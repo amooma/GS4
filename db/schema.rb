@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201101859) do
+ActiveRecord::Schema.define(:version => 20110201103422) do
+
+  create_table "tests", :force => true do |t|
+    t.string   "as"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_to_phones", :force => true do |t|
     t.integer  "user_id"

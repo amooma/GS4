@@ -7,6 +7,37 @@ gem 'rails', '3.0.3'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+# https://github.com/nono/acts_as_list
+gem "acts_as_list"
+
+# Test-Data => http://faker.rubyforge.org/
+gem 'faker'
+
+# Testing stuff
+gem "shoulda"
+# https://github.com/thoughtbot/factory_girl_rails
+gem 'factory_girl_rails'
+
+# Rails ERD (aptitude install graphviz)
+# Render Diagrams of the DBs http://rails-erd.rubyforge.org/
+gem "rails-erd"
+
+# Generators
+gem "rails3-generators"
+
+# run ./script/annotate to annotate
+gem 'annotate-models'
+
+# https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
+# nicer table like output on the console
+gem 'hirb'
+
+# http://railscasts.com/episodes/234-simple-form
+gem "simple_form"
+
+# https://github.com/FooBarWidget/default_value_for
+gem 'default_value_for'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
