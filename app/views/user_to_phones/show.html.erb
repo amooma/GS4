@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_to_phone.user_id %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @user_to_phone.phone_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_to_phone_path(@user_to_phone) %> |
+<%= link_to 'Back', user_to_phones_path %>

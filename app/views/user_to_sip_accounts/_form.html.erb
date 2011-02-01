@@ -1,0 +1,25 @@
+<%= form_for(@user_to_sip_account) do |f| %>
+  <% if @user_to_sip_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_to_sip_account.errors.count, "error") %> prohibited this user_to_sip_account from being saved:</h2>
+
+      <ul>
+      <% @user_to_sip_account.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_account_id %><br />
+    <%= f.text_field :sip_account_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
