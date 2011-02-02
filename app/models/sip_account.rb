@@ -28,5 +28,6 @@ class SipAccount < ActiveResource::Base
 #		attribute 'created_at'                , 'string'   # datetime
 #		attribute 'updated_at'                , 'string'   # datetime
 #	end
+  
 end
 

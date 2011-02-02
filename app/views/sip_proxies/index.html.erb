@@ -1,0 +1,23 @@
+<h1>Listing sip_proxies</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sip_proxies.each do |sip_proxy| %>
+  <tr>
+    <td><%= sip_proxy.name %></td>
+    <td><%= link_to 'Show', sip_proxy %></td>
+    <td><%= link_to 'Edit', edit_sip_proxy_path(sip_proxy) %></td>
+    <td><%= link_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sip proxy', new_sip_proxy_path %>

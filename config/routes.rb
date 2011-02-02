@@ -1,7 +1,13 @@
 Usermanager::Application.routes.draw do
-  resources :user_to_phones
+  resources :sip_account_to_sip_users
 
-  resources :user_to_sip_accounts
+  resources :sip_users
+
+  resources :sip_servers
+
+  resources :sip_proxies
+
+  resources :user_to_phones
 
   resources :users
 

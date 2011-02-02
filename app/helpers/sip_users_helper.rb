@@ -1,0 +1,2 @@
+module SipUsersHelper
+end

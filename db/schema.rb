@@ -10,7 +10,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201103422) do
+ActiveRecord::Schema.define(:version => 20110202104202) do
+
+  create_table "sip_account_to_sip_users", :force => true do |t|
+    t.integer  "sip_user_id"
+    t.integer  "sip_account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sip_proxies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sip_servers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sip_users", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "auth_name"
+    t.string   "password"
+    t.string   "realm"
+    t.integer  "phone_number"
+    t.integer  "sip_server_id"
+    t.integer  "sip_proxy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tests", :force => true do |t|
     t.string   "as"
