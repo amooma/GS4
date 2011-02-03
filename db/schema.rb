@@ -10,11 +10,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202104202) do
+ActiveRecord::Schema.define(:version => 20110203164006) do
+
+  create_table "extensions", :force => true do |t|
+    t.integer  "sip_account_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "phones", :force => true do |t|
+    t.string   "mac_address"
+    t.string   "ip_address"
+    t.integer  "provisioning_server_phone_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sip_account_to_sip_users", :force => true do |t|
     t.integer  "sip_user_id"
     t.integer  "sip_account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sip_accounts", :force => true do |t|
+    t.integer  "phone_id"
+    t.string   "user"
+    t.string   "password"
+    t.string   "registrar"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,7 +86,6 @@ ActiveRecord::Schema.define(:version => 20110202104202) do
     t.string   "sn"
     t.string   "mail"
     t.string   "userPassword"
-    t.string   "telephoneNumber"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
