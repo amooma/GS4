@@ -10,6 +10,8 @@ Usermanager::Application.routes.draw do
   resources :user_to_phones
 
   resources :users
+  
+  resources :kamailio, :only => [:index ], :format => 'txt'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
