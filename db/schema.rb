@@ -56,13 +56,6 @@ ActiveRecord::Schema.define(:version => 20110202104202) do
     t.datetime "updated_at"
   end
 
-  create_table "user_to_sip_accounts", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "sip_account_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "uid"
     t.string   "gn"
