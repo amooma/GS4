@@ -33,6 +33,20 @@ div.field, div.actions {
   color: green;
 }
 
+
+.app_notice {
+  padding: 0;
+  background-color: #dfd;
+  color: #090;
+  border
+}
+.app_alert {
+  padding: 0;
+  background-color: #fdd;
+  color: #c00;
+}
+
+
 .field_with_errors {
   padding: 2px;
   background-color: red;
