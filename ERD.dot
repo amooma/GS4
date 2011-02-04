@@ -46,7 +46,6 @@ digraph Usermanager {
   <tr><td align="left" width="130" port="gn">gn <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="mail">mail <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="sn">sn <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="telephoneNumber">telephoneNumber <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="uid">uid <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="userPassword">userPassword <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
