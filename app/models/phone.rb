@@ -16,5 +16,11 @@ class Phone < ActiveResource::Base
 #		attribute 'created_at'       , 'string'   # datetime
 #		attribute 'updated_at'       , 'string'   # datetime
 #	end
+	
+	#has_many :sip_accounts
+	#def sip_accounts
+	#	return SipAccount.find(:all, :params => { :phone_id => self.id }) || []
+	#	# GET "/sip_accounts.xml?phone_id=X"
+	#end
 end
 

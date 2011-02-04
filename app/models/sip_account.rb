@@ -28,6 +28,15 @@ class SipAccount < ActiveResource::Base
 #		attribute 'created_at'                , 'string'   # datetime
 #		attribute 'updated_at'                , 'string'   # datetime
 #	end
-  
+	
+	#belongs_to :phone
+	#def phone
+	#	begin
+	#		return Phone.find( self.phone_id )
+	#		# GET "/phones/X.xml"
+	#	rescue ActiveResource::ResourceNotFound
+	#		return nil
+	#	end
+	#end
 end
 
