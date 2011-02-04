@@ -4,5 +4,10 @@
 
 <h2>Users</h2>
 
-<%= link_to "List all users (#{@number_of_users})", users_path %><br />
-<%= link_to "Create a new user", new_user_path %><br />
+<%= link_to( "List all users (#{@number_of_users})",
+	url_for(:controller => 'users', :action => 'index')
+) %><br />
+<%= link_to( "Create a new user",
+	url_for(:controller => 'users', :action => 'new')
+) %><br />
+
