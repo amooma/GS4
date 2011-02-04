@@ -38,6 +38,10 @@ gem "simple_form"
 # https://github.com/FooBarWidget/default_value_for
 gem 'default_value_for'
 
+# https://github.com/plataformatec/devise for authentication
+gem 'devise', '~> 1.1'
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
