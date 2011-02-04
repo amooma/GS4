@@ -60,3 +60,9 @@ gem 'default_value_for'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
