@@ -2,3 +2,10 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 run Usermanager::Application
+
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
