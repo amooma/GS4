@@ -2,11 +2,11 @@
 
 <table>
   <tr>
-    <th>Uid</th>
-    <th>Gn</th>
-    <th>Sn</th>
-    <th>Mail</th>
-    <th>Userpassword</th>
+    <th>Username</th>
+    <th>Given name</th>
+    <th>Surname</th>
+    <th>E-mail address</th>
+    <th>Password</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +18,7 @@
     <td><%= user.gn %></td>
     <td><%= user.sn %></td>
     <td><%= user.mail %></td>
-    <td><%= user.userPassword %></td>
+    <td>&bull;&bull;&bull;</td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
