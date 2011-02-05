@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  before_filter :authenticate
+
+
+
+  
   # GET /users
   # GET /users.xml
   def index
@@ -80,4 +85,14 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+protected
+
+  def authenticate
+      env['warden'].custom_failure! 
+    authenticate_or_request_with_http_basic do |username, password|
+      Digest::MD5.hexdigest(password) == User.where(:uid => "#{username}").first.userPassword
+    end
+  end
+
 end
