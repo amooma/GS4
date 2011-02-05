@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: sip1.proxy.de
 
 two:
-  name: MyString
+  name: sip2.proxy.de

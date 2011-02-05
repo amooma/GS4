@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SipProxiesControllerTest < ActionController::TestCase
   setup do
-    @sip_proxy = sip_proxies(:one)
+    @sip_proxy = Factory.create(:sip_proxy)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class SipProxiesControllerTest < ActionController::TestCase
 
   test "should create sip_proxy" do
     assert_difference('SipProxy.count') do
-      post :create, :sip_proxy => @sip_proxy.attributes
+      post :create, :sip_proxy => Factory.attributes_for(:sip_proxy)
     end
 
     assert_redirected_to sip_proxy_path(assigns(:sip_proxy))

@@ -6,12 +6,10 @@ one:
   sn: MyString
   mail: MyString
   userPassword: MyString
-  telephoneNumber: MyString
-
+ 
 two:
   uid: MyString
   gn: MyString
   sn: MyString
   mail: MyString
   userPassword: MyString
-  telephoneNumber: MyString

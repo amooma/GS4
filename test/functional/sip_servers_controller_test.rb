@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SipServersControllerTest < ActionController::TestCase
   setup do
-    @sip_server = sip_servers(:one)
+    @sip_server = Factory.create(:sip_server)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class SipServersControllerTest < ActionController::TestCase
 
   test "should create sip_server" do
     assert_difference('SipServer.count') do
-      post :create, :sip_server => @sip_server.attributes
+      post :create, :sip_server => Factory.attributes_for(:sip_server)
     end
 
     assert_redirected_to sip_server_path(assigns(:sip_server))
