@@ -89,9 +89,9 @@ class UsersController < ApplicationController
 protected
 
   def authenticate
-      env['warden'].custom_failure! 
+         env['warden'].custom_failure! 
     authenticate_or_request_with_http_basic do |username, password|
-      Digest::MD5.hexdigest(password) == User.where(:uid => "#{username}").first.userPassword
+      !User.where(:uid => "#{username}").empty? && Digest::MD5.hexdigest(password) == User.where(:uid => "#{username}").first.userPassword
     end
   end
 
