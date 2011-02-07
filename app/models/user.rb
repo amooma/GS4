@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :sip_accounts
   
   validates_presence_of(:username, :message => "username needed")
-  validates_uniqueness_of(:username, :message => "username allready taken")
+  validates_uniqueness_of(:username, :message => "username already taken")
   # TODO Validations
   # TODO Tests
   #TODO Create Method and View to create new users
