@@ -1,0 +1,25 @@
+<h1>Listing extensions</h1>
+
+<table>
+  <tr>
+    <th>Sip user</th>
+    <th>Extension</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @extensions.each do |extension| %>
+  <tr>
+    <td><%= extension.sip_user_id %></td>
+    <td><%= extension.extension %></td>
+    <td><%= link_to 'Show', extension %></td>
+    <td><%= link_to 'Edit', edit_extension_path(extension) %></td>
+    <td><%= link_to 'Destroy', extension, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Extension', new_extension_path %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_id: 1
+  provisioning_server_id: 1
+
+two:
+  phone_id: 1
+  provisioning_server_id: 1

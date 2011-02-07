@@ -1,0 +1,25 @@
+<h1>Listing sip_phones</h1>
+
+<table>
+  <tr>
+    <th>Phone</th>
+    <th>Provisioning server</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sip_phones.each do |sip_phone| %>
+  <tr>
+    <td><%= sip_phone.phone_id %></td>
+    <td><%= sip_phone.provisioning_server_id %></td>
+    <td><%= link_to 'Show', sip_phone %></td>
+    <td><%= link_to 'Edit', edit_sip_phone_path(sip_phone) %></td>
+    <td><%= link_to 'Destroy', sip_phone, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sip phone', new_sip_phone_path %>

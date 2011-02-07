@@ -1,0 +1,25 @@
+<h1>Listing provisioning_servers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Port</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @provisioning_servers.each do |provisioning_server| %>
+  <tr>
+    <td><%= provisioning_server.name %></td>
+    <td><%= provisioning_server.port %></td>
+    <td><%= link_to 'Show', provisioning_server %></td>
+    <td><%= link_to 'Edit', edit_provisioning_server_path(provisioning_server) %></td>
+    <td><%= link_to 'Destroy', provisioning_server, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Provisioning server', new_provisioning_server_path %>

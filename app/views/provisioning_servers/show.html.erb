@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @provisioning_server.name %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%= @provisioning_server.port %>
+</p>
+
+
+<%= link_to 'Edit', edit_provisioning_server_path(@provisioning_server) %> |
+<%= link_to 'Back', provisioning_servers_path %>

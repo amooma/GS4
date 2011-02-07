@@ -1,0 +1,25 @@
+<%= form_for(@sip_phone) do |f| %>
+  <% if @sip_phone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sip_phone.errors.count, "error") %> prohibited this sip_phone from being saved:</h2>
+
+      <ul>
+      <% @sip_phone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :phone_id %><br />
+    <%= f.text_field :phone_id %>
+  </div>
+  <div class="field">
+    <%= f.label :provisioning_server_id %><br />
+    <%= f.text_field :provisioning_server_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

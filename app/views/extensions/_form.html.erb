@@ -1,0 +1,25 @@
+<%= form_for(@extension) do |f| %>
+  <% if @extension.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@extension.errors.count, "error") %> prohibited this extension from being saved:</h2>
+
+      <ul>
+      <% @extension.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sip_user_id %><br />
+    <%= f.text_field :sip_user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :extension %><br />
+    <%= f.text_field :extension %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
