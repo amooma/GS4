@@ -44,7 +44,13 @@ gem 'devise', '1.1.rc0'
 
 gem "bcrypt-ruby", :require => "bcrypt"
 
+# omniauth depends on nokogiri.
+# note:
+#   aptitude install libxml2-dev libxslt1-dev
+#   aptitude install libxml2 libxslt1.1
 gem "omniauth"
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
