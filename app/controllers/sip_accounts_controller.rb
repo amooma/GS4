@@ -1,4 +1,5 @@
 class SipAccountsController < ApplicationController
+  
   before_filter :authenticate_user!
   
   # GET /sip_accounts
@@ -82,4 +83,5 @@ class SipAccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

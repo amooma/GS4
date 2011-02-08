@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+		
 	def index
 		begin
 			@number_of_sip_accounts = SipAccount.count
@@ -7,5 +8,5 @@ class PagesController < ApplicationController
 		#	redirect_to('/db_migrate_missing')
 		end
 	end
-
+	
 end

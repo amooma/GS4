@@ -1,4 +1,5 @@
 class ExtensionsController < ApplicationController
+    
   # GET /extensions
   # GET /extensions.xml
   def index
@@ -80,4 +81,5 @@ class ExtensionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

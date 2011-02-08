@@ -1,5 +1,7 @@
 class ProvisioningServersController < ApplicationController
+  
   before_filter :authenticate_user!
+  
   # GET /provisioning_servers
   # GET /provisioning_servers.xml
   def index
@@ -81,4 +83,5 @@ class ProvisioningServersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

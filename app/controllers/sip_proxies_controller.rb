@@ -1,5 +1,7 @@
 class SipProxiesController < ApplicationController
+  
   before_filter :authenticate_user!
+  
   # GET /sip_proxies
   # GET /sip_proxies.xml
   def index
@@ -81,4 +83,5 @@ class SipProxiesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

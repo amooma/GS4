@@ -1,5 +1,7 @@
 class SipServersController < ApplicationController
+  
   before_filter :authenticate_user!
+  
   # GET /sip_servers
   # GET /sip_servers.xml
   def index
@@ -81,4 +83,5 @@ class SipServersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end
