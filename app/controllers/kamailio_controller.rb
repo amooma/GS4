@@ -2,6 +2,8 @@ class KamailioController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # GET /kamailio
+  # GET /kamailio.txt
   def index
     @sip_accounts = SipAccount.all
     
