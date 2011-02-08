@@ -2,6 +2,10 @@ require 'test_helper'
 
 class ProvisioningServersControllerTest < ActionController::TestCase
   
+  # Devise Test Helpers
+  # see https://github.com/plataformatec/devise
+  include Devise::TestHelpers
+  
   setup do
     @provisioning_server = provisioning_servers(:one)
     

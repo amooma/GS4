@@ -10,8 +10,5 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  
-  # Devise Test Helpers
-  # see https://github.com/plataformatec/devise
-  include Devise::TestHelpers
 end
+

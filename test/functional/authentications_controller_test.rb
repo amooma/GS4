@@ -2,6 +2,10 @@ require 'test_helper'
 
 class AuthenticationsControllerTest < ActionController::TestCase
   
+  # Devise Test Helpers
+  # see https://github.com/plataformatec/devise
+  include Devise::TestHelpers
+  
   setup do
     @authentication = authentications(:one)
   end

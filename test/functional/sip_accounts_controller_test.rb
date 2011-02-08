@@ -2,6 +2,10 @@ require 'test_helper'
 
 class SipAccountsControllerTest < ActionController::TestCase
   
+  # Devise Test Helpers
+  # see https://github.com/plataformatec/devise
+  include Devise::TestHelpers
+  
   setup do
     @sip_account = sip_accounts(:one)
     

@@ -2,6 +2,10 @@ require 'test_helper'
 
 class SipServersControllerTest < ActionController::TestCase
   
+  # Devise Test Helpers
+  # see https://github.com/plataformatec/devise
+  include Devise::TestHelpers
+  
   setup do
     @sip_server = Factory.create(:sip_server)
     

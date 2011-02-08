@@ -2,6 +2,10 @@ require 'test_helper'
 
 class SipPhonesControllerTest < ActionController::TestCase
   
+  # Devise Test Helpers
+  # see https://github.com/plataformatec/devise
+  include Devise::TestHelpers
+  
   setup do
     @sip_phone = sip_phones(:one)
     
