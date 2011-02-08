@@ -1,5 +1,7 @@
 class ExtensionsController < ApplicationController
-    
+  
+  before_filter :authenticate_user!
+  
   # GET /extensions
   # GET /extensions.xml
   def index

@@ -1,5 +1,7 @@
 class KamailioController < ApplicationController
   
+  before_filter :authenticate_user!
+  
   def index
     @sip_accounts = SipAccount.all
     
