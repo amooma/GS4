@@ -39,7 +39,7 @@ gem "simple_form"
 gem 'default_value_for'
 
 # https://github.com/plataformatec/devise for authentication
-gem 'devise', '1.1.rc0'  
+gem 'devise', '~> 1.1'  
 
 
 gem "bcrypt-ruby", :require => "bcrypt"

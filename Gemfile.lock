@@ -35,8 +35,9 @@ GEM
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
     default_value_for (1.0.1)
-    devise (1.1.rc0)
-      warden (~> 0.10.3)
+    devise (1.1.5)
+      bcrypt-ruby (~> 2.1.2)
+      warden (~> 1.0.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     factory_girl (1.3.3)
@@ -116,7 +117,7 @@ GEM
       activerecord (~> 3.0)
       activesupport (~> 3.0)
       ruby-graphviz (~> 0.9.18)
-    rails3-generators (0.17.3)
+    rails3-generators (0.17.4)
       railties (>= 3.0.0)
     railties (3.0.3)
       actionpack (= 3.0.3)
@@ -132,8 +133,7 @@ GEM
       ruby-openid (>= 2.1.7)
     rubyntlm (0.1.1)
     shoulda (2.11.3)
-    simple_form (1.3.0)
-      rails (~> 3.0.0)
+    simple_form (1.3.1)
     sqlite3 (1.3.3)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -141,7 +141,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
-    warden (0.10.7)
+    warden (1.0.3)
       rack (>= 1.0.0)
 
 PLATFORMS
@@ -152,7 +152,7 @@ DEPENDENCIES
   annotate-models
   bcrypt-ruby
   default_value_for
-  devise (= 1.1.rc0)
+  devise (~> 1.1)
   factory_girl_rails
   faker
   hirb
