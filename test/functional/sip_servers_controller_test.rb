@@ -7,7 +7,7 @@ class SipServersControllerTest < ActionController::TestCase
     
     an_admin_username = 'admin1'
     @admin_user = User.where( :username => an_admin_username ).first
-    assert_not_nil @admin_user, "This tests needs user #{an_admin_username.inspect}"
+    assert_not_nil( @admin_user, "This tests needs user #{an_admin_username.inspect}" )
     
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
@@ -18,7 +18,7 @@ class SipServersControllerTest < ActionController::TestCase
     sign_in :user, @admin_user
     get :index
     assert_response :success
-    assert_not_nil assigns(:sip_servers)
+    assert_not_nil( assigns(:sip_servers))
     sign_out @admin_user
   end
   
