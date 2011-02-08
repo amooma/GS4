@@ -5,6 +5,12 @@
 # below each fixture, per the syntax in the comments below
 #
 
+admin1:
+  username: admin1
+  email: admin1@example.com
+  gn: Admin1
+  sn: Example
+
 one:
   username: one
   email: one@example.com
