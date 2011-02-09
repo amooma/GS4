@@ -103,6 +103,13 @@ table tr.odd             > td {
 }
 
 
+div#user_nav {
+	text-align: right;
+	margin-bottom: 0.2em;
+	padding: 0.2em;
+	font-weight: bold;
+}
+
 div#header {
 	text-align: center;
 	background-color: #bbf;

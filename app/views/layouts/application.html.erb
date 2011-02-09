@@ -8,16 +8,17 @@
 </head>
 <body>
 
-<div id="header">
-	<a href="/">PBX User Manager</a>
+<div id="user_nav">
+<%- if user_signed_in? -%>
+	Signed in as <%= current_user.username %>.
+	<%= link_to "Sign out", destroy_user_session_path %>
+<%- else -%>
+	<%= link_to "Sign in", new_user_session_path %>
+<%- end -%>
 </div>
 
-<div id="user_nav">
-	<%- if user_signed_in? -%>
-		Signed in as <%= current_user.email %>. Not you? <%= link_to "Sign out", destroy_user_session_path %>
-	<%- else -%>
-		<%= link_to "Sign in", new_user_session_path %>
-	<%- end -%>
+<div id="header">
+	<a href="/">PBX User Manager</a>
 </div>
 
 <div class="app_notice">
