@@ -8,6 +8,8 @@ class SipAccount < ActiveRecord::Base
 	after_destroy    :prov_srv_sip_account_destroy
 	
 	# Returns the corresponding SIP account from Cantina.
+	# Returns the CantinaSipAccount if found or nil if not found or
+	# false on error.
 	#
 	def cantina_sip_account
 		return cantina_find_sip_account_by_server_and_user(
