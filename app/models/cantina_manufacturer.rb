@@ -1,15 +1,15 @@
 # Model from Cantina API:
 #
-class ProvisioningLogEntry < ActiveResource::Base
+class CantinaManufacturer < ActiveResource::Base
 	
 	self.site = 'http://localhost:3001/'
-	self.element_name = 'provisioning_log_entry'
+	self.element_name = 'manufacturer'
 	
 #	# http://api.rubyonrails.org/classes/ActiveResource/Base.html#method-c-schema
 #	schema do
-#		attribute 'phone_id'    , 'integer'  # integer
-#		attribute 'memo'        , 'string'   # string
-#		attribute 'succeeded'   , 'string'   # boolean
+#		attribute 'name'        , 'string'   # string
+#		attribute 'ieee_name'   , 'string'   # string
+#		attribute 'url'         , 'string'   # string
 #		attribute 'created_at'  , 'string'   # datetime
 #		attribute 'updated_at'  , 'string'   # datetime
 #	end

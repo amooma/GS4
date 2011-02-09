@@ -1,6 +1,6 @@
 # Model from Cantina API:
 #
-class PhoneKeyFunctionDefinition < ActiveResource::Base
+class CantinaPhoneKeyFunctionDefinition < ActiveResource::Base
 	
 	self.site = 'http://localhost:3001/'
 	self.element_name = 'phone_key_function_definition'

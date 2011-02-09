@@ -1,6 +1,6 @@
 # Model from Cantina API:
 #
-class PhoneModelKey < ActiveResource::Base
+class CantinaPhoneModelKey < ActiveResource::Base
 	
 	self.site = 'http://localhost:3001/'
 	self.element_name = 'phone_model_key'

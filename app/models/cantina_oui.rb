@@ -1,6 +1,6 @@
 # Model from Cantina API:
 #
-class Oui < ActiveResource::Base
+class CantinaOui < ActiveResource::Base
 	
 	self.site = 'http://localhost:3001/'
 	self.element_name = 'oui'
