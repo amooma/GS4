@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110207214124
+# Schema version: 20110209212927
 #
 # Table name: sip_accounts
 #
@@ -14,6 +14,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  extension_id  :integer
+#  sip_phone_id  :integer
 #
 
 class SipAccount < ActiveRecord::Base
