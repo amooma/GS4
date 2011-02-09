@@ -18,14 +18,17 @@
 
 class SipAccount < ActiveRecord::Base
 	
-	belongs_to :sip_server, :validate => true
-	belongs_to :sip_proxy, :validate => true
-	belongs_to :sip_phone
-	belongs_to :extensions    
+	belongs_to :sip_server , :validate => true
+	belongs_to :sip_proxy  , :validate => true
+	belongs_to :sip_phone  , :validate => true
+	belongs_to :extensions , :validate => true
+	
+	validates_presence_of :sip_phone_id
+	
 	
 	after_validation :prov_srv_sip_account_create, :on => :create
 	after_validation :prov_srv_sip_account_update, :on => :update
-	after_destroy    :prov_srv_sip_account_destroy
+	before_destroy   :prov_srv_sip_account_destroy
 	
 	
 #	# http://rubydoc.info/docs/rails/3.0.0/ActiveModel/Dirty
@@ -110,17 +113,20 @@ class SipAccount < ActiveRecord::Base
 	# false on error.
 	#
 	def cantina_find_sip_account_by_server_and_user( sip_server, sip_user )
+		logger.debug "Trying to find Cantina SIP account for \"#{sip_user}@#{sip_server}\" ..."
 		begin
 			cantina_sip_accounts = CantinaSipAccount.all()  # GET "/sip_accounts.xml" - #OPTIMIZE
 			if cantina_sip_accounts
 				cantina_sip_accounts.each { |cantina_sip_account|
 					if cantina_sip_account.sip_proxy == sip_server \
 					&& cantina_sip_account.user      == sip_user
+						logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
 						return cantina_sip_account
 						break
 					end
 				}
 			end
+			logger.debug "CantinaSipAccount not found."
 			return nil
 		rescue Errno::ECONNREFUSED => e
 			return false
@@ -131,27 +137,26 @@ class SipAccount < ActiveRecord::Base
 	#
 	def cantina_sip_account_create
 		begin
-			cantina_sip_account = CantinaSipAccount.create(
+			cantina_sip_account = CantinaSipAccount.create({
 				:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
 				:auth_user       => self.auth_name,
 				:user            => self.auth_name,
 				:password        => self.password,
 				:realm           => self.realm,
-				:phone_id        => nil,              #TODO
+				:phone_id        => self.sip_phone_id,
 				:registrar       => (self.sip_server ? self.sip_server.name : nil),
 				:registrar_port  => nil,
 				:sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
 				:sip_proxy_port  => nil,
 				:registration_expiry_time => 300,
 				:dtmf_mode       => 'rfc2833',
-			)
+			})
+			log_active_record_errors_from_remote( cantina_sip_account )
 		rescue Errno::ECONNREFUSED => e
 			logger.warn "Failed to connect to Cantina provisioning server. (#{e.class}, #{e.message})"
 			errors.add( :base, "Failed to connect to Cantina provisioning server." )
 			return false
 		end
-		
-		log_active_record_errors_from_remote( cantina_sip_account )
 		
 		if ! cantina_sip_account.valid?
 			errors.add( :base, "Failed to create SIP account on Cantina provisioning server." )
@@ -162,11 +167,11 @@ class SipAccount < ActiveRecord::Base
 	# Update SIP account on the Cantina provisioning server.
 	#
 	def cantina_sip_account_update
-		#cantina_sip_account = cantina_find_sip_account_by_server_and_user(
-		#	(self.sip_server_was ? self.sip_server_was.name : nil),
-		#	self.auth_name_was
-		#)
-		cantina_sip_account = false #FIXME
+		sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
+		cantina_sip_account = cantina_find_sip_account_by_server_and_user(
+			(sip_server_was ? sip_server_was.name : nil),
+			self.auth_name_was
+		)
 		
 		case cantina_sip_account
 			when false
@@ -176,7 +181,21 @@ class SipAccount < ActiveRecord::Base
 				# create instead
 				return cantina_sip_account_create
 			else
-				if ! cantina_sip_account.destroy
+				if ! cantina_sip_account.update_attributes({
+					:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
+					:auth_user       => self.auth_name,
+					:user            => self.auth_name,
+					:password        => self.password,
+					:realm           => self.realm,
+					:phone_id        => self.sip_phone_id,
+					:registrar       => (self.sip_server ? self.sip_server.name : nil),
+					:registrar_port  => nil,
+					:sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+					:sip_proxy_port  => nil,
+					:registration_expiry_time => 300,
+					:dtmf_mode       => 'rfc2833',
+				})
+					log_active_record_errors_from_remote( cantina_sip_account )
 					errors.add( :base, "Failed to update SIP account on Cantina provisioning server." )
 					return false
 				end
@@ -187,11 +206,11 @@ class SipAccount < ActiveRecord::Base
 	# Delete SIP account on the Cantina provisioning server.
 	#
 	def cantina_sip_account_destroy
-		#cantina_sip_account = cantina_find_sip_account_by_server_and_user(
-		#	(self.sip_server_was ? self.sip_server_was.name : nil),
-		#	self.auth_name_was
-		#)
-		cantina_sip_account = false #FIXME
+		sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
+		cantina_sip_account = cantina_find_sip_account_by_server_and_user(
+			(sip_server_was ? sip_server_was.name : nil),
+			self.auth_name_was
+		)
 		
 		case cantina_sip_account
 			when false
