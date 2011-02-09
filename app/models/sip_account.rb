@@ -146,18 +146,46 @@ class SipAccount < ActiveRecord::Base
 		#	(self.sip_server_was ? self.sip_server_was.name : nil),
 		#	self.auth_name_was
 		#)
+		cantina_sip_account = false #FIXME
 		
-		#TODO
-		errors.add( :base, "Failed to update SIP account on Cantina provisioning server." )
-		return false
+		case cantina_sip_account
+			when false
+				errors.add( :base, "Failed to connect to Cantina provisioning server." )
+				return false
+			when nil
+				# create instead
+				return cantina_sip_account_create
+			else
+				if ! cantina_sip_account.destroy
+					errors.add( :base, "Failed to update SIP account on Cantina provisioning server." )
+					return false
+				end
+		end
+		return true
 	end
 	
 	# Delete SIP account on the Cantina provisioning server.
 	#
 	def cantina_sip_account_destroy
-		#TODO
-		errors.add( :base, "Failed to delete SIP account on Cantina provisioning server." )
-		return false
+		#cantina_sip_account = cantina_find_sip_account_by_server_and_user(
+		#	(self.sip_server_was ? self.sip_server_was.name : nil),
+		#	self.auth_name_was
+		#)
+		cantina_sip_account = false #FIXME
+		
+		case cantina_sip_account
+			when false
+				errors.add( :base, "Failed to connect to Cantina provisioning server." )
+				return false
+			when nil
+				# no action required
+			else
+				if ! cantina_sip_account.destroy
+					errors.add( :base, "Failed to delete SIP account on Cantina provisioning server." )
+					return false
+				end
+		end
+		return true
 	end
 	
 	# Log validation errors from the remote model.
