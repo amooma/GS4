@@ -20,7 +20,8 @@ class SipAccount < ActiveRecord::Base
 	
 	belongs_to :sip_server, :validate => true
 	belongs_to :sip_proxy, :validate => true
-	
+	belongs_to :sip_phone
+  belongs_to :extensions    
 	after_validation :prov_srv_sip_account_create, :on => :create
 	after_validation :prov_srv_sip_account_update, :on => :update
 	after_destroy    :prov_srv_sip_account_destroy
