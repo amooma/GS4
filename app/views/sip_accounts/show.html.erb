@@ -35,6 +35,21 @@
   <%= @sip_account.sip_proxy_id %>
 </p>
 
+<p>
+  <b>Provisioning SIP account:</b>
+<%
+	cantina_sip_account = @sip_account.cantina_sip_account
+	case cantina_sip_account
+		when nil
+			%>none!<%
+		when false
+			%>Failed to query provisioning server!<%
+		else
+			%><%= cantina_sip_account.user %>@<%= cantina_sip_account.sip_proxy %><%
+	end
+%>
+</p>
+
 
 <%= link_to 'Edit', edit_sip_account_path(@sip_account) %> |
 <%= link_to 'Back', sip_accounts_path %>

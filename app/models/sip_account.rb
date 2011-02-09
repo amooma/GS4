@@ -7,6 +7,15 @@ class SipAccount < ActiveRecord::Base
 	after_validation :prov_srv_sip_account_update, :on => :update
 	after_destroy    :prov_srv_sip_account_destroy
 	
+	# Returns the corresponding SIP account from Cantina.
+	#
+	def cantina_sip_account
+		return cantina_find_sip_account_by_server_and_user(
+			(self.sip_server ? self.sip_server.name : nil),
+			self.auth_name
+		)
+	end
+	
 	private
 	
 	# Create SIP account on the provisioning server.
@@ -51,10 +60,41 @@ class SipAccount < ActiveRecord::Base
 		return ret
 	end
 	
+	
+	# Find a SIP account by SIP server and SIP user on the Cantina
+	# provisioning server.
+	# Returns the CantinaSipAccount if found or nil if not found or
+	# false on error.
+	#
+	def cantina_find_sip_account_by_server_and_user( sip_server, sip_user )
+		begin
+			cantina_sip_accounts = CantinaSipAccount.all()  # GET "/sip_accounts.xml" - #OPTIMIZE
+			if cantina_sip_accounts
+				cantina_sip_accounts.each { |cantina_sip_account|
+					if cantina_sip_account.sip_proxy == sip_server \
+					&& cantina_sip_account.user      == sip_user
+						return cantina_sip_account
+						break
+					end
+				}
+			end
+			return nil
+		rescue Errno::ECONNREFUSED => e
+			return false
+		end
+	end
+	
+	
+	# Get SIP account from the Cantina provisioning server.
+	#
+	def cantina_sip_account_get
+		
+		
+	end
+	
 	# Create SIP account on the Cantina provisioning server.
 	#
 	def cantina_sip_account_create
-		
 		begin
 			cantina_sip_account = CantinaSipAccount.create(
 				:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
