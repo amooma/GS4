@@ -29,18 +29,13 @@ div.field, div.actions {
 	margin-bottom: 10px;
 }
 
+
 #notice {
-	color: green;
-}
-
-
-.app_notice {
 	padding: 0;
 	background-color: #dfd;
 	color: #090;
-	border
 }
-.app_alert {
+#alert {
 	padding: 0;
 	background-color: #fdd;
 	color: #c00;
