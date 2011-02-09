@@ -13,9 +13,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  port: 1
+  name: 10.0.0.1
+  port: 3001
 
 two:
-  name: MyString
-  port: 1
+  name: 10.0.0.2
+  port: 3002
