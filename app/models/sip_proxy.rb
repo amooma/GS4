@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20110207214124
+#
+# Table name: sip_proxies
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class SipProxy < ActiveRecord::Base
   has_many :sip_accounts, :dependent => :destroy
   validates_presence_of(:name, :message => ":name missing")
