@@ -7,6 +7,27 @@ class SipAccount < ActiveRecord::Base
 	after_validation :prov_srv_sip_account_update, :on => :update
 	after_destroy    :prov_srv_sip_account_destroy
 	
+	
+#	# http://rubydoc.info/docs/rails/3.0.0/ActiveModel/Dirty
+# 	include ActiveModel::Dirty
+# 	
+# 	define_attribute_methods [:sip_server]
+# 	
+# 	def sip_server
+# 		@sip_server
+# 	end
+# 	
+# 	def sip_server=(val)
+# 		name_will_change! unless val == @sip_server
+# 		@sip_server = val
+# 	end
+# 	
+# 	def save
+# 		@previously_changed = changes
+# 		@changed_attributes.clear
+# 	end
+	
+	
 	# Returns the corresponding SIP account from Cantina.
 	# Returns the CantinaSipAccount if found or nil if not found or
 	# false on error.
@@ -86,14 +107,6 @@ class SipAccount < ActiveRecord::Base
 		end
 	end
 	
-	
-	# Get SIP account from the Cantina provisioning server.
-	#
-	def cantina_sip_account_get
-		
-		
-	end
-	
 	# Create SIP account on the Cantina provisioning server.
 	#
 	def cantina_sip_account_create
@@ -129,6 +142,11 @@ class SipAccount < ActiveRecord::Base
 	# Update SIP account on the Cantina provisioning server.
 	#
 	def cantina_sip_account_update
+		#cantina_sip_account = cantina_find_sip_account_by_server_and_user(
+		#	(self.sip_server_was ? self.sip_server_was.name : nil),
+		#	self.auth_name_was
+		#)
+		
 		#TODO
 		errors.add( :base, "Failed to update SIP account on Cantina provisioning server." )
 		return false
