@@ -70,11 +70,16 @@ class SipAccount < ActiveRecord::Base
 	def prov_srv_sip_account_create
 		prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
 		ret = false
-		case prov_srv
-			when 'cantina'
-				ret = cantina_sip_account_create
-			else
-				errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+		if self.errors && self.errors.length > 0
+			# The SIP account is invalid. Don't even try to create it on the prov. server.
+			errors.add( :base, "Will not create invalid SIP account on Cantina provisioning server." )
+		else
+			case prov_srv
+				when 'cantina'
+					ret = cantina_sip_account_create
+				else
+					errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+			end
 		end
 		return ret
 	end
@@ -84,11 +89,16 @@ class SipAccount < ActiveRecord::Base
 	def prov_srv_sip_account_update
 		prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
 		ret = false
-		case prov_srv
-			when 'cantina'
-				ret = cantina_sip_account_update
-			else
-				errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+		if self.errors && self.errors.length > 0
+			# The SIP account is invalid. Don't even try to update it on the prov. server.
+			errors.add( :base, "SIP account is invalid. Will not update data on Cantina provisioning server." )
+		else
+			case prov_srv
+				when 'cantina'
+					ret = cantina_sip_account_update
+				else
+					errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+			end
 		end
 		return ret
 	end
