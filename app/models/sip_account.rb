@@ -130,8 +130,8 @@ class SipAccount < ActiveRecord::Base
 			# GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
 			if cantina_sip_accounts
 				cantina_sip_accounts.each { |cantina_sip_account|
-					if cantina_sip_account.sip_proxy == sip_server \
-					&& cantina_sip_account.user      == sip_user
+					if cantina_sip_account.sip_proxy .to_s == sip_server .to_s \
+					&& cantina_sip_account.user      .to_s == sip_user   .to_s
 						logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
 						return cantina_sip_account
 						break
