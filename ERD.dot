@@ -89,9 +89,8 @@ digraph Usermanager {
   User -> Authentication [arrowhead = "normal", arrowtail = "none", weight = "2"]
   User -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   Extension -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  ProvisioningServer -> SipPhone [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  ProvisioningServer -> SipPhone [arrowhead = "normal", arrowtail = "none", weight = "2"]
   SipServer -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   SipProxy -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   SipPhone -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  SipPhone -> ProvisioningServer [arrowhead = "normal", arrowtail = "none", weight = "1"]
 }
