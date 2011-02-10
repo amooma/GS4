@@ -195,7 +195,6 @@ class SipAccount < ActiveRecord::Base
 				return cantina_sip_account_create
 			else
 				if ! cantina_sip_account.update_attributes({
-					:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
 					:auth_user       => self.auth_name,
 					:user            => self.auth_name,
 					:password        => self.password,
