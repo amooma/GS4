@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>SIP user ID:</b>
+  <%= @extension.sip_user_id %>
+</p>
+
+<p>
+  <b>Extension:</b>
+  <%= @extension.extension %>
+</p>
+
+
+<%= link_to 'Edit', edit_extension_path(@extension) %> |
+<%= link_to 'Back', extensions_path %>

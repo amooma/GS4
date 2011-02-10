@@ -1,19 +1,19 @@
 body {
-  background-color: #fff;
-  color: #000;
-  padding: 0.2em 1.2em;
+	background-color: #fff;
+	color: #000;
+	padding: 0.2em 1.2em;
 }
 
 body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size:   13px;
+	line-height: 18px;
 }
 
 pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
+	background-color: #eee;
+	padding: 10px;
+	font-size: 11px;
 }
 
 a { color: #00d; }
@@ -21,133 +21,135 @@ a:visited { color: #666; }
 a:hover { color: #fff; background-color:#000; }
 
 div {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 div.field, div.actions {
-  margin-bottom: 10px;
-}
-
-#notice {
-  color: green;
+	margin-bottom: 10px;
 }
 
 
-.app_notice {
-  padding: 0;
-  background-color: #dfd;
-  color: #090;
-  border
+#notice, .app_notice {
+	padding: 0;
+	background-color: #dfd;
+	color: #090;
 }
-.app_alert {
-  padding: 0;
-  background-color: #fdd;
-  color: #c00;
+#alert, .app_alert {
+	padding: 0;
+	background-color: #fdd;
+	color: #c00;
 }
 
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+	padding: 2px;
+	background-color: red;
+	display: table;
 }
 
 #error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+	width: 450px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 0;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
 }
 
 #error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
+	text-align: left;
+	font-weight: bold;
+	padding: 5px 5px 5px 15px;
+	font-size: 12px;
+	margin: -7px;
+	margin-bottom: 0px;
+	background-color: #c00;
+	color: #fff;
 }
 
 #error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
+	font-size: 12px;
+	list-style: square;
 }
 
 
 table th,
 table td {
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgba(0,0,0,0.05);
-  padding: 0.15em 0.4em;
-  text-align: left;
-  vertical-align: top;
-  background-color: #f3f3f3;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(0,0,0,0.05);
+	padding: 0.15em 0.4em;
+	text-align: left;
+	vertical-align: top;
+	background-color: #f3f3f3;
 }
 table th {
-  background-color: #bbf;
+	background-color: #bbf;
 }
 
 table tr:nth-child(even) > td,
 table tr.even            > td {
-  background-color: #f0f0f0;
+	background-color: #f0f0f0;
 }
 table tr:nth-child(odd)  > td,
 table tr.odd             > td {
-  background-color: #dddddd;
+	background-color: #dddddd;
 }
 
 
+div#user_nav {
+	text-align: right;
+	margin-bottom: 0.2em;
+	padding: 0.2em;
+	font-weight: bold;
+}
+
 div#header {
-  text-align: center;
-  background-color: #bbf;
-  padding: 0.2em;
-  margin-bottom: 2em;
+	text-align: center;
+	background-color: #bbf;
+	padding: 0.2em;
+	margin-bottom: 2em;
 }
 
 .simple_form label {
-  float: left;
-  width: 180px;
-  text-align: right;
-  margin: 2px 10px;
+	float: left;
+	width: 180px;
+	text-align: right;
+	margin: 2px 10px;
 }
 
 .simple_form div.input {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .simple_form div.boolean, .simple_form input[type='submit'] {
-  margin-left: 120px;
+	margin-left: 120px;
 }
 
 .simple_form div.boolean label, .simple_form label.collection_radio {
-  float: none;
-  margin: 0;
+	float: none;
+	margin: 0;
 }
 
 .simple_form label.collection_radio {
-  margin-right: 10px;
-  margin-left: 2px;
+	margin-right: 10px;
+	margin-left: 2px;
 }
 
 .simple_form .error {
-  clear: left;
-  margin-left: 120px;
-  font-size: 12px;
-  color: #D00;
-  display: block;
+	clear: left;
+	margin-left: 120px;
+	font-size: 12px;
+	color: #D00;
+	display: block;
 }
 
 .simple_form .hint {
-  clear: left;
-  margin-left: 120px;
-  font-size: 12px;
-  color: #555;
-  display: block;
-  font-style: italic;
+	clear: left;
+	margin-left: 120px;
+	font-size: 12px;
+	color: #555;
+	display: block;
+	font-style: italic;
 }

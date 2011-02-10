@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+
+# Provisioning server:
+ProvisioningServer.create({ :name => 'localhost', :port => 3001 })
+

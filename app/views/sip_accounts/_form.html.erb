@@ -1,0 +1,62 @@
+<%= form_for(@sip_account) do |f| %>
+  <% if @sip_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sip_account.errors.count, "error") %> prohibited this sip_account from being saved:</h2>
+
+      <ul>
+      <% @sip_account.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id, "User" %><br />
+    <%= f.select( :user_id,
+      @users.collect {|r| [ "#{r.sn}, #{r.gn} (#{r.username}, #{r.email})", r.id ] },
+      { :include_blank => true, :selected => @sip_account.user_id }
+    ) %>
+  </div>
+  <div class="field">
+    <%= f.label :auth_name %><br />
+    <%= f.text_field :auth_name %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :realm %><br />
+    <%= f.text_field :realm %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_server_id, "SIP server" %><br />
+    <%= f.select( :sip_server_id,
+      @sip_servers.collect {|r| [ "#{r.name} (ID #{r.id})", r.id ] },
+      { :include_blank => true, :selected => @sip_account.sip_server_id }
+    ) %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_proxy_id, "SIP proxy" %><br />
+    <%= f.select( :sip_proxy_id,
+      @sip_proxies.collect {|r| [ "#{r.name} (ID #{r.id})", r.id ] },
+      { :include_blank => true, :selected => @sip_account.sip_proxy_id }
+    ) %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_phone_id, "SIP phone" %><br />
+    <%= f.select( :sip_phone_id,
+      @sip_phones.collect {|r| [ "Prov. server #{r.provisioning_server_id} phone #{r.phone_id}", r.id ] },
+      { :include_blank => true, :selected => @sip_account.sip_phone_id }
+    ) %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

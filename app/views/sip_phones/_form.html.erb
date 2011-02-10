@@ -1,0 +1,29 @@
+<%= form_for(@sip_phone) do |f| %>
+  <% if @sip_phone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sip_phone.errors.count, "error") %> prohibited this sip_phone from being saved:</h2>
+
+      <ul>
+      <% @sip_phone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :provisioning_server_id, "Provisioning server" %><br />
+    <%= f.select( :provisioning_server_id,
+      @prov_servers.collect {|r| [ "#{r.name}" + (r.port ? ":#{r.port.to_s}" : '') + " (ID #{r.id})", r.id ] },
+      { :include_blank => true, :selected => @sip_phone.provisioning_server_id }
+    ) %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_id, "Prov. server phone ID" %><br />
+    <%= f.text_field :phone_id %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

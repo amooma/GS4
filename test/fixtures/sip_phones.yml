@@ -1,0 +1,21 @@
+# == Schema Information
+# Schema version: 20110209212927
+#
+# Table name: sip_phones
+#
+#  id                     :integer         not null, primary key
+#  phone_id               :integer
+#  provisioning_server_id :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_id: 1
+  provisioning_server_id: 1
+
+two:
+  phone_id: 1
+  provisioning_server_id: 1

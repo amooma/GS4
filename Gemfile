@@ -39,7 +39,16 @@ gem "simple_form"
 gem 'default_value_for'
 
 # https://github.com/plataformatec/devise for authentication
-gem 'devise', '~> 1.1'
+gem 'devise', '~> 1.1'  
+
+
+gem "bcrypt-ruby", :require => "bcrypt"
+
+# omniauth depends on nokogiri.
+# note:
+#   aptitude install libxml2-dev libxslt1-dev
+#   aptitude install libxml2 libxslt1.1
+gem "omniauth"
 
 
 # Use unicorn as the web server

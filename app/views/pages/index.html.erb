@@ -4,10 +4,10 @@
 
 <h2>Users</h2>
 
-<%= link_to( "List all users (#{@number_of_users})",
-	url_for(:controller => 'users', :action => 'index')
+<%= link_to( "List all SIP accouts (#{@number_of_sip_accounts})",
+	url_for(:controller => 'sip_accounts', :action => 'index')
 ) %><br />
-<%= link_to( "Create a new user",
-	url_for(:controller => 'users', :action => 'new')
+<%= link_to( "Create a new SIP account",
+	url_for(:controller => 'sip_accounts', :action => 'new')
 ) %><br />
 

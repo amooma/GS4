@@ -1,15 +1,50 @@
+# == Schema Information
+# Schema version: 20110209212927
+#
+# Table name: users
+#
+#  id                   :integer         not null, primary key
+#  email                :string(255)     default(""), not null
+#  encrypted_password   :string(128)     default(""), not null
+#  password_salt        :string(255)     default(""), not null
+#  reset_password_token :string(255)
+#  remember_token       :string(255)
+#  remember_created_at  :datetime
+#  sign_in_count        :integer         default(0)
+#  current_sign_in_at   :datetime
+#  last_sign_in_at      :datetime
+#  current_sign_in_ip   :string(255)
+#  last_sign_in_ip      :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  username             :string(255)
+#  sn                   :string(255)
+#  gn                   :string(255)
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+admin1:
+  username: admin1
+  email: admin1@example.com
+  gn: Admin1
+  sn: Example
+
 one:
-  uid: MyString
-  gn: MyString
-  sn: MyString
-  mail: MyString
-  userPassword: MyString
- 
+  username: one
+  email: one@example.com
+  gn: One
+  sn: Example
+
 two:
-  uid: MyString
-  gn: MyString
-  sn: MyString
-  mail: MyString
-  userPassword: MyString
+  username: two
+  email: two@example.com
+  gn: Two
+  sn: Example
+
+

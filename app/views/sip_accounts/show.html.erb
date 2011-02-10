@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @sip_account.user_id ? "ID #{@sip_account.user_id}" : "-" %>
+  <% if @sip_account.user %>
+    (<%= @sip_account.user.sn %>, <%= @sip_account.user.gn %>, <%= @sip_account.user.username %>, <%= @sip_account.user.email %>)
+  <% end %>
+</p>
+
+<p>
+  <b>Auth name:</b>
+  <%= @sip_account.auth_name %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @sip_account.password %>
+</p>
+
+<p>
+  <b>Realm:</b>
+  <%= @sip_account.realm %>
+</p>
+
+<p>
+  <b>Phone number:</b>
+  <%= @sip_account.phone_number %>
+</p>
+
+<p>
+  <b>SIP server:</b>
+  <%= @sip_account.sip_server_id ? "ID #{@sip_account.sip_server_id}" : "-" %>
+  <% if @sip_account.sip_server %>
+    (<%= @sip_account.sip_server.name %>)
+  <% end %>
+</p>
+
+<p>
+  <b>SIP proxy:</b>
+  <%= @sip_account.sip_proxy_id ? "ID #{@sip_account.sip_proxy_id}" : "-" %>
+  <% if @sip_account.sip_proxy %>
+    (<%= @sip_account.sip_proxy.name %>)
+  <% end %>
+</p>
+
+<p>
+  <b>SIP phone:</b>
+  <%= @sip_account.sip_phone_id ? "ID #{@sip_account.sip_phone_id}" : "-" %>
+  <% if @sip_account.sip_phone %>
+    (Prov. server <%= @sip_account.sip_phone.provisioning_server_id %> phone <%= @sip_account.sip_phone.phone_id %>)
+  <% end %>
+</p>
+
+<p>
+  <b>Provisioning SIP account:</b>
+<%
+	cantina_sip_account = @sip_account.cantina_sip_account
+	case cantina_sip_account
+		when nil
+			%>none!<%
+		when false
+			%>Failed to query provisioning server!<%
+		else
+			%><%= cantina_sip_account.user %>@<%= cantina_sip_account.sip_proxy %><%
+	end
+%>
+</p>
+
+
+<%= link_to 'Edit', edit_sip_account_path(@sip_account) %> |
+<%= link_to 'Back', sip_accounts_path %>
