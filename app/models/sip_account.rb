@@ -22,10 +22,11 @@ class SipAccount < ActiveRecord::Base
 	belongs_to :sip_server , :validate => true
 	belongs_to :sip_proxy  , :validate => true
 	belongs_to :sip_phone  , :validate => true
-	belongs_to :extensions , :validate => true
+	belongs_to :extension  , :validate => true
+	belongs_to :user       , :validate => true
 	
 	validates_presence_of :sip_phone_id
-	
+	validates_presence_of :user_id
 	
 	after_validation :prov_srv_sip_account_create, :on => :create
 	after_validation :prov_srv_sip_account_update, :on => :update
