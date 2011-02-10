@@ -14,5 +14,5 @@ class SipPhone < ActiveRecord::Base
   has_many :sip_accounts, :dependent => :destroy
   belongs_to :provisioning_server, :validate => true
   
-  validates_presence_of :provisioning_server
+  validates_presence_of :provisioning_server_id
 end
