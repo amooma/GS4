@@ -1,5 +1,7 @@
 Usermanager::Application.routes.draw do
  
+  get "admin/index"
+  match '/admin' => "admin#index"
   match '/auth/:provider/callback' => 'authentications#create'  
   resources :authentications
   
