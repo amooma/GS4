@@ -72,7 +72,7 @@ class SipAccount < ActiveRecord::Base
 		ret = false
 		if self.errors && self.errors.length > 0
 			# The SIP account is invalid. Don't even try to create it on the prov. server.
-			errors.add( :base, "Will not create invalid SIP account on Cantina provisioning server." )
+			errors.add( :base, "Will not create invalid SIP account on the provisioning server." )
 		else
 			case prov_srv
 				when 'cantina'
@@ -91,7 +91,7 @@ class SipAccount < ActiveRecord::Base
 		ret = false
 		if self.errors && self.errors.length > 0
 			# The SIP account is invalid. Don't even try to update it on the prov. server.
-			errors.add( :base, "SIP account is invalid. Will not update data on Cantina provisioning server." )
+			errors.add( :base, "SIP account is invalid. Will not update data on the provisioning server." )
 		else
 			case prov_srv
 				when 'cantina'
