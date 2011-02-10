@@ -13,7 +13,7 @@
 
 <div id="user_nav">
 <%- if user_signed_in? -%>
-	Signed in as <%= current_user.username %>.
+	Signed in as <q><%= current_user.username %></q>.
 	<%= link_to "Sign out", destroy_user_session_path %>
 <%- else -%>
 	<%= link_to "Sign in", new_user_session_path %>
