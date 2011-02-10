@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Provisioning server</th>
-    <th>Phone ID</th>
+    <th>Prov. server phone ID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -20,7 +20,7 @@
       %> <%=
         sip_phone.provisioning_server_id ? "(ID #{sip_phone.provisioning_server_id})" : '-'
       %></td>
-    <td><%= sip_phone.phone_id %></td>
+    <td><%= sip_phone.phone_id || '-' %></td>
     <td><%= link_to 'Show', sip_phone %></td>
     <td><%= link_to 'Edit', edit_sip_phone_path(sip_phone) %></td>
     <td><%= link_to 'Destroy', sip_phone, :confirm => 'Are you sure?', :method => :delete %></td>
