@@ -30,12 +30,12 @@ div.field, div.actions {
 }
 
 
-#notice {
+#notice, .app_notice {
 	padding: 0;
 	background-color: #dfd;
 	color: #090;
 }
-#alert {
+#alert, .app_alert {
 	padding: 0;
 	background-color: #fdd;
 	color: #c00;
