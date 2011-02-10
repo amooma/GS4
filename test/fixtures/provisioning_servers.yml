@@ -1,9 +1,21 @@
+# == Schema Information
+# Schema version: 20110209212927
+#
+# Table name: provisioning_servers
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  port       :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  port: 1
+  name: 10.0.0.1
+  port: 3001
 
 two:
-  name: MyString
-  port: 1
+  name: 10.0.0.2
+  port: 3002

@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20110209212927
+#
+# Table name: sip_servers
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
