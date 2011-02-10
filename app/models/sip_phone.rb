@@ -14,5 +14,12 @@ class SipPhone < ActiveRecord::Base
   has_many :sip_accounts, :dependent => :destroy
   belongs_to :provisioning_server, :validate => true
   
-  validates_presence_of :provisioning_server_id
+  # The provisioning server must never change, once it has been set.
+  validate {
+    if provisioning_server_id_was != nil \
+    && provisioning_server_id != provisioning_server_id_was
+      errors.add( :provisioning_server_id, "must not change. You have to delete the SIP phone and create it on the other provisioning server." )
+    end
+  }
+  
 end
