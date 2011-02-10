@@ -1,4 +1,5 @@
 Usermanager::Application.routes.draw do
+ 
   match '/auth/:provider/callback' => 'authentications#create'  
   resources :authentications
   
@@ -18,6 +19,9 @@ Usermanager::Application.routes.draw do
   
   resources :kamailio, :only => [:index ], :format => 'txt'
   
+  namespace :admin do 
+  resources :user
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
   

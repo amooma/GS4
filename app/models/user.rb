@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :gn, :sn
+  attr_accessible :email, :password, :password_confirmation, :gn, :sn, :username
   has_many :sip_accounts
   
   validates_presence_of(:username, :message => "username needed")
