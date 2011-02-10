@@ -22,10 +22,11 @@ class SipAccount < ActiveRecord::Base
 	belongs_to :sip_server , :validate => true
 	belongs_to :sip_proxy  , :validate => true
 	belongs_to :sip_phone  , :validate => true
-	belongs_to :extensions , :validate => true
+	belongs_to :extension  , :validate => true
+	belongs_to :user       , :validate => true
 	
 	validates_presence_of :sip_phone_id
-	
+	validates_presence_of :user_id
 	
 	after_validation :prov_srv_sip_account_create, :on => :create
 	after_validation :prov_srv_sip_account_update, :on => :update
@@ -70,11 +71,16 @@ class SipAccount < ActiveRecord::Base
 	def prov_srv_sip_account_create
 		prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
 		ret = false
-		case prov_srv
-			when 'cantina'
-				ret = cantina_sip_account_create
-			else
-				errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+		if self.errors && self.errors.length > 0
+			# The SIP account is invalid. Don't even try to create it on the prov. server.
+			errors.add( :base, "Will not create invalid SIP account on the provisioning server." )
+		else
+			case prov_srv
+				when 'cantina'
+					ret = cantina_sip_account_create
+				else
+					errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+			end
 		end
 		return ret
 	end
@@ -84,11 +90,16 @@ class SipAccount < ActiveRecord::Base
 	def prov_srv_sip_account_update
 		prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
 		ret = false
-		case prov_srv
-			when 'cantina'
-				ret = cantina_sip_account_update
-			else
-				errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+		if self.errors && self.errors.length > 0
+			# The SIP account is invalid. Don't even try to update it on the prov. server.
+			errors.add( :base, "SIP account is invalid. Will not update data on the provisioning server." )
+		else
+			case prov_srv
+				when 'cantina'
+					ret = cantina_sip_account_update
+				else
+					errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+			end
 		end
 		return ret
 	end
@@ -120,8 +131,8 @@ class SipAccount < ActiveRecord::Base
 			# GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
 			if cantina_sip_accounts
 				cantina_sip_accounts.each { |cantina_sip_account|
-					if cantina_sip_account.sip_proxy == sip_server \
-					&& cantina_sip_account.user      == sip_user
+					if cantina_sip_account.sip_proxy .to_s == sip_server .to_s \
+					&& cantina_sip_account.user      .to_s == sip_user   .to_s
 						logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
 						return cantina_sip_account
 						break
@@ -145,7 +156,7 @@ class SipAccount < ActiveRecord::Base
 				:user            => self.auth_name,
 				:password        => self.password,
 				:realm           => self.realm,
-				:phone_id        => self.sip_phone_id,
+				:phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
 				:registrar       => (self.sip_server ? self.sip_server.name : nil),
 				:registrar_port  => nil,
 				:sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
@@ -161,7 +172,9 @@ class SipAccount < ActiveRecord::Base
 		end
 		
 		if ! cantina_sip_account.valid?
-			errors.add( :base, "Failed to create SIP account on Cantina provisioning server." )
+			errors.add( :base, "Failed to create SIP account on Cantina provisioning server. (Reason:\n" +
+				get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+				")" )
 			return false
 		end
 	end
@@ -184,12 +197,11 @@ class SipAccount < ActiveRecord::Base
 				return cantina_sip_account_create
 			else
 				if ! cantina_sip_account.update_attributes({
-					:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
 					:auth_user       => self.auth_name,
 					:user            => self.auth_name,
 					:password        => self.password,
 					:realm           => self.realm,
-					:phone_id        => self.sip_phone_id,
+					:phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
 					:registrar       => (self.sip_server ? self.sip_server.name : nil),
 					:registrar_port  => nil,
 					:sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
@@ -198,7 +210,9 @@ class SipAccount < ActiveRecord::Base
 					:dtmf_mode       => 'rfc2833',
 				})
 					log_active_record_errors_from_remote( cantina_sip_account )
-					errors.add( :base, "Failed to update SIP account on Cantina provisioning server." )
+					errors.add( :base, "Failed to update SIP account on Cantina provisioning server. (Reason:\n" +
+						get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+						")" )
 					return false
 				end
 		end
@@ -222,7 +236,9 @@ class SipAccount < ActiveRecord::Base
 				# no action required
 			else
 				if ! cantina_sip_account.destroy
-					errors.add( :base, "Failed to delete SIP account on Cantina provisioning server." )
+					errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+						get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+						")" )
 					return false
 				end
 		end
@@ -232,8 +248,6 @@ class SipAccount < ActiveRecord::Base
 	# Log validation errors from the remote model.
 	#
 	def log_active_record_errors_from_remote( ar )
-		logger.info ar.valid?.inspect
-		
 		if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
 			logger.info "----------------------------------------------------------"
 			logger.info "Errors for #{ar.class} from Cantina:"
@@ -247,6 +261,22 @@ class SipAccount < ActiveRecord::Base
 			}
 			logger.info "----------------------------------------------------------"
 		end
+	end
+	
+	# Get validation errors from the remote model.
+	#
+	def get_active_record_errors_from_remote( ar )
+		ret = []
+		if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
+			ar.errors.each_pair { |attr, errs|
+				if errs.kind_of?(Array) && errs.length > 0
+					errs.each { |msg|
+						ret << ( '' + (attr == :base ? '' : "#{attr.to_s} ") + "#{msg}" )
+					}
+				end
+			}
+		end
+		return ret
 	end
 	
 end

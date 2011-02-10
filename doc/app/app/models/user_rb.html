@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">2011-02-02 01:07:11 +0100</dd>
+			<dd class="modified-date">2011-02-10 13:26:59 +0100</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -43,7 +43,32 @@
 		
 		<div class="description">
 			<h2>Description</h2>
-			
+			<h2>Schema Information</h2>
+<p>
+Schema version: 20110207214124
+</p>
+<p>
+Table name: users
+</p>
+<pre>
+ id                   :integer         not null, primary key
+ email                :string(255)     default(&quot;&quot;), not null
+ encrypted_password   :string(128)     default(&quot;&quot;), not null
+ password_salt        :string(255)     default(&quot;&quot;), not null
+ reset_password_token :string(255)
+ remember_token       :string(255)
+ remember_created_at  :datetime
+ sign_in_count        :integer         default(0)
+ current_sign_in_at   :datetime
+ last_sign_in_at      :datetime
+ current_sign_in_ip   :string(255)
+ last_sign_in_ip      :string(255)
+ created_at           :datetime
+ updated_at           :datetime
+ username             :string(255)
+ sn                   :string(255)
+ gn                   :string(255)</pre>
+
 		</div>
 		
 	</div>
