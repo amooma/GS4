@@ -2,6 +2,10 @@ class SipAccountsController < ApplicationController
   
   before_filter :authenticate_user!
   
+  before_filter { |controller|
+    @sip_phones = SipPhone.order([ :provisioning_server_id, :phone_id ])
+  }
+  
   # GET /sip_accounts
   # GET /sip_accounts.xml
   def index

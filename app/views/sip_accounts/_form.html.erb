@@ -40,8 +40,11 @@
     <%= f.text_field :sip_proxy_id %>
   </div>
   <div class="field">
-    <%= f.label :sip_phone_id, "SIP phone ID" %><br />
-    <%= f.text_field :sip_phone_id %>
+    <%= f.label :sip_phone_id, "SIP phone" %><br />
+    <%= f.select( :sip_phone_id,
+      @sip_phones.collect {|r| [ "Prov. server #{r.provisioning_server_id} phone #{r.phone_id}", r.id ] },
+      { :include_blank => true, :selected => @sip_account.sip_phone_id }
+    ) %>
   </div>
   <div class="actions">
     <%= f.submit %>
