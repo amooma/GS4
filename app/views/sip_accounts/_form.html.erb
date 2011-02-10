@@ -12,8 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id, "User ID" %><br />
-    <%= f.text_field :user_id %>
+    <%= f.label :user_id, "User" %><br />
+    <%= f.select( :user_id,
+      @users.collect {|r| [ "#{r.sn}, #{r.gn} (#{r.username}, #{r.email})", r.id ] },
+      { :include_blank => true, :selected => @sip_account.user_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :auth_name %><br />
@@ -32,12 +35,18 @@
     <%= f.text_field :phone_number %>
   </div>
   <div class="field">
-    <%= f.label :sip_server_id, "SIP server ID" %><br />
-    <%= f.text_field :sip_server_id %>
+    <%= f.label :sip_server_id, "SIP server" %><br />
+    <%= f.select( :sip_server_id,
+      @sip_servers.collect {|r| [ "#{r.name} (ID #{r.id})", r.id ] },
+      { :include_blank => true, :selected => @sip_account.sip_server_id }
+    ) %>
   </div>
   <div class="field">
-    <%= f.label :sip_proxy_id, "SIP proxy ID" %><br />
-    <%= f.text_field :sip_proxy_id %>
+    <%= f.label :sip_proxy_id, "SIP proxy" %><br />
+    <%= f.select( :sip_proxy_id,
+      @sip_proxies.collect {|r| [ "#{r.name} (ID #{r.id})", r.id ] },
+      { :include_blank => true, :selected => @sip_account.sip_proxy_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :sip_phone_id, "SIP phone" %><br />
