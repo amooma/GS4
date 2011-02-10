@@ -172,7 +172,9 @@ class SipAccount < ActiveRecord::Base
 		end
 		
 		if ! cantina_sip_account.valid?
-			errors.add( :base, "Failed to create SIP account on Cantina provisioning server." )
+			errors.add( :base, "Failed to create SIP account on Cantina provisioning server. (Reason:\n" +
+				get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+				")" )
 			return false
 		end
 	end
@@ -208,7 +210,9 @@ class SipAccount < ActiveRecord::Base
 					:dtmf_mode       => 'rfc2833',
 				})
 					log_active_record_errors_from_remote( cantina_sip_account )
-					errors.add( :base, "Failed to update SIP account on Cantina provisioning server." )
+					errors.add( :base, "Failed to update SIP account on Cantina provisioning server. (Reason:\n" +
+						get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+						")" )
 					return false
 				end
 		end
@@ -232,7 +236,9 @@ class SipAccount < ActiveRecord::Base
 				# no action required
 			else
 				if ! cantina_sip_account.destroy
-					errors.add( :base, "Failed to delete SIP account on Cantina provisioning server." )
+					errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+						get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+						")" )
 					return false
 				end
 		end
@@ -242,8 +248,6 @@ class SipAccount < ActiveRecord::Base
 	# Log validation errors from the remote model.
 	#
 	def log_active_record_errors_from_remote( ar )
-		logger.info ar.valid?.inspect
-		
 		if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
 			logger.info "----------------------------------------------------------"
 			logger.info "Errors for #{ar.class} from Cantina:"
@@ -257,6 +261,22 @@ class SipAccount < ActiveRecord::Base
 			}
 			logger.info "----------------------------------------------------------"
 		end
+	end
+	
+	# Get validation errors from the remote model.
+	#
+	def get_active_record_errors_from_remote( ar )
+		ret = []
+		if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
+			ar.errors.each_pair { |attr, errs|
+				if errs.kind_of?(Array) && errs.length > 0
+					errs.each { |msg|
+						ret << ( '' + (attr == :base ? '' : "#{attr.to_s} ") + "#{msg}" )
+					}
+				end
+			}
+		end
+		return ret
 	end
 	
 end
