@@ -11,7 +11,7 @@
 #
 
 class ProvisioningServer < ActiveRecord::Base
-  belongs_to :sip_phones
+  has_many :sip_phones
   validates_presence_of(:name, :message => ":name missing")
   validates_uniqueness_of(:name, :message => "Server already exists")
   validate_hostname_or_ip(:name)
