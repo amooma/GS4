@@ -12,13 +12,17 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :provisioning_server_id, "Provisioning server" %><br />
+    <%= f.select( :provisioning_server_id,
+      @prov_servers.collect {|r| [ "#{r.name}" + (r.port ? ":#{r.port.to_s}" : '') + " (ID #{r.id})", r.id ] },
+      { :include_blank => true, :selected => @sip_phone.provisioning_server_id }
+    ) %>
+  </div>
+  <div class="field">
     <%= f.label :phone_id, "Phone ID" %><br />
     <%= f.text_field :phone_id %>
   </div>
-  <div class="field">
-    <%= f.label :provisioning_server_id, "Provisioning server ID" %><br />
-    <%= f.text_field :provisioning_server_id %>
-  </div>
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>
