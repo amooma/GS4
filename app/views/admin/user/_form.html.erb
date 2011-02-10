@@ -1,5 +1,3 @@
-<%= form_for(:admin,@user, {:action => :create} ) do |f| %>
-
 <div class="field">
     <%= f.label :username %>
     <br/>
@@ -27,9 +25,9 @@
 </div>
 <div class="field">
     <%= f.label :email %>
-    <%f.text_field :email %>
+	<br/>
+    <%= f.text_field :email %>
 </div>
 <div class="actions">
     <%= f.submit %>
 </div>
-<% end %>
