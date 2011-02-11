@@ -1,0 +1,7 @@
+<h1>Setup after installation</h1>
+
+<% if @User == 0 %>
+<%= link_to "Create first user", new_admin_setup_path%>
+<% else %>
+There are allready created users. Nothing to do here.
+<% end %>
