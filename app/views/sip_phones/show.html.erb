@@ -1,13 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Provisioning server ID:</b>
-  <%= @sip_phone.provisioning_server_id %>
+  <b>Provisioning server:</b>
+<%
+	prov_server = @sip_phone.provisioning_server_id ? @prov_servers.find( @sip_phone.provisioning_server_id ) : nil
+%><%=
+	prov_server ? prov_server.name : ''
+%><%=
+	prov_server && prov_server.port ? ":#{prov_server.port}" : ''
+%><%=
+	@sip_phone.provisioning_server_id ? " (ID #{@sip_phone.provisioning_server_id})" : "(none)"
+%>
 </p>
 
 <p>
   <b>Phone ID on prov. server:</b>
-  <%= @sip_phone.phone_id %>
+  <%= @sip_phone.phone_id || "(none)" %>
 </p>
 
 

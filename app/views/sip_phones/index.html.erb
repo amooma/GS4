@@ -17,8 +17,8 @@
         prov_server ? prov_server.name : ''
       %><%=
         prov_server && prov_server.port ? ":#{prov_server.port}" : ''
-      %> <%=
-        sip_phone.provisioning_server_id ? "(ID #{sip_phone.provisioning_server_id})" : '-'
+      %><%=
+        sip_phone.provisioning_server_id ? " (ID #{sip_phone.provisioning_server_id})" : '-'
       %></td>
     <td><%= sip_phone.phone_id || '-' %></td>
     <td><%= link_to 'Show', sip_phone %></td>
