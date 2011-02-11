@@ -1,5 +1,11 @@
 Usermanager::Application.routes.draw do
 	
+  get "setup/index"
+
+  get "setup/create"
+
+  get "setup/new"
+
 	#get "admin/index"
 	#match '/admin' => "admin#index"
 	match '/auth/:provider/callback' => 'authentications#create'  
@@ -26,7 +32,7 @@ Usermanager::Application.routes.draw do
 	namespace :admin do
 		
 		resources :user
-		
+		resources :setup
 		#match '' => "admin#index"
 		match '' => "pages_admin#index"
 		#root :to => 'pages_admin#index'
