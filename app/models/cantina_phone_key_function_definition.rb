@@ -2,7 +2,7 @@
 #
 class CantinaPhoneKeyFunctionDefinition < ActiveResource::Base
 	
-	self.site = 'http://localhost:3001/'
+	#self.site = 'http://localhost:3001/'
 	self.element_name = 'phone_key_function_definition'
 	
 #	# http://api.rubyonrails.org/classes/ActiveResource/Base.html#method-c-schema

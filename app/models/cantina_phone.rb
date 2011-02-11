@@ -2,7 +2,7 @@
 #
 class CantinaPhone < ActiveResource::Base
 	
-	self.site = 'http://localhost:3001/'
+	#self.site = 'http://localhost:3001/'
 	self.element_name = 'phone'
 	
 #	# http://api.rubyonrails.org/classes/ActiveResource/Base.html#method-c-schema
