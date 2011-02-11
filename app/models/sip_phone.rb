@@ -22,4 +22,13 @@ class SipPhone < ActiveRecord::Base
     end
   }
   
+  # The phone_id must never change, once it has been set.
+  validate {
+    if phone_id_was != nil \
+    && phone_id != phone_id_was
+      errors.add( :phone_id, "must not change. You have to delete the SIP phone and create a new one." )
+    end
+  }
+  
+  
 end
