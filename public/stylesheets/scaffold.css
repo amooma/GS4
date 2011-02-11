@@ -153,3 +153,24 @@ div#header {
 	display: block;
 	font-style: italic;
 }
+
+
+.index_overview {
+	height: auto;
+	column-width: 24em;
+	-moz-column-width: 24em;
+	-webkit-column-width: 24em;
+	column-gap: 1em;
+	-moz-column-gap: 1em;
+	-webkit-column-gap: 1em;
+	column-fill: balance;
+	-moz-column-fill: balance;
+	-webkit-column-fill: balance;
+	widows: 5;
+	orphans: 5;
+}
+
+.index_overview section {
+	display: table;
+}
+
