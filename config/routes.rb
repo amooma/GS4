@@ -8,23 +8,24 @@ Usermanager::Application.routes.draw do
 	devise_for :users
 	
 	
+	resources :sip_accounts
+	
+	resources :provisioning_servers, :path => 'provisioning-servers'
+	
+	resources :sip_phones, :path => 'sip-phones'
+	
+	resources :sip_servers, :path => 'sip-servers'
+	
+	resources :sip_proxies, :path => 'sip-proxies'
+	
+	resources :extensions
+	
+	resources :kamailio, :only => [:index ], :format => 'txt'
+	
+	
 	namespace :admin do
 		
 		resources :user
-		
-		resources :sip_accounts
-		
-		resources :provisioning_servers, :path => 'provisioning-servers'
-		
-		resources :sip_phones, :path => 'sip-phones'
-		
-		resources :sip_servers, :path => 'sip-servers'
-		
-		resources :sip_proxies, :path => 'sip-proxies'
-		
-		resources :extensions
-		
-		resources :kamailio, :only => [:index ], :format => 'txt'
 		
 		#match '' => "admin#index"
 		match '' => "pages_admin#index"
