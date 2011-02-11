@@ -30,5 +30,13 @@ class SipPhone < ActiveRecord::Base
     end
   }
   
+  # If the phone does not belong to a provisioning server then the
+  # phone_id has to be nil.
+  validate {
+    if provisioning_server_id.blank? && (! phone_id.blank?)
+      errors.add( :phone_id, "must be blank if the phone does not belong to a provisioning server." )
+    end
+  }
+  
   
 end
