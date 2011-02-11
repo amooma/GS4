@@ -8,7 +8,7 @@ Usermanager::Application.routes.draw do
 	devise_for :users
 	
 	
-	resources :sip_accounts
+	resources :sip_accounts, :path => 'sip-accounts'
 	
 	resources :provisioning_servers, :path => 'provisioning-servers'
 	
