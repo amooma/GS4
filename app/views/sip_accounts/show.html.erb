@@ -48,7 +48,7 @@
   <b>SIP phone:</b>
   <%= @sip_account.sip_phone_id ? "ID #{@sip_account.sip_phone_id}" : "-" %>
   <% if @sip_account.sip_phone %>
-    (Prov. server <%= @sip_account.sip_phone.provisioning_server_id %> phone <%= @sip_account.sip_phone.phone_id %>)
+    (Prov. server <%= @sip_account.sip_phone.provisioning_server_id || '?' %> phone <%= @sip_account.sip_phone.phone_id || '?' %>, ID <%= @sip_account.sip_phone_id %>)
   <% end %>
 </p>
 
