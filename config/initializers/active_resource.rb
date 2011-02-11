@@ -14,3 +14,7 @@ class ActiveResource::Base
 	end
 end
 
+# Enable logging for ActiveResource:
+ActiveResource::Base.logger = ActionController::Base.logger
+#ActiveResource::Base.logger = ActiveRecord::Base.logger
+
