@@ -58,7 +58,7 @@
 	cantina_sip_account = @sip_account.cantina_sip_account
 	case cantina_sip_account
 		when nil
-			%>none!<%
+			%>(none)<%
 		when false
 			%>Failed to query provisioning server!<%
 		else
