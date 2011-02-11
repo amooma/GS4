@@ -32,7 +32,7 @@ class SipPhonesController < ApplicationController
   # GET /sip_phones/new
   # GET /sip_phones/new.xml
   def new
-    @sip_phone = SipPhone.new
+    @sip_phone = SipPhone.new(params[:sip_phone])
     
     respond_to do |format|
       format.html # new.html.erb
@@ -48,23 +48,30 @@ class SipPhonesController < ApplicationController
   # POST /sip_phones
   # POST /sip_phones.xml
   def create
-    @sip_phone = SipPhone.new(params[:sip_phone])
-    
-    respond_to do |format|
-      if @sip_phone.save
-        format.html { redirect_to(@sip_phone, :notice => 'Sip phone was successfully created.') }
-        format.xml  { render :xml => @sip_phone, :status => :created, :location => @sip_phone }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @sip_phone.errors, :status => :unprocessable_entity }
+    if ! params[:sip_phone][:phone_id]
+      respond_to do |format|
+        format.html { redirect_to params.merge!(:action => "new" )
+ }
+      end
+      
+    else   
+      @sip_phone = SipPhone.new(params[:sip_phone])
+      @sip_phone = SipPhone.find(params[:id])
+      
+      respond_to do |format|
+        if @sip_phone.save
+          format.html { redirect_to(@sip_phone, :notice => 'Sip phone was successfully created.') }
+          format.xml  { render :xml => @sip_phone, :status => :created, :location => @sip_phone }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @sip_phone.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
-  
   # PUT /sip_phones/1
   # PUT /sip_phones/1.xml
   def update
-    @sip_phone = SipPhone.find(params[:id])
     
     respond_to do |format|
       if @sip_phone.update_attributes(params[:sip_phone])
