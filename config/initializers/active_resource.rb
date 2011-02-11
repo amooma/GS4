@@ -7,9 +7,9 @@ class ActiveResource::Base
 	
 	# Allows you to set the provisioning server for the Cantina* models.
 	#
-	def self.set_resource( site, element_name )
+	def self.set_resource( site, element_name=nil )
 		self.site         = site
-		self.element_name = element_name
+		self.element_name = element_name  if ! element_name.blank?
 		return true
 	end
 end
