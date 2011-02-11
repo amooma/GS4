@@ -11,6 +11,19 @@
 </head>
 <body>
 
+<% if params[:controller] != 'admin/setup' && @app_number_of_users == 0
+%>
+	<div class="noticebox">
+		No users configured.<br />
+		You may want to go to the <%=
+			link_to( "setup",
+				url_for( :controller => '/admin/setup' )
+			)
+		%> and create an admin user.
+	</div>
+<% end
+%>
+
 <div id="user_nav">
 <%- if user_signed_in? -%>
 	Signed in as <q><%= current_user.username %></q>.
