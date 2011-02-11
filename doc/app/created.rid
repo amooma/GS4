@@ -1,10 +1,11 @@
-Fri, 11 Feb 2011 21:17:37 +0100
+Fri, 11 Feb 2011 21:21:02 +0100
 doc/README_FOR_APP	Tue, 01 Feb 2011 20:42:12 +0100
 app/helpers/application_helper.rb	Tue, 01 Feb 2011 20:42:11 +0100
 app/helpers/extensions_helper.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/helpers/sip_servers_helper.rb	Wed, 02 Feb 2011 01:07:11 +0100
 app/helpers/provisioning_servers_helper.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/helpers/kamailio_helper.rb	Thu, 03 Feb 2011 18:32:20 +0100
+app/helpers/admin/setup_helper.rb	Fri, 11 Feb 2011 21:19:21 +0100
 app/helpers/admin/user_helper.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/helpers/sip_accounts_helper.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/helpers/authentications_helper.rb	Thu, 10 Feb 2011 20:46:58 +0100
@@ -39,6 +40,7 @@ app/models/cantina_reboot_request.rb	Fri, 11 Feb 2011 18:53:15 +0100
 app/controllers/application_controller.rb	Tue, 01 Feb 2011 20:42:11 +0100
 app/controllers/sip_phones_controller.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/controllers/pages_admin_controller.rb	Fri, 11 Feb 2011 17:07:09 +0100
+app/controllers/admin/setup_controller.rb	Fri, 11 Feb 2011 21:19:21 +0100
 app/controllers/admin/user_controller.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/controllers/authentications_controller.rb	Thu, 10 Feb 2011 20:46:58 +0100
 app/controllers/extensions_controller.rb	Thu, 10 Feb 2011 20:46:58 +0100

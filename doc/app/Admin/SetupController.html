@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Module: Admin::UserHelper</title>
+	<title>Class: Admin::SetupController</title>
 
 	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -19,7 +19,7 @@
 		charset="utf-8"></script>
 
 </head>
-<body class="module">
+<body class="class">
 
 	<div id="metadata">
 		<div id="home-metadata">
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="../app/helpers/admin/user_helper_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="app/helpers/admin/user_helper.rb">app/helpers/admin/user_helper.rb</a></li>
+						<li><a href="../app/controllers/admin/setup_controller_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/controllers/admin/setup_controller.rb">app/controllers/admin/setup_controller.rb</a></li>
 					
 					</ul>
 				</div>
@@ -52,11 +52,31 @@
 
 			<!-- Parent Class -->
 			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link"><a href="../ApplicationController.html">ApplicationController</a></p>
+				
+			</div>
+			
 
 			<!-- Namespace Contents -->
 			
 
 			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-create">#create</a></li>
+					
+					<li><a href="#method-i-index">#index</a></li>
+					
+					<li><a href="#method-i-new">#new</a></li>
+					
+				</ul>
+			</div>
 			
 
 			<!-- Included Modules -->
@@ -204,7 +224,7 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="module">Admin::UserHelper</h1>
+		<h1 class="class">Admin::SetupController</h1>
 
 		<div id="description">
 			
@@ -218,6 +238,127 @@
 
 		<!-- Methods -->
 		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="create-method" class="method-detail ">
+				<a name="method-i-create"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">create</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="create-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin/setup_controller.rb, line 6</span>
+ 6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+ 7:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 8:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>      
+ 9:         <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>])
+10:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+11:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_path</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ @user.username } created. You can log in now.&quot;</span>) }
+12:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_path</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-ivar">@user</span>) }
+13:         <span class="ruby-keyword kw">else</span>
+14:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'new'</span> }
+15:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span>}
+16:         <span class="ruby-keyword kw">end</span>
+17:       <span class="ruby-keyword kw">else</span>
+18:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_path</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Setup disabled. Allready done!&quot;</span>) }
+19:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span>}
+20:       <span class="ruby-keyword kw">end</span>
+21:     <span class="ruby-keyword kw">end</span>
+22:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="index-method" class="method-detail ">
+				<a name="method-i-index"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">index</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="index-source">
+<pre>
+   <span class="ruby-comment cmt"># File app/controllers/admin/setup_controller.rb, line 2</span>
+2:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+3:     <span class="ruby-ivar">@User</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>
+4:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-i-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin/setup_controller.rb, line 24</span>
+24:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+25:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 
