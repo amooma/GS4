@@ -118,6 +118,38 @@ class SipAccount < ActiveRecord::Base
 		return ret
 	end
 	
+	# Returns the appropriate "site" parameter URL to use for the
+	# CantinaSipAccount ActiveResource. Returns nil if the SipPhone
+	# corresponding to this SipAccount does not have provisioning.
+	#
+	def determine_prov_server_resource
+		scheme = 'http'
+		host   = '0.0.0.0'  # this will not work on purpose
+		port   = 0          # this will not work on purpose
+		path   = '/'
+		if self.sip_phone
+			if self.sip_phone.provisioning_server_id.blank?
+				logger.debug "SipPhone #{self.sip_phone_id.inspect} has no provisioning server. Alright."
+				return nil  # phone without provisioning
+			else
+				prov_srv = self.sip_phone.provisioning_server
+				if prov_srv
+					scheme = 'http'  # TODO - https?
+					host   = prov_srv.name if ! prov_srv.name.blank?
+					port   = prov_srv.port if ! prov_srv.port.blank?
+					path   = '/'
+				end
+			end
+		end
+		ret = '%s://%s%s%s' % [
+			scheme,
+			host,
+			port.blank? ? '' : ":#{port.to_s}",
+			path,
+		]
+		logger.debug "SipPhone #{self.sip_phone_id.inspect} has prov. server #{ret.inspect}."
+		return ret
+	end
 	
 	# Find a SIP account by SIP server and SIP user on the Cantina
 	# provisioning server.
@@ -127,20 +159,27 @@ class SipAccount < ActiveRecord::Base
 	def cantina_find_sip_account_by_server_and_user( sip_server, sip_user )
 		logger.debug "Trying to find Cantina SIP account for \"#{sip_user}@#{sip_server}\" ..."
 		begin
-			cantina_sip_accounts = CantinaSipAccount.all()
-			# GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
-			if cantina_sip_accounts
-				cantina_sip_accounts.each { |cantina_sip_account|
-					if cantina_sip_account.sip_proxy .to_s == sip_server .to_s \
-					&& cantina_sip_account.user      .to_s == sip_user   .to_s
-						logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
-						return cantina_sip_account
-						break
-					end
-				}
+			cantina_resource = determine_prov_server_resource()
+			if ! cantina_resource
+				# SipPhone has no provisioning server.
+				return nil
+			else
+				CantinaSipAccount.set_resource( cantina_resource )
+				cantina_sip_accounts = CantinaSipAccount.all()
+				# GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
+				if cantina_sip_accounts
+					cantina_sip_accounts.each { |cantina_sip_account|
+						if cantina_sip_account.sip_proxy .to_s == sip_server .to_s \
+						&& cantina_sip_account.user      .to_s == sip_user   .to_s
+							logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
+							return cantina_sip_account
+							break
+						end
+					}
+				end
+				logger.debug "CantinaSipAccount not found."
+				return nil
 			end
-			logger.debug "CantinaSipAccount not found."
-			return nil
 		rescue Errno::ECONNREFUSED => e
 			return false
 		end
@@ -150,21 +189,28 @@ class SipAccount < ActiveRecord::Base
 	#
 	def cantina_sip_account_create
 		begin
-			cantina_sip_account = CantinaSipAccount.create({
-				:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
-				:auth_user       => self.auth_name,
-				:user            => self.auth_name,
-				:password        => self.password,
-				:realm           => self.realm,
-				:phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-				:registrar       => (self.sip_server ? self.sip_server.name : nil),
-				:registrar_port  => nil,
-				:sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
-				:sip_proxy_port  => nil,
-				:registration_expiry_time => 300,
-				:dtmf_mode       => 'rfc2833',
-			})
-			log_active_record_errors_from_remote( cantina_sip_account )
+			cantina_resource = determine_prov_server_resource()
+			if ! cantina_resource
+				return true
+			else
+				CantinaSipAccount.set_resource( cantina_resource )
+				cantina_sip_account = CantinaSipAccount.create({
+					:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
+					:auth_user       => self.auth_name,
+					:user            => self.auth_name,
+					:password        => self.password,
+					:realm           => self.realm,
+					:phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
+					:registrar       => (self.sip_server ? self.sip_server.name : nil),
+					:registrar_port  => nil,
+					:sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+					:sip_proxy_port  => nil,
+					:registration_expiry_time => 300,
+					:dtmf_mode       => 'rfc2833',
+				})
+				log_active_record_errors_from_remote( cantina_sip_account )
+				return true
+			end
 		rescue Errno::ECONNREFUSED => e
 			logger.warn "Failed to connect to Cantina provisioning server. (#{e.class}, #{e.message})"
 			errors.add( :base, "Failed to connect to Cantina provisioning server." )
