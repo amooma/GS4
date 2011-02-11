@@ -1,7 +1,7 @@
 Usermanager::Application.routes.draw do
 	
-	get "admin/index"
-	match '/admin' => "admin#index"
+	#get "admin/index"
+	#match '/admin' => "admin#index"
 	match '/auth/:provider/callback' => 'authentications#create'  
 	resources :authentications
 	
@@ -25,6 +25,10 @@ Usermanager::Application.routes.draw do
 		resources :extensions
 		
 		resources :kamailio, :only => [:index ], :format => 'txt'
+		
+		#match '' => "admin#index"
+		match '' => "pages_admin#index"
+		#root :to => 'pages_admin#index'
 		
 	end
 	
