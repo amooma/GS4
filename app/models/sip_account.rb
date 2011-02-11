@@ -28,6 +28,19 @@ class SipAccount < ActiveRecord::Base
 	validates_presence_of :sip_phone_id
 	validates_presence_of :user_id
 	
+	# The SipAccount must stay on the same provisioning server or
+	# bad things may happen.
+	validate {
+		if sip_phone_id_was != nil \
+		&& sip_phone_id != sip_phone_id_was
+			prov_server_id_is  = SipPhone.find( sip_phone_id     ).provisioning_server_id
+			prov_server_id_was = SipPhone.find( sip_phone_id_was ).provisioning_server_id
+			if prov_server_id_is != prov_server_id_was
+				errors.add( :sip_phone, "must stay on the same provisioning server (ID #{prov_server_id_was.inspect})." )
+			end
+		end
+	}
+	
 	after_validation :prov_srv_sip_account_create, :on => :create
 	after_validation :prov_srv_sip_account_update, :on => :update
 	before_destroy   :prov_srv_sip_account_destroy
