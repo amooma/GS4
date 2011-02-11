@@ -18,11 +18,13 @@
       { :include_blank => true, :selected => @sip_phone.provisioning_server_id }
     ) %>
   </div>
+  <% if @sip_phone.provisioning_server_id  %>
   <div class="field">
     <%= f.label :phone_id, "Prov. server phone ID" %><br />
     <%= f.text_field :phone_id %>
   </div>
   <br />
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
