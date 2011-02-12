@@ -1,5 +1,25 @@
 <h1>New SIP account</h1>
 
+<% if @num_users < 1 %>
+<div class="noticebox">
+	You will have to <%=
+		link_to( "create a user",
+			url_for( :controller => '/admin/user', :action => 'new' )
+		)
+	%> before you can create a SIP account.
+</div>
+<% end %>
+
+<% if @num_sip_phones < 1 %>
+<div class="noticebox">
+	You will have to <%=
+		link_to( "create a SIP phone",
+			url_for( :controller => '/sip_phones', :action => 'new' )
+		)
+	%> before you can create a SIP account.
+</div>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', sip_accounts_path %>
