@@ -33,7 +33,12 @@ class SipPhonesController < ApplicationController
   # GET /sip_phones/new.xml
   def new
     @sip_phone = SipPhone.new(params[:sip_phone])
-    
+    if params[:sip_phone][:provisioning_server_id]
+      p_id=params[:sip_phone][:provisioning_server_id]
+      s=ProvisioningServer.find(p_id).name
+      p=ProvisioningServer.find(p_id).port
+      CantinaPhone.set_resource( "http://#{s}:#{p}" )
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_phone }
@@ -51,12 +56,11 @@ class SipPhonesController < ApplicationController
     if ! params[:sip_phone][:phone_id]
       respond_to do |format|
         format.html { redirect_to params.merge!(:action => "new" )
- }
+        }
       end
       
     else   
       @sip_phone = SipPhone.new(params[:sip_phone])
-      @sip_phone = SipPhone.find(params[:id])
       
       respond_to do |format|
         if @sip_phone.save
