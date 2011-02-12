@@ -1,5 +1,15 @@
 <h1>New SIP phone</h1>
 
+<% if @num_prov_servers < 2 %>
+<div class="noticebox">
+	You may want to <%=
+		link_to( "create a provisioning server",
+			url_for( :controller => '/provisioning_servers', :action => 'new' )
+		)
+	%> first.
+</div>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', sip_phones_path %>

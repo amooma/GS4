@@ -5,6 +5,8 @@ class SipPhonesController < ApplicationController
   before_filter { |controller|
     @sip_phones   = SipPhone.order([ :provisioning_server_id, :phone_id ])
     @prov_servers = ProvisioningServer.order([ :name, :port ])
+    
+    @num_prov_servers = ProvisioningServer.count
   }
   
   # GET /sip_phones
