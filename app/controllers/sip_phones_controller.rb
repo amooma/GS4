@@ -34,16 +34,21 @@ class SipPhonesController < ApplicationController
   # GET /sip_phones/new
   # GET /sip_phones/new.xml
   def new
-    @sip_phone = SipPhone.new(params[:sip_phone])
-    if params[:sip_phone][:provisioning_server_id]
-      p_id=params[:sip_phone][:provisioning_server_id]
-      s=ProvisioningServer.find(p_id).name
-      p=ProvisioningServer.find(p_id).port
-      CantinaPhone.set_resource( "http://#{s}:#{p}" )
+    @sip_phone = SipPhone.new
+    if ProvisioningServer.count == 1
+      @sip_phone.provisioning_server = ProvisioningServer.first
+      setup_cantina_phone 
     end
+
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @sip_phone }
+      if ProvisioningServer.count == 0
+        format.html { redirect_to(new_provisioning_server_path, :alert => 'To create a new sip_phone you have to create a provisioning server first.') }
+        #TODO Fehlermeldung fuer XML rendern.
+        format.xml  { render :xml => @sip_phone }
+      else
+        format.html # new.html.erb
+        format.xml  { render :xml => @sip_phone }
+      end
     end
   end
   
@@ -55,14 +60,8 @@ class SipPhonesController < ApplicationController
   # POST /sip_phones
   # POST /sip_phones.xml
   def create
-    if ! params[:sip_phone][:phone_id]
-      respond_to do |format|
-        format.html { redirect_to params.merge!(:action => "new" )
-        }
-      end
-      
-    else   
       @sip_phone = SipPhone.new(params[:sip_phone])
+      setup_cantina_phone 
       
       respond_to do |format|
         if @sip_phone.save
@@ -73,8 +72,8 @@ class SipPhonesController < ApplicationController
           format.xml  { render :xml => @sip_phone.errors, :status => :unprocessable_entity }
         end
       end
-    end
   end
+  
   # PUT /sip_phones/1
   # PUT /sip_phones/1.xml
   def update
@@ -102,4 +101,12 @@ class SipPhonesController < ApplicationController
     end
   end
   
+  private
+  def setup_cantina_phone
+    if @sip_phone.provisioning_server_id != nil
+      provisioning_server = ProvisioningServer.find(@sip_phone.provisioning_server_id).name
+      port = ProvisioningServer.find(@sip_phone.provisioning_server_id).port
+      CantinaPhone.set_resource( "http://#{provisioning_server}:#{port}" )
+    end
+  end  
 end
