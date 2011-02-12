@@ -14,15 +14,15 @@ Usermanager::Application.routes.draw do
 	devise_for :users
 	
 	
-	resources :sip_accounts, :path => 'sip-accounts'
+	resources :sip_accounts
 	
-	resources :provisioning_servers, :path => 'provisioning-servers'
+	resources :provisioning_servers
 	
-	resources :sip_phones, :path => 'sip-phones'
+	resources :sip_phones
 	
-	resources :sip_servers, :path => 'sip-servers'
+	resources :sip_servers
 	
-	resources :sip_proxies, :path => 'sip-proxies'
+	resources :sip_proxies
 	
 	resources :extensions
 	
