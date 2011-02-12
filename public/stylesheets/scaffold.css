@@ -174,3 +174,18 @@ div#header {
 	display: table;
 }
 
+
+.noticebox {
+	margin: 0 0px 15px 0px;
+	padding: 5px;
+	min-width: 10em;
+	text-align: center;
+	-moz-border-radius: 5px;
+	border: 2px solid #dd3;
+	background-color: #ffb;
+	color: #550;
+	box-shadow:         2px 2px 8px #bbb;
+	-moz-box-shadow:    2px 2px 8px #bbb;
+	-webkit-box-shadow: 2px 2px 8px #bbb;
+}
+
