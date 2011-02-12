@@ -7,6 +7,8 @@ class ProvisioningServersController < ApplicationController
   def index
     @provisioning_servers = ProvisioningServer.all
     
+    @sip_phones = SipPhone.order(:id)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @provisioning_servers }

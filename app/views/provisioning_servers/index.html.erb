@@ -4,6 +4,7 @@
   <tr>
     <th>Host</th>
     <th>Port</th>
+    <th>SipPhones</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +14,14 @@
   <tr>
     <td><%= provisioning_server.name %></td>
     <td><%= provisioning_server.port %></td>
+    <td>
+    <ul>
+	<li><%= link_to 'create new sip_phone', new_sip_phone_path %></li>
+    <% @sip_phones.where(:provisioning_server_id => provisioning_server.id).each do |sip_phone| %>
+	<li><%= link_to sip_phone.id, sip_phone %></li>
+	<% end %>
+	</ul>
+	</td>
     <td><%= link_to 'Show', provisioning_server %></td>
     <td><%= link_to 'Edit', edit_provisioning_server_path(provisioning_server) %></td>
     <td><%= link_to 'Destroy', provisioning_server, :confirm => 'Are you sure?', :method => :delete %></td>
