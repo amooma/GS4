@@ -21,7 +21,7 @@
   <% if @sip_phone.provisioning_server_id  %>
   <div class="field">
     <%= f.label :phone_id, "Phone ID on prov. server" %><br />
-    <%= f.select(:phone_id, CantinaPhone.all.collect {|p| [p.id, p.mac_address]},:label_method => :mac_address ) %>
+    <%= f.select(:phone_id, CantinaPhone.all.collect {|p| [p.mac_address, p.id]},:label_method => :mac_address ) %>
   </div>
   <br />
   <% end %>
