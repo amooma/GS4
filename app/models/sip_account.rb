@@ -23,10 +23,9 @@ class SipAccount < ActiveRecord::Base
 	belongs_to :sip_proxy  , :validate => true
 	belongs_to :sip_phone  , :validate => true
 	belongs_to :extension  , :validate => true
-	belongs_to :user       , :validate => true
+	belongs_to :user      
 	
 	validates_presence_of :sip_phone_id
-	validates_presence_of :user_id
 	
 	# The SipAccount must stay on the same provisioning server or
 	# bad things may happen.
@@ -182,7 +181,7 @@ class SipAccount < ActiveRecord::Base
 				# GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
 				if cantina_sip_accounts
 					cantina_sip_accounts.each { |cantina_sip_account|
-						if cantina_sip_account.sip_proxy .to_s == sip_server .to_s \
+						if cantina_sip_account.registrar .to_s == sip_server .to_s \
 						&& cantina_sip_account.user      .to_s == sip_user   .to_s
 							logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
 							return cantina_sip_account
