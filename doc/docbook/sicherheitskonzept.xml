@@ -35,9 +35,9 @@
     </listitem>
 
     <listitem>
-      <para>Tests. Wir verwenden eine stetig wachsende Anzahl an Unit-Tests,
-      die einzelne Komponenten testen, sowie Funktionstests, die die
-      ordnungsgemäße Funktion der Controller testen. Dadurch ist auch das
+      <para>Tests. Wir verwenden eine stetig wachsende Anzahl an automatischen
+      Unit-Tests, die einzelne Komponenten testen, sowie Funktionstests, die
+      die ordnungsgemäße Funktion der Controller testen. Dadurch ist auch das
       Einloggen am System mit eingeschlossen. Hier ein Beispiel als
       Auszug:<programlisting># Ein Admin darf eine Liste der SIP-Telefone anzeigen:
 #
@@ -84,7 +84,11 @@ end</programlisting></para>
     </listitem>
 
     <listitem>
-      <para></para>
+      <para>Kein SQL im Code. Durch die Verwendung eines Objekt-relationalen
+      Mappers (ActiveRecord) besteht nicht die Gefahr daß durch Fehler im Code
+      von Gemeinschaft4 Daten ohne Escaping in SQL-Statements landen, dadurch
+      wird SQL-Injection verhindert. ActiveRecord selbst ist sehr gut getestet
+      und tausendfach im Einsatz.</para>
     </listitem>
   </itemizedlist>
 
