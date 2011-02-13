@@ -14,7 +14,7 @@ class SipPhone < ActiveRecord::Base
 	
 	has_many :sip_accounts, :dependent => :destroy
 	belongs_to :provisioning_server, :validate => true
-	
+	validates_uniqueness_of(:phone_id, :message => "exists", :scope => "provisioning_server_id")
 	# The provisioning server must never change, once it has been set.
 	validate {
 		if provisioning_server_id_was != nil \
