@@ -256,7 +256,7 @@ class SipAccount < ActiveRecord::Base
 			else
 				if ! cantina_sip_account.update_attributes({
 					:auth_user       => self.auth_name,
-					:user            => self.auth_name,
+					:user            => self.phone_number,
 					:password        => self.password,
 					:realm           => self.realm,
 					:phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
