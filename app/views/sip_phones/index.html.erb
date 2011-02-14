@@ -4,15 +4,23 @@
   <tr>
     <th>Provisioning server</th>
     <th>Phone ID on prov. server</th>
+    <th>MAC address</th>
     <th></th>
     <th></th>
-    <th></th>
+		<th></th>
   </tr>
 
 <% @sip_phones.each do |sip_phone|
     prov_server = sip_phone.provisioning_server_id ? @prov_servers.find( sip_phone.provisioning_server_id ) : nil
 %>
-  <tr>
+<%
+if sip_phone.provisioning_server_id != nil
+      provisioning_server = ProvisioningServer.find(sip_phone.provisioning_server_id).name
+      port = ProvisioningServer.find(sip_phone.provisioning_server_id).port
+      CantinaPhone.set_resource( "http://#{provisioning_server}:#{port}" )
+    end
+%>  
+<tr>
     <td><%=
         prov_server ? prov_server.name : ''
       %><%=
@@ -21,6 +29,7 @@
         sip_phone.provisioning_server_id ? " (ID #{sip_phone.provisioning_server_id})" : '-'
       %></td>
     <td><%= sip_phone.phone_id || '-' %></td>
+		<td><%= CantinaPhone.find(sip_phone.provisioning_server_id).mac_address%><td>
     <td><%= link_to 'Show', sip_phone %></td>
     <td><%= link_to 'Edit', edit_sip_phone_path(sip_phone) %></td>
     <td><%= link_to 'Destroy', sip_phone, :confirm => 'Are you sure?', :method => :delete %></td>
