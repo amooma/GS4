@@ -113,6 +113,22 @@ end</programlisting></para>
         dadurch wird SQL-Injection verhindert. ActiveRecord selbst ist sehr
         gut getestet und tausendfach im Einsatz.</para>
       </listitem>
+
+      <listitem>
+        <bridgehead>Saubere Schnittstellen</bridgehead>
+
+        <para>Gemeinschaft4 verwendet durch die
+        Model-View-Controller-Architektur definierte Schnittstellen.
+        Gleichzeitig werden nach außen APIs im REST-Stil bereitgestellt.
+        Ebenso wie für das HTML-Interface ist zur Benutzung der Schnittstellen
+        eine Authentifizierung und Authorisierung erforderlich. So können
+        weitere Konfigurations-Tools oder beispielsweise eine andere
+        Applikation auf die Schnittstellen zugreifen ohne daß die Gefahr
+        besteht, daß sich potenzielle Fehler in solchen &#8222;externen&#8220;
+        Tools auf den Kern des Systems auswirken oder daß &#8211;
+        möglicherweise unbeabsichtigt &#8211; Zugriffsbeschränkungen umgangen
+        werden.</para>
+      </listitem>
     </itemizedlist>
   </section>
 
