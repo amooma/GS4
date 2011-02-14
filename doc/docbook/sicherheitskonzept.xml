@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="sicherheitskonzept" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Sicherheitskonzept</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Nachfolgend geben wir einen Überblick über das
+  Sicherheitskonzept.</para>
+
+  <para>Wichtige Bausteine beim Web-Interface sind:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Validierungen der Attribute in den sogenannten
+      <quote><foreignphrase xml:lang="en">Models</foreignphrase></quote> der
+      MVC-Architektur. So werden nur gültige Werte zugelassen. Bei Zugriff
+      über das HTML-Web-Interface sowie über die XML-API finden die gleichen
+      Validierungen statt.</para>
+    </listitem>
+
+    <listitem>
+      <para>Tests. Wir verwenden eine stetig wachsende Anzahl an automatischen
+      Unit-Tests, die einzelne Komponenten testen, sowie Funktionstests, die
+      die ordnungsgemäße Funktion der Controller testen. Dadurch ist auch das
+      Einloggen am System mit eingeschlossen. Hier ein Beispiel als
+      Auszug:<programlisting># Ein Admin darf eine Liste der SIP-Telefone anzeigen:
+#
+test "should get index" do
+    sign_in :user, @admin_user
+    get :index
+    assert_response :success
+    assert_not_nil( assigns( :sip_phones))
+    sign_out @admin_user
+end
+
+# ansonsten darf keine Anzeige erfolgen:
+#
+test "should not get index (not an admin)" do
+    get :index
+    assert_response( @expected_http_status_if_not_allowed )
+end</programlisting></para>
+    </listitem>
+
+    <listitem>
+      <para>Zur Authentifizierung der Benutzer kommt <quote><foreignphrase
+      xml:lang="en">Devise</foreignphrase></quote> zum Einsatz (<link
+      xlink:href="https://github.com/plataformatec/devise">https://github.com/plataformatec/devise</link>).
+      Bei der Auswahl eines geeigneten Authentifizierungssystems für Ruby on
+      Rails war uns wichtig ein populäres System zu wählen das sich in
+      vielfachem produktivem Einsatz bewährt hat, das gut durch automatisierte
+      Tests abgedeckt ist, das aktiv gepflegt wird und das bereits vielen
+      Entwicklern bekannt ist. Devise ist ein modulares System bei dem man nur
+      die Komponenten einbindet die von der jeweiligen Applikation genutzt
+      werden. Zu den Modulen gehört beispielsweise <quote><foreignphrase
+      xml:lang="en">Database Authenticatable</foreignphrase></quote>, das das
+      Einloggen der Benutzer per Benutzername und Paßwort übernimmt. Die
+      Paßwörter sind dabei in der Datenbank nicht im Klartext gespeichert
+      sondern als SHA-Hashes (<link
+      xlink:href="http://de.wikipedia.org/wiki/Secure_Hash_Algorithm">http://de.wikipedia.org/wiki/Secure_Hash_Algorithm</link>)
+      die über Paßwort und ein zufälliges <quote><foreignphrase
+      xml:lang="en">Salt</foreignphrase></quote> (<link
+      xlink:href="http://de.wikipedia.org/wiki/Salt_%28Kryptologie%29">http://de.wikipedia.org/wiki/Salt_(Kryptologie)</link>)
+      gebildet werden. Auf diese Weise kann selbst jemand mit Zugriff auf die
+      Datenbank die Paßwörter nicht rekonstruieren, und durch das
+      <quote><foreignphrase xml:lang="en">Salt</foreignphrase></quote> wird
+      der Angriff mit <quote><foreignphrase xml:lang="en">Rainbow
+      Tables</foreignphrase></quote> erschwert.</para>
+    </listitem>
+
+    <listitem>
+      <para>Kein SQL im Code. Durch die Verwendung eines Objekt-relationalen
+      Mappers (ActiveRecord) besteht nicht die Gefahr daß durch Fehler im Code
+      von Gemeinschaft4 Daten ohne Escaping in SQL-Statements landen, dadurch
+      wird SQL-Injection verhindert. ActiveRecord selbst ist sehr gut getestet
+      und tausendfach im Einsatz.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Wichtige Bausteine auf der VoIP-Ebene:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>SIP-Proxy Kamailio als <quote>erste Verteidigungslinie</quote> der
+      Telefonanlage auf SIP-Ebene.</para>
+    </listitem>
+  </itemizedlist>
+</chapter>
