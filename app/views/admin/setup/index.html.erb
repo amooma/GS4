@@ -1,7 +1,31 @@
 <h1>Setup after installation</h1>
-
-<% if @User == 0 %>
-<%= link_to "Create first user", new_admin_setup_path%>
-<% else %>
-There are allready created users. Nothing to do here.
-<% end %>
+<table>
+    <% if @User == 0 %>
+    <tr>
+        <td>
+            <%= link_to "Create first user", new_admin_setup_path %>
+            <td>
+            </tr<% else %>
+            <tr>
+                <td>
+                    First User allready created
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <% if SipServer.count == 0 %>
+                    <%= link_to 'Create first sip server', new_sip_server_path %>
+                    <% else %>
+                    First sip server allready configured><%end %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <% if ProvisioningServer.count == 0 %>
+                    <%= link_to 'Create first provisioning server', new_provisioning_server_path %>
+                    <% else %>
+                    First provisioning server allready configured<%end %>
+                </td>
+            </tr>
+            <% end %>
+        </table>
