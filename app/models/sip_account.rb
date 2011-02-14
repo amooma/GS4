@@ -209,7 +209,7 @@ class SipAccount < ActiveRecord::Base
 				cantina_sip_account = CantinaSipAccount.create({
 					:name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
 					:auth_user       => self.auth_name,
-					:user            => self.auth_name,
+					:user            => self.phone_number,
 					:password        => self.password,
 					:realm           => self.realm,
 					:phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
