@@ -23,21 +23,55 @@
   <para>Nachfolgend geben wir einen Überblick über das
   Sicherheitskonzept.</para>
 
-  <section>
+  <section xml:id="sicherheitskonzept-betriebssystem">
     <title>Betriebssystem</title>
 
     <para>Die Grundlage bildet ein gehärtetes Betriebssystem, auf dem die
-    Telefonanlage letztlich installiert wird. Hier kommt beispielsweise auch
-    ein Intrusion-Detection-System (IDS) bzw. Intrusion-Prevention-System
-    (IPS) zum Einsatz. Eine dedizierte Beschreibung dazu findet sich bei der
-    Build-Umgebung des gehärteten Systems.</para>
+    Telefonanlage letztlich installiert wird. Eine dedizierte Beschreibung
+    dazu findet sich bei der Build-Umgebung des gehärteten Systems. Trotzdem
+    wollen wir hier einige Punkte nennen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>keine nicht benötigte Dienste und Softwarekomponenten
+        installieren, bzw. diese entfernen</para>
+      </listitem>
+
+      <listitem>
+        <para>keine Paßwörter im Klartext übertragen oder speichern</para>
+      </listitem>
+
+      <listitem>
+        <para>restriktive Sicherheitsrichtlinien bzw Rechte für Prozesse und
+        Benutzer</para>
+      </listitem>
+
+      <listitem>
+        <para>restriktiv konfigurierte Paketfilter (IPTables)</para>
+      </listitem>
+
+      <listitem>
+        <para>Einsatz eines host-basierten Intrusion-Detection-Systems (IDS)
+        bzw. Intrusion-Prevention-Systems (IPS) wie Snort</para>
+      </listitem>
+
+      <listitem>
+        <para>Protokollierung von Verbindungs- und
+        Authentifizierungsversuchen</para>
+      </listitem>
+
+      <listitem>
+        <para>schutzwürdige Daten auf einem verschlüsselten Dateisystem
+        speichern</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
-  <section>
+  <section xml:id="sicherheitskonzept-web-interface">
     <title>Web-Interface</title>
 
-    <para>Wichtige Bausteine des Sicherheitskonzeptes beim Web-Interface
-    sind:</para>
+    <para>Wichtige Bausteine des Sicherheitskonzeptes beim Web-Interface und
+    der Applikation sind:</para>
 
     <itemizedlist>
       <listitem>
@@ -47,7 +81,9 @@
         <quote><foreignphrase xml:lang="en">Models</foreignphrase></quote> der
         MVC-Architektur. So werden nur gültige Werte zugelassen. Bei Zugriff
         über das HTML-Web-Interface sowie über die XML-API finden die gleichen
-        Validierungen statt.</para>
+        Validierungen statt. Dies ist ein Baustein der Maxime &#8222;Security
+        by Design&#8220;, d.h. es wird immer von absichtlichen oder
+        unabsichtlichen Falsch-Eingaben ausgegangen.</para>
       </listitem>
 
       <listitem>
@@ -132,7 +168,7 @@ end</programlisting></para>
     </itemizedlist>
   </section>
 
-  <section>
+  <section xml:id="sicherheitskonzept-voip">
     <title>VoIP</title>
 
     <para>Wichtige Bausteine des Sicherheitskonzeptes auf der
@@ -157,13 +193,20 @@ end</programlisting></para>
         Telefonanlage direkt Funktionen mit die typischerweise ein Session
         Border Controller übernimmt. Dadurch kann selbst ein vergleichsweise
         unerfahrener Administrator die Telefonanlage betreiben, denn diese ist
-        auch vor Angriffen von innen <quote>ab Werk</quote> gut geschützt. Es
-        steht dem Administrator jedoch frei zusätzlich einen Session Border
-        Controller an der Netzwerk-Grenze zu installieren, potenziell sogar
-        einen mit B2BUA-Funktionalität. Dies kann &#8211; je nach Installation
-        &#8211; beispielsweise ratsam sein um die eigene Netzwerk-Topologie
-        vor externen VoIP-Kommunikationsteilnehmern zusätzlich zu verbergen,
-        führt allerdings zu einer geringfügig höheren Latenz.</para>
+        auch vor Angriffen von innen <quote>ab Werk</quote> gut
+        geschützt.</para>
+
+        <para>Es steht dem Administrator jedoch frei zusätzlich einen Session
+        Border Controller an der Netzwerk-Grenze zu installieren. Dies kann
+        &#8211; je nach Installation &#8211; beispielsweise ratsam sein um die
+        eigene Netzwerk-Topologie vor externen VoIP-Kommunikationsteilnehmern
+        zusätzlich zu verbergen, führt allerdings zu einer geringfügig höheren
+        Latenz.</para>
+
+        <para>Grundsätzlich muß bei der Entwicklung damit gerechnet werden daß
+        die Telefonanlage ohne zusätzlichen Schutz ein Netzwerk-Interface ins
+        Internet haben könnte, daher muß sie in der Standard-Installation u.a.
+        eine eigene Firewall mitbringen.</para>
       </listitem>
     </itemizedlist>
   </section>
