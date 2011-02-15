@@ -27,10 +27,44 @@
     <title>Betriebssystem</title>
 
     <para>Die Grundlage bildet ein gehärtetes Betriebssystem, auf dem die
-    Telefonanlage letztlich installiert wird. Hier kommt beispielsweise auch
-    ein Intrusion-Detection-System (IDS) bzw. Intrusion-Prevention-System
-    (IPS) zum Einsatz. Eine dedizierte Beschreibung dazu findet sich bei der
-    Build-Umgebung des gehärteten Systems.</para>
+    Telefonanlage letztlich installiert wird. Eine dedizierte Beschreibung
+    dazu findet sich bei der Build-Umgebung des gehärteten Systems. Trotzdem
+    wollen wir hier einige Punkte nennen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>keine nicht benötigte Dienste und Softwarekomponenten
+        installieren, bzw. diese entfernen</para>
+      </listitem>
+
+      <listitem>
+        <para>keine Paßwörter im Klartext übertragen oder speichern</para>
+      </listitem>
+
+      <listitem>
+        <para>restriktive Sicherheitsrichtlinien bzw Rechte für Prozesse und
+        Benutzer</para>
+      </listitem>
+
+      <listitem>
+        <para>restriktiv konfigurierte Paketfilter (IPTables)</para>
+      </listitem>
+
+      <listitem>
+        <para>Einsatz eines host-basierten Intrusion-Detection-Systems (IDS)
+        bzw. Intrusion-Prevention-Systems (IPS) wie Snort</para>
+      </listitem>
+
+      <listitem>
+        <para>Protokollierung von Verbindungs- und
+        Authentifizierungsversuchen</para>
+      </listitem>
+
+      <listitem>
+        <para>schutzwürdige Daten auf einem verschlüsselten Dateisystem
+        speichern</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section>
