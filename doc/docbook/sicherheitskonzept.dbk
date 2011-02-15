@@ -33,8 +33,8 @@
     <para>Um ein Beispiel zu geben: Es ist zwar gut wenn bei API-Zugriffen
     eine Authentifizierung und Authorisierung stattfindet, würde allerdings
     umgangen wenn das System als Beispiel gleichzeitig einen offenen
-    SSH-Dienst für den root-Benutzer mit einem zu einfachen Paßwort wie
-    &#8222;123&#8220; hätte.</para>
+    SSH-Dienst für den root-Benutzer mit einem zu einfachen Paßwort wie „123“
+    hätte.</para>
 
     <para>Die Kombination aller Faktoren ist also entscheidend, denn
     potenziell untergräbt das schwächste Glied in der Kette eben auch andere
@@ -46,9 +46,8 @@
 
     <para>Wie in der Vergangenheit immer wieder erschreckende Fälle zeigen:
     Die beste Firewall kann umgangen werden wenn man den Administrator per
-    &#8222;<foreignphrase xml:lang="en">Social
-    Engineering</foreignphrase>&#8220; dazu bringt &#8222;mal eben
-    schnell&#8220; einen SSH-Zugang freizugeben.</para>
+    „<foreignphrase xml:lang="en">Social Engineering</foreignphrase>“ dazu
+    bringt „mal eben schnell“ einen SSH-Zugang freizugeben.</para>
 
     <para>Oder: Die Software loggt beispielsweise auf einen separaten
     Syslog-Server aber der Administrator übersieht daß dort die Festplatte
@@ -70,20 +69,20 @@
     ebenso sicher bzw. unsicher wie ein ansonsten in gleicher Weise
     geschützten SSH-Dienst auf einem anderen höheren Port. Wenn der Dienst
     allerdings auf einem anderen Port läuft wird er weniger leicht von
-    Scannern entdeckt. Somit würden zumindest eine Menge &#8222;Script
-    Kiddies&#8220; abgehalten. Ähnliches gilt für Zugriffsbeschränkungen
-    anhand von IP- oder MAC-Adressen. Man darf sich auf keine dieser Maßnahmen
-    als alleinige Zugangskontrolle verlassen, aber dennoch können sie dazu
-    beitragen die Hürde zu erhöhen.</para>
+    Scannern entdeckt. Somit würden zumindest eine Menge „Script Kiddies“
+    abgehalten. Ähnliches gilt für Zugriffsbeschränkungen anhand von IP- oder
+    MAC-Adressen. Man darf sich auf keine dieser Maßnahmen als alleinige
+    Zugangskontrolle verlassen, aber dennoch können sie dazu beitragen die
+    Hürde zu erhöhen.</para>
 
     <para>Für kryptographische Algorithmen gilt: Wer kein Experte auf dem
     Gebiet der Kryptologie ist sollte auf zuverlässige, anerkannte und
-    getestete Verfahren zurückgreifen statt &#8222;mal eben schnell&#8220; was
-    eigenes zu erfinden. Beispielsweise ist die mehrfache Anwendung eines
-    Algorithmus oder die Kombination aus zwei Algorithmen nicht unbedingt
-    besser &#8211; manchmal sogar deutlich leichter angreifbar. Extremes
-    (vereinfachtes) Beispiel: Die doppelte Anwendung von Rot-13 führt nicht zu
-    doppelt guter Verschlüsselung. :-)</para>
+    getestete Verfahren zurückgreifen statt „mal eben schnell“ was eigenes zu
+    erfinden. Beispielsweise ist die mehrfache Anwendung eines Algorithmus
+    oder die Kombination aus zwei Algorithmen nicht unbedingt besser –
+    manchmal sogar deutlich leichter angreifbar. Extremes (vereinfachtes)
+    Beispiel: Die doppelte Anwendung von Rot-13 führt nicht zu doppelt guter
+    Verschlüsselung. :-)</para>
   </section>
 
   <section xml:id="sicherheitskonzept-betriebssystem">
@@ -106,7 +105,7 @@
 
       <listitem>
         <para>restriktive Sicherheitsrichtlinien bzw Rechte für Prozesse und
-        Benutzer</para>
+        Benutzer (SELinux z.B.)</para>
       </listitem>
 
       <listitem>
@@ -159,9 +158,9 @@
         geschützt.</para>
 
         <para>Es steht dem Administrator jedoch frei zusätzlich einen Session
-        Border Controller an der Netzwerk-Grenze zu installieren. Dies kann
-        &#8211; je nach Installation &#8211; beispielsweise ratsam sein um die
-        eigene Netzwerk-Topologie vor externen VoIP-Kommunikationsteilnehmern
+        Border Controller an der Netzwerk-Grenze zu installieren. Dies kann –
+        je nach Installation – beispielsweise ratsam sein um die eigene
+        Netzwerk-Topologie vor externen VoIP-Kommunikationsteilnehmern
         zusätzlich zu verbergen, führt allerdings zu einer geringfügig höheren
         Latenz.</para>
 
@@ -174,8 +173,30 @@
       <listitem>
         <bridgehead>Verschlüsselung</bridgehead>
 
+        <para>Die Signalisierung der Gespräche erfolgt TLS verschlüsselt.
+        Hierdurch wird sichergestellt, dass keine unbefugten Personen die
+        Daten des Gesprächsaufbaus (Nummer des Anrufers und Nummer des
+        Angerufenen) abfangen können. Da während des Gesprächs übertragene
+        DTMF Töne auch über SIP übertragen werden können, ist die
+        Verschlüsselung der Singalisierung extrem wichtig (Bsp. Onlinebanking
+        mit PIN per DTMF).</para>
+
         <para>Bei allen Gesprächen soll der RTP-Strom verschlüsselt sein. Dazu
-        gehört auch die Identifizierung der Teilnehmer.</para>
+        gehört auch die Identifizierung der Teilnehmer.Eine zuverlässige
+        Identifizierung der Teilnehmer kann nur über auf den Endgeräten
+        installierten Client Zertifikate sichergestellt werden. Die Verteilung
+        dieser Zertifikate sollte über ein gesichertes Netz (Ideal:
+        Netzwerkkarte direkt am Server mit Kabel zum Telefon) bei der
+        Ersteinrichtung stattfinden.</para>
+
+        <para>Eine durchgehende Ende zu Ende Verschlüsselung kann mit den
+        heutigen technischen Mitteln nur durch ZRT sichergestellt werden. Die
+        eingesetzte Software (Freeswitch) unterstützt bereits ZRTP. Um ZRTP
+        nutzen zu können, müssen die verwendetetn Endgeräte dieses Protokoll
+        auch unterstützen. Alle anderen Verschlüsselungsmethoden für die
+        Audiodaten (RTP Strom) haben momentan noch Schwächen (Bsp. Die
+        Schlüssel müssen auf allen Server, über die der RTP Strom geroutet
+        wird im Klartext vorhanden sein).</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -194,9 +215,9 @@
         <quote><foreignphrase xml:lang="en">Models</foreignphrase></quote> der
         MVC-Architektur. So werden nur gültige Werte zugelassen. Bei Zugriff
         über das HTML-Web-Interface sowie über die XML-API finden die gleichen
-        Validierungen statt. Dies ist ein Baustein der Maxime &#8222;Security
-        by Design&#8220;, d.h. es wird immer von absichtlichen oder
-        unabsichtlichen Falsch-Eingaben ausgegangen.</para>
+        Validierungen statt. Dies ist ein Baustein der Maxime „Security by
+        Design“, d.h. es wird immer von absichtlichen oder unabsichtlichen
+        Falsch-Eingaben ausgegangen.</para>
       </listitem>
 
       <listitem>
@@ -281,10 +302,9 @@ end</programlisting></para>
         eine Authentifizierung und Authorisierung erforderlich. So können
         weitere Konfigurations-Tools oder beispielsweise eine andere
         Applikation auf die Schnittstellen zugreifen ohne daß die Gefahr
-        besteht, daß sich potenzielle Fehler in solchen &#8222;externen&#8220;
-        Tools auf den Kern des Systems auswirken oder daß &#8211;
-        möglicherweise unbeabsichtigt &#8211; Zugriffsbeschränkungen umgangen
-        werden.</para>
+        besteht, daß sich potenzielle Fehler in solchen „externen“ Tools auf
+        den Kern des Systems auswirken oder daß – möglicherweise
+        unbeabsichtigt – Zugriffsbeschränkungen umgangen werden.</para>
       </listitem>
 
       <listitem>
@@ -295,15 +315,21 @@ end</programlisting></para>
         Varianten aus der großen Menge der möglichen Verfahren beim
         Schlüsselaustausch, Authentifizierung, Hashfunktion und
         Verschlüsselung. Insbesondere bietet die sogenannte
-        &#8222;Null&#8220;-Verschlüsselung, die prinzipiell von SSL/TLS
-        unterstützt wird, keine Verschlüsselung &#8211; wie der Name schon
-        sagt. Schlüssel unter einer Länge von 128 Bit sollen generell
-        ausgeschlossen werden, ebenso wie die Hash-Algorithmen MD5 und SHA-1
-        (stattdessen: SHA-2-Familie). Natürlich dürfen nur solche Zertifikate
-        akzeptiert werden, deren &#8222;<foreignphrase
-        xml:lang="en">Chain</foreignphrase>&#8220; (Kette) zur CA
+        „Null“-Verschlüsselung, die prinzipiell von SSL/TLS unterstützt wird,
+        keine Verschlüsselung – wie der Name schon sagt. Schlüssel unter einer
+        Länge von 128 Bit sollen generell ausgeschlossen werden, ebenso wie
+        die Hash-Algorithmen MD5 und SHA-1 (stattdessen: SHA-2-Familie).
+        Natürlich dürfen nur solche Zertifikate akzeptiert werden, deren
+        „<foreignphrase xml:lang="en">Chain</foreignphrase>“ (Kette) zur CA
         (<foreignphrase xml:lang="en">Certificate Authority</foreignphrase>)
-        korrekt ist.</para>
+        korrekt ist. </para>
+
+        <para>Besonders schützenswerte Bereiche können zusätzlich durch Client
+        Zertifikate geschützt werden. Der Zugriff auf so geschützte Bereiche
+        ist dann nur mit einem im Browser installierten Zertifikat möglich.
+        Wenn die Zertifikate auf einem gesicherten Weg verteilt wurden, kann
+        damit sichergestellt werden dass keine sensiblen Daten durch einen
+        einfachen Passwortdiebstahl zugänglich sind.</para>
       </listitem>
     </itemizedlist>
   </section>
