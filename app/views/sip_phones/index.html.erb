@@ -29,7 +29,9 @@ if sip_phone.provisioning_server_id != nil
         sip_phone.provisioning_server_id ? " (ID #{sip_phone.provisioning_server_id})" : '-'
       %></td>
     <td><%= sip_phone.phone_id || '-' %></td>
-		<td><%= CantinaPhone.find(sip_phone.provisioning_server_id).mac_address%><td>
+		<td><%=
+			#CantinaPhone.find(sip_phone.provisioning_server_id).mac_address #FIXME
+		%>!<td>
     <td><%= link_to 'Show', sip_phone %></td>
     <td><%= link_to 'Edit', edit_sip_phone_path(sip_phone) %></td>
     <td><%= link_to 'Destroy', sip_phone, :confirm => 'Are you sure?', :method => :delete %></td>
