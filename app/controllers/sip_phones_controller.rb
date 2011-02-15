@@ -55,6 +55,7 @@ class SipPhonesController < ApplicationController
   # GET /sip_phones/1/edit
   def edit
     @sip_phone = SipPhone.find(params[:id])
+    setup_cantina_phone
   end
   
   # POST /sip_phones
