@@ -81,7 +81,9 @@
         <quote><foreignphrase xml:lang="en">Models</foreignphrase></quote> der
         MVC-Architektur. So werden nur gültige Werte zugelassen. Bei Zugriff
         über das HTML-Web-Interface sowie über die XML-API finden die gleichen
-        Validierungen statt.</para>
+        Validierungen statt. Dies ist ein Baustein der Maxime &#8222;Security
+        by Design&#8220;, d.h. es wird immer von absichtlichen oder
+        unabsichtlichen Falsch-Eingaben ausgegangen.</para>
       </listitem>
 
       <listitem>
@@ -191,13 +193,20 @@ end</programlisting></para>
         Telefonanlage direkt Funktionen mit die typischerweise ein Session
         Border Controller übernimmt. Dadurch kann selbst ein vergleichsweise
         unerfahrener Administrator die Telefonanlage betreiben, denn diese ist
-        auch vor Angriffen von innen <quote>ab Werk</quote> gut geschützt. Es
-        steht dem Administrator jedoch frei zusätzlich einen Session Border
-        Controller an der Netzwerk-Grenze zu installieren, potenziell sogar
-        einen mit B2BUA-Funktionalität. Dies kann &#8211; je nach Installation
-        &#8211; beispielsweise ratsam sein um die eigene Netzwerk-Topologie
-        vor externen VoIP-Kommunikationsteilnehmern zusätzlich zu verbergen,
-        führt allerdings zu einer geringfügig höheren Latenz.</para>
+        auch vor Angriffen von innen <quote>ab Werk</quote> gut
+        geschützt.</para>
+
+        <para>Es steht dem Administrator jedoch frei zusätzlich einen Session
+        Border Controller an der Netzwerk-Grenze zu installieren. Dies kann
+        &#8211; je nach Installation &#8211; beispielsweise ratsam sein um die
+        eigene Netzwerk-Topologie vor externen VoIP-Kommunikationsteilnehmern
+        zusätzlich zu verbergen, führt allerdings zu einer geringfügig höheren
+        Latenz.</para>
+
+        <para>Grundsätzlich muß bei der Entwicklung damit gerechnet werden daß
+        die Telefonanlage ohne zusätzlichen Schutz ein Netzwerk-Interface ins
+        Internet haben könnte, daher muß sie in der Standard-Installation u.a.
+        eine eigene Firewall mitbringen.</para>
       </listitem>
     </itemizedlist>
   </section>
