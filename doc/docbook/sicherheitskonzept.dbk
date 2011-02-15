@@ -23,7 +23,7 @@
   <para>Nachfolgend geben wir einen Überblick über das
   Sicherheitskonzept.</para>
 
-  <section>
+  <section xml:id="sicherheitskonzept-betriebssystem">
     <title>Betriebssystem</title>
 
     <para>Die Grundlage bildet ein gehärtetes Betriebssystem, auf dem die
@@ -67,11 +67,11 @@
     </itemizedlist>
   </section>
 
-  <section>
+  <section xml:id="sicherheitskonzept-web-interface">
     <title>Web-Interface</title>
 
-    <para>Wichtige Bausteine des Sicherheitskonzeptes beim Web-Interface
-    sind:</para>
+    <para>Wichtige Bausteine des Sicherheitskonzeptes beim Web-Interface und
+    der Applikation sind:</para>
 
     <itemizedlist>
       <listitem>
@@ -168,7 +168,7 @@ end</programlisting></para>
     </itemizedlist>
   </section>
 
-  <section>
+  <section xml:id="sicherheitskonzept-voip">
     <title>VoIP</title>
 
     <para>Wichtige Bausteine des Sicherheitskonzeptes auf der
