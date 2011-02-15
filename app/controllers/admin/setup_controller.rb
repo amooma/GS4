@@ -15,7 +15,7 @@ class Admin::SetupController < ApplicationController
           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity}
         end
       else
-        format.html { redirect_to(admin_path, :notice => "Setup disabled. Allready done!") }
+        format.html { redirect_to(admin_path, :notice => "Setup disabled. Already done!") }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity}
       end
     end

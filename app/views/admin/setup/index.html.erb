@@ -8,7 +8,7 @@
             </tr<% else %>
             <tr>
                 <td>
-                    First User allready created
+                    First User already created
                 </td>
             </tr>
             <tr>
@@ -16,7 +16,7 @@
                     <% if SipServer.count == 0 %>
                     <%= link_to 'Create first sip server', new_sip_server_path %>
                     <% else %>
-                    First sip server allready configured><%end %>
+                    First sip server already configured><%end %>
                 </td>
             </tr>
             <tr>
@@ -24,7 +24,7 @@
                     <% if ProvisioningServer.count == 0 %>
                     <%= link_to 'Create first provisioning server', new_provisioning_server_path %>
                     <% else %>
-                    First provisioning server allready configured<%end %>
+                    First provisioning server already configured<%end %>
                 </td>
             </tr>
             <% end %>
