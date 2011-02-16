@@ -20,8 +20,25 @@
     </authorgroup>
   </info>
 
-  <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über den
-  grundlegenden Ansatz von Gemeinschaft4.</para>
+  <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über die
+  grundlegende Funktionsweise von Gemeinschaft4. Um ein sicheres System zu
+  bieten gehen wir von folgende Ansätze aus:<itemizedlist>
+      <listitem>
+        <para>verschlüsseltes Dateisystem. Gemeinschaft4 kann auf einem
+        normalen Debian Linux installiert werden, die Standard-Variante ist
+        jedoch ein unveränderbares Live-CD-System das sensible Daten auf einem
+        verschlüsselten Dateisystem auf einem USB-Stick oder einer Festplatte
+        speichert.</para>
+      </listitem>
+
+      <listitem>
+        <para>Firewall. Es muß damit gerechnet werden daß ein Administrator
+        die TK-Anlage im Extremfall direkt ins Internet hängt, daher muß die
+        Anlage entsprechend abgesichert sein und eine eigene Firewall
+        mitbringen. Zur Verwaltung der IPTables-Regeln kommt Shorewall zum
+        Einsatz.</para>
+      </listitem>
+    </itemizedlist></para>
 
   <para>Nachfolgend geben wir einen Überblick über das
   Sicherheitskonzept.</para>
@@ -198,7 +215,21 @@
         nutzen zu können, müssen auch die verwendeten Endgeräte dieses
         Protokoll unterstützen. Andere Methoden haben momentan noch Schwächen.
         (Beispiel: Die Schlüssel müssen auf allen Servern über die der
-        RTP-Strom geroutet wird vorhanden sein).</para>
+        RTP-Strom geroutet wird vorhanden sein). ZRTP ist ein Verfahren zum
+        Schlüsselaustausch über RTP. Darüber wird zwischen den Teilnehmern ein
+        sogenanntes „<foreignphrase xml:lang="en">Shared
+        Secret</foreignphrase>“ ausgehandelt, das dann zur Verschlüsselung der
+        SRTP-Verbindung benutzt wird. Der Vorteil von ZRTP liegt darin daß es
+        ohne eine <foreignphrase xml:lang="en">Public Key
+        Infrastructure</foreignphrase> (PKI) auskommt.<footnote>
+            <simpara>siehe auch:</simpara>
+
+            <simpara><link
+            xlink:href="http://zfoneproject.com/zrtp_ietf.html">http://zfoneproject.com/zrtp_ietf.html</link></simpara>
+
+            <simpara><link
+            xlink:href="http://zfoneproject.com/faq.html">http://zfoneproject.com/faq.html</link></simpara>
+          </footnote></para>
       </listitem>
     </itemizedlist>
   </section>
