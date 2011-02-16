@@ -221,7 +221,15 @@
         Secret</foreignphrase>“ ausgehandelt, das dann zur Verschlüsselung der
         SRTP-Verbindung benutzt wird. Der Vorteil von ZRTP liegt darin daß es
         ohne eine <foreignphrase xml:lang="en">Public Key
-        Infrastructure</foreignphrase> (PKI) auskommt.</para>
+        Infrastructure</foreignphrase> (PKI) auskommt.<footnote>
+            <simpara>siehe auch:</simpara>
+
+            <simpara><link
+            xlink:href="http://zfoneproject.com/zrtp_ietf.html">http://zfoneproject.com/zrtp_ietf.html</link></simpara>
+
+            <simpara><link
+            xlink:href="http://zfoneproject.com/faq.html">http://zfoneproject.com/faq.html</link></simpara>
+          </footnote></para>
       </listitem>
     </itemizedlist>
   </section>
