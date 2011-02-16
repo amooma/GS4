@@ -215,7 +215,13 @@
         nutzen zu können, müssen auch die verwendeten Endgeräte dieses
         Protokoll unterstützen. Andere Methoden haben momentan noch Schwächen.
         (Beispiel: Die Schlüssel müssen auf allen Servern über die der
-        RTP-Strom geroutet wird vorhanden sein).</para>
+        RTP-Strom geroutet wird vorhanden sein). ZRTP ist ein Verfahren zum
+        Schlüsselaustausch über RTP. Darüber wird zwischen den Teilnehmern ein
+        sogenanntes „<foreignphrase xml:lang="en">Shared
+        Secret</foreignphrase>“ ausgehandelt, das dann zur Verschlüsselung der
+        SRTP-Verbindung benutzt wird. Der Vorteil von ZRTP liegt darin daß es
+        ohne eine <foreignphrase xml:lang="en">Public Key
+        Infrastructure</foreignphrase> (PKI) auskommt.</para>
       </listitem>
     </itemizedlist>
   </section>
