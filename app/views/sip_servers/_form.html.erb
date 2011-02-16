@@ -1,21 +1,27 @@
 <%= form_for(@sip_server) do |f| %>
-  <% if @sip_server.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sip_server.errors.count, "error") %> prohibited this sip_server from being saved:</h2>
-
-      <ul>
-      <% @sip_server.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name, "Host" %><br />
+<% if @sip_server.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@sip_server.errors.count, "error") %>prohibited this sip_server from being saved:</h2>
+    <ul>
+        <% @sip_server.errors.full_messages.each do |msg| %>
+        <li>
+            <%= msg %>
+        </li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<div class="field">
+    <%= f.label :name, "Host" %>
+    <br/>
     <%= f.text_field :name %>
-  </div>
-  <div class="actions">
+</div>
+<div class="field">
+    <%= f.label :config_port, "Configuration port" %>
+    <br/>
+    <%= f.text_field :config_port %>
+</div>
+<div class="actions">
     <%= f.submit %>
-  </div>
+</div>
 <% end %>
