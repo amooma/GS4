@@ -182,7 +182,7 @@ class SipAccount < ActiveRecord::Base
 				if cantina_sip_accounts
 					cantina_sip_accounts.each { |cantina_sip_account|
 						if cantina_sip_account.registrar .to_s == sip_server .to_s \
-						&& cantina_sip_account.user      .to_s == sip_user   .to_s
+						&& cantina_sip_account.auth_user      .to_s == auth_name   .to_s
 							logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
 							return cantina_sip_account
 							break
