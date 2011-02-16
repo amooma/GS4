@@ -79,7 +79,7 @@
     Gebiet der Kryptologie ist sollte auf zuverlässige, anerkannte und
     getestete Verfahren zurückgreifen statt „mal eben schnell“ was eigenes zu
     erfinden. Beispielsweise ist die mehrfache Anwendung eines Algorithmus
-    oder die Kombination aus zwei Algorithmen nicht unbedingt besser –
+    oder die Kombination aus zwei Algorithmen nicht unbedingt besser &#8211;
     manchmal sogar deutlich leichter angreifbar. Extremes (vereinfachtes)
     Beispiel: Die doppelte Anwendung von Rot-13 führt nicht zu doppelt guter
     Verschlüsselung. :-)</para>
@@ -158,9 +158,9 @@
         geschützt.</para>
 
         <para>Es steht dem Administrator jedoch frei zusätzlich einen Session
-        Border Controller an der Netzwerk-Grenze zu installieren. Dies kann –
-        je nach Installation – beispielsweise ratsam sein um die eigene
-        Netzwerk-Topologie vor externen VoIP-Kommunikationsteilnehmern
+        Border Controller an der Netzwerk-Grenze zu installieren. Dies kann
+        &#8211; je nach Installation &#8211; beispielsweise ratsam sein um die
+        eigene Netzwerk-Topologie vor externen VoIP-Kommunikationsteilnehmern
         zusätzlich zu verbergen, führt allerdings zu einer geringfügig höheren
         Latenz.</para>
 
@@ -303,8 +303,8 @@ end</programlisting></para>
         weitere Konfigurations-Tools oder beispielsweise eine andere
         Applikation auf die Schnittstellen zugreifen ohne daß die Gefahr
         besteht, daß sich potenzielle Fehler in solchen „externen“ Tools auf
-        den Kern des Systems auswirken oder daß – möglicherweise
-        unbeabsichtigt – Zugriffsbeschränkungen umgangen werden.</para>
+        den Kern des Systems auswirken oder daß &#8211; möglicherweise
+        unbeabsichtigt &#8211; Zugriffsbeschränkungen umgangen werden.</para>
       </listitem>
 
       <listitem>
@@ -316,13 +316,13 @@ end</programlisting></para>
         Schlüsselaustausch, Authentifizierung, Hashfunktion und
         Verschlüsselung. Insbesondere bietet die sogenannte
         „Null“-Verschlüsselung, die prinzipiell von SSL/TLS unterstützt wird,
-        keine Verschlüsselung – wie der Name schon sagt. Schlüssel unter einer
-        Länge von 128 Bit sollen generell ausgeschlossen werden, ebenso wie
-        die Hash-Algorithmen MD5 und SHA-1 (stattdessen: SHA-2-Familie).
+        keine Verschlüsselung &#8211; wie der Name schon sagt. Schlüssel unter
+        einer Länge von 128 Bit sollen generell ausgeschlossen werden, ebenso
+        wie die Hash-Algorithmen MD5 und SHA-1 (stattdessen: SHA-2-Familie).
         Natürlich dürfen nur solche Zertifikate akzeptiert werden, deren
         „<foreignphrase xml:lang="en">Chain</foreignphrase>“ (Kette) zur CA
         (<foreignphrase xml:lang="en">Certificate Authority</foreignphrase>)
-        korrekt ist. </para>
+        korrekt ist.</para>
 
         <para>Besonders schützenswerte Bereiche können zusätzlich durch Client
         Zertifikate geschützt werden. Der Zugriff auf so geschützte Bereiche
