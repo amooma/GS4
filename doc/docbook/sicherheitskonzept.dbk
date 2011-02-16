@@ -135,7 +135,7 @@ net     eth0        detect      dhcp,tcpflags,logmartians,nosmurfs</programlisti
       <formalpara>
         <title><filename>/etc/shorewall/zones</filename></title>
 
-        <para><programlisting>#ZONE   TYPE   OPTIONS   IN   OUT
+        <para><programlisting>#ZONE   TYPE       OPTIONS   IN   OUT
 fw      firewall
 net     ipv4</programlisting></para>
       </formalpara>
@@ -143,10 +143,11 @@ net     ipv4</programlisting></para>
       <formalpara>
         <title><filename>/etc/shorewall/policy</filename></title>
 
-        <para><programlisting>$FW   net   ACCEPT
-net   all   DROP     info
+        <para><programlisting>#SOURCE   DEST   POLICY   LOG LEVEL   LIMIT:BURST
+$FW       net    ACCEPT
+net       all    DROP     info
 # The FOLLOWING POLICY MUST BE LAST
-all   all   REJECT   info</programlisting></para>
+all       all    REJECT   info</programlisting></para>
       </formalpara>
 
       <formalpara>
