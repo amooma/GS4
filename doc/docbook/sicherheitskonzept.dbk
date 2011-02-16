@@ -173,30 +173,29 @@
       <listitem>
         <bridgehead>Verschlüsselung</bridgehead>
 
-        <para>Die Signalisierung der Gespräche erfolgt TLS verschlüsselt.
+        <para>Die Signalisierung der Gespräche erfolgt TLS-verschlüsselt.
         Hierdurch wird sichergestellt, dass keine unbefugten Personen die
-        Daten des Gesprächsaufbaus (Nummer des Anrufers und Nummer des
-        Angerufenen) abfangen können. Da während des Gesprächs übertragene
-        DTMF Töne auch über SIP übertragen werden können, ist die
-        Verschlüsselung der Singalisierung extrem wichtig (Bsp. Onlinebanking
-        mit PIN per DTMF).</para>
+        Daten des Gesprächsaufbaus (Nummer des Anrufers, Nummer des
+        Angerufenen etc.) abfangen können. Da während des Gesprächs
+        übertragene DTMF-Töne auch über SIP übertragen werden können, ist die
+        Verschlüsselung der Signalisierung extrem wichtig (Beispiel:
+        Onlinebanking mit PIN per DTMF).</para>
 
         <para>Bei allen Gesprächen soll der RTP-Strom verschlüsselt sein. Dazu
-        gehört auch die Identifizierung der Teilnehmer.Eine zuverlässige
+        gehört auch die Identifizierung der Teilnehmer. Eine zuverlässige
         Identifizierung der Teilnehmer kann nur über auf den Endgeräten
-        installierten Client Zertifikate sichergestellt werden. Die Verteilung
-        dieser Zertifikate sollte über ein gesichertes Netz (Ideal:
-        Netzwerkkarte direkt am Server mit Kabel zum Telefon) bei der
-        Ersteinrichtung stattfinden.</para>
+        installierte Client-Zertifikate sichergestellt werden. Die Verteilung
+        dieser Zertifikate sollte über ein gesichertes Netz bei der
+        Ersteinrichtung stattfinden (ideal: Netzwerkkarte direkt am Server mit
+        Kabel zum Telefon).</para>
 
-        <para>Eine durchgehende Ende zu Ende Verschlüsselung kann mit den
-        heutigen technischen Mitteln nur durch ZRT sichergestellt werden. Die
-        eingesetzte Software (Freeswitch) unterstützt bereits ZRTP. Um ZRTP
-        nutzen zu können, müssen die verwendetetn Endgeräte dieses Protokoll
-        auch unterstützen. Alle anderen Verschlüsselungsmethoden für die
-        Audiodaten (RTP Strom) haben momentan noch Schwächen (Bsp. Die
-        Schlüssel müssen auf allen Server, über die der RTP Strom geroutet
-        wird im Klartext vorhanden sein).</para>
+        <para>Eine durchgehende Ende-zu-Ende-Verschlüsselung kann mit den
+        heutigen technischen Mitteln gut durch ZRTP sichergestellt werden. Die
+        eingesetzte Software (FreeSwitch) unterstützt bereits ZRTP. Um ZRTP
+        nutzen zu können, müssen auch die verwendeten Endgeräte dieses
+        Protokoll unterstützen. Andere Methoden haben momentan noch Schwächen.
+        (Beispiel: Die Schlüssel müssen auf allen Servern über die der
+        RTP-Strom geroutet wird vorhanden sein).</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -324,12 +323,12 @@ end</programlisting></para>
         (<foreignphrase xml:lang="en">Certificate Authority</foreignphrase>)
         korrekt ist.</para>
 
-        <para>Besonders schützenswerte Bereiche können zusätzlich durch Client
-        Zertifikate geschützt werden. Der Zugriff auf so geschützte Bereiche
-        ist dann nur mit einem im Browser installierten Zertifikat möglich.
-        Wenn die Zertifikate auf einem gesicherten Weg verteilt wurden, kann
-        damit sichergestellt werden dass keine sensiblen Daten durch einen
-        einfachen Passwortdiebstahl zugänglich sind.</para>
+        <para>Besonders schützenswerte Bereiche können zusätzlich durch
+        Client-Zertifikate abgesichert werden. Der Zugriff auf so geschützte
+        Bereiche ist dann nur mit einem im Browser installierten Zertifikat
+        möglich. Wenn die Zertifikate auf einem gesicherten Weg verteilt
+        wurden kann damit sichergestellt werden dass keine sensiblen Daten
+        durch einen einfachen Passwortdiebstahl zugänglich sind.</para>
       </listitem>
     </itemizedlist>
   </section>
