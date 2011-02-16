@@ -1,8 +1,5 @@
 require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+ # testing sip_account requires provisioning_server to be accessible
 end

@@ -7,7 +7,7 @@ class ProvisioningServersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   
   setup do
-    @provisioning_server = provisioning_servers(:one)
+    @provisioning_server = Factory.create(:provisioning_server)
     
     an_admin_username = 'admin1'
     @admin_user = User.where( :username => an_admin_username ).first

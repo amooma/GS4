@@ -7,7 +7,9 @@ class AuthenticationsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   
   setup do
-    @authentication = authentications(:one)
+    @user = Factory.create(:user)
+    sign_in(@user)
+    @authentication = Factory.create(:authentication)
   end
   
   
