@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article version="5.0" xml:id="beschreibung" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Übersicht</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Gemeinschaft 4.0 ist modular aufgebaut und sieht von der Struktur eine
+  einfache Skalierung auf mehrere Server und eine saubere Abtrennung der
+  einzelnen Komponenten vor. Selbst wenn diese Möglichkeit der Skalierung für
+  SiVoIP nicht notwendig ist (weil die Installation auf einem Server gemacht
+  wird), birgt sie auch keine Nachteile und erhöht die saubere Abgrenzbarkeit.
+  Durch eine saubere Abgrenzung ist eine bessere Testbarkeit gegeben.</para>
+
+  <para>Die folgende Skizze zeigt ein Single-Server-SiVoIP-System auf Basis
+  von Gemeinschaft 4.0:<mediaobject>
+      <imageobject>
+        <imagedata align="center" fileref="sivoip_single_server.png"
+                   format="PNG" width="99%"></imagedata>
+      </imageobject>
+    </mediaobject></para>
+
+  <para>Eine Erklärung zu den Kommunikationswegen der einzelnen
+  Komponenten:</para>
+  
+        <orderedlist>
+          <listitem>
+            <para>Kommunikation über ein RESTful Interface. Die Web-GUI kann
+            nicht direkt auf FreeSWITCH oder die Datenbank zugreifen.
+            Sämtliche Kommunikation geschieht über einen RESTful
+            HTTP(S)-Aufruf.</para>
+          </listitem>
+
+          <listitem>
+            <para>Kommunikation über ein RESTful Interface. Die Web-GUI kann
+            nicht direkt auf FreeSWITCH oder die Datenbank zugreifen.
+            Sämtliche Kommunikation geschieht über einen RESTful
+            HTTP(S)-Aufruf.</para>
+          </listitem>
+
+          <listitem>
+            <para>Kommunikation über ein RESTful Interface. Die Web-GUI kann
+            nicht direkt auf FreeSWITCH oder die Datenbank zugreifen.
+            Sämtliche Kommunikation geschieht über einen RESTful
+            HTTP(S)-Aufruf.</para>
+          </listitem>
+
+          <listitem>
+            <para>Die Kommunikation zwischen dem Kern von Gemeinschafts und
+            der Datenbank erfolgt per SQL. Durch die Verwendung von
+            Active-Record als Bibliothek wird sichergestellt, dass nur valides
+            SQL benutzt wird und die Datenbank bei Bedarf gegen eine andere
+            SQL-Datenbank ausgetauscht werden kann.</para>
+          </listitem>
+
+          <listitem>
+            <para>Die Kommunikation zwischen FreeSWITCH und dem Kern von
+            Gemeinschaft 4.0 erfolgt über eine RESTful
+            HTTP(S)-Schnittstelle.</para>
+          </listitem>
+
+          <listitem>
+            <para>Die Kommunikation zwischen FreeSWITCH und jedem
+            vorgeschalteten VoIP-Proxy erfolgt über das entsprechende
+            Protokoll.</para>
+          </listitem>
+
+          <listitem>
+            <para>Die Kommunikation zwischen FreeSWITCH und dem Kamailio
+            SIP-Proxy erfolgt per SIP:</para>
+          </listitem>
+
+          <listitem>
+            <para>Jeder Proxy speichert und liest Daten aus der Datenbank per
+            SQL.</para>
+          </listitem>
+
+          <listitem>
+            <para>Der SIP-Proxy (Kamailio) speichert und liest Daten aus der
+            Datenbank per SQL.</para>
+          </listitem>
+
+          <listitem>
+            <para>Die Kommunikation vom xyz-Proxy mit dem PSTN-Netz oder
+            xyz-Telefonen erfolgt über das xyz-Protokoll. xyz steht hier
+            exemplarisch für alle zukünfigten VoIP-Protokolle.</para>
+          </listitem>
+
+          <listitem>
+            <para>Der SIP-Proxy (Kamailio) spricht per SIP mit dem PSTN (dem
+            Festnetz).</para>
+          </listitem>
+
+          <listitem>
+            <para>Der SIP-Proxy (Kamailio) spricht per SIP mit den
+            Telefonen.</para>
+          </listitem>
+
+          <listitem>
+            <para>Der Provisioning-Server spricht per HTTP(S) oder SFTP mit
+            den Telefonen.</para>
+          </listitem>
+
+          <listitem>
+            <para>Der Web-Browser spricht per HTTP(S) mit dem Web-Server von
+            SiVoIP.</para>
+          </listitem>
+
+          <listitem>
+            <para>Der Administrator kann sich bei entsprechender Konfiguration
+            per SSH auf dem System anmelden, um dort mit den Admin-Skripten zu
+            arbeiten.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Die Grundidee ist es, jedes einzelne Modul von SiVoIP so klar
+        wie möglich abzugrenzen und über eine einheitliche API anzusteuern. So
+        können automatische Tests sicherstellen, dass ein Module korrekt
+        funktioniert, und es wird Entwicklern einfacher gemacht neue
+        Funktionen einzubauen, da sie durch das Testen mit dem Test-Kit
+        sichergehen können, nichts kaputtgemacht zu haben.</para>
+
+</article>
