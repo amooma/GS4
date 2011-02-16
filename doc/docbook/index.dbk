@@ -20,5 +20,7 @@
     </authorgroup>
   </info>
 
+  <xi:include href="beschreibung.dbk" />
+
   <xi:include href="sicherheitskonzept.dbk" />
 </book>
