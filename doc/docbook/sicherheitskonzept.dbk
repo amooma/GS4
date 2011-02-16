@@ -24,7 +24,14 @@
   grundlegende Funktionsweise von Gemeinschaft4. Um ein sicheres System zu
   bieten gehen wir von folgende Ansätze aus:<itemizedlist>
       <listitem>
-        <para>verschlüsseltes Dateisystem. Gemeinschaft4 kann auf einem
+        <para>Minimales System. Auf dem System sind nur die wirklich
+        benötigten Pakete installiert, denn jegliche zusätzliche Software
+        birgt auch potenzielle Fehler und kann u.U. einem Eindringling
+        hilfreich sein, beispielsweise Compiler auf dem System.</para>
+      </listitem>
+
+      <listitem>
+        <para>Verschlüsseltes Dateisystem. Gemeinschaft4 kann auf einem
         normalen Debian Linux installiert werden, die Standard-Variante ist
         jedoch ein unveränderbares Live-CD-System das sensible Daten auf einem
         verschlüsselten Dateisystem auf einem USB-Stick oder einer Festplatte
@@ -36,7 +43,14 @@
         die TK-Anlage im Extremfall direkt ins Internet hängt, daher muß die
         Anlage entsprechend abgesichert sein und eine eigene Firewall
         mitbringen. Zur Verwaltung der IPTables-Regeln kommt Shorewall zum
-        Einsatz.</para>
+        Einsatz. Damit werden nur die wirklich benötigten Ports und Protokolle
+        freigegeben.</para>
+      </listitem>
+
+      <listitem>
+        <para>In der Standard-Installation sind keine Dienste enthalten nur
+        weil sie praktisch sind. Wenn der Administrator SSH benötigt so muß er
+        sich bewußt dafür entscheiden.</para>
       </listitem>
     </itemizedlist></para>
 
