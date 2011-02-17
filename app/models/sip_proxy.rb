@@ -1,12 +1,13 @@
 # == Schema Information
-# Schema version: 20110207214124
+# Schema version: 20110216214824
 #
 # Table name: sip_proxies
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  config_port :integer
 #
 
 class SipProxy < ActiveRecord::Base
