@@ -160,7 +160,8 @@
     xml:lang="en">authentications</foreignphrase>) der Benutzer
     (<foreignphrase xml:lang="en">users</foreignphrase>). Diese Tabelle wird
     vom Authentifizierungssystem „<foreignphrase
-    xml:lang="en">Devise</foreignphrase>“ verwendet.</para>
+    xml:lang="en">Devise</foreignphrase>“ verwendet (siehe <xref
+    linkend="sicherheitskonzept-web-interface-authentifizierung" />).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -324,7 +325,9 @@
     <para>Enthält die Benutzer (<foreignphrase
     xml:lang="en">users</foreignphrase>), die jeweils ein oder mehrere
     SIP-Konten (<foreignphrase xml:lang="en">SIP accounts</foreignphrase>)
-    haben.</para>
+    haben. Diese Tabelle wird vom Authentifizierungssystem „<foreignphrase
+    xml:lang="en">Devise</foreignphrase>“ verwendet (siehe <xref
+    linkend="sicherheitskonzept-web-interface-authentifizierung" />).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
