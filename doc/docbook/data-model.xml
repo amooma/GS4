@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="data-model" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Daten-Modell</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+
+      <author>
+        <personname><firstname>Stefan</firstname><surname>Wintermeyer</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Wie bei jedem Ruby-on-Rails-Projekt befinden sich die
+  Datenbank-<quote><foreignphrase xml:lang="en">Models</foreignphrase></quote>
+  im Unterverzeichnis <filename>app/models/</filename>. In jeder Datei wird
+  eine Klasse definiert, die eine entsprechende Tabelle in der Datenbank hat.
+  Das komplette <classname>ActiveRecord</classname>-Schema findet sich in
+  <filename>db/schema.rb</filename>. Auch in den jeweiligen <foreignphrase
+  xml:lang="en">Models</foreignphrase> ist jeweils oben in einem Kommentar die
+  Tabellenstruktur beschrieben.</para>
+
+  <para>Ein Daten-Modell hat eine Reihe von Attributen (bzw. Feldern),
+  Relationen zu anderen Daten-Modellen, sowie Methoden zur Validierung von
+  übergebenen Daten für die Attribute.</para>
+
+  <para>In Gemeinschaft4 gibt es folgende Daten-Modelle:<informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Modell</entry>
+
+            <entry>Dateiname</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><classname>Authentication</classname></entry>
+
+            <entry><filename>authentication.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>Extension</classname></entry>
+
+            <entry><filename>extension.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>ProvisioningServer</classname></entry>
+
+            <entry><filename>provisioning_server.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>SipAccount</classname></entry>
+
+            <entry><filename>sip_account.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>SipPhone</classname></entry>
+
+            <entry><filename>sip_phone.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>SipProxy</classname></entry>
+
+            <entry><filename>sip_proxy.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>SipServer</classname></entry>
+
+            <entry><filename>sip_server.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>User</classname></entry>
+
+            <entry><filename>user.rb</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable></para>
+
+  <note>
+    <para>Daneben gibt es noch die Daten-Modelle
+    <classname>Cantina<replaceable>*</replaceable></classname> in den Dateien
+    <filename>cantina_<replaceable>*</replaceable>.rb</filename>. Es handelt
+    sich dabei um als <classname>ActiveResource</classname> eingebunde
+    Daten-Modelle aus dem Cantina-Provisioning-Server. Die Beschreibungen dazu
+    finden sich in der Dokumentation zu Cantina.</para>
+  </note>
+
+  <para>Die Dateinamen und Klassen folgen der Standard-Konvention von
+  Ruby-on-Rails-Projekten, was die Einstiegshürde für andere Entwickler
+  niedrig hält.</para>
+
+  <para>Eine grafische Übersicht zu den Datenstrukturen findet sich in der
+  mitgelieferten Datei <filename>ERD.dot</filename> in Form eines
+  Entity-Relationship-Diagramms.<footnote>
+      <para>Information für Entwickler: Mit dem Befehl <emphasis
+      role="bold"><command>./script/erd</command></emphasis> im
+      Wurzelverzeichnis von Gemeinschaft4 lassen sich die Dateien
+      <filename>ERD.dot</filename> und <filename>ERD.pdf</filename>
+      generieren.</para>
+    </footnote></para>
+</chapter>

@@ -54,5 +54,7 @@
 
   <xi:include href="frontend.xml" />
 
+  <xi:include href="data-model.xml" />
+
   <xi:include href="sicherheitskonzept-und-architektur.dbk" />
 </book>
