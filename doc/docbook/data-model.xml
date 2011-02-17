@@ -153,6 +153,27 @@
   mehrere), <methodname>belongs_to</methodname> = <quote>gehört zu</quote>
   (genau eine).</para>
 
+  <section xml:id="model-authentication">
+    <title>Authentication</title>
+
+    <para>Enthält die Authentifizierungen (<foreignphrase
+    xml:lang="en">authentications</foreignphrase>) der Benutzer
+    (<foreignphrase xml:lang="en">users</foreignphrase>). Diese Tabelle wird
+    vom Authentifizierungssystem „<foreignphrase
+    xml:lang="en">Devise</foreignphrase>“ verwendet.</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-user" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
   <section xml:id="model-extension">
     <title>Extension</title>
 
