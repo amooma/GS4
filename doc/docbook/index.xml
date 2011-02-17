@@ -41,6 +41,17 @@
     </authorgroup>
   </info>
 
+  <chapter xml:id="installation">
+    <title>Installation</title>
+
+    <para>Nachfolgend wird beschrieben wie zuerst Ruby on Rails installiert
+    wird und dann das eigentliche Gemeinschaft4-System.</para>
+
+    <xi:include href="installation-ror-debian-5.xml" />
+
+    <xi:include href="installation-gs4.xml" />
+  </chapter>
+
   <xi:include href="frontend.xml" />
 
   <xi:include href="sicherheitskonzept-und-architektur.dbk" />
