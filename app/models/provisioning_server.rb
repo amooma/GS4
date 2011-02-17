@@ -18,6 +18,6 @@ class ProvisioningServer < ActiveRecord::Base
   validates_presence_of(:port, :message => "Port needed")
   validates_numericality_of(:port, :message => "Must be integer")
   validate_hostname_or_ip :name
-  validates_uniqueness_of(:name, :message => "allready exists")
+  validates_uniqueness_of(:name, :message => "already exists")
   
 end
