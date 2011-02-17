@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book version="5.0" xml:id="cantina" xml:lang="de"
+      xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:m="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+    <title>Cantina SIP Phone Provisioning System</title>
+
+    <authorgroup>
+      <author>
+        <personname><firstname>Stefan</firstname><surname>Wintermeyer</surname></personname>
+
+        <email>stefan.wintermeyer@amooma.de</email>
+      </author>
+
+      <author>
+        <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
+
+        <email>philipp.kempgen@amooma.de</email>
+      </author>
+
+      <author>
+        <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <email>sascha.daniels@amooma.de</email>
+      </author>
+
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+    </authorgroup>
+  </info>
+  <xi:include href="frontend.xml" />
+</book>
