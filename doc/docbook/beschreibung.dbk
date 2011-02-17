@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<article version="5.0" xml:id="beschreibung" xml:lang="de"
+<section version="5.0" xml:id="beschreibung" xml:lang="de"
          xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -19,25 +19,6 @@
       </author>
     </authorgroup>
   </info>
-
-  <para>Die Telefonanlage Gemeinschaft4 verwendet folgende
-  Software-Komponenten in der Architektur:<itemizedlist>
-      <listitem>
-        <para>Ruby und Ruby on Rails</para>
-      </listitem>
-
-      <listitem>
-        <para>FreeSwitch</para>
-      </listitem>
-
-      <listitem>
-        <para>Kamailio</para>
-      </listitem>
-
-      <listitem>
-        <para>MySQL</para>
-      </listitem>
-    </itemizedlist></para>
 
   <para>Gemeinschaft 4.0 ist modular aufgebaut und sieht von der Struktur eine
   einfache Skalierung auf mehrere Server und eine saubere Abtrennung der
@@ -152,4 +133,4 @@
   es wird Entwicklern einfacher gemacht neue Funktionen einzubauen, da sie
   durch das Testen mit dem Test-Kit sichergehen können, nichts kaputtgemacht
   zu haben.</para>
-</article>
+</section>

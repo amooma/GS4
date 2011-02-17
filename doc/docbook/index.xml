@@ -12,31 +12,22 @@
 
     <authorgroup>
       <author>
-        <personname>
-          <firstname>Stefan</firstname>
-
-          <surname>Wintermeyer</surname>
-        </personname>
+        <personname><firstname>Stefan</firstname>
+        <surname>Wintermeyer</surname></personname>
 
         <email>stefan.wintermeyer@amooma.de</email>
       </author>
 
       <author>
-        <personname>
-          <firstname>Philipp</firstname>
-
-          <surname>Kempgen</surname>
-        </personname>
+        <personname><firstname>Philipp</firstname>
+        <surname>Kempgen</surname></personname>
 
         <email>philipp.kempgen@amooma.de</email>
       </author>
 
       <author>
-        <personname>
-          <firstname>Sascha</firstname>
-
-          <surname>Daniels</surname>
-        </personname>
+        <personname><firstname>Sascha</firstname>
+        <surname>Daniels</surname></personname>
 
         <email>sascha.daniels@amooma.de</email>
       </author>
@@ -44,16 +35,13 @@
       <author>
         <orgname>Amooma GmbH</orgname>
 
-        <uri>
-          <link xlink:href="http://www.amooma.de/">http://www.amooma.de</link>
-        </uri>
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
       </author>
     </authorgroup>
   </info>
 
-  <xi:include href="beschreibung.dbk" />
-
   <xi:include href="frontend.xml" />
 
-  <xi:include href="sicherheitskonzept.dbk" />
+  <xi:include href="sicherheitskonzept-und-architektur.dbk" />
 </book>
