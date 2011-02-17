@@ -160,7 +160,8 @@
     xml:lang="en">authentications</foreignphrase>) der Benutzer
     (<foreignphrase xml:lang="en">users</foreignphrase>). Diese Tabelle wird
     vom Authentifizierungssystem „<foreignphrase
-    xml:lang="en">Devise</foreignphrase>“ verwendet (siehe <xref
+    xml:lang="en">Devise</foreignphrase>“ in Kombination mit „<foreignphrase
+    xml:lang="en">OmniAuth</foreignphrase>“ verwendet (siehe <xref
     linkend="sicherheitskonzept-web-interface-authentifizierung" />).</para>
 
     <formalpara>
