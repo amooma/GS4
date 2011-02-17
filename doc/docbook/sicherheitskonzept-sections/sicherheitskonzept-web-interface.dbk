@@ -63,13 +63,14 @@ end</programlisting></para>
       Rails war uns wichtig ein populäres System zu wählen das sich in
       vielfachem produktivem Einsatz bewährt hat, das gut durch automatisierte
       Tests abgedeckt ist, das aktiv gepflegt wird und das bereits vielen
-      Entwicklern bekannt ist. Devise ist ein modulares System bei dem man nur
-      die Komponenten einbindet die von der jeweiligen Applikation genutzt
-      werden. Zu den Modulen gehört beispielsweise <quote><foreignphrase
-      xml:lang="en">Database Authenticatable</foreignphrase></quote>, das das
-      Einloggen der Benutzer per Benutzername und Paßwort übernimmt. Die
-      Paßwörter sind dabei in der Datenbank nicht im Klartext gespeichert
-      sondern als SHA-Hashes (<link
+      Entwicklern bekannt ist. <foreignphrase
+      xml:lang="en">Devise</foreignphrase> ist ein modulares System bei dem
+      man nur die Komponenten einbindet die von der jeweiligen Applikation
+      genutzt werden. Zu den Modulen gehört beispielsweise
+      <quote><foreignphrase xml:lang="en">Database
+      Authenticatable</foreignphrase></quote>, das das Einloggen der Benutzer
+      per Benutzername und Paßwort übernimmt. Die Paßwörter sind dabei in der
+      Datenbank nicht im Klartext gespeichert sondern als SHA-Hashes (<link
       xlink:href="http://de.wikipedia.org/wiki/Secure_Hash_Algorithm">http://de.wikipedia.org/wiki/Secure_Hash_Algorithm</link>)
       die über Paßwort und ein zufälliges <quote><foreignphrase
       xml:lang="en">Salt</foreignphrase></quote> (<link
