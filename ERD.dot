@@ -27,7 +27,7 @@ digraph Usermanager {
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
 </table>
 >];
   SipAccount [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -54,6 +54,7 @@ digraph Usermanager {
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="config_port">config_port <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
@@ -62,6 +63,7 @@ digraph Usermanager {
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="config_port">config_port <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
