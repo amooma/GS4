@@ -121,7 +121,9 @@
     <filename>cantina_<replaceable>*</replaceable>.rb</filename>. Es handelt
     sich dabei um als <classname>ActiveResource</classname> eingebunde
     Daten-Modelle aus dem Cantina-Provisioning-Server. Die Beschreibungen dazu
-    finden sich in der Dokumentation zu Cantina.</para>
+    finden sich in der Dokumentation zu Cantina. Diese Daten-Modelle werden
+    dazu verwendet um die XML-API von Cantina anzusprechen und beispielsweise
+    die SIP-Account auf Cantina anzulegen, zu ändern und zu löschen.</para>
   </note>
 
   <para>Die Dateinamen und Klassen folgen der Standard-Konvention von
@@ -137,4 +139,181 @@
       <filename>ERD.dot</filename> und <filename>ERD.pdf</filename>
       generieren.</para>
     </footnote></para>
+
+  <para>Im folgenden wird erklärt was die einzelnen Daten-Modelle enthalten.
+  Wir gehen hier zwecks leichterer Nachschlagbarkeit in alphabetischer
+  Reihenfolge vor.</para>
+
+  <para>Dabei sind immer auch die entsprechenden direkten Relationen
+  angegeben. Wir verwenden hierfür eine an
+  <classname>ActiveRecord</classname>-Assoziationen angelehnte Schreibweise,
+  allerdings gleich mit einem Verweis bzw. Link auf das jeweilige
+  referenzierte Daten-Modell. Die verwendeten Assoziationen bedeuten:
+  <methodname>has_many</methodname> = <quote>hat viele</quote> (0, 1, oder
+  mehrere), <methodname>belongs_to</methodname> = <quote>gehört zu</quote>
+  (genau eine).</para>
+
+  <section xml:id="model-extension">
+    <title>Extension</title>
+
+    <para>Enthält die Nebenstellen (<foreignphrase
+    xml:lang="en">extensions</foreignphrase>) der SIP-Konten (<foreignphrase
+    xml:lang="en">SIP accounts</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-provisioning-server">
+    <title>ProvisioningServer</title>
+
+    <para>Enthält die Provisionierungs-Server (<foreignphrase
+    xml:lang="en">provisioning servers</foreignphrase>), die jeweils eine
+    bestimmte Menge der Telefone provisionieren. Im einfachsten Fall befindet
+    sich in dieser Tabelle nur ein einziger Cantina-Provisionierungs-Server
+    der alle Telefone provisioniert.</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-phone" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-sip-account">
+    <title>SipAccount</title>
+
+    <para>Enthält die SIP-Konten (<foreignphrase xml:lang="en">SIP
+    accounts</foreignphrase>) der Benutzer (<foreignphrase
+    xml:lang="en">users</foreignphrase>) und deren Zuweisung auf die
+    SIP-Telefone (<foreignphrase xml:lang="en">SIP
+    phones</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-user" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-sip-phone" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-sip-server" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-sip-proxy" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-extension" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-sip-phone">
+    <title>SipPhone</title>
+
+    <para>Enthält die SIP-Telefone (<foreignphrase xml:lang="en">SIP
+    phones</foreignphrase>). Ein SIP-Telefon befindet sich jeweils auf einem
+    bestimmten Provisioning-Server. (Im einfachsten Fall gibt es nur genau
+    einen Provisioning-Server.)</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-provisioning-server" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-sip-proxy">
+    <title>SipProxy</title>
+
+    <para>Enthält die SIP-Proxies (<foreignphrase xml:lang="en">SIP
+    proxies</foreignphrase>) der SIP-Konten (<foreignphrase xml:lang="en">SIP
+    accounts</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-sip-server">
+    <title>SipServer</title>
+
+    <para>Enthält die SIP-Server (<foreignphrase xml:lang="en">SIP
+    servers</foreignphrase>) der SIP-Konten (<foreignphrase xml:lang="en">SIP
+    accounts</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-user">
+    <title>User</title>
+
+    <para>Enthält die Benutzer (<foreignphrase
+    xml:lang="en">users</foreignphrase>), die jeweils ein oder mehrere
+    SIP-Konten (<foreignphrase xml:lang="en">SIP accounts</foreignphrase>)
+    haben.</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
 </chapter>
