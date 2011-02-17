@@ -30,5 +30,207 @@
     </authorgroup>
   </info>
 
-  <para></para>
+  <section>
+    <title>Erste Schritte nach der Installation</title>
+
+    <para>Die initiale Setuproutine leitet Sie automatisch zu den notwendigen
+    Einstellungen. Wir werden in diesem Kapitel die Ersteinrichtung Schrit für
+    Schrit durchgehen.</para>
+
+    <para>Beim ersten Aufruf des Gemeinschaft4 Webinterfaces werden Sie
+    automatisch zum Setup weitergeleitet.</para>
+
+    <screenshot>
+      <info>
+        <title>Automatische Weiterleitung zum Setup</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup1.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Anlegen des ersten Administrators</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup2.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para></para>
+
+    <screenshot>
+      <info>
+        <title>Anmeldung mit den gerade angelegten Daten</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup3.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Anlegen des ersten SIP Servers</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup4.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Geben Sie die IP des Rechners an, auf dem Gemeinschaft4
+        installiert ist (NICHT 127.0.0.1!). Der Configuration port ist der
+        port auf dem der rails Server für die Kamailio Konfiguration
+        läuft.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup5.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Der Server wurde ohne Fehler in der DAtenbank angelegt.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup6.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Zuletzt muss noch der Provisioning Server (Cantina) angelegt
+        werden.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup7.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Bitte geben Sie die IP Adresse des Cantina Servers an. Der Port
+        ist wieder der Port auf dem der rails Server von Cantina
+        läuft.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup8.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Der Provisionig Server wurde fehlerfrei angelegt.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup9.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Die Startseite von Gemeinschaft4 nach der
+        Ersteinrichtung.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup10.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Anlegen eines SIP Telefons</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup12.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Es stehen die auf dem Cantina Server bereits angelegten
+        Telefone zur Verfügung.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup13.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Das Telefon wurde erfolgreich angelegt.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup14.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Um ein Telefon benutzen zu können brauchen wir noch einen SIP
+        Account.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup15.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Alle Eingabefelder müssen ausgefüllt werden. Bis auf SIP Server
+        sind alle Auswahlfelder optional. Damit auch ein Telefon provisioniert
+        werden kann, muss natürlich auch eines ausgewählt werden.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup16.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </section>
 </chapter>
