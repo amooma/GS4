@@ -20,6 +20,25 @@
     </authorgroup>
   </info>
 
+  <para>Die Telefonanlage Gemeinschaft4 verwendet folgende
+  Software-Komponenten in der Architektur:<itemizedlist>
+      <listitem>
+        <para>Ruby und Ruby on Rails</para>
+      </listitem>
+
+      <listitem>
+        <para>FreeSwitch</para>
+      </listitem>
+
+      <listitem>
+        <para>Kamailio</para>
+      </listitem>
+
+      <listitem>
+        <para>MySQL</para>
+      </listitem>
+    </itemizedlist></para>
+
   <para>Gemeinschaft 4.0 ist modular aufgebaut und sieht von der Struktur eine
   einfache Skalierung auf mehrere Server und eine saubere Abtrennung der
   einzelnen Komponenten vor. Selbst wenn diese Möglichkeit der Skalierung für
