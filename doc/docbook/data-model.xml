@@ -181,7 +181,8 @@
 
     <para>Enthält die Nebenstellen (<foreignphrase
     xml:lang="en">extensions</foreignphrase>) der SIP-Konten (<foreignphrase
-    xml:lang="en">SIP accounts</foreignphrase>).</para>
+    xml:lang="en">SIP accounts</foreignphrase>). Diese werden im momentanen
+    System noch nicht verwendet.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -287,7 +288,8 @@
 
     <para>Enthält die SIP-Proxies (<foreignphrase xml:lang="en">SIP
     proxies</foreignphrase>) der SIP-Konten (<foreignphrase xml:lang="en">SIP
-    accounts</foreignphrase>).</para>
+    accounts</foreignphrase>). Diese werden im momentanen System noch nicht
+    verwendet.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
