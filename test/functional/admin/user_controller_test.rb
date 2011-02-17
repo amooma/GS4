@@ -13,7 +13,7 @@ class Admin::UserControllerTest < ActionController::TestCase
 
   test "should get show" do
     sign_in :user, @user
-    get :show
+    get :show, :id => @user.to_param
     assert_response :success
   end
 
@@ -31,14 +31,14 @@ class Admin::UserControllerTest < ActionController::TestCase
 
   test "should get edit" do
     sign_in :user, @user
-    get :edit
+    get :edit, :id => @user.to_param
     assert_response :success
   end
 
   test "should get update" do
     sign_in :user, @user
-    get :update
-    assert_response :success
+    put :update, :id => @user.to_param, :user => @user.attributes
+    assert_redirected_to admin_user_index_path
   end
 
 end

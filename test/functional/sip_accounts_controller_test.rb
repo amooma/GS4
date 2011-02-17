@@ -7,7 +7,7 @@ class SipAccountsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   
   setup do
-    @sip_account = sip_accounts(:one)
+    @sip_account = Factory.create(:sip_account)
     
     an_admin_username = 'admin1'
     @admin_user = User.where( :username => an_admin_username ).first
