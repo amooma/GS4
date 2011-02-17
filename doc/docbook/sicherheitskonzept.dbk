@@ -58,8 +58,8 @@
   <para>Nachfolgend geben wir einen Überblick über das
   Sicherheitskonzept.</para>
 
-  <xi:include href="sicherheitskonzept-komplettsystem.dbk" />
-  <xi:include href="sicherheitskonzept-betriebssystem.dbk" />
-  <xi:include href="sicherheitskonzept-voip.dbk" />
-  <xi:include href="sicherheitskonzept-web-interface.dbk" />
+  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-komplettsystem.dbk" />
+  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-betriebssystem.dbk" />
+  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-voip.dbk" />
+  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-web-interface.dbk" />
 </section>
