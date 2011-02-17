@@ -34,6 +34,19 @@
     gleichen Port gestartet werden können und dürfen!</para>
   </important>
 
+  <note>
+    <para>Beim normalen Betrieb als Single-Server-System (d.h. alles auf einem
+    Server) ist natürlich nur einmal die Installation von Ruby
+    erforderlich.</para>
+  </note>
+
+  <note>
+    <para>Informationen zur Installation bzw. Konfiguration des SIP-Proxy
+    (Kamailio) werden von der SIP-Proxy-Steuerungsapplikation („sipproxy“)
+    bereitgestellt. Die Applikation „sipproxy“ ist zuständig für die Steuerung
+    des SIP-Proxy-Dienstes.</para>
+  </note>
+
   <para>Gemeinschaft4 ist verfügbar auf <uri
   xlink:href="https://github.com/amooma/Cantina">https://github.com/amooma/Gemeinschaft4</uri>
   und kann von dort wie folgt per Git installiert werden:<screen>debian:~# <emphasis
