@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article version="5.0" xml:id="sicherheitskonzept-und-architektur"
+         xml:lang="de" xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Architektur, Sicherheitskonzept</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Die Telefonanlage Gemeinschaft4 verwendet folgende
+  Software-Komponenten in der Architektur:<itemizedlist>
+      <listitem>
+        <para>Ruby und Ruby on Rails</para>
+      </listitem>
+
+      <listitem>
+        <para>FreeSwitch</para>
+      </listitem>
+
+      <listitem>
+        <para>Kamailio</para>
+      </listitem>
+
+      <listitem>
+        <para>MySQL</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <xi:include href="beschreibung.dbk" />
+
+  <xi:include href="sicherheitskonzept.dbk" />
+</article>

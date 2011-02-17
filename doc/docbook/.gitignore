@@ -1,0 +1,6 @@
+# Ignore .DS_Store:
+.DS_Store
+
+# Ignore temporary docbook files:
+*~
+
