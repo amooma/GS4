@@ -14,7 +14,8 @@
 
   <itemizedlist>
     <listitem>
-      <bridgehead>Validierungen</bridgehead>
+      <bridgehead
+      xml:id="sicherheitskonzept-web-interface-validierungen">Validierungen</bridgehead>
 
       <para>Validierungen der Attribute in den sogenannten
       <quote><foreignphrase xml:lang="en">Models</foreignphrase></quote> der
@@ -26,7 +27,8 @@
     </listitem>
 
     <listitem>
-      <bridgehead>Tests</bridgehead>
+      <bridgehead
+      xml:id="sicherheitskonzept-web-interface-tests">Tests</bridgehead>
 
       <para>Wir verwenden eine stetig wachsende Anzahl an automatischen
       Unit-Tests, die einzelne Komponenten testen, sowie Funktionstests, die
@@ -51,7 +53,8 @@ end</programlisting></para>
     </listitem>
 
     <listitem>
-      <bridgehead>Authentifizierung</bridgehead>
+      <bridgehead
+      xml:id="sicherheitskonzept-web-interface-authentifizierung">Authentifizierung</bridgehead>
 
       <para>Zur Authentifizierung der Benutzer kommt <quote><foreignphrase
       xml:lang="en">Devise</foreignphrase></quote> zum Einsatz (<link
@@ -79,7 +82,8 @@ end</programlisting></para>
     </listitem>
 
     <listitem>
-      <bridgehead>ORM</bridgehead>
+      <bridgehead
+      xml:id="sicherheitskonzept-web-interface-orm">ORM</bridgehead>
 
       <para>Kein SQL im Code. Durch die Verwendung eines Objekt-relationalen
       Mappers (ActiveRecord) besteht nicht die Gefahr daß durch Fehler im Code
@@ -97,7 +101,9 @@ end</programlisting></para>
     </listitem>
 
     <listitem>
-      <bridgehead>Saubere Schnittstellen</bridgehead>
+      <bridgehead
+      xml:id="sicherheitskonzept-web-interface-saubere-schnittstellen">Saubere
+      Schnittstellen</bridgehead>
 
       <para>Gemeinschaft4 verwendet durch die
       Model-View-Controller-Architektur definierte Schnittstellen.
@@ -112,7 +118,8 @@ end</programlisting></para>
     </listitem>
 
     <listitem>
-      <bridgehead>HTTPS</bridgehead>
+      <bridgehead
+      xml:id="sicherheitskonzept-web-interface-https">HTTPS</bridgehead>
 
       <para>Verbindungen sollen immer über HTTPS erfolgen. Dabei ist zu
       beachten nur geeignete Cipher Suites auszuwählen, also geeignete
