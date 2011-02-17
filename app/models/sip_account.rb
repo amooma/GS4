@@ -28,7 +28,11 @@ class SipAccount < ActiveRecord::Base
   #validates_presence_of :sip_phone_id
   
   
-  after_validation :prov_srv_sip_account_create, :on => :create
+  after_validation( :on => :create) do
+    if ! sip_phone_id.nil?
+      prov_srv_sip_account_create
+    end
+  end
   after_validation( :on => :update) do
     if ! sip_phone_id.nil?
       prov_srv_sip_account_update 
@@ -38,7 +42,12 @@ class SipAccount < ActiveRecord::Base
       delete_last_cantina_account
     end
   end
-  before_destroy   :prov_srv_sip_account_destroy
+  before_destroy do
+    if ! sip_phone_id.nil?
+    prov_srv_sip_account_destroy
+      end
+  end
+  
   
   #	# http://rubydoc.info/docs/rails/3.0.0/ActiveModel/Dirty
   # 	include ActiveModel::Dirty

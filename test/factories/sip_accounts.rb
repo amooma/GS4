@@ -5,7 +5,6 @@ Factory.define :sip_account do |f|
   f.sequence(:realm) { |n| "testrealm#{n}" }
   f.sequence(:phone_number) { |n| n }
   
-  f.association :sip_phone
   f.association :sip_server
   f.association :sip_proxy
 end

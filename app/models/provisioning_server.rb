@@ -15,7 +15,9 @@ class ProvisioningServer < ActiveRecord::Base
   has_many :sip_phones
   
   validates_presence_of :name
+  validates_presence_of(:port, :message => "Port needed")
+  validates_numericality_of(:port, :message => "Must be integer")
   validate_hostname_or_ip :name
-  validates_uniqueness_of :name, :message => "already exists"
+  validates_uniqueness_of(:name, :message => "allready exists")
   
 end

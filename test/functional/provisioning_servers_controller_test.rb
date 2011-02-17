@@ -48,7 +48,7 @@ class ProvisioningServersControllerTest < ActionController::TestCase
   test "should create provisioning_server" do
     sign_in :user, @admin_user
     assert_difference('ProvisioningServer.count') {
-      post :create, :provisioning_server => @provisioning_server.attributes
+      post :create, :provisioning_server => Factory.attributes_for(:provisioning_server)
     }
     assert_redirected_to( provisioning_server_path( assigns(:provisioning_server)))
     sign_out @admin_user
