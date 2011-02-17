@@ -264,7 +264,7 @@
     <para>Enthält die SIP-Telefone (<foreignphrase xml:lang="en">SIP
     phones</foreignphrase>). Ein SIP-Telefon befindet sich jeweils auf einem
     bestimmten Provisioning-Server. (Im einfachsten Fall gibt es nur genau
-    einen Provisioning-Server.)</para>
+    einen Provisioning-Server der alle Telefone provisioniert.)</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
