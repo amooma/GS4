@@ -20,94 +20,74 @@
     </authorgroup>
   </info>
 
-  <para>Die Strukturanalyse erfasst den Informationsverbund
-  vollständig und ermittelt alle beteiligten Komponenten. Hierzu
-  gehören die Netzwerkverbindungen, die IT-Systeme und die
-  Anwendungen und Daten.</para>
-  <para>Gemeinschaft 4.0 ist modular aufgebaut. Die einzelnen
-  Applikationen können auf einem einzigen IT-System betrieben
-  werden. In dieser Form sind keine Netzverbindungen innerhalb des
-  Verbundes erforderlich. Für eine mögliche Skalierung sieht
-  Gemeinschaft 4.0 aber auch die Verteilung der Applikation auf
-  mehrere IT-Systeme und die Trennung einzelner
-  Applikationsbestandteile vor. </para>
+  <para>Die Strukturanalyse erfasst den Informationsverbund vollständig und
+  ermittelt alle beteiligten Komponenten. Hierzu gehören die
+  Netzwerkverbindungen, die IT-Systeme und die Anwendungen und Daten.</para>
 
-  <para>
-    Für die Strukturanalyse ist eine Analyse der folgenden Daten erforderlich
-    <itemizedlist>
-      <listitem>
-	<para>
-	  Netzplan
-	</para>
-      </listitem>
-      <listitem>
-	<para>
-	  IT-Systeme
-	</para>
-      </listitem>
-      <listitem>
-	<para>
-	  Anwendungen
-	</para>
-      </listitem>
-    </itemizedlist>
-  </para>
+  <para>Gemeinschaft 4.0 ist modular aufgebaut. Die einzelnen Applikationen
+  können auf einem einzigen IT-System betrieben werden. In dieser Form sind
+  keine Netzverbindungen innerhalb des Verbundes erforderlich. Für eine
+  mögliche Skalierung sieht Gemeinschaft 4.0 aber auch die Verteilung der
+  Applikation auf mehrere IT-Systeme und die Trennung einzelner
+  Applikationsbestandteile vor.</para>
 
-  <para>
-    Der Netzplan für die Gemeinschaft 4.0 ist sehr einfach aufgebaut
-    und stellt die Verbindungen mit der Außenwelt und den Telefonen
-    dar. Hier werden die folgenden Systeme erkannt:
-    <itemizedlist>
+  <para>Für die Strukturanalyse ist eine Analyse der folgenden Daten
+  erforderlich <itemizedlist>
       <listitem>
-	<para>
-	  Gemeinschaft 4.0 Telefonanlage
-	</para>
+        <para>Netzplan</para>
       </listitem>
+
       <listitem>
-	<para>
-	  VoIP Telefongeräte
-	</para>
+        <para>IT-Systeme</para>
       </listitem>
-    </itemizedlist>
-  </para>
-  <para>Die Telefongeräte sind nicht Bestandteil der Gemeinschaft
-  4.0. Daher werden diese im weiteren nicht betrachtet.</para>
 
-  <para>Für die Erfassung der IT-Systeme ist somit nur das System, auf
-  dem die Gemeinschaft 4.0 betrieben wird, relevant. Zum aktuellen
-  Zeitpunkt der Projektierung werden hier die folgenden Parameter
-  angenommen:
-  <itemizedlist>
-    <listitem>
-      <para>
-	Name: Gemeinschaft4Server
-      </para>
-    </listitem>
-    <listitem>
-      <para>
-	Typ: Linux System
-      </para>
-    </listitem>
-    <listitem>
-      <para>
-	Standort: Abgeschlossener Serverraum
-      </para>
-    </listitem>
-  </itemizedlist>
-  </para>
+      <listitem>
+        <para>Anwendungen</para>
+      </listitem>
+    </itemizedlist></para>
 
-  <para>Auf dem identifizierten IT-System werden mehrere Applikationen
-  für die Telefonanlage betrieben. Die folgende Skizze zeigt ein
-  Single-Server-SiVoIP-System auf Basis 
-  von Gemeinschaft 4.0:<mediaobject>
+  <para>Der Netzplan für die Gemeinschaft 4.0 ist sehr einfach aufgebaut und
+  stellt die Verbindungen mit der Außenwelt und den Telefonen dar. Hier werden
+  die folgenden Systeme erkannt: <itemizedlist>
+      <listitem>
+        <para>Gemeinschaft 4.0 Telefonanlage</para>
+      </listitem>
+
+      <listitem>
+        <para>VoIP Telefongeräte</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Die Telefongeräte sind nicht Bestandteil der Gemeinschaft 4.0. Daher
+  werden diese im weiteren nicht betrachtet.</para>
+
+  <para>Für die Erfassung der IT-Systeme ist somit nur das System, auf dem die
+  Gemeinschaft 4.0 betrieben wird, relevant. Zum aktuellen Zeitpunkt der
+  Projektierung werden hier die folgenden Parameter angenommen: <itemizedlist>
+      <listitem>
+        <para>Name: Gemeinschaft4Server</para>
+      </listitem>
+
+      <listitem>
+        <para>Typ: Linux System</para>
+      </listitem>
+
+      <listitem>
+        <para>Standort: Abgeschlossener Serverraum</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Auf dem identifizierten IT-System werden mehrere Applikationen für die
+  Telefonanlage betrieben. Die folgende Skizze zeigt ein
+  Single-Server-SiVoIP-System auf Basis von Gemeinschaft 4.0:<mediaobject>
       <imageobject>
         <imagedata align="center" fileref="sivoip_single_server.png"
                    format="PNG" width="99%"></imagedata>
       </imageobject>
     </mediaobject></para>
 
-  <para>Die einzelnen Komponenten und die genutzten Kommunikationswege
-  werden im folgenden erläutert:</para>
+  <para>Die einzelnen Komponenten und die genutzten Kommunikationswege werden
+  im folgenden erläutert:</para>
 
   <orderedlist>
     <listitem>
@@ -198,12 +178,9 @@
     </listitem>
   </orderedlist>
 
-  <para>Grundlage des Design, ist die Abgrenzung der einzelnen
-  Komponenten untereinander. Für die Kommunikation wird eine
-  einheitliche API angeboten und genutzt. Dies erlaubt die Erzeugung 
-  automatischer Tests für die Funktionsprüfung der einzelnen Module.
-  Dies garantiert Zukunftsicherheit und die einfache Integration
-  weiterer Funktionen.  
-  </para> 
-
+  <para>Grundlage des Design, ist die Abgrenzung der einzelnen Komponenten
+  untereinander. Für die Kommunikation wird eine einheitliche API angeboten
+  und genutzt. Dies erlaubt die Erzeugung automatischer Tests für die
+  Funktionsprüfung der einzelnen Module. Dies garantiert Zukunftsicherheit und
+  die einfache Integration weiterer Funktionen.</para>
 </section>
