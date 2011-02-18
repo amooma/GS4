@@ -74,139 +74,197 @@
   <para>Im folgenden wird eine erste Abschätzung des Schutzbedarfs für die
   einzelnen Komponenten und Kommunikationsverbindungen durchgeführt.</para>
 
-  <table>
-    <title>Schutzbedarf</title>
+  <note>
+    <para>Die Abschätzung des Schutzbedarfs der Telefonanlage in Bezug auf
+    Verfügbarkeit, Vertraulichkeit und Integrität ist teilweise schwierig,
+    denn unterschiedliche Organisationen/Firmen haben z.T. verschiedene
+    Anforderungen, die sich u.a. aus dem Tätigkeitsfeld ergeben, aus
+    gesetzlichen Bestimmungen und aus betrieblichen Vereinbarungen. So können
+    beispielsweise die mögliche Beinträchtigung in der Aufgabenerfüllung, die
+    finanziellen Auswirkungen, die negative Außenwirkung oder andere
+    Auswirkungen stark variieren. Es ist daher schwierig eine pausche und
+    allgemeingültige Analyse durchzuführen.</para>
+  </note>
 
-    <tgroup cols="5">
-      <thead>
-        <row>
-          <entry>Komponente</entry>
+  <section xml:id="schutzbedarf-komponenten">
+    <title>Schutzbedarf der einzelnen Komponenten</title>
 
-          <entry>Personenbezogene Daten</entry>
+    <para>Übersicht:</para>
 
-          <entry>Verfügbarkeit</entry>
+    <table>
+      <title>Schutzbedarf</title>
 
-          <entry>Vertraulichkeit</entry>
+      <tgroup cols="5">
+        <thead>
+          <row>
+            <entry>Komponente</entry>
 
-          <entry>Integrität</entry>
-        </row>
-      </thead>
+            <entry>Personenbezogene Daten</entry>
 
-      <tbody>
-        <row>
-          <entry>Datenbank</entry>
+            <entry>Verfügbarkeit</entry>
 
-          <entry>ja</entry>
+            <entry>Vertraulichkeit</entry>
 
-          <entry>normal</entry>
+            <entry>Integrität</entry>
+          </row>
+        </thead>
 
-          <entry>normal</entry>
+        <tbody>
+          <row>
+            <entry>Datenbank</entry>
 
-          <entry>hoch</entry>
-        </row>
+            <entry>ja</entry>
 
-        <row>
-          <entry>Gemeinschaft4</entry>
+            <entry>normal</entry>
 
-          <entry>nein</entry>
+            <entry>normal</entry>
 
-          <entry>normal</entry>
+            <entry>hoch</entry>
+          </row>
 
-          <entry>normal</entry>
+          <row>
+            <entry>Gemeinschaft4</entry>
 
-          <entry>normal</entry>
-        </row>
+            <entry>nein</entry>
 
-        <row>
-          <entry>FreeSwitch</entry>
+            <entry>normal</entry>
 
-          <entry>nein</entry>
+            <entry>normal</entry>
 
-          <entry>hoch</entry>
+            <entry>normal</entry>
+          </row>
 
-          <entry>normal</entry>
+          <row>
+            <entry>FreeSwitch</entry>
 
-          <entry>normal</entry>
-        </row>
+            <entry>nein</entry>
 
-        <row>
-          <entry>SIP-Proxy</entry>
+            <entry>hoch</entry>
 
-          <entry>ja</entry>
+            <entry>normal</entry>
 
-          <entry>hoch</entry>
+            <entry>normal</entry>
+          </row>
 
-          <entry>hoch</entry>
+          <row>
+            <entry>SIP-Proxy</entry>
 
-          <entry>normal</entry>
-        </row>
+            <entry>nein</entry>
 
-        <row>
-          <entry>Prov.-Server</entry>
+            <entry>hoch</entry>
 
-          <entry>ja</entry>
+            <entry>hoch</entry>
 
-          <entry>normal</entry>
+            <entry>normal</entry>
+          </row>
 
-          <entry>normal</entry>
+          <row>
+            <entry>Prov.-Server</entry>
 
-          <entry>normal</entry>
-        </row>
+            <entry>nein</entry>
 
-        <row>
-          <entry>Webserver</entry>
+            <entry>normal</entry>
 
-          <entry>ja</entry>
+            <entry>normal</entry>
 
-          <entry>normal</entry>
+            <entry>normal</entry>
+          </row>
 
-          <entry>hoch</entry>
+          <row>
+            <entry>Verbindung Telefone</entry>
 
-          <entry>normal</entry>
-        </row>
+            <entry>ja</entry>
 
-        <row>
-          <entry>Verbindung Telefone</entry>
+            <entry>hoch</entry>
 
-          <entry>ja</entry>
+            <entry>hoch</entry>
 
-          <entry>hoch</entry>
+            <entry>hoch</entry>
+          </row>
 
-          <entry>hoch</entry>
+          <row>
+            <entry>Verbindung SIP-Trunk</entry>
 
-          <entry>hoch</entry>
-        </row>
+            <entry>ja</entry>
 
-        <row>
-          <entry>Verbindung SIP-Trunk</entry>
+            <entry>hoch</entry>
 
-          <entry>ja</entry>
+            <entry>hoch</entry>
 
-          <entry>hoch</entry>
+            <entry>hoch</entry>
+          </row>
 
-          <entry>hoch</entry>
+          <row>
+            <entry>Verbindung PSTN-Trunk</entry>
 
-          <entry>hoch</entry>
-        </row>
+            <entry>ja</entry>
 
-        <row>
-          <entry>Verbindung PSTN-Trunk</entry>
+            <entry>hoch</entry>
 
-          <entry>ja</entry>
+            <entry>hoch</entry>
 
-          <entry>hoch</entry>
+            <entry>hoch</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
 
-          <entry>hoch</entry>
+    <para>Nachfolgend wird erläutert wie die Abschätzung des Schutzbedarfs der
+    einzelnen Kompontenten zustandekommt.</para>
 
-          <entry>hoch</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
+    <section xml:id="schutzbedarf-datenbank">
+      <title>Datenbank</title>
 
-  <para>Basierend auf dieser ersten Abschätzung erfolgt die weitere
-  Modellierung in der Phase 3 des Sicherheitskonzepts. Dabei ist eine laufende
-  Kontrolle der Ergebnisse der Strukturanalyse und der Schutzbedarfsbestimmung
-  im Projekt erforderlich, da im weiteren Änderungen in der Struktur möglich
-  sind.</para>
+      <para>Die Datenbank enthält personenbezogene Daten (Namen, Anruflisten).
+      Ohne sie wäre keine Provisionierung der Endgeräte mehr möglich, jedoch
+      noch eine eingeschränkte Telefonie im Notbetrieb. Den Schutzbedarf der
+      Integrität der Datenbank erachten wir als hoch. Die Liste der Personen
+      und die Liste der Endgeräte sind üblicherweise recht leicht
+      wiederherzustellen (aus LDAP oder einer anderen Datenbank der
+      Organisation). Ein Ausfall der Anruflisten, der von Benutzern definierte
+      Tastenfunktionen auf den Telefonen, der gesetzte Rufumleitungen sind
+      typischerweise nicht kritisch, können aber von einigen Organisationen
+      bzw. je nach Einsatz-Szenario als relevant bewertet werden. Hier wäre
+      dann entsprechend vom Administrator ein ein- oder besser mehrstufiges
+      Backup-Konzept anzuwenden. Die Backups sollten verschlüsselt sein, denn
+      beispielsweise die Anruflisten können sensible Informationen
+      enthalten.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-gemeinschaft4">
+      <title>Gemeinschaft4</title>
+
+      <para>Die Applikationslogik von Gemeinschaft4 und die Web-Schnittstellen
+      speichern selbst keine personenbezogene Daten (diese liegen in der
+      Datenbank, die separat betrachtet wird). Ohne Gemeinschaft wäre noch
+      eine eingeschränkte Telefone im Notbetrieb möglich. Die Software ist aus
+      öffentlichen Quellen wiederherstellbar. Da über die Schnittstellen von
+      Gemeinschaft4 (HTTPS) potenziell sensible Daten übertragen werden
+      sollten diese Schnittstellen bzw. die Übertragungstrecke nach dem
+      derzeitigen Stand der Technik geschützt werden.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-sip-proxy">
+      <title>SIP-Proxy</title>
+
+      <para>Der SIP-Proxy Kamailio speichert selbst keine direkten
+      personenbezogenen Daten. Er agiert anhand der in der Datenbank
+      hinterlegten SIP-Accounts. Ja nach Konfiguration könnten jedoch die
+      SIP-Accounts Rückschlüsse auf bestimmte Personen ermöglichen. Den
+      Schutzbedarf der Verfügbarkeit erachten wir als hoch, denn ohne den
+      SIP-Proxy ist in aller Regel keine Telefonie mehr möglich. Der SIP-Proxy
+      sieht (zwecks Routing) als potenziell sensibel einzustufende
+      Informationen über die SIP-Topologie.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-anpassungen">
+      <title>Weitere Anpassungen</title>
+
+      <para>Basierend auf dieser ersten Abschätzung erfolgt die weitere
+      Modellierung in der Phase 3 des Sicherheitskonzepts. Dabei ist eine
+      laufende Kontrolle der Ergebnisse der Strukturanalyse und der
+      Schutzbedarfsbestimmung im Projekt erforderlich, da im weiteren
+      Änderungen in der Struktur möglich sind.</para>
+    </section>
+  </section>
 </section>
