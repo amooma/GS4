@@ -302,7 +302,9 @@
       die Integrität sichergestellt sein. Es ist entscheidend ein Endgerät
       bzw. einen SIP-Account eindeutig identifizieren zu können, damit
       beispielsweise bei der Provisionierung sensible Daten nicht an ein
-      anderes Gerät gesendet werden.</para>
+      anderes Gerät gesendet werden. Die Sicherstellung der Verfügbarkeit der
+      Netzwerk-Infrastruktur liegt in der Verantwortung des
+      Administrators.</para>
 
       <para>Möglichkeiten wie vor einem Angreifer der auf dem Ethernet-Kabel
       „lauscht“ verborgen werden kann daß überhaupt verschlüsselte Gespräche
@@ -316,7 +318,11 @@
       in einem späteren Projektschritt. SIP-Trunks sind beispielsweise denkbar
       zu einem Telekom-Carrier ins öffentliche Telefonnetz oder zwischen zwei
       Standorten/Organisationen/Firmen. Verfügbarkeit, Vertraulichkeit und
-      Integrität sind hier normalerweise als hoch anzusehen.</para>
+      Integrität sind hier normalerweise als hoch anzusehen. Die
+      Sicherstellung der Verfügbarkeit der Netzwerk-Infrastruktur liegt in der
+      Verantwortung des Administrators. Die TK-Anlage kann jedoch über mehrere
+      SIP-Trunks angebunden werden die so konfiguriert werden können daß sie
+      gegenseitig als Fallback dienen.</para>
     </section>
 
     <section xml:id="schutzbedarf-verbindung-isdn-trunk">
