@@ -21,7 +21,46 @@
   </info>
 
   <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über die
-  grundlegende Funktionsweise von Gemeinschaft4. Um ein sicheres System zu
+  grundlegende Funktionsweise von Gemeinschaft4. Hierfür soll ein
+  Sicherheitskonzept erstellt werden.
+  </para>
+  <para>
+    Das Sicherheitskonzept wird in fünf Phasen erstellt:<itemizedlist>
+    <listitem>
+      <para>
+	Strukturanalyse
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+	Schutzbedarfsfestellung
+      </para>
+    </listitem>
+    <listitem>
+      Modellierung
+    </listitem>
+    <listitem>
+      <para>
+	Basissicherheitscheck
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+	Realisierung
+      </para>
+    </listitem>
+  </itemizedlist>
+  </para>
+
+  <para>
+    Bei dem aktuellen Fortschritt des Gesamtprojektes können lediglich die
+    ersten beiden Phasen der Erstellung des Sicherheitskonzeptes
+    Berücksichtigung finden. Hierzu werden im folgenden diese beiden
+    Phasen genauer betrachtet.
+  </para>
+
+<!-- Comment
+  Um ein sicheres System zu
   bieten gehen wir von folgende Ansätze aus:<itemizedlist>
       <listitem>
         <para>Minimales System. Auf dem System sind nur die wirklich
@@ -58,8 +97,13 @@
   <para>Nachfolgend geben wir einen Überblick über das
   Sicherheitskonzept.</para>
 
+
   <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-komplettsystem.dbk" />
   <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-betriebssystem.dbk" />
   <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-voip.dbk" />
   <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-web-interface.dbk" />
+-->
+  <xi:include href="sicherheitskonzept-sections/strukturanalyse.dbk" />
+  <xi:include href="sicherheitskonzept-sections/schutzbedarfsfestellung.dbk" />
+
 </section>
