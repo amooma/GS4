@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section version="5.0" xml:id="sicherheitskonzept-schutzbedarfsfeststellung" xml:lang="de"
-         xmlns="http://docbook.org/ns/docbook"
+<section version="5.0" xml:id="sicherheitskonzept-schutzbedarfsfeststellung"
+         xml:lang="de" xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:xi="http://www.w3.org/2001/XInclude"
          xmlns:svg="http://www.w3.org/2000/svg"
@@ -21,11 +21,11 @@
   </info>
 
   <para>Ziel der Schutzbedarfsfeststellung ist es, den Schutzbedarf für alle
-  Komponenten des Informationsverbundes, hier der Gemeinschaft 4.0, zu
-  bestimmen. Da eine Quantifizierung des exakten Schutzbedarfs nicht möglich
-  ist, wird lediglich, wie allgemein üblich, eine qualitative Aussage
-  getroffen und der Schutzbedarf in die drei Kategorien normal, mittel und
-  hoch unterschieden.</para>
+  Komponenten des Informationsverbundes, hier Gemeinschaft 4.0, zu bestimmen.
+  Da eine Quantifizierung des exakten Schutzbedarfs nicht möglich ist, wird
+  lediglich, wie allgemein üblich, eine qualitative Aussage getroffen und der
+  Schutzbedarf in die drei Kategorien normal, mittel und hoch
+  unterschieden.</para>
 
   <para>Diese Schutzbedarfskategorien werden in Anlehnung an die Dokumenation
   des BSI wie folgt definiert: <itemizedlist>
@@ -35,18 +35,18 @@
       </listitem>
 
       <listitem>
-        <para>hoch: Die Schadensauswirkungen könnnen beträchtlich sein.</para>
+        <para>hoch: Die Schadensauswirkungen können beträchtlich sein.</para>
       </listitem>
 
       <listitem>
         <para>sehr hoch: Die Schadensauswirkungen können ein existentiell
-        bedrochliches, katastrophales Ausmaß erreichen</para>
+        bedrohliches, katastrophales Ausmaß erreichen.</para>
       </listitem>
     </itemizedlist></para>
 
   <para>Um die Einordnung der Schutzbedarfskategorien zu erleichtern, werden
   im folgenden mehrere typische Schadenszenarien (nach BSI) vorgestellt, die
-  bei der Beurteilung berücksichtigt werden sollten</para>
+  bei der Beurteilung berücksichtigt werden sollten:</para>
 
   <itemizedlist>
     <listitem>
@@ -100,7 +100,7 @@
 
           <entry>normal</entry>
 
-          <entry>nrmal</entry>
+          <entry>normal</entry>
 
           <entry>hoch</entry>
         </row>
@@ -142,7 +142,7 @@
         </row>
 
         <row>
-          <entry>Provision-Server</entry>
+          <entry>Prov.-Server</entry>
 
           <entry>ja</entry>
 
