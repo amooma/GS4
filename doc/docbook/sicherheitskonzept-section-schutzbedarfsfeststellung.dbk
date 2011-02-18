@@ -20,59 +20,54 @@
     </authorgroup>
   </info>
 
-  <para>Ziel der Schutzbedarfsfeststellung ist es, den Schutzbedarf
-  für alle Komponenten des Informationsverbundes, hier der
-  Gemeinschaft 4.0, zu bestimmen. Da eine Quantifizierung des exakten
-  Schutzbedarfs nicht möglich ist, wird lediglich, wie allgemein
-  üblich, eine qualitative Aussage getroffen und der Schutzbedarf in
-  die drei Kategorien normal, mittel und hoch unterschieden.</para>
+  <para>Ziel der Schutzbedarfsfeststellung ist es, den Schutzbedarf für alle
+  Komponenten des Informationsverbundes, hier der Gemeinschaft 4.0, zu
+  bestimmen. Da eine Quantifizierung des exakten Schutzbedarfs nicht möglich
+  ist, wird lediglich, wie allgemein üblich, eine qualitative Aussage
+  getroffen und der Schutzbedarf in die drei Kategorien normal, mittel und
+  hoch unterschieden.</para>
 
-  <para>
-    Diese Schutzbedarfskategorien werden in Anlehnung an die
-    Dokumenation des BSI wie folgt definiert:
-    <itemizedlist>
-    <listitem><para>
-    normal: Die Schadensauswirkungen sind begrenzt und
-    überschaubar.</para></listitem>
-    <listitem><para>
-      hoch: Die Schadensauswirkungen könnnen beträchtlich sein.</para>
-    </listitem>
-    <listitem><para>sehr hoch: Die Schadensauswirkungen können ein
-    existentiell bedrochliches, katastrophales Ausmaß erreichen</para>
-    </listitem>
-    </itemizedlist>
-  </para>
+  <para>Diese Schutzbedarfskategorien werden in Anlehnung an die Dokumenation
+  des BSI wie folgt definiert: <itemizedlist>
+      <listitem>
+        <para>normal: Die Schadensauswirkungen sind begrenzt und
+        überschaubar.</para>
+      </listitem>
 
-  <para>Um die Einordnung der Schutzbedarfskategorien zu erleichtern,
-  werden im folgenden mehrere typische Schadenszenarien (nach BSI) vorgestellt,
-  die bei der Beurteilung berücksichtigt werden sollten
-  </para>
+      <listitem>
+        <para>hoch: Die Schadensauswirkungen könnnen beträchtlich sein.</para>
+      </listitem>
+
+      <listitem>
+        <para>sehr hoch: Die Schadensauswirkungen können ein existentiell
+        bedrochliches, katastrophales Ausmaß erreichen</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Um die Einordnung der Schutzbedarfskategorien zu erleichtern, werden
+  im folgenden mehrere typische Schadenszenarien (nach BSI) vorgestellt, die
+  bei der Beurteilung berücksichtigt werden sollten</para>
+
   <itemizedlist>
     <listitem>
-      <para>
-	Beeinträchtigung des informationellen Selbstbestimmungsrechts
-	und Missbrauch personenbezogener Daten
-      </para>
+      <para>Beeinträchtigung des informationellen Selbstbestimmungsrechts und
+      Missbrauch personenbezogener Daten</para>
     </listitem>
+
     <listitem>
-      <para>
-	Beinträchtigung in der Aufgabenerfüllung
-      </para>
+      <para>Beinträchtigung in der Aufgabenerfüllung</para>
     </listitem>
+
     <listitem>
-      <para>
-	Verstoß gegen Verträge, Vorschriften und Gesetze
-      </para>
+      <para>Verstoß gegen Verträge, Vorschriften und Gesetze</para>
     </listitem>
+
     <listitem>
-      <para>
-	Negative Außenwirkung
-      </para>
+      <para>Negative Außenwirkung</para>
     </listitem>
+
     <listitem>
-      <para>
-	Finanzielle Auswirkungen
-      </para>
+      <para>Finanzielle Auswirkungen</para>
     </listitem>
   </itemizedlist>
 
@@ -81,49 +76,137 @@
 
   <table>
     <title>Schutzbedarf</title>
+
     <tgroup cols="5">
       <thead>
-	<row>
-	  <entry>Komponente</entry><entry>Personenbezogene Daten</entry><entry>Verfügbarkeit</entry><entry>Vertraulichkeit</entry><entry>Integrität</entry>
-	</row>
+        <row>
+          <entry>Komponente</entry>
+
+          <entry>Personenbezogene Daten</entry>
+
+          <entry>Verfügbarkeit</entry>
+
+          <entry>Vertraulichkeit</entry>
+
+          <entry>Integrität</entry>
+        </row>
       </thead>
+
       <tbody>
-	<row>
-	  <entry>Datenbank</entry><entry>ja</entry><entry>normal</entry><entry>nrmal</entry><entry>hoch</entry>
-	</row>
-	<row>
-	  <entry>Gemeinschaft4</entry><entry>nein</entry><entry>normal</entry><entry>normal</entry><entry>normal</entry>
-	</row>
-	<row>
-	  <entry>FreeSwitch</entry><entry>nein</entry><entry>hoch</entry><entry>normal</entry><entry>normal</entry>
-	</row>
-	<row>
-	  <entry>SIP-Proxy</entry><entry>ja</entry><entry>hoch</entry><entry>hoch</entry><entry>normal</entry>
-	</row>
-	<row>
-	  <entry>Provision-Server</entry><entry>ja</entry><entry>normal</entry><entry>normal</entry><entry>normal</entry>
-	</row>
-	<row>
-	  <entry>Webserver</entry><entry>ja</entry><entry>normal</entry><entry>hoch</entry><entry>normal</entry>
-	</row>
-	<row>
-	  <entry>Verbindung Telefone</entry><entry>ja</entry><entry>hoch</entry><entry>hoch</entry><entry>hoch</entry>
-	</row>
-	<row>
-	  <entry>Verbindung SIP-Trunk</entry><entry>ja</entry><entry>hoch</entry><entry>hoch</entry><entry>hoch</entry>
-	</row>
-	<row>
-	  <entry>Verbindung PSTN-Trunk</entry><entry>ja</entry><entry>hoch</entry><entry>hoch</entry><entry>hoch</entry>
-	</row>
+        <row>
+          <entry>Datenbank</entry>
+
+          <entry>ja</entry>
+
+          <entry>normal</entry>
+
+          <entry>nrmal</entry>
+
+          <entry>hoch</entry>
+        </row>
+
+        <row>
+          <entry>Gemeinschaft4</entry>
+
+          <entry>nein</entry>
+
+          <entry>normal</entry>
+
+          <entry>normal</entry>
+
+          <entry>normal</entry>
+        </row>
+
+        <row>
+          <entry>FreeSwitch</entry>
+
+          <entry>nein</entry>
+
+          <entry>hoch</entry>
+
+          <entry>normal</entry>
+
+          <entry>normal</entry>
+        </row>
+
+        <row>
+          <entry>SIP-Proxy</entry>
+
+          <entry>ja</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+
+          <entry>normal</entry>
+        </row>
+
+        <row>
+          <entry>Provision-Server</entry>
+
+          <entry>ja</entry>
+
+          <entry>normal</entry>
+
+          <entry>normal</entry>
+
+          <entry>normal</entry>
+        </row>
+
+        <row>
+          <entry>Webserver</entry>
+
+          <entry>ja</entry>
+
+          <entry>normal</entry>
+
+          <entry>hoch</entry>
+
+          <entry>normal</entry>
+        </row>
+
+        <row>
+          <entry>Verbindung Telefone</entry>
+
+          <entry>ja</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+        </row>
+
+        <row>
+          <entry>Verbindung SIP-Trunk</entry>
+
+          <entry>ja</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+        </row>
+
+        <row>
+          <entry>Verbindung PSTN-Trunk</entry>
+
+          <entry>ja</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+
+          <entry>hoch</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
 
-  <para>
-    Basierend auf dieser ersten Abschätzung erfolgt die weitere
-    Modellierung in der Phase 3 des Sicherheitskonzepts. Dabei ist
-    eine laufende Kontrolle der Ergebnisse der Strukturanalyse und der
-    Schutzbedarfsbestimmung im Projekt erforderlich, da im weiteren
-    Änderungen in der Struktur möglich sind.
-  </para>
+  <para>Basierend auf dieser ersten Abschätzung erfolgt die weitere
+  Modellierung in der Phase 3 des Sicherheitskonzepts. Dabei ist eine laufende
+  Kontrolle der Ergebnisse der Strukturanalyse und der Schutzbedarfsbestimmung
+  im Projekt erforderlich, da im weiteren Änderungen in der Struktur möglich
+  sind.</para>
 </section>
