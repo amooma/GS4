@@ -104,6 +104,6 @@
   <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-web-interface.dbk" />
 -->
   <xi:include href="sicherheitskonzept-sections/strukturanalyse.dbk" />
-  <xi:include href="sicherheitskonzept-sections/schutzbedarfsfestellung.dbk" />
+  <xi:include href="sicherheitskonzept-sections/schutzbedarfsfeststellung.dbk" />
 
 </section>
