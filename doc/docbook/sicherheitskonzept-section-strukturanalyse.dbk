@@ -78,8 +78,30 @@
     </itemizedlist></para>
 
   <para>Auf dem identifizierten IT-System werden mehrere Applikationen für die
-  Telefonanlage betrieben. Die folgende Skizze zeigt ein
-  Single-Server-SiVoIP-System auf Basis von Gemeinschaft 4.0:<mediaobject>
+  Telefonanlage betrieben. Diese sind:<itemizedlist>
+      <listitem>
+        <para>Gemeinschaft-Applikation mit Web-Interface und API</para>
+      </listitem>
+
+      <listitem>
+        <para>Gemeinschaft-Provisioning-Server „Cantina“</para>
+      </listitem>
+
+      <listitem>
+        <para>Datenbank</para>
+      </listitem>
+
+      <listitem>
+        <para>FreeSwitch</para>
+      </listitem>
+
+      <listitem>
+        <para>SIP-Proxy</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Die folgende Skizze zeigt ein Single-Server-SiVoIP-System auf Basis
+  von Gemeinschaft 4.0:<mediaobject>
       <imageobject>
         <imagedata align="center" fileref="sivoip_single_server.png"
                    format="PNG" width="99%"></imagedata>
