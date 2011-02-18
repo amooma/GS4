@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section version="5.0" xml:id="sicherheitskonzept-strukturanalyse" xml:lang="de"
-         xmlns="http://docbook.org/ns/docbook"
+<section version="5.0" xml:id="sicherheitskonzept-strukturanalyse"
+         xml:lang="de" xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:xi="http://www.w3.org/2001/XInclude"
          xmlns:svg="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@
       </listitem>
 
       <listitem>
-        <para>VoIP Telefongeräte</para>
+        <para>VoIP-Telefongeräte</para>
       </listitem>
     </itemizedlist></para>
 
@@ -65,11 +65,11 @@
   Gemeinschaft 4.0 betrieben wird, relevant. Zum aktuellen Zeitpunkt der
   Projektierung werden hier die folgenden Parameter angenommen: <itemizedlist>
       <listitem>
-        <para>Name: Gemeinschaft4Server</para>
+        <para>Name: Gemeinschaft4-Server</para>
       </listitem>
 
       <listitem>
-        <para>Typ: Linux System</para>
+        <para>Typ: Linux-System</para>
       </listitem>
 
       <listitem>
