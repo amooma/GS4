@@ -98,12 +98,12 @@
   Sicherheitskonzept.</para>
 
 
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-komplettsystem.dbk" />
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-betriebssystem.dbk" />
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-voip.dbk" />
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-web-interface.dbk" />
+  <xi:include href="sicherheitskonzept-section-komplettsystem.dbk" />
+  <xi:include href="sicherheitskonzept-section-betriebssystem.dbk" />
+  <xi:include href="sicherheitskonzept-section-voip.dbk" />
+  <xi:include href="sicherheitskonzept-section-web-interface.dbk" />
 -->
-  <xi:include href="sicherheitskonzept-sections/strukturanalyse.dbk" />
-  <xi:include href="sicherheitskonzept-sections/schutzbedarfsfeststellung.dbk" />
+  <xi:include href="sicherheitskonzept-section-strukturanalyse.dbk" />
+  <xi:include href="sicherheitskonzept-section-schutzbedarfsfeststellung.dbk" />
 
 </section>
