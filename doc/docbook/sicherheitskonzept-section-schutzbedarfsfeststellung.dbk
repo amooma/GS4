@@ -137,7 +137,7 @@
           <row>
             <entry>FreeSwitch</entry>
 
-            <entry>nein</entry>
+            <entry>teilweise</entry>
 
             <entry>hoch</entry>
 
@@ -149,7 +149,7 @@
           <row>
             <entry>SIP-Proxy</entry>
 
-            <entry>nein</entry>
+            <entry>teilweise</entry>
 
             <entry>hoch</entry>
 
@@ -161,7 +161,7 @@
           <row>
             <entry>Prov.-Server</entry>
 
-            <entry>nein</entry>
+            <entry>teilweise</entry>
 
             <entry>normal</entry>
 
@@ -173,7 +173,7 @@
           <row>
             <entry>Verbindung Telefone</entry>
 
-            <entry>ja</entry>
+            <entry>teilweise</entry>
 
             <entry>hoch</entry>
 
@@ -185,7 +185,7 @@
           <row>
             <entry>Verbindung SIP-Trunk</entry>
 
-            <entry>ja</entry>
+            <entry>teilweise</entry>
 
             <entry>hoch</entry>
 
@@ -195,9 +195,9 @@
           </row>
 
           <row>
-            <entry>Verbindung PSTN-Trunk</entry>
+            <entry>Verbindung ISDN-Trunk</entry>
 
-            <entry>ja</entry>
+            <entry>teilweise</entry>
 
             <entry>hoch</entry>
 
@@ -215,17 +215,19 @@
     <section xml:id="schutzbedarf-datenbank">
       <title>Datenbank</title>
 
-      <para>Die Datenbank enthält personenbezogene Daten (Namen, Anruflisten).
-      Ohne sie wäre keine Provisionierung der Endgeräte mehr möglich, jedoch
-      noch eine eingeschränkte Telefonie im Notbetrieb. Den Schutzbedarf der
-      Integrität der Datenbank erachten wir als hoch. Die Liste der Personen
-      und die Liste der Endgeräte sind üblicherweise recht leicht
-      wiederherzustellen (aus LDAP oder einer anderen Datenbank der
-      Organisation). Ein Ausfall der Anruflisten, der von Benutzern definierte
-      Tastenfunktionen auf den Telefonen, der gesetzte Rufumleitungen sind
-      typischerweise nicht kritisch, können aber von einigen Organisationen
-      bzw. je nach Einsatz-Szenario als relevant bewertet werden. Hier wäre
-      dann entsprechend vom Administrator ein ein- oder besser mehrstufiges
+      <para>Das Datenbank-Management-System (DBMS) ist aus öffentlichen
+      Quellen wiederherstellbar. Die vom DBMS verwaltete Datenbank enthält
+      personenbezogene Daten (Namen, Anruflisten). Ohne sie wäre keine
+      Provisionierung der Endgeräte mehr möglich, jedoch noch eine
+      eingeschränkte Telefonie im Notbetrieb. Den Schutzbedarf der Integrität
+      der Datenbank erachten wir als hoch. Die Liste der Personen und die
+      Liste der Endgeräte sind üblicherweise recht leicht wiederherzustellen
+      (aus LDAP oder einer anderen Datenbank der Organisation). Ein Ausfall
+      der Anruflisten, der von Benutzern definierte Tastenfunktionen auf den
+      Telefonen, der gesetzte Rufumleitungen sind typischerweise nicht
+      kritisch, können aber von einigen Organisationen bzw. je nach
+      Einsatz-Szenario als relevant bewertet werden. Hier wäre dann
+      entsprechend vom Administrator ein ein- oder besser mehrstufiges
       Backup-Konzept anzuwenden. Die Backups sollten verschlüsselt sein, denn
       beispielsweise die Anruflisten können sensible Informationen
       enthalten.</para>
@@ -236,12 +238,31 @@
 
       <para>Die Applikationslogik von Gemeinschaft4 und die Web-Schnittstellen
       speichern selbst keine personenbezogene Daten (diese liegen in der
-      Datenbank, die separat betrachtet wird). Ohne Gemeinschaft wäre noch
+      Datenbank, die separat betrachtet wird). Ohne Gemeinschaft4 wäre noch
       eine eingeschränkte Telefone im Notbetrieb möglich. Die Software ist aus
       öffentlichen Quellen wiederherstellbar. Da über die Schnittstellen von
       Gemeinschaft4 (HTTPS) potenziell sensible Daten übertragen werden
       sollten diese Schnittstellen bzw. die Übertragungstrecke nach dem
-      derzeitigen Stand der Technik geschützt werden.</para>
+      derzeitigen Stand der Technik geschützt werden. Ohne Gemeinschaft4 wäre
+      eine Benutzeradministration über das Web-Interface bzw. die XML-API
+      nicht mehr möglich. Nach unserer Erwartung stellt der Umstand daß
+      während eines angenommenen Ausfalls des Benutzer-Managements keine neuen
+      Benutzer angelegt/geändert werden können jedoch eher eine untergeordnete
+      Rolle.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-provisioning-server">
+      <title>Provisioning-Server</title>
+
+      <para>Der Provisioning-Server („Cantina“) dient der Konfiguration der
+      Telefone. Bei einem Ausfall würden die Telefone ihre derzeitige
+      Konfiguration beibehalten, Änderungen könnten nicht mehr automatisiert
+      sondern nur noch manuell vorgenommen werden. Nach unserer Erwartung
+      würde ein vorübergehender Ausfall in den meisten Fällen kein Problem
+      darstellen, da mit den Geräten in ihrer derzeitigen Konfiguration
+      weiterhin telefoniert werden kann. Die Software ist aus öffentlichen
+      Quellen wiederherstellbar. Im weiteren Projekt sind hier noch
+      Anpassungen der Betrachtung der Schutzwürdigkeit erforderlich.</para>
     </section>
 
     <section xml:id="schutzbedarf-sip-proxy">
@@ -254,7 +275,59 @@
       Schutzbedarf der Verfügbarkeit erachten wir als hoch, denn ohne den
       SIP-Proxy ist in aller Regel keine Telefonie mehr möglich. Der SIP-Proxy
       sieht (zwecks Routing) als potenziell sensibel einzustufende
-      Informationen über die SIP-Topologie.</para>
+      Informationen über die SIP-Topologie. Die Software ist aus öffentlichen
+      Quellen wiederherstellbar.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-freeswitch">
+      <title>FreeSwitch</title>
+
+      <para>FreeSwitch kommt als B2BUA für TK-Anlagen-Funktionen zum Einsatz.
+      Die Software ist aus öffentlichen Quellen wiederherstellbar. Der
+      Schutzbedarf im Hinblick auf die Verfügbarkeit ist hier als etwas
+      weniger hoch als beim SIP-Proxy anzusehen, da ohne FreeSwitch zumindest
+      noch in einem Notbetrieb telefoniert werden kann. Hier ist im weiteren
+      Projekt noch eine nähere Betrachtung erforderlich.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-verbindung-telefone">
+      <title>Verbindung Telefone</title>
+
+      <para>Die Anbindung der Telefone an den SIP-Proxy und an den
+      Provisioning-Server erfolgt über das lokale Ethernet-Netzwerk (LAN). Der
+      Schutzbedarf der Verfügbarkeit, Vertraulichkeit und Integrität ist als
+      hoch anzusiedeln. Bei einem Ausfall der LAN-Verbindung ist keine
+      Telefonie mehr möglich. Sowohl zum SIP-Proxy als auch zum
+      Provisioning-Server sollen Übertragungen vertraulich erfolgen als auch
+      die Integrität sichergestellt sein. Es ist entscheidend ein Endgerät
+      bzw. einen SIP-Account eindeutig identifizieren zu können, damit
+      beispielsweise bei der Provisionierung sensible Daten nicht an ein
+      anderes Gerät gesendet werden.</para>
+
+      <para>Möglichkeiten wie vor einem Angreifer der auf dem Ethernet-Kabel
+      „lauscht“ verborgen werden kann daß überhaupt verschlüsselte Gespräche
+      stattfinden werden hier nicht betrachtet.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-verbindung-sip-trunk">
+      <title>Verbindung SIP-Trunk</title>
+
+      <para>Die Möglichkeit der Anbindung der TK-Anlage an SIP-Trunks erfolgt
+      in einem späteren Projektschritt. SIP-Trunks sind beispielsweise denkbar
+      zu einem Telekom-Carrier ins öffentliche Telefonnetz oder zwischen zwei
+      Standorten/Organisationen/Firmen. Verfügbarkeit, Vertraulichkeit und
+      Integrität sind hier normalerweise als hoch anzusehen.</para>
+    </section>
+
+    <section xml:id="schutzbedarf-verbindung-isdn-trunk">
+      <title>Verbindung ISDN-Trunk</title>
+
+      <para>Der Schutzbedarf eines ISDN-Anschlusses über ein Media-Gateway
+      wird in diesem Projektschritt noch nicht näher betrachtet. Er entspricht
+      voraussichtlich in etwa dem eines SIP-Trunks. Unter Umständen können
+      hier verschlüsselte Verbindungen zum Einsatz kommen, die allerdings das
+      Vorhandensein spezieller Hardware (oder Software) auf beiden Seiten
+      erforderlich machen.</para>
     </section>
 
     <section xml:id="schutzbedarf-anpassungen">
