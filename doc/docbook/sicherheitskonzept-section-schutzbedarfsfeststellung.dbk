@@ -270,7 +270,7 @@
 
       <para>Der SIP-Proxy Kamailio speichert selbst keine direkten
       personenbezogenen Daten. Er agiert anhand der in der Datenbank
-      hinterlegten SIP-Accounts. Ja nach Konfiguration könnten jedoch die
+      hinterlegten SIP-Accounts. Je nach Konfiguration könnten jedoch die
       SIP-Accounts Rückschlüsse auf bestimmte Personen ermöglichen. Den
       Schutzbedarf der Verfügbarkeit erachten wir als hoch, denn ohne den
       SIP-Proxy ist in aller Regel keine Telefonie mehr möglich. Der SIP-Proxy
