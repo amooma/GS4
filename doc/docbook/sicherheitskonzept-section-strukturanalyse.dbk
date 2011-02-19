@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section version="5.0" xml:id="sicherheitskonzept-strukturanalyse"
+         xml:lang="de" xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Strukturanalyse Gemeinschaft 4.0</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Die Strukturanalyse erfasst den Informationsverbund vollständig und
+  ermittelt alle beteiligten Komponenten. Hierzu gehören die
+  Netzwerkverbindungen, die IT-Systeme und die Anwendungen und Daten.</para>
+
+  <para>Gemeinschaft 4.0 ist modular aufgebaut. Die einzelnen Applikationen
+  können auf einem einzigen IT-System betrieben werden. In dieser Form sind
+  keine Netzverbindungen innerhalb des Verbundes erforderlich. Für eine
+  mögliche Skalierung sieht Gemeinschaft 4.0 aber auch die Verteilung der
+  Applikation auf mehrere IT-Systeme und die Trennung einzelner
+  Applikationsbestandteile vor.</para>
+
+  <para>Für die Strukturanalyse ist eine Analyse der folgenden Daten
+  erforderlich <itemizedlist>
+      <listitem>
+        <para>Netzplan</para>
+      </listitem>
+
+      <listitem>
+        <para>IT-Systeme</para>
+      </listitem>
+
+      <listitem>
+        <para>Anwendungen</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Der Netzplan für die Gemeinschaft 4.0 ist sehr einfach aufgebaut und
+  stellt die Verbindungen mit der Außenwelt und den Telefonen dar. Hier werden
+  die folgenden Systeme erkannt: <itemizedlist>
+      <listitem>
+        <para>Gemeinschaft 4.0 Telefonanlage</para>
+      </listitem>
+
+      <listitem>
+        <para>VoIP-Telefongeräte</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Die Telefongeräte sind nicht Bestandteil der Gemeinschaft 4.0. Daher
+  werden diese im weiteren nicht betrachtet.</para>
+
+  <para>Für die Erfassung der IT-Systeme ist somit nur das System, auf dem die
+  Gemeinschaft 4.0 betrieben wird, relevant. Zum aktuellen Zeitpunkt der
+  Projektierung werden hier die folgenden Parameter angenommen: <itemizedlist>
+      <listitem>
+        <para>Name: Gemeinschaft4-Server</para>
+      </listitem>
+
+      <listitem>
+        <para>Typ: Linux-System</para>
+      </listitem>
+
+      <listitem>
+        <para>Standort: Abgeschlossener Serverraum</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Auf dem identifizierten IT-System werden mehrere Applikationen für die
+  Telefonanlage betrieben. Diese sind:<itemizedlist>
+      <listitem>
+        <para>Gemeinschaft-Applikation mit Web-Interface und API</para>
+      </listitem>
+
+      <listitem>
+        <para>Gemeinschaft-Provisioning-Server „Cantina“</para>
+      </listitem>
+
+      <listitem>
+        <para>Datenbank</para>
+      </listitem>
+
+      <listitem>
+        <para>FreeSwitch</para>
+      </listitem>
+
+      <listitem>
+        <para>SIP-Proxy</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <para>Die folgende Skizze zeigt ein Single-Server-SiVoIP-System auf Basis
+  von Gemeinschaft 4.0:<mediaobject>
+      <imageobject>
+        <imagedata align="center" fileref="sivoip_single_server.png"
+                   format="PNG" width="99%"></imagedata>
+      </imageobject>
+    </mediaobject></para>
+
+  <para>Die einzelnen Komponenten und die genutzten Kommunikationswege werden
+  im folgenden erläutert:</para>
+
+  <orderedlist>
+    <listitem>
+      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
+      nicht direkt auf Free&#8203;SWITCH oder die Datenbank zugreifen.
+      Sämtliche Kommunikation geschieht über einen RESTful
+      HTTP(S)-Aufruf.</para>
+    </listitem>
+
+    <listitem>
+      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
+      nicht direkt auf Free&#8203;SWITCH oder die Datenbank zugreifen.
+      Sämtliche Kommunikation geschieht über einen RESTful
+      HTTP(S)-Aufruf.</para>
+    </listitem>
+
+    <listitem>
+      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
+      nicht direkt auf Free&#8203;SWITCH oder die Datenbank zugreifen.
+      Sämtliche Kommunikation geschieht über einen RESTful
+      HTTP(S)-Aufruf.</para>
+    </listitem>
+
+    <listitem>
+      <para>Die Kommunikation zwischen dem Kern von Gemeinschafts und der
+      Datenbank erfolgt per SQL. Durch die Verwendung von Active-Record als
+      Bibliothek wird sichergestellt, dass nur valides SQL benutzt wird und
+      die Datenbank bei Bedarf gegen eine andere SQL-Datenbank ausgetauscht
+      werden kann.</para>
+    </listitem>
+
+    <listitem>
+      <para>Die Kommunikation zwischen Free&#8203;SWITCH und dem Kern von
+      Gemeinschaft 4.0 erfolgt über eine REST&#8203;ful
+      HTTP(S)-Schnittstelle.</para>
+    </listitem>
+
+    <listitem>
+      <para>Die Kommunikation zwischen Free&#8203;SWITCH und jedem
+      vorgeschalteten VoIP-Proxy erfolgt über das entsprechende
+      Protokoll.</para>
+    </listitem>
+
+    <listitem>
+      <para>Die Kommunikation zwischen Free&#8203;SWITCH und dem Kamailio
+      SIP-Proxy erfolgt per SIP:</para>
+    </listitem>
+
+    <listitem>
+      <para>Jeder Proxy speichert und liest Daten aus der Datenbank per
+      SQL.</para>
+    </listitem>
+
+    <listitem>
+      <para>Der SIP-Proxy (Kamailio) speichert und liest Daten aus der
+      Datenbank per SQL.</para>
+    </listitem>
+
+    <listitem>
+      <para>Die Kommunikation vom xyz-Proxy mit dem PSTN-Netz oder
+      xyz-Telefonen erfolgt über das xyz-Protokoll. xyz steht hier
+      exemplarisch für alle zukünfigten VoIP-Protokolle.</para>
+    </listitem>
+
+    <listitem>
+      <para>Der SIP-Proxy (Kamailio) spricht per SIP mit dem PSTN (dem
+      Festnetz).</para>
+    </listitem>
+
+    <listitem>
+      <para>Der SIP-Proxy (Kamailio) spricht per SIP mit den Telefonen.</para>
+    </listitem>
+
+    <listitem>
+      <para>Der Provisioning-Server spricht per HTTP(S) oder SFTP mit den
+      Telefonen.</para>
+    </listitem>
+
+    <listitem>
+      <para>Der Web-Browser spricht per HTTP(S) mit dem Web-Server von
+      SiVoIP.</para>
+    </listitem>
+
+    <listitem>
+      <para>Der Administrator kann sich bei entsprechender Konfiguration per
+      SSH auf dem System anmelden, um dort mit den Admin-Skripten zu
+      arbeiten.</para>
+    </listitem>
+  </orderedlist>
+
+  <para>Grundlage des Design, ist die Abgrenzung der einzelnen Komponenten
+  untereinander. Für die Kommunikation wird eine einheitliche API angeboten
+  und genutzt. Dies erlaubt die Erzeugung automatischer Tests für die
+  Funktionsprüfung der einzelnen Module. Dies garantiert Zukunftsicherheit und
+  die einfache Integration weiterer Funktionen.</para>
+</section>

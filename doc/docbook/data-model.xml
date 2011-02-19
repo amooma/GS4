@@ -161,8 +161,7 @@
     (<foreignphrase xml:lang="en">users</foreignphrase>). Diese Tabelle wird
     vom Authentifizierungssystem „<foreignphrase
     xml:lang="en">Devise</foreignphrase>“ in Kombination mit „<foreignphrase
-    xml:lang="en">OmniAuth</foreignphrase>“ verwendet (siehe <xref
-    linkend="sicherheitskonzept-web-interface-authentifizierung" />).</para>
+    xml:lang="en">OmniAuth</foreignphrase>“ verwendet.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -329,8 +328,7 @@
     xml:lang="en">users</foreignphrase>), die jeweils ein oder mehrere
     SIP-Konten (<foreignphrase xml:lang="en">SIP accounts</foreignphrase>)
     haben. Diese Tabelle wird vom Authentifizierungssystem „<foreignphrase
-    xml:lang="en">Devise</foreignphrase>“ verwendet (siehe <xref
-    linkend="sicherheitskonzept-web-interface-authentifizierung" />).</para>
+    xml:lang="en">Devise</foreignphrase>“ verwendet.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>

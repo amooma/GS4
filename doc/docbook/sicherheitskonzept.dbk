@@ -21,45 +21,37 @@
   </info>
 
   <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über die
-  grundlegende Funktionsweise von Gemeinschaft4. Um ein sicheres System zu
-  bieten gehen wir von folgende Ansätze aus:<itemizedlist>
+  grundlegende Funktionsweise von Gemeinschaft4. Hierfür soll ein
+  Sicherheitskonzept erstellt werden.</para>
+
+  <para>Das Sicherheitskonzept wird in fünf Phasen erstellt:<itemizedlist>
       <listitem>
-        <para>Minimales System. Auf dem System sind nur die wirklich
-        benötigten Pakete installiert, denn jegliche zusätzliche Software
-        birgt auch potenzielle Fehler und kann u.U. einem Eindringling
-        hilfreich sein, beispielsweise Compiler auf dem System.</para>
+        <para>Strukturanalyse</para>
       </listitem>
 
       <listitem>
-        <para>Verschlüsseltes Dateisystem. Gemeinschaft4 kann auf einem
-        normalen Debian Linux installiert werden, die Standard-Variante ist
-        jedoch ein unveränderbares Live-CD-System das sensible Daten auf einem
-        verschlüsselten Dateisystem auf einem USB-Stick oder einer Festplatte
-        speichert.</para>
+        <para>Schutzbedarfsfestellung</para>
       </listitem>
 
       <listitem>
-        <para>Firewall. Es muß damit gerechnet werden daß ein Administrator
-        die TK-Anlage im Extremfall direkt ins Internet hängt, daher muß die
-        Anlage entsprechend abgesichert sein und eine eigene Firewall
-        mitbringen. Zur Verwaltung der IPTables-Regeln kommt Shorewall zum
-        Einsatz (siehe auch <xref linkend="sicherheitskonzept-shorewall" />).
-        Damit werden nur die wirklich benötigten Ports und Protokolle
-        freigegeben.</para>
+        <para>Modellierung</para>
       </listitem>
 
       <listitem>
-        <para>In der Standard-Installation sind keine Dienste enthalten nur
-        weil sie praktisch sind. Wenn der Administrator SSH benötigt so muß er
-        sich bewußt dafür entscheiden.</para>
+        <para>Basissicherheitscheck</para>
+      </listitem>
+
+      <listitem>
+        <para>Realisierung</para>
       </listitem>
     </itemizedlist></para>
 
-  <para>Nachfolgend geben wir einen Überblick über das
-  Sicherheitskonzept.</para>
+  <para>Bei dem aktuellen Fortschritt des Gesamtprojektes können lediglich die
+  ersten beiden Phasen der Erstellung des Sicherheitskonzeptes
+  Berücksichtigung finden. Hierzu werden im folgenden diese beiden Phasen
+  genauer betrachtet.</para>
 
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-komplettsystem.dbk" />
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-betriebssystem.dbk" />
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-voip.dbk" />
-  <xi:include href="sicherheitskonzept-sections/sicherheitskonzept-web-interface.dbk" />
+  <xi:include href="sicherheitskonzept-section-strukturanalyse.dbk" />
+
+  <xi:include href="sicherheitskonzept-section-schutzbedarfsfeststellung.dbk" />
 </section>
