@@ -23,14 +23,12 @@ Usermanager::Application.routes.draw do
 	resources :sip_proxies
 	
 	resources :extensions
-	resources :pages_admin, :as => :admin, :controller => :admin
+	resources :admin
 	resources :kamailio, :only => [:index ], :format => 'txt'
 	namespace :admin do
 		
 		resources :user
 		resources :setup
-		match '' => "pages_admin#index"
-		
 	end
 	
 	# The priority is based upon order of creation:
