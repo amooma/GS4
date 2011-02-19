@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of(:username, :message => "username needed")
   validates_uniqueness_of(:username, :message => "username already taken")
-  # TODO Validations
-  # TODO Tests
-  #TODO Create Method and View to create new users
+ 
+  # TODO Validattion for username rest is validated (:validatable)
+  
 end

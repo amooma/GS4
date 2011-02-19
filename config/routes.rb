@@ -7,7 +7,7 @@ Usermanager::Application.routes.draw do
   get "setup/new"
 
 	match '/auth/:provider/callback' => 'authentications#create'  
-	resources :authentications
+	resources :authentications, :only => [ :index, :create, :destroy ]
 	
 	devise_for :users
 	
@@ -23,15 +23,13 @@ Usermanager::Application.routes.draw do
 	resources :sip_proxies
 	
 	resources :extensions
-	
+	resources :pages_admin, :as => :admin, :controller => :admin
 	resources :kamailio, :only => [:index ], :format => 'txt'
 	namespace :admin do
 		
 		resources :user
 		resources :setup
-		#match '' => "admin#index"
 		match '' => "pages_admin#index"
-		#root :to => 'pages_admin#index'
 		
 	end
 	

@@ -24,7 +24,6 @@ class SipAccount < ActiveRecord::Base
   belongs_to :sip_phone  , :validate => true
   belongs_to :extension  , :validate => true
   belongs_to :user      
-  
   #validates_presence_of :sip_phone_id
   
   
@@ -316,7 +315,6 @@ class SipAccount < ActiveRecord::Base
         if cantina_sip_account.registrar .to_s == self.sip_server .to_s \
           && cantina_sip_account.auth_user      .to_s == self.auth_name   .to_s
           logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
-          return cantina_sip_account
           break
         end
       }

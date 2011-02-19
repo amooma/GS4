@@ -15,8 +15,6 @@
     <td><%= authentication.user_id %></td>
     <td><%= authentication.provider %></td>
     <td><%= authentication.uid %></td>
-    <td><%= link_to 'Show', authentication %></td>
-    <td><%= link_to 'Edit', edit_authentication_path(authentication) %></td>
     <td><%= link_to 'Destroy', authentication, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -24,4 +22,3 @@
 
 <br />
 
-<%= link_to 'New Authentication', new_authentication_path %>
