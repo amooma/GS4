@@ -25,17 +25,21 @@ class SipAccount < ActiveRecord::Base
   belongs_to :extension  , :validate => true
   validates_uniqueness_of :auth_name, :scope => :sip_server_id
   validates_presence_of :sip_server_id
+  validates_presence_of :phone_number
+  validates_numericality_of :phone_number
+  
   belongs_to :user      
-  #validates_presence_of :sip_phone_id
   
   
+  # TODO Why is validation needed here again? FIXME!
   after_validation( :on => :create) do
     if ! sip_phone_id.nil?
       prov_srv_sip_account_create
     end
-    if ! sip_server_id.nil?
+    if ! sip_server_id.nil? && ! self.phone_number.nil?
         if !self.sip_server.config_port.nil?
             create_user_on_sipproxy(sip_server_id)
+            create_alias_on_sipproxy(sip_server_id, auth_name, phone_number)
         end
     end
   end
@@ -47,17 +51,20 @@ class SipAccount < ActiveRecord::Base
                                                    && sip_phone_id != sip_phone_id_was))
       delete_last_cantina_account
     end
-    if ((self.auth_name_was != self.auth_name_was) || (self.password != self.password_was) && self.sip_server.config_port != nil)
-        update_user_on_sipproxy(self.sip_server_id)
+    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id = self.sip_server_id_was && self.sip_server.config_port != nil)
+        update_user_on_sipproxy(sip_server_id, auth_name_was )
+    end
+    if self.sip_server_id != self.sip_server_id_was && ! self.sip_server.config_port.nil?
+        destroy_user_on_sipproxy(sip_server_id_was, auth_name_was )
     end
   end
   before_destroy do
     if ! sip_phone_id.nil?
-    prov_srv_sip_account_destroy
+    prov_srv_sip_account_destroy(sip_server_id_was)
     end
     if !sip_server_id.nil?
         if ! self.sip_server.config_port.nil?
-            destroy_user_on_sipproxy(sip_server_id )
+            destroy_user_on_sipproxy(sip_server_id_was, auth_name_was )
         end
     end
   end
@@ -197,6 +204,7 @@ class SipAccount < ActiveRecord::Base
         CantinaSipAccount.set_resource( cantina_resource )
         cantina_sip_accounts = CantinaSipAccount.all()
         # GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
+        # FIXME see sipproxy API
         if cantina_sip_accounts
           cantina_sip_accounts.each { |cantina_sip_account|
             if cantina_sip_account.registrar .to_s == sip_server .to_s \
@@ -368,7 +376,7 @@ class SipAccount < ActiveRecord::Base
   
   # destroy user on sipproxy
   
-  def destroy_user_on_sipproxy(p_id)
+  def destroy_user_on_sipproxy(p_id, p_authname)
     begin
       server = SipServer.find(p_id)
       if server.config_port.nil? 
@@ -376,8 +384,7 @@ class SipAccount < ActiveRecord::Base
           return false
           else
           SipproxySubscriber.set_resource("http://#{server.name}:#{server.config_port}")
-            subscriber_id = get_sipproxy_subscriber_id_by_username(self.auth_name)   
-            destroy_subscriber = SipproxySubscriber.find(subscriber_id)
+            destroy_subscriber = SipproxySubscriber.find( :first, :params => {'username'=> "#{p_authname}"} )
           if ! destroy_subscriber.destroy
             errors.add( :base, "Failed to destroy user account on sipproxy provisioning server. (Reason:\n" +
       get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
@@ -394,21 +401,21 @@ class SipAccount < ActiveRecord::Base
     end
   end
   
-  def update_user_on_sipproxy(p_id)
+  def update_user_on_sipproxy(p_id, p_authname)
       server = SipServer.find(p_id)
       if server.config_port.nil?
           # TODO errormessage
           return false
           else
           SipproxySubscriber.set_resource("http://#{server.name}:#{server.config_port}")
-            get_sipproxy_subscriber_id_by_username(self.auth_name_was)
-          sipproxy_subscriber = SipproxySubscriber.update_attributes(
+            update_subscriber = SipproxySubscriber.find( :first, :params => {'username'=> "#{p_authname}"} )
+          sipproxy_subscriber = update_subscriber.update_attributes(
             :username       =>  self.auth_name,
             :domain         =>  self.sip_server.name,
             :password       =>  self.password
             #:ha1            =>  Digest::MD5.hexdigest("#{self.auth_name}:#{self.realm}:#{self.password}")
           )
-          if ! sipproxy_subscriber.valid?
+          if ! sipproxy_subscriber
             errors.add( :base, "Failed to create user account on sipproxy provisioning server. (Reason:\n" +
       get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
 				")" )
@@ -417,10 +424,27 @@ class SipAccount < ActiveRecord::Base
       end  
   end
   
-  
-  
-  def get_sipproxy_subscriber_id_by_username(auth_name)
-          SipproxySubscriber.find( :all, :params => {'username'=> "#{auth_name}"} ).collect {|a| a.id} .to_param
+  # create alias on sipproxy
+  def create_alias_on_sipproxy(p_id, p_name, p_alias)
+      server = SipServer.find(p_id)
+      if server.config_port.nil?
+          # TODO errormessage
+          return false
+          else
+          SipproxyDbalias.set_resource("http://#{server.name}:#{server.config_port}")
+          sipproxy_dbalias = SipproxyDbalias.create(
+            :username       =>  self.auth_name,
+            :domain         =>  self.sip_server.name,
+            :alias_username =>  p_alias,
+            :alias_domain   =>  self.sip_server.name
+          )
+          if ! sipproxy_dbalias.valid?
+            errors.add( :base, "Failed to create alias on sipproxy provisioning server. (Reason:\n" +
+      get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
+				")" )
+          
+          end
+      end  
   end
 
   # Log validation errors from the remote model.
