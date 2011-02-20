@@ -4,5 +4,6 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .project
+*.komodoproject
 .tmp*~
 ERD.pdf

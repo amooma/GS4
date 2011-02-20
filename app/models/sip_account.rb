@@ -23,6 +23,8 @@ class SipAccount < ActiveRecord::Base
   belongs_to :sip_proxy  , :validate => true
   belongs_to :sip_phone  , :validate => true
   belongs_to :extension  , :validate => true
+  validates_uniqueness_of :auth_name, :scope => :sip_server_id
+  validates_presence_of :sip_server_id
   belongs_to :user      
   #validates_presence_of :sip_phone_id
   
@@ -31,20 +33,33 @@ class SipAccount < ActiveRecord::Base
     if ! sip_phone_id.nil?
       prov_srv_sip_account_create
     end
+    if ! sip_server_id.nil?
+        if !self.sip_server.config_port.nil?
+            create_user_on_sipproxy(sip_server_id)
+        end
+    end
   end
   after_validation( :on => :update) do
     if ! sip_phone_id.nil?
       prov_srv_sip_account_update 
     end
-    if ((self.auth_name != self.auth_name_was) || (sip_phone_id_was != nil \
+    if ((self.auth_name != self.auth_name_was && sip_phone_id_was != nil ) || (sip_phone_id_was != nil \
                                                    && sip_phone_id != sip_phone_id_was))
       delete_last_cantina_account
+    end
+    if ((self.auth_name_was != self.auth_name_was) || (self.password != self.password_was) && self.sip_server.config_port != nil)
+        update_user_on_sipproxy(self.sip_server_id)
     end
   end
   before_destroy do
     if ! sip_phone_id.nil?
     prov_srv_sip_account_destroy
-      end
+    end
+    if !sip_server_id.nil?
+        if ! self.sip_server.config_port.nil?
+            destroy_user_on_sipproxy(sip_server_id )
+        end
+    end
   end
   
   
@@ -320,9 +335,94 @@ class SipAccount < ActiveRecord::Base
       }
     end
     delete_c_account = found_c_accounts.collect {|a| a.id}.to_enum.first
-    CantinaSipAccount.find(delete_c_account).destroy
+    if ! CantinaSipAccount.find(delete_c_account).destroy
+       errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+        get_active_record_errors_from_remote( delete_c_account ).join(",\n") +
+						")" )
+    end
   end
   
+  # create user on sipproxy
+  
+  def create_user_on_sipproxy(p_id)
+      server = SipServer.find(p_id)
+      if server.config_port.nil?
+          # TODO errormessage
+          return false
+          else
+          SipproxySubscriber.set_resource("http://#{server.name}:#{server.config_port}")
+          sipproxy_subscriber = SipproxySubscriber.create(
+            :username       =>  self.auth_name,
+            :domain         =>  self.sip_server.name,
+            :password       =>  self.password
+            #:ha1            =>  Digest::MD5.hexdigest("#{self.auth_name}:#{self.realm}:#{self.password}")
+          )
+          if ! sipproxy_subscriber.valid?
+            errors.add( :base, "Failed to create user account on sipproxy provisioning server. (Reason:\n" +
+      get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
+				")" )
+          
+          end
+      end  
+  end
+  
+  # destroy user on sipproxy
+  
+  def destroy_user_on_sipproxy(p_id)
+    begin
+      server = SipServer.find(p_id)
+      if server.config_port.nil? 
+          # TODO errormessage
+          return false
+          else
+          SipproxySubscriber.set_resource("http://#{server.name}:#{server.config_port}")
+            subscriber_id = get_sipproxy_subscriber_id_by_username(self.auth_name)   
+            destroy_subscriber = SipproxySubscriber.find(subscriber_id)
+          if ! destroy_subscriber.destroy
+            errors.add( :base, "Failed to destroy user account on sipproxy provisioning server. (Reason:\n" +
+      get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
+				")" )
+          # TODO error message
+          else
+              return true
+          end
+      end
+    rescue Errno::ECONNREFUSED => e
+        logger.warn "Failed to connect to sipproxy server server. (#{e.class}, #{e.message})"
+        errors.add( :base, "Failed to connect to sipproxy server." )
+        return false
+    end
+  end
+  
+  def update_user_on_sipproxy(p_id)
+      server = SipServer.find(p_id)
+      if server.config_port.nil?
+          # TODO errormessage
+          return false
+          else
+          SipproxySubscriber.set_resource("http://#{server.name}:#{server.config_port}")
+            get_sipproxy_subscriber_id_by_username(self.auth_name_was)
+          sipproxy_subscriber = SipproxySubscriber.update_attributes(
+            :username       =>  self.auth_name,
+            :domain         =>  self.sip_server.name,
+            :password       =>  self.password
+            #:ha1            =>  Digest::MD5.hexdigest("#{self.auth_name}:#{self.realm}:#{self.password}")
+          )
+          if ! sipproxy_subscriber.valid?
+            errors.add( :base, "Failed to create user account on sipproxy provisioning server. (Reason:\n" +
+      get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
+				")" )
+          
+          end
+      end  
+  end
+  
+  
+  
+  def get_sipproxy_subscriber_id_by_username(auth_name)
+          SipproxySubscriber.find( :all, :params => {'username'=> "#{auth_name}"} ).collect {|a| a.id} .to_param
+  end
+
   # Log validation errors from the remote model.
   #
   def log_active_record_errors_from_remote( ar )

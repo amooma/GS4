@@ -50,7 +50,6 @@ gem "bcrypt-ruby", :require => "bcrypt"
 #   aptitude install libxml2 libxslt1.1
 gem "omniauth"
 
-
 # Use unicorn as the web server
 # gem 'unicorn'
 
