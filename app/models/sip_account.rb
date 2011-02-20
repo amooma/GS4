@@ -39,10 +39,12 @@ class SipAccount < ActiveRecord::Base
     if ! sip_server_id.nil? && ! self.phone_number.nil?
         if !self.sip_server.config_port.nil?
             create_user_on_sipproxy(sip_server_id)
-            create_alias_on_sipproxy(sip_server_id, auth_name, phone_number)
+            create_alias_on_sipproxy(sip_server_id)
         end
     end
   end
+
+
   after_validation( :on => :update) do
     if ! sip_phone_id.nil?
       prov_srv_sip_account_update 
@@ -57,14 +59,21 @@ class SipAccount < ActiveRecord::Base
     if self.sip_server_id != self.sip_server_id_was && ! self.sip_server.config_port.nil?
         destroy_user_on_sipproxy(sip_server_id_was, auth_name_was )
     end
+    if ((self.sip_server_id_was == self.sip_server_id) && \
+        ((self.auth_name != self.auth_name_was) || (self.phone_number != self.phone_number_was)))
+        update_alias_on_sipproxy(self.sip_server_id, self.auth_name_was, self.phone_number_was)
+    end
   end
+
+
   before_destroy do
     if ! sip_phone_id.nil?
     prov_srv_sip_account_destroy(sip_server_id_was)
     end
     if !sip_server_id.nil?
         if ! self.sip_server.config_port.nil?
-            destroy_user_on_sipproxy(sip_server_id_was, auth_name_was )
+            destroy_user_on_sipproxy(self.sip_server_id_was, self.auth_name_was )
+            destroy_dbalias_on_sipproxy(self.sip_server_id_was, self.auth_name_was, self.phone_number_was)
         end
     end
   end
@@ -425,7 +434,7 @@ class SipAccount < ActiveRecord::Base
   end
   
   # create alias on sipproxy
-  def create_alias_on_sipproxy(p_id, p_name, p_alias)
+  def create_alias_on_sipproxy(p_id)
       server = SipServer.find(p_id)
       if server.config_port.nil?
           # TODO errormessage
@@ -435,7 +444,7 @@ class SipAccount < ActiveRecord::Base
           sipproxy_dbalias = SipproxyDbalias.create(
             :username       =>  self.auth_name,
             :domain         =>  self.sip_server.name,
-            :alias_username =>  p_alias,
+            :alias_username =>  self.phone_number,
             :alias_domain   =>  self.sip_server.name
           )
           if ! sipproxy_dbalias.valid?
@@ -445,6 +454,56 @@ class SipAccount < ActiveRecord::Base
           
           end
       end  
+  end
+
+  # update alias on sipproxy
+  def update_alias_on_sipproxy(p_id, p_name, p_alias)
+      server = SipServer.find(p_id)
+      if server.config_port.nil?
+          # TODO errormessage
+          return false
+          else
+          SipproxyDbalias.set_resource("http://#{server.name}:#{server.config_port}")
+            update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{p_name}", 'alias_username' => "#{p_alias}"} )
+          sipproxy_dbalias = update_dbalias.update_attributes(
+            :username       =>  self.auth_name,
+            :domain         =>  self.sip_server.name,
+            :alias_username =>  self.phone_number,
+            :alias_domain   =>  self.sip_server.name
+            )
+          if ! sipproxy_dbalias
+            errors.add( :base, "Failed to update dbalias on sipproxy provisioning server. (Reason:\n" +
+      get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
+				")" )
+          
+          end
+      end  
+  end
+  
+  # Destroy dbalias on sipproxy
+  def destroy_dbalias_on_sipproxy(p_id, p_authname, p_alias)
+    begin
+      server = SipServer.find(p_id)
+      if server.config_port.nil? 
+          # TODO errormessage
+          return false
+          else
+          SipproxyDbalias.set_resource("http://#{server.name}:#{server.config_port}")
+            destroy_dbalias = SipproxyDbalias.find( :first, :params => {'username' => "#{p_authname}", 'alias_username' => "#{p_alias}"} )
+          if ! destroy_dbalias.destroy
+            errors.add( :base, "Failed to destroy dbalias on sipproxy provisioning server. (Reason:\n" +
+      get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
+				")" )
+          # TODO error message
+          else
+              return true
+          end
+      end
+    rescue Errno::ECONNREFUSED => e
+        logger.warn "Failed to connect to sipproxy server server. (#{e.class}, #{e.message})"
+        errors.add( :base, "Failed to connect to sipproxy server." )
+        return false
+    end
   end
 
   # Log validation errors from the remote model.
