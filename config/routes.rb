@@ -23,10 +23,9 @@ Usermanager::Application.routes.draw do
 	resources :sip_proxies
 	
 	resources :extensions
-	resources :admin
+	resources :admin, :only => [:index]
 	resources :kamailio, :only => [:index ], :format => 'txt'
 	namespace :admin do
-		
 		resources :user
 		resources :setup
 	end
