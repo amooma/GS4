@@ -68,7 +68,7 @@ class SipAccount < ActiveRecord::Base
 
   before_destroy do
     if ! sip_phone_id.nil?
-    prov_srv_sip_account_destroy(sip_server_id_was)
+    prov_srv_sip_account_destroy
     end
     if !sip_server_id.nil?
         if ! self.sip_server.config_port.nil?
