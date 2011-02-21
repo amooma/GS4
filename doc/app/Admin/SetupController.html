@@ -171,8 +171,6 @@
 				
 					<li><a href="../ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
-					<li><a href="../PagesAdminController.html">PagesAdminController</a></li>
-				
 					<li><a href="../PagesController.html">PagesController</a></li>
 				
 					<li><a href="../PagesHelper.html">PagesHelper</a></li>
@@ -206,6 +204,10 @@
 					<li><a href="../SipServersController.html">SipServersController</a></li>
 				
 					<li><a href="../SipServersHelper.html">SipServersHelper</a></li>
+				
+					<li><a href="../SipproxyDbalias.html">SipproxyDbalias</a></li>
+				
+					<li><a href="../SipproxySubscriber.html">SipproxySubscriber</a></li>
 				
 					<li><a href="../User.html">User</a></li>
 				
@@ -264,14 +266,14 @@
  8:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>      
  9:         <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>])
 10:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
-11:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_path</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ @user.username } created. You can log in now.&quot;</span>) }
-12:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_path</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-ivar">@user</span>) }
+11:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_index_path</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ @user.username } created. You can log in now.&quot;</span>) }
+12:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_index_path</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-ivar">@user</span>) }
 13:         <span class="ruby-keyword kw">else</span>
 14:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'new'</span> }
 15:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span>}
 16:         <span class="ruby-keyword kw">end</span>
 17:       <span class="ruby-keyword kw">else</span>
-18:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_path</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Setup disabled. Already done!&quot;</span>) }
+18:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_index_path</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Setup disabled. Already done!&quot;</span>) }
 19:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span>}
 20:       <span class="ruby-keyword kw">end</span>
 21:     <span class="ruby-keyword kw">end</span>

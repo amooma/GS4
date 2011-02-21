@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Class: PagesAdminController</title>
+	<title>Class: SipproxySubscriber</title>
 
 	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./app/controllers/pages_admin_controller_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="app/controllers/pages_admin_controller.rb">app/controllers/pages_admin_controller.rb</a></li>
+						<li><a href="./app/models/sipproxy_subscriber_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/models/sipproxy_subscriber.rb">app/models/sipproxy_subscriber.rb</a></li>
 					
 					</ul>
 				</div>
@@ -55,7 +55,7 @@
 			<div id="parent-class-section" class="section">
 				<h3 class="section-header">Parent</h3>
 				
-				<p class="link"><a href="ApplicationController.html">ApplicationController</a></p>
+				<p class="link">ActiveResource::Base</p>
 				
 			</div>
 			
@@ -64,15 +64,6 @@
 			
 
 			<!-- Method Quickref -->
-			
-			<div id="method-list-section" class="section">
-				<h3 class="section-header">Methods</h3>
-				<ul class="link-list">
-					
-					<li><a href="#method-i-index">#index</a></li>
-					
-				</ul>
-			</div>
 			
 
 			<!-- Included Modules -->
@@ -167,8 +158,6 @@
 				
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
-					<li><a href="./PagesAdminController.html">PagesAdminController</a></li>
-				
 					<li><a href="./PagesController.html">PagesController</a></li>
 				
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
@@ -203,6 +192,10 @@
 				
 					<li><a href="./SipServersHelper.html">SipServersHelper</a></li>
 				
+					<li><a href="./SipproxyDbalias.html">SipproxyDbalias</a></li>
+				
+					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
@@ -216,7 +209,7 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="class">PagesAdminController</h1>
+		<h1 class="class">SipproxySubscriber</h1>
 
 		<div id="description">
 			
@@ -230,62 +223,6 @@
 
 		<!-- Methods -->
 		
-		<div id="public-instance-method-details" class="method-section section">
-			<h3 class="section-header">Public Instance Methods</h3>
-
-		
-			<div id="index-method" class="method-detail ">
-				<a name="method-i-index"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">index</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="index-source">
-<pre>
-    <span class="ruby-comment cmt"># File app/controllers/pages_admin_controller.rb, line 5</span>
- 5:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 6:    <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
- 7:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 8:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
- 9:       <span class="ruby-keyword kw">end</span>
-10:   <span class="ruby-keyword kw">end</span> 
-11:                 <span class="ruby-keyword kw">begin</span>
-12:                         <span class="ruby-ivar">@number_of_users</span>         = <span class="ruby-constant">User</span>               .<span class="ruby-identifier">count</span>
-13:                         <span class="ruby-ivar">@number_of_sip_accounts</span>  = <span class="ruby-constant">SipAccount</span>         .<span class="ruby-identifier">count</span>
-14:                         <span class="ruby-ivar">@number_of_sip_phones</span>    = <span class="ruby-constant">SipPhone</span>           .<span class="ruby-identifier">count</span>
-15:                         <span class="ruby-ivar">@number_of_sip_proxies</span>   = <span class="ruby-constant">SipProxy</span>           .<span class="ruby-identifier">count</span>
-16:                         <span class="ruby-ivar">@number_of_sip_servers</span>   = <span class="ruby-constant">SipServer</span>          .<span class="ruby-identifier">count</span>
-17:                         <span class="ruby-ivar">@number_of_prov_servers</span>  = <span class="ruby-constant">ProvisioningServer</span> .<span class="ruby-identifier">count</span>
-18:                         <span class="ruby-ivar">@number_of_extensions</span>    = <span class="ruby-constant">Extension</span>          .<span class="ruby-identifier">count</span>
-19:                         
-20:                 <span class="ruby-comment cmt">#rescue</span>
-21:                 <span class="ruby-comment cmt">#     redirect_to('/db_migrate_missing')</span>
-22:                 <span class="ruby-keyword kw">end</span>
-23:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-		</div>
-	
 
 	</div>
 
