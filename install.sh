@@ -58,4 +58,6 @@ make install
 
 cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.DIST
 cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/lighttpd.conf
-
+cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
+cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
+update-rc.d  kamailio defaults
