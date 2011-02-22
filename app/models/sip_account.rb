@@ -241,7 +241,7 @@ class SipAccount < ActiveRecord::Base
         cantina_sip_account = CantinaSipAccount.create({
           :name            => "a SIP account from Gemeinschaft (#{Time.now.to_i}-#{self.object_id})",
           :auth_user       => self.auth_name,
-          :user            => self.phone_number,
+          :user            => self.auth_name,
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
@@ -288,7 +288,7 @@ class SipAccount < ActiveRecord::Base
       else
         if ! cantina_sip_account.update_attributes({
           :auth_user       => self.auth_name,
-          :user            => self.phone_number,
+          :user            => self.auth_name,
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
@@ -425,8 +425,8 @@ class SipAccount < ActiveRecord::Base
       sipproxy_subscriber = update_subscriber.update_attributes(
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
-        :password   =>  self.password
-      # :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.realm}:#{self.password}" )
+        :password   =>  self.password,
+        :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.realm}:#{self.password}" )
       )
       if ! sipproxy_subscriber
         errors.add( :base, "Failed to create user account on sipproxy server. (Reason:\n" +
