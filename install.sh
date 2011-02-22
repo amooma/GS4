@@ -11,7 +11,7 @@ aptitude -y install curl git-core patch file \
 	build-essential bison  \
   	openssl zlib1g-dev libssl-dev libreadline5-dev libxml2-dev \
 	libreadline5-dev libxml2-dev sqlite3 libsqlite3-dev libxslt-dev \
-	libfcgi-ruby1.9.1 libfcgi-dev lighttpd
+	libfcgi-ruby1.9.1 libfcgi-dev lighttpd libpcre3-dev
 
 cd /usr/local/src
 wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p136.tar.bz2
