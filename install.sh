@@ -59,5 +59,10 @@ make install
 cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.DIST
 cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/lighttpd.conf
 cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
+chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
+chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
+chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber 
+chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
 cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
 update-rc.d  kamailio defaults
+
