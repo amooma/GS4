@@ -22,7 +22,8 @@ make
 make install
 
 gem update
-gem install rails --version 3.0.0
+gem install rake
+gem install bundler
 
 cd /opt
 PROJECTS="Gemeinschaft4 
@@ -41,6 +42,8 @@ do
   rake db:setup RAILS_ENV=production
   
   chown www-data:www-data db/production.sqlite3
+  
+  ln -snf /dev/stderr log/production.log
   
   cd /opt/$i/public
   bundle install --path .
