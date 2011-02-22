@@ -49,8 +49,7 @@ cd kamailio
 git checkout -b 3.1 origin/3.1
 make FLAVOUR=kamailio  include_modules="dbtext dialplan" cfg
 
-make PREFIX="/opt/kamailio-3.1" FLAVOUR=kamailio
-include_modules="db_text dialplan" cfg
+make PREFIX="/opt/kamailio-3.1" FLAVOUR=kamailio include_modules="db_text dialplan" cfg
 
 make all
 
