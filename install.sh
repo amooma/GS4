@@ -38,8 +38,8 @@ do
 	bundle install --path .
 done
 
-aptitude -y  install  gcc flex bison libmysqlclient-dev make
-libcurl4-openssl-dev -dev libpcre3-dev libpcre++-dev
+aptitude -y  install  gcc flex bison libmysqlclient-dev make \
+  libcurl4-openssl-dev libpcre3-dev libpcre++-dev
 
 cd /usr/local/src
 git clone git://git.sip-router.org/sip-router kamailio
