@@ -32,10 +32,8 @@ do
 	git clone https://$USER:$PASS@github.com/amooma/$i.git
 	cd /opt/$i
 	bundle install
-	rake db:migrate
-	rake db:seed
-	rake db:migrate RAILS_ENV=production
-	rake db:seed RAILS_ENV=production
+	rake db:setup
+	rake db:setup RAILS_ENV=production
 	cd /opt/$i/public
 	bundle install --path .
 done
