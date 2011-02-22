@@ -31,11 +31,17 @@ sipproxy";
 for i in $PROJECTS
 do
   cd /opt
+  
   git clone https://$USER:$PASS@github.com/amooma/$i.git
   cd /opt/$i
+  
   bundle install
+  
   rake db:setup
   rake db:setup RAILS_ENV=production
+  
+  chown www-data:www-data db/production.sqlite3
+  
   cd /opt/$i/public
   bundle install --path .
 done
