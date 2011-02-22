@@ -14,9 +14,9 @@ aptitude -y install curl git-core patch file \
   libfcgi-ruby1.9.1 libfcgi-dev lighttpd libpcre3-dev
 
 cd /usr/local/src
-wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p136.tar.bz2
-tar -xvjf ruby-1.9.2-p136.tar.bz2
-cd ruby-1.9.2-p136
+wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p180.tar.bz2
+tar -xvjf ruby-1.9.2-p180.tar.bz2
+cd ruby-1.9.2-p180
 ./configure
 make
 make install
