@@ -372,8 +372,8 @@ class SipAccount < ActiveRecord::Base
       sipproxy_subscriber = SipproxySubscriber.create(
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
-        :password   =>  self.password
-      # :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.realm}:#{self.password}" )
+        :password   =>  self.password,
+       :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
       )
       if ! sipproxy_subscriber.valid?
         errors.add( :base, "Failed to create user account on sipproxy server. (Reason:\n" +
@@ -427,6 +427,7 @@ class SipAccount < ActiveRecord::Base
         :domain     =>  self.sip_server.name,
         :password   =>  self.password,
         :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.realm}:#{self.password}" )
+       	:ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
       )
       if ! sipproxy_subscriber
         errors.add( :base, "Failed to create user account on sipproxy server. (Reason:\n" +
