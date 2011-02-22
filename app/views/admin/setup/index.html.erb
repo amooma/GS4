@@ -27,5 +27,13 @@
                     First provisioning server already configured<%end %>
                 </td>
             </tr>
+						<tr>
+                <td>
+                    <% if SipProxy.count == 0 %>
+                    <%= link_to 'Create first proxy server', new_sip_proxy_path %>
+                    <% else %>
+                    First provisioning server already configured<%end %>
+                </td>
+            </tr>
             <% end %>
         </table>

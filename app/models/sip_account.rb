@@ -27,6 +27,7 @@ class SipAccount < ActiveRecord::Base
   
   validates_uniqueness_of   :auth_name, :scope => :sip_server_id
   validates_presence_of     :sip_server_id
+  validates_presence_of     :sip_proxy_id
   validates_presence_of     :phone_number
   validates_numericality_of :phone_number
   
@@ -426,7 +427,6 @@ class SipAccount < ActiveRecord::Base
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
         :password   =>  self.password,
-        :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.realm}:#{self.password}" )
        	:ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
       )
       if ! sipproxy_subscriber
