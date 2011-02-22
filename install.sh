@@ -8,7 +8,7 @@ read PASS
 
 aptitude update
 aptitude -y install curl git-core patch file \
-  build-essential bison  \
+  build-essential bison \
   openssl zlib1g-dev libssl-dev libreadline5-dev libxml2-dev \
   libreadline5-dev libxml2-dev sqlite3 libsqlite3-dev libxslt-dev \
   libfcgi-ruby1.9.1 libfcgi-dev lighttpd libpcre3-dev
@@ -40,7 +40,7 @@ do
   bundle install --path .
 done
 
-aptitude -y  install  gcc flex bison libmysqlclient-dev make \
+aptitude -y install gcc flex bison libmysqlclient-dev make \
   libcurl4-openssl-dev libpcre3-dev libpcre++-dev
 
 cd /usr/local/src
