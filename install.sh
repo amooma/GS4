@@ -47,6 +47,7 @@ do
   
   cd /opt/$i/public
   bundle install --path .
+  chown -R www-data /opt/$i
 done
 
 aptitude -y install gcc flex bison libmysqlclient-dev make \
