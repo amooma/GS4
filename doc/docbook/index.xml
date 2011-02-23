@@ -45,7 +45,10 @@
     <title>Installation</title>
 
     <para>Nachfolgend wird beschrieben wie zuerst Ruby on Rails installiert
-    wird und dann das eigentliche Gemeinschaft4-System.</para>
+    wird und dann das eigentliche Gemeinschaft4-System. Die folgende
+    Beschreibung bezieht sich auf die Installation auf einem Debian 5 System.
+    Für ein Debian 6 System steht ein Script zur Verfügung. Eine Genaue
+    Anleitung finden Sie im Kapitel "Installation auf Debian 6".</para>
 
     <xi:include href="installation-ror-debian-5.xml" />
 
