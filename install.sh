@@ -39,9 +39,9 @@ do
   
   bundle install
   
-  rake db:setup
-  rake db:setup RAILS_ENV=production
-    
+  rake db:migrate RAILS_ENV=production
+  rake db:seed RAILS_ENV=production
+  
   cd /opt/$i/public
   bundle install --path .
   chown -R www-data /opt/$i
