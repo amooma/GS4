@@ -8,5 +8,4 @@
 
 
 # Provisioning server:
-ProvisioningServer.create({ :name => 'localhost', :port => 3001 })
 
