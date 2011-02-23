@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-Usermanager::Application.config.session_store :cookie_store, :key => '_usermanager_session'
+Gemeinschaft4::Application.config.session_store :cookie_store, :key => '_usermanager_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information

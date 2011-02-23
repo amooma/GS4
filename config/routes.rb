@@ -1,4 +1,4 @@
-Usermanager::Application.routes.draw do
+Gemeinschaft4::Application.routes.draw do
 	
   get "setup/index"
 

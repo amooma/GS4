@@ -1,0 +1,9 @@
+Options +FollowSymLinks +ExecCGI
+
+RewriteRule ^(.*)$ dispatch.cgi [QSA,L]
+RewriteEngine On
+
+RewriteRule ^$ index.html [QSA]
+RewriteRule ^([^.]+)$ $1.html [QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+

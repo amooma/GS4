@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Usermanager::Application.load_tasks
+Gemeinschaft4::Application.load_tasks
