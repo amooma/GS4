@@ -40,11 +40,7 @@ do
   
   rake db:setup
   rake db:setup RAILS_ENV=production
-  
-  chown www-data:www-data db/production.sqlite3
-  
-  ln -snf /dev/stderr log/production.log
-  
+    
   cd /opt/$i/public
   bundle install --path .
   chown -R www-data /opt/$i
