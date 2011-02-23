@@ -35,7 +35,7 @@ class SipAccount < ActiveRecord::Base
     if ! sip_phone_id.nil?
       prov_srv_sip_account_create
     end
-    if ! sip_server_id.nil? && ! self.phone_number.nil?
+    if ! sip_server_id.nil? && ! self.phone_number.nil? && ! self.sip_proxy_id.nil?
       if ! self.sip_server.config_port.nil?
          create_user_on_sipproxy(  sip_server_id )
          create_alias_on_sipproxy( sip_server_id )
