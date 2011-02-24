@@ -33,8 +33,123 @@
   <section>
     <title>Installation des Basis Systems</title>
 
-    <para>Die initiale Setup-Routine leitet Sie automatisch zu den notwendigen
-    Einstellungen. Wir werden in diesem Kapitel die Ersteinrichtung Schrit für
-    Schrit durchgehen.</para>
+    <para>Als Basis System kommt eine Minimal Installation von Debian 6
+    ("Squeeze") zum Einsatz.</para>
+
+    <para>Bitte wählen Sie bei der Paketauswahl alle Pakete ausser "ssh" ab.
+    Das Paket erleichtert vor allem in einer virtuellen Installation die
+    weitern Schritte.</para>
+  </section>
+
+  <section>
+    <title>Installation von Gemeinschaft4</title>
+
+    <para>Alle für Gemeinschaft4 benötigten komponenten können über das im
+    github.com Repository vorhandene Installationsscript installiert
+    werden.</para>
+
+    <para>Für die Installation des Demo Systems werden alle drei Ruby
+    Applikationen in einem Webserver gestartet. Hierfür kommt lighttpd
+    verwendet. Die einzelnen Applikationen sind weiterhin über die bekannte
+    Ports erreichbar:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Gemeinschaft4 3000</para>
+      </listitem>
+
+      <listitem>
+        <para>Cantina 3001</para>
+      </listitem>
+
+      <listitem>
+        <para>sipproxy 3002</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Als erstes laden Sie Sich bitte die Datei install.sh von
+    https://github.com/amooma/Gemeinschaft4 herunter und transferrieren Sie
+    die Datei auf den Server (z.B. per scp).</para>
+
+    <para>Das Script zum Zeitpunkt der Dokumentation. Bitte IMMER die aktuelle
+    Version verwenden.</para>
+
+    <para><screen>#!/bin/bash
+
+echo -e "Please enter your github.com username\n"
+read USER
+
+echo -e "Please enter your github.com password\n"
+read PASS
+
+aptitude update
+aptitude -y install curl git-core patch file \
+  build-essential bison \
+  openssl zlib1g-dev libssl-dev libreadline5-dev libxml2-dev \
+  libreadline5-dev libxml2-dev sqlite3 libsqlite3-dev libxslt-dev \
+  libfcgi-ruby1.9.1 libfcgi-dev lighttpd libpcre3-dev libyaml-dev \
+  nmap
+
+cd /usr/local/src
+wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p180.tar.bz2
+tar -xvjf ruby-1.9.2-p180.tar.bz2
+cd ruby-1.9.2-p180
+./configure
+make
+make install
+
+gem update
+gem install rake
+gem install bundler
+
+cd /opt
+PROJECTS="Gemeinschaft4
+Cantina
+sipproxy";
+for i in $PROJECTS
+do
+cd /opt
+  
+  git clone https://$USER:$PASS@github.com/amooma/$i.git
+  cd /opt/$i
+  
+  bundle install
+  
+  rake db:migrate RAILS_ENV=production
+  rake db:seed RAILS_ENV=production
+  
+  cd /opt/$i/public
+  bundle install --path .
+  chown -R www-data /opt/$i
+done
+
+aptitude -y install gcc flex bison libmysqlclient-dev make \
+  libcurl4-openssl-dev libpcre3-dev libpcre++-dev
+
+cd /usr/local/src
+git clone git://git.sip-router.org/sip-router kamailio
+cd kamailio
+git checkout -b 3.1 origin/3.1
+make FLAVOUR=kamailio include_modules="dbtext dialplan" cfg
+make PREFIX="/opt/kamailio-3.1" FLAVOUR=kamailio include_modules="db_text dialplan" cfg
+make all
+make install
+
+cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.DIST
+cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/lighttpd.conf
+/etc/init.d/lighttpd restart
+cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
+chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
+chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
+chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
+chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
+cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
+update-rc.d kamailio defaults
+/etc/init.d/kamailio start
+
+
+</screen>Sobald das Script erfolgreich abgearbeitet wurde, können Sie auf das
+    Webinterface von Gemeinschaft4 über http://IP_DES_SERVERS:3000
+    zugreifen.</para>
   </section>
 </chapter>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="frontend" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Die einzelnen Applikationen</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </info>
+
+  <section>
+    <title>Interaktion der Ruby Applikationen</title>
+
+    <para>Gemeinschaft4 besteht im Moment aus drei einzelnen ruby
+    Applikationen.</para>
+
+    <section>
+      <title>Cantina</title>
+
+      <para>Cantina ist der zentrale Provisionierungsserver für SIP Telefone.
+      Die Dokumentation zu dieser Applikation finden Sie im doc erzeichnis des
+      Projekts.</para>
+    </section>
+
+    <section>
+      <title>sipproxy</title>
+
+      <para>sipproxy ist eine Applikation, die eine beliebige Datenbank für
+      die Userdaten und die benötigten Alias Daten für Kamailio
+      befüllt.</para>
+
+      <section>
+        <title>Userdaten</title>
+
+        <para>Kamailio benötigt für jedes Telefon, das sich registrieren
+        können soll einen Usernamen und ein Passwort. Diese Daten können
+        sipproxy über einen Restfull Aufruf übergeben werden. Auch wenn
+        sipproxy eine html Schnittstelle zur Verfügung stellt, sollten
+        Änderungen immer nur über das Webinterface von Gemeinschaft4
+        vorgenommen werden.</para>
+      </section>
+
+      <section>
+        <title>Alias Daten</title>
+
+        <para>Per default ist jeder auf Kamailio angelegte User über seinen
+        Usernamen erreichbar. Da ein Username auch alphanummerisch sein kann
+        erschwert das das Wählen über eine Telfontastatur. Aus diesem Grund
+        wird jedem User ein nummerischer Alias zugeordnet. In unserem Beispiel
+        erhält der User "test1" den Alias "111".</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Gemeinschaft4</title>
+
+      <para>Gemeinschaft4 ist die zentrale Verwaltungsstelle für die gesamte
+      Telefonanlage. Das Webinterface ist so ausgelegt, dass eine beliebige
+      Anzahl von Cantina und sipproxy Instanzen verwaltet werden
+      können.</para>
+
+      <para>In der Datenbank von Gemeinschaft werden alle benötigten
+      Informationen gespeichert. An die weiteren Applikationen werden über
+      Restfull Aufrufe nur die Informationen übermittelt, die für die
+      jeweilige Applikation notwendig sind.</para>
+
+      <para>Genaue Informationen über das Zusammenspiel der Applikationen
+      entnehmen Sie bitte der Datei "gemeinschaft4-interaktion.pdf".</para>
+    </section>
+  </section>
+</chapter>
