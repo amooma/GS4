@@ -287,8 +287,8 @@
 
     <para>Enthält die SIP-Proxies (<foreignphrase xml:lang="en">SIP
     proxies</foreignphrase>) der SIP-Konten (<foreignphrase xml:lang="en">SIP
-    accounts</foreignphrase>). Diese werden im momentanen System noch nicht
-    verwendet.</para>
+    accounts</foreignphrase>). Im momentanen System muss der SIP Proxy
+    identisch mit dem SIP Server gehalten werden.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
