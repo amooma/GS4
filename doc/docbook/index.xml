@@ -51,7 +51,7 @@
 
     <xi:include href="installation-gs4.xml" />
   </chapter>
-
+  <xi:include href="install-squeeze.xml" />
   <xi:include href="frontend.xml" />
 
   <xi:include href="data-model.xml" />

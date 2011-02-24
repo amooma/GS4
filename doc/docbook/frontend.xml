@@ -117,8 +117,8 @@
 
     <screenshot>
       <info>
-        <title>Zuletzt muss noch der Provisioning-Server (Cantina) angelegt
-        werden.</title>
+        <title>Im nächsten Schritt muss der erste Provisioning-Server
+        (Cantina) angelegt werden.</title>
       </info>
 
       <mediaobject>
@@ -156,8 +156,7 @@
 
     <screenshot>
       <info>
-        <title>Die Startseite von Gemeinschaft4 nach der
-        Ersteinrichtung.</title>
+        <title>Zuletzt muss noch ein SIP Proxy angelegt werden.</title>
       </info>
 
       <mediaobject>
@@ -169,7 +168,20 @@
 
     <screenshot>
       <info>
-        <title>Anlegen eines SIP-Telefons</title>
+        <title>Es wird wieder die IP des Servers benötigt. Ein Port für den
+        Konfigurationsserver wird nicht benötigt.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup11.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Der SIP Proxy wurde fehlerfrei angelegt.</title>
       </info>
 
       <mediaobject>
@@ -181,8 +193,9 @@
 
     <screenshot>
       <info>
-        <title>Es stehen die auf dem Cantina-Server bereits angelegten
-        Telefone zur Verfügung.</title>
+        <title>Um einen SIP Account auf ein Telefon provisionieren zu können,
+        muss zuerst ein auf "Cantina" angelegtes Telefon in Geminschaft4
+        angelegt werden.</title>
       </info>
 
       <mediaobject>
@@ -194,7 +207,8 @@
 
     <screenshot>
       <info>
-        <title>Das Telefon wurde erfolgreich angelegt.</title>
+        <title>Das Telefon kann über die MAC Adresse identifiziert
+        werden.</title>
       </info>
 
       <mediaobject>
@@ -206,8 +220,7 @@
 
     <screenshot>
       <info>
-        <title>Um ein Telefon benutzen zu können brauchen wir noch einen
-        SIP-Account.</title>
+        <title>Das Telefon wurde erfolgreich angelegt.</title>
       </info>
 
       <mediaobject>
@@ -219,10 +232,7 @@
 
     <screenshot>
       <info>
-        <title>Alle Text-Eingabefelder müssen ausgefüllt werden. Bis auf
-        SIP-Server sind alle Auswahlfelder optional. Damit auch ein Telefon
-        provisioniert werden kann, muss natürlich auch eines ausgewählt
-        werden.</title>
+        <title>Jetzt kann der erste SIP Account angelegt werden.</title>
       </info>
 
       <mediaobject>
@@ -231,5 +241,44 @@
         </imageobject>
       </mediaobject>
     </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Das Feld User wird noch nicht benötigt. Das Feld Realm muss im
+        Moment noch leer bleiben. Ein SIP phone muss nur ausgewählt werden,
+        wenn der Account auf ein Telefon provisioniert werden soll. Für ein
+        Softphone z.B. wird das Feld nicht benötigt.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup17.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <info>
+        <title>Der SIP Account wurde erfolgreich angelegt. Das Telefon wurde
+        auf "Cantina" übertragen und der Account wurde auf "sipproxy"
+        angelegt.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup18.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para>Mit den hier gezeigten Schritten sind Sie in der Lage eine beliebige
+    Anzahl von Telefonen an zu legen.</para>
+
+    <para>Der Menüpunkt "Extensions" hat im Moment noch keine Funktion. An
+    dieser Stelle können ind der Zukunft einem SIP Account eine beliebige
+    Anzahl von weiteren Durchwahlen zugeordnet werden. </para>
+
+    <para>Die Dokumentation zu "Cantina" finden Sie im doc Verzeichnis des
+    Projektes.</para>
   </section>
 </chapter>
