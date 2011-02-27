@@ -34,7 +34,7 @@ make install
 echo "Installing required gems"
 gem update
 gem install rake
-gem install bundler
+gem install bundler --version=1.0.7
 
 echo "Getting Gemeinschaft4, Cantina and sipproxy"
 cd /opt
