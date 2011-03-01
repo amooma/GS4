@@ -15,9 +15,9 @@ class SipProxyTest < ActiveSupport::TestCase
   [
     'hostname',
     '10.0.0.1',
-  ].each { |name|
-    should "be valid with host #{name.inspect}" do
-      assert Factory.build( :sip_proxy, :name => name ).valid?
+  ].each { |host|
+    should "be valid with host #{host.inspect}" do
+      assert Factory.build( :sip_proxy, :name => host ).valid?
     end
   }
   
@@ -26,9 +26,9 @@ class SipProxyTest < ActiveSupport::TestCase
     nil,
     '',
     '-',
-  ].each { |name|
-    should "not be valid with host #{name.inspect}" do
-      assert ! Factory.build( :sip_proxy, :name => name ).valid?
+  ].each { |host|
+    should "not be valid with host #{host.inspect}" do
+      assert ! Factory.build( :sip_proxy, :name => host ).valid?
     end
   }
   
