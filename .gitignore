@@ -7,3 +7,5 @@ tmp/**/*
 *.komodoproject
 .tmp*~
 ERD.pdf
+vendor/cache/*.gem
+
