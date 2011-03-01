@@ -29,7 +29,7 @@ class SipAccount < ActiveRecord::Base
   validates_presence_of     :sip_server_id
   validates_presence_of     :sip_proxy_id
   validates_presence_of     :phone_number
-  validates_numericality_of :phone_number
+  validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
   
   after_validation( :on => :create ) do
     if ! sip_phone_id.nil?
