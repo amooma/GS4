@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
- # testing sip_account requires provisioning_server to be accessible
- 
- 
+  # testing sip_account requires provisioning_server to be accessible
+  
+  
   # valid extension
   [
     '123',
@@ -21,16 +21,19 @@ class SipAccountTest < ActiveSupport::TestCase
     '',
     'foo',
     '123foo',
+    '012foo',
+    'foo123',
+  # '01',
     '-',
     '+',
     -1,
-  # '-1',
-  # '-0',
+    '-1',
+    '-0',
   # '+10',
   ].each { |extension|
     should "not be valid with extension #{extension.inspect}" do
       assert ! Factory.build( :sip_account, :phone_number => extension ).valid?
     end
   }
- 
+  
 end
