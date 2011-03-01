@@ -1,0 +1,9 @@
+#! /bin/sh
+
+# `rake notes` doesn't find everything and is too slow.
+
+find . -type f \
+  | grep -vEe '/(\.git/|doc/app/|script/notes|public/javascripts/controls\.js)' \
+  | xargs grep --color -IEe '(TODO|FIXME|OPTIMIZE)'
+
+
