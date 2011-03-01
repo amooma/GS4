@@ -30,7 +30,7 @@ class SipAccount < ActiveRecord::Base
   validates_presence_of     :sip_proxy_id
   validates_presence_of     :phone_number
   
-  validates_format_of       :phone_number, :with => /\A [1-9][0-9]* \z/x,
+  validates_format_of       :phone_number, :with => /\A [1-9][0-9]{,9} \z/x,
     :allow_blank => false,
     :allow_nil => false
   validates_numericality_of :phone_number, :greater_than_or_equal_to => 1

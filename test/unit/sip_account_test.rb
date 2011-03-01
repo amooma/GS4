@@ -20,6 +20,7 @@ class SipAccountTest < ActiveSupport::TestCase
     nil,
     '',
     'foo',
+    '12345678901',
     '123foo',
     '012foo',
     'foo123',
