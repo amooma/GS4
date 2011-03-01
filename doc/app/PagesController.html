@@ -261,13 +261,16 @@ before_filter :authenticate_user!
 						id="index-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/pages_controller.rb, line 6</span>
- 6:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 7:                 <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
- 8:                         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 9:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
-10:                         <span class="ruby-keyword kw">end</span>
-11:                 <span class="ruby-keyword kw">end</span>   
-12:         <span class="ruby-keyword kw">end</span></pre>
+ 6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+ 7: 
+ 8:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 9:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+10:             <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
+11:         <span class="ruby-keyword kw">else</span>
+12:             <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_index_path</span>) }
+13:       <span class="ruby-keyword kw">end</span>
+14:     <span class="ruby-keyword kw">end</span>
+15:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -304,10 +307,10 @@ before_filter :authenticate_user!
 					<div class="method-source-code"
 						id="rescue-missing-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/pages_controller.rb, line 15</span>
-15:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
-16:                 <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value str">'/db_migrate_missing'</span>)
-17:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/pages_controller.rb, line 17</span>
+17:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
+18:     <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value str">'/db_migrate_missing'</span>)
+19:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
