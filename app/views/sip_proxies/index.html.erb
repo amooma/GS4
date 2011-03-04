@@ -15,7 +15,7 @@
 	<td><%= sip_proxy.config_port%><td>
     <td><%= link_to 'Show', sip_proxy %></td>
     <td><%= link_to 'Edit', edit_sip_proxy_path(sip_proxy) %></td>
-    <td><%= link_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

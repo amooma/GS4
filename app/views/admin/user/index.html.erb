@@ -18,7 +18,7 @@
 	<td><%= user.sn%></td>
     <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
 	<% if user.id != current_user.id %>
-    <td><%= link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
 	<% else %>
 	<td>Current User</td>
 	<% end %>

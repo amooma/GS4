@@ -24,7 +24,7 @@
 	</td>
     <td><%= link_to 'Show', provisioning_server %></td>
     <td><%= link_to 'Edit', edit_provisioning_server_path(provisioning_server) %></td>
-    <td><%= link_to 'Destroy', provisioning_server, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', provisioning_server, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

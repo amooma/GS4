@@ -27,7 +27,7 @@
     <td><%= sip_account.sip_phone_id %></td>
     <td><%= link_to 'Show', sip_account %></td>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
-    <td><%= link_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -15,7 +15,7 @@
 	<td><%= sip_server.config_port%><td>
     <td><%= link_to 'Show', sip_server %></td>
     <td><%= link_to 'Edit', edit_sip_server_path(sip_server) %></td>
-    <td><%= link_to 'Destroy', sip_server, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', sip_server, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
