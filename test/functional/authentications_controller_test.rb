@@ -11,7 +11,6 @@ class AuthenticationsControllerTest < ActionController::TestCase
     #@authentication = authentications(:one)
     @user = Factory.create(:user)
     #sign_in(@user)
-    
   end
   
   
@@ -23,25 +22,23 @@ class AuthenticationsControllerTest < ActionController::TestCase
     sign_out(@user)
   end
   
-# TODO FIX create and destroy
-# not needed yet
+  # not needed yet:
   #test "should create authentication" do
   #  sign_in(@user)
   #  assert_difference('Authentication.count') {
   #    post :create, :authentication => @authentication.attributes
   #  }
   #  assert_redirected_to( authentication_path( assigns(:authentication)))
-  #  sign_out(:user)
+  #  sign_out(@user)
   #end
   #
   #test "should destroy authentication" do
-  #  sign_in(:user)
+  #  sign_in(@user)
   #  assert_difference('Authentication.count', -1) {
   #    delete :destroy, :id => @authentication.to_param
   #  }
   #  assert_redirected_to( authentications_path )
-  #  sign_out(:user)
+  #  sign_out(@user)
   #end
-  
   
 end
