@@ -44,7 +44,8 @@ class SipAccountsControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
-  # TODO MOCK it
+  
+  # OPTIMIZE Mock the ActiveResource.
   #test "should create sip_account" do
   #  sign_in :user, @admin_user
   #  assert_difference('SipAccount.count') {
@@ -53,13 +54,13 @@ class SipAccountsControllerTest < ActionController::TestCase
   #  assert_redirected_to( sip_account_path( assigns(:sip_account)))
   #  sign_out @admin_user
   #end
-  #
-  #test "should not create sip_account (not an admin)" do
-  #  assert_no_difference('SipAccount.count') {
-  #    post :create, :sip_account => @sip_account.attributes
-  #  }
-  #  assert_response( @expected_http_status_if_not_allowed )
-  #end
+  
+  test "should not create sip_account (not an admin)" do
+    assert_no_difference('SipAccount.count') {
+      post :create, :sip_account => @sip_account.attributes
+    }
+    assert_response( @expected_http_status_if_not_allowed )
+  end
   
   
   test "should show sip_account" do
