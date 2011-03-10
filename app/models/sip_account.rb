@@ -169,7 +169,9 @@ class SipAccount < ActiveRecord::Base
   
   # Returns the appropriate "site" parameter URL to use for the
   # CantinaSipAccount ActiveResource. Returns nil if the SipPhone
-  # corresponding to this SipAccount does not have provisioning.
+  # corresponding to this SipAccount does not have provisioning
+  # or if the SipAccount does not even have a SipPhone (and thus
+  # does not have a provisioning server).
   #
   def determine_prov_server_resource
     scheme = 'http'
@@ -189,6 +191,9 @@ class SipAccount < ActiveRecord::Base
           path   = '/'
         end
       end
+    else
+      logger.debug "SipAccount ID #{self.id} is not associated to a SipPhone, i.e. does not have a provisioning server."
+      return nil  # SIP account without phone and thus without provisioning server
     end
     ret = '%s://%s%s%s' % [
       scheme,
@@ -231,6 +236,10 @@ class SipAccount < ActiveRecord::Base
         return nil
       end
     rescue Errno::ECONNREFUSED => e
+      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
+      return false
+    rescue Errno::EADDRNOTAVAIL => e
+      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
       return false
     end
   end
@@ -262,7 +271,11 @@ class SipAccount < ActiveRecord::Base
         return true
       end
     rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to Cantina provisioning server. (#{e.class}, #{e.message})"
+      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to Cantina provisioning server." )
+      return false
+    rescue Errno::EADDRNOTAVAIL => e
+      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to Cantina provisioning server." )
       return false
     end
@@ -414,6 +427,10 @@ class SipAccount < ActiveRecord::Base
       logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to sipproxy server." )
       return false
+    rescue Errno::EADDRNOTAVAIL => e
+      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to sipproxy server." )
+      return false
     end
   end
   
@@ -513,6 +530,10 @@ class SipAccount < ActiveRecord::Base
         end
       end
     rescue Errno::ECONNREFUSED => e
+      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to sipproxy server." )
+      return false
+    rescue Errno::EADDRNOTAVAIL => e
       logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to sipproxy server." )
       return false
