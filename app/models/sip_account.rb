@@ -393,7 +393,6 @@ class SipAccount < ActiveRecord::Base
           errors.add( :base, "Failed to destroy user account on SipProxy server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
             ")" )
-          # TODO error message
         else
           return true
         end
@@ -495,7 +494,6 @@ class SipAccount < ActiveRecord::Base
           errors.add( :base, "Failed to destroy dbalias on SipProxy server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
             ")" )
-          # TODO error message
         else
           return true
         end
