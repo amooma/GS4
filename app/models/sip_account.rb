@@ -201,7 +201,7 @@ class SipAccount < ActiveRecord::Base
         CantinaSipAccount.set_resource( cantina_resource )
         cantina_sip_accounts = CantinaSipAccount.all()
         # GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
-        # FIXME see sipproxy API
+        # As soon as the Cantina API has been extended please optimize this method. Thanks.
         if cantina_sip_accounts
           cantina_sip_accounts.each { |cantina_sip_account|
             if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
