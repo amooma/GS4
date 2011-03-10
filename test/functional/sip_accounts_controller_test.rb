@@ -45,7 +45,7 @@ class SipAccountsControllerTest < ActionController::TestCase
   end
   
   
-  # OPTIMIZE Mock the ActiveResource.
+  # OPTIMIZE Mock the ActiveResource or create a SIP account without a phone and thus without a provisioning server.
   #test "should create sip_account" do
   #  sign_in :user, @admin_user
   #  assert_difference('SipAccount.count') {
@@ -101,7 +101,8 @@ class SipAccountsControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
-  # TODO MOCK it
+  
+  # OPTIMIZE Mock the ActiveResource or create a SIP account without a phone and thus without a provisioning server.
   #test "should destroy sip_account" do
   #  sign_in :user, @admin_user
   #  assert_difference('SipAccount.count', -1) {
@@ -110,13 +111,12 @@ class SipAccountsControllerTest < ActionController::TestCase
   #  assert_redirected_to( sip_accounts_path )
   #  sign_out @admin_user
   #end
-  #
-  #test "should not destroy sip_account (not an admin)" do
-  #  assert_no_difference('SipAccount.count') {
-  #    delete :destroy, :id => @sip_account.to_param
-  #  }
-  #  assert_response( @expected_http_status_if_not_allowed )
-  #end
   
+  test "should not destroy sip_account (not an admin)" do
+    assert_no_difference('SipAccount.count') {
+      delete :destroy, :id => @sip_account.to_param
+    }
+    assert_response( @expected_http_status_if_not_allowed )
+  end
   
 end
