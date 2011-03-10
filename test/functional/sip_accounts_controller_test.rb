@@ -46,10 +46,13 @@ class SipAccountsControllerTest < ActionController::TestCase
   
   
   # OPTIMIZE Mock the ActiveResource or create a SIP account without a phone and thus without a provisioning server.
+  # Edit: This has nothing to do with us not being able to contact
+  # the provisioning server so no mock is needed. Must be something
+  # else.
   #test "should create sip_account" do
   #  sign_in :user, @admin_user
   #  assert_difference('SipAccount.count') {
-  #    post :create, :sip_account => @sip_account.attributes
+  #    post :create, :sip_account => @sip_account.attributes.reject{ |k,v| k.to_s == 'id' }
   #  }
   #  assert_redirected_to( sip_account_path( assigns(:sip_account)))
   #  sign_out @admin_user
@@ -57,7 +60,7 @@ class SipAccountsControllerTest < ActionController::TestCase
   
   test "should not create sip_account (not an admin)" do
     assert_no_difference('SipAccount.count') {
-      post :create, :sip_account => @sip_account.attributes
+      post :create, :sip_account => @sip_account.attributes.reject{ |k,v| k.to_s == 'id' }
     }
     assert_response( @expected_http_status_if_not_allowed )
   end
@@ -91,26 +94,25 @@ class SipAccountsControllerTest < ActionController::TestCase
   
   test "should update sip_account" do
     sign_in :user, @admin_user
-    put :update, :id => @sip_account.to_param, :sip_account => @sip_account.attributes
+    put :update, :id => @sip_account.to_param, :sip_account => @sip_account.attributes.reject{ |k,v| k.to_s == 'id' }
     assert_redirected_to( sip_account_path( assigns(:sip_account)))
     sign_out @admin_user
   end
   
   test "should not update sip_account (not an admin)" do
-    put :update, :id => @sip_account.to_param, :sip_account => @sip_account.attributes
+    put :update, :id => @sip_account.to_param, :sip_account => @sip_account.attributes.reject{ |k,v| k.to_s == 'id' }
     assert_response( @expected_http_status_if_not_allowed )
   end
   
   
-  # OPTIMIZE Mock the ActiveResource or create a SIP account without a phone and thus without a provisioning server.
-  #test "should destroy sip_account" do
-  #  sign_in :user, @admin_user
-  #  assert_difference('SipAccount.count', -1) {
-  #    delete :destroy, :id => @sip_account.to_param
-  #  }
-  #  assert_redirected_to( sip_accounts_path )
-  #  sign_out @admin_user
-  #end
+  test "should destroy sip_account" do
+    sign_in :user, @admin_user
+    assert_difference('SipAccount.count', -1) {
+      delete :destroy, :id => @sip_account.to_param
+    }
+    assert_redirected_to( sip_accounts_path )
+    sign_out @admin_user
+  end
   
   test "should not destroy sip_account (not an admin)" do
     assert_no_difference('SipAccount.count') {
