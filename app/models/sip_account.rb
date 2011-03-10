@@ -165,7 +165,7 @@ class SipAccount < ActiveRecord::Base
       else
         prov_srv = self.sip_phone.provisioning_server
         if prov_srv
-          scheme = 'http'  # TODO - https?
+          scheme = 'http'  # TODO - https as soon as it is implemented.
           host   = prov_srv.name if ! prov_srv.name.blank?
           port   = prov_srv.port if ! prov_srv.port.blank?
           path   = '/'
