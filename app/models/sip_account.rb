@@ -82,26 +82,6 @@ class SipAccount < ActiveRecord::Base
   end
   
   
-  #  # http://rubydoc.info/docs/rails/3.0.0/ActiveModel/Dirty
-  #  include ActiveModel::Dirty
-  #  
-  #  define_attribute_methods [:sip_server]
-  #  
-  #  def sip_server
-  #    @sip_server
-  #  end
-  #  
-  #  def sip_server=(val)
-  #    name_will_change! unless val == @sip_server
-  #    @sip_server = val
-  #  end
-  #  
-  #  def save
-  #    @previously_changed = changes
-  #    @changed_attributes.clear
-  #  end
-  
-  
   # Returns the corresponding SIP account from Cantina.
   # Returns the CantinaSipAccount if found or nil if not found or
   # false on error.
