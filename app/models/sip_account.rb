@@ -276,7 +276,6 @@ class SipAccount < ActiveRecord::Base
       (sip_server_was ? sip_server_was.name : nil),
       self.auth_name_was
     )
-    
     case cantina_sip_account
       when false
         errors.add( :base, "Failed to connect to Cantina provisioning server." )
