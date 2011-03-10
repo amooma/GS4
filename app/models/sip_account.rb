@@ -357,8 +357,7 @@ class SipAccount < ActiveRecord::Base
   #
   def delete_last_cantina_account
     prov_server = SipPhone.find(sip_phone_id_was).provisioning_server
-    CantinaSipAccount.set_resource( "http://#{prov_server.name}:#{prov_server.port}" )
-    #OPTIMIZE - set_resource() wants a path "/", and .port can be blank.
+    CantinaSipAccount.set_resource( "http://#{prov_server.name}:#{prov_server.port}/" )
     cantina_sip_accounts = CantinaSipAccount.all
     if cantina_sip_accounts
       found_c_accounts = cantina_sip_accounts.each { |cantina_sip_account|
@@ -385,8 +384,7 @@ class SipAccount < ActiveRecord::Base
       # TODO errormessage
       return false
     else
-      SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}" )
-      #OPTIMIZE - set_resource() wants a path "/", and .config_port can be blank(?).
+      SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
       sipproxy_subscriber = SipproxySubscriber.create(
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
@@ -410,8 +408,7 @@ class SipAccount < ActiveRecord::Base
         # TODO errormessage
         return false
       else
-        SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}" )
-        #OPTIMIZE - set_resource() wants a path "/", and .config_port can be blank(?).
+        SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
         destroy_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => p_authname.to_s })
         if ! destroy_subscriber.destroy
           errors.add( :base, "Failed to destroy user account on SipProxy server. (Reason:\n" +
@@ -441,8 +438,7 @@ class SipAccount < ActiveRecord::Base
       # TODO errormessage
       return false
     else
-      SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}" )
-      #OPTIMIZE - set_resource() wants a path "/", and .config_port can be blank(?).
+      SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => p_authname.to_s })
       sipproxy_subscriber = update_subscriber.update_attributes(
         :username   =>  self.auth_name,
@@ -466,8 +462,7 @@ class SipAccount < ActiveRecord::Base
       # TODO errormessage
       return false
     else
-      SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}" )
-      #OPTIMIZE - set_resource() wants a path "/", and .config_port can be blank(?).
+      SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
       sipproxy_dbalias = SipproxyDbalias.create(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
@@ -490,8 +485,7 @@ class SipAccount < ActiveRecord::Base
       # TODO errormessage
       return false
     else
-      SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}" )
-      #OPTIMIZE - set_resource() wants a path "/", and .config_port can be blank(?).
+      SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{p_name}", 'alias_username' => "#{p_alias}"} )
       sipproxy_dbalias = update_dbalias.update_attributes(
         :username       =>  self.auth_name,
@@ -516,8 +510,7 @@ class SipAccount < ActiveRecord::Base
         # TODO errormessage
         return false
       else
-        SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}" )
-        #OPTIMIZE - set_resource() wants a path "/", and .config_port can be blank(?).
+        SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
         destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => p_authname.to_s, 'alias_username' => p_alias.to_s })
         if ! destroy_dbalias.destroy
           errors.add( :base, "Failed to destroy dbalias on SipProxy server. (Reason:\n" +
