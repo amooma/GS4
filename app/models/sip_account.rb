@@ -466,7 +466,7 @@ class SipAccount < ActiveRecord::Base
       return false
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
-      update_dbalias = SipproxyDbalias.where(:username => p_name, :alias_username => p_alias).first
+      update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{p_name}", 'alias_username' => "#{p_alias}"} )
       sipproxy_dbalias = update_dbalias.update_attributes(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
@@ -491,7 +491,7 @@ class SipAccount < ActiveRecord::Base
         return false
       else
         SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
-        destroy_dbalias = SipproxyDbalias.where(:username => provisioning_server_authname.to_s, :alias_username => proxy_server_alias.to_s).first
+        destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => provisioning_server_authname.to_s, 'alias_username' => proxy_server_alias.to_s })
         if ! destroy_dbalias.destroy
           errors.add( :base, "Failed to destroy dbalias on SipProxy server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
