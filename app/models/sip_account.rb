@@ -35,7 +35,9 @@ class SipAccount < ActiveRecord::Base
     :allow_nil => false
   validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
   
-  validates_numericality_of(:voicemail_pin, :greater_than_or_equal_to => 1000, :message => "Must be a number")
+  validates_numericality_of(:voicemail_pin,
+    :greater_than_or_equal_to => 1000
+  )
   
   
   after_validation( :on => :create ) do
