@@ -26,7 +26,7 @@ Gemeinschaft4::Application.routes.draw do
 	resources :admin, :only => [:index]
 	resources :kamailio, :only => [:index ], :format => 'txt'
 	namespace :admin do
-		resources :user
+		resources :user   #OPTIMIZE - plural!
 		resources :setup
 	end
 	
