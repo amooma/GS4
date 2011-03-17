@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<header>
 <% if params[:controller] != 'admin/setup' && @app_number_of_users == 0
 %>
 	<div class="noticebox">
@@ -22,19 +23,20 @@
 	</div>
 <% end
 %>
-
-<div id="user_nav">
+	
+	<div id="user_nav">
 <%- if user_signed_in? -%>
-	Signed in as <q><%= current_user.username %></q>.
-	<%= link_to "Sign out", destroy_user_session_path %>
+		Signed in as <q><%= current_user.username %></q>.
+		<%= link_to "Sign out", destroy_user_session_path %>
 <%- else -%>
-	<%= link_to "Sign in", new_user_session_path %>
+		<%= link_to "Sign in", new_user_session_path %>
 <%- end -%>
-</div>
-
-<div id="header">
-	<a href="/">Gemeinschaft4</a>
-</div>
+	</div>
+	
+	<div id="header">
+		<a href="/">Gemeinschaft4</a>
+	</div>
+</header>
 
 <div class="app_notice">
 	<%= notice %>

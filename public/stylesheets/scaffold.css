@@ -105,7 +105,7 @@ div#user_nav {
 	font-weight: bold;
 }
 
-div#header {
+#header {
 	text-align: center;
 	background-color: #bbf;
 	padding: 0.2em;
