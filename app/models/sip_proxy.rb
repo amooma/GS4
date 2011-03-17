@@ -16,8 +16,8 @@ class SipProxy < ActiveRecord::Base
   validates_uniqueness_of(:name, :message => "Server already exists")
   validate_hostname_or_ip(:name)
   validates_numericality_of( :config_port,
-    :allow_nil => true,
-    :greater_than => 0,
-    :less_than => 65536,
+    :allow_nil    => true,
+    :greater_than =>     0,
+    :less_than    => 65536,
   )
 end
