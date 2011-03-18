@@ -71,6 +71,21 @@
     https://github.com/amooma/Gemeinschaft4 herunter und transferrieren Sie
     die Datei auf den Server (z.B. per scp).</para>
 
+    <para>Bitte achten Sie darauf die Datei aus dem richtigen Branch (NICHT
+    master) zu laden. Bitte verwenden Sie immer die aktuellste Version (zum
+    jetzigen Zeitpunkt 1.0). Nachdem Sie install.sh heruntergeladen haben,
+    gehen Sie bitte wie folgt vor:</para>
+
+    <para><screen>scp install.sh root@GEMEINSCHAFT:/tmp/
+ssh root@GEMEINSCHAFT
+cd /tmp
+chmod +x install.sh
+./install.sh
+</screen>Bitte führen Sie install.sh unbedingt als "root" aus, da sonst die
+    globalen gems nicht installiert werden können.</para>
+
+    <para></para>
+
     <para>Das Script zum Zeitpunkt der Dokumentation. Bitte IMMER die aktuelle
     Version verwenden.</para>
 
