@@ -41,11 +41,12 @@ cd /opt
 PROJECTS="Gemeinschaft4 
 Cantina 
 sipproxy";
+
 for i in $PROJECTS
 do
   cd /opt
   
-  git clone https://$USER:$PASS@github.com/amooma/$i.git
+  git clone -b 1.0 https://$USER:$PASS@github.com/amooma/$i.git
   cd /opt/$i
   
   bundle install
