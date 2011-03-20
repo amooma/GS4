@@ -384,7 +384,7 @@ class SipAccount < ActiveRecord::Base
         :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
       )
       if ! sipproxy_subscriber.valid?
-        errors.add( :base, "Failed to create user account on SipProxy server. (Reason:\n" +
+        errors.add( :base, "Failed to create user account on SipProxy management server. (Reason:\n" +
         get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
           ")" )
       end
@@ -403,7 +403,7 @@ class SipAccount < ActiveRecord::Base
         SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
         destroy_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => provisioning_server_authname.to_s })
         if ! destroy_subscriber.destroy
-          errors.add( :base, "Failed to destroy user account on SipProxy server. (Reason:\n" +
+          errors.add( :base, "Failed to destroy user account on SipProxy management server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
             ")" )
         else
@@ -411,16 +411,16 @@ class SipAccount < ActiveRecord::Base
         end
       end
     rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to sipproxy server." )
+      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
     rescue Errno::EADDRNOTAVAIL => e
-      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to sipproxy server." )
+      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
     rescue Errno::EHOSTDOWN => e
-      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to sipproxy server." )
+      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
     end
   end
@@ -442,7 +442,7 @@ class SipAccount < ActiveRecord::Base
        	:ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
       )
       if ! sipproxy_subscriber
-        errors.add( :base, "Failed to create user account on SipProxy server. (Reason:\n" +
+        errors.add( :base, "Failed to create user account on SipProxy management server. (Reason:\n" +
         get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
           ")" )
       end
@@ -465,7 +465,7 @@ class SipAccount < ActiveRecord::Base
         :alias_domain   =>  self.sip_server.name
       )
       if ! sipproxy_dbalias.valid?
-        errors.add( :base, "Failed to create alias on SipProxy server. (Reason:\n" +
+        errors.add( :base, "Failed to create alias on SipProxy management server. (Reason:\n" +
         get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
           ")" )
       end
@@ -489,7 +489,7 @@ class SipAccount < ActiveRecord::Base
         :alias_domain   =>  self.sip_server.name
       )
       if ! sipproxy_dbalias
-        errors.add( :base, "Failed to update dbalias on SipProxy server. (Reason:\n" +
+        errors.add( :base, "Failed to update dbalias on SipProxy management server. (Reason:\n" +
         get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
           ")" )
       end
@@ -508,7 +508,7 @@ class SipAccount < ActiveRecord::Base
         SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
         destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => provisioning_server_authname.to_s, 'alias_username' => proxy_server_alias.to_s })
         if ! destroy_dbalias.destroy
-          errors.add( :base, "Failed to destroy dbalias on SipProxy server. (Reason:\n" +
+          errors.add( :base, "Failed to destroy dbalias on SipProxy management server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
             ")" )
         else
@@ -516,16 +516,16 @@ class SipAccount < ActiveRecord::Base
         end
       end
     rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to sipproxy server." )
+      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
     rescue Errno::EADDRNOTAVAIL => e
-      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to sipproxy server." )
+      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
     rescue Errno::EHOSTDOWN => e
-      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to sipproxy server." )
+      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
     end
   end
