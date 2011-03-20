@@ -339,23 +339,25 @@ class SipAccount < ActiveRecord::Base
   # Delete SipAccount on Cantina when Phone has changed.
   #
   def delete_last_cantina_account
-    prov_server = SipPhone.find(sip_phone_id_was).provisioning_server
-    CantinaSipAccount.set_resource( "http://#{prov_server.name}:#{prov_server.port}/" )
-    cantina_sip_accounts = CantinaSipAccount.all
-    if cantina_sip_accounts
-      found_c_accounts = cantina_sip_accounts.each { |cantina_sip_account|
-        if (cantina_sip_account.registrar .to_s == self.sip_server .to_s) \
-        && (cantina_sip_account.auth_user .to_s == self.auth_name  .to_s)
-          logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
-          break
-        end
-      }
-    end
-    delete_c_account = found_c_accounts.collect {|a| a.id}.to_enum.first
-    if ! CantinaSipAccount.find(delete_c_account).destroy
-      errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
-      get_active_record_errors_from_remote( delete_c_account ).join(",\n") +
-        ")" )
+    old_prov_server = SipPhone.find(sip_phone_id_was).provisioning_server
+    if ! old_prov_server.blank?
+      CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
+      cantina_sip_accounts = CantinaSipAccount.all
+      if cantina_sip_accounts
+        found_c_accounts = cantina_sip_accounts.each { |cantina_sip_account|
+          if (cantina_sip_account.registrar .to_s == self.sip_server .to_s) \
+          && (cantina_sip_account.auth_user .to_s == self.auth_name  .to_s)
+            logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
+            break
+          end
+        }
+      end
+      delete_c_account = found_c_accounts.collect {|a| a.id}.to_enum.first
+      if ! CantinaSipAccount.find(delete_c_account).destroy
+        errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+        get_active_record_errors_from_remote( delete_c_account ).join(",\n") +
+          ")" )
+      end
     end
   end
   
