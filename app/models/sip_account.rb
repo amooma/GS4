@@ -225,6 +225,9 @@ class SipAccount < ActiveRecord::Base
     rescue Errno::EADDRNOTAVAIL => e
       logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
       return false
+    rescue Errno::EHOSTDOWN => e
+      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
+      return false
     end
   end
   
@@ -259,6 +262,10 @@ class SipAccount < ActiveRecord::Base
       errors.add( :base, "Failed to connect to Cantina provisioning server." )
       return false
     rescue Errno::EADDRNOTAVAIL => e
+      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to Cantina provisioning server." )
+      return false
+    rescue Errno::EHOSTDOWN => e
       logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to Cantina provisioning server." )
       return false
@@ -411,6 +418,10 @@ class SipAccount < ActiveRecord::Base
       logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to sipproxy server." )
       return false
+    rescue Errno::EHOSTDOWN => e
+      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to sipproxy server." )
+      return false
     end
   end
   
@@ -509,6 +520,10 @@ class SipAccount < ActiveRecord::Base
       errors.add( :base, "Failed to connect to sipproxy server." )
       return false
     rescue Errno::EADDRNOTAVAIL => e
+      logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
+      errors.add( :base, "Failed to connect to sipproxy server." )
+      return false
+    rescue Errno::EHOSTDOWN => e
       logger.warn "Failed to connect to sipproxy server. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to sipproxy server." )
       return false
