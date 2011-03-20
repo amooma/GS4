@@ -33,61 +33,63 @@
   <section>
     <title>Installation des Basis Systems</title>
 
-    <para>Als Basis System kommt eine Minimal Installation von Debian 6
-    ("Squeeze") zum Einsatz.</para>
+    <para>Als Basis-System kommt eine Minimal-Installation von Debian 6
+    („Squeeze“) zum Einsatz.</para>
 
-    <para>Bitte wählen Sie bei der Paketauswahl alle Pakete ausser "ssh" ab.
+    <para>Bitte wählen Sie bei der Paketauswahl alle Pakete außer „ssh“ ab.
     Das Paket erleichtert vor allem in einer virtuellen Installation die
-    weitern Schritte.</para>
+    weiteren Schritte.</para>
   </section>
 
   <section>
     <title>Installation von Gemeinschaft4</title>
 
     <para>Alle für Gemeinschaft4 benötigten komponenten können über das im
-    github.com Repository vorhandene Installationsscript installiert
+    github.com-Repository vorhandene Installationsskript installiert
     werden.</para>
 
-    <para>Für die Installation des Demo Systems werden alle drei Ruby
-    Applikationen in einem Webserver gestartet. Hierfür kommt lighttpd
+    <para>Für die Installation des Demo-Systems werden alle drei
+    Ruby-Applikationen in einem Web-Server gestartet. Hierfür wird Lighttpd
     verwendet. Die einzelnen Applikationen sind weiterhin über die bekannte
     Ports erreichbar:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Gemeinschaft4 3000</para>
+        <para>Gemeinschaft4: 3000</para>
       </listitem>
 
       <listitem>
-        <para>Cantina 3001</para>
+        <para>Cantina: 3001</para>
       </listitem>
 
       <listitem>
-        <para>sipproxy 3002</para>
+        <para>SipProxy: 3002</para>
       </listitem>
     </itemizedlist>
 
-    <para>Als erstes laden Sie Sich bitte die Datei install.sh von
-    https://github.com/amooma/Gemeinschaft4 herunter und transferrieren Sie
-    die Datei auf den Server (z.B. per scp).</para>
+    <para>Als erstes laden Sie sich bitte die Datei
+    <filename>install.sh</filename> von <link
+    xlink:href="https://github.com/amooma/Gemeinschaft4">https://github.com/amooma/Gemeinschaft4</link>
+    herunter und transferieren Sie die Datei auf den Server (z.B. per
+    scp).</para>
 
-    <para>Bitte achten Sie darauf die Datei aus dem richtigen Branch (NICHT
-    master) zu laden. Bitte verwenden Sie immer die aktuellste Version (zum
-    jetzigen Zeitpunkt 1.0). Nachdem Sie install.sh heruntergeladen haben,
-    gehen Sie bitte wie folgt vor:</para>
+    <para>Bitte achten Sie darauf die Datei aus dem richtigen Branch
+    (<emphasis>nicht</emphasis> <literal>master</literal>) zu laden. Bitte
+    verwenden Sie immer die aktuellste Version (zum jetzigen Zeitpunkt 1.0).
+    Nachdem Sie <filename>install.sh</filename> heruntergeladen haben, gehen
+    Sie bitte wie folgt vor:</para>
 
-    <para><screen>scp install.sh root@GEMEINSCHAFT:/tmp/
-ssh root@GEMEINSCHAFT
+    <para><screen>scp install.sh root@<replaceable>GEMEINSCHAFT</replaceable>:/tmp/
+ssh root@<replaceable>GEMEINSCHAFT</replaceable>
 cd /tmp
 chmod +x install.sh
 ./install.sh
-</screen>Bitte führen Sie install.sh unbedingt als "root" aus, da sonst die
-    globalen gems nicht installiert werden können.</para>
+</screen>Bitte führen Sie <filename>install.sh</filename> unbedingt als
+    Benutzer „root“ aus, da sonst die globalen Ruby-Gems nicht installiert
+    werden können.</para>
 
-    <para></para>
-
-    <para>Das Script zum Zeitpunkt der Dokumentation. Bitte IMMER die aktuelle
-    Version verwenden.</para>
+    <para>Das Skript zum Zeitpunkt der Dokumentation. Bitte verwenden Sie
+    immer die aktuelle Version.</para>
 
     <para><screen>#!/bin/bash
 
@@ -123,7 +125,7 @@ Cantina
 sipproxy";
 for i in $PROJECTS
 do
-cd /opt
+  cd /opt
   
   git clone https://$USER:$PASS@github.com/amooma/$i.git
   cd /opt/$i
@@ -162,9 +164,9 @@ cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
 update-rc.d kamailio defaults
 /etc/init.d/kamailio start
 
-
-</screen>Sobald das Script erfolgreich abgearbeitet wurde, können Sie auf das
-    Webinterface von Gemeinschaft4 über http://IP_DES_SERVERS:3000
+</screen>Sobald das Skript erfolgreich abgearbeitet wurde, können Sie auf das
+    Web-Interface von Gemeinschaft4 über
+    <uri>http://<replaceable>IP_ADRESSE</replaceable>:3000</uri>
     zugreifen.</para>
   </section>
 </chapter>
