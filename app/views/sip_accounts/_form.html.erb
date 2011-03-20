@@ -19,12 +19,16 @@
     ) %>
   </div>
   <div class="field">
-    <%= f.label :auth_name %><br />
+    <%= f.label :auth_name, "Auth. name" %><br />
     <%= f.text_field :auth_name %>
   </div>
   <div class="field">
     <%= f.label :password %><br />
     <%= f.text_field :password %>
+  </div>
+	<div class="field">
+    <%= f.label :voicemail_pin, "Voicemail PIN" %><br />
+    <%= f.text_field :voicemail_pin %>
   </div>
   <div class="field">
     <%= f.label :realm %><br />

@@ -31,45 +31,46 @@
   </info>
 
   <section>
-    <title>Interaktion der Ruby Applikationen</title>
+    <title>Interaktion der Ruby-Applikationen</title>
 
-    <para>Gemeinschaft4 besteht im Moment aus drei einzelnen ruby
-    Applikationen.</para>
+    <para>Gemeinschaft4 besteht im Moment aus drei einzelnen
+    Ruby-Applikationen.</para>
 
     <section>
       <title>Cantina</title>
 
-      <para>Cantina ist der zentrale Provisionierungsserver für SIP Telefone.
-      Die Dokumentation zu dieser Applikation finden Sie im doc erzeichnis des
-      Projekts.</para>
+      <para>Cantina ist der zentrale Provisionierungsserver für SIP-Telefone.
+      Die Dokumentation zu dieser Applikation finden Sie im
+      <filename>doc</filename>-Verzeichnis des Projekts.</para>
     </section>
 
     <section>
       <title>sipproxy</title>
 
       <para>sipproxy ist eine Applikation, die eine beliebige Datenbank für
-      die Userdaten und die benötigten Alias Daten für Kamailio
+      die Userdaten und die benötigten Alias-Daten für Kamailio
       befüllt.</para>
 
       <section>
         <title>Userdaten</title>
 
         <para>Kamailio benötigt für jedes Telefon, das sich registrieren
-        können soll einen Usernamen und ein Passwort. Diese Daten können
-        sipproxy über einen Restfull Aufruf übergeben werden. Auch wenn
-        sipproxy eine html Schnittstelle zur Verfügung stellt, sollten
-        Änderungen immer nur über das Webinterface von Gemeinschaft4
+        können soll, einen Benutzernamen und ein Passwort. Diese Daten können
+        sipproxy über einen Aufruf im REST-Stil übergeben werden. Auch wenn
+        sipproxy eine HTML-Schnittstelle zur Verfügung stellt sollten
+        Änderungen immer nur über das Web-Interface von Gemeinschaft4
         vorgenommen werden.</para>
       </section>
 
       <section>
         <title>Alias Daten</title>
 
-        <para>Per default ist jeder auf Kamailio angelegte User über seinen
-        Usernamen erreichbar. Da ein Username auch alphanummerisch sein kann
-        erschwert das das Wählen über eine Telfontastatur. Aus diesem Grund
-        wird jedem User ein nummerischer Alias zugeordnet. In unserem Beispiel
-        erhält der User "test1" den Alias "111".</para>
+        <para>Standardmäßig ist jeder auf Kamailio angelegte Benutzer über
+        seinen Benutzernamen erreichbar. Da ein Benutzername auch
+        alphanumerisch sein kann erschwert das das Wählen über eine
+        Telefontastatur. Aus diesem Grund wird jedem User ein numerischer
+        Alias-Name zugeordnet. In unserem Beispiel erhält der Benutzer
+        „<literal>test1</literal>“ das Alias „<literal>111</literal>“.</para>
       </section>
     </section>
 
@@ -77,17 +78,18 @@
       <title>Gemeinschaft4</title>
 
       <para>Gemeinschaft4 ist die zentrale Verwaltungsstelle für die gesamte
-      Telefonanlage. Das Webinterface ist so ausgelegt, dass eine beliebige
-      Anzahl von Cantina und sipproxy Instanzen verwaltet werden
+      Telefonanlage. Das Web-Interface ist so ausgelegt, dass eine beliebige
+      Anzahl von Cantina- und sipproxy-Instanzen verwaltet werden
       können.</para>
 
       <para>In der Datenbank von Gemeinschaft werden alle benötigten
       Informationen gespeichert. An die weiteren Applikationen werden über
-      Restfull Aufrufe nur die Informationen übermittelt, die für die
+      Aufrufe im REST-Stil nur die Informationen übermittelt, die für die
       jeweilige Applikation notwendig sind.</para>
 
       <para>Genaue Informationen über das Zusammenspiel der Applikationen
-      entnehmen Sie bitte der Datei "gemeinschaft4-interaktion.pdf".</para>
+      entnehmen Sie bitte der Datei
+      <filename>gemeinschaft4-interaktion.pdf</filename>.</para>
     </section>
   </section>
 </chapter>
