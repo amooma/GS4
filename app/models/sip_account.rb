@@ -42,7 +42,7 @@ class SipAccount < ActiveRecord::Base
   
   after_validation( :on => :create ) do
     if ! sip_phone_id.nil?
-      prov_srv_sip_account_create
+      provisioning_server_sip_account_create
     end
     if (! sip_server_id.nil?) && (! self.phone_number.nil?) && (! self.sip_proxy_id.nil?)  # ?
       if ! self.sip_server.config_port.nil?
@@ -54,7 +54,7 @@ class SipAccount < ActiveRecord::Base
   
   after_validation( :on => :update ) do
     if ! sip_phone_id.nil?
-      prov_srv_sip_account_update
+      provisioning_server_sip_account_update
     end
     if ((self.auth_name != self.auth_name_was && sip_phone_id_was != nil ) || (sip_phone_id_was != nil \
         && sip_phone_id != sip_phone_id_was))
@@ -75,7 +75,7 @@ class SipAccount < ActiveRecord::Base
   
   before_destroy do
     if ! sip_phone_id.nil?
-      prov_srv_sip_account_destroy
+      provisioning_server_sip_account_destroy
     end
     if ! sip_server_id.nil?
       if ! self.sip_server.config_port.nil?
@@ -101,18 +101,18 @@ class SipAccount < ActiveRecord::Base
   
   # Create SIP account on the provisioning server.
   #
-  def prov_srv_sip_account_create
-    prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+  def provisioning_server_sip_account_create
+    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
     ret = false
     if self.errors && self.errors.length > 0
       # The SIP account is invalid. Don't even try to create it on the prov. server.
       errors.add( :base, "Will not create invalid SIP account on the provisioning server." )
     else
-      case prov_srv
+      case provisioning_server
         when 'cantina'
           ret = cantina_sip_account_create
         else
-          errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+          errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
       end
     end
     return ret
@@ -120,18 +120,18 @@ class SipAccount < ActiveRecord::Base
   
   # Update SIP account on the provisioning server.
   #
-  def prov_srv_sip_account_update
-    prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+  def provisioning_server_sip_account_update
+    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
     ret = false
     if self.errors && self.errors.length > 0
       # The SIP account is invalid. Don't even try to update it on the prov. server.
       errors.add( :base, "SIP account is invalid. Will not update data on the provisioning server." )
     else
-      case prov_srv
+      case provisioning_server
         when 'cantina'
           ret = cantina_sip_account_update
         else
-          errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+          errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
       end
     end
     return ret
@@ -139,14 +139,14 @@ class SipAccount < ActiveRecord::Base
   
   # Delete SIP account on the provisioning server.
   #
-  def prov_srv_sip_account_destroy
-    prov_srv = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+  def provisioning_server_sip_account_destroy
+    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
     ret = false
-    case prov_srv
+    case provisioning_server
       when 'cantina'
         ret = cantina_sip_account_destroy
       else
-        errors.add( :base, "Provisioning server type #{prov_srv.inspect} not implemented." )
+        errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
     end
     return ret
   end
@@ -167,11 +167,11 @@ class SipAccount < ActiveRecord::Base
         logger.debug "SipPhone #{self.sip_phone_id.inspect} has no provisioning server. Alright."
         return nil  # phone without provisioning
       else
-        prov_srv = self.sip_phone.provisioning_server
-        if prov_srv
+        provisioning_server = self.sip_phone.provisioning_server
+        if provisioning_server
           scheme = 'http'  # TODO - https as soon as it is implemented.
-          host   = prov_srv.name if ! prov_srv.name.blank?
-          port   = prov_srv.port if ! prov_srv.port.blank?
+          host   = provisioning_server.name if ! provisioning_server.name.blank?
+          port   = provisioning_server.port if ! provisioning_server.port.blank?
           path   = '/'
         end
       end
