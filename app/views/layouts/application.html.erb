@@ -5,13 +5,14 @@
 	<title>Amooma Gemeinschaft4</title>
 	<link rel="icon shortcut" type="image/x-icon" sizes="16x16" href="/favicon.ico" />
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+	<meta name="viewport" content="width=850, initial-scale=1.0" />
 <%= stylesheet_link_tag :all %>
 <%= csrf_meta_tag %>
 </head>
 <body>
 
 <header>
-<% if params[:controller] != 'admin/setup' && @app_number_of_users == 0
+<% if (params[:controller] != 'admin/setup' && @app_number_of_users == 0) ; (
 %>
 	<div class="noticebox">
 		No users configured.<br />
@@ -21,31 +22,44 @@
 			)
 		%> and create an admin user.
 	</div>
-<% end
+	
+<% )end
 %>
 	
-	<div id="user_nav">
+	<a class="tty" href="#content">Skip navigation</a>
+	<div id="header">
+		<div id="application">
+			<a href="/">Gemeinschaft4</a>
+		</div>
+		
+		<div id="user_nav">
 <%- if user_signed_in? -%>
-		Signed in as <q><%= current_user.username %></q>.
-		<%= link_to "Sign out", destroy_user_session_path %>
+			Signed in as <q><b><%= current_user.username %></b></q>.
+			<%= link_to "Sign out", destroy_user_session_path %>
 <%- else -%>
-		<%= link_to "Sign in", new_user_session_path %>
+			<%= link_to "Sign in", new_user_session_path %>
 <%- end -%>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	<hr class="tty" width="100%" />
+	
+<%= render 'layouts/menu' %>
+</header>
+<hr class="tty" width="100%" />
+
+<!-- content { -->
+<div id="content">
+	<div class="app_notice">
+		<%= notice %>
+	</div>
+	<div class="app_alert">
+		<%= alert %>
 	</div>
 	
-	<div id="header">
-		<a href="/">Gemeinschaft4</a>
-	</div>
-</header>
-
-<div class="app_notice">
-	<%= notice %>
+	<%= yield %>
 </div>
-<div class="app_alert">
-	<%= alert %>
-</div>
-
-<%= yield %>
-
+<!-- content } -->
 </body>
 </html>
