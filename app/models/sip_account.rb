@@ -351,19 +351,24 @@ class SipAccount < ActiveRecord::Base
       CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
       cantina_sip_accounts = CantinaSipAccount.all
       if cantina_sip_accounts
-        found_c_accounts = cantina_sip_accounts.each { |cantina_sip_account|
+        matching_cantina_sip_accounts = cantina_sip_accounts.each { |cantina_sip_account|
           if (cantina_sip_account.registrar .to_s == self.sip_server .to_s) \
           && (cantina_sip_account.auth_user .to_s == self.auth_name  .to_s)
             logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
+            #FIXME ? - Does this block really do anything?
             break
           end
         }
-      end
-      delete_c_account = found_c_accounts.collect {|a| a.id}.to_enum.first
-      if ! CantinaSipAccount.find(delete_c_account).destroy
-        errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
-        get_active_record_errors_from_remote( delete_c_account ).join(",\n") +
-          ")" )
+        #puts "matching_cantina_sip_accounts = #{matching_cantina_sip_accounts.inspect}"
+        delete_cantina_sip_account_id = matching_cantina_sip_accounts.collect {|a| a.id}.to_enum.first
+        logger.debug "delete_cantina_sip_account_id = #{delete_cantina_sip_account_id.inspect}"
+        if delete_cantina_sip_account_id
+          if ! CantinaSipAccount.find( delete_cantina_sip_account_id ).destroy
+            errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+            get_active_record_errors_from_remote( delete_cantina_sip_account_id ).join(",\n") +
+              ")" )
+          end
+        end
       end
     end
   end
