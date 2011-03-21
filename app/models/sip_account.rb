@@ -25,7 +25,7 @@ class SipAccount < ActiveRecord::Base
   belongs_to :extension  , :validate => true
   belongs_to :user
   
-  #FIXME - validate that the referenced objects exists
+  #FIXME - validate that the referenced objects (*_id) exists
   
   validates_uniqueness_of   :auth_name, :scope => :sip_server_id
   validates_presence_of     :sip_server_id
