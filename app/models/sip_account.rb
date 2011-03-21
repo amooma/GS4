@@ -60,7 +60,7 @@ class SipAccount < ActiveRecord::Base
         && sip_phone_id != sip_phone_id_was))
       delete_last_cantina_account
     end
-    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id = self.sip_server_id_was && self.sip_server.config_port != nil)
+    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.config_port != nil)
       update_user_on_sipproxy( sip_server_id, auth_name_was )
     end
     #FIXME - self.sip_server can be nil
