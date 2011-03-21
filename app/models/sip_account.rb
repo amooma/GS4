@@ -398,7 +398,7 @@ class SipAccount < ActiveRecord::Base
   
   # Delete user on "SipProxy" proxy manager.
   #
-  def destroy_user_on_sipproxy( proxy_server_id, provisioning_server_authname )
+  def destroy_user_on_sipproxy( proxy_server_id, proxy_server_authname )
     begin
       server = SipServer.find(proxy_server_id)
       if server.config_port.nil?
@@ -406,7 +406,7 @@ class SipAccount < ActiveRecord::Base
         return false
       else
         SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
-        destroy_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => provisioning_server_authname.to_s })
+        destroy_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
         if ! destroy_subscriber.destroy
           errors.add( :base, "Failed to destroy user account on SipProxy management server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
@@ -432,14 +432,14 @@ class SipAccount < ActiveRecord::Base
   
   # Update user on "SipProxy" proxy manager.
   #
-  def update_user_on_sipproxy( proxy_server_id, provisioning_server_authname )
+  def update_user_on_sipproxy( proxy_server_id, proxy_server_authname )
     server = SipServer.find(proxy_server_id)
     if server.config_port.nil?
       # TODO errormessage
       return false
     else
       SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
-      update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => provisioning_server_authname.to_s })
+      update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
       sipproxy_subscriber = update_subscriber.update_attributes(
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
@@ -479,14 +479,14 @@ class SipAccount < ActiveRecord::Base
   
   # Update alias on "SipProxy" proxy manager.
   #
-  def update_alias_on_sipproxy( proxy_server_id, p_name, p_alias )
+  def update_alias_on_sipproxy( proxy_server_id, proxy_server_authname, proxy_server_alias )
     server = SipServer.find(proxy_server_id)
     if server.config_port.nil?
       # TODO errormessage
       return false
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
-      update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{p_name}", 'alias_username' => "#{p_alias}"} )
+      update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
       sipproxy_dbalias = update_dbalias.update_attributes(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
@@ -503,7 +503,7 @@ class SipAccount < ActiveRecord::Base
   
   # Delete dbalias on "SipProxy" proxy manager.
   #
-  def destroy_dbalias_on_sipproxy( proxy_server_id, provisioning_server_authname, proxy_server_alias )
+  def destroy_dbalias_on_sipproxy( proxy_server_id, proxy_server_authname, proxy_server_alias )
     begin
       server = SipServer.find(proxy_server_id)
       if server.config_port.nil?
@@ -511,7 +511,7 @@ class SipAccount < ActiveRecord::Base
         return false
       else
         SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
-        destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => provisioning_server_authname.to_s, 'alias_username' => proxy_server_alias.to_s })
+        destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => proxy_server_authname.to_s, 'alias_username' => proxy_server_alias.to_s })
         if ! destroy_dbalias.destroy
           errors.add( :base, "Failed to destroy dbalias on SipProxy management server. (Reason:\n" +
           get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
