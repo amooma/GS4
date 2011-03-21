@@ -18,13 +18,30 @@
       { :include_blank => true, :selected => @sip_phone.provisioning_server_id }
     ) %>
   </div>
-  <% if @sip_phone.provisioning_server_id  %>
+<% if @sip_phone.provisioning_server_id %>
   <div class="field">
     <%= f.label :phone_id, "Phone on prov. server" %><br />
-    <%= f.select(:phone_id, CantinaPhone.all.collect {|p| [p.mac_address, p.id]}, :label_method => :mac_address ) %>
+    <%
+      begin
+        @cantina_phones = CantinaPhone.all  #OPTIMIZE - set this in the controller?
+      rescue => e
+        %>
+        <div class="app_alert">
+          <%= "Failed to get available phones from provisioning server. (#{e.class}, #{e.message})" %>
+        </div>
+        <%
+      end
+      if ! @cantina_phones
+        @cantina_phones = []
+      end
+    %>
+    <%= f.select( :phone_id,
+      @cantina_phones.collect {|p| [p.mac_address, p.id]},
+      :label_method => :mac_address
+    ) %>
   </div>
   <br />
-  <% end %>
+<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
