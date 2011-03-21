@@ -15,4 +15,12 @@ class SipPhoneTest < ActiveSupport::TestCase
     assert ! SipPhone.new( :provisioning_server_id => nil, :phone_id => nil ).valid?
   end
   
+  should "be unique on provisioning_server" do
+    sip_phone = Factory.create( :sip_phone )
+    assert ! Factory.build( :sip_phone, {
+      :provisioning_server_id => sip_phone.provisioning_server_id,
+      :phone_id               => sip_phone.phone_id,
+    }).valid?
+  end
+  
 end
