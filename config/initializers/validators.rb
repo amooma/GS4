@@ -135,4 +135,17 @@ ActiveRecord::Base.class_eval do
     ){1,255}
     $/x, :allow_nil => false, :allow_blank => false
   end
+  def self.validate_password(attr_name)
+   validates_format_of [ attr_name ], :with =>
+  /^
+   (?:
+   (?:
+   [A-Za-z0-9] |
+   [\-_.!~*'()]
+        ) |
+        %[0-9A-F]{2} |
+        [&=+$,]
+      ){0,255}
+    $/x, :allow_nil => true, :allow_blank => true 
+  end
 end

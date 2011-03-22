@@ -66,6 +66,43 @@ class SipAccountTest < ActiveSupport::TestCase
       assert Factory.build( :sip_account, :auth_name => username ).valid?
     end
   }
+  # valid password
+  #
+  [
+    nil,
+    '',
+    'ABCabc012',
+    '-_.!~*\'()',
+    '&=+$,',
+    '%00',
+    '%20',
+    '%FF',
+  ].each { |password|
+    should "be possible to set password to #{password.inspect}" do
+      assert Factory.build( :sip_account, :password => password ).valid?
+    end
+  }
+  
+  # invalid password
+  #
+  [
+    '%2',
+    '%XX',
+    '%ff',
+    '%Ff',
+    '%',
+    '%%%',
+    '"',
+    ':',
+    '#',
+    '\\',
+    'x' * 256,
+  ].each { |password|
+    should "not be possible to set password to #{password.inspect}" do
+      assert ! Factory.build( :sip_account, :password => password ).valid?
+    end
+    
+  }
   
   should "create a SIP account on the Cantina provisioning server" do
     puts ""

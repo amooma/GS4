@@ -32,6 +32,7 @@ class SipAccount < ActiveRecord::Base
   validates_presence_of     :sip_proxy_id
   validates_presence_of     :phone_number
   validate_username         :auth_name
+  validate_password         :password
   validates_format_of       :phone_number, :with => /\A [1-9][0-9]{,9} \z/x,
     :allow_blank => false,
     :allow_nil => false
