@@ -121,4 +121,18 @@ ActiveRecord::Base.class_eval do
     )
     $/x
   end
+  # Validate username as described in RFC 3261
+  def self.validate_username(attr_name)
+    validates_format_of [ attr_name ], :with =>
+    /^
+     (?:
+     (?:
+     [A-Za-z0-9] |
+     [\-_.!~*'()]
+    ) |
+        %[0-9A-F]{2} |
+    [&=+$,;?\/]
+    ){1,255}
+    $/x, :allow_nil => false, :allow_blank => false
+  end
 end

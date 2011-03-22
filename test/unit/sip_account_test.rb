@@ -37,6 +37,35 @@ class SipAccountTest < ActiveSupport::TestCase
     end
   }
   
+  # invalid auth_name
+  #
+  [
+    '%A',
+    '%XX',
+    '%Ff',
+    '\x00',
+    '\\',
+    '"',
+    'x' * 256,
+  ].each { |username|
+    should "not be possible to set auth_name to #{username.inspect}" do
+      assert ! Factory.build( :sip_account, :auth_name => username ).valid?
+    end
+  }
+  
+  # valid auth_name
+  #
+  [
+    'elvis',
+    'Elvis123',
+    '-_.!~*\'()',
+    '%FF',
+    '&=+$,;?/',
+  ].each { |username|
+    should "be possible to set auth_name to #{username.inspect}" do
+      assert Factory.build( :sip_account, :auth_name => username ).valid?
+    end
+  }
   
   should "create a SIP account on the Cantina provisioning server" do
     puts ""
