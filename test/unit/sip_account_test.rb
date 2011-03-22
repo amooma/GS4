@@ -43,6 +43,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '%A',
     '%XX',
     '%Ff',
+    "-A-\x00-B-",
     "\x00",
     '\\',
     '"',
