@@ -444,7 +444,7 @@ class SipAccount < ActiveRecord::Base
     else
       SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
-      #FIXME - update_subscriber can be nil, then we need to create instead. See cantina_sip_account_update().
+      #FIXME - update_subscriber can be nil, then we need to create instead. And we need to catch exceptions by connection errors. See cantina_sip_account_update().
       sipproxy_subscriber = update_subscriber.update_attributes(
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
@@ -492,7 +492,7 @@ class SipAccount < ActiveRecord::Base
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
-      #FIXME - update_dbalias can be nil, then we need to create instead. See cantina_sip_account_update().
+      #FIXME - update_dbalias can be nil, then we need to create instead. And we need to catch exceptions by connection errors. See cantina_sip_account_update().
       sipproxy_dbalias = update_dbalias.update_attributes(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
