@@ -467,7 +467,6 @@ class SipAccount < ActiveRecord::Base
       return false
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
-      #FIXME - First check if the SipproxyDbalias already exists.
       sipproxy_dbalias = SipproxyDbalias.create(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
