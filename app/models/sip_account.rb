@@ -43,7 +43,7 @@ class SipAccount < ActiveRecord::Base
   )
   
   
-  after_validation( :on => :create ) do
+  after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false? It used to be a different callback.
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_create
     end
@@ -55,7 +55,7 @@ class SipAccount < ActiveRecord::Base
     end
   end
   
-  after_validation( :on => :update ) do
+  after_validation( :on => :update ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false? It used to be a different callback.
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_update
     end
@@ -76,7 +76,7 @@ class SipAccount < ActiveRecord::Base
     end
   end
   
-  before_destroy do
+  before_destroy do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false? It used to be a different callback.
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_destroy
     end
@@ -467,6 +467,7 @@ class SipAccount < ActiveRecord::Base
       return false
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
+      #FIXME - First check if the SipproxyDbalias already exists.
       sipproxy_dbalias = SipproxyDbalias.create(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
@@ -491,6 +492,7 @@ class SipAccount < ActiveRecord::Base
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
+      #FIXME - update_dbalias can be nil, then we need to create instead. See cantina_sip_account_update().
       sipproxy_dbalias = update_dbalias.update_attributes(
         :username       =>  self.auth_name,
         :domain         =>  self.sip_server.name,
