@@ -161,7 +161,7 @@ class SipAccountTest < ActiveSupport::TestCase
     sip_account = SipAccount.create(
       :user_id        => nil,
       :auth_name      => "mytest",
-      :password       => "ksjdfhvasdn",
+      :password       => "ksj6fhv8sdn",
       :phone_number   => "1234",
       :voicemail_pin  => "1111",
       :sip_server_id  => sip_server.id,
@@ -196,7 +196,7 @@ class SipAccountTest < ActiveSupport::TestCase
     
     puts "-----------------------------------------------------------"
     puts "Updating the SipAccount ..."
-    sip_account.update_attributes!( :password => "sfuerbc" )
+    sip_account.update_attributes!( :password => "h3r8vs5g" )
     puts sip_account.inspect
     puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
     assert sip_account.valid?
@@ -278,7 +278,7 @@ class SipAccountTest < ActiveSupport::TestCase
     {
       'auth_user'       => 'mytest',
       'user'            => 'mytest',
-      'password'        => 'sfuerbc',
+      'password'        => 'h3r8vs5g',
       'realm'           => nil,
       'phone_id'        => 99991,
       'registrar'       => 'sip-server.test.invalid',
@@ -301,7 +301,7 @@ class SipAccountTest < ActiveSupport::TestCase
         :id              => 1,
         :auth_user       => 'mytest',
         :user            => 'mytest',
-        :password        => 'sfuerbc',
+        :password        => 'h3r8vs5g',
         :realm           => nil,
         :phone_id        => 99991,
         :registrar       => 'sip-server.test.invalid',
@@ -352,7 +352,7 @@ class SipAccountTest < ActiveSupport::TestCase
     {
       'auth_user'       => 'mytest',
       'user'            => 'mytest',
-      'password'        => 'sfuerbc',
+      'password'        => 'h3r8vs5g',
       'realm'           => nil,
       'phone_id'        => 99991,
       'registrar'       => 'sip-server.test.invalid',
@@ -389,7 +389,7 @@ class SipAccountTest < ActiveSupport::TestCase
         :id              => 1,
         :auth_user       => 'mytest',
         :user            => 'mytest',
-        :password        => 'sfuerbc',
+        :password        => 'h3r8vs5g',
         :realm           => nil,
         :phone_id        => 99992,
         :registrar       => 'sip-server.test.invalid',
