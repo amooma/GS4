@@ -443,6 +443,7 @@ class SipAccount < ActiveRecord::Base
     else
       SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
+      #FIXME - update_subscriber can be nil, then we need to create instead. See cantina_sip_account_update().
       sipproxy_subscriber = update_subscriber.update_attributes(
         :username   =>  self.auth_name,
         :domain     =>  self.sip_server.name,
