@@ -43,8 +43,8 @@ class SipAccountTest < ActiveSupport::TestCase
     '%A',
     '%XX',
     '%Ff',
-  # "-A-\x00-B-",   #FIXME - ActiveRecord's SQLite adapter has a bug and does not escape \x00 bytes.
-  # "\x00",         #FIXME - ActiveRecord's SQLite adapter has a bug and does not escape \x00 bytes."
+  # "-A-\x00-B-",   #FIXME - ActiveRecord's SQLite adapter has a bug and does not escape \x00 bytes. https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/6606
+  # "\x00",         #FIXME - ActiveRecord's SQLite adapter has a bug and does not escape \x00 bytes. https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/6606
     '\\',
     '"',
     'x' * 256,
