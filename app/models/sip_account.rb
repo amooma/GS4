@@ -312,12 +312,13 @@ class SipAccount < ActiveRecord::Base
           :registration_expiry_time => 300,
           :dtmf_mode       => 'rfc2833',
         })
-        log_active_record_errors_from_remote( cantina_sip_account )
-        errors.add( :base, "Failed to update SIP account on Cantina provisioning server. (Reason:\n" +
-        get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
-          ")" )
-        return false
-      end
+          log_active_record_errors_from_remote( cantina_sip_account )
+          errors.add( :base, "Failed to update SIP account on Cantina provisioning server. (Reason:\n" +
+          get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+            ")" )
+          return false
+        end
+      #end else
     end
     return true
   end
@@ -437,25 +438,37 @@ class SipAccount < ActiveRecord::Base
   # Update user on "SipProxy" proxy manager.
   #
   def update_user_on_sipproxy( proxy_server_id, proxy_server_authname )
-    server = SipServer.find(proxy_server_id)
-    if server.config_port.nil?
+    server = SipServer.find( proxy_server_id )
+    if server.config_port.blank?
       # TODO errormessage
-      return false
+      return false  # return true?
     else
       SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
-      #FIXME - update_subscriber can be nil, then we need to create instead. And we need to catch exceptions by connection errors. See cantina_sip_account_update().
-      sipproxy_subscriber = update_subscriber.update_attributes(
-        :username   =>  self.auth_name,
-        :domain     =>  self.sip_server.name,
-        :password   =>  self.password,
-       	:ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
-      )
-      if ! sipproxy_subscriber
-        errors.add( :base, "Failed to create user account on SipProxy management server. (Reason:\n" +
-        get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
-          ")" )
+      #FIXME - Catch exceptions by connection errors, see cantina_sip_account_update().
+      case update_subscriber
+        #when false
+        #  errors.add( :base, "Failed to connect to SipProxy management server." )
+        #  return false
+        when nil
+          # create instead
+          return create_user_on_sipproxy( proxy_server_id )
+        else
+          if ! update_subscriber.update_attributes({
+            :username   =>  self.auth_name,
+            :domain     =>  self.sip_server.name,
+            :password   =>  self.password,
+            :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
+          })
+            log_active_record_errors_from_remote( update_subscriber )
+            errors.add( :base, "Failed to update user account on SipProxy management server. (Reason:\n" +
+            get_active_record_errors_from_remote( update_subscriber ).join(",\n") +
+              ")" )
+            return false
+          end
+        #end else
       end
+      return true
     end
   end
   
@@ -485,25 +498,37 @@ class SipAccount < ActiveRecord::Base
   # Update alias on "SipProxy" proxy manager.
   #
   def update_alias_on_sipproxy( proxy_server_id, proxy_server_authname, proxy_server_alias )
-    server = SipServer.find(proxy_server_id)
-    if server.config_port.nil?
+    server = SipServer.find( proxy_server_id )
+    if server.config_port.blank?
       # TODO errormessage
-      return false
+      return false  # return true?
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
-      #FIXME - update_dbalias can be nil, then we need to create instead. And we need to catch exceptions by connection errors. See cantina_sip_account_update().
-      sipproxy_dbalias = update_dbalias.update_attributes(
-        :username       =>  self.auth_name,
-        :domain         =>  self.sip_server.name,
-        :alias_username =>  self.phone_number,
-        :alias_domain   =>  self.sip_server.name
-      )
-      if ! sipproxy_dbalias
-        errors.add( :base, "Failed to update dbalias on SipProxy management server. (Reason:\n" +
-        get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
-          ")" )
+      #FIXME - Catch exceptions by connection errors, see cantina_sip_account_update().
+      case update_dbalias
+        #when false
+        #  errors.add( :base, "Failed to connect to SipProxy management server." )
+        #  return false
+        when nil
+          # create instead
+          return create_alias_on_sipproxy( proxy_server_id )
+        else
+          if ! update_dbalias.update_attributes({
+            :username       =>  self.auth_name,
+            :domain         =>  self.sip_server.name,
+            :alias_username =>  self.phone_number,
+            :alias_domain   =>  self.sip_server.name
+          })
+            log_active_record_errors_from_remote( update_dbalias )
+            errors.add( :base, "Failed to update dbalias on SipProxy management server. (Reason:\n" +
+            get_active_record_errors_from_remote( update_dbalias ).join(",\n") +
+              ")" )
+            return false
+          end
+        #end else
       end
+      return true
     end
   end
   
