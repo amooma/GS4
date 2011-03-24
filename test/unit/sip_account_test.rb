@@ -325,9 +325,11 @@ class SipAccountTest < ActiveSupport::TestCase
       'password'        => 'h3r8vs5g',
       'realm'           => nil,
       'phone_id'        => 99991,
-      'registrar'       => 'sip-server.test.invalid',
+      'registrar'       => 'sip-proxy.test.invalid',
       'registrar_port'  => nil,
-      'sip_proxy'       => 'sip-proxy.test.invalid',
+      'outbound_proxy'  => 'sip-proxy.test.invalid',
+      'outbound_proxy_port' => nil,
+      'sip_proxy'       => 'sip-server.test.invalid',
       'sip_proxy_port'  => nil,
       'registration_expiry_time' => 300,
       'dtmf_mode'       => 'rfc2833',
@@ -348,9 +350,11 @@ class SipAccountTest < ActiveSupport::TestCase
         :password        => 'h3r8vs5g',
         :realm           => nil,
         :phone_id        => 99991,
-        :registrar       => 'sip-server.test.invalid',
+        :registrar       => 'sip-proxy.test.invalid',
         :registrar_port  => nil,
-        :sip_proxy       => 'sip-proxy.test.invalid',
+        :outbound_proxy  => 'sip-proxy.test.invalid',
+        :outbound_proxy_port => nil,
+        :sip_proxy       => 'sip-server.test.invalid',
         :sip_proxy_port  => nil,
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',
@@ -361,11 +365,10 @@ class SipAccountTest < ActiveSupport::TestCase
         [ cantina_sip_account_on_phone1 ].to_xml( :root => "sip-accounts" ), 200, {}
       mock.put    "/sip_accounts/1.xml", {},  # PUT = update
         nil, 204, {}
-      mock.get    "/sip_accounts/1.xml", {},  # GET = show
-        cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
-      mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
-        nil, 200, {}
-      #FIXME - why does this need a DELETE?
+      #mock.get    "/sip_accounts/1.xml", {},  # GET = show
+      #  cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
+      #mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
+      #  nil, 200, {}
     }
     
     sip_account.update_attributes!( :sip_phone_id => sip_phone2.id )
@@ -399,27 +402,29 @@ class SipAccountTest < ActiveSupport::TestCase
       'password'        => 'h3r8vs5g',
       'realm'           => nil,
       'phone_id'        => 99991,
-      'registrar'       => 'sip-server.test.invalid',
+      'registrar'       => 'sip-proxy.test.invalid',
       'registrar_port'  => nil,
-      'sip_proxy'       => 'sip-proxy.test.invalid',
+      'outbound_proxy'  => 'sip-proxy.test.invalid',
+      'outbound_proxy_port' => nil,
+      'sip_proxy'       => 'sip-server.test.invalid',
       'sip_proxy_port'  => nil,
       'registration_expiry_time' => 300,
       'dtmf_mode'       => 'rfc2833',
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
     
-    puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
-    idx = ActiveResource::HttpMock.requests.index(
-      ActiveResource::Request.new(
-        :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-    )
-    assert_not_equal( nil, idx )
+    #puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
+    #idx = ActiveResource::HttpMock.requests.index(
+    #  ActiveResource::Request.new(
+    #    :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
+    #)
+    #assert_not_equal( nil, idx )
     
-    puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
-    idx = ActiveResource::HttpMock.requests.index(
-      ActiveResource::Request.new(
-        :delete, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-    )
-    assert_not_equal( nil, idx )
+    #puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
+    #idx = ActiveResource::HttpMock.requests.index(
+    #  ActiveResource::Request.new(
+    #    :delete, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
+    #)
+    #assert_not_equal( nil, idx )
     
     ActiveResource::HttpMock.reset!
     
@@ -436,9 +441,11 @@ class SipAccountTest < ActiveSupport::TestCase
         :password        => 'h3r8vs5g',
         :realm           => nil,
         :phone_id        => 99991,
-        :registrar       => 'sip-server.test.invalid',
+        :registrar       => 'sip-proxy.test.invalid',
         :registrar_port  => nil,
-        :sip_proxy       => 'sip-proxy.test.invalid',
+        :outbound_proxy  => 'sip-proxy.test.invalid',
+        :outbound_proxy_port => nil,
+        :sip_proxy       => 'sip-server.test.invalid',
         :sip_proxy_port  => nil,
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',
@@ -497,9 +504,11 @@ class SipAccountTest < ActiveSupport::TestCase
       'password'        => 'e99w2oc4',
       'realm'           => nil,
       'phone_id'        => 99991,
-      'registrar'       => 'sip-server.test.invalid',
+      'registrar'       => 'sip-proxy.test.invalid',
       'registrar_port'  => nil,
-      'sip_proxy'       => 'sip-proxy.test.invalid',
+      'outbound_proxy'  => 'sip-proxy.test.invalid',
+      'outbound_proxy_port' => nil,
+      'sip_proxy'       => 'sip-server.test.invalid',
       'sip_proxy_port'  => nil,
       'registration_expiry_time' => 300,
       'dtmf_mode'       => 'rfc2833',
@@ -547,9 +556,11 @@ class SipAccountTest < ActiveSupport::TestCase
         :password        => 'h3r8vs5g',
         :realm           => nil,
         :phone_id        => 99992,
-        :registrar       => 'sip-server.test.invalid',
+        :registrar       => 'sip-proxy.test.invalid',
         :registrar_port  => nil,
-        :sip_proxy       => 'sip-proxy.test.invalid',
+        :outbound_proxy  => 'sip-proxy.test.invalid',
+        :outbound_proxy_port => nil,
+        :sip_proxy       => 'sip-server.test.invalid',
         :sip_proxy_port  => nil,
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',

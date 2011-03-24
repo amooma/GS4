@@ -43,11 +43,25 @@ class SipAccount < ActiveRecord::Base
     :greater_than_or_equal_to => 1000
   )
   
+  # The SipAccount must stay on the same provisioning server or
+  # bad things may happen.  #OPTIMIZE - Is this still required?
+  #validate {
+  #  if sip_phone_id_was != nil \
+  #  && sip_phone_id     != nil \
+  #  && sip_phone_id     != sip_phone_id_was
+  #    the_prov_server_id_is  = SipPhone.find( sip_phone_id     ).provisioning_server_id
+  #    the_prov_server_id_was = SipPhone.find( sip_phone_id_was ).provisioning_server_id
+  #    if the_prov_server_id_is != the_prov_server_id_was
+  #      errors.add( :sip_phone, "must stay on the same provisioning server (ID #{prov_server_id_was.inspect})." )
+  #    end
+  #  end
+  #}
   
-  after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false? It used to be a different callback.
+  after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_create
     end
+    
     if (! sip_server_id.nil?) && (! self.phone_number.nil?) && (! self.sip_proxy_id.nil?)  # ?
       if ! self.sip_server.config_port.nil?
         create_user_on_sipproxy(  sip_server_id )
@@ -56,31 +70,75 @@ class SipAccount < ActiveRecord::Base
     end
   end
   
-  after_validation( :on => :update ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false? It used to be a different callback.
+  after_validation( :on => :update ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
+    
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
+    
+    need_to_delete_old_sip_acct = false
+    if sip_phone_id_was != nil    # The SIP account was associated to a phone before.
+      logger.debug "The SIP account had a phone."
+      if sip_phone_id != sip_phone_id_was    # The phone is being changed.
+        if sip_phone_id != nil
+          phone_prov_server_id_was = SipPhone.find( sip_phone_id_was ).provisioning_server_id
+          phone_prov_server_id_is  = SipPhone.find( sip_phone_id     ).provisioning_server_id
+          if phone_prov_server_id_is != phone_prov_server_id_was
+            # The SIP account is being associated to a phone on a different provisioning server instance.
+            logger.debug "The SIP account is being associated to a phone on a different provisioning server instance."
+            need_to_delete_old_sip_acct = true
+          else
+            logger.debug "The SIP account is being associated to a different phone on the same provisioning server instance."
+          end
+        else  # The SIP account is being associated to no phone.
+          logger.debug "The SIP account is being associated to no phone."
+          if provisioning_server_type == 'cantina'
+            need_to_delete_old_sip_acct = true
+          end
+        end
+      else
+        logger.debug "The SIP account's phone isn't being changed."
+      end
+      if provisioning_server_type == 'cantina'
+        if self.auth_name != self.auth_name_was
+          # No need to delete the account. We'll update it in the normal way. (#FIXME?)
+          #logger.debug "The SIP account's username is being changed."
+          #need_to_delete_old_sip_acct = true
+        end
+      end
+    else
+      logger.debug "The SIP account didn't have a phone."
+    end
+    
+    if need_to_delete_old_sip_acct
+      logger.debug "Deleting old SIP account on the provisioning server ..."
+      provisioning_server_sip_account_destroy_old
+    else
+      logger.debug "No need to delete the old SIP account on the provisioning server."
+    end
+    
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_update
     end
-    if ((self.auth_name != self.auth_name_was && sip_phone_id_was != nil ) || (sip_phone_id_was != nil \
-        && sip_phone_id != sip_phone_id_was))
-      delete_last_cantina_account
-    end
+    
     if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.config_port != nil)
       update_user_on_sipproxy( sip_server_id, auth_name_was )
     end
+    
     #FIXME - self.sip_server can be nil
     if self.sip_server_id != self.sip_server_id_was && ! self.sip_server.config_port.nil?
       destroy_user_on_sipproxy( sip_server_id_was, auth_name_was )
     end
+    
     if ((self.sip_server_id_was == self.sip_server_id) && \
         ((self.auth_name != self.auth_name_was) || (self.phone_number != self.phone_number_was)))
       update_alias_on_sipproxy( self.sip_server_id, self.auth_name_was, self.phone_number_was )
     end
   end
   
-  before_destroy do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false? It used to be a different callback.
+  before_destroy do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_destroy
     end
+    
     if ! sip_server_id.nil?
       if ! self.sip_server.config_port.nil?
         destroy_user_on_sipproxy(    self.sip_server_id_was, self.auth_name_was )
@@ -106,17 +164,17 @@ class SipAccount < ActiveRecord::Base
   # Create SIP account on the provisioning server.
   #
   def provisioning_server_sip_account_create
-    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     ret = false
     if self.errors && self.errors.length > 0
       # The SIP account is invalid. Don't even try to create it on the prov. server.
       errors.add( :base, "Will not create invalid SIP account on the provisioning server." )
     else
-      case provisioning_server
+      case provisioning_server_type
         when 'cantina'
           ret = cantina_sip_account_create
         else
-          errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
+          errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
       end
     end
     return ret
@@ -125,17 +183,17 @@ class SipAccount < ActiveRecord::Base
   # Update SIP account on the provisioning server.
   #
   def provisioning_server_sip_account_update
-    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     ret = false
     if self.errors && self.errors.length > 0
       # The SIP account is invalid. Don't even try to update it on the prov. server.
       errors.add( :base, "SIP account is invalid. Will not update data on the provisioning server." )
     else
-      case provisioning_server
+      case provisioning_server_type
         when 'cantina'
           ret = cantina_sip_account_update
         else
-          errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
+          errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
       end
     end
     return ret
@@ -144,13 +202,27 @@ class SipAccount < ActiveRecord::Base
   # Delete SIP account on the provisioning server.
   #
   def provisioning_server_sip_account_destroy
-    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     ret = false
-    case provisioning_server
+    case provisioning_server_type
       when 'cantina'
         ret = cantina_sip_account_destroy
       else
-        errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
+        errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
+    end
+    return ret
+  end
+  
+  # Delete old SIP account on the provisioning server.
+  #
+  def provisioning_server_sip_account_destroy_old
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
+    ret = false
+    case provisioning_server_type
+      when 'cantina'
+        ret = cantina_sip_account_destroy_old
+      else
+        errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
     end
     return ret
   end
@@ -212,15 +284,20 @@ class SipAccount < ActiveRecord::Base
         # As soon as the Cantina API has been extended please optimize this method. Thanks.
         if cantina_sip_accounts
           cantina_sip_accounts.each { |cantina_sip_account|
-            if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
-            && (cantina_sip_account.auth_user .to_s == auth_name  .to_s)
+            # Note: Maybe the "sip_proxy" attribute of CantinaSipAccount
+            # should be named "sip_server" or "sip_domain"?
+            logger.debug "-------------{"
+            logger.debug cantina_sip_account.inspect
+            logger.debug "-------------}"
+            if (cantina_sip_account.sip_proxy .to_s == sip_server .to_s) \
+            && (cantina_sip_account.user      .to_s == sip_user   .to_s)
               logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
               return cantina_sip_account
               break
             end
           }
         end
-        logger.debug "CantinaSipAccount not found."
+        logger.debug "CantinaSipAccount for \"#{sip_user}@#{sip_server}\" not found."
         return nil
       end
     rescue Errno::ECONNREFUSED => e
@@ -251,10 +328,15 @@ class SipAccount < ActiveRecord::Base
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-          :registrar       => (self.sip_server ? self.sip_server.name : nil),
+        # :registrar       => (self.sip_server ? self.sip_server.name : nil),
+          :registrar       => (self.sip_proxy ? self.sip_proxy.name : nil),
           :registrar_port  => nil,
-          :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :sip_proxy       => (self.sip_server ? self.sip_server.name : nil),
+          #OPTIMIZE - For GS4 the "sip_proxy" seems irrelevant. Or should it be renamed to "sip_domain"?
           :sip_proxy_port  => nil,
+          :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :outbound_proxy_port => nil,
           :registration_expiry_time => 300,
           :dtmf_mode       => 'rfc2833',
         })
@@ -305,10 +387,15 @@ class SipAccount < ActiveRecord::Base
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-          :registrar       => (self.sip_server ? self.sip_server.name : nil),
+        # :registrar       => (self.sip_server ? self.sip_server.name : nil),
+          :registrar       => (self.sip_proxy ? self.sip_proxy.name : nil),
           :registrar_port  => nil,
-          :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :sip_proxy       => (self.sip_server ? self.sip_server.name : nil),
+          #OPTIMIZE - For GS4 the "sip_proxy" seems irrelevant. Or should it be renamed to "sip_domain"?
           :sip_proxy_port  => nil,
+          :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :outbound_proxy_port => nil,
           :registration_expiry_time => 300,
           :dtmf_mode       => 'rfc2833',
         })
@@ -348,17 +435,18 @@ class SipAccount < ActiveRecord::Base
     return true
   end
   
-  # Delete SipAccount on Cantina when Phone has changed.
+  # Delete old SIP account on the Cantina provisioning server.
   #
-  def delete_last_cantina_account
-    old_prov_server = SipPhone.find(sip_phone_id_was).provisioning_server
+  def cantina_sip_account_destroy_old
+    #TODO - Make this method more like the other cantina_* methods.
+    old_prov_server = SipPhone.find( sip_phone_id_was ).provisioning_server
     if ! old_prov_server.blank?
       CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
       cantina_sip_accounts = CantinaSipAccount.all
       if cantina_sip_accounts
         matching_cantina_sip_accounts = cantina_sip_accounts.each { |cantina_sip_account|
-          if (cantina_sip_account.registrar .to_s == self.sip_server .to_s) \
-          && (cantina_sip_account.auth_user .to_s == self.auth_name  .to_s)
+          if (cantina_sip_account.sip_proxy .to_s == sip_server .to_s) \
+          && (cantina_sip_account.user      .to_s == sip_user   .to_s)
             logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
             #FIXME ? - Does this block really do anything?
             break
@@ -372,10 +460,12 @@ class SipAccount < ActiveRecord::Base
             errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
             get_active_record_errors_from_remote( delete_cantina_sip_account_id ).join(",\n") +
               ")" )
+            return false
           end
         end
       end
     end
+    return true
   end
   
   # Create user on "SipProxy" proxy manager.
@@ -570,17 +660,21 @@ class SipAccount < ActiveRecord::Base
   #
   def log_active_record_errors_from_remote( ar )
     if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
-      logger.info "----------------------------------------------------------"
-      logger.info "Errors for #{ar.class} from Cantina:"
-      ar.errors.each_pair { |attr, errs|
-        logger.info "  :#{attr.to_s}"
-        if errs.kind_of?(Array) && errs.length > 0
-          errs.each { |msg|
-            logger.info "    " + (attr == :base ? '' : ":#{attr.to_s} ") + "#{msg}"
-          }
-        end
-      }
-      logger.info "----------------------------------------------------------"
+      if ar.errors.length < 1
+        logger.info "No errors for #{ar.class} from remote."
+      else
+        logger.info "----------------------------------------------------------"
+        logger.info "Errors for #{ar.class} from remote:"
+        ar.errors.each_pair { |attr, errs|
+          logger.info "  :#{attr.to_s}"
+          if errs.kind_of?(Array) && errs.length > 0
+            errs.each { |msg|
+              logger.info "    " + (attr == :base ? '' : ":#{attr.to_s} ") + "#{msg}"
+            }
+          end
+        }
+        logger.info "----------------------------------------------------------"
+      end
     end
   end
   
