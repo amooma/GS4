@@ -471,7 +471,7 @@ class SipAccount < ActiveRecord::Base
   # Create user on "SipProxy" proxy manager.
   #
   def sipproxy_user_create( proxy_server_id )
-    server = SipServer.find(proxy_server_id)
+    server = SipServer.find( proxy_server_id )
     if server.config_port.nil?
       # TODO errormessage
       return false
@@ -495,7 +495,7 @@ class SipAccount < ActiveRecord::Base
   #
   def sipproxy_user_destroy( proxy_server_id, proxy_server_authname )
     begin
-      server = SipServer.find(proxy_server_id)
+      server = SipServer.find( proxy_server_id )
       if server.config_port.nil?
         # TODO errormessage
         return false
@@ -565,7 +565,7 @@ class SipAccount < ActiveRecord::Base
   # Create alias on "SipProxy" proxy manager.
   #
   def sipproxy_alias_create( proxy_server_id )
-    server = SipServer.find(proxy_server_id)
+    server = SipServer.find( proxy_server_id )
     if server.config_port.nil?
       # TODO errormessage
       return false
@@ -626,7 +626,7 @@ class SipAccount < ActiveRecord::Base
   #
   def sipproxy_alias_destroy( proxy_server_id, proxy_server_authname, proxy_server_alias )
     begin
-      server = SipServer.find(proxy_server_id)
+      server = SipServer.find( proxy_server_id )
       if server.config_port.nil?
         # TODO errormessage
         return false
