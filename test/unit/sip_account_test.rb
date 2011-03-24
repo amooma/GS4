@@ -208,9 +208,9 @@ class SipAccountTest < ActiveSupport::TestCase
     
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
-      mock.get    "/subscribers.xml?username=mytest", {},
+      mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
         [].to_xml( :root => "subscribers" ), 200, {}
-      mock.post   "/subscribers.xml", {},
+      mock.post   "/subscribers.xml", {},  # POST = create
         nil, 201, { "Location" => "/subscribers/ignored.xml" }
     }
     
@@ -288,9 +288,9 @@ class SipAccountTest < ActiveSupport::TestCase
     ActiveResource::HttpMock.respond_to { |mock|
       cantina_sip_accounts = [
       ]
-      mock.get    "/sip_accounts.xml", {},
+      mock.get    "/sip_accounts.xml", {},  # GET = index
         cantina_sip_accounts.to_xml( :root => "sip-accounts" ), 200, {}
-      mock.post   "/sip_accounts.xml", {},
+      mock.post   "/sip_accounts.xml", {},  # POST = create
         nil, 201, { "Location" => "/sip_accounts/ignored.xml" }
     }
     
@@ -357,13 +357,13 @@ class SipAccountTest < ActiveSupport::TestCase
       }
       cantina_sip_account_on_phone2 = cantina_sip_account_on_phone1.dup
       cantina_sip_account_on_phone2[:phone_id] = 99992
-      mock.get    "/sip_accounts.xml", {},
+      mock.get    "/sip_accounts.xml", {},  # GET = index
         [ cantina_sip_account_on_phone1 ].to_xml( :root => "sip-accounts" ), 200, {}
-      mock.put    "/sip_accounts/1.xml", {},
+      mock.put    "/sip_accounts/1.xml", {},  # PUT = update
         nil, 204, {}
-      mock.get    "/sip_accounts/1.xml", {},
+      mock.get    "/sip_accounts/1.xml", {},  # GET = show
         cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
-      mock.delete "/sip_accounts/1.xml", {},
+      mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
         nil, 200, {}
       #FIXME - why does this need a DELETE?
     }
@@ -453,14 +453,14 @@ class SipAccountTest < ActiveSupport::TestCase
         :ha1         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
       }
       
-      mock.get    "/sip_accounts.xml", {},
+      mock.get    "/sip_accounts.xml", {},  # GET = index
         [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
-      mock.put    "/sip_accounts/1.xml", {},
+      mock.put    "/sip_accounts/1.xml", {},  # PUT = update
         nil, 204, {}
       
-      mock.get    "/subscribers.xml?username=mytest", {},
+      mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
         [ sipproxy_subscriber2 ].to_xml( :root => "subscribers" ), 200, {}
-      mock.put    "/subscribers/1.xml", {},
+      mock.put    "/subscribers/1.xml", {},  # PUT = update
         nil, 204, {}
       
       #FIXME - shouldn't this access "/dbaliases.xml" as well?
@@ -554,11 +554,11 @@ class SipAccountTest < ActiveSupport::TestCase
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',
       }
-      mock.get    "/sip_accounts.xml", {},
+      mock.get    "/sip_accounts.xml", {},  # GET = index
         [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
-      mock.get    "/sip_accounts/1.xml", {},
+      mock.get    "/sip_accounts/1.xml", {},  # GET = show
         cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
-      mock.delete "/sip_accounts/1.xml", {},
+      mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
         nil, 200, {}
     }
     
@@ -610,13 +610,13 @@ class SipAccountTest < ActiveSupport::TestCase
         :alias_domain    => 'sip-server.test.invalid',
         :subscriber_id   => 1,
       }
-      mock.get    "/subscribers.xml?username=mytest", {},
+      mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
         [ sipproxy_subscriber3 ].to_xml( :root => "subscribers" ), 200, {}
-      mock.delete "/subscribers/1.xml", {},
+      mock.delete "/subscribers/1.xml", {},  # DELETE = destroy
         nil, 200, {}
-      mock.get    "/dbaliases.xml?alias_username=1234&username=mytest", {},
+      mock.get    "/dbaliases.xml?alias_username=1234&username=mytest", {},  # GET = index
         [ sipproxy_dbalias3 ].to_xml( :root => "subscribers" ), 200, {}
-      mock.delete "/dbaliases/1.xml", {},
+      mock.delete "/dbaliases/1.xml", {},  # DELETE = destroy
         nil, 200, {}
     }
     
