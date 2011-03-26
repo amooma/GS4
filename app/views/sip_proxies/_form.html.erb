@@ -17,7 +17,11 @@
     <%= f.text_field :name %>
 </div>
 <div class="field">
-    <%= f.label :config_port, "Configuration port" %>
+    <%= f.check_box :managed_by_gs %>
+    <%= f.label :managed_by_gs, "Is managed by Gemeinschaft?" %>
+</div>
+<div class="field">
+    <%= f.label :config_port, "Configuration port (if managed by Gemeinschaft)" %>
     <br/>
     <%= f.text_field :config_port %>
 </div>
