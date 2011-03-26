@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110326104119) do
+ActiveRecord::Schema.define(:version => 20110326140023) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20110326104119) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "config_port"
+    t.boolean  "managed_by_gs"
   end
 
   create_table "sip_servers", :force => true do |t|
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20110326104119) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "config_port"
+    t.boolean  "managed_by_gs"
   end
 
   create_table "tests", :force => true do |t|
