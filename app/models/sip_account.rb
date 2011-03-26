@@ -452,7 +452,7 @@ class SipAccount < ActiveRecord::Base
   def sipproxy_user_create( proxy_server_id )
     server = SipServer.find( proxy_server_id )
     if ! server.managed_by_gs
-      errors.add( :name, "is not managed by gs!")
+      errors.add( :name, "is not managed by GS!")
       return false
     else
       SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
@@ -476,7 +476,7 @@ class SipAccount < ActiveRecord::Base
     begin
       server = SipServer.find( proxy_server_id )
       if ! server.managed_by_gs
-        errors.add( :name, "ist noct managed by GS!")
+        errors.add( :name, "is not managed by GS!")
         return false
       else
         SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
