@@ -71,27 +71,32 @@ class SipProxyTest < ActiveSupport::TestCase
   
   # valid config_port
   [
-    '',
-    nil,
     1,
     65535,
   ].each { |port|
     should "be valid with config_port #{port.inspect}" do
-      assert Factory.build( :sip_proxy, :config_port => port ).valid?
+      assert Factory.build( :sip_proxy, :config_port => port, :managed_by_gs => true ).valid?
     end
   }
   
   # invalid config_port
   [
+    '',
+    nil,
     'foo',
     -1,
     65536,
   ].each { |port|
     should "not be valid with config_port #{port.inspect}" do
-      assert ! Factory.build( :sip_proxy, :config_port => port ).valid?
+      assert ! Factory.build( :sip_proxy, :config_port => port, :managed_by_gs => true ).valid?
     end
   }
   
+   should "not be valid when not managed_by_gs but config_port given" do
+    assert ! Factory.build( :sip_proxy, :config_port => 3000, :managed_by_gs => false ).valid?
+  end
+  
+   
   
   should "not be valid when name not unique" do
     sip_proxy = Factory.create(:sip_proxy)
