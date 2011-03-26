@@ -17,33 +17,61 @@ class SipAccountTest < ActiveSupport::TestCase
     assert_equal( number_of_mock_requests, ActiveResource::HttpMock.requests.length )
   end
   
-  should "create subscriber on sip_proxy server" do
-    sip_server = Factory.create(:sip_server, :config_port => nil)
+  should "create subscriber and alias on sip_proxy server" do
+    sip_server = Factory.create(:sip_server, :config_port => 4040, :managed_by_gs => true)
     sip_proxy = Factory.create(:sip_proxy, :config_port  => nil)
-    sip_account = Factory.create(:sip_account,
-                             :auth_name => 'mytest',
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      mock.post   "/subscribers.xml", {},  # POST = create
+      nil, 201, { "Location" => "/subscribers/ignored.xml" }
+      mock.post   "/dbaliases.xml", {},  # POST = create
+      nil, 201, { "Location" => "/dbaliases/ignored.xml" }
+    }
+    
+    sip_account = Factory.create(:sip_account, 
                              :sip_server_id => sip_server.id,
                              :sip_proxy_id => sip_proxy.id,
                              :sip_phone_id => nil)
-    sip_server.update_attributes!( :config_port => 4020 )
-    
-    # This will result in create (instead of update) operations on the
-    # SipProxy manager application because it did not have a config_port
-    # when the SipAccount was created in GS4 and thus the Subscriber and
-    # Dbalias do not exist in the SipProxy manager yet.
-    
-    ActiveResource::HttpMock.reset!
-    ActiveResource::HttpMock.respond_to { |mock|
-      mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
-      [].to_xml( :root => "subscribers" ), 200, {}
-      mock.post   "/subscribers.xml", {},  # POST = create
-      nil, 201, { "Location" => "/subscribers/ignored.xml" }
-    }
-    
-    
-    
-    sip_account.update_attributes!( :password => "h3r8vs5g" )
     assert sip_account.valid?
+    
+    idx = ActiveResource::HttpMock.requests.index(
+                                                  # Note that ActiveResource::Request.==() does not check equality
+                                                  # of the body, so neither .include?() not .index() alone is enough.
+                                                  ActiveResource::Request.new(
+        :post, "/subscribers.xml", nil, { "Content-Type"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
+    
+    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
+    assert_not_equal( nil, req_obj_hash )
+    assert_not_equal( nil, req_obj_hash['subscriber'], 'Request expected to contain "subscriber" as root' )
+    req_obj_hash = req_obj_hash['subscriber']
+    {
+      'username'    => sip_account.auth_name,
+      'domain'      => sip_account.sip_server.name,
+      'password'    => sip_account.password,
+      'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
+    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
+
+
+    idx = ActiveResource::HttpMock.requests.index(
+                                                  # Note that ActiveResource::Request.==() does not check equality
+                                                  # of the body, so neither .include?() not .index() alone is enough.
+                                                  ActiveResource::Request.new(
+        :post, "/dbaliases.xml", nil, { "Content-Type"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
+    
+    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
+    assert_not_equal( nil, req_obj_hash )
+    assert_not_equal( nil, req_obj_hash['dbalias'], 'Request expected to contain "dbalias" as root' )
+    req_obj_hash = req_obj_hash['dbalias']
+    {
+      'username'    => sip_account.auth_name,
+      'domain'      => sip_account.sip_server.name,
+      'alias_username'  => sip_account.phone_number,
+      'alias_domain'    => sip_account.sip_server.name
+    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
   end
   
   
