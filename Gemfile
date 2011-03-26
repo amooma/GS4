@@ -25,9 +25,6 @@ gem "rails-erd"
 # Generators
 gem "rails3-generators"
 
-# run ./script/annotate to annotate
-gem 'annotate-models'
-
 # https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
 # nicer table like output on the console
 gem 'hirb'

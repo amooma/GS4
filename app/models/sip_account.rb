@@ -1,23 +1,3 @@
-# == Schema Information
-# Schema version: 20110314104017
-#
-# Table name: sip_accounts
-#
-#  id            :integer         not null, primary key
-#  user_id       :integer
-#  auth_name     :string(255)
-#  password      :string(255)
-#  realm         :string(255)
-#  phone_number  :integer
-#  sip_server_id :integer
-#  sip_proxy_id  :integer
-#  created_at    :datetime
-#  updated_at    :datetime
-#  extension_id  :integer
-#  sip_phone_id  :integer
-#  voicemail_pin :integer
-#
-
 class SipAccount < ActiveRecord::Base
   
   belongs_to :sip_server , :validate => true
