@@ -1,6 +1,27 @@
 require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
+  
+  
+  def create_sip_account_without_phone
+    @sip_server = Factory.create(:sip_server, :config_port => 4040, :managed_by_gs => true)
+    @sip_proxy = Factory.create(:sip_proxy, :config_port  => nil)
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      mock.post   "/subscribers.xml", {},  # POST = create
+      nil, 201, { "Location" => "/subscribers/1.xml" }
+      mock.post   "/dbaliases.xml", {},  # POST = create
+      nil, 201, { "Location" => "/dbaliases/1.xml" }
+    }
+    
+    @sip_account = Factory.create(:sip_account, 
+                             :sip_server_id => @sip_server.id,
+                             :sip_proxy_id => @sip_proxy.id,
+                             :sip_phone_id => nil)
+      
+  end
+  
+  
   # testing active resources of sip_account (external servers)
   
   should "not make requests if sip_phone_id is nil" do
@@ -18,21 +39,8 @@ class SipAccountTest < ActiveSupport::TestCase
   end
   
   should "create subscriber and alias on sip_proxy server" do
-    sip_server = Factory.create(:sip_server, :config_port => 4040, :managed_by_gs => true)
-    sip_proxy = Factory.create(:sip_proxy, :config_port  => nil)
-    ActiveResource::HttpMock.reset!
-    ActiveResource::HttpMock.respond_to { |mock|
-      mock.post   "/subscribers.xml", {},  # POST = create
-      nil, 201, { "Location" => "/subscribers/ignored.xml" }
-      mock.post   "/dbaliases.xml", {},  # POST = create
-      nil, 201, { "Location" => "/dbaliases/ignored.xml" }
-    }
-    
-    sip_account = Factory.create(:sip_account, 
-                             :sip_server_id => sip_server.id,
-                             :sip_proxy_id => sip_proxy.id,
-                             :sip_phone_id => nil)
-    assert sip_account.valid?
+    create_sip_account_without_phone
+    assert @sip_account.valid?
     
     idx = ActiveResource::HttpMock.requests.index(
                                                   # Note that ActiveResource::Request.==() does not check equality
@@ -47,13 +55,13 @@ class SipAccountTest < ActiveSupport::TestCase
     assert_not_equal( nil, req_obj_hash['subscriber'], 'Request expected to contain "subscriber" as root' )
     req_obj_hash = req_obj_hash['subscriber']
     {
-      'username'    => sip_account.auth_name,
-      'domain'      => sip_account.sip_server.name,
-      'password'    => sip_account.password,
-      'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
+      'username'    => @sip_account.auth_name,
+      'domain'      => @sip_account.sip_server.name,
+      'password'    => @sip_account.password,
+      'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{@sip_account.password}" ),
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
-
-
+    
+    
     idx = ActiveResource::HttpMock.requests.index(
                                                   # Note that ActiveResource::Request.==() does not check equality
                                                   # of the body, so neither .include?() not .index() alone is enough.
@@ -67,11 +75,64 @@ class SipAccountTest < ActiveSupport::TestCase
     assert_not_equal( nil, req_obj_hash['dbalias'], 'Request expected to contain "dbalias" as root' )
     req_obj_hash = req_obj_hash['dbalias']
     {
-      'username'    => sip_account.auth_name,
-      'domain'      => sip_account.sip_server.name,
-      'alias_username'  => sip_account.phone_number,
-      'alias_domain'    => sip_account.sip_server.name
+      'username'    => @sip_account.auth_name,
+      'domain'      => @sip_account.sip_server.name,
+      'alias_username'  => @sip_account.phone_number,
+      'alias_domain'    => @sip_account.sip_server.name
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
+  end
+  
+  should "update subscriber on sip_proxy" do
+    
+    create_sip_account_without_phone
+   ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      sip_proxy_subscriber = {
+      :id           => 1,
+      :username    => @sip_account.auth_name,
+      :domain      => @sip_account.sip_server.name,
+      :password    => @sip_account.password,
+      :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.name}:#{@sip_account.password}" )
+      }
+      
+      mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, #GET = index
+      [ sip_proxy_subscriber ].to_xml(:root => "subscribers"), 200, {  }
+      mock.put    "/subscribers/1.xml", {},  # PUT = update
+      nil, 204, {}
+    }  
+    
+    @sip_account.update_attributes!(:password => "blafasel")
+    # puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
+    
+    idx = ActiveResource::HttpMock.requests.index(
+                                                  ActiveResource::Request.new(
+        :get, "/subscribers.xml?username=#{@sip_account.auth_name}", nil, { "Accept"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
+    
+    # puts "Asserting that the mock received the expected request (POST /subscribers.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+                                                  # Note that ActiveResource::Request.==() does not check equality
+                                                  # of the body, so neither .include?() not .index() alone is enough.
+                                                  ActiveResource::Request.new(
+        :put, "/subscribers/1.xml", nil, { "Content-Type"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
+    
+    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
+    assert_not_equal( nil, req_obj_hash )
+    assert_not_equal( nil, req_obj_hash['subscriber'], 'Request expected to contain "subscriber" as root' )
+    req_obj_hash = req_obj_hash['subscriber']
+    {
+      'username'    => @sip_account.auth_name,
+      'domain'      => @sip_account.sip_server.name,
+      'password'    => @sip_account.password,
+      'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{@sip_account.password}" ),
+    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
+    
+    ActiveResource::HttpMock.reset!
+    
+    
   end
   
   
@@ -86,39 +147,6 @@ class SipAccountTest < ActiveSupport::TestCase
     # request to the SipProxy manager application.
     sip_account.reload
     
-    
-    puts "-----------------------------------------------------------"
-    puts "Updating the SipAccount ..."
-    
-    
-    puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
-    idx = ActiveResource::HttpMock.requests.index(
-                                                  ActiveResource::Request.new(
-        :get, "/subscribers.xml?username=mytest", nil, { "Accept"=>"application/xml" } )
-    )
-    assert_not_equal( nil, idx )
-    
-    puts "Asserting that the mock received the expected request (POST /subscribers.xml) from the model ..."
-    idx = ActiveResource::HttpMock.requests.index(
-                                                  # Note that ActiveResource::Request.==() does not check equality
-                                                  # of the body, so neither .include?() not .index() alone is enough.
-                                                  ActiveResource::Request.new(
-        :post, "/subscribers.xml", nil, { "Content-Type"=>"application/xml" } )
-    )
-    assert_not_equal( nil, idx )
-    
-    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
-    assert_not_equal( nil, req_obj_hash )
-    assert_not_equal( nil, req_obj_hash['subscriber'], 'Request expected to contain "subscriber" as root' )
-    req_obj_hash = req_obj_hash['subscriber']
-    {
-      'username'    => 'mytest',
-      'domain'      => 'sip-server.test.invalid',
-      'password'    => 'h3r8vs5g',
-      'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
-    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
-    
-    ActiveResource::HttpMock.reset!
     
     
     number_of_mock_requests = ActiveResource::HttpMock.requests.length
