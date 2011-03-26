@@ -30,7 +30,6 @@ GEM
     activesupport (3.0.5)
     acts_as_list (0.1.2)
     addressable (2.2.4)
-    annotate-models (1.0.4)
     arel (2.0.9)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
@@ -154,7 +153,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  annotate-models
   bcrypt-ruby
   default_value_for
   devise (~> 1.1)
