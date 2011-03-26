@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110209212927
+# Schema version: 20110314104017
 #
 # Table name: sip_accounts
 #
@@ -15,6 +15,7 @@
 #  updated_at    :datetime
 #  extension_id  :integer
 #  sip_phone_id  :integer
+#  voicemail_pin :integer
 #
 
 class SipAccount < ActiveRecord::Base
@@ -42,48 +43,106 @@ class SipAccount < ActiveRecord::Base
     :greater_than_or_equal_to => 1000
   )
   
+  # The SipAccount must stay on the same provisioning server or
+  # bad things may happen.  #OPTIMIZE - Is this still required?
+  #validate {
+  #  if sip_phone_id_was != nil \
+  #  && sip_phone_id     != nil \
+  #  && sip_phone_id     != sip_phone_id_was
+  #    the_prov_server_id_is  = SipPhone.find( sip_phone_id     ).provisioning_server_id
+  #    the_prov_server_id_was = SipPhone.find( sip_phone_id_was ).provisioning_server_id
+  #    if the_prov_server_id_is != the_prov_server_id_was
+  #      errors.add( :sip_phone, "must stay on the same provisioning server (ID #{prov_server_id_was.inspect})." )
+  #    end
+  #  end
+  #}
   
-  after_validation( :on => :create ) do
+  after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_create
     end
+    
     if (! sip_server_id.nil?) && (! self.phone_number.nil?) && (! self.sip_proxy_id.nil?)  # ?
       if ! self.sip_server.config_port.nil?
-        create_user_on_sipproxy(  sip_server_id )
-        create_alias_on_sipproxy( sip_server_id )
+        sipproxy_user_create(  sip_server_id )
+        sipproxy_alias_create( sip_server_id )
       end
     end
   end
   
-  after_validation( :on => :update ) do
+  after_validation( :on => :update ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
+    
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
+    
+    need_to_delete_old_sip_acct = false
+    if sip_phone_id_was != nil    # The SIP account was associated to a phone before.
+      logger.debug "The SIP account had a phone."
+      if sip_phone_id != sip_phone_id_was    # The phone is being changed.
+        if sip_phone_id != nil
+          phone_prov_server_id_was = SipPhone.find( sip_phone_id_was ).provisioning_server_id
+          phone_prov_server_id_is  = SipPhone.find( sip_phone_id     ).provisioning_server_id
+          if phone_prov_server_id_is != phone_prov_server_id_was
+            # The SIP account is being associated to a phone on a different provisioning server instance.
+            logger.debug "The SIP account is being associated to a phone on a different provisioning server instance."
+            need_to_delete_old_sip_acct = true
+          else
+            logger.debug "The SIP account is being associated to a different phone on the same provisioning server instance."
+          end
+        else  # The SIP account is being associated to no phone.
+          logger.debug "The SIP account is being associated to no phone."
+          if provisioning_server_type == 'cantina'
+            need_to_delete_old_sip_acct = true
+          end
+        end
+      else
+        logger.debug "The SIP account's phone isn't being changed."
+      end
+      if provisioning_server_type == 'cantina'
+        if self.auth_name != self.auth_name_was
+          # No need to delete the account. We'll update it in the normal way. (#FIXME?)
+          #logger.debug "The SIP account's username is being changed."
+          #need_to_delete_old_sip_acct = true
+        end
+      end
+    else
+      logger.debug "The SIP account didn't have a phone."
+    end
+    
+    if need_to_delete_old_sip_acct
+      logger.debug "Deleting old SIP account on the provisioning server ..."
+      provisioning_server_sip_account_destroy_old
+    else
+      logger.debug "No need to delete the old SIP account on the provisioning server."
+    end
+    
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_update
     end
-    if ((self.auth_name != self.auth_name_was && sip_phone_id_was != nil ) || (sip_phone_id_was != nil \
-        && sip_phone_id != sip_phone_id_was))
-      delete_last_cantina_account
-    end
+    
     if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.config_port != nil)
-      update_user_on_sipproxy( sip_server_id, auth_name_was )
+      sipproxy_user_update( sip_server_id, auth_name_was )
     end
+    
     #FIXME - self.sip_server can be nil
     if self.sip_server_id != self.sip_server_id_was && ! self.sip_server.config_port.nil?
-      destroy_user_on_sipproxy( sip_server_id_was, auth_name_was )
+      sipproxy_user_destroy( sip_server_id_was, auth_name_was )
     end
+    
     if ((self.sip_server_id_was == self.sip_server_id) && \
         ((self.auth_name != self.auth_name_was) || (self.phone_number != self.phone_number_was)))
-      update_alias_on_sipproxy( self.sip_server_id, self.auth_name_was, self.phone_number_was )
+      sipproxy_alias_update( self.sip_server_id, self.auth_name_was, self.phone_number_was )
     end
   end
   
-  before_destroy do
+  before_destroy do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_destroy
     end
+    
     if ! sip_server_id.nil?
       if ! self.sip_server.config_port.nil?
-        destroy_user_on_sipproxy(    self.sip_server_id_was, self.auth_name_was )
-        destroy_dbalias_on_sipproxy( self.sip_server_id_was, self.auth_name_was, self.phone_number_was )
+        sipproxy_user_destroy(  self.sip_server_id_was, self.auth_name_was )
+        sipproxy_alias_destroy( self.sip_server_id_was, self.auth_name_was, self.phone_number_was )
       end
     end
   end
@@ -94,7 +153,7 @@ class SipAccount < ActiveRecord::Base
   # false on error.
   #
   def cantina_sip_account
-    return cantina_find_sip_account_by_server_and_user(
+    return cantina_sip_account_find_by_server_and_user(
       self.sip_server ? self.sip_server.name : nil,
       self.auth_name
     )
@@ -105,17 +164,17 @@ class SipAccount < ActiveRecord::Base
   # Create SIP account on the provisioning server.
   #
   def provisioning_server_sip_account_create
-    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     ret = false
     if self.errors && self.errors.length > 0
       # The SIP account is invalid. Don't even try to create it on the prov. server.
       errors.add( :base, "Will not create invalid SIP account on the provisioning server." )
     else
-      case provisioning_server
+      case provisioning_server_type
         when 'cantina'
           ret = cantina_sip_account_create
         else
-          errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
+          errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
       end
     end
     return ret
@@ -124,17 +183,17 @@ class SipAccount < ActiveRecord::Base
   # Update SIP account on the provisioning server.
   #
   def provisioning_server_sip_account_update
-    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     ret = false
     if self.errors && self.errors.length > 0
       # The SIP account is invalid. Don't even try to update it on the prov. server.
       errors.add( :base, "SIP account is invalid. Will not update data on the provisioning server." )
     else
-      case provisioning_server
+      case provisioning_server_type
         when 'cantina'
           ret = cantina_sip_account_update
         else
-          errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
+          errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
       end
     end
     return ret
@@ -143,13 +202,27 @@ class SipAccount < ActiveRecord::Base
   # Delete SIP account on the provisioning server.
   #
   def provisioning_server_sip_account_destroy
-    provisioning_server = 'cantina'  # might want to implement a mock Cantina here or multiple Cantinas
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     ret = false
-    case provisioning_server
+    case provisioning_server_type
       when 'cantina'
         ret = cantina_sip_account_destroy
       else
-        errors.add( :base, "Provisioning server type #{provisioning_server.inspect} not implemented." )
+        errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
+    end
+    return ret
+  end
+  
+  # Delete old SIP account on the provisioning server.
+  #
+  def provisioning_server_sip_account_destroy_old
+    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
+    ret = false
+    case provisioning_server_type
+      when 'cantina'
+        ret = cantina_sip_account_destroy_old
+      else
+        errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
     end
     return ret
   end
@@ -160,7 +233,7 @@ class SipAccount < ActiveRecord::Base
   # or if the SipAccount does not even have a SipPhone (and thus
   # does not have a provisioning server).
   #
-  def determine_prov_server_resource
+  def provisioning_server_base_url
     scheme = 'http'
     host   = '0.0.0.0'  # this will not work on purpose
     port   = 0          # this will not work on purpose
@@ -197,10 +270,10 @@ class SipAccount < ActiveRecord::Base
   # Returns the CantinaSipAccount if found or nil if not found or
   # false on error.
   #
-  def cantina_find_sip_account_by_server_and_user( sip_server, sip_user )
+  def cantina_sip_account_find_by_server_and_user( sip_server, sip_user )
     logger.debug "Trying to find Cantina SIP account for \"#{sip_user}@#{sip_server}\" ..."
     begin
-      cantina_resource = determine_prov_server_resource()
+      cantina_resource = provisioning_server_base_url()
       if ! cantina_resource
         # SipPhone has no provisioning server.
         return nil
@@ -211,15 +284,20 @@ class SipAccount < ActiveRecord::Base
         # As soon as the Cantina API has been extended please optimize this method. Thanks.
         if cantina_sip_accounts
           cantina_sip_accounts.each { |cantina_sip_account|
-            if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
-            && (cantina_sip_account.auth_user .to_s == auth_name  .to_s)
+            # Note: Maybe the "sip_proxy" attribute of CantinaSipAccount
+            # should be named "sip_server" or "sip_domain"?
+            logger.debug "-------------{"
+            logger.debug cantina_sip_account.inspect
+            logger.debug "-------------}"
+            if (cantina_sip_account.sip_proxy .to_s == sip_server .to_s) \
+            && (cantina_sip_account.user      .to_s == sip_user   .to_s)
               logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
               return cantina_sip_account
               break
             end
           }
         end
-        logger.debug "CantinaSipAccount not found."
+        logger.debug "CantinaSipAccount for \"#{sip_user}@#{sip_server}\" not found."
         return nil
       end
     rescue Errno::ECONNREFUSED => e
@@ -238,7 +316,7 @@ class SipAccount < ActiveRecord::Base
   #
   def cantina_sip_account_create
     begin
-      cantina_resource = determine_prov_server_resource()
+      cantina_resource = provisioning_server_base_url()
       if ! cantina_resource
         return true
       else
@@ -250,14 +328,19 @@ class SipAccount < ActiveRecord::Base
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-          :registrar       => (self.sip_server ? self.sip_server.name : nil),
+        # :registrar       => (self.sip_server ? self.sip_server.name : nil),
+          :registrar       => (self.sip_proxy ? self.sip_proxy.name : nil),
           :registrar_port  => nil,
-          :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :sip_proxy       => (self.sip_server ? self.sip_server.name : nil),
+          #OPTIMIZE - For GS4 the "sip_proxy" seems irrelevant. Or should it be renamed to "sip_domain"?
           :sip_proxy_port  => nil,
+          :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :outbound_proxy_port => nil,
           :registration_expiry_time => 300,
           :dtmf_mode       => 'rfc2833',
         })
-        log_active_record_errors_from_remote( cantina_sip_account )
+        active_record_errors_from_remote_log( cantina_sip_account )
         return true
       end
     rescue Errno::ECONNREFUSED => e
@@ -276,7 +359,7 @@ class SipAccount < ActiveRecord::Base
     
     if ! cantina_sip_account.valid?
       errors.add( :base, "Failed to create SIP account on Cantina provisioning server. (Reason:\n" +
-      get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+        active_record_errors_from_remote_get( cantina_sip_account ).join(",\n") +
         ")" )
       return false
     end
@@ -286,7 +369,7 @@ class SipAccount < ActiveRecord::Base
   #
   def cantina_sip_account_update
     sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
-    cantina_sip_account = cantina_find_sip_account_by_server_and_user(
+    cantina_sip_account = cantina_sip_account_find_by_server_and_user(
       (sip_server_was ? sip_server_was.name : nil),
       self.auth_name_was
     )
@@ -304,19 +387,25 @@ class SipAccount < ActiveRecord::Base
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-          :registrar       => (self.sip_server ? self.sip_server.name : nil),
+        # :registrar       => (self.sip_server ? self.sip_server.name : nil),
+          :registrar       => (self.sip_proxy ? self.sip_proxy.name : nil),
           :registrar_port  => nil,
-          :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :sip_proxy       => (self.sip_server ? self.sip_server.name : nil),
+          #OPTIMIZE - For GS4 the "sip_proxy" seems irrelevant. Or should it be renamed to "sip_domain"?
           :sip_proxy_port  => nil,
+          :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :outbound_proxy_port => nil,
           :registration_expiry_time => 300,
           :dtmf_mode       => 'rfc2833',
         })
-        log_active_record_errors_from_remote( cantina_sip_account )
-        errors.add( :base, "Failed to update SIP account on Cantina provisioning server. (Reason:\n" +
-        get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
-          ")" )
-        return false
-      end
+          active_record_errors_from_remote_log( cantina_sip_account )
+          errors.add( :base, "Failed to update SIP account on Cantina provisioning server. (Reason:\n" +
+            active_record_errors_from_remote_get( cantina_sip_account ).join(",\n") +
+            ")" )
+          return false
+        end
+      #end else
     end
     return true
   end
@@ -325,7 +414,7 @@ class SipAccount < ActiveRecord::Base
   #
   def cantina_sip_account_destroy
     sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
-    cantina_sip_account = cantina_find_sip_account_by_server_and_user(
+    cantina_sip_account = cantina_sip_account_find_by_server_and_user(
       (sip_server_was ? sip_server_was.name : nil),
       self.auth_name_was
     )
@@ -338,7 +427,7 @@ class SipAccount < ActiveRecord::Base
       else
         if ! cantina_sip_account.destroy
           errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
-          get_active_record_errors_from_remote( cantina_sip_account ).join(",\n") +
+            active_record_errors_from_remote_get( cantina_sip_account ).join(",\n") +
             ")" )
           return false
         end
@@ -346,17 +435,18 @@ class SipAccount < ActiveRecord::Base
     return true
   end
   
-  # Delete SipAccount on Cantina when Phone has changed.
+  # Delete old SIP account on the Cantina provisioning server.
   #
-  def delete_last_cantina_account
-    old_prov_server = SipPhone.find(sip_phone_id_was).provisioning_server
+  def cantina_sip_account_destroy_old
+    #TODO - Make this method more like the other cantina_* methods.
+    old_prov_server = SipPhone.find( sip_phone_id_was ).provisioning_server
     if ! old_prov_server.blank?
       CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
       cantina_sip_accounts = CantinaSipAccount.all
       if cantina_sip_accounts
         matching_cantina_sip_accounts = cantina_sip_accounts.each { |cantina_sip_account|
-          if (cantina_sip_account.registrar .to_s == self.sip_server .to_s) \
-          && (cantina_sip_account.auth_user .to_s == self.auth_name  .to_s)
+          if (cantina_sip_account.sip_proxy .to_s == sip_server .to_s) \
+          && (cantina_sip_account.user      .to_s == sip_user   .to_s)
             logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
             #FIXME ? - Does this block really do anything?
             break
@@ -367,19 +457,23 @@ class SipAccount < ActiveRecord::Base
         logger.debug "delete_cantina_sip_account_id = #{delete_cantina_sip_account_id.inspect}"
         if delete_cantina_sip_account_id
           if ! CantinaSipAccount.find( delete_cantina_sip_account_id ).destroy
-            errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
-            get_active_record_errors_from_remote( delete_cantina_sip_account_id ).join(",\n") +
-              ")" )
+            #errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+            #  active_record_errors_from_remote_get( delete_cantina_sip_account ).join(",\n") +
+            #  ")" )
+            #OPTIMIZE - delete_cantina_sip_account is not available here.
+            errors.add( :base, "Failed to delete SIP account on Cantina provisioning server." )
+            return false
           end
         end
       end
     end
+    return true
   end
   
   # Create user on "SipProxy" proxy manager.
   #
-  def create_user_on_sipproxy( proxy_server_id )
-    server = SipServer.find(proxy_server_id)
+  def sipproxy_user_create( proxy_server_id )
+    server = SipServer.find( proxy_server_id )
     if server.config_port.nil?
       # TODO errormessage
       return false
@@ -393,7 +487,7 @@ class SipAccount < ActiveRecord::Base
       )
       if ! sipproxy_subscriber.valid?
         errors.add( :base, "Failed to create user account on SipProxy management server. (Reason:\n" +
-        get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
+          active_record_errors_from_remote_get( sipproxy_subscriber ).join(",\n") +
           ")" )
       end
     end
@@ -401,9 +495,9 @@ class SipAccount < ActiveRecord::Base
   
   # Delete user on "SipProxy" proxy manager.
   #
-  def destroy_user_on_sipproxy( proxy_server_id, proxy_server_authname )
+  def sipproxy_user_destroy( proxy_server_id, proxy_server_authname )
     begin
-      server = SipServer.find(proxy_server_id)
+      server = SipServer.find( proxy_server_id )
       if server.config_port.nil?
         # TODO errormessage
         return false
@@ -412,7 +506,7 @@ class SipAccount < ActiveRecord::Base
         destroy_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
         if ! destroy_subscriber.destroy
           errors.add( :base, "Failed to destroy user account on SipProxy management server. (Reason:\n" +
-          get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
+            active_record_errors_from_remote_get( sipproxy_subscriber ).join(",\n") +
             ")" )
         else
           return true
@@ -435,32 +529,45 @@ class SipAccount < ActiveRecord::Base
   
   # Update user on "SipProxy" proxy manager.
   #
-  def update_user_on_sipproxy( proxy_server_id, proxy_server_authname )
-    server = SipServer.find(proxy_server_id)
-    if server.config_port.nil?
+  def sipproxy_user_update( proxy_server_id, proxy_server_authname )
+    server = SipServer.find( proxy_server_id )
+    if server.config_port.blank?
       # TODO errormessage
-      return false
+      return false  # return true?
     else
       SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
-      sipproxy_subscriber = update_subscriber.update_attributes(
-        :username   =>  self.auth_name,
-        :domain     =>  self.sip_server.name,
-        :password   =>  self.password,
-       	:ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
-      )
-      if ! sipproxy_subscriber
-        errors.add( :base, "Failed to create user account on SipProxy management server. (Reason:\n" +
-        get_active_record_errors_from_remote( sipproxy_subscriber ).join(",\n") +
-          ")" )
+      #FIXME - Catch exceptions by connection errors, see cantina_sip_account_update().
+      case update_subscriber
+        #when false
+        #  errors.add( :base, "Failed to connect to SipProxy management server." )
+        #  return false
+        when nil
+          # create instead
+          return sipproxy_user_create( proxy_server_id )
+        else
+          if ! update_subscriber.update_attributes({
+            :username   =>  self.auth_name,
+            :domain     =>  self.sip_server.name,
+            :password   =>  self.password,
+            :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
+          })
+            active_record_errors_from_remote_log( update_subscriber )
+            errors.add( :base, "Failed to update user account on SipProxy management server. (Reason:\n" +
+              active_record_errors_from_remote_get( update_subscriber ).join(",\n") +
+              ")" )
+            return false
+          end
+        #end else
       end
+      return true
     end
   end
   
   # Create alias on "SipProxy" proxy manager.
   #
-  def create_alias_on_sipproxy( proxy_server_id )
-    server = SipServer.find(proxy_server_id)
+  def sipproxy_alias_create( proxy_server_id )
+    server = SipServer.find( proxy_server_id )
     if server.config_port.nil?
       # TODO errormessage
       return false
@@ -474,7 +581,7 @@ class SipAccount < ActiveRecord::Base
       )
       if ! sipproxy_dbalias.valid?
         errors.add( :base, "Failed to create alias on SipProxy management server. (Reason:\n" +
-        get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
+          active_record_errors_from_remote_get( sipproxy_dbalias ).join(",\n") +
           ")" )
       end
     end
@@ -482,33 +589,46 @@ class SipAccount < ActiveRecord::Base
   
   # Update alias on "SipProxy" proxy manager.
   #
-  def update_alias_on_sipproxy( proxy_server_id, proxy_server_authname, proxy_server_alias )
-    server = SipServer.find(proxy_server_id)
-    if server.config_port.nil?
+  def sipproxy_alias_update( proxy_server_id, proxy_server_authname, proxy_server_alias )
+    server = SipServer.find( proxy_server_id )
+    if server.config_port.blank?
       # TODO errormessage
-      return false
+      return false  # return true?
     else
       SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
-      sipproxy_dbalias = update_dbalias.update_attributes(
-        :username       =>  self.auth_name,
-        :domain         =>  self.sip_server.name,
-        :alias_username =>  self.phone_number,
-        :alias_domain   =>  self.sip_server.name
-      )
-      if ! sipproxy_dbalias
-        errors.add( :base, "Failed to update dbalias on SipProxy management server. (Reason:\n" +
-        get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
-          ")" )
+      #FIXME - Catch exceptions by connection errors, see cantina_sip_account_update().
+      case update_dbalias
+        #when false
+        #  errors.add( :base, "Failed to connect to SipProxy management server." )
+        #  return false
+        when nil
+          # create instead
+          return sipproxy_alias_create( proxy_server_id )
+        else
+          if ! update_dbalias.update_attributes({
+            :username       =>  self.auth_name,
+            :domain         =>  self.sip_server.name,
+            :alias_username =>  self.phone_number,
+            :alias_domain   =>  self.sip_server.name
+          })
+            active_record_errors_from_remote_log( update_dbalias )
+            errors.add( :base, "Failed to update dbalias on SipProxy management server. (Reason:\n" +
+              active_record_errors_from_remote_get( update_dbalias ).join(",\n") +
+              ")" )
+            return false
+          end
+        #end else
       end
+      return true
     end
   end
   
   # Delete dbalias on "SipProxy" proxy manager.
   #
-  def destroy_dbalias_on_sipproxy( proxy_server_id, proxy_server_authname, proxy_server_alias )
+  def sipproxy_alias_destroy( proxy_server_id, proxy_server_authname, proxy_server_alias )
     begin
-      server = SipServer.find(proxy_server_id)
+      server = SipServer.find( proxy_server_id )
       if server.config_port.nil?
         # TODO errormessage
         return false
@@ -517,7 +637,7 @@ class SipAccount < ActiveRecord::Base
         destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => proxy_server_authname.to_s, 'alias_username' => proxy_server_alias.to_s })
         if ! destroy_dbalias.destroy
           errors.add( :base, "Failed to destroy dbalias on SipProxy management server. (Reason:\n" +
-          get_active_record_errors_from_remote( sipproxy_dbalias ).join(",\n") +
+            active_record_errors_from_remote_get( sipproxy_dbalias ).join(",\n") +
             ")" )
         else
           return true
@@ -540,25 +660,29 @@ class SipAccount < ActiveRecord::Base
   
   # Log validation errors from the remote model.
   #
-  def log_active_record_errors_from_remote( ar )
+  def active_record_errors_from_remote_log( ar )
     if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
-      logger.info "----------------------------------------------------------"
-      logger.info "Errors for #{ar.class} from Cantina:"
-      ar.errors.each_pair { |attr, errs|
-        logger.info "  :#{attr.to_s}"
-        if errs.kind_of?(Array) && errs.length > 0
-          errs.each { |msg|
-            logger.info "    " + (attr == :base ? '' : ":#{attr.to_s} ") + "#{msg}"
-          }
-        end
-      }
-      logger.info "----------------------------------------------------------"
+      if ar.errors.length < 1
+        logger.info "No errors for #{ar.class} from remote."
+      else
+        logger.info "----------------------------------------------------------"
+        logger.info "Errors for #{ar.class} from remote:"
+        ar.errors.each_pair { |attr, errs|
+          logger.info "  :#{attr.to_s}"
+          if errs.kind_of?(Array) && errs.length > 0
+            errs.each { |msg|
+              logger.info "    " + (attr == :base ? '' : ":#{attr.to_s} ") + "#{msg}"
+            }
+          end
+        }
+        logger.info "----------------------------------------------------------"
+      end
     end
   end
   
   # Get validation errors from the remote model.
   #
-  def get_active_record_errors_from_remote( ar )
+  def active_record_errors_from_remote_get( ar )
     ret = []
     if ar.respond_to?(:errors) && ar.errors.kind_of?(Hash)
       ar.errors.each_pair { |attr, errs|

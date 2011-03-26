@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110209212927
+# Schema version: 20110314104017
 #
 # Table name: sip_accounts
 #
@@ -15,6 +15,7 @@
 #  updated_at    :datetime
 #  extension_id  :integer
 #  sip_phone_id  :integer
+#  voicemail_pin :integer
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
