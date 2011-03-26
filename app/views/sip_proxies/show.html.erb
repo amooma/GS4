@@ -2,7 +2,14 @@
 <p>
   <b>Host:</b>
   <%= @sip_proxy.name %>
-  <%= @sip_proxy.config_port%>
+</p>
+<p>
+  <b>Is managed by Gemeinschaft?:</b>
+  <%= @sip_proxy.managed_by_gs ? "yes":"no" %>
+</p>
+<p>
+  <b>Configuration port:</b>
+  <%= (! @sip_proxy.config_port.blank?) ? @sip_proxy.config_port : "none" %>
 </p>
 
 
