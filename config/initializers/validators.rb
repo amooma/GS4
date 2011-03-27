@@ -1,5 +1,14 @@
 ActiveRecord::Base.class_eval do
   
+  def self.validate_ip_port( attr_names, options={} )
+    validates_numericality_of( attr_names, {
+      :only_integer => true,
+      :greater_than =>     0,
+      :less_than    => 65536,
+      :allow_nil    => false,
+    }.merge!( options ) )
+  end
+  
   def self.validate_hostname_or_ip( attr_names, options={} )
     # Validate the server. This is the "host" rule from RFC 3261
     # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
