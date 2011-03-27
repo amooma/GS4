@@ -5,12 +5,8 @@ class SipAccountsController < ApplicationController
   before_filter { |controller|
     @sip_phones   = SipPhone  .order([ :provisioning_server_id, :phone_id ])
     @sip_servers  = SipServer .order([ :name ])
-<<<<<<< HEAD
     @sip_proxies  = SipProxy  .order([ :host ])
-=======
-    @sip_proxies  = SipProxy  .order([ :name ])
     @voicemail_servers = VoicemailServer .order([ :host ])
->>>>>>> 176dbdb6d10fbcbcec5aeb143708d58cf9914e70
     @users        = User      .order([ :sn, :gn, :username ])
     
     @num_users       = User      .count
