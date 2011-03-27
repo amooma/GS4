@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  host: vm-server-1.localdomain
+  host: my-vm-server-1.localdomain
   port: 1
-  management_host: vm-server-1.localdomain
+  management_host: my-vm-server-1.localdomain
   management_port: 1
 
 two:
-  host: vm-server-2.localdomain
+  host: my-vm-server-2.localdomain
   port: 1
-  management_host: vm-server-2.localdomain
+  management_host: my-vm-server-2.localdomain
   management_port: 1

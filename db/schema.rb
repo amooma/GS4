@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110327122221) do
+ActiveRecord::Schema.define(:version => 20110327160434) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20110327122221) do
     t.integer  "sip_phone_id"
     t.integer  "voicemail_pin"
     t.integer  "position"
+    t.integer  "voicemail_server_id"
   end
 
   create_table "sip_phones", :force => true do |t|
@@ -110,5 +111,7 @@ ActiveRecord::Schema.define(:version => 20110327122221) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  #TODO - add more indexes to the tables (in migrations)
 
 end

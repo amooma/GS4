@@ -2,11 +2,14 @@ class SipAccount < ActiveRecord::Base
   
   belongs_to :sip_server , :validate => true
   belongs_to :sip_proxy  , :validate => true
+  belongs_to :voicemail_server , :validate => true
   belongs_to :sip_phone  , :validate => true
   belongs_to :extension  , :validate => true
   belongs_to :user
+  
   # TODO: Test acts_as_list
   acts_as_list :scope => :user
+  
   #FIXME - validate that the referenced objects (*_id) exists
   
   validates_uniqueness_of   :auth_name, :scope => :sip_server_id
@@ -20,9 +23,15 @@ class SipAccount < ActiveRecord::Base
     :allow_nil => false
   validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
   
-  validates_numericality_of(:voicemail_pin,
-    :greater_than_or_equal_to => 1000
-  )
+  validates_numericality_of :voicemail_pin,
+    :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
+    :only_integer => true,
+    :greater_than_or_equal_to => 1000,
+    :message => "must be all digits and greater than 1000"
+  validates_inclusion_of    :voicemail_pin,
+    :in => [ nil ],
+    :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
+    :message => "must not be set if the SIP account does not have a voicemail server."
   
   # The SipAccount must stay on the same provisioning server or
   # bad things may happen.  #OPTIMIZE - Is this still required?

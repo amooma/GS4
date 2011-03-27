@@ -1,4 +1,7 @@
 class VoicemailServersController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
   # GET /voicemail_servers
   # GET /voicemail_servers.xml
   def index
@@ -80,4 +83,5 @@ class VoicemailServersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

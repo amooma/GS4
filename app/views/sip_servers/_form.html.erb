@@ -14,16 +14,22 @@
 <div class="field">
     <%= f.label :name, "Host" %>
     <br/>
-    <%= f.text_field :name %>
+    <%= f.text_field :host %>
 </div>
 <div class="field">
-    <%= f.check_box :managed_by_gs %>
-    <%= f.label :managed_by_gs, "Is managed by Gemeinschaft?" %>
-</div>
-<div class="field">
-    <%= f.label :config_port, "Configuration port (if managed by Gemeinschaft)" %>
+    <%= f.label :name, "Port" %>
     <br/>
-    <%= f.text_field :config_port %>
+    <%= f.text_field :port %>
+</div>
+<div class="field">
+    <%= f.label :management_host, "Management host (if managed by Gemeinschaft)" %>
+    <br/>
+    <%= f.text_field :management_host %>
+</div>
+<div class="field">
+    <%= f.label :management_port, "Management port (if managed by Gemeinschaft)" %>
+    <br/>
+    <%= f.text_field :management_port %>
 </div>
 <div class="actions">
     <%= f.submit %>

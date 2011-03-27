@@ -26,10 +26,6 @@
     <%= f.label :password %><br />
     <%= f.text_field :password %>
   </div>
-	<div class="field">
-    <%= f.label :voicemail_pin, "Voicemail PIN" %><br />
-    <%= f.text_field :voicemail_pin %>
-  </div>
   <div class="field">
     <%= f.label :realm %><br />
     <%= f.text_field :realm %>
@@ -51,6 +47,17 @@
       @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_proxy_id }
     ) %>
+  </div>
+  <div class="field">
+    <%= f.label :voicemail_server_id, "Voicemail server" %><br />
+    <%= f.select( :voicemail_server_id,
+      @voicemail_servers.collect {|r| [ "#{r.host}#{r.port ? (':' + r.port.to_s) : ''}", r.id ] },
+      { :include_blank => true, :selected => @sip_account.voicemail_server_id }
+    ) %>
+  </div>
+  <div class="field">
+    <%= f.label :voicemail_pin, "Voicemail PIN" %><br />
+    <%= f.text_field :voicemail_pin %>
   </div>
   <div class="field">
     <%= f.label :sip_phone_id, "SIP phone" %><br />
