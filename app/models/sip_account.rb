@@ -140,7 +140,7 @@ class SipAccount < ActiveRecord::Base
   #
   def cantina_sip_account
     return cantina_sip_account_find_by_server_and_user(
-      self.sip_server ? self.sip_server.name : nil,
+      self.sip_server ? self.sip_server.host : nil,
       self.auth_name
     )
   end
@@ -232,7 +232,7 @@ class SipAccount < ActiveRecord::Base
         provisioning_server = self.sip_phone.provisioning_server
         if provisioning_server
           scheme = 'http'  # TODO - https as soon as it is implemented.
-          host   = provisioning_server.name if ! provisioning_server.name.blank?
+          host   = provisioning_server.host if ! provisioning_server.host.blank?
           port   = provisioning_server.port if ! provisioning_server.port.blank?
           path   = '/'
         end
@@ -314,11 +314,11 @@ class SipAccount < ActiveRecord::Base
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-        # :registrar       => (self.sip_server ? self.sip_server.name : nil),
+        # :registrar       => (self.sip_server ? self.sip_server.host : nil),
           :registrar       => (self.sip_proxy ? self.sip_proxy.host : nil),
           :registrar_port  => nil,
-        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
-          :sip_proxy       => (self.sip_server ? self.sip_server.name : nil),
+        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.host : nil),
+          :sip_proxy       => (self.sip_server ? self.sip_server.host : nil),
           #OPTIMIZE - For GS4 the "sip_proxy" seems irrelevant. Or should it be renamed to "sip_domain"?
           :sip_proxy_port  => nil,
           :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.host : nil),
@@ -356,7 +356,7 @@ class SipAccount < ActiveRecord::Base
   def cantina_sip_account_update
     sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
     cantina_sip_account = cantina_sip_account_find_by_server_and_user(
-      (sip_server_was ? sip_server_was.name : nil),
+      (sip_server_was ? sip_server_was.host : nil),
       self.auth_name_was
     )
     case cantina_sip_account
@@ -373,14 +373,14 @@ class SipAccount < ActiveRecord::Base
           :password        => self.password,
           :realm           => self.realm,
           :phone_id        => (self.sip_phone ? self.sip_phone.phone_id : nil),
-        # :registrar       => (self.sip_server ? self.sip_server.name : nil),
-          :registrar       => (self.sip_proxy ? self.sip_proxy.name : nil),
+        # :registrar       => (self.sip_server ? self.sip_server.host : nil),
+          :registrar       => (self.sip_proxy ? self.sip_proxy.host : nil),
           :registrar_port  => nil,
-        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.name : nil),
-          :sip_proxy       => (self.sip_server ? self.sip_server.name : nil),
+        # :sip_proxy       => (self.sip_proxy ? self.sip_proxy.host : nil),
+          :sip_proxy       => (self.sip_server ? self.sip_server.host : nil),
           #OPTIMIZE - For GS4 the "sip_proxy" seems irrelevant. Or should it be renamed to "sip_domain"?
           :sip_proxy_port  => nil,
-          :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.name : nil),
+          :outbound_proxy  => (self.sip_proxy ? self.sip_proxy.host : nil),
           :outbound_proxy_port => nil,
           :registration_expiry_time => 300,
           :dtmf_mode       => 'rfc2833',
@@ -401,7 +401,7 @@ class SipAccount < ActiveRecord::Base
   def cantina_sip_account_destroy
     sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
     cantina_sip_account = cantina_sip_account_find_by_server_and_user(
-      (sip_server_was ? sip_server_was.name : nil),
+      (sip_server_was ? sip_server_was.host : nil),
       self.auth_name_was
     )
     case cantina_sip_account
@@ -427,7 +427,7 @@ class SipAccount < ActiveRecord::Base
     #TODO - Make this method more like the other cantina_* methods.
     old_prov_server = SipPhone.find( sip_phone_id_was ).provisioning_server
     if ! old_prov_server.blank?
-      CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
+      CantinaSipAccount.set_resource( "http://#{old_prov_server.host}:#{old_prov_server.port}/" )
       cantina_sip_accounts = CantinaSipAccount.all
       if cantina_sip_accounts
         matching_cantina_sip_accounts = cantina_sip_accounts.each { |cantina_sip_account|
@@ -464,12 +464,12 @@ class SipAccount < ActiveRecord::Base
       errors.add( :name, "is not managed by GS!")
       return false
     else
-      SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
+      SipproxySubscriber.set_resource( "http://#{server.host}:#{server.config_port}/" )
       sipproxy_subscriber = SipproxySubscriber.create(
         :username   =>  self.auth_name,
-        :domain     =>  self.sip_server.name,
+        :domain     =>  self.sip_server.host,
         :password   =>  self.password,
-        :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
+        :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
       )
       if ! sipproxy_subscriber.valid?
         errors.add( :base, "Failed to create user account on SipProxy management server. (Reason:\n" +
@@ -488,7 +488,7 @@ class SipAccount < ActiveRecord::Base
         errors.add( :name, "is not managed by GS!")
         return false
       else
-        SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
+        SipproxySubscriber.set_resource( "http://#{server.host}:#{server.config_port}/" )
         destroy_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
         if ! destroy_subscriber.destroy
           errors.add( :base, "Failed to destroy user account on SipProxy management server. (Reason:\n" +
@@ -521,7 +521,7 @@ class SipAccount < ActiveRecord::Base
       # TODO errormessage
       return false  # return true?
     else
-      SipproxySubscriber.set_resource( "http://#{server.name}:#{server.config_port}/" )
+      SipproxySubscriber.set_resource( "http://#{server.host}:#{server.config_port}/" )
       update_subscriber = SipproxySubscriber.find( :first, :params => { 'username' => proxy_server_authname.to_s })
       #FIXME - Catch exceptions by connection errors, see cantina_sip_account_update().
       case update_subscriber
@@ -534,9 +534,9 @@ class SipAccount < ActiveRecord::Base
         else
           if ! update_subscriber.update_attributes({
             :username   =>  self.auth_name,
-            :domain     =>  self.sip_server.name,
+            :domain     =>  self.sip_server.host,
             :password   =>  self.password,
-            :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.name}:#{self.password}" )
+            :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
           })
             active_record_errors_from_remote_log( update_subscriber )
             errors.add( :base, "Failed to update user account on SipProxy management server. (Reason:\n" +
@@ -558,12 +558,12 @@ class SipAccount < ActiveRecord::Base
       errors.add( :name, "is not managed by GS!")
       return false
     else
-      SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
+      SipproxyDbalias.set_resource( "http://#{server.host}:#{server.config_port}/" )
       sipproxy_dbalias = SipproxyDbalias.create(
         :username       =>  self.auth_name,
-        :domain         =>  self.sip_server.name,
+        :domain         =>  self.sip_server.host,
         :alias_username =>  self.phone_number,
-        :alias_domain   =>  self.sip_server.name
+        :alias_domain   =>  self.sip_server.host
       )
       if ! sipproxy_dbalias.valid?
         errors.add( :base, "Failed to create alias on SipProxy management server. (Reason:\n" +
@@ -581,7 +581,7 @@ class SipAccount < ActiveRecord::Base
       # TODO errormessage
       return false  # return true?
     else
-      SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
+      SipproxyDbalias.set_resource( "http://#{server.host}:#{server.config_port}/" )
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
       #FIXME - Catch exceptions by connection errors, see cantina_sip_account_update().
       case update_dbalias
@@ -594,9 +594,9 @@ class SipAccount < ActiveRecord::Base
         else
           if ! update_dbalias.update_attributes({
             :username       =>  self.auth_name,
-            :domain         =>  self.sip_server.name,
+            :domain         =>  self.sip_server.host,
             :alias_username =>  self.phone_number,
-            :alias_domain   =>  self.sip_server.name
+            :alias_domain   =>  self.sip_server.host
           })
             active_record_errors_from_remote_log( update_dbalias )
             errors.add( :base, "Failed to update dbalias on SipProxy management server. (Reason:\n" +
@@ -619,7 +619,7 @@ class SipAccount < ActiveRecord::Base
         errors.add(:name, "is not managed by GS!")
         return false
       else
-        SipproxyDbalias.set_resource( "http://#{server.name}:#{server.config_port}/" )
+        SipproxyDbalias.set_resource( "http://#{server.host}:#{server.config_port}/" )
         destroy_dbalias = SipproxyDbalias.find( :first, :params => { 'username' => proxy_server_authname.to_s, 'alias_username' => proxy_server_alias.to_s })
         if ! destroy_dbalias.destroy
           errors.add( :base, "Failed to destroy dbalias on SipProxy management server. (Reason:\n" +
