@@ -37,7 +37,7 @@
   <div class="field">
     <%= f.label :sip_server_id, "SIP server" %><br />
     <%= f.select( :sip_server_id,
-      @sip_servers.collect {|r| [ "#{r.name} (ID #{r.id})", r.id ] },
+      @sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_server_id }
     ) %>
   </div>
