@@ -1,15 +1,20 @@
 
 <p>
   <b>Host:</b>
-  <%= @sip_server.name %>
+  <%= @sip_server.host %>
 </p>
 <p>
-  <b>Is managed by Gemeinschaft?:</b>
-  <%= @sip_server.managed_by_gs ? "yes":"no" %>
+  <b>Port:</b>
+  <%= @sip_server.port %>
 </p>
 <p>
-  <b>Configuration port:</b>
-  <%= (! @sip_server.config_port.blank?) ? @sip_server.config_port : "none" %>
+<p>
+  <b>Management host:</b>
+  <%= @sip_server.management_host %>
+</p>
+<p>
+  <b>Management port:</b>
+  <%= @sip_server.management_port %>
 </p>
 
 
