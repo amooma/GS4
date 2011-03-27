@@ -4,7 +4,7 @@ class SipAccountTest < ActiveSupport::TestCase
   
   
   def create_sip_account_without_phone
-    @sip_server = Factory.create(:sip_server, :management_port => "1.2.3.9", :management_port => 4040)
+    @sip_server = Factory.create(:sip_server, :management_host => "1.2.3.9", :management_port => 4040)
     @sip_proxy = Factory.create(:sip_proxy)
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
@@ -69,7 +69,7 @@ class SipAccountTest < ActiveSupport::TestCase
     req_obj_hash = req_obj_hash['subscriber']
     {
       'username'    => @sip_account.auth_name,
-      'domain'      => @sip_account.sip_server.name,
+      'domain'      => @sip_account.sip_server.host,
       'password'    => @sip_account.password,
       'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{@sip_account.password}" ),
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
@@ -89,9 +89,9 @@ class SipAccountTest < ActiveSupport::TestCase
     req_obj_hash = req_obj_hash['dbalias']
     {
       'username'    => @sip_account.auth_name,
-      'domain'      => @sip_account.sip_server.name,
+      'domain'      => @sip_account.sip_server.host,
       'alias_username'  => @sip_account.phone_number,
-      'alias_domain'    => @sip_account.sip_server.name
+      'alias_domain'    => @sip_account.sip_server.host
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
   end
   
@@ -103,9 +103,9 @@ class SipAccountTest < ActiveSupport::TestCase
       sip_proxy_subscriber = {
       :id           => 1,
       :username    => @sip_account.auth_name,
-      :domain      => @sip_account.sip_server.name,
+      :domain      => @sip_account.sip_server.host,
       :password    => @sip_account.password,
-      :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.name}:#{@sip_account.password}" )
+      :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" )
       }
       
       mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, #GET = index
@@ -138,7 +138,7 @@ class SipAccountTest < ActiveSupport::TestCase
     req_obj_hash = req_obj_hash['subscriber']
     {
       'username'    => @sip_account.auth_name,
-      'domain'      => @sip_account.sip_server.name,
+      'domain'      => @sip_account.sip_server.host,
       'password'    => @sip_account.password,
       'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{@sip_account.password}" ),
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
@@ -195,9 +195,9 @@ class SipAccountTest < ActiveSupport::TestCase
       'password'        => @sip_account.password,
       'realm'           => @sip_account.realm,
       'phone_id'        => @sip_account.sip_phone_id,
-      'registrar'       => @sip_account.sip_server.name,
+      'registrar'       => @sip_account.sip_server.host,
       'registrar_port'  => nil,
-      'outbound_proxy'  => @sip_account.sip_server.name,
+      'outbound_proxy'  => @sip_account.sip_server.host,
       'outbound_proxy_port' => nil,
       'sip_proxy'       => 'sip-server.test.invalid',
       'sip_proxy_port'  => nil,
