@@ -4,7 +4,7 @@ class SipAccountTest < ActiveSupport::TestCase
   
   
   def create_sip_account_without_phone
-    @sip_server = Factory.create(:sip_server, :config_port => 4040, :managed_by_gs => true)
+    @sip_server = Factory.create(:sip_server, :management_port => "1.2.3.9", :management_port => 4040)
     @sip_proxy = Factory.create(:sip_proxy)
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
@@ -40,7 +40,7 @@ class SipAccountTest < ActiveSupport::TestCase
   should "not make requests if sip_phone_id is nil" do
     number_of_mock_requests = ActiveResource::HttpMock.requests.length
     
-    sip_server = Factory.create(:sip_server, :config_port => nil)
+    sip_server = Factory.create(:sip_server, :management_port => nil)
     sip_proxy = Factory.create(:sip_proxy)
     
     sip_account = Factory.create(:sip_account, 
