@@ -1,6 +1,6 @@
 ActiveRecord::Base.class_eval do
   
-  def self.validate_hostname_or_ip( *attr_names )
+  def self.validate_hostname_or_ip( attr_names, options={} )
     # Validate the server. This is the "host" rule from RFC 3261
     # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
     configuration = {
@@ -125,7 +125,7 @@ ActiveRecord::Base.class_eval do
       )
     $/x
     }
-    configuration.update( attr_names.pop ) if attr_names.last.is_a?(Hash)
+    configuration.merge!( options )
     validates_format_of( attr_names, configuration )
   end
   
