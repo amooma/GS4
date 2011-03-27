@@ -1,6 +1,6 @@
 class VoicemailServer < ActiveRecord::Base
   
-  has_many :sip_accounts
+  has_many :sip_accounts, :dependent => :nullify
   
   validates_presence_of      :host
   validate_hostname_or_ip    :host
