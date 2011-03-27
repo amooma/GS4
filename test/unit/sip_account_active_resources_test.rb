@@ -194,7 +194,7 @@ class SipAccountTest < ActiveSupport::TestCase
       'user'            => @sip_account.auth_name,
       'password'        => @sip_account.password,
       'realm'           => @sip_account.realm,
-      'phone_id'        => @sip_account.sip_phone_id,
+      'phone_id'        => @sip_account.sip_phone.phone_id,
       'registrar'       => @sip_account.sip_server.host,
       'registrar_port'  => nil,
       'outbound_proxy'  => @sip_account.sip_server.host,
