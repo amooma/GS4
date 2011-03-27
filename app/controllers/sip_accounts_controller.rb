@@ -6,6 +6,7 @@ class SipAccountsController < ApplicationController
     @sip_phones   = SipPhone  .order([ :provisioning_server_id, :phone_id ])
     @sip_servers  = SipServer .order([ :name ])
     @sip_proxies  = SipProxy  .order([ :name ])
+    @voicemail_servers = VoicemailServer .order([ :host ])
     @users        = User      .order([ :sn, :gn, :username ])
     
     @num_users       = User      .count

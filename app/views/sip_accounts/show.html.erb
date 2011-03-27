@@ -44,6 +44,14 @@
 </p>
 
 <p>
+  <b>Voicemail server:</b>
+  <%= @sip_account.voicemail_server_id ? "ID #{@sip_account.voicemail_server_id}" : "-" %>
+  <% if @sip_account.voicemail_server %>
+    (<%= @sip_account.voicemail_server.host %>)
+  <% end %>
+</p>
+
+<p>
   <b>SIP phone:</b>
   <%= @sip_account.sip_phone_id ? "ID #{@sip_account.sip_phone_id}" : "-" %>
   <% if @sip_account.sip_phone %>

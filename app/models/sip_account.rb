@@ -2,11 +2,15 @@ class SipAccount < ActiveRecord::Base
   
   belongs_to :sip_server , :validate => true
   belongs_to :sip_proxy  , :validate => true
+  belongs_to :voicemail_server , :validate => true
   belongs_to :sip_phone  , :validate => true
   belongs_to :extension  , :validate => true
   belongs_to :user
+  
+  
   # TODO: Test acts_as_list
   acts_as_list :scope => :user
+  
   #FIXME - validate that the referenced objects (*_id) exists
   
   validates_uniqueness_of   :auth_name, :scope => :sip_server_id
