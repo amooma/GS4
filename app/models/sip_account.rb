@@ -24,7 +24,13 @@ class SipAccount < ActiveRecord::Base
   validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
   
   validates_numericality_of :voicemail_pin,
+    :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
+    :only_integer => true,
     :greater_than_or_equal_to => 1000
+  validates_inclusion_of    :voicemail_pin,
+    :in => [ nil ],
+    :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
+    :message => "must not be set if the SIP account does not have a voicemail server."
   
   # The SipAccount must stay on the same provisioning server or
   # bad things may happen.  #OPTIMIZE - Is this still required?
