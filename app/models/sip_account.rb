@@ -26,7 +26,8 @@ class SipAccount < ActiveRecord::Base
   validates_numericality_of :voicemail_pin,
     :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
     :only_integer => true,
-    :greater_than_or_equal_to => 1000
+    :greater_than_or_equal_to => 1000,
+    :message => "must be all digits"
   validates_inclusion_of    :voicemail_pin,
     :in => [ nil ],
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
