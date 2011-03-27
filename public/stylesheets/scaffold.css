@@ -352,7 +352,7 @@ table tr.odd             > td {
 	nav.hnav li a:hover,
 	nav.hnav li a:active,
 	nav.hnav li a:focus,
-	nav.hnav li a.navcur {
+	nav.hnav li a.current_page_navigation {
 		color: #fff;
 		background-color: #029;
 		background-image: -moz-linear-gradient( top,
