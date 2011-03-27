@@ -39,7 +39,7 @@
   <b>SIP proxy:</b>
   <%= @sip_account.sip_proxy_id ? "ID #{@sip_account.sip_proxy_id}" : "-" %>
   <% if @sip_account.sip_proxy %>
-    (<%= @sip_account.sip_proxy.name %>)
+    (<%= @sip_account.sip_proxy.host %>)
   <% end %>
 </p>
 

@@ -38,7 +38,7 @@ class SipProxyTest < ActiveSupport::TestCase
     'abc.',
   ].each { |host|
     should "be valid with host #{host.inspect}" do
-      assert Factory.build( :sip_proxy, :name => host ).valid?
+      assert Factory.build( :sip_proxy, :host => host ).valid?
     end
   }
   
@@ -64,7 +64,7 @@ class SipProxyTest < ActiveSupport::TestCase
     'a_c',
   ].each { |host|
     should "not be valid with host #{host.inspect}" do
-      assert ! Factory.build( :sip_proxy, :name => host ).valid?
+      assert ! Factory.build( :sip_proxy, :host => host ).valid?
     end
   }
   
@@ -75,7 +75,7 @@ class SipProxyTest < ActiveSupport::TestCase
     65535,
   ].each { |port|
     should "be valid with config_port #{port.inspect}" do
-      assert Factory.build( :sip_proxy, :config_port => port, :managed_by_gs => true ).valid?
+      assert Factory.build( :sip_proxy, :management_host_port => port, :management_host => 'h1.test.de' ).valid?
     end
   }
   
@@ -88,19 +88,15 @@ class SipProxyTest < ActiveSupport::TestCase
     65536,
   ].each { |port|
     should "not be valid with config_port #{port.inspect}" do
-      assert ! Factory.build( :sip_proxy, :config_port => port, :managed_by_gs => true ).valid?
+      assert ! Factory.build( :sip_proxy, :management_host_port => port, :management_host => 'h1.test.de' ).valid?
     end
   }
   
-   should "not be valid when not managed_by_gs but config_port given" do
-    assert ! Factory.build( :sip_proxy, :config_port => 3000, :managed_by_gs => false ).valid?
-  end
-  
    
   
-  should "not be valid when name not unique" do
+  should "not be valid when host not unique" do
     sip_proxy = Factory.create(:sip_proxy)
-    assert ! Factory.build( :sip_proxy, :name => sip_proxy.name ).valid?
+    assert ! Factory.build( :sip_proxy, :host => sip_proxy.host ).valid?
   end
   
 end

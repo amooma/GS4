@@ -48,7 +48,7 @@
   <div class="field">
     <%= f.label :sip_proxy_id, "SIP proxy" %><br />
     <%= f.select( :sip_proxy_id,
-      @sip_proxies.collect {|r| [ "#{r.name} (ID #{r.id})", r.id ] },
+      @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_proxy_id }
     ) %>
   </div>

@@ -3,18 +3,20 @@
 <table>
   <tr>
     <th>Host</th>
-    <th>Managed by Gemeinschaft?</th>
-    <th>Config. port</th>
+    <th>Port</th>
+    <th>Management host</th>
+    <th>Management host port</th>
     <th></th>
-    <th></th>
+	<th></th>
 	<th></th>
   </tr>
 
 <% @sip_proxies.each do |sip_proxy| %>
   <tr>
-    <td><%= sip_proxy.name %></td>
-    <td><%= sip_proxy.managed_by_gs ? "yes":"no" %></td>
-	<td><%= sip_proxy.config_port %><td>
+    <td><%= sip_proxy.host %></td>
+    <td><%= sip_proxy.host_port%></td>
+	<td><%= sip_proxy.management_host %></td>
+	<td><%= sip_proxy.management_host_port%></td>
     <td><%= link_to 'Show', sip_proxy %></td>
     <td><%= link_to 'Edit', edit_sip_proxy_path(sip_proxy) %></td>
     <td><%= button_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>

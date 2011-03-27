@@ -1,9 +1,12 @@
 ActiveRecord::Base.class_eval do
   
-  def self.validate_hostname_or_ip( attr_name )
+  def self.validate_hostname_or_ip( attr_names, options={} )
     # Validate the server. This is the "host" rule from RFC 3261
     # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
-    validates_format_of [ attr_name ], :with =>
+    configuration = {
+      :allow_nil   => false,
+      :allow_blank => false,
+      :with =>
     /^
       (?:
         (?:
@@ -121,6 +124,9 @@ ActiveRecord::Base.class_eval do
         )
       )
     $/x
+    }
+    configuration.merge!( options )
+    validates_format_of( attr_names, configuration )
   end
   
   # Validate username. This is the "user" rule from RFC 3261.
