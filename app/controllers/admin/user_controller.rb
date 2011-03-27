@@ -64,5 +64,4 @@ class Admin::UserController < ApplicationController
     end
   end
   
-  
 end
