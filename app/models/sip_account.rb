@@ -7,7 +7,6 @@ class SipAccount < ActiveRecord::Base
   belongs_to :extension  , :validate => true
   belongs_to :user
   
-  
   # TODO: Test acts_as_list
   acts_as_list :scope => :user
   
@@ -24,9 +23,8 @@ class SipAccount < ActiveRecord::Base
     :allow_nil => false
   validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
   
-  validates_numericality_of(:voicemail_pin,
+  validates_numericality_of :voicemail_pin,
     :greater_than_or_equal_to => 1000
-  )
   
   # The SipAccount must stay on the same provisioning server or
   # bad things may happen.  #OPTIMIZE - Is this still required?
