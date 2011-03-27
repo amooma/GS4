@@ -110,5 +110,7 @@ ActiveRecord::Schema.define(:version => 20110327160434) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  #TODO - add more indexes to the tables (in migrations)
 
 end
