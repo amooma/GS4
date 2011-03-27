@@ -23,6 +23,10 @@ module ApplicationHelper
     return menu_items
   end
   
+  def page_title(page_title)  
+    content_for(:page_title) { page_title }  
+  end  
+  
 end
 
 #menu_items = [{:text=>'A',:url=>'/a'},{:text=>'S', :sub => [{:text=>'t1',:url=>'/t1'},{:text=>'t2',:url=>'/t2'}]}]
