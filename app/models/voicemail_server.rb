@@ -5,24 +5,24 @@ class VoicemailServer < ActiveRecord::Base
   validates_presence_of      :host
   validate_hostname_or_ip    :host
   validates_uniqueness_of    :host
-  validates_numericality_of( :port,
-    :allow_nil    => true,              # empty SIP port means default SIP port (SRV lookups!)
-    :greater_than =>     0,
-    :less_than    => 65536,
-  )
+  
+  validate_ip_port           :port, :allow_nil => true  # empty SIP port means default SIP port (SRV lookups)
   
   validate_hostname_or_ip(   :management_host, {
-    :message => "must be a valid hostname or IP address if set",
+    :message => "must be a valid hostname or IP address if set.",
     :allow_nil   => true,
     :allow_blank => true,
   })
   validates_uniqueness_of    :management_host
-  validates_numericality_of( :management_port,
-    :allow_nil    => true,
-    :greater_than =>     0,
-    :less_than    => 65536,
-  )
   
-  #TODO - Tests for the validations.
+  validate_ip_port           :management_port, :allow_nil => true
   
+  validates_presence_of :management_port,
+    :message => "must be present if a management host is set.",
+    :if => Proc.new { |vm_server| ! vm_server.management_host.blank? }
+  
+  validates_presence_of :management_host,
+    :message => "must be present if a management port is set.",
+    :if => Proc.new { |vm_server| ! vm_server.management_port.blank? }
+    
 end

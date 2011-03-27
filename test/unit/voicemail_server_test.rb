@@ -99,13 +99,12 @@ class VoicemailServerTest < ActiveSupport::TestCase
   
   # valid management_host
   [
-    nil,
-    '',
     '10.0.0.0',
     'www.amooma.de',
   ].each { |host|
     should "be valid with management_host #{host.inspect}" do
-      assert Factory.build( :voicemail_server, :management_host => host ).valid?
+      valid_management_port = 123
+      assert Factory.build( :voicemail_server, :management_host => host, :management_port => valid_management_port ).valid?
     end
   }
   
@@ -114,15 +113,57 @@ class VoicemailServerTest < ActiveSupport::TestCase
     '123',
   ].each { |host|
     should "not be valid with management_host #{host.inspect}" do
-      assert ! Factory.build( :voicemail_server, :management_host => host ).valid?
+      valid_management_port = 123
+      assert ! Factory.build( :voicemail_server, :management_host => host, :management_port => valid_management_port ).valid?
     end
   }
   
   
+  # valid management_port
+  [
+    1,
+    65535,
+  ].each { |port|
+    should "be valid with management_port #{port.inspect}" do
+      valid_management_host = "foo.localdomain"
+      assert Factory.build( :voicemail_server, :management_port => port, :management_host => valid_management_host ).valid?
+    end
+  }
+  
+  # invalid management_port
+  [
+    'foo',
+    -1,
+    65536,
+  ].each { |port|
+    should "not be valid with management_port #{port.inspect}" do
+      valid_management_host = "foo.localdomain"
+      assert ! Factory.build( :voicemail_server, :management_port => port, :management_host => valid_management_host ).valid?
+    end
+  }
   
   
+  # invalid with management_port without management_host
+  [
+    nil,
+    '',
+  ].each { |host|
+    should "not be valid with management_port if management_host is not set" do
+      valid_management_port = 123
+      assert ! Factory.build( :voicemail_server, :management_host => host, :management_port => valid_management_port ).valid?
+    end
+  }
   
-  
+  # invalid with management_host without management_port
+  [
+    nil,
+    '',
+  ].each { |port|
+    should "not be valid with management_host if management_port is not set" do
+      valid_management_host = "foo.localdomain"
+      assert ! Factory.build( :voicemail_server, :management_port => port, :management_host => valid_management_host ).valid?
+    end
+  }
   
   
 end
