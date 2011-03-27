@@ -232,7 +232,7 @@ class SipAccount < ActiveRecord::Base
         provisioning_server = self.sip_phone.provisioning_server
         if provisioning_server
           scheme = 'http'  # TODO - https as soon as it is implemented.
-          host   = provisioning_server.host if ! provisioning_server.host.blank?
+          host   = provisioning_server.name if ! provisioning_server.name.blank?
           port   = provisioning_server.port if ! provisioning_server.port.blank?
           path   = '/'
         end
