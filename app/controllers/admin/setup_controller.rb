@@ -9,14 +9,11 @@ class Admin::SetupController < ApplicationController
         @user = User.new(params[:user])
         if @user.save
           format.html { redirect_to(admin_index_path, :notice => "#{ @user.username } created. You can log in now.") }
-          format.xml  { render :xml => admin_index_path, :status => :created, :location => admin_user_path(@user) }
         else
           format.html { render :action => 'new' }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity}
         end
       else
         format.html { redirect_to(admin_index_path, :notice => "Setup disabled. Already done!") }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity}
       end
     end
   end

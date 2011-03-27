@@ -1,0 +1,21 @@
+<span class="tty">Navigation:</span> 
+<nav class="hnav"> 
+	<ul> 
+		<% top_menu_array.each do |navigation_item| %>
+          <li>
+	        <% if navigation_item[:url] != nil && current_page?(navigation_item[:url]) %>
+              <%= link_to navigation_item[:text], navigation_item[:url], :class => 'navcur' %>
+            <% else %>
+              <%= link_to navigation_item[:text], navigation_item[:url] %>
+            <% end %>
+            <% if navigation_item[:sub] != nil %>
+               <ul>
+	               <% navigation_item[:sub].each do |sub_navigation_item| %>
+		              <li><%= link_to sub_navigation_item[:text], sub_navigation_item[:url] %></li>
+	               <% end %>
+               </ul>
+            <% end %>
+          </li>
+        <% end %>	    
+	</ul> 
+</nav> 

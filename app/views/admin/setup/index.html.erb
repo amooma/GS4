@@ -1,39 +1,35 @@
 <h1>Setup after installation</h1>
 <table>
-    <% if @User == 0 %>
-    <tr>
-        <td>
-            <%= link_to "Create first user", new_admin_setup_path %>
-            <td>
-            </tr<% else %>
-            <tr>
-                <td>
-                    First User already created
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <% if SipServer.count == 0 %>
-                    <%= link_to 'Create first SIP server', new_sip_server_path %>
-                    <% else %>
-                    First SIP server already configured<%end %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <% if ProvisioningServer.count == 0 %>
-                    <%= link_to 'Create first provisioning server', new_provisioning_server_path %>
-                    <% else %>
-                    First provisioning server already configured<%end %>
-                </td>
-            </tr>
-						<tr>
-                <td>
-                    <% if SipProxy.count == 0 %>
-                    <%= link_to 'Create first SIP proxy server', new_sip_proxy_path %>
-                    <% else %>
-                    First SIP proxy server already configured<%end %>
-                </td>
-            </tr>
-            <% end %>
-        </table>
+	<tr>
+		<td>
+			First user with admin privileges already created (<%= User.first.username %>).
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<% if SipServer.count == 0 %>
+			  <%= link_to 'Create first SIP server', new_sip_server_path %>
+			<% else %>
+			  First SIP server already configured
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<% if ProvisioningServer.count == 0 %>
+			  <%= link_to 'Create first provisioning server', new_provisioning_server_path %>
+			<% else %>
+			  First provisioning server already configured
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<% if SipProxy.count == 0 %>
+			  <%= link_to 'Create first SIP proxy server', new_sip_proxy_path %>
+			<% else %>
+			  First SIP proxy server already configured
+			<% end %>
+		</td>
+	</tr>
+</table>
