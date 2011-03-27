@@ -1,4 +1,5 @@
 module ApplicationHelper
+  
   # Define the top navigation menu_items content
   #
   def top_menu_items_array
@@ -12,9 +13,10 @@ module ApplicationHelper
         { :text => "Servers"       , :sub => [
           { :text => "Provisioning Servers" , :url => provisioning_servers_path },
           { :text => "SIP Servers"          , :url => sip_servers_path },
-          { :text => "SIP Proxies"          , :url => sip_proxies_path }
-          ]}
-        ]
+          { :text => "SIP Proxies"          , :url => sip_proxies_path },
+          { :text => "Voicemail Servers"    , :url => voicemail_servers_path },
+        ]},
+      ]
     else
         menu_items = [
           { :text => "Sign in"       , :url => new_user_session_path }

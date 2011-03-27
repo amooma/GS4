@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Host:</b>
+  <%= @voicemail_server.host %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%= @voicemail_server.port %>
+</p>
+
+<p>
+  <b>Management host:</b>
+  <%= @voicemail_server.management_host %>
+</p>
+
+<p>
+  <b>Management port:</b>
+  <%= @voicemail_server.management_port %>
+</p>
+
+
+<%= link_to 'Edit', edit_voicemail_server_path(@voicemail_server) %> |
+<%= link_to 'Back', voicemail_servers_path %>

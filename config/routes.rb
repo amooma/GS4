@@ -1,5 +1,5 @@
 Gemeinschaft4::Application.routes.draw do
-	
+  
   get "setup/index"
 
   get "setup/create"
@@ -21,6 +21,8 @@ Gemeinschaft4::Application.routes.draw do
 	resources :sip_servers
 	
 	resources :sip_proxies
+	
+	resources :voicemail_servers
 	
 	resources :extensions
 	resources :admin, :only => [:index]
