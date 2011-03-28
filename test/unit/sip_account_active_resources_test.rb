@@ -2,40 +2,47 @@ require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
   
-  
   def create_sip_account_without_phone
-    @sip_server = Factory.create(:sip_server, :management_host => "1.2.3.9", :management_port => 4040)
+    @sip_server = Factory.create(:sip_server,
+      :management_host => "1.2.3.9",
+      :management_port => 4040
+    )
     @sip_proxy = Factory.create(:sip_proxy)
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
       mock.post   "/subscribers.xml", {},  # POST = create
-      nil, 201, { "Location" => "/subscribers/1.xml" }
+        nil, 201, { "Location" => "/subscribers/1.xml" }
       mock.post   "/dbaliases.xml", {},  # POST = create
-      nil, 201, { "Location" => "/dbaliases/1.xml" }
+        nil, 201, { "Location" => "/dbaliases/1.xml" }
     }
     
-    @sip_account = Factory.create(:sip_account, 
-                             :sip_server_id => @sip_server.id,
-                             :sip_proxy_id => @sip_proxy.id,
-                             :sip_phone_id => nil)
-    
+    @sip_account = Factory.create(:sip_account,
+      :sip_server_id => @sip_server.id,
+      :sip_proxy_id  => @sip_proxy.id,
+      :sip_phone_id  => nil
+    )
   end
   
   def create_sip_account_and_phones
     @provisioning_server = Factory.create(:provisioning_server)
-    @sip_phone_1 = Factory.create(:sip_phone, :provisioning_server_id => @provisioning_server.id)
-    @sip_phone_2 = Factory.create(:sip_phone, :provisioning_server_id => @provisioning_server.id)
+    @sip_phone_1 = Factory.create(:sip_phone,
+      :provisioning_server_id => @provisioning_server.id
+    )
+    @sip_phone_2 = Factory.create(:sip_phone,
+      :provisioning_server_id => @provisioning_server.id
+    )
     @sip_server  = Factory.create(:sip_server)
     @sip_proxy = Factory.create(:sip_proxy)
-    @sip_account = Factory.create(:sip_account, 
-                             :sip_server_id => @sip_server.id,
-                             :sip_proxy_id => @sip_proxy.id,
-                             :sip_phone_id => nil)
-    
+    @sip_account = Factory.create(:sip_account,
+      :sip_server_id => @sip_server.id,
+      :sip_proxy_id => @sip_proxy.id,
+      :sip_phone_id => nil
+    )
   end
 
   
   # testing active resources of sip_account (external servers)
+  
   
   should "not make requests if sip_phone_id is nil" do
     number_of_mock_requests = ActiveResource::HttpMock.requests.length
@@ -43,22 +50,24 @@ class SipAccountTest < ActiveSupport::TestCase
     sip_server = Factory.create(:sip_server, :management_port => nil)
     sip_proxy = Factory.create(:sip_proxy)
     
-    sip_account = Factory.create(:sip_account, 
-                             :sip_server_id => sip_server.id,
-                             :sip_proxy_id => sip_proxy.id,
-                             :sip_phone_id => nil)
+    sip_account = Factory.create(:sip_account,
+      :sip_server_id => sip_server.id,
+      :sip_proxy_id  => sip_proxy.id,
+      :sip_phone_id  => nil
+    )
     
     assert_equal( number_of_mock_requests, ActiveResource::HttpMock.requests.length )
   end
+  
   
   should "create subscriber and alias on sip_proxy server" do
     create_sip_account_without_phone
     assert @sip_account.valid?
     
     idx = ActiveResource::HttpMock.requests.index(
-                                                  # Note that ActiveResource::Request.==() does not check equality
-                                                  # of the body, so neither .include?() not .index() alone is enough.
-                                                  ActiveResource::Request.new(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :post, "/subscribers.xml", nil, { "Content-Type"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
@@ -76,9 +85,9 @@ class SipAccountTest < ActiveSupport::TestCase
     
     
     idx = ActiveResource::HttpMock.requests.index(
-                                                  # Note that ActiveResource::Request.==() does not check equality
-                                                  # of the body, so neither .include?() not .index() alone is enough.
-                                                  ActiveResource::Request.new(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :post, "/dbaliases.xml", nil, { "Content-Type"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
@@ -88,12 +97,13 @@ class SipAccountTest < ActiveSupport::TestCase
     assert_not_equal( nil, req_obj_hash['dbalias'], 'Request expected to contain "dbalias" as root' )
     req_obj_hash = req_obj_hash['dbalias']
     {
-      'username'    => @sip_account.auth_name,
-      'domain'      => @sip_account.sip_server.host,
+      'username'        => @sip_account.auth_name,
+      'domain'          => @sip_account.sip_server.host,
       'alias_username'  => @sip_account.phone_number,
       'alias_domain'    => @sip_account.sip_server.host
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
   end
+  
   
   should "update subscriber on sip_proxy" do
     
@@ -101,7 +111,7 @@ class SipAccountTest < ActiveSupport::TestCase
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
       sip_proxy_subscriber = {
-      :id           => 1,
+      :id          => 1,
       :username    => @sip_account.auth_name,
       :domain      => @sip_account.sip_server.host,
       :password    => @sip_account.password,
@@ -109,25 +119,25 @@ class SipAccountTest < ActiveSupport::TestCase
       }
       
       mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, #GET = index
-      [ sip_proxy_subscriber ].to_xml(:root => "subscribers"), 200, {  }
+        [ sip_proxy_subscriber ].to_xml(:root => "subscribers"), 200, {  }
       mock.put    "/subscribers/1.xml", {},  # PUT = update
-      nil, 204, {}
+        nil, 204, {}
     }  
     
     @sip_account.update_attributes!(:password => "x3u89")
     # puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
     
     idx = ActiveResource::HttpMock.requests.index(
-                                                  ActiveResource::Request.new(
+      ActiveResource::Request.new(
         :get, "/subscribers.xml?username=#{@sip_account.auth_name}", nil, { "Accept"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
     
     # puts "Asserting that the mock received the expected request (POST /subscribers.xml) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
-                                                  # Note that ActiveResource::Request.==() does not check equality
-                                                  # of the body, so neither .include?() not .index() alone is enough.
-                                                  ActiveResource::Request.new(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :put, "/subscribers/1.xml", nil, { "Content-Type"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
@@ -144,9 +154,8 @@ class SipAccountTest < ActiveSupport::TestCase
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
     
     ActiveResource::HttpMock.reset!
-    
-    
   end
+  
   
   should "move sip account from one phone to another phone" do
     number_of_mock_requests = ActiveResource::HttpMock.requests.length
@@ -160,9 +169,9 @@ class SipAccountTest < ActiveSupport::TestCase
       cantina_sip_accounts = [
       ]
       mock.get    "/sip_accounts.xml", {},  # GET = index
-      cantina_sip_accounts.to_xml( :root => "sip-accounts" ), 200, {}
+        cantina_sip_accounts.to_xml( :root => "sip-accounts" ), 200, {}
       mock.post   "/sip_accounts.xml", {},  # POST = create
-      nil, 201, { "Location" => "/sip_accounts/ignored.xml" }
+        nil, 201, { "Location" => "/sip_accounts/ignored.xml" }
     }
     
     @sip_account.update_attributes!( :sip_phone_id => @sip_phone_1.id )
@@ -171,16 +180,16 @@ class SipAccountTest < ActiveSupport::TestCase
     assert @sip_account.valid?
     puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
-                                                  ActiveResource::Request.new(
+      ActiveResource::Request.new(
         :get, "/sip_accounts.xml", nil, { "Accept"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
     
     puts "Asserting that the mock received the expected request (POST /sip_accounts.xml) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
-                                                  # Note that ActiveResource::Request.==() does not check equality
-                                                  # of the body, so neither .include?() not .index() alone is enough.
-                                                  ActiveResource::Request.new(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :post, "/sip_accounts.xml", nil, { "Content-Type"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
@@ -206,24 +215,22 @@ class SipAccountTest < ActiveSupport::TestCase
     }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
     
     ActiveResource::HttpMock.reset!
-    
-    
   end
 
 
-should "create a SIP account on the Cantina provisioning server" do
-  return
-  
-  
-  puts "-----------------------------------------------------------"
-  
-  
-  puts "-----------------------------------------------------------"
-  puts "Assigning the SipAccount to the SipPhone 2 ..."
-  
-  ActiveResource::HttpMock.reset!
-  ActiveResource::HttpMock.respond_to { |mock|
-    cantina_sip_account_on_phone1 = {
+  should "create a SIP account on the Cantina provisioning server" do
+    return
+    
+    
+    puts "-----------------------------------------------------------"
+    
+    
+    puts "-----------------------------------------------------------"
+    puts "Assigning the SipAccount to the SipPhone 2 ..."
+    
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      cantina_sip_account_on_phone1 = {
         :id              => 1,
         :auth_user       => 'mytest',
         :user            => 'mytest',
@@ -238,45 +245,45 @@ should "create a SIP account on the Cantina provisioning server" do
         :sip_proxy_port  => nil,
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',
+      }
+      cantina_sip_account_on_phone2 = cantina_sip_account_on_phone1.dup
+      cantina_sip_account_on_phone2[:phone_id] = 99992
+      mock.get    "/sip_accounts.xml", {},  # GET = index
+        [ cantina_sip_account_on_phone1 ].to_xml( :root => "sip-accounts" ), 200, {}
+      mock.put    "/sip_accounts/1.xml", {},  # PUT = update
+        nil, 204, {}
+      #mock.get    "/sip_accounts/1.xml", {},  # GET = show
+      #  cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
+      #mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
+      #  nil, 200, {}
     }
-    cantina_sip_account_on_phone2 = cantina_sip_account_on_phone1.dup
-    cantina_sip_account_on_phone2[:phone_id] = 99992
-    mock.get    "/sip_accounts.xml", {},  # GET = index
-    [ cantina_sip_account_on_phone1 ].to_xml( :root => "sip-accounts" ), 200, {}
-    mock.put    "/sip_accounts/1.xml", {},  # PUT = update
-    nil, 204, {}
-    #mock.get    "/sip_accounts/1.xml", {},  # GET = show
-    #  cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
-    #mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
-    #  nil, 200, {}
-  }
-  
-  sip_account.update_attributes!( :sip_phone_id => sip_phone2.id )
-  puts sip_account.inspect
-  puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
-  assert sip_account.valid?
-  
-  puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                ActiveResource::Request.new(
+    
+    sip_account.update_attributes!( :sip_phone_id => sip_phone2.id )
+    puts sip_account.inspect
+    puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
+    assert sip_account.valid?
+    
+    puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/sip_accounts.xml", nil, { "Accept"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  puts "Asserting that the mock received the expected request (PUT /sip_accounts/1.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                # Note that ActiveResource::Request.==() does not check equality
-                                                # of the body, so neither .include?() not .index() alone is enough.
-                                                ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (PUT /sip_accounts/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :put, "/sip_accounts/1.xml", nil, { "Content-Type"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
-  assert_not_equal( nil, req_obj_hash )
-  assert_not_equal( nil, req_obj_hash['sip_account'], 'Request expected to contain "sip_account" as root' )
-  req_obj_hash = req_obj_hash['sip_account']
-  {
+    )
+    assert_not_equal( nil, idx )
+    
+    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
+    assert_not_equal( nil, req_obj_hash )
+    assert_not_equal( nil, req_obj_hash['sip_account'], 'Request expected to contain "sip_account" as root' )
+    req_obj_hash = req_obj_hash['sip_account']
+    {
       'auth_user'       => 'mytest',
       'user'            => 'mytest',
       'password'        => 'h3r8vs5g',
@@ -290,31 +297,31 @@ should "create a SIP account on the Cantina provisioning server" do
       'sip_proxy_port'  => nil,
       'registration_expiry_time' => 300,
       'dtmf_mode'       => 'rfc2833',
-  }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
-  
-  #puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
-  #idx = ActiveResource::HttpMock.requests.index(
-  #  ActiveResource::Request.new(
-  #    :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-  #)
-  #assert_not_equal( nil, idx )
-  
-  #puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
-  #idx = ActiveResource::HttpMock.requests.index(
-  #  ActiveResource::Request.new(
-  #    :delete, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-  #)
-  #assert_not_equal( nil, idx )
-  
-  ActiveResource::HttpMock.reset!
-  
-  
-  puts "-----------------------------------------------------------"
-  puts "Updating the SipAccount, again ..."
-  
-  ActiveResource::HttpMock.reset!
-  ActiveResource::HttpMock.respond_to { |mock|
-    cantina_sip_account_on_phone1 = {
+    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
+    
+    #puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
+    #idx = ActiveResource::HttpMock.requests.index(
+    #  ActiveResource::Request.new(
+    #    :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
+    #)
+    #assert_not_equal( nil, idx )
+    
+    #puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
+    #idx = ActiveResource::HttpMock.requests.index(
+    #  ActiveResource::Request.new(
+    #    :delete, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
+    #)
+    #assert_not_equal( nil, idx )
+    
+    ActiveResource::HttpMock.reset!
+    
+    
+    puts "-----------------------------------------------------------"
+    puts "Updating the SipAccount, again ..."
+    
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      cantina_sip_account_on_phone1 = {
         :id              => 1,
         :auth_user       => 'mytest',
         :user            => 'mytest',
@@ -329,56 +336,56 @@ should "create a SIP account on the Cantina provisioning server" do
         :sip_proxy_port  => nil,
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',
-    }
-    cantina_sip_account_on_phone2 = cantina_sip_account_on_phone1.dup
-    cantina_sip_account_on_phone2[:phone_id] = 99992
-    
-    sipproxy_subscriber2 = {
+      }
+      cantina_sip_account_on_phone2 = cantina_sip_account_on_phone1.dup
+      cantina_sip_account_on_phone2[:phone_id] = 99992
+      
+      sipproxy_subscriber2 = {
         :id          => 1,
         :username    => 'mytest',
         :domain      => 'sip-server.test.invalid',
         :ha1         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
+      }
+      
+      mock.get    "/sip_accounts.xml", {},  # GET = index
+        [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
+      mock.put    "/sip_accounts/1.xml", {},  # PUT = update
+        nil, 204, {}
+      
+      mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
+        [ sipproxy_subscriber2 ].to_xml( :root => "subscribers" ), 200, {}
+      mock.put    "/subscribers/1.xml", {},  # PUT = update
+        nil, 204, {}
+      
+      #FIXME - shouldn't this access "/dbaliases.xml" as well?
     }
     
-    mock.get    "/sip_accounts.xml", {},  # GET = index
-    [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
-    mock.put    "/sip_accounts/1.xml", {},  # PUT = update
-    nil, 204, {}
+    sip_account.update_attributes!( :password => "e99w2oc4" )
+    puts sip_account.inspect
+    puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
+    assert sip_account.valid?
     
-    mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
-    [ sipproxy_subscriber2 ].to_xml( :root => "subscribers" ), 200, {}
-    mock.put    "/subscribers/1.xml", {},  # PUT = update
-    nil, 204, {}
-    
-    #FIXME - shouldn't this access "/dbaliases.xml" as well?
-  }
-  
-  sip_account.update_attributes!( :password => "e99w2oc4" )
-  puts sip_account.inspect
-  puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
-  assert sip_account.valid?
-  
-  puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                ActiveResource::Request.new(
+    puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/sip_accounts.xml", nil, { "Accept"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  puts "Asserting that the mock received the expected request (PUT /sip_accounts/1.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                # Note that ActiveResource::Request.==() does not check equality
-                                                # of the body, so neither .include?() not .index() alone is enough.
-                                                ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (PUT /sip_accounts/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :put, "/sip_accounts/1.xml", nil, { "Content-Type"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
-  assert_not_equal( nil, req_obj_hash )
-  assert_not_equal( nil, req_obj_hash['sip_account'], 'Request expected to contain "sip_account" as root' )
-  req_obj_hash = req_obj_hash['sip_account']
-  {
+    )
+    assert_not_equal( nil, idx )
+    
+    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
+    assert_not_equal( nil, req_obj_hash )
+    assert_not_equal( nil, req_obj_hash['sip_account'], 'Request expected to contain "sip_account" as root' )
+    req_obj_hash = req_obj_hash['sip_account']
+    {
       'auth_user'       => 'mytest',
       'user'            => 'mytest',
       'password'        => 'e99w2oc4',
@@ -392,44 +399,44 @@ should "create a SIP account on the Cantina provisioning server" do
       'sip_proxy_port'  => nil,
       'registration_expiry_time' => 300,
       'dtmf_mode'       => 'rfc2833',
-  }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
-  
-  puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                ActiveResource::Request.new(
+    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
+    
+    puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/subscribers.xml?username=mytest", nil, { "Accept"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  puts "Asserting that the mock received the expected request (PUT /subscribers/1.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                # Note that ActiveResource::Request.==() does not check equality
-                                                # of the body, so neither .include?() not .index() alone is enough.
-                                                ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (PUT /subscribers/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      # Note that ActiveResource::Request.==() does not check equality
+      # of the body, so neither .include?() not .index() alone is enough.
+      ActiveResource::Request.new(
         :put, "/subscribers/1.xml", nil, { "Content-Type"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
-  assert_not_equal( nil, req_obj_hash )
-  assert_not_equal( nil, req_obj_hash['subscriber'], 'Request expected to contain "subscriber" as root' )
-  req_obj_hash = req_obj_hash['subscriber']
-  {
+    )
+    assert_not_equal( nil, idx )
+    
+    req_obj_hash = Hash.from_xml( ActiveResource::HttpMock.requests[idx].body )
+    assert_not_equal( nil, req_obj_hash )
+    assert_not_equal( nil, req_obj_hash['subscriber'], 'Request expected to contain "subscriber" as root' )
+    req_obj_hash = req_obj_hash['subscriber']
+    {
       'username'    => 'mytest',
       'domain'      => 'sip-server.test.invalid',
       'password'    => 'e99w2oc4',
       'ha1'         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
-  }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
-  
-  ActiveResource::HttpMock.reset!
-  
-  
-  puts "-----------------------------------------------------------"
-  puts "Assigning the SipAccount to no SipPhone ..."
-  
-  ActiveResource::HttpMock.reset!
-  ActiveResource::HttpMock.respond_to { |mock|
-    cantina_sip_account_on_phone2 = {
+    }.each { |k,v| assert_equal( v, req_obj_hash[k], "Request expected to contain attribute #{k.inspect} = #{v.inspect} but is #{req_obj_hash[k].inspect}" ) }
+    
+    ActiveResource::HttpMock.reset!
+    
+    
+    puts "-----------------------------------------------------------"
+    puts "Assigning the SipAccount to no SipPhone ..."
+    
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      cantina_sip_account_on_phone2 = {
         :id              => 1,
         :auth_user       => 'mytest',
         :user            => 'mytest',
@@ -444,112 +451,108 @@ should "create a SIP account on the Cantina provisioning server" do
         :sip_proxy_port  => nil,
         :registration_expiry_time => 300,
         :dtmf_mode       => 'rfc2833',
+      }
+      mock.get    "/sip_accounts.xml", {},  # GET = index
+        [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
+      mock.get    "/sip_accounts/1.xml", {},  # GET = show
+        cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
+      mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
+        nil, 200, {}
     }
-    mock.get    "/sip_accounts.xml", {},  # GET = index
-    [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
-    mock.get    "/sip_accounts/1.xml", {},  # GET = show
-    cantina_sip_account_on_phone2.to_xml( :root => "sip-account" ), 200, {}
-    mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
-    nil, 200, {}
-  }
-  
-  sip_account.update_attributes!( :sip_phone_id => nil )
-  puts sip_account.inspect
-  puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
-  assert sip_account.valid?
-  
-  puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                ActiveResource::Request.new(
+    
+    sip_account.update_attributes!( :sip_phone_id => nil )
+    puts sip_account.inspect
+    puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
+    assert sip_account.valid?
+    
+    puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/sip_accounts.xml", nil, { "Accept"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
-  idx = ActiveResource::HttpMock.requests.index(
-                                                ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :delete, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-  )
-  assert_not_equal( nil, idx )
-  
-  ActiveResource::HttpMock.reset!
-  
-  
-  puts "-----------------------------------------------------------"
-  puts "Deleting the SipAccount ..."
-  
-  ActiveResource::HttpMock.reset!
-  ActiveResource::HttpMock.respond_to { |mock|
-    sipproxy_subscriber3 = {
+    )
+    assert_not_equal( nil, idx )
+    
+    ActiveResource::HttpMock.reset!
+    
+    
+    puts "-----------------------------------------------------------"
+    puts "Deleting the SipAccount ..."
+    
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      sipproxy_subscriber3 = {
         :id          => 1,
         :username    => 'mytest',
         :domain      => 'sip-server.test.invalid',
         :ha1         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{sip_account.password}" ),
-    }
-    sipproxy_dbalias3 = {
+      }
+      sipproxy_dbalias3 = {
         :id              => 1,
         :username        => 'mytest',
         :domain          => 'sip-server.test.invalid',
         :alias_username  => '1234',
         :alias_domain    => 'sip-server.test.invalid',
         :subscriber_id   => 1,
+      }
+      mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
+        [ sipproxy_subscriber3 ].to_xml( :root => "subscribers" ), 200, {}
+      mock.delete "/subscribers/1.xml", {},  # DELETE = destroy
+        nil, 200, {}
+      mock.get    "/dbaliases.xml?alias_username=1234&username=mytest", {},  # GET = index
+        [ sipproxy_dbalias3 ].to_xml( :root => "subscribers" ), 200, {}
+      mock.delete "/dbaliases/1.xml", {},  # DELETE = destroy
+        nil, 200, {}
     }
-    mock.get    "/subscribers.xml?username=mytest", {},  # GET = index
-    [ sipproxy_subscriber3 ].to_xml( :root => "subscribers" ), 200, {}
-    mock.delete "/subscribers/1.xml", {},  # DELETE = destroy
-    nil, 200, {}
-    mock.get    "/dbaliases.xml?alias_username=1234&username=mytest", {},  # GET = index
-    [ sipproxy_dbalias3 ].to_xml( :root => "subscribers" ), 200, {}
-    mock.delete "/dbaliases/1.xml", {},  # DELETE = destroy
-    nil, 200, {}
-  }
-  
-  sip_account.destroy
-  #puts sip_account.inspect
-  puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
-  begin; sip_account.reload ; rescue ActiveRecord::RecordNotFound => e; sip_account = nil; end
-assert_equal( nil, sip_account )
-
-puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
-idx = ActiveResource::HttpMock.requests.index(
-                                              ActiveResource::Request.new(
+    
+    sip_account.destroy
+    #puts sip_account.inspect
+    puts "Errors: #{sip_account.errors.inspect}" if sip_account.errors.length > 0
+    begin; sip_account.reload ; rescue ActiveRecord::RecordNotFound => e; sip_account = nil; end
+    assert_equal( nil, sip_account )
+    
+    puts "Asserting that the mock received the expected request (GET /subscribers.xml?username=mytest) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/subscribers.xml?username=mytest", nil, { "Accept"=>"application/xml" } )
-)
-assert_not_equal( nil, idx )
-
-puts "Asserting that the mock received the expected request (DELETE /subscribers/1.xml) from the model ..."
-idx = ActiveResource::HttpMock.requests.index(
-                                              ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (DELETE /subscribers/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :delete, "/subscribers/1.xml", nil, { "Accept"=>"application/xml" } )
-)
-assert_not_equal( nil, idx )
-
-puts "Asserting that the mock received the expected request (GET /dbaliases.xml?alias_username=1234&username=mytest) from the model ..."
-idx = ActiveResource::HttpMock.requests.index(
-                                              ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (GET /dbaliases.xml?alias_username=1234&username=mytest) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :get, "/dbaliases.xml?alias_username=1234&username=mytest", nil, { "Accept"=>"application/xml" } )
-)
-assert_not_equal( nil, idx )
-
-puts "Asserting that the mock received the expected request (DELETE /dbaliases/1.xml) from the model ..."
-idx = ActiveResource::HttpMock.requests.index(
-                                              ActiveResource::Request.new(
+    )
+    assert_not_equal( nil, idx )
+    
+    puts "Asserting that the mock received the expected request (DELETE /dbaliases/1.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
         :delete, "/dbaliases/1.xml", nil, { "Accept"=>"application/xml" } )
-)
-assert_not_equal( nil, idx )
-
-ActiveResource::HttpMock.reset!
-
-
-end
-
-
-
+    )
+    assert_not_equal( nil, idx )
+    
+    ActiveResource::HttpMock.reset!
+  end
+  
 end
