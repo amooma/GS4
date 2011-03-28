@@ -118,11 +118,11 @@ class SipAccountTest < ActiveSupport::TestCase
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
       sip_proxy_subscriber = {
-      :id          => 1,
-      :username    => @sip_account.auth_name,
-      :domain      => @sip_account.sip_server.host,
-      :password    => @sip_account.password,
-      :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" )
+        :id          => 1,
+        :username    => @sip_account.auth_name,
+        :domain      => @sip_account.sip_server.host,
+        :password    => @sip_account.password,
+        :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" )
       }
       
       mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, #GET = index
@@ -319,9 +319,9 @@ class SipAccountTest < ActiveSupport::TestCase
       
       sipproxy_subscriber2 = {
         :id          => 1,
-        :username    => 'mytest',
-        :domain      => 'sip-server.test.invalid',
-        :ha1         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{@sip_account.password}" ),
+        :username    => @sip_account.auth_name,
+        :domain      => @sip_account.sip_server.host,
+        :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" ),
       }
       
       mock.get    "/sip_accounts.xml", {},  # GET = index
@@ -478,7 +478,7 @@ class SipAccountTest < ActiveSupport::TestCase
         :id          => 1,
         :username    => @sip_account.auth_name,
         :domain      => @sip_account.sip_server.host,
-        :ha1         => Digest::MD5.hexdigest( "#{req_obj_hash['username']}:#{req_obj_hash['domain']}:#{@sip_account.password}" ),
+        :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" ),
       }
       sipproxy_dbalias3 = {
         :id              => 1,
@@ -496,6 +496,8 @@ class SipAccountTest < ActiveSupport::TestCase
       #  [ sipproxy_dbalias3 ].to_xml( :root => "subscribers" ), 200, {}
       #mock.delete "/dbaliases/1.xml", {},  # DELETE = destroy
       #  nil, 200, {}
+      
+      #FIXME - shouldn't this access sipproxy?
     }
     
     old_sip_account = @sip_account.dup
