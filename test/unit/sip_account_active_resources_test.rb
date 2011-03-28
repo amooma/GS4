@@ -45,6 +45,7 @@ class SipAccountTest < ActiveSupport::TestCase
   # testing active resources of sip_account (external servers)
   
   
+  ################################################################
   should "not make requests if sip_phone_id is nil" do
     ActiveResource::HttpMock.reset!
     number_of_mock_requests = ActiveResource::HttpMock.requests.length
@@ -62,6 +63,7 @@ class SipAccountTest < ActiveSupport::TestCase
   end
   
   
+  ################################################################
   should "create subscriber and alias on sip_proxy server" do
     ActiveResource::HttpMock.reset!
     
@@ -109,6 +111,7 @@ class SipAccountTest < ActiveSupport::TestCase
   end
   
   
+  ################################################################
   should "update subscriber on sip_proxy" do
     
     create_sip_account_without_phone
@@ -161,6 +164,7 @@ class SipAccountTest < ActiveSupport::TestCase
   end
   
   
+  ################################################################
   should "move SIP account from one phone to another phone" do
     ActiveResource::HttpMock.reset!
     number_of_mock_requests = ActiveResource::HttpMock.requests.length
