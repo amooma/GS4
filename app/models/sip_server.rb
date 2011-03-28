@@ -50,6 +50,6 @@ class SipServer < ActiveRecord::Base
         sip_account.update_attributes(:sip_server_id => self.id)
       end
     end
-    
   end
+  
 end

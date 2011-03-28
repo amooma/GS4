@@ -13,9 +13,8 @@ class SipProxy < ActiveRecord::Base
 
   validates_presence_of :management_host, :if => Proc.new {|sip_proxy| sip_proxy.management_host_port}
   validates_presence_of :management_host_port, :if => Proc.new {|sip_proxy| ! sip_proxy.management_host.blank? }
-
   
-before_validation(:on => :update) do
+  before_validation(:on => :update) do
     if self.host != self.host_was || \
       self.host_port != self.host_port_was || \
       self.management_host != self.management_host_was || \
@@ -39,10 +38,7 @@ before_validation(:on => :update) do
         sip_account.update_attributes(:sip_proxy_id => self.id)
       end
     end
-    
   end
-
-
-
+  
   # TODO tests
 end
