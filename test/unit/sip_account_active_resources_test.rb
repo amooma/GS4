@@ -36,8 +36,8 @@ class SipAccountTest < ActiveSupport::TestCase
     @sip_proxy   = Factory.create(:sip_proxy)
     @sip_account = Factory.create(:sip_account,
       :sip_server_id => @sip_server.id,
-      :sip_proxy_id => @sip_proxy.id,
-      :sip_phone_id => nil
+      :sip_proxy_id  => @sip_proxy.id,
+      :sip_phone_id  => nil
     )
   end
   
