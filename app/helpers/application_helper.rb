@@ -18,9 +18,9 @@ module ApplicationHelper
         ]},
       ]
     else
-        menu_items = [
-          { :text => "Sign in"       , :url => new_user_session_path }
-        ]
+      menu_items = [
+        { :text => "Sign in"       , :url => new_user_session_path }
+      ]
     end
     return menu_items
   end

@@ -93,13 +93,12 @@ class SipAccount < ActiveRecord::Base
       provisioning_server_sip_account_update
     end
     
-    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.management_port != nil)
-      sipproxy_user_update( sip_server_id, auth_name_was )
-    end
-    
     
     if self.sip_server_id != self.sip_server_id_was &&  SipServer.find(self.sip_server_id_was).management_host
       sipproxy_user_destroy( sip_server_id_was, auth_name_was )
+   end 
+    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.management_port != nil)
+      sipproxy_user_update( sip_server_id, auth_name_was )
     end
     
     if ((self.sip_server_id_was == self.sip_server_id) && \
@@ -266,7 +265,7 @@ class SipAccount < ActiveRecord::Base
             logger.debug "-------------{"
             logger.debug cantina_sip_account.inspect
             logger.debug "-------------}"
-            if (cantina_sip_account.sip_proxy .to_s == sip_server .to_s) \
+            if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
             && (cantina_sip_account.user      .to_s == sip_user   .to_s)
               logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
               return cantina_sip_account
@@ -416,7 +415,7 @@ class SipAccount < ActiveRecord::Base
       cantina_sip_accounts = CantinaSipAccount.all
       if cantina_sip_accounts
         matching_cantina_sip_accounts = cantina_sip_accounts.each { |cantina_sip_account|
-          if (cantina_sip_account.sip_proxy .to_s == sip_server .to_s) \
+          if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
           && (cantina_sip_account.user      .to_s == sip_user   .to_s)
             logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
             #FIXME ? - Does this block really do anything?
