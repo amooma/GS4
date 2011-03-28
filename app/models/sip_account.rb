@@ -52,7 +52,7 @@ class SipAccount < ActiveRecord::Base
       provisioning_server_sip_account_create
     end
     
-    if (! sip_server_id.nil?) && (! self.phone_number.nil?) && (! self.sip_proxy_id.nil?)  && self.sip_server.management_host
+    if (! sip_server_id.nil?) && (! self.phone_number.nil?) && (! self.sip_proxy_id.nil?) && ! self.sip_server.management_host.blank?
         sipproxy_user_create(  sip_server_id )
         sipproxy_alias_create( sip_server_id )
     end
@@ -107,11 +107,12 @@ class SipAccount < ActiveRecord::Base
       provisioning_server_sip_account_update
     end
     
-    if self.sip_server_id != self.sip_server_id_was && self.sip_server.management_host
+    if self.sip_server_id != self.sip_server_id_was && ! self.sip_server.management_host.blank?
       sipproxy_user_destroy( sip_server_id_was, auth_name_was )
     end
     
-    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.management_port != nil)
+    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) \
+    &&  self.sip_server_id == self.sip_server_id_was && ! self.sip_server.management_host.blank?)
       sipproxy_user_update( sip_server_id, auth_name_was )
     end
     
@@ -126,7 +127,7 @@ class SipAccount < ActiveRecord::Base
       provisioning_server_sip_account_destroy
     end
     
-    if ! sip_server_id.nil? && self.sip_server.management_host
+    if ! sip_server_id.nil? && ! self.sip_server.management_host.blank?
         sipproxy_user_destroy(  self.sip_server_id_was, self.auth_name_was )
         sipproxy_alias_destroy( self.sip_server_id_was, self.auth_name_was, self.phone_number_was )
     end
@@ -453,7 +454,7 @@ class SipAccount < ActiveRecord::Base
   #
   def sipproxy_user_create( proxy_server_id )
     server = SipServer.find( proxy_server_id )
-    if ! server.management_host
+    if server.management_host.blank?
       errors.add( :name, "is not managed by GS!")
       return false
     else
@@ -477,7 +478,7 @@ class SipAccount < ActiveRecord::Base
   def sipproxy_user_destroy( proxy_server_id, proxy_server_authname )
     begin
       server = SipServer.find( proxy_server_id )
-      if ! server.management_host
+      if server.management_host.blank?
         errors.add( :name, "is not managed by GS!")
         return false
       else
@@ -547,7 +548,7 @@ class SipAccount < ActiveRecord::Base
   #
   def sipproxy_alias_create( proxy_server_id )
     server = SipServer.find( proxy_server_id )
-    if ! server.management_host
+    if server.management_host.blank?
       errors.add( :name, "is not managed by GS!")
       return false
     else
@@ -608,7 +609,7 @@ class SipAccount < ActiveRecord::Base
   def sipproxy_alias_destroy( proxy_server_id, proxy_server_authname, proxy_server_alias )
     begin
       server = SipServer.find( proxy_server_id )
-      if ! server.management_host
+      if server.management_host.blank?
         errors.add(:name, "is not managed by GS!")
         return false
       else
