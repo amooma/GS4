@@ -107,13 +107,12 @@ class SipAccount < ActiveRecord::Base
       provisioning_server_sip_account_update
     end
     
-    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.management_port != nil)
-      sipproxy_user_update( sip_server_id, auth_name_was )
+    if self.sip_server_id != self.sip_server_id_was && self.sip_server.management_host
+      sipproxy_user_destroy( sip_server_id_was, auth_name_was )
     end
     
-    
-    if self.sip_server_id != self.sip_server_id_was &&  self.sip_server.management_host
-      sipproxy_user_destroy( sip_server_id_was, auth_name_was )
+    if (((self.auth_name_was != self.auth_name) || (self.password != self.password_was)) && self.sip_server_id == self.sip_server_id_was && self.sip_server.management_port != nil)
+      sipproxy_user_update( sip_server_id, auth_name_was )
     end
     
     if ((self.sip_server_id_was == self.sip_server_id) && \
