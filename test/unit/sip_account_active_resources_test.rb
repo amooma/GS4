@@ -331,6 +331,7 @@ class SipAccountTest < ActiveSupport::TestCase
       
       #mock.get    "/subscribers.xml?username=#{@sip_account.auth_name}", {},  # GET = index
       #  [ sipproxy_subscriber2 ].to_xml( :root => "subscribers" ), 200, {}
+      #FIXME - Use @sip_account.auth_name_was ?
       #mock.put    "/subscribers/1.xml", {},  # PUT = update
       #  nil, 204, {}
       
