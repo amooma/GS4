@@ -8,7 +8,6 @@
     <th>Management host port</th>
     <th></th>
 	<th></th>
-	<th></th>
   </tr>
 
 <% @sip_proxies.each do |sip_proxy| %>
@@ -18,7 +17,6 @@
 	<td><%= sip_proxy.management_host %></td>
 	<td><%= sip_proxy.management_host_port%></td>
     <td><%= link_to 'Show', sip_proxy %></td>
-    <td><%= link_to 'Edit', edit_sip_proxy_path(sip_proxy) %></td>
     <td><%= button_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

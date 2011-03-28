@@ -15,6 +15,7 @@ class SipServersControllerTest < ActionController::TestCase
     
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
+    @expected_http_status_if_no_route = 404
   end
   
   
@@ -75,47 +76,51 @@ class SipServersControllerTest < ActionController::TestCase
   end
   
   
-  test "should get edit" do
+  test "should not get edit" do
     sign_in :user, @admin_user
-    get :edit, :id => @sip_server.to_param
-    assert_response :success
+    assert_raise(ActionController::RoutingError) do
+      get :edit, :id => @sip_server.to_param
+    end
     sign_out @admin_user
   end
   
   test "should not get edit (not an admin)" do
-    get :edit, :id => @sip_server.to_param
-    assert_response( @expected_http_status_if_not_allowed )
+    assert_raise(ActionController::RoutingError) do
+      get :edit, :id => @sip_server.to_param
+    end
   end
   
   
-  test "should update sip_server" do
+  test "should not update sip_server" do
     sign_in :user, @admin_user
+    assert_raise(ActionController::RoutingError)do
     put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
-    assert_redirected_to( sip_server_path( assigns(:sip_server)))
-    sign_out @admin_user
   end
-  
-  test "should not update sip_server (not an admin)" do
+  sign_out @admin_user
+end
+
+test "should not update sip_server (not an admin)" do
+  assert_raise(ActionController::RoutingError) do
     put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
-    assert_response( @expected_http_status_if_not_allowed )
   end
-  
-  
-  test "should destroy sip_server" do
-    sign_in :user, @admin_user
-    assert_difference('SipServer.count', -1) {
-      delete :destroy, :id => @sip_server.to_param
-    }
-    assert_redirected_to( sip_servers_path )
-    sign_out @admin_user
-  end
-  
-  test "should not destroy sip_server (not an admin)" do
-    assert_no_difference('SipServer.count') {
-      delete :destroy, :id => @sip_server.to_param
-    }
-    assert_response( @expected_http_status_if_not_allowed )
-  end
-  
-  
+end
+
+
+test "should destroy sip_server" do
+  sign_in :user, @admin_user
+  assert_difference('SipServer.count', -1) {
+    delete :destroy, :id => @sip_server.to_param
+  }
+  assert_redirected_to( sip_servers_path )
+  sign_out @admin_user
+end
+
+test "should not destroy sip_server (not an admin)" do
+  assert_no_difference('SipServer.count') {
+    delete :destroy, :id => @sip_server.to_param
+  }
+  assert_response( @expected_http_status_if_not_allowed )
+end
+
+
 end

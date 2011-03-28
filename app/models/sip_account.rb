@@ -32,22 +32,8 @@ class SipAccount < ActiveRecord::Base
     :in => [ nil ],
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
-  
-  # The SipAccount must stay on the same provisioning server or
-  # bad things may happen.  #OPTIMIZE - Is this still required?
-  #validate {
-  #  if sip_phone_id_was != nil \
-  #  && sip_phone_id     != nil \
-  #  && sip_phone_id     != sip_phone_id_was
-  #    the_prov_server_id_is  = SipPhone.find( sip_phone_id     ).provisioning_server_id
-  #    the_prov_server_id_was = SipPhone.find( sip_phone_id_was ).provisioning_server_id
-  #    if the_prov_server_id_is != the_prov_server_id_was
-  #      errors.add( :sip_phone, "must stay on the same provisioning server (ID #{prov_server_id_was.inspect})." )
-  #    end
-  #  end
-  #}
-  
-  after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
+
+    after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_create
     end
@@ -59,8 +45,7 @@ class SipAccount < ActiveRecord::Base
   end
   
   after_validation( :on => :update ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
-    
-    provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
+      provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     
     need_to_delete_old_sip_acct = false
     if sip_phone_id_was != nil    # The SIP account was associated to a phone before.
@@ -102,6 +87,7 @@ class SipAccount < ActiveRecord::Base
     else
       logger.debug "No need to delete the old SIP account on the provisioning server."
     end
+
     
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_update
@@ -112,7 +98,7 @@ class SipAccount < ActiveRecord::Base
     end
     
     
-    if self.sip_server_id != self.sip_server_id_was &&  self.sip_server.management_host
+    if self.sip_server_id != self.sip_server_id_was &&  SipServer.find(self.sip_server_id_was).management_host
       sipproxy_user_destroy( sip_server_id_was, auth_name_was )
     end
     
@@ -120,6 +106,10 @@ class SipAccount < ActiveRecord::Base
         ((self.auth_name != self.auth_name_was) || (self.phone_number != self.phone_number_was)))
       sipproxy_alias_update( self.sip_server_id, self.auth_name_was, self.phone_number_was )
     end
+    
+    
+    
+    
   end
   
   before_destroy do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
@@ -145,6 +135,7 @@ class SipAccount < ActiveRecord::Base
     )
   end
   
+ 
   private
   
   # Create SIP account on the provisioning server.

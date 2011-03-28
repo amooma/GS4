@@ -15,6 +15,7 @@ class SipProxiesControllerTest < ActionController::TestCase
     
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
+    @expected_http_status_if_no_route = 404
   end
   
   
@@ -32,7 +33,7 @@ class SipProxiesControllerTest < ActionController::TestCase
   end
   
   
-  test "should get new" do
+  test "should not get new" do
     sign_in :user, @admin_user
     get :new
     assert_response :success
@@ -75,47 +76,52 @@ class SipProxiesControllerTest < ActionController::TestCase
   end
   
   
-  test "should get edit" do
+  test "should not get edit" do
     sign_in :user, @admin_user
+    assert_raise(ActionController::RoutingError)do
     get :edit, :id => @sip_proxy.to_param
-    assert_response :success
-    sign_out @admin_user
   end
-  
-  test "should not get edit (not an admin)" do
-    get :edit, :id => @sip_proxy.to_param
-    assert_response( @expected_http_status_if_not_allowed )
-  end
-  
-  
-  test "should update sip_proxy" do
-    sign_in :user, @admin_user
-    put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
-    assert_redirected_to( sip_proxy_path( assigns(:sip_proxy)))
-    sign_out @admin_user
-  end
-  
-  test "should not update sip_proxy (not an admin)" do
-    put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
-    assert_response( @expected_http_status_if_not_allowed )
-  end
-  
-  
-  test "should destroy sip_proxy" do
-    sign_in :user, @admin_user
-    assert_difference('SipProxy.count', -1) {
-      delete :destroy, :id => @sip_proxy.to_param
-    }
-    assert_redirected_to( sip_proxies_path )
-    sign_out @admin_user
-  end
-  
-  test "should not destroy sip_proxy (not an admin)" do
-    assert_no_difference('SipProxy.count') {
-      delete :destroy, :id => @sip_proxy.to_param
-    }
-    assert_response( @expected_http_status_if_not_allowed )
-  end
-  
-  
+  sign_out @admin_user
+end
+
+test "should not get edit (not an admin)" do
+  assert_raise(ActionController::RoutingError)do
+  get :edit, :id => @sip_proxy.to_param
+end
+end
+
+
+test "should not update sip_proxy" do
+sign_in :user, @admin_user
+assert_raise(ActionController::RoutingError)do
+put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
+end
+sign_out @admin_user
+end
+
+test "should not update sip_proxy (not an admin)" do
+assert_raise(ActionController::RoutingError)do
+
+put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
+end
+end
+
+
+test "should destroy sip_proxy" do
+sign_in :user, @admin_user
+assert_difference('SipProxy.count', -1) {
+delete :destroy, :id => @sip_proxy.to_param
+}
+assert_redirected_to( sip_proxies_path )
+sign_out @admin_user
+end
+
+test "should not destroy sip_proxy (not an admin)" do
+assert_no_difference('SipProxy.count') {
+delete :destroy, :id => @sip_proxy.to_param
+}
+assert_response( @expected_http_status_if_not_allowed )
+end
+
+
 end

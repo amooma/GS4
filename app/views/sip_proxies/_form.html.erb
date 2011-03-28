@@ -31,6 +31,13 @@
     <br/>
     <%= f.text_field :management_host_port %>
 </div>
+<div class="field">
+	<%= f.label :last_sip_proxy_id, "Take over accounts" %><br />
+    <%= f.select( :last_sip_proxy_id,
+      @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
+      { :include_blank => true }
+    ) %>
+	</div>
 <div class="actions">
     <%= f.submit %>
 </div>
