@@ -38,9 +38,13 @@ class SipAccount < ActiveRecord::Base
       provisioning_server_sip_account_create
     end
     
-    if (! sip_server_id.nil?) && (! self.phone_number.nil?) && (! self.sip_proxy_id.nil?) && ! self.sip_server.management_host.blank?
-      sipproxy_user_create(  sip_server_id )
-      sipproxy_alias_create( sip_server_id )
+    if ! self.sip_server.management_host.blank?
+      if (! self.sip_server_id .nil?) \
+      && (! self.phone_number  .nil?) \
+      && (! self.sip_proxy_id  .nil?)
+        sipproxy_user_create(  sip_server_id )
+        sipproxy_alias_create( sip_server_id )
+      end
     end
   end
   
