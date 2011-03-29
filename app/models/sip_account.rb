@@ -505,7 +505,7 @@ class SipAccount < ActiveRecord::Base
   #
   def sipproxy_user_update( proxy_server_id, proxy_server_authname )
     server = SipServer.find( proxy_server_id )
-    if server.management_port.blank?
+    if server.management_host.blank?
       # TODO errormessage
       return false  # return true?
     else
@@ -565,7 +565,7 @@ class SipAccount < ActiveRecord::Base
   #
   def sipproxy_alias_update( proxy_server_id, proxy_server_authname, proxy_server_alias )
     server = SipServer.find( proxy_server_id )
-    if server.management_port.blank?
+    if server.management_host.blank?
       # TODO errormessage
       return false  # return true?
     else
