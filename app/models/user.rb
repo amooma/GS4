@@ -12,9 +12,8 @@ class User < ActiveRecord::Base
   
   has_many :sip_accounts
   
-  validates_presence_of(   :username, :message => "username needed" )
-  validates_uniqueness_of( :username, :message => "username already taken" )
-  
-  # TODO Validation for username rest is validated (:validatable)
+  validates_presence_of(   :username, :message => "needed" )
+  validates_uniqueness_of( :username, :message => "already taken" )
+  validate_username(:username)
   
 end

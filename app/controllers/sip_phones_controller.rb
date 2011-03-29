@@ -43,7 +43,6 @@ class SipPhonesController < ApplicationController
     respond_to do |format|
       if ProvisioningServer.count == 0
         format.html { redirect_to(new_provisioning_server_path, :alert => 'To create a new sip_phone you have to create a provisioning server first.') }
-        #TODO Fehlermeldung fuer XML rendern. (=> sd)
         format.xml  { render :xml => @sip_phone }
       else
         format.html # new.html.erb

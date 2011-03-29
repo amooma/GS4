@@ -3,10 +3,9 @@ class SipPhone < ActiveRecord::Base
 	has_many   :sip_accounts, :dependent => :destroy
 	belongs_to :provisioning_server, :validate => true
 	
-	validates_presence_of :provisioning_server_id
+	validates_presence_of :provisioning_server
 	
-	#FIXME - validate that the referenced objects exists
-	# Validate existance of sip_phone on provisioning_server BEFORE create!
+	#FIXME Validate existance of sip_phone on provisioning_server BEFORE create!
 
 	# phone_id on provisioning_server must be unique.
 	validates_uniqueness_of( :phone_id, :scope => "provisioning_server_id" )

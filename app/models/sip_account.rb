@@ -10,11 +10,11 @@ class SipAccount < ActiveRecord::Base
   # TODO: Test acts_as_list
   acts_as_list :scope => :user
   
-  #FIXME - validate that the referenced objects (*_id) exists
-  
   validates_uniqueness_of   :auth_name, :scope => :sip_server_id
-  validates_presence_of     :sip_server_id
-  validates_presence_of     :sip_proxy_id
+  validates_presence_of     :sip_server
+  validates_presence_of     :sip_proxy
+  # TODO Testing that it is not posssible to set a proxy/server/voicemail that does not exist
+  validates_presence_of     :voicemail_server, :if => Proc.new { |sip_account| sip_account.voicemail_server_id}
   validates_presence_of     :phone_number
   validate_username         :auth_name
   validate_password         :password
@@ -33,7 +33,7 @@ class SipAccount < ActiveRecord::Base
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
   
-  after_validation( :on => :create ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
+  after_validation( :on => :create ) do
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_create
     end
@@ -48,7 +48,9 @@ class SipAccount < ActiveRecord::Base
     end
   end
   
-  after_validation( :on => :update ) do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
+  after_validation( :on => :update ) do
+    # OPTIMIZE Only check if method has to be called. Method checks if server is managed or not
+    #
     provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     
     need_to_delete_old_sip_acct = false
@@ -76,9 +78,8 @@ class SipAccount < ActiveRecord::Base
       end
       if provisioning_server_type == 'cantina'
         if self.auth_name != self.auth_name_was
-          # No need to delete the account. We'll update it in the normal way. (#FIXME?)
-          #logger.debug "The SIP account's username is being changed."
-          #need_to_delete_old_sip_acct = true
+          # OPTIMIZE Can we just make an update?
+          need_to_delete_old_sip_acct = true
         end
       end
     else
@@ -115,7 +116,7 @@ class SipAccount < ActiveRecord::Base
     
   end
   
-  before_destroy do  #FIXME ? - Is this the correct callback so the handlers can abort the transaction by returning false?
+  before_destroy do  
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_destroy
     end
@@ -260,8 +261,7 @@ class SipAccount < ActiveRecord::Base
       else
         CantinaSipAccount.set_resource( cantina_resource )
         cantina_sip_accounts = CantinaSipAccount.all()
-        # GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does not let us do more advanced queries so we have to get all SIP accounts.
-        # As soon as the Cantina API has been extended please optimize this method. Thanks.
+        # GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does now let us do more advanced queries!
         if cantina_sip_accounts
           cantina_sip_accounts.each { |cantina_sip_account|
             # Note: Maybe the "sip_proxy" attribute of CantinaSipAccount
@@ -412,7 +412,7 @@ class SipAccount < ActiveRecord::Base
   # Delete old SIP account on the Cantina provisioning server.
   #
   def cantina_sip_account_destroy_old
-    #TODO - Make this method more like the other cantina_* methods.
+    #OPTIMIZE Cantina API makes it easy now!
     old_prov_server = SipPhone.find( sip_phone_id_was ).provisioning_server
     if ! old_prov_server.blank?
       CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
@@ -422,7 +422,6 @@ class SipAccount < ActiveRecord::Base
           if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
           && (cantina_sip_account.user      .to_s == sip_user   .to_s)
             logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
-            #FIXME ? - Does this block really do anything?
             break
           end
         }

@@ -20,7 +20,7 @@ class SipServer < ActiveRecord::Base
     :allow_nil   => true,
     :allow_blank => true,
   })
-  # TODO tests
+  
   validates_length_of(:management_host, :maximum => 0, :message => "must not be set if not managed by GS!", :if => Proc.new { |sip_server| ! sip_server.management_port})
   validates_length_of(:management_port, :maximum => 0, :message => "must not be set if not managed by GS!", :if => Proc.new { |sip_server| ! sip_server.management_host})
   validates_presence_of(:management_host, :message => "needed if managed by GS!", :if => Proc.new { |sip_server| sip_server.management_port })
