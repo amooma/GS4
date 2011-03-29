@@ -45,7 +45,7 @@ class SipAccountsControllerTest < ActionController::TestCase
   end
   
   
-  # OPTIMIZE Mock the ActiveResource or create a SIP account without a phone and thus without a provisioning server. Edit: This has nothing to do with us not being able to contact the provisioning server so no mock is needed. Must be something else.
+  # OPTIMIZE Figure out why the test doesn't work. The test may need to be changed.
   #test "should create sip_account" do
   #  sign_in :user, @admin_user
   #  assert_difference('SipAccount.count') {
