@@ -7,17 +7,19 @@ class SipAccount < ActiveRecord::Base
   belongs_to :extension  , :validate => true
   belongs_to :user
   
-  # TODO: Test acts_as_list
   acts_as_list :scope => :user
   
+  validate_username         :auth_name
   validates_uniqueness_of   :auth_name, :scope => :sip_server_id
+  
   validates_presence_of     :sip_server
   validates_presence_of     :sip_proxy
-  # TODO Testing that it is not posssible to set a proxy/server/voicemail that does not exist
-  validates_presence_of     :voicemail_server, :if => Proc.new { |sip_account| sip_account.voicemail_server_id}
-  validates_presence_of     :phone_number
-  validate_username         :auth_name
+  validates_presence_of     :voicemail_server, :if => Proc.new { |sip_account| sip_account.voicemail_server_id }
+  # TODO Test that it is not possible to set a proxy/server/voicemail that does not exist
+  
   validate_password         :password
+  
+  validates_presence_of     :phone_number
   validates_format_of       :phone_number, :with => /\A [1-9][0-9]{,9} \z/x,
     :allow_blank => false,
     :allow_nil => false
@@ -39,9 +41,9 @@ class SipAccount < ActiveRecord::Base
     end
     
     if ! self.sip_server.management_host.blank?
-      if (! self.sip_server_id .nil?) \
-      && (! self.phone_number  .nil?) \
-      && (! self.sip_proxy_id  .nil?)
+      if (self.sip_server_id != nil) \
+      && (self.sip_proxy_id  != nil) \
+      && (self.phone_number  != nil)
         sipproxy_user_create(  sip_server_id )
         sipproxy_alias_create( sip_server_id )
       end
