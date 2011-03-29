@@ -8,6 +8,7 @@ class Admin::UserController < ApplicationController
       format.xml  { render :xml => @users }
     end
   end
+  
   def show
     @user = User.find(params[:id])
     respond_to do |format|
@@ -15,6 +16,7 @@ class Admin::UserController < ApplicationController
       format.xml  { render :xml => @user }
     end
   end
+  
   def new
     #    @user = User.new
   end
@@ -31,6 +33,7 @@ class Admin::UserController < ApplicationController
       end
     end
   end
+  
   def edit
     @user = User.find(params[:id])
   end
@@ -40,7 +43,6 @@ class Admin::UserController < ApplicationController
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
     respond_to do |format|
-      
       if @user.update_attributes(params[:user])
         format.html { redirect_to(admin_user_index_path, :notice => "#{ @user.username } updated.") }
         format.xml  { render :xml => admin_user_path(@user), :status => :updated, :location => admin_user_path(@user) }
@@ -50,6 +52,7 @@ class Admin::UserController < ApplicationController
       end
     end
   end
+  
   def delete
   end
   
