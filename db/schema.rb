@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110329093045) do
+ActiveRecord::Schema.define(:version => 20110329150942) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20110329093045) do
     t.string   "host"
     t.integer  "host_port"
     t.string   "management_host"
-    t.integer  "management_host_port"
+    t.integer  "management_port"
   end
 
   create_table "sip_servers", :force => true do |t|

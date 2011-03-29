@@ -75,7 +75,7 @@ class SipProxyTest < ActiveSupport::TestCase
     65535,
   ].each { |port|
     should "be valid with config_port #{port.inspect}" do
-      assert Factory.build( :sip_proxy, :management_host_port => port, :management_host => 'h1.test.de' ).valid?
+      assert Factory.build( :sip_proxy, :management_port => port, :management_host => 'h1.test.de' ).valid?
     end
   }
   
@@ -88,7 +88,7 @@ class SipProxyTest < ActiveSupport::TestCase
     65536,
   ].each { |port|
     should "not be valid with config_port #{port.inspect}" do
-      assert ! Factory.build( :sip_proxy, :management_host_port => port, :management_host => 'h1.test.de' ).valid?
+      assert ! Factory.build( :sip_proxy, :management_port => port, :management_host => 'h1.test.de' ).valid?
     end
   }
   
