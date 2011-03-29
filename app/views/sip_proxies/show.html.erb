@@ -4,15 +4,15 @@
   <%= @sip_proxy.host %>
 </p>
 <p>
-  <b>Host port:</b>
-  <%= (! @sip_proxy.host_port.blank?) ? @sip_proxy.host_port : "none" %>
+  <b>Port:</b>
+  <%= (! @sip_proxy.port.blank?) ? @sip_proxy.port : "none" %>
 </p>
 <p>
   <b>Management host:</b>
   <%= @sip_proxy.management_host %>
 </p>	
 <p>
-  <b>Management host port:</b>
+  <b>Management port:</b>
   <%= (! @sip_proxy.management_port.blank?) ? @sip_proxy.management_port : "none" %>
 </p>
 
