@@ -1,10 +1,11 @@
 require 'test_helper'
-# TODO Testing moving accounts when creating new server
 class SipServersControllerTest < ActionController::TestCase
   
   # Devise Test Helpers
   # see https://github.com/plataformatec/devise
   include Devise::TestHelpers
+  
+  # TODO Test moving accounts when creating new server
   
   setup do
     @sip_server = Factory.create(:sip_server)
@@ -78,49 +79,49 @@ class SipServersControllerTest < ActionController::TestCase
   
   test "should not get edit" do
     sign_in :user, @admin_user
-    assert_raise(ActionController::RoutingError) do
+    assert_raise(ActionController::RoutingError) {
       get :edit, :id => @sip_server.to_param
-    end
+    }
     sign_out @admin_user
   end
   
   test "should not get edit (not an admin)" do
-    assert_raise(ActionController::RoutingError) do
+    assert_raise(ActionController::RoutingError) {
       get :edit, :id => @sip_server.to_param
-    end
+    }
   end
   
   
   test "should not update sip_server" do
     sign_in :user, @admin_user
-    assert_raise(ActionController::RoutingError)do
-    put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
+    assert_raise(ActionController::RoutingError) {
+      put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
+    }
+    sign_out @admin_user
   end
-  sign_out @admin_user
-end
-
-test "should not update sip_server (not an admin)" do
-  assert_raise(ActionController::RoutingError) do
-    put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
+  
+  test "should not update sip_server (not an admin)" do
+    assert_raise(ActionController::RoutingError) {
+      put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
+    }
   end
-end
-
-
-test "should destroy sip_server" do
-  sign_in :user, @admin_user
-  assert_difference('SipServer.count', -1) {
-    delete :destroy, :id => @sip_server.to_param
-  }
-  assert_redirected_to( sip_servers_path )
-  sign_out @admin_user
-end
-
-test "should not destroy sip_server (not an admin)" do
-  assert_no_difference('SipServer.count') {
-    delete :destroy, :id => @sip_server.to_param
-  }
-  assert_response( @expected_http_status_if_not_allowed )
-end
-
-
+  
+  
+  test "should destroy sip_server" do
+    sign_in :user, @admin_user
+    assert_difference('SipServer.count', -1) {
+      delete :destroy, :id => @sip_server.to_param
+    }
+    assert_redirected_to( sip_servers_path )
+    sign_out @admin_user
+  end
+  
+  test "should not destroy sip_server (not an admin)" do
+    assert_no_difference('SipServer.count') {
+      delete :destroy, :id => @sip_server.to_param
+    }
+    assert_response( @expected_http_status_if_not_allowed )
+  end
+  
+  
 end
