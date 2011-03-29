@@ -443,8 +443,8 @@ class SipAccountTest < ActiveSupport::TestCase
       
       mock.get    "/sip_accounts.xml", {},  # GET = index
         [ cantina_sip_account_on_phone2_v2 ].to_xml( :root => "sip-accounts" ), 200, {}
-      mock.get    "/sip_accounts/1.xml", {},  # GET = show
-        cantina_sip_account_on_phone2_v2.to_xml( :root => "sip-account" ), 200, {}
+      #mock.get    "/sip_accounts/1.xml", {},  # GET = show
+      #  cantina_sip_account_on_phone2_v2.to_xml( :root => "sip-account" ), 200, {}
       mock.delete "/sip_accounts/1.xml", {},  # DELETE = destroy
         nil, 200, {}
     }
@@ -461,12 +461,12 @@ class SipAccountTest < ActiveSupport::TestCase
     )
     assert_not_equal( nil, idx )
     
-    #puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
-    idx = ActiveResource::HttpMock.requests.index(
-      ActiveResource::Request.new(
-        :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
-    )
-    assert_not_equal( nil, idx )
+    ##puts "Asserting that the mock received the expected request (GET /sip_accounts/1.xml) from the model ..."
+    #idx = ActiveResource::HttpMock.requests.index(
+    #  ActiveResource::Request.new(
+    #    :get, "/sip_accounts/1.xml", nil, { "Accept"=>"application/xml" } )
+    #)
+    #assert_not_equal( nil, idx )
     
     #puts "Asserting that the mock received the expected request (DELETE /sip_accounts/1.xml) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(

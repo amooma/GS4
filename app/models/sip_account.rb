@@ -426,15 +426,13 @@ class SipAccount < ActiveRecord::Base
           end
         }
         #puts "matching_cantina_sip_accounts = #{matching_cantina_sip_accounts.inspect}"
-        delete_cantina_sip_account_id = matching_cantina_sip_accounts.collect {|a| a.id}.to_enum.first
-        logger.debug "delete_cantina_sip_account_id = #{delete_cantina_sip_account_id.inspect}"
-        if delete_cantina_sip_account_id
-          if ! CantinaSipAccount.find( delete_cantina_sip_account_id ).destroy
-            #errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
-            #  active_record_errors_from_remote_get( delete_cantina_sip_account ).join(",\n") +
-            #  ")" )
-            #OPTIMIZE - delete_cantina_sip_account is not available here.
-            errors.add( :base, "Failed to delete SIP account on Cantina provisioning server." )
+        delete_cantina_sip_account = matching_cantina_sip_accounts.first
+        logger.debug "delete_cantina_sip_account.id = #{(delete_cantina_sip_account ? delete_cantina_sip_account.id : nil).inspect}"
+        if delete_cantina_sip_account
+          if ! delete_cantina_sip_account.destroy
+            errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+              active_record_errors_from_remote_get( delete_cantina_sip_account ).join(",\n") +
+              ")" )
             return false
           end
         end
