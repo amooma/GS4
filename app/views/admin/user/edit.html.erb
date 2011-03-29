@@ -3,38 +3,44 @@
 
 <%= form_for(:user,  :url => { :action => "update"}, :html => { :method => "put" }) do |f| %>
 
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <div class="field">
-    <%= f.label :username %>
-    <br/>
-    <%= f.text_field :username %>
+  <%= f.label :username %>  <br />
+  <%= f.text_field :username %>
 </div>
 <div class="field">
-    <%= f.label :password %>
-    <br/>
-    <%= f.password_field :password %>
+  <%= f.label :password %>  <br />
+  <%= f.password_field :password %>
 </div>
 <div class="field">
-    <%= f.label :password_confirmation, 'Password confirmation' %>
-    <br/>
-    <%= f.password_field :password_confirmation %>
+  <%= f.label :password_confirmation, 'Password confirmation' %>  <br />
+  <%= f.password_field :password_confirmation %>
 </div>
 <div class="field">
-    <%= f.label :gn, 'First name' %>
-    <br/>
-    <%= f.text_field :gn %>
+  <%= f.label :gn, 'Given name' %>  <br />
+  <%= f.text_field :gn %>
 </div>
 <div class="field">
-    <%= f.label :sn, 'Last name' %>
-    <br/>
-    <%= f.text_field :sn %>
+  <%= f.label :sn, 'Surname' %>  <br />
+  <%= f.text_field :sn %>
 </div>
 <div class="field">
-    <%= f.label :email %>
-	<br/>
-    <%= f.text_field :email %>
+  <%= f.label :email, "E-mail address" %><br/>
+  <%= f.text_field :email %>
 </div>
 <div class="actions">
-    <%= f.submit %>
+  <%= f.submit %>
 </div>
 <%= link_to 'Back', admin_user_index_path %>
 
