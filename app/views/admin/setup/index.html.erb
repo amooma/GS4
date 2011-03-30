@@ -16,19 +16,19 @@
 	</tr>
 	<tr>
 		<td>
-			<% if ProvisioningServer.count == 0 %>
-			  <%= link_to 'Create first provisioning server', new_provisioning_server_path %>
+			<% if SipProxy.count == 0 %>
+			  <%= link_to 'Create first SIP proxy server', new_sip_proxy_path %>
 			<% else %>
-			  First provisioning server already configured
+			  First SIP proxy server already configured
 			<% end %>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<% if SipProxy.count == 0 %>
-			  <%= link_to 'Create first SIP proxy server', new_sip_proxy_path %>
+			<% if ProvisioningServer.count == 0 %>
+			  <%= link_to 'Create first provisioning server', new_provisioning_server_path %>
 			<% else %>
-			  First SIP proxy server already configured
+			  First provisioning server already configured
 			<% end %>
 		</td>
 	</tr>
