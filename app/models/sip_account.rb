@@ -282,13 +282,7 @@ class SipAccount < ActiveRecord::Base
         logger.debug "CantinaSipAccount for \"#{sip_user}@#{sip_server}\" not found."
         return nil
       end
-    rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
-      return false
-    rescue Errno::EADDRNOTAVAIL => e
-      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
-      return false
-    rescue Errno::EHOSTDOWN => e
+    rescue Errno::ECONNREFUSED, Errno::EADDRNOTAVAIL, Errno::EHOSTDOWN => e
       logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
       return false
     end
@@ -322,15 +316,7 @@ class SipAccount < ActiveRecord::Base
         active_record_errors_from_remote_log( cantina_sip_account )
         return true
       end
-    rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to Cantina provisioning server." )
-      return false
-    rescue Errno::EADDRNOTAVAIL => e
-      logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to Cantina provisioning server." )
-      return false
-    rescue Errno::EHOSTDOWN => e
+    rescue Errno::ECONNREFUSED, Errno::EADDRNOTAVAIL, Errno::EHOSTDOWN => e
       logger.warn "Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to Cantina provisioning server." )
       return false
@@ -486,15 +472,7 @@ class SipAccount < ActiveRecord::Base
           return true
         end
       end
-    rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to SipProxy management server." )
-      return false
-    rescue Errno::EADDRNOTAVAIL => e
-      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to SipProxy management server." )
-      return false
-    rescue Errno::EHOSTDOWN => e
+    rescue Errno::ECONNREFUSED, Errno::EADDRNOTAVAIL, Errno::EHOSTDOWN => e
       logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
@@ -617,15 +595,7 @@ class SipAccount < ActiveRecord::Base
           return true
         end
       end
-    rescue Errno::ECONNREFUSED => e
-      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to SipProxy management server." )
-      return false
-    rescue Errno::EADDRNOTAVAIL => e
-      logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
-      errors.add( :base, "Failed to connect to SipProxy management server." )
-      return false
-    rescue Errno::EHOSTDOWN => e
+    rescue Errno::ECONNREFUSED, Errno::EADDRNOTAVAIL, Errno::EHOSTDOWN => e
       logger.warn "Failed to connect to SipProxy management server. (#{e.class}, #{e.message})"
       errors.add( :base, "Failed to connect to SipProxy management server." )
       return false
