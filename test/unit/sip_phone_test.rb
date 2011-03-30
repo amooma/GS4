@@ -15,6 +15,13 @@ class SipPhoneTest < ActiveSupport::TestCase
     assert ! SipPhone.new( :provisioning_server_id => nil, :phone_id => nil ).valid?
   end
   
+  should "not be possible to set a provisioning_server_id that does not exist" do
+    prov_server = Factory.create( :provisioning_server )
+    prov_server_id = prov_server.id
+    prov_server.destroy
+    assert ! Factory.build( :sip_phone, :provisioning_server_id => prov_server_id ).valid?
+  end
+  
   should "be unique on provisioning_server" do
     sip_phone = Factory.create( :sip_phone )
     assert ! Factory.build( :sip_phone, {
