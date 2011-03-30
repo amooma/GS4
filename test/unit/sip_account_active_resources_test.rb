@@ -139,7 +139,7 @@ class SipAccountTest < ActiveSupport::TestCase
       }
       
       mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, #GET = index
-        [ sip_proxy_subscriber ].to_xml(:root => "subscribers"), 200, {  }
+        [ sip_proxy_subscriber ].to_xml(:root => "subscribers"), 200, {}
       mock.put    "/subscribers/1.xml", {},  # PUT = update
         nil, 204, {}
     }  
