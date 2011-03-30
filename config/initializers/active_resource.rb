@@ -14,7 +14,7 @@ class ActiveResource::Base
 		
 		self.site         = site         .to_s.dup
 		self.element_name = element_name .to_s.dup  if ! element_name.blank?
-				
+		
 		return true
 	end
 end
