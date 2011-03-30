@@ -158,8 +158,8 @@ class SipAccount < ActiveRecord::Base
           ret = cantina_sip_account_create
         else
           errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
-        end
       end
+    end
     return ret
   end
   
@@ -177,8 +177,8 @@ class SipAccount < ActiveRecord::Base
           ret = cantina_sip_account_update
         else
           errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
-        end
       end
+    end
     return ret
   end
   
@@ -203,9 +203,9 @@ class SipAccount < ActiveRecord::Base
     ret = false
     case provisioning_server_type
       when 'cantina'
-      ret = cantina_sip_account_destroy_old
-    else
-      errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
+        ret = cantina_sip_account_destroy_old
+      else
+        errors.add( :base, "Provisioning server type #{provisioning_server_type.inspect} not implemented." )
     end
     return ret
   end
@@ -407,6 +407,7 @@ class SipAccount < ActiveRecord::Base
             ")" )
           return false
         end
+      #end else
     end
     return true
   end
