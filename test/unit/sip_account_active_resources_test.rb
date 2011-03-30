@@ -138,7 +138,7 @@ class SipAccountTest < ActiveSupport::TestCase
         :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" )
       }
       
-      mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, #GET = index
+      mock.get   "/subscribers.xml?username=#{@sip_account.auth_name}", {}, # GET = index
         [ sip_proxy_subscriber ].to_xml(:root => "subscribers"), 200, {}
       mock.put    "/subscribers/1.xml", {},  # PUT = update
         nil, 204, {}
