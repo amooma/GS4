@@ -27,7 +27,17 @@
     %></td>
     <td><%= sip_phone.phone_id || '-' %></td>
     <td><%=
-      CantinaPhone.find(sip_phone.phone_id).mac_address 
+      if prov_server
+        begin
+          CantinaPhone.find( sip_phone.phone_id ).mac_address
+        rescue ActiveResource::ResourceNotFound => e
+          "(not found!)"
+        rescue Errno::ECONNREFUSED, Errno::EADDRNOTAVAIL, Errno::EHOSTDOWN, ActiveResource::TimeoutError => e
+          "(Failed to connect to the provisioning server!)"
+        end
+      else
+        '-'
+      end
     %></td>
     <td><%= link_to 'Show', sip_phone %></td>
     <td><%= link_to 'Edit', edit_sip_phone_path(sip_phone) %></td>
