@@ -5,9 +5,7 @@ class SipPhone < ActiveRecord::Base
 	
 	validates_presence_of :provisioning_server
 	
-	#FIXME Validate existence of sip_phone on provisioning_server BEFORE create!
-
-	# phone_id on provisioning_server must be unique.
+	validates_numericality_of :phone_id, :only_integer => true
 	validates_uniqueness_of( :phone_id, :scope => "provisioning_server_id" )
 	
 	# The provisioning server must never change, once it has been set.
@@ -41,6 +39,8 @@ class SipPhone < ActiveRecord::Base
 			errors.add( :phone_id, "must not be blank if the phone belongs to a provisioning server." )
 		end
 	}
+	
+	#FIXME Validate existence of sip_phone on provisioning_server BEFORE create!
 	
 end
 
