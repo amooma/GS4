@@ -1,12 +1,12 @@
 module ApplicationHelper
   
-  # Define the top navigation menu_items content
+  # Define the top navigation menu items
   #
-  def top_menu_items_array
+  def top_menu_items
     if user_signed_in?
       menu_items = [
-        { :text => "Admin"         , :url => url_for( :controller => '/admin' ) },
-        { :text => "Users"         , :url => url_for( :controller => '/admin/user' ) },
+        { :text => "Admin"         , :url => admin_index_path },
+        { :text => "Users"         , :url => admin_users_path },
         { :text => "Phones"        , :url => sip_phones_path },
         { :text => "SIP Accounts"  , :url => sip_accounts_path },
         { :text => "Extensions"    , :url => extensions_path },

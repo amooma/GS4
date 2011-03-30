@@ -1,6 +1,7 @@
 class Admin::SetupController < ApplicationController
+  
   def index
-    @User = User.count
+    #@User = User.count
   end
   
   def create

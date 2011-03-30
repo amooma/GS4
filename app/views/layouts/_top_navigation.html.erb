@@ -2,7 +2,7 @@
 <nav class="hnav">
 	<ul>
 		<%
-		top_menu_items_array.each { |navigation_item|
+		top_menu_items.each { |navigation_item|
 			mark_as_current_page = false
 			if navigation_item[:url] && current_page?( navigation_item[:url] )
 				mark_as_current_page = true
@@ -38,8 +38,6 @@
 				</ul>
 			<% end %>
 		</li>
-		<%
-		}
-		%>
+		<% } %>
 	</ul> 
 </nav> 

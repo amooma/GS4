@@ -12,8 +12,6 @@ class SipPhonesController < ApplicationController
   # GET /sip_phones
   # GET /sip_phones.xml
   def index
-    @sip_phones = SipPhone.order([ :provisioning_server_id, :phone_id ])
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sip_phones }

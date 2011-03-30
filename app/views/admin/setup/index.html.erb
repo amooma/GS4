@@ -2,11 +2,6 @@
 <table>
 	<tr>
 		<td>
-			First user with admin privileges already created (<%= User.first.username %>).
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<% if SipServer.count == 0 %>
 			  <%= link_to 'Create first SIP server', new_sip_server_path %>
 			<% else %>

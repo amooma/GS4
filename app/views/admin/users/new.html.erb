@@ -1,7 +1,7 @@
 
-<h1>Edit user: <%= @user.username %></h1>
+<h1>New user</h1>
 
-<%= form_for(:user,  :url => { :action => "update"}, :html => { :method => "put" }) do |f| %>
+<%= form_for :user,  :url => { :action => "create" } do |f| %>
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -16,23 +16,23 @@
   <% end %>
 
 <div class="field">
-  <%= f.label :username %>  <br />
+  <%= f.label :username %><br />
   <%= f.text_field :username %>
 </div>
 <div class="field">
-  <%= f.label :password %>  <br />
+  <%= f.label :password %><br />
   <%= f.password_field :password %>
 </div>
 <div class="field">
-  <%= f.label :password_confirmation, 'Password confirmation' %>  <br />
+  <%= f.label :password_confirmation, 'Password confirmation' %><br />
   <%= f.password_field :password_confirmation %>
 </div>
 <div class="field">
-  <%= f.label :gn, 'Given name' %>  <br />
+  <%= f.label :gn, 'Given name' %><br />
   <%= f.text_field :gn %>
 </div>
 <div class="field">
-  <%= f.label :sn, 'Surname' %>  <br />
+  <%= f.label :sn, 'Surname' %><br />
   <%= f.text_field :sn %>
 </div>
 <div class="field">
@@ -42,6 +42,6 @@
 <div class="actions">
   <%= f.submit %>
 </div>
-<%= link_to 'Back', admin_user_index_path %>
+<%= link_to 'Back', admin_users_path %>
 
 <% end %>
