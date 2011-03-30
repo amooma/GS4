@@ -39,7 +39,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   test "should get update" do
     sign_in :user, @user
     put :update, :id => @user.to_param, :user => @user.attributes
-    assert_redirected_to admin_user_index_path
+    assert_redirected_to admin_users_path
   end
   
 end
