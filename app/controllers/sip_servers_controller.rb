@@ -2,11 +2,13 @@ class SipServersController < ApplicationController
   
   before_filter :authenticate_user!
   
+  before_filter { |controller|
+     @sip_servers = SipServer.all
+  }
+  
   # GET /sip_servers
   # GET /sip_servers.xml
   def index
-    @sip_servers = SipServer.all
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sip_servers }
@@ -28,7 +30,7 @@ class SipServersController < ApplicationController
   # GET /sip_servers/new.xml
   def new
     @sip_server = SipServer.new
-    @sip_servers = SipServer.all
+   
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_server }

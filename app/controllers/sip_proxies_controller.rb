@@ -2,11 +2,13 @@ class SipProxiesController < ApplicationController
   
   before_filter :authenticate_user!
   
+  before_filter { |controller|
+    @sip_proxies = SipProxy.all
+  }
+  
   # GET /sip_proxies
   # GET /sip_proxies.xml
   def index
-    @sip_proxies = SipProxy.all
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sip_proxies }
@@ -28,7 +30,7 @@ class SipProxiesController < ApplicationController
   # GET /sip_proxies/new.xml
   def new
     @sip_proxy = SipProxy.new
-    @sip_proxies = SipProxy.all
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_proxy }
@@ -39,6 +41,7 @@ class SipProxiesController < ApplicationController
   # POST /sip_proxies.xml
   def create
     @sip_proxy = SipProxy.new(params[:sip_proxy])
+    
     respond_to do |format|
       if @sip_proxy.save
         format.html { redirect_to(@sip_proxy, :notice => 'Sip proxy was successfully created.') }
