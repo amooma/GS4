@@ -1,11 +1,11 @@
 class SipAccount < ActiveRecord::Base
   
-  belongs_to :sip_server , :validate => true
-  belongs_to :sip_proxy  , :validate => true
+  belongs_to :sip_server       , :validate => true
+  belongs_to :sip_proxy        , :validate => true
   belongs_to :voicemail_server , :validate => true
-  belongs_to :sip_phone  , :validate => true
-  belongs_to :extension  , :validate => true
-  belongs_to :user
+  belongs_to :sip_phone        , :validate => true
+  belongs_to :extension        , :validate => true
+  belongs_to :user             , :validate => true
   
   acts_as_list :scope => :user
   
@@ -14,15 +14,17 @@ class SipAccount < ActiveRecord::Base
   
   validates_presence_of     :sip_server
   validates_presence_of     :sip_proxy
-  validates_presence_of     :voicemail_server, :if => Proc.new { |sip_account| sip_account.voicemail_server_id }
-  # TODO Test that it is not possible to set a proxy/server/voicemail that does not exist
-  
+  validates_presence_of     :voicemail_server , :if => Proc.new { |sip_account| sip_account.voicemail_server_id }
+  validates_presence_of     :sip_phone        , :if => Proc.new { |sip_account| sip_account.sip_phone_id }
+  validates_presence_of     :extension        , :if => Proc.new { |sip_account| sip_account.extension_id }
+  validates_presence_of     :user             , :if => Proc.new { |sip_account| sip_account.user_id }
+    
   validate_password         :password
   
   validates_presence_of     :phone_number
   validates_format_of       :phone_number, :with => /\A [1-9][0-9]{,9} \z/x,
     :allow_blank => false,
-    :allow_nil => false
+    :allow_nil   => false
   validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
   
   validates_numericality_of :voicemail_pin,
@@ -35,12 +37,12 @@ class SipAccount < ActiveRecord::Base
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
   
-  after_validation( :on => :create ) do
+  after_validation( :on => :create ) {
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_create
     end
     
-    if ! self.sip_server.management_host.blank?
+    if self.sip_server && ! self.sip_server.management_host.blank?
       if (self.sip_server_id != nil) \
       && (self.sip_proxy_id  != nil) \
       && (self.phone_number  != nil)
@@ -48,11 +50,9 @@ class SipAccount < ActiveRecord::Base
         sipproxy_alias_create( sip_server_id )
       end
     end
-  end
+  }
   
-  after_validation( :on => :update ) do
-    # OPTIMIZE Only check if method has to be called. Method checks if server is managed or not
-    #
+  after_validation( :on => :update ) {
     provisioning_server_type = 'cantina'  # might want to implement a mock Cantina here
     
     need_to_delete_old_sip_acct = false
@@ -104,6 +104,7 @@ class SipAccount < ActiveRecord::Base
         sipproxy_user_destroy( sip_server_id_was, auth_name_was )
       end
     else
+      # OPTIMIZE Only check if method has to be called. Method checks if server is managed or not.
       if ! self.sip_server.management_host.blank?
         if (self.auth_name    != self.auth_name_was    ) \
         || (self.password     != self.password_was     )
@@ -115,10 +116,9 @@ class SipAccount < ActiveRecord::Base
         end
       end
     end
-    
-  end
+  }
   
-  before_destroy do  
+  before_destroy {
     if ! sip_phone_id.nil?
       provisioning_server_sip_account_destroy
     end
@@ -127,7 +127,7 @@ class SipAccount < ActiveRecord::Base
       sipproxy_user_destroy(  self.sip_server_id_was, self.auth_name_was )
       sipproxy_alias_destroy( self.sip_server_id_was, self.auth_name_was, self.phone_number_was )
     end
-  end
+  }
   
   
   # Returns the corresponding SIP account from Cantina.
