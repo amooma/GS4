@@ -45,8 +45,12 @@ class SipPhone < ActiveRecord::Base
 		end
 	}
 	
-	#TODO Validate existence of the phone on the provisioning server:
-	#after_validation {
+	# FIXME
+	# Validate existence of the phone on the provisioning server.
+	# This runs :on => :save instead of :on => :create so the
+	# validates_uniqueness_of :phone_id check runs before this one. (?)
+	#
+	#after_validation( :on => :save ) {
 	#	if (! provisioning_server_id.blank?) && (! phone_id.blank?)
 	#		cantina_phone = self.cantina_phone_by_id( phone_id )
 	#		case cantina_phone

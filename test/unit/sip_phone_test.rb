@@ -11,6 +11,16 @@ class SipPhoneTest < ActiveSupport::TestCase
     }).valid?
   end
   
+  #should "not be possible to create with a phone_id that does not exist on the provisioning server" do
+  #  prov_server = Factory.create( :provisioning_server )
+  #  p = SipPhone.new({
+  #    :provisioning_server_id => prov_server.id,
+  #    :phone_id               => 818181,
+  #  })
+  #  assert ! p.save
+  #end
+  
+  
   should "be valid with a phone_id if it has a provisioning_server_id" do
     prov_server = Factory.create( :provisioning_server )
     
