@@ -93,10 +93,15 @@ class SipProxyTest < ActiveSupport::TestCase
   }
   
    
+  #TODO - unique host/port (resp. mgmt. host/port) combination?
+  #should "not be valid when host not unique" do
+  #  sip_proxy = Factory.create( :sip_proxy )
+  #  assert ! Factory.build( :sip_proxy, :host => sip_proxy.host ).valid?
+  #end
   
-  should "not be valid when host not unique" do
-    sip_proxy = Factory.create(:sip_proxy)
-    assert ! Factory.build( :sip_proxy, :host => sip_proxy.host ).valid?
-  end
+  #should "not be valid when host not unique (case-insensitive)" do
+  #  sip_proxy = Factory.create( :sip_proxy, :host => "abc.localdomain" )
+  #  assert ! Factory.build( :sip_proxy, :host => sip_proxy.host.swapcase ).valid?
+  #end
   
 end

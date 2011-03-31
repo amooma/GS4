@@ -165,5 +165,18 @@ class VoicemailServerTest < ActiveSupport::TestCase
     end
   }
   
+
+  
+  #TODO - unique host/port (resp. mgmt. host/port) combination?
+  #should "not be valid when host not unique" do
+  #  vm_server = Factory.create( :voicemail_server )
+  #  assert ! Factory.build( :voicemail_server, :host => vm_server.host ).valid?
+  #end
+  
+  #should "not be valid when host not unique (case-insensitive)" do
+  #  vm_server = Factory.create( :voicemail_server, :host => "abc.localdomain" )
+  #  assert ! Factory.build( :voicemail_server, :host => vm_server.host.swapcase ).valid?
+  #end
+  
   
 end
