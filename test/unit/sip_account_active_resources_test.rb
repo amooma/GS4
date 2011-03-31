@@ -441,7 +441,7 @@ class SipAccountTest < ActiveSupport::TestCase
       cantina_sip_account_on_phone2_v2 = cantina_sip_account_on_phone2.dup
       cantina_sip_account_on_phone2_v2[:password] = @sip_account.password
       
-      mock.get    "/sip_accounts.xml", {},  # GET = index
+      mock.get    "/sip_accounts.xml?auth_user=#{@sip_account.auth_name}", {},  # GET = index
         [ cantina_sip_account_on_phone2_v2 ].to_xml( :root => "sip-accounts" ), 200, {}
       #mock.get    "/sip_accounts/1.xml", {},  # GET = show
       #  cantina_sip_account_on_phone2_v2.to_xml( :root => "sip-account" ), 200, {}
@@ -454,10 +454,10 @@ class SipAccountTest < ActiveSupport::TestCase
     puts "Errors: #{@sip_account.errors.inspect}" if @sip_account.errors.length > 0
     assert @sip_account.valid?
     
-    #puts "Asserting that the mock received the expected request (GET /sip_accounts.xml) from the model ..."
+    #puts "Asserting that the mock received the expected request (GET /sip_accounts.xml?auth_user=#{@sip_account.auth_name}) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
       ActiveResource::Request.new(
-        :get, "/sip_accounts.xml", nil, { "Accept"=>"application/xml" } )
+        :get, "/sip_accounts.xml?auth_user=#{@sip_account.auth_name}", nil, { "Accept"=>"application/xml" } )
     )
     assert_not_equal( nil, idx )
     

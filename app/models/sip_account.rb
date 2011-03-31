@@ -136,6 +136,7 @@ class SipAccount < ActiveRecord::Base
   #
   def cantina_sip_account
     return cantina_sip_account_find_by_server_and_user(
+      nil,
       self.sip_server ? self.sip_server.host : nil,
       self.auth_name
     )
@@ -215,22 +216,33 @@ class SipAccount < ActiveRecord::Base
   # corresponding to this SipAccount does not have provisioning
   # or if the SipAccount does not even have a SipPhone (and thus
   # does not have a provisioning server).
+  # the_sip_phone_id can be nil to use the provisioning_server_id
+  # of the account's current sip_phone, or you may want to pass in
+  # sip_phone_id_was.
   #
-  def provisioning_server_base_url
+  def provisioning_server_base_url( the_sip_phone_id=nil )
     scheme = 'http'
     host   = '0.0.0.0'  # this will not work on purpose
     port   = 0          # this will not work on purpose
     path   = '/'
-    if self.sip_phone
-      if self.sip_phone.provisioning_server_id.blank?
-        logger.debug "SipPhone #{self.sip_phone_id.inspect} has no provisioning server. Alright."
+    
+    the_sip_phone_id = self.sip_phone_id if the_sip_phone_id == nil
+    begin
+      the_sip_phone = the_sip_phone_id ? SipPhone.find( the_sip_phone_id ) : nil
+    rescue ActiveResource::ResourceNotFound => e
+      the_sip_phone = nil
+    end
+    
+    if the_sip_phone
+      if the_sip_phone.provisioning_server_id.blank?
+        logger.debug "SipPhone #{the_sip_phone_id.inspect} has no provisioning server. Alright."
         return nil  # phone without provisioning
       else
-        provisioning_server = self.sip_phone.provisioning_server
-        if provisioning_server
+        the_prov_server = the_sip_phone.provisioning_server  # We're using a variable name different from the provisioning_server method.
+        if the_prov_server
           scheme = 'http'  # TODO - https as soon as it is implemented.
-          host   = provisioning_server.name if ! provisioning_server.name.blank?
-          port   = provisioning_server.port if ! provisioning_server.port.blank?
+          host   = the_prov_server.name if ! the_prov_server.name.blank?
+          port   = the_prov_server.port if ! the_prov_server.port.blank?
           path   = '/'
         end
       end
@@ -244,7 +256,7 @@ class SipAccount < ActiveRecord::Base
       port.blank? ? '' : ":#{port.to_s}",
       path,
     ]
-    logger.debug "SipPhone #{self.sip_phone_id.inspect} has prov. server #{ret.inspect}."
+    logger.debug "SipPhone #{the_sip_phone_id.inspect} has prov. server #{ret.inspect}."
     return ret
   end
   
@@ -253,10 +265,10 @@ class SipAccount < ActiveRecord::Base
   # Returns the CantinaSipAccount if found or nil if not found or
   # false on error.
   #
-  def cantina_sip_account_find_by_server_and_user( sip_server, sip_user )
+  def cantina_sip_account_find_by_server_and_user( the_sip_phone_id=nil, sip_server, sip_user )
     logger.debug "Trying to find Cantina SIP account for \"#{sip_user}@#{sip_server}\" ..."
     begin
-      cantina_resource = provisioning_server_base_url()
+      cantina_resource = provisioning_server_base_url( the_sip_phone_id )
       if ! cantina_resource
         # SipPhone has no provisioning server.
         return nil
@@ -338,6 +350,7 @@ class SipAccount < ActiveRecord::Base
   def cantina_sip_account_update
     sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
     cantina_sip_account = cantina_sip_account_find_by_server_and_user(
+      nil,
       (sip_server_was ? sip_server_was.host : nil),
       self.auth_name_was
     )
@@ -380,6 +393,7 @@ class SipAccount < ActiveRecord::Base
   def cantina_sip_account_destroy
     sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
     cantina_sip_account = cantina_sip_account_find_by_server_and_user(
+      nil,
       (sip_server_was ? sip_server_was.host : nil),
       self.auth_name_was
     )
@@ -404,30 +418,19 @@ class SipAccount < ActiveRecord::Base
   # Delete old SIP account on the Cantina provisioning server.
   #
   def cantina_sip_account_destroy_old
-    #OPTIMIZE Cantina API makes it easy now!
-    old_prov_server = SipPhone.find( sip_phone_id_was ).provisioning_server
-    if ! old_prov_server.blank?
-      CantinaSipAccount.set_resource( "http://#{old_prov_server.name}:#{old_prov_server.port}/" )
-      cantina_sip_accounts = CantinaSipAccount.all
-      if cantina_sip_accounts
-        matching_cantina_sip_accounts = cantina_sip_accounts.each { |cantina_sip_account|
-          if (cantina_sip_account.registrar .to_s == sip_server .to_s) \
-          && (cantina_sip_account.user      .to_s == sip_user   .to_s)
-            logger.debug "Found CantinaSipAccount ID #{cantina_sip_account.id}."
-            break
-          end
-        }
-        #puts "matching_cantina_sip_accounts = #{matching_cantina_sip_accounts.inspect}"
-        delete_cantina_sip_account = matching_cantina_sip_accounts.first
-        logger.debug "delete_cantina_sip_account.id = #{(delete_cantina_sip_account ? delete_cantina_sip_account.id : nil).inspect}"
-        if delete_cantina_sip_account
-          if ! delete_cantina_sip_account.destroy
-            errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
-              active_record_errors_from_remote_get( delete_cantina_sip_account ).join(",\n") +
-              ")" )
-            return false
-          end
-        end
+    sip_server_was = self.sip_server_id_was ? SipServer.find( self.sip_server_id_was ) : nil
+    delete_cantina_sip_account = cantina_sip_account_find_by_server_and_user(
+      sip_phone_id_was,  # Find SIP account on the *old* provisioning server.
+      (sip_server_was ? sip_server_was.host : nil),
+      self.auth_name_was
+    )
+    logger.debug "delete_cantina_sip_account.id = #{(delete_cantina_sip_account ? delete_cantina_sip_account.id : nil).inspect}"
+    if delete_cantina_sip_account
+      if ! delete_cantina_sip_account.destroy
+        errors.add( :base, "Failed to delete SIP account on Cantina provisioning server. (Reason:\n" +
+          active_record_errors_from_remote_get( delete_cantina_sip_account ).join(",\n") +
+          ")" )
+        return false
       end
     end
     return true
