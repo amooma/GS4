@@ -262,12 +262,15 @@ class SipAccount < ActiveRecord::Base
         return nil
       else
         CantinaSipAccount.set_resource( cantina_resource )
-        cantina_sip_accounts = CantinaSipAccount.all()
-        # GET "/sip_accounts.xml" - #OPTIMIZE - The Cantina API does now let us do more advanced queries!
+        cantina_sip_accounts = CantinaSipAccount.find( :all,
+          :params => { 'auth_user' => sip_user.to_s })
+        # => GET "/sip_accounts.xml?auth_user=#{sip_user}"
+        # By passing the username parameter to Cantina we have
+        # already narrowed the result, but we still need to check if
+        # the SIP server matches. And while we're at it we can also
+        # check the username, just to make sure.
         if cantina_sip_accounts
           cantina_sip_accounts.each { |cantina_sip_account|
-            # Note: Maybe the "sip_proxy" attribute of CantinaSipAccount
-            # should be named "sip_server" or "sip_domain"?
             logger.debug "-------------{"
             logger.debug cantina_sip_account.inspect
             logger.debug "-------------}"
