@@ -41,5 +41,6 @@ class SipProxy < ActiveRecord::Base
     end
   }
   
-  # TODO tests
+  # TODO tests for last_sip_proxy_id
+  
 end
