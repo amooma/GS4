@@ -588,7 +588,7 @@ class SipAccount < ActiveRecord::Base
     begin
       server = SipServer.find( proxy_server_id )
       if server.management_host.blank?
-        errors.add(:name, "is not managed by GS!")
+        errors.add( :name, "is not managed by GS!" )
         return false
       else
         SipproxyDbalias.set_resource( "http://#{server.management_host}:#{server.management_port}/" )
