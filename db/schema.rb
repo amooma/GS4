@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20110329203130) do
   end
 
   create_table "provisioning_servers", :force => true do |t|
-    t.string   "name"  #FIXME rename "name" to "host", see sip_servers, sip_proxies, voicemail_servers
+    t.string   "name"
     t.integer  "port"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -74,6 +74,12 @@ ActiveRecord::Schema.define(:version => 20110329203130) do
     t.integer  "management_port"
     t.integer  "port"
     t.string   "management_host"
+  end
+
+  create_table "tests", :force => true do |t|
+    t.string   "as"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
