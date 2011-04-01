@@ -528,11 +528,11 @@ class SipAccount < ActiveRecord::Base
     server = SipServer.find( proxy_server_id )
     if server.management_host.blank?
       return true
+    else
       if ! connection_to_server_possible(server.management_host, server.management_port)
         errors.add( :base, "Failed to connect to SipProxy management server." )
         return
       end
-    else
       SipproxyDbalias.set_resource( "http://#{server.management_host}:#{server.management_port}/" )
       sipproxy_dbalias = SipproxyDbalias.create(
         :username       =>  self.auth_name,

@@ -1,5 +1,9 @@
 module ConnectionChecks
   def connection_to_server_possible(host, port) 
+    # There is no MOCK for socket connections
+    if Rails.env == "test"
+      return true
+    end
     require 'socket' 
     require 'timeout' 
     begin 
