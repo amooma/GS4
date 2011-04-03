@@ -1,12 +1,15 @@
 require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
-  # testing sip_account without external servers
+  
+  # test sip_account without external servers
+  
+  
   should "have a valid factory setup" do
     assert Factory.build( :sip_account ).valid?
   end
   
-  # testing that two Factories in a row work
+  # test that two Factories in a row work
   should "have a valid factory setup for two Factories in a row" do
     Factory.create(:sip_account)
     assert Factory.build( :sip_account ).valid?
