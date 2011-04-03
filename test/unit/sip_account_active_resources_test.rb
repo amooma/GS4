@@ -25,12 +25,45 @@ class SipAccountTest < ActiveSupport::TestCase
   
   def create_sip_account_and_phones
     @provisioning_server = Factory.create(:provisioning_server)
+    
+    ActiveResource::HttpMock.reset!
+    ActiveResource::HttpMock.respond_to { |mock|
+      a_cantina_phone = {
+        :id               => 0,
+        :mac_address      => '000000000000',
+        :phone_model_id   => 0,
+        :ip_address       => '0.0.0.1',
+        :last_ip_address  => nil,
+        :http_user        => '',
+        :http_password    => '',
+      }
+      first_factory_phone_phone_id = 4001
+      number_of_factory_phones = 2
+      for cantina_phone_id in (
+        (first_factory_phone_phone_id) ..
+        (first_factory_phone_phone_id + number_of_factory_phones - 1)
+      ) do
+        mock.get(    "/phones/#{cantina_phone_id.to_s}.xml", {},  # GET = show
+          a_cantina_phone.merge({
+            :id               => cantina_phone_id,
+            :mac_address      => cantina_phone_id.to_s(16).rjust(12,'0'),
+          }).to_xml( :root => "phone" ), 200, {}
+        )
+      end
+    }
+    number_of_mock_requests = ActiveResource::HttpMock.requests.length
+    
     @sip_phone_1 = Factory.create(:sip_phone,
       :provisioning_server_id => @provisioning_server.id
     )
     @sip_phone_2 = Factory.create(:sip_phone,
       :provisioning_server_id => @provisioning_server.id
     )
+    
+    assert( ActiveResource::HttpMock.requests.length > number_of_mock_requests,
+      "Factory.create(:sip_phone) is expected to make requests because of the phone_id validation" )
+    ActiveResource::HttpMock.reset!
+    
     @sip_server  = Factory.create(:sip_server,
       :management_host => "10.5.5.2",
       :management_port => 4042
@@ -184,10 +217,28 @@ class SipAccountTest < ActiveSupport::TestCase
         
     #puts "Assigning the SipAccount to SipPhone 1 ..."
     
+    cantina_phone_id = 4001
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
       cantina_sip_accounts = [
       ]
+      
+      a_cantina_phone = {
+        :id               => 0,
+        :mac_address      => '000000000000',
+        :phone_model_id   => 0,
+        :ip_address       => '0.0.0.1',
+        :last_ip_address  => nil,
+        :http_user        => '',
+        :http_password    => '',
+      }
+      
+      mock.get    "/phones/#{cantina_phone_id.to_s}.xml", {},  # GET = show
+        a_cantina_phone.merge({
+          :id               => cantina_phone_id,
+          :mac_address      => cantina_phone_id.to_s(16).rjust(12,'0'),
+        }).to_xml( :root => "phone" ), 200, {}
+      
       mock.get    "/sip_accounts.xml?auth_user=#{@sip_account.auth_name}", {},  # GET = index
         cantina_sip_accounts.to_xml( :root => "sip-accounts" ), 200, {}
       mock.post   "/sip_accounts.xml", {},  # POST = create
@@ -197,6 +248,13 @@ class SipAccountTest < ActiveSupport::TestCase
     @sip_account.update_attributes!( :sip_phone_id => @sip_phone_1.id )
     puts "Errors: #{sip_account.errors.inspect}" if @sip_account.errors.length > 0
     assert @sip_account.valid?
+    
+    #puts "Asserting that the mock received the expected request (GET /phones/4001.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
+        :get, "/phones/#{cantina_phone_id.to_s}.xml", nil, { "Accept"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
     
     #puts "Asserting that the mock received the expected request (GET /sip_accounts.xml?auth_user=#{@sip_account.auth_name}) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
@@ -237,6 +295,7 @@ class SipAccountTest < ActiveSupport::TestCase
     
     #puts "Assigning the SipAccount to SipPhone 2 ..."
     
+    cantina_phone_id = 4001
     ActiveResource::HttpMock.reset!
     ActiveResource::HttpMock.respond_to { |mock|
       cantina_sip_account_on_phone1 = {
@@ -255,6 +314,22 @@ class SipAccountTest < ActiveSupport::TestCase
         :registration_expiry_time => 300,
         :dtmf_mode           => 'rfc2833',
       }
+      a_cantina_phone = {
+        :id               => 0,
+        :mac_address      => '000000000000',
+        :phone_model_id   => 0,
+        :ip_address       => '0.0.0.1',
+        :last_ip_address  => nil,
+        :http_user        => '',
+        :http_password    => '',
+      }
+      
+      mock.get    "/phones/#{cantina_phone_id.to_s}.xml", {},  # GET = show
+        a_cantina_phone.merge({
+          :id               => cantina_phone_id,
+          :mac_address      => cantina_phone_id.to_s(16).rjust(12,'0'),
+        }).to_xml( :root => "phone" ), 200, {}
+      
       mock.get    "/sip_accounts.xml?auth_user=#{@sip_account.auth_name}", {},  # GET = index
         [ cantina_sip_account_on_phone1 ].to_xml( :root => "sip-accounts" ), 200, {}
       mock.put    "/sip_accounts/1.xml", {},  # PUT = update
@@ -265,6 +340,13 @@ class SipAccountTest < ActiveSupport::TestCase
     #puts @sip_account.inspect
     puts "Errors: #{@sip_account.errors.inspect}" if @sip_account.errors.length > 0
     assert @sip_account.valid?
+    
+    #puts "Asserting that the mock received the expected request (GET /phones/4001.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
+        :get, "/phones/#{cantina_phone_id.to_s}.xml", nil, { "Accept"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
     
     #puts "Asserting that the mock received the expected request (GET /sip_accounts.xml?auth_user=#{@sip_account.auth_name}) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
@@ -326,12 +408,28 @@ class SipAccountTest < ActiveSupport::TestCase
       cantina_sip_account_on_phone2 = cantina_sip_account_on_phone1.dup
       cantina_sip_account_on_phone2[:phone_id] = @sip_phone_2.phone_id
       
+      a_cantina_phone = {
+        :id               => 0,
+        :mac_address      => '000000000000',
+        :phone_model_id   => 0,
+        :ip_address       => '0.0.0.1',
+        :last_ip_address  => nil,
+        :http_user        => '',
+        :http_password    => '',
+      }
+      
       sipproxy_subscriber2 = {
         :id          => 1,
         :username    => @sip_account.auth_name,
         :domain      => @sip_account.sip_server.host,
         :ha1         => Digest::MD5.hexdigest( "#{@sip_account.auth_name}:#{@sip_account.sip_server.host}:#{@sip_account.password}" ),
       }
+      
+      mock.get    "/phones/#{cantina_phone_id.to_s}.xml", {},  # GET = show
+        a_cantina_phone.merge({
+          :id               => cantina_phone_id,
+          :mac_address      => cantina_phone_id.to_s(16).rjust(12,'0'),
+        }).to_xml( :root => "phone" ), 200, {}
       
       mock.get    "/sip_accounts.xml?auth_user=#{@sip_account.auth_name}", {},  # GET = index
         [ cantina_sip_account_on_phone2 ].to_xml( :root => "sip-accounts" ), 200, {}
@@ -349,6 +447,13 @@ class SipAccountTest < ActiveSupport::TestCase
     #puts @sip_account.inspect
     puts "Errors: #{@sip_account.errors.inspect}" if @sip_account.errors.length > 0
     assert @sip_account.valid?
+    
+    #puts "Asserting that the mock received the expected request (GET /phones/4001.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
+        :get, "/phones/#{cantina_phone_id.to_s}.xml", nil, { "Accept"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
     
     #puts "Asserting that the mock received the expected request (GET /sip_accounts.xml?auth_user=#{@sip_account.auth_name}) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
@@ -441,6 +546,22 @@ class SipAccountTest < ActiveSupport::TestCase
       cantina_sip_account_on_phone2_v2 = cantina_sip_account_on_phone2.dup
       cantina_sip_account_on_phone2_v2[:password] = @sip_account.password
       
+      a_cantina_phone = {
+        :id               => 0,
+        :mac_address      => '000000000000',
+        :phone_model_id   => 0,
+        :ip_address       => '0.0.0.1',
+        :last_ip_address  => nil,
+        :http_user        => '',
+        :http_password    => '',
+      }
+      
+      mock.get    "/phones/#{cantina_phone_id.to_s}.xml", {},  # GET = show
+        a_cantina_phone.merge({
+          :id               => cantina_phone_id,
+          :mac_address      => cantina_phone_id.to_s(16).rjust(12,'0'),
+        }).to_xml( :root => "phone" ), 200, {}
+      
       mock.get    "/sip_accounts.xml?auth_user=#{@sip_account.auth_name}", {},  # GET = index
         [ cantina_sip_account_on_phone2_v2 ].to_xml( :root => "sip-accounts" ), 200, {}
       #mock.get    "/sip_accounts/1.xml", {},  # GET = show
@@ -453,6 +574,13 @@ class SipAccountTest < ActiveSupport::TestCase
     #puts @sip_account.inspect
     puts "Errors: #{@sip_account.errors.inspect}" if @sip_account.errors.length > 0
     assert @sip_account.valid?
+    
+    #puts "Asserting that the mock received the expected request (GET /phones/4001.xml) from the model ..."
+    idx = ActiveResource::HttpMock.requests.index(
+      ActiveResource::Request.new(
+        :get, "/phones/#{cantina_phone_id.to_s}.xml", nil, { "Accept"=>"application/xml" } )
+    )
+    assert_not_equal( nil, idx )
     
     #puts "Asserting that the mock received the expected request (GET /sip_accounts.xml?auth_user=#{@sip_account.auth_name}) from the model ..."
     idx = ActiveResource::HttpMock.requests.index(
