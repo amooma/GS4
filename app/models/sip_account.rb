@@ -12,7 +12,7 @@ class SipAccount < ActiveRecord::Base
   acts_as_list :scope => :user
   
   validate_username         :auth_name
-  validates_uniqueness_of   :auth_name, :scope => :sip_server_id
+  validates_uniqueness_of   :auth_name, :case_sensitive => false,  :scope => :sip_server_id
   
   validates_presence_of     :sip_server
   validates_presence_of     :sip_proxy

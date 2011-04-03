@@ -13,6 +13,5 @@ class SipProxy < AServer
     end
   }
   
-  # TODO tests for last_sip_proxy_id
   
 end

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :sip_accounts
   
   validates_presence_of(   :username, :message => "needed" )
-  validates_uniqueness_of( :username, :message => "already taken" )
+  validates_uniqueness_of( :username, :case_sensitive => false, :message => "already taken" )
   validate_username(       :username )
   
 end

@@ -13,6 +13,5 @@ class SipServer < AServer
     end
   }
   
-  # TODO tests for last_sip_server_id
   
 end

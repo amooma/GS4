@@ -22,8 +22,8 @@ class AServer < ActiveRecord::Base
   
   validates_presence_of     :host
   validate_hostname_or_ip   :host
-  validates_uniqueness_of   :host
-  #validates_uniqueness_of   :port, :scope => :host
+  validates_uniqueness_of   :host, :case_sensitive => false, :scope => :port
+  validates_uniqueness_of   :port, :scope => :host
   
   validate_ip_port          :port, :allow_nil => true  # empty SIP port means default SIP port (SRV lookups)
   

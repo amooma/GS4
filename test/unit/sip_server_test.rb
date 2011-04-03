@@ -178,16 +178,24 @@ class SipServerTest < ActiveSupport::TestCase
     assert ! Factory.build( :sip_server, :management_port => 3000 ).valid?
   end
 
+ 
+  should "not be valid when host and port not unique" do
+    sip_server = Factory.create(:sip_server, :port => 3000)
+    assert ! Factory.build( :sip_server, :host => sip_server.host, :port => sip_server.port ).valid?
+  end
+  
+  should "not be valid when host and port not unique (case-insensitive)" do
+    sip_server = Factory.create( :sip_server, :host => "abc.localdomain", :port => 3000 )
+    assert ! Factory.build( :sip_server, :host => sip_server.host.swapcase, :port => sip_server.port ).valid?
 
-  #TODO - unique host/port (resp. mgmt. host/port) combination?
-  #should "not be valid when host not unique" do
-  #  sip_server = Factory.create(:sip_server)
-  #  assert ! Factory.build( :sip_server, :host => sip_server.host ).valid?
-  #end
+  end
+    should "be valid when host not unique" do
+    sip_server = Factory.create(:sip_server, :port => 3000)
+    assert Factory.build( :sip_server, :host => sip_server.host, :port => sip_server.port + 1 ).valid?
+  end
   
-  #should "not be valid when host not unique (case-insensitive)" do
-  #  sip_server = Factory.create( :sip_server, :host => "abc.localdomain" )
-  #  assert ! Factory.build( :sip_server, :host => sip_server.host.swapcase ).valid?
-  #end
-  
+  should "be valid when host not unique (case-insensitive)" do
+    sip_server = Factory.create( :sip_server, :host => "abc.localdomain", :port => 3000 )
+    assert Factory.build( :sip_server, :host => sip_server.host.swapcase, :port => sip_server.port + 1 ).valid?
+  end
 end
