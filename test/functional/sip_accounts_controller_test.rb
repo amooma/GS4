@@ -45,15 +45,16 @@ class SipAccountsControllerTest < ActionController::TestCase
   end
   
   
-  # OPTIMIZE Figure out why the test doesn't work. The test may need to be changed.
-  #test "should create sip_account" do
-  #  sign_in :user, @admin_user
-  #  assert_difference('SipAccount.count') {
-  #    post :create, :sip_account => @sip_account.attributes.reject{ |k,v| k.to_s == 'id' }
-  #  }
-  #  assert_redirected_to( sip_account_path( assigns(:sip_account)))
-  #  sign_out @admin_user
-  #end
+  test "should create sip_account" do
+    sign_in :user, @admin_user
+    puts SipAccount.last.to_yaml
+    assert_difference('SipAccount.count') {
+      sip_account = Factory.build(:sip_account)
+      post :create, :sip_account => sip_account.attributes
+    }
+    assert_redirected_to( sip_account_path( assigns(:sip_account)))
+    sign_out @admin_user
+  end
   
   test "should not create sip_account (not an admin)" do
     assert_no_difference('SipAccount.count') {
