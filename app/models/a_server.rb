@@ -23,9 +23,9 @@ class AServer < ActiveRecord::Base
   validates_presence_of     :host
   validate_hostname_or_ip   :host
   validates_uniqueness_of   :host, :case_sensitive => false, :scope => :port
-  validates_uniqueness_of   :port, :scope => :host
   
   validate_ip_port          :port, :allow_nil => true  # empty SIP port means default SIP port (SRV lookups)
+  validates_uniqueness_of   :port, :scope => :host
   
   validates_presence_of     :management_host, {
     :message => "must be present if a management port is set.",
@@ -37,14 +37,19 @@ class AServer < ActiveRecord::Base
     :allow_blank => true,
   }
   validates_uniqueness_of   :management_host,
+    :scope => :port,
+    :case_sensitive => false,
     :allow_nil   => true,
     :allow_blank => true
-  #validates_uniqueness_of   :management_port, :scope => :management_host
   
-  validate_ip_port          :management_port, :allow_nil => true
   validates_presence_of     :management_port, {
     :message => "must be present if a management host is set.",
     :if => Proc.new { |me| ! me.management_host.blank? },
   }
+  validate_ip_port          :management_port, :allow_nil => true
+  validates_uniqueness_of   :management_port, :scope => :management_host,
+    :allow_nil   => true,
+    :allow_blank => true
+  
   
 end

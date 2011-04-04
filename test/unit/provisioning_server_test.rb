@@ -56,8 +56,8 @@ class ProvisioningServerTest < ActiveSupport::TestCase
     end
   }
   
-
-   should "not be valid when host and port not unique" do
+  
+  should "not be valid when host and port not unique" do
     provisioning_server = Factory.create(:provisioning_server, :port => 3000)
     assert ! Factory.build( :provisioning_server, :name => provisioning_server.name, :port => provisioning_server.port ).valid?
   end
