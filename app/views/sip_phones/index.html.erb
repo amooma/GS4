@@ -14,7 +14,7 @@
   prov_server = sip_phone.provisioning_server_id ? @prov_servers.find( sip_phone.provisioning_server_id ) : nil
   if prov_server
     CantinaPhone.set_resource( "http://#{prov_server.name}:#{prov_server.port}/" )
-    #FIXME https once it is implemented
+    # FIXME https once it is implemented
   end
 %>  
   <tr>
