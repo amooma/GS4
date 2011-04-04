@@ -14,6 +14,6 @@ class VoicemailServer < AServer
   #  end
   #}
   #
-  ## TODO tests for last_voicemail_server_id
+  ## TODO tests for last_voicemail_server_id (once it's implemented)
   
 end
