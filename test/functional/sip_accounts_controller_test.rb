@@ -47,7 +47,7 @@ class SipAccountsControllerTest < ActionController::TestCase
   
   test "should create sip_account" do
     sign_in :user, @admin_user
-    puts SipAccount.last.to_yaml
+    #puts SipAccount.last.to_yaml
     assert_difference('SipAccount.count') {
       sip_account = Factory.build(:sip_account)
       post :create, :sip_account => sip_account.attributes
