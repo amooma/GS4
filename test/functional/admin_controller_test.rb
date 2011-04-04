@@ -16,8 +16,8 @@ class AdminControllerTest < ActionController::TestCase
   end
   
   test "should get index" do
-    sign_in :user, @admin_user 
-    get :index 
+    sign_in :user, @admin_user
+    get :index
     assert_response :success
   end
   

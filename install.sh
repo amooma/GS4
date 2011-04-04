@@ -86,7 +86,7 @@ cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
 echo "Fixing rights for webserver. Rights will be managed by SELinux in the future."
 chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
 chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
-chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber 
+chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
 chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
 cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
 

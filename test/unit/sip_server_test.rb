@@ -90,7 +90,7 @@ class SipServerTest < ActiveSupport::TestCase
     should "not be valid with management_port #{port.inspect}" do
       assert ! Factory.build( :sip_server, :management_port => port ).valid?
     end
-  } 
+  }
   
   # valid management_host
   [

@@ -35,7 +35,7 @@ class SipPhonesController < ApplicationController
     @sip_phone = SipPhone.new
     if ProvisioningServer.count == 1
       @sip_phone.provisioning_server = ProvisioningServer.first
-      setup_cantina_phone 
+      setup_cantina_phone
     end
     
     respond_to do |format|
@@ -59,7 +59,7 @@ class SipPhonesController < ApplicationController
   # POST /sip_phones.xml
   def create
     @sip_phone = SipPhone.new(params[:sip_phone])
-    setup_cantina_phone 
+    setup_cantina_phone
     
     respond_to do |format|
       if @sip_phone.save

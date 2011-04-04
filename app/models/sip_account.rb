@@ -81,7 +81,7 @@ class SipAccount < ActiveRecord::Base
         logger.debug "The SIP account's phone isn't being changed."
       end
       if provisioning_server_type == 'cantina'
-        if self.auth_name != self.auth_name_was 
+        if self.auth_name != self.auth_name_was
           need_to_delete_old_sip_acct = false
         end
       end
