@@ -56,9 +56,17 @@ class SipAccountsControllerTest < ActionController::TestCase
     sign_out @admin_user
   end
   
-  test "should not create sip_account (not an admin)" do
+  test "should not create sip_account (not an admin) - version a" do
     assert_no_difference('SipAccount.count') {
       post :create, :sip_account => @sip_account.attributes.reject{ |k,v| k.to_s == 'id' }
+    }
+    assert_response( @expected_http_status_if_not_allowed )
+  end
+  
+  test "should not create sip_account (not an admin) - version b" do
+    assert_no_difference('SipAccount.count') {
+      sip_account = Factory.build(:sip_account)
+      post :create, :sip_account => sip_account.attributes
     }
     assert_response( @expected_http_status_if_not_allowed )
   end
