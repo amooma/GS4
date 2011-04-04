@@ -5,8 +5,6 @@ class SipProxiesControllerTest < ActionController::TestCase
   # see https://github.com/plataformatec/devise
   include Devise::TestHelpers
   
-  # TODO Test moving accounts when creating new server
-  
   setup do
     @sip_proxy = Factory.create(:sip_proxy)
     
@@ -123,5 +121,19 @@ class SipProxiesControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
+  test "should move accounts to new sip_proxy" do
+    sign_in :user, @admin_user
+    sip_proxy = Factory.create(:sip_proxy)
+    assert_nil SipAccount.find_by_sip_proxy_id(sip_proxy.id)
+    sip_account = Factory.create( :sip_account, :sip_proxy => sip_proxy)
+    assert_not_nil SipAccount.find_by_sip_proxy_id(sip_proxy.id)
+    assert_difference('SipProxy.count') {
+      post :create, :sip_proxy => Factory.attributes_for(:sip_proxy, :last_sip_proxy_id => sip_proxy.id)
+    }
+    assert_nil SipAccount.find_by_sip_proxy_id(sip_proxy.id)
+    assert_not_nil SipAccount.find_by_sip_proxy_id(SipProxy.last.id)
+    assert_redirected_to( sip_proxy_path( assigns(:sip_proxy)))
+    sign_out @admin_user
+  end
   
 end

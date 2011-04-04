@@ -5,8 +5,6 @@ class SipServersControllerTest < ActionController::TestCase
   # see https://github.com/plataformatec/devise
   include Devise::TestHelpers
   
-  # TODO Test moving accounts when creating new server
-  
   setup do
     @sip_server = Factory.create(:sip_server)
     
@@ -123,5 +121,19 @@ class SipServersControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
+  test "should move accounts to new sip_server" do
+    sign_in :user, @admin_user
+    sip_server = Factory.create(:sip_server)
+    assert_nil SipAccount.find_by_sip_server_id(sip_server.id)
+    sip_account = Factory.create( :sip_account, :sip_server => sip_server)
+    assert_not_nil SipAccount.find_by_sip_server_id(sip_server.id)
+    assert_difference('SipServer.count') {
+      post :create, :sip_server => Factory.attributes_for(:sip_server, :last_sip_server_id => sip_server.id)
+    }
+    assert_nil SipAccount.find_by_sip_server_id(sip_server.id)
+    assert_not_nil SipAccount.find_by_sip_server_id(SipServer.last.id)
+    assert_redirected_to( sip_server_path( assigns(:sip_server)))
+    sign_out @admin_user
+  end
   
 end
