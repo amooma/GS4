@@ -1,4 +1,5 @@
 #!/bin/bash
+test $(id -u) -gt 0 && (echo "This script MUST run as superuser (root)"; exit 1)
 
 echo -e "Please enter your github.com username\n"
 read USER
