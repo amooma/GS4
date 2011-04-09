@@ -3,16 +3,16 @@ digraph Gemeinschaft4 {
   node [shape = "Mrecord", fontsize = "10", fontname = "Arial", margin = "0.07,0.05", penwidth = "1.0"];
   edge [fontname = "Arial", fontsize = "7", dir = "both", arrowsize = "0.9", penwidth = "1.0", labelangle = "32", labeldistance = "1.8"];
   label = "Gemeinschaft4 domain model\n\n";
-  Authentication [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_Authentication [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Authentication</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="provider">provider <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="uid">uid <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="provider">provider <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="uid">uid <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
-  Extension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_Extension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Extension</font></td></tr>
 </table>
 |
@@ -21,7 +21,7 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="sip_user_id">sip_user_id <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
-  ProvisioningServer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_ProvisioningServer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ProvisioningServer</font></td></tr>
 </table>
 |
@@ -30,7 +30,7 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
 </table>
 >];
-  SipAccount [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_SipAccount [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipAccount</font></td></tr>
 </table>
 |
@@ -41,7 +41,7 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="realm">realm <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 >];
-  SipPhone [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_SipPhone [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipPhone</font></td></tr>
 </table>
 |
@@ -49,25 +49,25 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="phone_id">phone_id <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
-  SipProxy [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_SipProxy [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipProxy</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="config_port">config_port <font face="Arial Italic" color="grey60">integer</font></td></tr>
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 >];
-  SipServer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_SipServer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipServer</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="config_port">config_port <font face="Arial Italic" color="grey60">integer</font></td></tr>
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 >];
-  User [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  m_User [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">User</font></td></tr>
 </table>
 |
@@ -88,11 +88,11 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="username">username <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
-  User -> Authentication [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  User -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  Extension -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  ProvisioningServer -> SipPhone [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  SipServer -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  SipProxy -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  SipPhone -> SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_User -> m_Authentication [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_User -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipProxy -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Extension -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_ProvisioningServer -> m_SipPhone [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipPhone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
 }
