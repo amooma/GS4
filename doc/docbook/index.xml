@@ -54,9 +54,13 @@
 
     <xi:include href="installation-gs4.xml" />
   </chapter>
+
   <xi:include href="install-squeeze.xml" />
+
   <xi:include href="frontend.xml" />
+
   <xi:include href="integration.xml" />
+
   <xi:include href="data-model.xml" />
 
   <xi:include href="sicherheitskonzept-und-architektur.dbk" />

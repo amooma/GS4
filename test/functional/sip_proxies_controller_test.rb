@@ -1,5 +1,4 @@
 require 'test_helper'
-
 class SipProxiesControllerTest < ActionController::TestCase
   
   # Devise Test Helpers
@@ -15,6 +14,7 @@ class SipProxiesControllerTest < ActionController::TestCase
     
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
+    @expected_http_status_if_no_route = 404
   end
   
   
@@ -32,7 +32,7 @@ class SipProxiesControllerTest < ActionController::TestCase
   end
   
   
-  test "should get new" do
+  test "should not get new" do
     sign_in :user, @admin_user
     get :new
     assert_response :success
@@ -75,29 +75,33 @@ class SipProxiesControllerTest < ActionController::TestCase
   end
   
   
-  test "should get edit" do
+  test "should not get edit" do
     sign_in :user, @admin_user
-    get :edit, :id => @sip_proxy.to_param
-    assert_response :success
+    assert_raise(ActionController::RoutingError) {
+      get :edit, :id => @sip_proxy.to_param
+    }
     sign_out @admin_user
   end
   
   test "should not get edit (not an admin)" do
-    get :edit, :id => @sip_proxy.to_param
-    assert_response( @expected_http_status_if_not_allowed )
+    assert_raise(ActionController::RoutingError) {
+      get :edit, :id => @sip_proxy.to_param
+    }
   end
   
   
-  test "should update sip_proxy" do
+  test "should not update sip_proxy" do
     sign_in :user, @admin_user
-    put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
-    assert_redirected_to( sip_proxy_path( assigns(:sip_proxy)))
+    assert_raise(ActionController::RoutingError) {
+      put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
+    }
     sign_out @admin_user
   end
   
   test "should not update sip_proxy (not an admin)" do
-    put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
-    assert_response( @expected_http_status_if_not_allowed )
+    assert_raise(ActionController::RoutingError) {
+      put :update, :id => @sip_proxy.to_param, :sip_proxy => @sip_proxy.attributes
+    }
   end
   
   
@@ -117,5 +121,19 @@ class SipProxiesControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
+  test "should move accounts to new sip_proxy" do
+    sign_in :user, @admin_user
+    sip_proxy = Factory.create(:sip_proxy)
+    assert_nil SipAccount.find_by_sip_proxy_id(sip_proxy.id)
+    sip_account = Factory.create( :sip_account, :sip_proxy => sip_proxy)
+    assert_not_nil SipAccount.find_by_sip_proxy_id(sip_proxy.id)
+    assert_difference('SipProxy.count') {
+      post :create, :sip_proxy => Factory.attributes_for(:sip_proxy, :last_sip_proxy_id => sip_proxy.id)
+    }
+    assert_nil SipAccount.find_by_sip_proxy_id(sip_proxy.id)
+    assert_not_nil SipAccount.find_by_sip_proxy_id(SipProxy.last.id)
+    assert_redirected_to( sip_proxy_path( assigns(:sip_proxy)))
+    sign_out @admin_user
+  end
   
 end

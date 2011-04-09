@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '~> 3.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -24,9 +24,6 @@ gem "rails-erd"
 
 # Generators
 gem "rails3-generators"
-
-# run ./script/annotate to annotate
-gem 'annotate-models'
 
 # https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
 # nicer table like output on the console

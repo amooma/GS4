@@ -3,9 +3,9 @@
 <table>
   <tr>
     <th>Username</th>
-    <th>Email</th>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>E-mail address</th>
+    <th>Given name</th>
+    <th>Surname</th>
     <th></th>
 	<th></th>
   </tr>
@@ -20,7 +20,7 @@
 	<% if user.id != current_user.id %>
     <td><%= button_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
 	<% else %>
-	<td>Current User</td>
+	<td>(current user)</td>
 	<% end %>
   </tr>
 <% end %>

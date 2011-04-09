@@ -1,5 +1,4 @@
 require 'test_helper'
-
 class SipServersControllerTest < ActionController::TestCase
   
   # Devise Test Helpers
@@ -15,6 +14,7 @@ class SipServersControllerTest < ActionController::TestCase
     
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
+    @expected_http_status_if_no_route = 404
   end
   
   
@@ -75,29 +75,33 @@ class SipServersControllerTest < ActionController::TestCase
   end
   
   
-  test "should get edit" do
+  test "should not get edit" do
     sign_in :user, @admin_user
-    get :edit, :id => @sip_server.to_param
-    assert_response :success
+    assert_raise(ActionController::RoutingError) {
+      get :edit, :id => @sip_server.to_param
+    }
     sign_out @admin_user
   end
   
   test "should not get edit (not an admin)" do
-    get :edit, :id => @sip_server.to_param
-    assert_response( @expected_http_status_if_not_allowed )
+    assert_raise(ActionController::RoutingError) {
+      get :edit, :id => @sip_server.to_param
+    }
   end
   
   
-  test "should update sip_server" do
+  test "should not update sip_server" do
     sign_in :user, @admin_user
-    put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
-    assert_redirected_to( sip_server_path( assigns(:sip_server)))
+    assert_raise(ActionController::RoutingError) {
+      put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
+    }
     sign_out @admin_user
   end
   
   test "should not update sip_server (not an admin)" do
-    put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
-    assert_response( @expected_http_status_if_not_allowed )
+    assert_raise(ActionController::RoutingError) {
+      put :update, :id => @sip_server.to_param, :sip_server => @sip_server.attributes
+    }
   end
   
   
@@ -117,5 +121,19 @@ class SipServersControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
+  test "should move accounts to new sip_server" do
+    sign_in :user, @admin_user
+    sip_server = Factory.create(:sip_server)
+    assert_nil SipAccount.find_by_sip_server_id(sip_server.id)
+    sip_account = Factory.create( :sip_account, :sip_server => sip_server)
+    assert_not_nil SipAccount.find_by_sip_server_id(sip_server.id)
+    assert_difference('SipServer.count') {
+      post :create, :sip_server => Factory.attributes_for(:sip_server, :last_sip_server_id => sip_server.id)
+    }
+    assert_nil SipAccount.find_by_sip_server_id(sip_server.id)
+    assert_not_nil SipAccount.find_by_sip_server_id(SipServer.last.id)
+    assert_redirected_to( sip_server_path( assigns(:sip_server)))
+    sign_out @admin_user
+  end
   
 end

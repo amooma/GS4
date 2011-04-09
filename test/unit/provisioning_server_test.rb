@@ -57,9 +57,14 @@ class ProvisioningServerTest < ActiveSupport::TestCase
   }
   
   
-  should "not be valid when name not unique" do
-    provisioning_server = Factory.create(:provisioning_server)
-    assert ! Factory.build( :provisioning_server, :name => provisioning_server.name ).valid?
+  should "not be valid when host and port not unique" do
+    provisioning_server = Factory.create(:provisioning_server, :port => 3000)
+    assert ! Factory.build( :provisioning_server, :name => provisioning_server.name, :port => provisioning_server.port ).valid?
+  end
+  
+  should "not be valid when host and port not unique (case-insensitive)" do
+    provisioning_server = Factory.create( :provisioning_server, :name => "abc.localdomain", :port => 3000 )
+    assert ! Factory.build( :provisioning_server, :name => provisioning_server.name.swapcase, :port => provisioning_server.port ).valid?
   end
   
 end

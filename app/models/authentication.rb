@@ -1,16 +1,6 @@
-# == Schema Information
-# Schema version: 20110207214124
-#
-# Table name: authentications
-#
-#  id         :integer         not null, primary key
-#  user_id    :integer
-#  provider   :string(255)
-#  uid        :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class Authentication < ActiveRecord::Base
-  belongs_to :user  
+  belongs_to :user
+  validates_presence_of(:user, :message => "must have a valid user")
+  validates_presence_of(:provider, :message => "needed")
+  validates_presence_of(:uid, :message => "needed")
 end

@@ -3,18 +3,20 @@
 <table>
   <tr>
     <th>Host</th>
-    <th>Config port</th>
+    <th>Port</th>
+    <th>Management host</th>
+    <th>Management port</th>
     <th></th>
     <th></th>
-	<th></th>
   </tr>
 
 <% @sip_servers.each do |sip_server| %>
   <tr>
-    <td><%= sip_server.name %></td>
-	<td><%= sip_server.config_port%><td>
+    <td><%= sip_server.host %></td>
+    <td><%= sip_server.port %></td>
+    <td><%= sip_server.management_host %></td>
+    <td><%= sip_server.management_port %></td>
     <td><%= link_to 'Show', sip_server %></td>
-    <td><%= link_to 'Edit', edit_sip_server_path(sip_server) %></td>
     <td><%= button_to 'Destroy', sip_server, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

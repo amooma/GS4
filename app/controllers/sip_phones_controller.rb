@@ -12,8 +12,6 @@ class SipPhonesController < ApplicationController
   # GET /sip_phones
   # GET /sip_phones.xml
   def index
-    @sip_phones = SipPhone.order([ :provisioning_server_id, :phone_id ])
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sip_phones }
@@ -37,13 +35,12 @@ class SipPhonesController < ApplicationController
     @sip_phone = SipPhone.new
     if ProvisioningServer.count == 1
       @sip_phone.provisioning_server = ProvisioningServer.first
-      setup_cantina_phone 
+      setup_cantina_phone
     end
     
     respond_to do |format|
       if ProvisioningServer.count == 0
         format.html { redirect_to(new_provisioning_server_path, :alert => 'To create a new sip_phone you have to create a provisioning server first.') }
-        #TODO Fehlermeldung fuer XML rendern.
         format.xml  { render :xml => @sip_phone }
       else
         format.html # new.html.erb
@@ -62,7 +59,7 @@ class SipPhonesController < ApplicationController
   # POST /sip_phones.xml
   def create
     @sip_phone = SipPhone.new(params[:sip_phone])
-    setup_cantina_phone 
+    setup_cantina_phone
     
     respond_to do |format|
       if @sip_phone.save

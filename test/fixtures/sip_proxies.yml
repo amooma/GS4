@@ -1,19 +1,7 @@
-# == Schema Information
-# Schema version: 20110216214824
-#
-# Table name: sip_proxies
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  config_port :integer
-#
-
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: sip1.proxy.de
+  host: sip1.proxy.de
 
 two:
-  name: sip2.proxy.de
+  host: sip2.proxy.de

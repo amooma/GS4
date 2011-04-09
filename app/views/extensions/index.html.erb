@@ -11,7 +11,7 @@
 
 <% @extensions.each do |extension| %>
   <tr>
-    <td><%= extension.sip_user_id %></td>
+    <td><%= extension.sip_account_id %></td>
     <td><%= extension.extension %></td>
     <td><%= link_to 'Show', extension %></td>
     <td><%= link_to 'Edit', edit_extension_path(extension) %></td>

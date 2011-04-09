@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110216214824) do
+ActiveRecord::Schema.define(:version => 20110329203130) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(:version => 20110216214824) do
   end
 
   create_table "extensions", :force => true do |t|
-    t.integer  "sip_user_id"
     t.integer  "extension"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sip_account_id"
   end
 
   create_table "provisioning_servers", :force => true do |t|
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(:version => 20110216214824) do
     t.datetime "updated_at"
     t.integer  "extension_id"
     t.integer  "sip_phone_id"
+    t.integer  "voicemail_pin"
+    t.integer  "position"
+    t.integer  "voicemail_server_id"
   end
 
   create_table "sip_phones", :force => true do |t|
@@ -56,17 +59,21 @@ ActiveRecord::Schema.define(:version => 20110216214824) do
   end
 
   create_table "sip_proxies", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "config_port"
+    t.string   "host"
+    t.integer  "port"
+    t.string   "management_host"
+    t.integer  "management_port"
   end
 
   create_table "sip_servers", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "config_port"
+    t.string   "host"
+    t.integer  "management_port"
+    t.integer  "port"
+    t.string   "management_host"
   end
 
   create_table "tests", :force => true do |t|
@@ -96,5 +103,14 @@ ActiveRecord::Schema.define(:version => 20110216214824) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "voicemail_servers", :force => true do |t|
+    t.string   "host"
+    t.integer  "port"
+    t.string   "management_host"
+    t.integer  "management_port"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

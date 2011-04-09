@@ -45,7 +45,7 @@ for i in $PROJECTS
 do
   cd /opt
   
-  git clone https://$USER:$PASS@github.com/amooma/$i.git
+  git clone -b master https://$USER:$PASS@github.com/amooma/$i.git
   cd /opt/$i
   
   bundle install
@@ -81,11 +81,12 @@ cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.DIST
 cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/lighttpd.conf
 /etc/init.d/lighttpd restart
 cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
+#TODO - move Kamailio configuration into the SipProxy manager project.
 
 echo "Fixing rights for webserver. Rights will be managed by SELinux in the future."
 chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
 chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
-chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber 
+chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
 chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
 cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
 

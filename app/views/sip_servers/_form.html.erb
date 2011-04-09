@@ -1,27 +1,40 @@
 <%= form_for(@sip_server) do |f| %>
 <% if @sip_server.errors.any? %>
 <div id="error_explanation">
-    <h2><%= pluralize(@sip_server.errors.count, "error") %>prohibited this sip_server from being saved:</h2>
-    <ul>
-        <% @sip_server.errors.full_messages.each do |msg| %>
-        <li>
-            <%= msg %>
-        </li>
-        <% end %>
-    </ul>
+  <h2><%= pluralize(@sip_server.errors.count, "error") %>prohibited this sip_server from being saved:</h2>
+  <ul>
+    <% @sip_server.errors.full_messages.each do |msg| %>
+    <li>
+      <%= msg %>
+    </li>
+    <% end %>
+  </ul>
 </div>
 <% end %>
 <div class="field">
-    <%= f.label :name, "Host" %>
-    <br/>
-    <%= f.text_field :name %>
+  <%= f.label :name, "Host" %><br />
+  <%= f.text_field :host %>
 </div>
 <div class="field">
-    <%= f.label :config_port, "Configuration port" %>
-    <br/>
-    <%= f.text_field :config_port %>
+  <%= f.label :name, "Port" %><br />
+  <%= f.text_field :port %>
 </div>
+<div class="field">
+  <%= f.label :management_host, "Management host (if managed by Gemeinschaft)" %><br />
+  <%= f.text_field :management_host %>
+</div>
+<div class="field">
+  <%= f.label :management_port, "Management port (if managed by Gemeinschaft)" %><br />
+  <%= f.text_field :management_port %>
+</div>
+<div class="field">
+  <%= f.label :last_sip_server_id, "Take over accounts" %><br />
+  <%= f.select( :last_sip_server_id,
+    @sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
+    { :include_blank => true }
+  ) %>
+  </div>
 <div class="actions">
-    <%= f.submit %>
+  <%= f.submit %>
 </div>
 <% end %>

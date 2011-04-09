@@ -1,11 +1,21 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>Host:</b>
-  <%= @sip_server.name %>
-  <%= @sip_server.config_port%>
+  <%= @sip_server.host %>
+</p>
+<p>
+  <b>Port:</b>
+  <%= (! @sip_server.port.blank?) ? @sip_server.port : "none" %>
+</p>
+<p>
+<p>
+  <b>Management host:</b>
+  <%= @sip_server.management_host %>
+</p>
+<p>
+  <b>Management port:</b>
+  <%= (! @sip_server.management_port.blank?) ? @sip_server.management_port : "none" %>
 </p>
 
 
-<%= link_to 'Edit', edit_sip_server_path(@sip_server) %> |
 <%= link_to 'Back', sip_servers_path %>

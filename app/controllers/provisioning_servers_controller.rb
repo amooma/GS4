@@ -2,13 +2,14 @@ class ProvisioningServersController < ApplicationController
   
   before_filter :authenticate_user!
   
+  before_filter { |controller|
+    @provisioning_servers = ProvisioningServer.all
+    @sip_phones = SipPhone.order(:id)
+  }
+  
   # GET /provisioning_servers
   # GET /provisioning_servers.xml
   def index
-    @provisioning_servers = ProvisioningServer.all
-    
-    @sip_phones = SipPhone.order(:id)
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @provisioning_servers }

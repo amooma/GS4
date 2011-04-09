@@ -3,12 +3,13 @@
 <table>
   <tr>
     <th>User ID</th>
-    <th>Auth name</th>
+    <th>Auth. name</th>
     <th>Password</th>
     <th>Realm</th>
     <th>Phone number</th>
     <th>SIP server ID</th>
     <th>SIP proxy ID</th>
+    <th>Voicemail server ID</th>
     <th>SIP phone ID</th>
     <th></th>
     <th></th>
@@ -24,6 +25,7 @@
     <td><%= sip_account.phone_number %></td>
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
+    <td><%= sip_account.voicemail_server_id %></td>
     <td><%= sip_account.sip_phone_id %></td>
     <td><%= link_to 'Show', sip_account %></td>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>

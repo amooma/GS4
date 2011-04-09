@@ -1,11 +1,20 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>Host:</b>
-  <%= @sip_proxy.name %>
-  <%= @sip_proxy.config_port%>
+  <%= @sip_proxy.host %>
+</p>
+<p>
+  <b>Port:</b>
+  <%= (! @sip_proxy.port.blank?) ? @sip_proxy.port : "none" %>
+</p>
+<p>
+  <b>Management host:</b>
+  <%= @sip_proxy.management_host %>
+</p>	
+<p>
+  <b>Management port:</b>
+  <%= (! @sip_proxy.management_port.blank?) ? @sip_proxy.management_port : "none" %>
 </p>
 
 
-<%= link_to 'Edit', edit_sip_proxy_path(@sip_proxy) %> |
 <%= link_to 'Back', sip_proxies_path %>

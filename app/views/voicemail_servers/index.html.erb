@@ -1,0 +1,29 @@
+<h1>Voicemail servers</h1>
+
+<table>
+  <tr>
+    <th>SIP host</th>
+    <th>SIP port</th>
+    <th>Management host</th>
+    <th>Management port</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @voicemail_servers.each do |voicemail_server| %>
+  <tr>
+    <td><%= voicemail_server.host %></td>
+    <td><%= voicemail_server.port %></td>
+    <td><%= voicemail_server.management_host %></td>
+    <td><%= voicemail_server.management_port %></td>
+    <td><%= link_to 'Show', voicemail_server %></td>
+    <td><%= link_to 'Edit', edit_voicemail_server_path(voicemail_server) %></td>
+    <td><%= link_to 'Destroy', voicemail_server, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Voicemail server', new_voicemail_server_path %>

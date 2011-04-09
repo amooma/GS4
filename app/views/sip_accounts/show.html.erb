@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>User:</b>
@@ -32,7 +31,7 @@
   <b>SIP server:</b>
   <%= @sip_account.sip_server_id ? "ID #{@sip_account.sip_server_id}" : "-" %>
   <% if @sip_account.sip_server %>
-    (<%= @sip_account.sip_server.name %>)
+    (<%= @sip_account.sip_server.host %>)
   <% end %>
 </p>
 
@@ -40,7 +39,15 @@
   <b>SIP proxy:</b>
   <%= @sip_account.sip_proxy_id ? "ID #{@sip_account.sip_proxy_id}" : "-" %>
   <% if @sip_account.sip_proxy %>
-    (<%= @sip_account.sip_proxy.name %>)
+    (<%= @sip_account.sip_proxy.host %>)
+  <% end %>
+</p>
+
+<p>
+  <b>Voicemail server:</b>
+  <%= @sip_account.voicemail_server_id ? "ID #{@sip_account.voicemail_server_id}" : "-" %>
+  <% if @sip_account.voicemail_server %>
+    (<%= @sip_account.voicemail_server.host %>)
   <% end %>
 </p>
 
