@@ -531,7 +531,7 @@ class SipAccount < ActiveRecord::Base
     else
       if ! connection_to_server_possible(server.management_host, server.management_port)
         errors.add( :base, "Failed to connect to SipProxy management server." )
-        return
+        return false
       end
       SipproxyDbalias.set_resource( "http://#{server.management_host}:#{server.management_port}/" )
       sipproxy_dbalias = SipproxyDbalias.create(
@@ -558,7 +558,7 @@ class SipAccount < ActiveRecord::Base
       SipproxyDbalias.set_resource( "http://#{server.management_host}:#{server.management_port}/" )
       if ! connection_to_server_possible(server.management_host, server.management_port)
         errors.add( :base, "Failed to connect to SipProxy management server." )
-        return
+        return false
       end
       update_dbalias = SipproxyDbalias.find( :first, :params => {'username'=> "#{proxy_server_authname}", 'alias_username' => "#{proxy_server_alias}"} )
       case update_dbalias
