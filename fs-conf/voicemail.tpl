@@ -2,7 +2,7 @@ From: "${voicemail_caller_id_name}" <${voicemail_caller_id_number}@${voicemail_d
 To: <${voicemail_email}>
 Subject: Voicemail from "${voicemail_caller_id_name}" <${voicemail_caller_id_number}> ${voicemail_message_len}
 X-Priority: ${voicemail_priority}
-X-Mailer: FreeSWITCH
+X-Mailer: FreeSwitch
 
 Content-Type: multipart/alternative; 
 	boundary="000XXX000"

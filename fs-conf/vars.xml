@@ -13,7 +13,7 @@
 	This setting is what sets the default domain FreeSwitch
 	will use if all else fails.
 	
-	FreeSWICH will default to $${local_ip_v4} unless changed.
+	FreeSwitch will default to $${local_ip_v4} unless changed.
 	Changing this setting does affect the SIP authentication.
 	Please review conf/directory/default.xml for more
 	information on this topic.

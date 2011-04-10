@@ -19,7 +19,7 @@
 		digit-len="4"
 	>
 		<!-- The following are the definitions for the digits the user dials -->
-		<!-- Digit 1 transfer caller to the public FreeSWITCH conference -->
+		<!-- Digit 1 transfer caller to the public FreeSwitch conference -->
 		<entry digits="1" action="menu-exec-app" param="bridge sofia/$${domain}/888@conference.freeswitch.org" />
 		<entry digits="2" action="menu-exec-app" param="transfer 9996 XML default" />    <!-- FS echo -->
 		<entry digits="3" action="menu-exec-app" param="transfer 9999 XML default" />    <!-- MOH -->
