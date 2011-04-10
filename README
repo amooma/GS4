@@ -4,5 +4,5 @@ Configuration of FreeSwitch for Gemeinschaft4.
 
 cd /opt/freeswitch/
 mv conf conf-orig
-ln -sn /usr/src/gs-freeswitch-conf/gs-conf conf
+ln -sn /usr/src/gs-freeswitch-conf/fs-conf conf
 
