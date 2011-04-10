@@ -1,0 +1,8 @@
+Configuration of FreeSwitch for Gemeinschaft4.
+
+"fs-conf" is the "conf" directory for FreeSwitch.
+
+cd /opt/freeswitch/
+mv conf conf-orig
+ln -sn /usr/src/gs-freeswitch-conf/gs-conf conf
+
