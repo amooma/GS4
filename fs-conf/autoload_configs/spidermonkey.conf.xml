@@ -4,5 +4,6 @@
 		<load module="mod_spidermonkey_core_db" />
 		<load module="mod_spidermonkey_socket" />
 		<!--<load module="mod_spidermonkey_odbc" />-->
+		<load module="mod_spidermonkey_curl" />
 	</modules>
 </configuration>
