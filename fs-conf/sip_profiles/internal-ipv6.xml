@@ -71,16 +71,17 @@
 		
 		<!-- this lets anything register -->
 		<!-- comment the next line and uncomment one or both of the other 2 lines for call authentication -->
-		<!--<param name="accept-blind-reg" value="true" />-->
+		<param name="accept-blind-reg" value="false" />
 		
 		<!-- accept any authentication without actually checking (not a good feature for most people) -->
-		<!--<param name="accept-blind-auth" value="true" />-->
+		<param name="accept-blind-auth" value="false" />
 		
 		<!-- suppress CNG on this profile or per call with the 'suppress_cng' variable -->
 		<!--<param name="suppress-cng" value="true" />-->
 		
 		<!-- TTL for nonce in sip auth -->
 		<param name="nonce-ttl" value="60" />
+		
 		<!-- Uncomment if you want to force the outbound leg of a bridge to only offer the codec 
 		that the originator is using -->
 		<!--<param name="disable-transcoding" value="true" />-->
@@ -111,7 +112,7 @@
 		<param name="force-register-db-domain" value="$${domain}" />
 		<!-- disable register and transfer which may be undesirable in a public switch -->
 		<!--<param name="disable-transfer" value="true" />-->
-		<!--<param name="disable-register" value="true" />-->
+		<param name="disable-register" value="false" />
 		<!--<param name="enable-3pcc" value="true" />-->
 		<!-- use stun when specified (default is true) -->
 		<!--<param name="stun-enabled" value="true" />-->
