@@ -1,6 +1,7 @@
 <configuration name="xml_curl.conf" description="cURL XML Gateway">
 	<bindings>
-		<binding name="example">
+		
+		<!--<binding name="example">-->
 			<!--
 			The url to a gateway cgi that can generate xml similar to
 		 	what's in this file only on-the-fly (leave it commented if you dont
@@ -44,6 +45,14 @@
 			
 			<!-- one or more of these imply you want to pick the exact variables that are transmitted -->
 			<!--<param name="enable-post-var" value="Unique-ID" />-->
+		<!--</binding>-->
+		
+		<binding name="our users directory">
+			<param name="gateway-url" value="http://127.0.0.1:3000/freeswitch-directory-entries/search.xml" bindings="directory" />
+			<!-- FIXME Use SSL when implemented by the remote server. Maybe via Stunnel. -->
+			<param name="disable-100-continue" value="true" />
+			<param name="timeout" value="10" />
 		</binding>
+		
 	</bindings>
 </configuration>

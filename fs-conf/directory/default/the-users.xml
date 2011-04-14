@@ -1,5 +1,6 @@
 <include>
 	
+	<!--
 	<user id="10">
 		<params>
 			<param name="password" value="123" />
@@ -16,73 +17,6 @@
 			<variable name="callgroup" value="users" />
 		</variables>
 	</user>
-	
-	<user id="11">
-		<params>
-			<param name="password" value="123" />
-			<param name="vm-password" value="123" />
-		</params>
-		<variables>
-			<variable name="accountcode" value="11" />
-			<variable name="effective_caller_id_number" value="11" />
-			<variable name="effective_caller_id_name" value="User 11" />
-			<variable name="user_context" value="default" />
-			<variable name="toll_allow" value="domestic,international,local" />
-			<variable name="outbound_caller_id_name" value="$${outbound_caller_name}" />
-			<variable name="outbound_caller_id_number" value="$${outbound_caller_id}" />
-			<variable name="callgroup" value="users" />
-		</variables>
-	</user>
-	
-	<user id="12">
-		<params>
-			<param name="password" value="123" />
-			<param name="vm-password" value="123" />
-		</params>
-		<variables>
-			<variable name="accountcode" value="12" />
-			<variable name="effective_caller_id_number" value="12" />
-			<variable name="effective_caller_id_name" value="User 12" />
-			<variable name="user_context" value="default" />
-			<variable name="toll_allow" value="domestic,international,local" />
-			<variable name="outbound_caller_id_name" value="$${outbound_caller_name}" />
-			<variable name="outbound_caller_id_number" value="$${outbound_caller_id}" />
-			<variable name="callgroup" value="users" />
-		</variables>
-	</user>
-	
-	<user id="13">
-		<params>
-			<param name="password" value="123" />
-			<param name="vm-password" value="123" />
-		</params>
-		<variables>
-			<variable name="accountcode" value="13" />
-			<variable name="effective_caller_id_number" value="13" />
-			<variable name="effective_caller_id_name" value="User 13" />
-			<variable name="user_context" value="default" />
-			<variable name="toll_allow" value="domestic,international,local" />
-			<variable name="outbound_caller_id_name" value="$${outbound_caller_name}" />
-			<variable name="outbound_caller_id_number" value="$${outbound_caller_id}" />
-			<variable name="callgroup" value="users" />
-		</variables>
-	</user>
-	
-	<user id="14">
-		<params>
-			<param name="password" value="123" />
-			<param name="vm-password" value="123" />
-		</params>
-		<variables>
-			<variable name="accountcode" value="14" />
-			<variable name="effective_caller_id_number" value="14" />
-			<variable name="effective_caller_id_name" value="User 14" />
-			<variable name="user_context" value="default" />
-			<variable name="toll_allow" value="domestic,international,local" />
-			<variable name="outbound_caller_id_name" value="$${outbound_caller_name}" />
-			<variable name="outbound_caller_id_number" value="$${outbound_caller_id}" />
-			<variable name="callgroup" value="users" />
-		</variables>
-	</user>
+	-->
 	
 </include>
