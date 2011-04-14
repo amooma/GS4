@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <document type="freeswitch/xml">
 	<section name="directory">
-		<% domain = @sip_account.sip_server ? @sip_account.sip_server.host : '' %>
+		<% domain = @sip_account.sip_server ? @sip_account.sip_server.host.to_s : '' %>
 		<domain name="<%= domain %>">
 			<users>
 				<user id="<%= @sip_account.auth_name %>" <%=
@@ -16,13 +16,18 @@
 					<params>
 						<param name="dial-string" value="${sofia_contact(<%= @sip_account.auth_name %>@<%= domain %>)}" />
 						<param name="a1-hash" value="<%= Digest::MD5.hexdigest(
-							"#{@sip_account.auth_name}:#{domain}:#{@sip_account.password}"
+							@sip_account.auth_name.to_s + ":" +
+							domain + ":" +
+							@sip_account.password.to_s
 						) %>" />
-						<param name="vm-password" value="<%=
-							(! @sip_account.voicemail_pin.blank?) \
-							? @sip_account.voicemail_pin \
-							: rand(999999999).to_s.rjust(9,'0') + rand(999999999).to_s.rjust(9,'0')
-						%>" />
+						<param name="vm-a1-hash" value="<%= Digest::MD5.hexdigest(
+							@sip_account.auth_name.to_s + ":" +
+							domain + ":" +
+							( (! @sip_account.voicemail_pin.blank?) \
+								? @sip_account.voicemail_pin.to_s \
+								: rand(999999999).to_s.rjust(9,'0') + rand(999999999).to_s.rjust(9,'0')
+							)
+						) %>" />
 					</params>
 					<variables>
 						<variable name="accountcode" value="<%= @sip_account.auth_name %>" />
