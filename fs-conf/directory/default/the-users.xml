@@ -17,7 +17,6 @@
 			<variable name="callgroup" value="users" />
 		</variables>
 	</user>
-	-->
 	
 	<user id="11">
 		<params>
@@ -35,5 +34,6 @@
 			<variable name="callgroup" value="users" />
 		</variables>
 	</user>
+	-->
 	
 </include>
