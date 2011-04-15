@@ -233,6 +233,9 @@ try {
 						break;
 				}
 			}
+			if (i == 0) {
+				throw new Error( "Got 0 actions!" );
+			}
 		},
 	};
 	
@@ -250,11 +253,12 @@ try {
 		var num_requests = 0;
 		while (session.ready()) {
 			++num_requests;
-			log( LOG_INFO, "Dialplan actions, iteration "+ num_requests.toString() +" ..." );
-			DialplanService.process_actions();
 			if (num_requests > 100) {
 				throw new Error( "Too many dialplan requests!" );
 			}
+			log( LOG_INFO, "Dialplan actions, iteration "+ num_requests.toString() +" ..." );
+			DialplanService.process_actions();
+			session.execute( 'sleep', '500' );  // just to make sure the iterations are not too fast
 		}
 		log( LOG_INFO, "Done." );
 	}
