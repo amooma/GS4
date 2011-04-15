@@ -3,6 +3,8 @@
 	<section name="directory">
 		<% domain = @sip_account.sip_server ? @sip_account.sip_server.host.to_s : '' %>
 		<domain name="<%= domain %>">
+			<groups>
+			<group name="default">
 			<users>
 				<user id="<%= @sip_account.auth_name %>" <%=
 					if ! @sip_account.phone_number.blank?
@@ -41,6 +43,8 @@
 					</variables>
 				</user>
 			</users>
+			</group>
+			</groups>
 		</domain>
 	</section>
 </document>
