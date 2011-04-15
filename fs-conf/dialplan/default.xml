@@ -27,5 +27,23 @@ will build the domains ACL using this value.
 		-->
 		<X-PRE-PROCESS cmd="include" data="default/*.xml" />
 		
+		<!--
+		<extension name="gs_main">
+			<condition field="destination_number" expression="^.*$">
+				<action application="socket" data="127.0.0.1:8084 async full" />
+				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" /><!- - 503 Service Unavailable - ->
+			</condition>
+		</extension>
+		-->
+		
+		<extension name="gs_main">
+			<condition field="${module_exists(mod_spidermonkey)}" expression="true" />
+			<condition field="destination_number" expression="^.*$">
+				<action application="javascript" data="./GS.js" />
+				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" /><!-- 503 Service Unavailable -->
+			</condition>
+		</extension>
+		
+		
 	</context>
 </include>
