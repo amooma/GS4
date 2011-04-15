@@ -27,6 +27,12 @@ Gemeinschaft4::Application.routes.draw do
 		:action     => 'search',
 		:format     => :'xml'
 	
+	match '/freeswitch-call-processing/actions',
+		:via        => [ :get, :post ],
+		:controller => :freeswitch_call_processing,
+		:action     => 'actions',
+		:format     => :'xml'
+	
 	namespace :admin do
 		resources :users
 		resources :setup
