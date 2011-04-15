@@ -12,6 +12,10 @@ class FreeswitchCallProcessingController < ApplicationController
 			logger.info( "   #{k.ljust(36)} = #{v}" )
 		}
 		
+		# For FreeSwitch dialplan applications see
+		# http://wiki.freeswitch.org/wiki/Mod_dptools
+		# http://wiki.freeswitch.org/wiki/Category:Dptools
+		
 		@dp_actions = []
 		
 		#FIXME Just an example ...
