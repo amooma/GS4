@@ -7,14 +7,19 @@ class FreeswitchCallProcessingController < ApplicationController
 	# POST /freeswitch-call-processing/actions.xml
 	def actions()
 	(
-		logger.info(_bold( "[FS] Call processing request ..." ))
+		call_src_sip_username     = _arg( 'Caller-Username' )
+		call_src_cid_userinfo     = _arg( 'Caller-Caller-ID-Number' )
+		call_src_cid_displayname  = _arg( 'Caller-Caller-ID-Name' )
+		call_dst_sip_userinfo     = _arg( 'Caller-Destination-Number' )
+		
+		logger.info(_bold( "[FS] Call-proc. request, acct. #{call_src_sip_username.inspect} as #{call_src_cid_userinfo.inspect} (#{call_src_cid_displayname.inspect}) -> #{call_dst_sip_userinfo.inspect} ..." ))
 		_args.each { |k,v|
 			case v
 				when String
-					logger.info( "   #{k.ljust(36)} = #{v.inspect}" )
+					logger.debug( "   #{k.ljust(36)} = #{v.inspect}" )
 				#when Hash
 				#	v.each { |k1,v1|
-				#		logger.info( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
+				#		logger.debug( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
 				#	}
 			end
 		}
@@ -23,24 +28,38 @@ class FreeswitchCallProcessingController < ApplicationController
 		# http://wiki.freeswitch.org/wiki/Mod_dptools
 		# http://wiki.freeswitch.org/wiki/Category:Dptools
 		
-		@dp_actions = []
-		
-		#FIXME Just an example ...
-		@dp_actions << { :app => :set       , :data => 'effective_caller_id_number=1234567' }
-		@dp_actions << { :app => :bridge    , :data => 'user/12' }
-		@dp_actions << { :app => :answer    , :data => '' }
-		@dp_actions << { :app => :sleep     , :data => 1000 }
-		@dp_actions << { :app => :playback  , :data => 'tone_stream://%(500, 0, 640)' }
-		@dp_actions << { :app => :set       , :data => 'voicemail_authorized=${sip_authorized}' }
-		@dp_actions << { :app => :voicemail , :data => 'default $${domain} ${dialed_ext}' }
-		@dp_actions << { :app => :hangup    , :data => '' }
-		#@dp_actions << { :app => :_continue }
-		
 		# Note: If you want to do multiple iterations (requests) you
 		# have to set channel variables to keep track of "where you
 		# are" i.e. what you have done already.
 		# And you have to explicitly send "_continue" as the last
 		# application.
+		
+		@dp_actions = []
+		
+		if ! call_dst_sip_userinfo.blank?
+			case _arg( 'Answer-State' )
+				when 'ringing'
+					@dp_actions << { :app => :respond   , :data => '404 Not Found' }  # or '400 Bad Request'? or '484 Address Incomplete'?
+				else
+					@dp_actions << { :app => :hangup    , :data => '' }
+			end
+		else
+			
+			call_dst_real_sip_username = call_dst_sip_userinfo  # un-alias ...
+			
+			#FIXME Just an example ...
+			@dp_actions << { :app => :set       , :data => 'effective_caller_id_number=1234567' }
+			@dp_actions << { :app => :bridge    , :data => "sofia/internal/#{call_dst_real_sip_username}" }
+			@dp_actions << { :app => :answer    , :data => '' }
+			@dp_actions << { :app => :sleep     , :data => 1000 }
+			@dp_actions << { :app => :playback  , :data => 'tone_stream://%(500, 0, 640)' }
+			@dp_actions << { :app => :set       , :data => 'voicemail_authorized=${sip_authorized}' }
+			@dp_actions << { :app => :voicemail , :data => "default $${domain} #{call_dst_real_sip_username}" }
+			@dp_actions << { :app => :hangup    , :data => '' }
+			#@dp_actions << { :app => :_continue }
+			
+		end
+		
 		
 		respond_to { |format|
 			format.xml {
