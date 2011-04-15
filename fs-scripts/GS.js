@@ -197,6 +197,8 @@ try {
 			}
 			
 			var i = 0;
+			var num_valid_actions = 0;
+			var ret_do_continue_iterations = false;
 			for each( var item in dialplan_actions_xml_obj.*) {
 				if (! item.name()) continue;  // text node
 				if (++i > 1000) {
@@ -222,20 +224,37 @@ try {
 						if (attr_appl == '') {
 							throw new Error( "Missing attribute \"application\" in <"+ tag_name +"> tag!" );
 						}
-						if (! session.execute( attr_appl, attr_data )) {
-							// Note: ok means that the application was found,
-							// not that it executed successfully.
-							throw new Error( "Dialplan application \""+ attr_appl +"\" not found!" );
+						switch (attr_appl) {
+							case '_continue':
+								// This is a safety precaution. We require an
+								// explicit <action application="_continue" />
+								// if the web service wants us to continue
+								// the processing iterations, so we avoid
+								// running an endless loop.
+								ret_do_continue_iterations = true;
+								break;
+							default:
+								if (! session.execute( attr_appl, attr_data )) {
+									// Note: ok means that the application was found,
+									// not that it executed successfully.
+									throw new Error( "Dialplan application \""+ attr_appl +"\" not found!" );
+								}
 						}
+						++num_valid_actions;
 						break;
 					default:
 						throw new Error( "Unknown element <"+ tag_name +">!" );
 						break;
 				}
 			}
-			if (i == 0) {
+			if (num_valid_actions == 0) {
 				throw new Error( "Got 0 actions!" );
 			}
+			log( LOG_INFO, (ret_do_continue_iterations
+				? 'Got "_continue" action.'
+				: 'Did not get "_continue" action.'
+			));
+			return ret_do_continue_iterations;
 		},
 	};
 	
@@ -257,7 +276,8 @@ try {
 				throw new Error( "Too many dialplan requests!" );
 			}
 			log( LOG_INFO, "Dialplan actions, iteration "+ num_requests.toString() +" ..." );
-			DialplanService.process_actions();
+			var do_continue_iterations = DialplanService.process_actions();
+			if (! do_continue_iterations) break;
 			session.execute( 'sleep', '500' );  // just to make sure the iterations are not too fast
 		}
 		log( LOG_INFO, "Done." );
