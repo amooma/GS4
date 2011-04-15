@@ -73,6 +73,16 @@ try {
 		var re = /^([a-zA-Z_\-1-9]+)\s*:\s*([^\n\r]*)/mg;
 		var match;
 		while (match = re.exec( channel_dump_str )) {
+			switch (match[1]) {
+				// Filter out the boring stuff. As we get the data
+				// by calling "uuid_dump" some values don't tell us
+				// much.
+				case 'Event-Calling-File':          // 'mod_commands.c'
+				case 'Event-Calling-Function':      // 'uuid_dump_function'
+				case 'Event-Calling-Line-Number':   // '3834'
+				case 'Caller-Dialplan':             // 'XML'
+					continue;
+			}
 			/*
 			try {
 				channel_info[ match[1] ] = decodeURIComponent( match[2] );
