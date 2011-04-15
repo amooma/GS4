@@ -177,12 +177,15 @@ try {
 		request_actions: function()
 		{
 			log( LOG_DEBUG, "Requesting dialplan actions via HTTP ..." );
-			var buffer_obj = { data: '' };
 			this._load_curl();
+			var query_data = Hash.to_query( get_channel_info() || {} );
+			log( LOG_DEBUG, "Query data is "+ (query_data.length) +" bytes." );
+			var buffer_obj = { data: '' };
+			var t = (new Date()).getTime();
 			this._curl.run(
 				// HTTP-method, URL,
 				'POST', this._url,
-				Hash.to_query( get_channel_info() || {} ),  // encoded-query-string
+				query_data,  // encoded-query-string
 				function ( string, arg ) {
 					// Note: We want the arg to be passed by reference,
 					// so it has to be an object instead of a scalar.
@@ -208,6 +211,16 @@ try {
 				5,              // timeout in seconds
 				'application/x-www-form-urlencoded'  // Content-Type
 			);
+			t = (new Date()).getTime() - t;
+			delete query_data;
+			if (t < 1000) {
+				log( LOG_INFO    , "Request to web service took "+ (t) +" ms." );
+			} else if (t < 2000) {
+				log( LOG_NOTICE  , "Request to web service took "+ (t) +" ms." );
+			} else {
+				log( LOG_WARNING , "Request to web service took "+ (t) +" ms." );
+			}
+			
 			if (buffer_obj.data.length == 0) {
 				throw new Error( "Did not receive any data." );
 			}
