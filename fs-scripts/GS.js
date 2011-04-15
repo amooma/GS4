@@ -70,28 +70,52 @@ try {
 			return false;
 		}
 		var chan_info = {};
+		//var chan_vars = {};
 		var re = /^([a-zA-Z_\-1-9]+)\s*:\s*([^\n\r]*)/mg;
+		var re_variable = /^variable_/;
 		var match;
 		while (match = re.exec( chan_dump_str )) {
-			switch (match[1]) {
+			var name = match[1];
+			switch (name) {
 				// Filter out the boring stuff. As we get the data
 				// by calling "uuid_dump" some values don't tell us
 				// much.
+				// Also saves some 127 bytes on the wire (out of
+				// about 3900, i.e. 3 %).
 				case 'Event-Calling-File':          // 'mod_commands.c'
 				case 'Event-Calling-Function':      // 'uuid_dump_function'
 				case 'Event-Calling-Line-Number':   // '3834'
 				case 'Caller-Dialplan':             // 'XML'
 					continue;
 			}
+			var val;
 			/*
 			try {
-				chan_info[ match[1] ] = decodeURIComponent( match[2] );
+				val = decodeURIComponent( match[2] );
 			} catch (e if e instanceof URIError) {
 				// decodeURIComponent() may complain about "malformed URI sequence".
 			}
 			*/
-			chan_info[ match[1] ] = unescape( match[2] );
+			val = unescape( match[2] );
+			/*
+			if (re_variable.test( name )) {
+				name = name.replace( re_variable, '' );
+				chan_vars[ name ] = val;
+			} else {
+				chan_info[ name ] = val;
+			}
+			*/
+			if (re_variable.test( name )) {
+				name = name.replace( re_variable, 'var_' );
+				// By replacing "variable_" by "var_" we save
+				// ("variable_".length - "var_".length) == 5 bytes
+				// on the wire per variable. There are at least 67
+				// vars, so we save 335 bytes (out of about 3900,
+				// i.e. 8.5 %).
+			}
+			chan_info[ name ] = val;
 		}
+		//chan_info['vars'] = chan_vars;
 		return chan_info;
 	}
 	
@@ -103,15 +127,31 @@ try {
 				return '';
 			}
 			var www_form_urlencoded = [];
-			for (prop in hash) {
-				if (hash.hasOwnProperty(prop)
-				&&  (typeof(hash[prop])) == 'string'
-				) {
-					www_form_urlencoded.push(
-						escape( prop )       .replace('%20','+') +
-						'='+
-						escape( hash[prop] ) .replace('%20','+')
-					);
+			for (var prop in hash) {
+				if (! hash.hasOwnProperty(prop)) continue;
+				switch (typeof(hash[prop])) {
+					case 'string':
+						www_form_urlencoded.push(
+							escape( prop         ).replace('%20','+') +
+							'='+
+							escape( hash[prop]   ).replace('%20','+')
+						);
+						break;
+					/*
+					case 'object':
+						var hash1 = hash[prop];
+						for (var prop1 in hash1) {
+							if (! hash1.hasOwnProperty(prop1)) continue;
+							www_form_urlencoded.push(
+								escape( prop         ).replace('%20','+') +
+								'[' +
+								escape( prop1        ).replace('%20','+') +
+								']=' +
+								escape( hash1[prop1] ).replace('%20','+')
+							);
+						}
+						break;
+					*/
 				}
 			}
 			return www_form_urlencoded.join('&');
