@@ -62,17 +62,17 @@ try {
 	
 	function get_channel_info()
 	{
-		var channel_dump_str = apiExecute( 'uuid_dump', session.uuid );
-		if (channel_dump_str.match( /^INVALID\s*COMMAND/i )) {
+		var chan_dump_str = apiExecute( 'uuid_dump', session.uuid );
+		if (chan_dump_str.match( /^INVALID\s*COMMAND/i )) {
 			return false;
 		}
-		if (channel_dump_str.match( /^-?ERR\s*No\s*Such\s*Channel/i )) {
+		if (chan_dump_str.match( /^-?ERR\s*No\s*Such\s*Channel/i )) {
 			return false;
 		}
-		var channel_info = {};
+		var chan_info = {};
 		var re = /^([a-zA-Z_\-1-9]+)\s*:\s*([^\n\r]*)/mg;
 		var match;
-		while (match = re.exec( channel_dump_str )) {
+		while (match = re.exec( chan_dump_str )) {
 			switch (match[1]) {
 				// Filter out the boring stuff. As we get the data
 				// by calling "uuid_dump" some values don't tell us
@@ -85,14 +85,14 @@ try {
 			}
 			/*
 			try {
-				channel_info[ match[1] ] = decodeURIComponent( match[2] );
+				chan_info[ match[1] ] = decodeURIComponent( match[2] );
 			} catch (e if e instanceof URIError) {
 				// decodeURIComponent() may complain about "malformed URI sequence".
 			}
 			*/
-			channel_info[ match[1] ] = unescape( match[2] );
+			chan_info[ match[1] ] = unescape( match[2] );
 		}
-		return channel_info;
+		return chan_info;
 	}
 	
 	var Hash = {
