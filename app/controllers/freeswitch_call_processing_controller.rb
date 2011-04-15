@@ -9,7 +9,14 @@ class FreeswitchCallProcessingController < ApplicationController
 	(
 		logger.info(_bold( "[FS] Call processing request ..." ))
 		_args.each { |k,v|
-			logger.info( "   #{k.ljust(36)} = #{v.inspect}" )
+			case v
+				when String
+					logger.info( "   #{k.ljust(36)} = #{v.inspect}" )
+				#when Hash
+				#	v.each { |k1,v1|
+				#		logger.info( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
+				#	}
+			end
 		}
 		
 		# For FreeSwitch dialplan applications see
