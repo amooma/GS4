@@ -9,7 +9,7 @@ class FreeswitchCallProcessingController < ApplicationController
 	(
 		logger.info(_bold( "[FS] Call processing request ..." ))
 		_args.each { |k,v|
-			logger.info( "   #{k.ljust(36)} = #{v}" )
+			logger.info( "   #{k.ljust(36)} = #{v.inspect}" )
 		}
 		
 		# For FreeSwitch dialplan applications see
@@ -28,6 +28,12 @@ class FreeswitchCallProcessingController < ApplicationController
 		@dp_actions << { :app => :voicemail , :data => 'default $${domain} ${dialed_ext}' }
 		@dp_actions << { :app => :hangup    , :data => '' }
 		#@dp_actions << { :app => :_continue }
+		
+		# Note: If you want to do multiple iterations (requests) you
+		# have to set channel variables to keep track of "where you
+		# are" i.e. what you have done already.
+		# And you have to explicitly send "_continue" as the last
+		# application.
 		
 		respond_to { |format|
 			format.xml {
