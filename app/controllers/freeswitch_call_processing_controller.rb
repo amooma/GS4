@@ -27,6 +27,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		@dp_actions << { :app => :set       , :data => 'voicemail_authorized=${sip_authorized}' }
 		@dp_actions << { :app => :voicemail , :data => 'default $${domain} ${dialed_ext}' }
 		@dp_actions << { :app => :hangup    , :data => '' }
+		#@dp_actions << { :app => :_continue }
 		
 		respond_to { |format|
 			format.xml {
