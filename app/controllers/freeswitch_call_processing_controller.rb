@@ -36,7 +36,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		@dp_actions = []
 		
-		if ! call_dst_sip_userinfo.blank?
+		if call_dst_sip_userinfo.blank?
 			case _arg( 'Answer-State' )
 				when 'ringing'
 					@dp_actions << { :app => :respond   , :data => '404 Not Found' }  # or '400 Bad Request'? or '484 Address Incomplete'?
