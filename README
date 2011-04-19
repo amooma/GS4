@@ -1,5 +1,30 @@
 Configuration of FreeSwitch for Gemeinschaft4.
 
+Basic documentation for this setup can be found here:
+http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc
+
+Please change domain and IP1-4 to your needs.
+
+If you want to test voicemail boxes, you have to create the boxes.
+
+directory/default
+
+101.xml
+
+<include>
+  <user id="101">
+    <params>
+      <param name="vm-password" value="1001"/>
+    </params>
+    <variables>
+      <variable name="accountcode" value="101"/>
+      <variable name="user_context" value="default"/>
+      <variable name="effective_caller_id_name" value="Extension 101"/>
+      <variable name="effective_caller_id_number" value="101"/>
+    </variables>
+  </user>
+</include>
+
 "fs-conf" is the "conf" directory for FreeSwitch.
 "fs-scripts" is the "scripts" directory for FreeSwitch.
 

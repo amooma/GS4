@@ -1,0 +1,11 @@
+<include>
+        <context name="public">
+
+		<extension name="from_kamailio">
+		      <condition field="network_addr" expression="^$${IP1}\.$${IP2}\.$${IP3}\.$${IP4}$" />
+		      <condition field="destination_number" expression="^(.+)$">
+		        <action application="transfer" data="$1 XML default"/>
+		      </condition>
+		    </extension>
+	</context>
+</include>

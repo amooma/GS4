@@ -25,7 +25,7 @@ will build the domains ACL using this value.
 		<!--
 		You can place files in the default directory to get included.
 		-->
-		<X-PRE-PROCESS cmd="include" data="default/*.xml" />
+		<!-- <X-PRE-PROCESS cmd="include" data="default/*.xml" /> -->
 		
 		<!--
 		<extension name="gs_main">
@@ -35,14 +35,41 @@ will build the domains ACL using this value.
 			</condition>
 		</extension>
 		-->
-		
+		<!--	
 		<extension name="gs_main">
 			<condition field="${module_exists(mod_spidermonkey)}" expression="true" />
 			<condition field="destination_number" expression="^.*$">
 				<action application="javascript" data="./GS.js" />
-				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" /><!-- 503 Service Unavailable -->
+				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" />
 			</condition>
 		</extension>
+		-->
+		<extension name="vbox">
+		      <condition field="destination_number" expression="^vb-(1[0-9][0-9])$">
+		            <action application="answer"/>
+		            <action application="voicemail" data="default ${domain_name} $1"/>
+		      </condition>
+		    </extension>
+		
+		    <extension name="vmenu">
+		      <condition field="destination_number" expression="^vm-(1[0-9][0-9])$">
+		            <action application="voicemail" data="check default ${domain_name} $1"/>
+		      </condition>
+		    </extension>
+		
+		    <extension name="kbridge">
+		      <condition field="destination_number" expression="^kb-(.+)$">
+		                  <action application="set" data="proxy_media=true"/>
+		                  <action application="set" data="call_timeout=50"/>
+		                  <action application="set" data="continue_on_fail=true"/>
+		                  <action application="set" data="hangup_after_bridge=true"/>
+		                  <action application="set" data="sip_invite_domain=$${IP1}.$${IP2}.$${IP3}.$${IP4}"/>
+		                  <action application="export" data="sip_contact_user=ufs"/>
+		                  <action application="bridge" data="sofia/$${domain}/$1@$${IP1}.$${IP2}.$${IP3}.$${IP4}"/>
+		                  <action application="answer"/>
+		                  <action application="voicemail" data="default ${domain_name} $1"/>
+		      </condition>
+		    </extension>
 		
 		
 	</context>

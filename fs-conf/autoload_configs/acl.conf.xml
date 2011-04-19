@@ -24,6 +24,7 @@
 		-->
 		<list name="domains" default="deny">
 			<node type="allow" domain="$${domain}" />
+		        <node type="allow" cidr="$${IP1}.$${IP2}.$${IP3}.$${IP4}/32"/>
 		</list>
 		
 	</network-lists>

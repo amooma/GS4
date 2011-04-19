@@ -22,7 +22,10 @@
 	<X-PRE-PROCESS cmd="set" data="domain_name=$${domain}" />
 	<X-PRE-PROCESS cmd="set" data="hold_music=local_stream://moh" />
 	<X-PRE-PROCESS cmd="set" data="use_profile=internal" />
-	
+	<X-PRE-PROCESS cmd="set" data="IP1=192"/>
+  	<X-PRE-PROCESS cmd="set" data="IP2=168"/>
+  	<X-PRE-PROCESS cmd="set" data="IP3=110"/>
+  	<X-PRE-PROCESS cmd="set" data="IP4=23"/>	
 	<!--
 	Enable ZRTP globally, you can override this on a per channel basis.
 	http://wiki.freeswitch.org/wiki/ZRTP (on how to enable zrtp)
@@ -201,8 +204,8 @@
 	
 	<!-- Internal SIP Profile -->
 	<X-PRE-PROCESS cmd="set" data="internal_auth_calls=true" />
-	<X-PRE-PROCESS cmd="set" data="internal_sip_port=15060" />
-	<X-PRE-PROCESS cmd="set" data="internal_tls_port=15061" />
+	<X-PRE-PROCESS cmd="set" data="internal_sip_port=5090" />
+	<X-PRE-PROCESS cmd="set" data="internal_tls_port=5092" />
 	<X-PRE-PROCESS cmd="set" data="internal_ssl_enable=false" />
 	<X-PRE-PROCESS cmd="set" data="internal_ssl_dir=$${base_dir}/conf/ssl" />
 	
