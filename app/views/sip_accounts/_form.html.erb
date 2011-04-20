@@ -60,10 +60,10 @@
     <%= f.text_field :voicemail_pin %>
   </div>
   <div class="field">
-    <%= f.label :sip_phone_id, "SIP phone" %><br />
-    <%= f.select( :sip_phone_id,
+    <%= f.label :phone_id, "SIP phone" %><br />
+    <%= f.select( :phone_id,
       @sip_phones.collect {|r| [ "Prov. server #{r.provisioning_server_id || '?'} phone #{r.phone_id || '?'} (ID #{r.id})", r.id ] },
-      { :include_blank => true, :selected => @sip_account.sip_phone_id }
+      { :include_blank => true, :selected => @sip_account.phone_id }
     ) %>
   </div>
   <br />
