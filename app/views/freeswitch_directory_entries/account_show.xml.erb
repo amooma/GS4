@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document type="freeswitch/xml">
+	<section name="directory">
+		<% domain = @sip_account.sip_server ? @sip_account.sip_server.host.to_s : '' %>
+		<domain name="<%= domain %>">
+			<groups>
+				<group name="default">
+					<users>
+						<user id="<%= @sip_account.auth_name %>" <%=
+							if ! @sip_account.phone_number.blank?
+								raw 'number-alias="' + @sip_account.phone_number.to_s + '"'
+							elsif @sip_account.extension && ! @sip_account.extension.extension.blank?
+								raw 'number-alias="' + @sip_account.extension.extension.to_s + '"'
+							else
+								''
+							end
+						%>>
+							<params>
+								<param name="dial-string" value="${sofia_contact(<%= @sip_account.auth_name %>@<%= domain %>)}" />
+								<param name="a1-hash" value="<%= Digest::MD5.hexdigest(
+									@sip_account.auth_name.to_s + ":" +
+									domain + ":" +
+									@sip_account.password.to_s
+								) %>" />
+								<param name="vm-a1-hash" value="<%= Digest::MD5.hexdigest(
+									@sip_account.auth_name.to_s + ":" +
+									domain + ":" +
+									( (! @sip_account.voicemail_pin.blank?) \
+										? @sip_account.voicemail_pin.to_s \
+										: rand(999999999).to_s.rjust(9,'0') + rand(999999999).to_s.rjust(9,'0')
+									)
+								) %>" />
+							</params>
+							<variables>
+								<variable name="accountcode" value="<%= @sip_account.auth_name %>" />
+								<variable name="effective_caller_id_number" value="<%= @sip_account.user ? @sip_account.user.username : @sip_account.auth_name %>" />
+								<variable name="effective_caller_id_name" value="<%= @sip_account.user ? "#{@sip_account.user.sn}, #{@sip_account.user.gn}" : '' %>" />
+								<variable name="outbound_caller_id_number" value="<%= @sip_account.user ? @sip_account.user.username : @sip_account.auth_name %>" />
+								<variable name="outbound_caller_id_name" value="<%= @sip_account.user ? "#{@sip_account.user.sn}, #{@sip_account.user.gn}" : '' %>" />
+								<variable name="user_context" value="default" />
+								<variable name="toll_allow" value="domestic,international,local" />
+								<variable name="callgroup" value="users" />
+							</variables>
+						</user>
+					</users>
+				</group>
+			</groups>
+		</domain>
+	</section>
+</document>

@@ -16,8 +16,22 @@ Gemeinschaft4::Application.routes.draw do
 	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :voicemail_servers
 	resources :extensions
+	
 	resources :admin                , :only => [ :index ]
+	
 	resources :kamailio             , :only => [ :index ], :format => 'txt'
+	
+	match '/freeswitch-directory-entries/search',
+		:via        => [ :get, :post ],
+		:controller => :freeswitch_directory_entries,
+		:action     => 'search',
+		:format     => :'xml'
+	
+	match '/freeswitch-call-processing/actions',
+		:via        => [ :get, :post ],
+		:controller => :freeswitch_call_processing,
+		:action     => 'actions',
+		:format     => :'xml'
 	
 	namespace :admin do
 		resources :users
