@@ -7,8 +7,8 @@ Configuration of FreeSwitch for Gemeinschaft4.
 cd /opt/freeswitch/
 
 mv conf conf-orig
-ln -sn /usr/src/gs-freeswitch-conf/fs-conf conf
+ln -sn /usr/src/Gemeinschaft4/misc/freeswitch/fs-conf conf
 
 mv scripts scripts-orig
-ln -sn /usr/src/gs-freeswitch-scripts/fs-scripts scripts
+ln -sn /usr/src/Gemeinschaft4/misc/freeswitch/fs-scripts scripts
 
