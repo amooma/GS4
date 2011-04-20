@@ -24,12 +24,14 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">2011-03-01 18:11:09 +0100</dd>
+			<dd class="modified-date">2011-04-09 19:00:19 +0200</dd>
 
 			
 			<dt class="requires">Requires</dt>
 			<dd class="requires">
 				<ul>
+				
+					<li>connection_checks</li>
 				
 				</ul>
 			</dd>
@@ -43,27 +45,7 @@
 		
 		<div class="description">
 			<h2>Description</h2>
-			<h2>Schema Information</h2>
-<p>
-Schema version: 20110209212927
-</p>
-<p>
-Table name: sip_accounts
-</p>
-<pre>
- id            :integer         not null, primary key
- user_id       :integer
- auth_name     :string(255)
- password      :string(255)
- realm         :string(255)
- phone_number  :integer
- sip_server_id :integer
- sip_proxy_id  :integer
- created_at    :datetime
- updated_at    :datetime
- extension_id  :integer
- sip_phone_id  :integer</pre>
-
+			
 		</div>
 		
 	</div>

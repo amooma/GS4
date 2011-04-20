@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: PhoneModel</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./app/models/phone_model_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/models/phone_model.rb">app/models/phone_model.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">ActiveRecord::Base</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-find_by_mac_address">::find_by_mac_address</a></li>
+					
+					<li><a href="#method-i-does_a_manufacturer_to_this_phone_model_exist">#does_a_manufacturer_to_this_phone_model_exist</a></li>
+					
+					<li><a href="#method-i-random_new_password">#random_new_password</a></li>
+					
+					<li><a href="#method-i-validate_max_number_of_sip_accounts_for_an_existing_phone_model">#validate_max_number_of_sip_accounts_for_an_existing_phone_model</a></li>
+					
+					<li><a href="#method-i-validate_number_of_keys_for_an_existing_phone_model">#validate_number_of_keys_for_an_existing_phone_model</a></li>
+					
+					<li><a href="#method-i-validate_url">#validate_url</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Admin.html">Admin</a></li>
+				
+					<li><a href="./Admin/SetupController.html">Admin::SetupController</a></li>
+				
+					<li><a href="./Admin/SetupHelper.html">Admin::SetupHelper</a></li>
+				
+					<li><a href="./Admin/UserHelper.html">Admin::UserHelper</a></li>
+				
+					<li><a href="./Admin/UsersController.html">Admin::UsersController</a></li>
+				
+					<li><a href="./AServer.html">AServer</a></li>
+				
+					<li><a href="./AdminController.html">AdminController</a></li>
+				
+					<li><a href="./AdminHelper.html">AdminHelper</a></li>
+				
+					<li><a href="./ApplicationController.html">ApplicationController</a></li>
+				
+					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
+				
+					<li><a href="./Authentication.html">Authentication</a></li>
+				
+					<li><a href="./AuthenticationsController.html">AuthenticationsController</a></li>
+				
+					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
+				
+					<li><a href="./CantinaCodec.html">CantinaCodec</a></li>
+				
+					<li><a href="./CantinaManufacturer.html">CantinaManufacturer</a></li>
+				
+					<li><a href="./CantinaOui.html">CantinaOui</a></li>
+				
+					<li><a href="./CantinaPhone.html">CantinaPhone</a></li>
+				
+					<li><a href="./CantinaPhoneKey.html">CantinaPhoneKey</a></li>
+				
+					<li><a href="./CantinaPhoneKeyFunctionDefinition.html">CantinaPhoneKeyFunctionDefinition</a></li>
+				
+					<li><a href="./CantinaPhoneKeyToFunctionMapping.html">CantinaPhoneKeyToFunctionMapping</a></li>
+				
+					<li><a href="./CantinaPhoneModel.html">CantinaPhoneModel</a></li>
+				
+					<li><a href="./CantinaPhoneModelCodec.html">CantinaPhoneModelCodec</a></li>
+				
+					<li><a href="./CantinaPhoneModelKey.html">CantinaPhoneModelKey</a></li>
+				
+					<li><a href="./CantinaPhoneModelMacAddress.html">CantinaPhoneModelMacAddress</a></li>
+				
+					<li><a href="./CantinaProvisioningLogEntry.html">CantinaProvisioningLogEntry</a></li>
+				
+					<li><a href="./CantinaRebootRequest.html">CantinaRebootRequest</a></li>
+				
+					<li><a href="./CantinaSipAccount.html">CantinaSipAccount</a></li>
+				
+					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
+				
+					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
+				
+					<li><a href="./Extension.html">Extension</a></li>
+				
+					<li><a href="./ExtensionsController.html">ExtensionsController</a></li>
+				
+					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
+				
+					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
+				
+					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Oui.html">Oui</a></li>
+				
+					<li><a href="./PagesHelper.html">PagesHelper</a></li>
+				
+					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneKey.html">PhoneKey</a></li>
+				
+					<li><a href="./PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a></li>
+				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
+					<li><a href="./PhoneModel.html">PhoneModel</a></li>
+				
+					<li><a href="./PhoneModelCodec.html">PhoneModelCodec</a></li>
+				
+					<li><a href="./PhoneModelKey.html">PhoneModelKey</a></li>
+				
+					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
+				
+					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
+				
+					<li><a href="./ProvisioningServersController.html">ProvisioningServersController</a></li>
+				
+					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
+				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
+					<li><a href="./SipAccount.html">SipAccount</a></li>
+				
+					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
+				
+					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
+				
+					<li><a href="./SipPhone.html">SipPhone</a></li>
+				
+					<li><a href="./SipPhonesController.html">SipPhonesController</a></li>
+				
+					<li><a href="./SipPhonesHelper.html">SipPhonesHelper</a></li>
+				
+					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
+				
+					<li><a href="./SipProxiesHelper.html">SipProxiesHelper</a></li>
+				
+					<li><a href="./SipProxy.html">SipProxy</a></li>
+				
+					<li><a href="./SipServer.html">SipServer</a></li>
+				
+					<li><a href="./SipServersController.html">SipServersController</a></li>
+				
+					<li><a href="./SipServersHelper.html">SipServersHelper</a></li>
+				
+					<li><a href="./SipproxyDbalias.html">SipproxyDbalias</a></li>
+				
+					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
+				
+					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
+				
+					<li><a href="./VoicemailServersController.html">VoicemailServersController</a></li>
+				
+					<li><a href="./VoicemailServersHelper.html">VoicemailServersHelper</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">PhoneModel</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="find-by-mac-address-method" class="method-detail ">
+				<a name="method-c-find_by_mac_address"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">find_by_mac_address</span><span
+						class="method-args">(mac_address)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Find a phone_model by a given MAC Address
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="find-by-mac-address-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_by_mac_address</span>(<span class="ruby-identifier">mac_address</span>)
+48:     <span class="ruby-identifier">phone_model</span> = <span class="ruby-keyword kw">nil</span>
+49:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span>(
+50:       <span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">String</span> <span class="ruby-keyword kw">or</span> 
+51:       <span class="ruby-identifier">mac_address</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">or</span> 
+52:       <span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">12</span> <span class="ruby-keyword kw">or</span> 
+53:       <span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">7</span>
+54:       )
+55:       <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
+56:       (<span class="ruby-value">6</span> <span class="ruby-operator">..</span> <span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">length</span><span class="ruby-operator">|</span>
+57:         <span class="ruby-identifier">phone_model_mac_addresses</span> = <span class="ruby-constant">PhoneModelMacAddress</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:starts_with</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>[<span class="ruby-value">0</span>,<span class="ruby-identifier">length</span>])
+58:         <span class="ruby-identifier">phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">phone_model_mac_addresses</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">phone_model_id</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">phone_model_mac_addresses</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">nil?</span>
+59:         <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">nil?</span>
+60:       <span class="ruby-keyword kw">end</span>
+61:     <span class="ruby-keyword kw">end</span>
+62:     <span class="ruby-identifier">phone_model</span>
+63:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="random-new-password-method" class="method-detail ">
+				<a name="method-i-random_new_password"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">random_new_password</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Generate a random password for a <a href="Phone.html">Phone</a> of this <a
+href="PhoneModel.html">PhoneModel</a>
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="random-new-password-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 67</span>
+67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">random_new_password</span>
+68:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">random_password_length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+69:       <span class="ruby-keyword kw">nil</span>
+70:     <span class="ruby-keyword kw">else</span>
+71:       <span class="ruby-identifier">new_password</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+72:       <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span> <span class="ruby-operator">..</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">random_password_length</span>
+73:          <span class="ruby-identifier">new_password</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">random_password_contains_of</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/./</span>).<span class="ruby-identifier">sort_by</span> {<span class="ruby-identifier">rand</span>}.<span class="ruby-identifier">first</span>
+74:       <span class="ruby-keyword kw">end</span>
+75:       <span class="ruby-identifier">new_password</span>
+76:     <span class="ruby-keyword kw">end</span>
+77:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="does-a-manufacturer-to-this-phone-model-exist-method" class="method-detail ">
+				<a name="method-i-does_a_manufacturer_to_this_phone_model_exist"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">does_a_manufacturer_to_this_phone_model_exist</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validates if the phone model has a manufacturer.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="does-a-manufacturer-to-this-phone-model-exist-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 82</span>
+82:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">does_a_manufacturer_to_this_phone_model_exist</span>
+83:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">manufacturer_id</span>)
+84:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:manufacturer_id</span>, <span class="ruby-node">&quot;There is no Manufacturer with the given id #{self.manufacturer_id}.&quot;</span>)
+85:     <span class="ruby-keyword kw">end</span>      
+86:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="validate-max-number-of-sip-accounts-for-an-existing-phone-model-method" class="method-detail ">
+				<a name="method-i-validate_max_number_of_sip_accounts_for_an_existing_phone_model"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">validate_max_number_of_sip_accounts_for_an_existing_phone_model</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validates the number of sip_accounts on a phone_model If you change the
+number of maximum sip_accounts on an already existing model the system
+checks if there are any phones with  more than that in the system.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="validate-max-number-of-sip-accounts-for-an-existing-phone-model-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 111</span>
+111:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_max_number_of_sip_accounts_for_an_existing_phone_model</span>
+112:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_record?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">changed_attributes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">'max_number_of_sip_accounts'</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">max_number_of_sip_accounts</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">max_number_of_sip_accounts</span>
+113:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phones</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">count</span>}.<span class="ruby-identifier">max</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">max_number_of_sip_accounts</span>
+114:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:max_number_of_sip_accounts</span>, <span class="ruby-node">&quot;There are already phones with more than #{self.max_number_of_sip_accounts} sip_accounts in the database. Delete sip_accounts first before reducing max_number_of_sip_accounts.&quot;</span> )
+115:       <span class="ruby-keyword kw">end</span>
+116:     <span class="ruby-keyword kw">end</span>
+117:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="validate-number-of-keys-for-an-existing-phone-model-method" class="method-detail ">
+				<a name="method-i-validate_number_of_keys_for_an_existing_phone_model"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">validate_number_of_keys_for_an_existing_phone_model</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validates the number of number_of_keys on a phone_model If you change the
+number number_of_keys on an already existing model the system checks if
+there are any phones with  more than that in the system.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="validate-number-of-keys-for-an-existing-phone-model-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 123</span>
+123:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_number_of_keys_for_an_existing_phone_model</span>
+124:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_record?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">changed_attributes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">'number_of_keys'</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">number_of_keys</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">number_of_keys</span>
+125:       <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phones</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>}.<span class="ruby-identifier">flatten</span>
+126:       <span class="ruby-identifier">number_of_used_keys</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">sip_account</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone_keys</span>}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_key</span>.<span class="ruby-identifier">phone_model_key_id</span>}.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">count</span>
+127:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">number_of_used_keys</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">number_of_keys</span>
+128:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:number_of_keys</span>, <span class="ruby-node">&quot;There are already phones with more than #{self.number_of_keys} phone_keys in the database. Delete phone_keys first before reducing number_of_keys.&quot;</span> )
+129:       <span class="ruby-keyword kw">end</span>
+130:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">number_of_keys</span>
+131:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:number_of_keys</span>, <span class="ruby-node">&quot;There are already more than #{self.number_of_keys} phone_model_keys in the database. Delete phone_model_keys first before reducing number_of_keys.&quot;</span> )
+132:       <span class="ruby-keyword kw">end</span>
+133:     <span class="ruby-keyword kw">end</span>
+134:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="validate-url-method" class="method-detail ">
+				<a name="method-i-validate_url"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">validate_url</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validates the URL.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="validate-url-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 89</span>
+ 89:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_url</span>()
+ 90:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">blank?</span>
+ 91:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
+ 92:       <span class="ruby-keyword kw">begin</span>
+ 93:         <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url</span> )
+ 94:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">absolute?</span>
+ 95:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (has to have a scheme)&quot;</span> )
+ 96:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hierarchical?</span>
+ 97:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (not hierarchical)&quot;</span> )
+ 98:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span>( <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPS</span> ) )
+ 99:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (must have http or https scheme)&quot;</span> )
+100:         <span class="ruby-keyword kw">end</span>
+101:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+102:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid&quot;</span> )
+103:       <span class="ruby-keyword kw">end</span>
+104:     <span class="ruby-keyword kw">end</span>
+105:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
