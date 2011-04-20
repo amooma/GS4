@@ -6,8 +6,10 @@ log/*.log
 tmp/**/*
 .project
 *.komodoproject
+/.komodotools
 .tmp*~
 ERD.pdf
 vendor/cache/*.gem
 .settings/*
 .idea/*
+
