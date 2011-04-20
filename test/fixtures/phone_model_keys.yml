@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  phone_model_id: 1
+  position: 1
+
+two:
+  name: MyString
+  phone_model_id: 1
+  position: 1

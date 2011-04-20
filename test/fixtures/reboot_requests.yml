@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_id: 1
+  start: 2011-04-20 11:30:53
+  end: 2011-04-20 11:30:53
+  successful: false
+
+two:
+  phone_id: 1
+  start: 2011-04-20 11:30:53
+  end: 2011-04-20 11:30:53
+  successful: false

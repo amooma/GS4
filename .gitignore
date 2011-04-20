@@ -9,4 +9,5 @@ tmp/**/*
 .tmp*~
 ERD.pdf
 vendor/cache/*.gem
-
+.settings/*
+.idea/*

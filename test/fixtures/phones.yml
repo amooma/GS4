@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  mac_address: MyString
+  phone_model_id: 1
+  ip_address: MyString
+  last_ip_address: MyString
+  http_user: MyString
+  http_password: MyString
+
+two:
+  mac_address: MyString
+  phone_model_id: 1
+  ip_address: MyString
+  last_ip_address: MyString
+  http_user: MyString
+  http_password: MyString

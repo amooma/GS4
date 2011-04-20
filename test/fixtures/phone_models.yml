@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  url: MyString
+  manufacturer_id: 1
+  max_number_of_sip_accounts: 1
+  number_of_keys: 1
+  default_http_user: MyString
+  default_http_password: MyString
+  http_port: 1
+  reboot_request_path: MyString
+  ssl: false
+  http_request_timeout: 1
+  random_password_length: 1
+  random_password_contains_of: MyString
+
+two:
+  name: MyString
+  url: MyString
+  manufacturer_id: 1
+  max_number_of_sip_accounts: 1
+  number_of_keys: 1
+  default_http_user: MyString
+  default_http_password: MyString
+  http_port: 1
+  reboot_request_path: MyString
+  ssl: false
+  http_request_timeout: 1
+  random_password_length: 1
+  random_password_contains_of: MyString

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_model_key_id: 1
+  phone_key_function_definition_id: 1
+
+two:
+  phone_model_key_id: 1
+  phone_key_function_definition_id: 1

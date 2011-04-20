@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  type_of_class: MyString
+  regex_validation: MyString
+
+two:
+  name: MyString
+  type_of_class: MyString
+  regex_validation: MyString

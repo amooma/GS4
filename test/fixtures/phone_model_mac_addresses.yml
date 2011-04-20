@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_model_id: 1
+  starts_with: MyString
+
+two:
+  phone_model_id: 1
+  starts_with: MyString

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_model_id: 1
+  codec_id: 1
+  position: 1
+
+two:
+  phone_model_id: 1
+  codec_id: 1
+  position: 1

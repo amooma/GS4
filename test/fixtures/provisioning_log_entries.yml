@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_id: 1
+  memo: MyString
+  succeeded: false
+
+two:
+  phone_id: 1
+  memo: MyString
+  succeeded: false
