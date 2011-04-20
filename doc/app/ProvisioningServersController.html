@@ -125,9 +125,11 @@
 				
 					<li><a href="./Admin/SetupHelper.html">Admin::SetupHelper</a></li>
 				
-					<li><a href="./Admin/UserController.html">Admin::UserController</a></li>
-				
 					<li><a href="./Admin/UserHelper.html">Admin::UserHelper</a></li>
+				
+					<li><a href="./Admin/UsersController.html">Admin::UsersController</a></li>
+				
+					<li><a href="./AServer.html">AServer</a></li>
 				
 					<li><a href="./AdminController.html">AdminController</a></li>
 				
@@ -173,15 +175,43 @@
 				
 					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
 				
+					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
+				
 					<li><a href="./Extension.html">Extension</a></li>
 				
 					<li><a href="./ExtensionsController.html">ExtensionsController</a></li>
 				
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
-					<li><a href="./PagesController.html">PagesController</a></li>
+					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
+				
+					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Oui.html">Oui</a></li>
 				
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
+				
+					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneKey.html">PhoneKey</a></li>
+				
+					<li><a href="./PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a></li>
+				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
+					<li><a href="./PhoneModel.html">PhoneModel</a></li>
+				
+					<li><a href="./PhoneModelCodec.html">PhoneModelCodec</a></li>
+				
+					<li><a href="./PhoneModelKey.html">PhoneModelKey</a></li>
+				
+					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
+				
+					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
 					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
 				
@@ -189,7 +219,11 @@
 				
 					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
 				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
+				
+					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -220,6 +254,12 @@
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
+				
+					<li><a href="./VoicemailServersController.html">VoicemailServersController</a></li>
+				
+					<li><a href="./VoicemailServersHelper.html">VoicemailServersHelper</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -270,20 +310,20 @@ POST /provisioning_servers POST /provisioning_servers.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 47</span>
-47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-48:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:provisioning_server</span>])
-49:     
-50:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-51:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">save</span>
-52:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@provisioning_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Provisioning server was successfully created.'</span>) }
-53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span> }
-54:       <span class="ruby-keyword kw">else</span>
-55:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-56:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-57:       <span class="ruby-keyword kw">end</span>
-58:     <span class="ruby-keyword kw">end</span>
-59:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 48</span>
+48:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+49:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:provisioning_server</span>])
+50:     
+51:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+52:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">save</span>
+53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@provisioning_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Provisioning server was successfully created.'</span>) }
+54:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span> }
+55:       <span class="ruby-keyword kw">else</span>
+56:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+57:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+58:       <span class="ruby-keyword kw">end</span>
+59:     <span class="ruby-keyword kw">end</span>
+60:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -316,16 +356,16 @@ DELETE /provisioning_servers/1 DELETE /provisioning_servers/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 79</span>
-79:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-80:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-81:     <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">destroy</span>
-82:     
-83:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-84:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">provisioning_servers_url</span>) }
-85:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-86:     <span class="ruby-keyword kw">end</span>
-87:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 80</span>
+80:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+81:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+82:     <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">destroy</span>
+83:     
+84:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+85:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">provisioning_servers_url</span>) }
+86:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+87:     <span class="ruby-keyword kw">end</span>
+88:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -358,10 +398,10 @@ GET /provisioning_servers/1/edit
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 41</span>
-41:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-42:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-43:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 42</span>
+42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+43:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+44:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -394,17 +434,13 @@ GET /provisioning_servers GET /provisioning_servers.xml
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 7</span>
- 7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 8:     <span class="ruby-ivar">@provisioning_servers</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">all</span>
- 9:     
-10:     <span class="ruby-ivar">@sip_phones</span> = <span class="ruby-constant">SipPhone</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:id</span>)
-11:     
-12:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-13:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
-14:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_servers</span> }
-15:     <span class="ruby-keyword kw">end</span>
-16:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 12</span>
+12:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+13:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+14:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
+15:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_servers</span> }
+16:     <span class="ruby-keyword kw">end</span>
+17:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -437,15 +473,15 @@ GET /provisioning_servers/new GET /provisioning_servers/new.xml
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 31</span>
-31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
-32:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">new</span>
-33:     
-34:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-35:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span> }
-37:     <span class="ruby-keyword kw">end</span>
-38:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+33:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">new</span>
+34:     
+35:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span> }
+38:     <span class="ruby-keyword kw">end</span>
+39:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -478,15 +514,15 @@ GET /provisioning_servers/1 GET /provisioning_servers/1.xml
 					<div class="method-source-code"
 						id="show-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 20</span>
-20:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
-21:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-22:     
-23:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-24:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
-25:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span> }
-26:     <span class="ruby-keyword kw">end</span>
-27:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 21</span>
+21:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+22:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+23:     
+24:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+25:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
+26:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span> }
+27:     <span class="ruby-keyword kw">end</span>
+28:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -519,20 +555,20 @@ PUT /provisioning_servers/1 PUT /provisioning_servers/1.xml
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 63</span>
-63:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-64:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-65:     
-66:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-67:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:provisioning_server</span>])
-68:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@provisioning_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Provisioning server was successfully updated.'</span>) }
-69:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-70:       <span class="ruby-keyword kw">else</span>
-71:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-72:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-73:       <span class="ruby-keyword kw">end</span>
-74:     <span class="ruby-keyword kw">end</span>
-75:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/provisioning_servers_controller.rb, line 64</span>
+64:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+65:     <span class="ruby-ivar">@provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+66:     
+67:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+68:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:provisioning_server</span>])
+69:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@provisioning_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Provisioning server was successfully updated.'</span>) }
+70:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+71:       <span class="ruby-keyword kw">else</span>
+72:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+73:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@provisioning_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+74:       <span class="ruby-keyword kw">end</span>
+75:     <span class="ruby-keyword kw">end</span>
+76:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

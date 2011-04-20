@@ -58,6 +58,17 @@
 
 			<!-- Method Quickref -->
 			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-page_title">#page_title</a></li>
+					
+					<li><a href="#method-i-top_menu_items">#top_menu_items</a></li>
+					
+				</ul>
+			</div>
+			
 
 			<!-- Included Modules -->
 			
@@ -97,9 +108,11 @@
 				
 					<li><a href="./Admin/SetupHelper.html">Admin::SetupHelper</a></li>
 				
-					<li><a href="./Admin/UserController.html">Admin::UserController</a></li>
-				
 					<li><a href="./Admin/UserHelper.html">Admin::UserHelper</a></li>
+				
+					<li><a href="./Admin/UsersController.html">Admin::UsersController</a></li>
+				
+					<li><a href="./AServer.html">AServer</a></li>
 				
 					<li><a href="./AdminController.html">AdminController</a></li>
 				
@@ -145,15 +158,43 @@
 				
 					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
 				
+					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
+				
 					<li><a href="./Extension.html">Extension</a></li>
 				
 					<li><a href="./ExtensionsController.html">ExtensionsController</a></li>
 				
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
-					<li><a href="./PagesController.html">PagesController</a></li>
+					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
+				
+					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Oui.html">Oui</a></li>
 				
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
+				
+					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneKey.html">PhoneKey</a></li>
+				
+					<li><a href="./PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a></li>
+				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
+					<li><a href="./PhoneModel.html">PhoneModel</a></li>
+				
+					<li><a href="./PhoneModelCodec.html">PhoneModelCodec</a></li>
+				
+					<li><a href="./PhoneModelKey.html">PhoneModelKey</a></li>
+				
+					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
+				
+					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
 					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
 				
@@ -161,7 +202,11 @@
 				
 					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
 				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
+				
+					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -193,6 +238,12 @@
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
 				
+					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
+				
+					<li><a href="./VoicemailServersController.html">VoicemailServersController</a></li>
+				
+					<li><a href="./VoicemailServersHelper.html">VoicemailServersHelper</a></li>
+				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
 			</div>
@@ -216,6 +267,101 @@
 
 		<!-- Methods -->
 		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="page-title-method" class="method-detail ">
+				<a name="method-i-page_title"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">page_title</span><span
+						class="method-args">( page_title )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="page-title-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 28</span>
+28:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">page_title</span>( <span class="ruby-identifier">page_title</span> )
+29:     <span class="ruby-identifier">content_for</span>(<span class="ruby-value">:page_title</span>) { <span class="ruby-identifier">page_title</span> }
+30:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="top-menu-items-method" class="method-detail ">
+				<a name="method-i-top_menu_items"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">top_menu_items</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Define the top navigation menu items
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="top-menu-items-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 5</span>
+ 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">top_menu_items</span>
+ 6:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user_signed_in?</span>
+ 7:       <span class="ruby-identifier">menu_items</span> = [
+ 8:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Admin&quot;</span>         , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_index_path</span> },
+ 9:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Users&quot;</span>         , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_users_path</span> },
+10:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Phones&quot;</span>        , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_phones_path</span> },
+11:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Accounts&quot;</span>  , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_accounts_path</span> },
+12:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Extensions&quot;</span>    , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">extensions_path</span> },
+13:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Servers&quot;</span>       , <span class="ruby-value">:sub</span> =<span class="ruby-operator">&gt;</span> [
+14:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Provisioning Servers&quot;</span> , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">provisioning_servers_path</span> },
+15:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Servers&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_servers_path</span> },
+16:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Proxies&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_proxies_path</span> },
+17:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Voicemail Servers&quot;</span>    , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">voicemail_servers_path</span> },
+18:         ]},
+19:       ]
+20:     <span class="ruby-keyword kw">else</span>
+21:       <span class="ruby-identifier">menu_items</span> = [
+22:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Sign in&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_user_session_path</span> }
+23:       ]
+24:     <span class="ruby-keyword kw">end</span>
+25:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">menu_items</span>
+26:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

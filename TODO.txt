@@ -1,0 +1,15 @@
+#TODO Zusammenführung:
+
+- doc/docbook von Cantina einbauen
+- db/seeds.rb von Cantina einbauen
+- lib/tasks/*.rake von Cantina einbauen
+...
+
+
+- SipProxy einbauen (mit Doku etc.)
+
+- gs-kamailio-config reinziehen
+
+- gs-freeswitch-conf reinziehen
+
+

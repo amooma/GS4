@@ -69,7 +69,11 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
+					<li><a href="#method-i-check_if_admin_account_exists">#check_if_admin_account_exists</a></li>
+					
 					<li><a href="#method-i-index">#index</a></li>
+					
+					<li><a href="#method-i-rescue_missing">#rescue_missing</a></li>
 					
 				</ul>
 			</div>
@@ -113,9 +117,11 @@
 				
 					<li><a href="./Admin/SetupHelper.html">Admin::SetupHelper</a></li>
 				
-					<li><a href="./Admin/UserController.html">Admin::UserController</a></li>
-				
 					<li><a href="./Admin/UserHelper.html">Admin::UserHelper</a></li>
+				
+					<li><a href="./Admin/UsersController.html">Admin::UsersController</a></li>
+				
+					<li><a href="./AServer.html">AServer</a></li>
 				
 					<li><a href="./AdminController.html">AdminController</a></li>
 				
@@ -161,15 +167,43 @@
 				
 					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
 				
+					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
+				
 					<li><a href="./Extension.html">Extension</a></li>
 				
 					<li><a href="./ExtensionsController.html">ExtensionsController</a></li>
 				
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
-					<li><a href="./PagesController.html">PagesController</a></li>
+					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
+				
+					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Oui.html">Oui</a></li>
 				
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
+				
+					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneKey.html">PhoneKey</a></li>
+				
+					<li><a href="./PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a></li>
+				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
+					<li><a href="./PhoneModel.html">PhoneModel</a></li>
+				
+					<li><a href="./PhoneModelCodec.html">PhoneModelCodec</a></li>
+				
+					<li><a href="./PhoneModelKey.html">PhoneModelKey</a></li>
+				
+					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
+				
+					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
 					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
 				
@@ -177,7 +211,11 @@
 				
 					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
 				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
+				
+					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -208,6 +246,12 @@
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
+				
+					<li><a href="./VoicemailServersController.html">VoicemailServersController</a></li>
+				
+					<li><a href="./VoicemailServersHelper.html">VoicemailServersHelper</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -256,26 +300,101 @@
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 4</span>
- 4:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 5:    <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
- 6:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 7:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
- 8:       <span class="ruby-keyword kw">end</span>
- 9:   <span class="ruby-keyword kw">end</span> 
-10:                 <span class="ruby-keyword kw">begin</span>
-11:                         <span class="ruby-ivar">@number_of_users</span>         = <span class="ruby-constant">User</span>               .<span class="ruby-identifier">count</span>
-12:                         <span class="ruby-ivar">@number_of_sip_accounts</span>  = <span class="ruby-constant">SipAccount</span>         .<span class="ruby-identifier">count</span>
-13:                         <span class="ruby-ivar">@number_of_sip_phones</span>    = <span class="ruby-constant">SipPhone</span>           .<span class="ruby-identifier">count</span>
-14:                         <span class="ruby-ivar">@number_of_sip_proxies</span>   = <span class="ruby-constant">SipProxy</span>           .<span class="ruby-identifier">count</span>
-15:                         <span class="ruby-ivar">@number_of_sip_servers</span>   = <span class="ruby-constant">SipServer</span>          .<span class="ruby-identifier">count</span>
-16:                         <span class="ruby-ivar">@number_of_prov_servers</span>  = <span class="ruby-constant">ProvisioningServer</span> .<span class="ruby-identifier">count</span>
-17:                         <span class="ruby-ivar">@number_of_extensions</span>    = <span class="ruby-constant">Extension</span>          .<span class="ruby-identifier">count</span>
-18:                         
-19:                 <span class="ruby-comment cmt">#rescue</span>
-20:                 <span class="ruby-comment cmt">#     redirect_to('/db_migrate_missing')</span>
-21:                 <span class="ruby-keyword kw">end</span>
-22:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 11</span>
+11:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+12:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+13:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+14:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
+15:       <span class="ruby-keyword kw">end</span>
+16:     <span class="ruby-keyword kw">else</span>
+17:       <span class="ruby-ivar">@number_of_users</span>         = <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>
+18:       <span class="ruby-ivar">@number_of_sip_accounts</span>  = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">count</span>
+19:       <span class="ruby-ivar">@number_of_sip_phones</span>    = <span class="ruby-constant">SipPhone</span>.<span class="ruby-identifier">count</span>
+20:       <span class="ruby-ivar">@number_of_sip_proxies</span>   = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span>
+21:       <span class="ruby-ivar">@number_of_sip_servers</span>   = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span>
+22:       <span class="ruby-ivar">@number_of_prov_servers</span>  = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span>
+23:       <span class="ruby-ivar">@number_of_extensions</span>    = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">count</span>
+24:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+25:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+26:       <span class="ruby-keyword kw">end</span>
+27:     <span class="ruby-keyword kw">end</span>
+28:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="check-if-admin-account-exists-method" class="method-detail ">
+				<a name="method-i-check_if_admin_account_exists"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check_if_admin_account_exists</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="check-if-admin-account-exists-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 36</span>
+36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_admin_account_exists</span>
+37:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+38:       <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_admin_setup_path</span>)
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="rescue-missing-method" class="method-detail ">
+				<a name="method-i-rescue_missing"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">rescue_missing</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="rescue-missing-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
+33:     <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value str">'/db_migrate_missing'</span>)
+34:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

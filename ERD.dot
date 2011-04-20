@@ -12,6 +12,14 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="uid">uid <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
+  m_Codec [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Codec</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
   m_Extension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Extension</font></td></tr>
 </table>
@@ -21,6 +29,112 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="sip_account_id">sip_account_id <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
+  m_Manufacturer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Manufacturer</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="ieee_name">ieee_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="url">url <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
+  m_Oui [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Oui</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="value">value <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_Phone [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Phone</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="http_password">http_password <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="http_user">http_user <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="ip_address">ip_address <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="last_ip_address">last_ip_address <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="mac_address">mac_address <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_PhoneKey [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneKey</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="label">label <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="value">value <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_PhoneKeyFunctionDefinition [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneKeyFunctionDefinition</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="regex_validation">regex_validation <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="type_of_class">type_of_class <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_PhoneKeyToFunctionMapping [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneKeyToFunctionMapping</font></td></tr>
+</table>
+>];
+  m_PhoneModel [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneModel</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="default_http_password">default_http_password <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="default_http_user">default_http_user <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="http_port">http_port <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="http_request_timeout">http_request_timeout <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="max_number_of_sip_accounts">max_number_of_sip_accounts <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="number_of_keys">number_of_keys <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="random_password_contains_of">random_password_contains_of <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="random_password_length">random_password_length <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="reboot_request_path">reboot_request_path <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="ssl">ssl <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="url">url <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
+  m_PhoneModelCodec [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneModelCodec</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
+</table>
+>];
+  m_PhoneModelKey [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneModelKey</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
+</table>
+>];
+  m_PhoneModelMacAddress [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PhoneModelMacAddress</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="starts_with">starts_with <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_ProvisioningLogEntry [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ProvisioningLogEntry</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="memo">memo <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="succeeded">succeeded <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+</table>
+>];
   m_ProvisioningServer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ProvisioningServer</font></td></tr>
 </table>
@@ -28,6 +142,16 @@ digraph Gemeinschaft4 {
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
   <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+</table>
+>];
+  m_RebootRequest [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">RebootRequest</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="end">end <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="start">start <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="successful">successful <font face="Arial Italic" color="grey60">boolean</font></td></tr>
 </table>
 >];
   m_SipAccount [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -41,6 +165,14 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="realm">realm <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="voicemail_pin">voicemail_pin <font face="Arial Italic" color="grey60">integer</font></td></tr>
+</table>
+>];
+  m_SipAccountCodec [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipAccountCodec</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
   m_SipPhone [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -110,7 +242,29 @@ digraph Gemeinschaft4 {
   m_SipProxy -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_VoicemailServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Codec -> m_SipAccountCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Codec -> m_SipAccount [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
+  m_Codec -> m_PhoneModelCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Codec -> m_PhoneModel [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
   m_Extension -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Manufacturer -> m_PhoneModel [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Manufacturer -> m_Oui [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Manufacturer -> m_Phone [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
+  m_Phone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_Phone -> m_ProvisioningLogEntry [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneModel -> m_Phone [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Phone -> m_RebootRequest [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipAccount -> m_PhoneKey [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_PhoneModelKey -> m_PhoneKey [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneKeyFunctionDefinition -> m_PhoneKey [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneKey -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_PhoneKeyFunctionDefinition -> m_PhoneKeyToFunctionMapping [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneKeyFunctionDefinition -> m_PhoneModelKey [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
+  m_PhoneModelKey -> m_PhoneKeyToFunctionMapping [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneModel -> m_PhoneModelKey [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneModel -> m_PhoneModelMacAddress [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_PhoneModel -> m_PhoneModelCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_ProvisioningServer -> m_SipPhone [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipPhone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipAccount -> m_SipAccountCodec [arrowhead = "normal", arrowtail = "none", weight = "1"]
 }
