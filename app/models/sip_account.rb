@@ -18,17 +18,10 @@ class SipAccount < ActiveRecord::Base
   
   validates_presence_of     :sip_server
   validates_presence_of     :sip_proxy
-<<<<<<< HEAD
-  validates_presence_of     :voicemail_server , :if => Proc.new { |me| me.voicemail_server_id }
-  validates_presence_of     :sip_phone        , :if => Proc.new { |me| me.sip_phone_id }
-  validates_presence_of     :extension        , :if => Proc.new { |me| me.extension_id }
-  validates_presence_of     :user             , :if => Proc.new { |me| me.user_id }
-=======
   validates_presence_of     :voicemail_server , :if => Proc.new { |sip_account| sip_account.voicemail_server_id }
   validates_presence_of     :phone        , :if => Proc.new { |sip_account| sip_account.phone_id }
   validates_presence_of     :extension        , :if => Proc.new { |sip_account| sip_account.extension_id }
   validates_presence_of     :user             , :if => Proc.new { |sip_account| sip_account.user_id }
->>>>>>> redesign
   
   validate_password         :password
   
