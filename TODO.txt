@@ -1,0 +1,8 @@
+#TODO Migration von Cantina:
+
+- doc/docbook von Cantina einbauen
+- db/seeds.rb von Cantina einbauen
+- lib/tasks/*.rake von Cantina einbauen
+...
+
+
