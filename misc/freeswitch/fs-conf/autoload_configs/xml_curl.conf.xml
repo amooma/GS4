@@ -48,8 +48,8 @@
 		<!--</binding>-->
 		
 		<binding name="our users directory">
-			<param name="gateway-url" value="http://127.0.0.1:3000/freeswitch-directory-entries/search.xml" bindings="directory" />
-			<!-- FIXME Use SSL when implemented by the remote server. Maybe via Stunnel. -->
+			<param name="gateway-url" value="http://127.0.0.1:80/freeswitch-directory-entries/search.xml" bindings="directory" />
+			<!-- #OPTIMIZE We may want to use HTTPS. Maybe via a Stunnel. -->
 			<param name="disable-100-continue" value="true" />
 			<param name="timeout" value="10" />
 		</binding>

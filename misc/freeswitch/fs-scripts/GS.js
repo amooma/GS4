@@ -1,5 +1,6 @@
 
-DIALPLAN_SERVICE_URL = 'http://127.0.0.1:3000/freeswitch-call-processing/actions.xml';
+DIALPLAN_SERVICE_URL = 'http://127.0.0.1:80/freeswitch-call-processing/actions.xml';
+//#OPTIMIZE We may want to use HTTPS. Maybe via a Stunnel.
 
 
 LOG_DEBUG   = 1;
