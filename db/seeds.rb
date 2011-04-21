@@ -1,33 +1,75 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
+# This file should contain all the record creation needed to seed
+# the database with its default values. The data can then be loaded
+# with the rake db:seed (or created alongside the db with db:setup).
 
 
-# Provisioning server:
+################################################################
+# Phone key function definitions
+################################################################
 
 # General softkey functions:
-# DO NOT RENAME THEM! The name is magic and serves as an identifier!
+# DO NOT RENAME THEM! The name is magic and serves as an identifier! (#OPTIMIZE)
 #
 PhoneKeyFunctionDefinition.create([
-  { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
-  { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil },
-  
+	{ :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
+	{ :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
+	{ :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
+	{ :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil },
 ])
 
-# Phone Models
-#
+
+################################################################
+# Manufacturers
+################################################################
+
+snom    = Manufacturer.find_or_create_by_ieee_name(
+	'SNOM Technology AG', {
+		:name => "SNOM Technology AG",
+		:url  => 'http://www.snom.com/',
+})
+aastra  = Manufacturer.find_or_create_by_ieee_name(
+	'DeTeWe-Deutsche Telephonwerke', {
+		:name => "Aastra DeTeWe",
+		:url  => 'http://www.aastra.de/',
+})
+tiptel  = Manufacturer.find_or_create_by_ieee_name(
+	'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', {
+		:name => "Tiptel",
+		:url  => 'http://www.tiptel.de/'
+})
+#OPTIMIZE Differentiate between manufacturer and vendor. Make this either Yealink or Tiptel.
+
+
+################################################################
+# OUIs
+################################################################
+
+snom    .ouis.create([
+	{ :value => '000413'},
+])
+aastra  .ouis.create([
+	{ :value => '003042' },
+	{ :value => '00085D' },
+])
+tiptel  .ouis.create([
+	{ :value => '001565' },
+])
+
+
+
+
+#TODO Clean up the stuff in following ...
+
+
+
+################################################################
+# Phone models
+################################################################
 
 # Snom
 # http://wiki.snom.com/Settings/mac
 #
-snom = Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG', :url => 'http://www.snom.com/')
-snom.ouis.create(:value => '000413')
+
 snom.phone_models.create(:name => 'Snom 190').phone_model_mac_addresses.create(:starts_with => '00041322')
 snom300 = snom.phone_models.create(:name => 'Snom 300', 
                                    :url => 'http://www.snom.com/en/products/ip-phones/snom-300/',
@@ -138,8 +180,6 @@ end
 
 # Aastra
 #
-aastra = Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/')
-aastra.ouis.create([{:value => '003042'},{:value => '00085D'}])
 aastra.phone_models.create(:name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30,  :url => 'http://www.aastra.com/aastra-6757i.htm')
 aastra.phone_models.create(:name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26,  :url => 'http://www.aastra.com/aastra-6753i.htm')
 aastra.phone_models.create(:name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6,   :url => 'http://www.aastra.com/aastra-6753i.htm')
@@ -182,8 +222,6 @@ end
 # Tiptel
 #
 
-tiptel = Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/')
-tiptel.ouis.create(:value => '001565')
 tiptel.phone_models.create(:name => 'IP 286', :max_number_of_sip_accounts => 16, :number_of_keys => 10,  :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-286-6/')
 tiptel.phone_models.create(:name => 'IP 280', :max_number_of_sip_accounts => 2, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-280-6/')
 tiptel.phone_models.create(:name => 'IP 284', :max_number_of_sip_accounts => 13, :number_of_keys => 10, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-284-6/')
@@ -213,8 +251,12 @@ end
   }
 end
 
-# Sample Phones (Testphones Sascha)
-#
+
+
+################################################################
+# Sample phones (test phones)
+################################################################
+
 
 PhoneModel.where(
   :name => 'IP 284' 
@@ -223,7 +265,6 @@ PhoneModel.where(
 ])
 
 
-# more test phones:
 Phone.create(
   :mac_address    => '00-04-13-29-68-87',
   :phone_model_id => PhoneModel.where( :name => 'Snom 360' ).first.id
@@ -244,3 +285,5 @@ PhoneModel.where(
 ).first.phones.create([
   { :mac_address => '000413271FD8' } 
 ])
+
+
