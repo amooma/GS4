@@ -30,7 +30,7 @@ class AdminController < ApplicationController
   private
   
   def rescue_missing
-    redirect_to('/db_migrate_missing')
+    redirect_to( '/db_migrate_missing.html' )
   end
 
   def check_if_admin_account_exists
