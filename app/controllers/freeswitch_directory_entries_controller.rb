@@ -171,15 +171,13 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 	# "action" arg.!
 	# 
 	def _arg( name )
-	(
 		name = name.to_sym
 		return request.request_parameters[name] || request.query_parameters[name]
-	)end
+	end
 	
 	def _bold( str )
-	(
 		return "\e[0;1m#{str} \e[0m "
-	)end
+	end
 	
 	
 )end
