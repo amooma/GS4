@@ -3,7 +3,8 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 	#before_filter :authenticate_user!
 	#FIXME Implement SSL with client certificates.
 	
-	# GET /freeswitch-directory-entries/search.xml
+	# GET  /freeswitch-directory-entries/search.xml
+	# POST /freeswitch-directory-entries/search.xml
 	def search()
 	(
 		if (_arg(:section) != 'directory'); (
@@ -30,9 +31,11 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			
 			logger.info(_bold( "[FS] Request for gateways ..." ))
 			
+			#@sip_servers = SipServer.all( :group => :host )
+			
 			respond_to { |format|
 				format.xml {
-					#render :gateways_index, :layout => false
+					#render :domains_and_gateways_index, :layout => false
 					render :empty_result, :layout => false
 				}
 				format.all {
