@@ -47,6 +47,17 @@ gem "bcrypt-ruby", :require => "bcrypt"
 #   aptitude install libxml2 libxslt1.1
 gem "omniauth"
 
+
+# FastCGI (aptitude install libfcgi-dev)
+group :production do
+	gem 'fcgi', '~> 0.8'
+end
+
+# Syslogger
+group :production do
+	gem 'syslogger', '~> 1.2'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
