@@ -3,10 +3,11 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 	# Allow access from 127.0.0.1 and [::1] only.
 	prepend_before_filter { |controller|
 		if ! request.local?
-			logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr} ..." ))
+			logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
 			render :status => '403 None of your business',
 				:layout => false, :content_type => 'text/plain',
 				:text => "<!-- This is none of your business. -->"
+			# Maybe allow access in "development" mode?
 		end
 	}
 	#before_filter :authenticate_user!
