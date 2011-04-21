@@ -10,7 +10,7 @@
     <th>SIP server ID</th>
     <th>SIP proxy ID</th>
     <th>Voicemail server ID</th>
-    <th>SIP phone ID</th>
+    <th>SIP phone</th>
     <th></th>
     <th></th>
     <th></th>
@@ -26,7 +26,11 @@
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
     <td><%= sip_account.voicemail_server_id %></td>
-    <td><%= sip_account.sip_phone_id %></td>
+    <td>
+      <% if ! sip_account.phone.nil? %>
+        <%= sip_account.phone.mac_address %>
+      <% end %>
+    </td>
     <td><%= link_to 'Show', sip_account %></td>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
     <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>

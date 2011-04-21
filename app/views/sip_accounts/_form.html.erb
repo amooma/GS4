@@ -1,4 +1,4 @@
-<%= form_for(@sip_account) do |f| %>
+<%= simple_form_for @sip_account do |f| %>
   <% if @sip_account.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sip_account.errors.count, "error") %> prohibited this sip_account from being saved:</h2>
@@ -60,11 +60,7 @@
     <%= f.text_field :voicemail_pin %>
   </div>
   <div class="field">
-    <%= f.label :phone_id, "SIP phone" %><br />
-    <%= f.select( :phone_id,
-      @sip_phones.collect {|r| [ "Prov. server #{r.provisioning_server_id || '?'} phone #{r.phone_id || '?'} (ID #{r.id})", r.id ] },
-      { :include_blank => true, :selected => @sip_account.phone_id }
-    ) %>
+    <%= f.association :phone,  :label_method => :mac_address %>  
   </div>
   <br />
   <div class="actions">

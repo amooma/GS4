@@ -55,7 +55,7 @@
   <b>SIP phone:</b>
   <%= @sip_account.phone_id ? "ID #{@sip_account.phone_id}" : "-" %>
   <% if @sip_account.phone %>
-    (Prov. server <%= @sip_account.phone.provisioning_server_id || '?' %> phone <%= @sip_account.phone.phone_id || '?' %>, ID <%= @sip_account.phone_id %>)
+    MAC: <%= @sip_account.phone.mac_address %> 
   <% end %>
 </p>
 
