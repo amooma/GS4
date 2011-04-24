@@ -1,0 +1,60 @@
+Source: ruby-sane
+Section: ruby
+Priority: optional
+Maintainer: Philipp Kempgen <root@localhost>
+Build-Depends: debhelper (>= 7.0.50~), dpkg-dev, sed
+Standards-Version: 3.8.4
+#Vcs-Git: git://git.debian.org/collab-maint/ruby-sane.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/ruby-sane.git;a=summary
+
+
+Package: ruby-sane
+Section: ruby
+Architecture: all
+Pre-Depends: ruby1.9.1 (>= 1.9.2)
+Recommends: ruby-sane-dev (= ${source:Version}), irb1.9.1 (>= 1.9.2), rdoc1.9.1 (>= 1.9.2)
+Suggests: ri1.9.1, rdoc1.9.1, libsqlite3-0 (>= 3.7)
+Conflicts: ruby1.8, rubygems1.8, libruby1.8, rake, libsqlite3-ruby, libsqlite3-ruby1.9.1, libsqlite3-ruby1.8
+Provides: rake
+# We replace Debian's RubyGems (which is in ruby1.9.1):
+Replaces: rubygems1.9.1, ruby1.9.1
+Breaks: rails (<< 3.0), rails-ruby1.8
+Description: Ruby language (sane version)
+ Sane Ruby including Ruby StdLib, RubyGems, IRb, Rake and
+ GemBundler, but without Debian's pre-1.9 Ruby stuff which was a
+ real pain.
+ .
+ Also the binaries in Debian's ruby1.9.1 package are called
+ "ruby1.9.1", "irb1.9.1", "rake1.9.1", "rdoc1.9.1", "gem1.9.1"
+ etc. so normal Ruby scripts won't be able to find the "ruby"
+ interpreter. (Duh!) This package creates aliases named "ruby",
+ "irb", "rake", "rdoc", "gem" just as if you had installed Ruby
+ from the upstream. We created aliases for the man pages as well
+ so the Ruby installation works as expected.
+ .
+ ruby1.9.1 provides rubygems1.9.1. RubyGems may compile native
+ Gems and thus requires a compiler. If you need to build native
+ Gems ("gem install ...", "bundle install ...") you need to
+ install the ruby-sane-dev package as well.
+ .
+ Do not install any of the Debian-packaged Gems (lib*-ruby1.8,
+ lib*-ruby1.9.1). Install Gems through "gem install ..."
+ .
+ If you want Ruby on Rails: "gem install rails"
+
+
+Package: ruby-sane-dev
+Section: ruby
+Architecture: all
+Depends: ruby-sane (= ${source:Version})
+Pre-Depends: ruby1.9.1-dev
+Recommends: build-essential
+Suggests: libsqlite3-dev
+Description: Ruby language (sane version), header files
+ Header files for ruby-sane.
+ .
+ ruby1.9.1 provides rubygems1.9.1. RubyGems may compile native Gems
+ and thus requires a compiler. Unfortunately ruby1.9.1 doesn't list
+ a compiler in Depends or Recommends so we have to.
+
+

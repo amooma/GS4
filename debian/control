@@ -1,0 +1,137 @@
+Source: gemeinschaft
+Section: comm
+Priority: extra
+Maintainer: Amooma GmbH <info@amooma.de>
+Homepage: http://www.amooma.de/
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+#Vcs-Git: git://git.debian.org/collab-maint/gemeinschaft.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/gemeinschaft.git;a=summary
+
+
+#Package: gemeinschaft
+#Architecture: any
+#Depends: ${shlibs:Depends}, ${misc:Depends}
+#Description: Gemeinschaft - the secure PBX system
+# <insert long description, indented with spaces>
+
+#Package: gemeinschaft-doc
+#Architecture: all
+#Description: Gemeinschaft - documentation
+# <insert long description, indented with spaces>
+
+
+Package: gemeinschaft
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-sip-proxy, gemeinschaft-sip-pbx, gemeinschaft-web-service
+Suggests: gemeinschaft-doc
+Description: Gemeinschaft - the telephony system
+ <insert long description, indented with spaces>
+
+
+Package: gemeinschaft-common
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-sensible-ruby (>= 1.9.2)
+Description: Gemeinschaft - common files
+ <insert long description, indented with spaces>
+
+
+Package: gemeinschaft-sane-ruby
+Architecture: all
+Version: 1.9.2
+Depends: ruby1.9.1 (>= 1.9.2)
+Recommends: build-essential
+Suggests: ri1.9.1 (>= 1.9.2)
+Conflicts: ruby1.8, rubygems1.8, rubygems, libruby, libruby1.8, libruby1.9.1, rake, rails, rails-ruby1.8
+Description: Gemeinschaft - sane Ruby
+ Sane Ruby including RubyGems, IRb and Rake, but without Debian's
+ pre-1.9 ruby which was a real pain.
+ .
+ ruby1.9.1 provides rubygems1.9.1. RubyGems may compile native Gems
+ and thus requires a compiler. Unfortunately ruby1.9.1 doesn't list
+ a compiler in Depends or Recommends so we have to.
+
+
+Package: gemeinschaft-sip-proxy
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common
+Recommends: gemeinschaft-sip-pbx
+Pre-Depends: kamailio (>= 3.1)
+Replaces: kamailio
+Description: Gemeinschaft - SIP proxy
+ <insert long description, indented with spaces>
+ .
+ As Kamailio is not in the official Debian repository yet you may
+ want to install it as per
+  http://www.kamailio.org/dokuwiki/doku.php/packages:debs
+ .
+ Add the GPG key to your APT key list:
+  wget -q -O - http://deb.kamailio.org/kamailiodebkey.gpg | apt-key add -
+ .
+ Add the APT repository:
+ .
+  (
+  echo 'deb     http://deb.kamailio.org/kamailio squeeze main'
+  echo 'deb-src http://deb.kamailio.org/kamailio squeeze main'
+  ) > /etc/apt/sources.list.d/kamailio.list
+  aptitude update
+
+
+Package: gemeinschaft-sip-pbx
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common, gemeinschaft-sip-proxy, gemeinschaft-sip-pbx-freeswitch
+Description: Gemeinschaft - SIP PBX
+ <insert long description, indented with spaces>
+
+
+Package:gemeinschaft-sip-pbx-freeswitch
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-sip-pbx
+Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
+Replaces: freeswitch
+Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
+Suggests: monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
+Description: Gemeinschaft - SIP PBX - FreeSwitch
+ <insert long description, indented with spaces>
+ .
+ FreeSwitch is not in the official Debian repository. You may want
+ to build your own package from the upstream sources or use an
+ existing APT repository, e.g.:
+ .
+  (
+  echo 'deb     http://www.kempgen.net/pkg/deb/ squeeze contrib'
+  echo 'deb-src http://www.kempgen.net/pkg/deb/ squeeze contrib'
+  ) > /etc/apt/sources.list.d/kempgen.list
+  aptitude update
+ .
+ Note that the freeswitch-sounds-* packages don't exist anywhere.
+ You will have to download the tarballs from
+  http://files.freeswitch.org/
+ and make your own packages (if you want to) or download the sound
+ files as .deb packages from
+  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
+  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-music/
+ and install them (dpkg -i freeswitch-sounds-*.deb).
+ .
+ Or your could add freeswitch-driver's PPA on LaunchPad (for Ubuntu)
+  deb     http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main
+  deb-src http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main 
+ to your APT sources. It's for Ubuntu but the architecture-independant
+ sound files should work. You will have to use APT pinning though so
+ let's no go there. Get the tarballs.
+
+
+Package:gemeinschaft-web-service
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common, lighttpd (>= 1.4)
+Provides: gemeinschaft-provisioning
+Description: Gemeinschaft - web service
+ <insert long description, indented with spaces>
+
+
+Package: gemeinschaft-doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: Gemeinschaft - documentation
+ <insert long description, indented with spaces>
+
