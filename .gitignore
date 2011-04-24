@@ -9,7 +9,8 @@ tmp/**/*
 /.komodotools
 .tmp*~
 ERD.pdf
-vendor/cache/*.gem
+/vendor/cache
+/vendor/bundle
 .settings/*
 .idea/*
 
