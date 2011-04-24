@@ -1,1 +1,4 @@
-#DOCS#
+doc/app             usr/share/doc/gemeinschaft/
+doc/docbook         usr/share/doc/gemeinschaft/
+ERD.dot             usr/share/doc/gemeinschaft/
+

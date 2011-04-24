@@ -3,7 +3,8 @@ Section: comm
 Priority: extra
 Maintainer: Amooma GmbH <info@amooma.de>
 Homepage: http://www.amooma.de/
-Build-Depends: debhelper (>= 7.0.50~)
+# Build-dependency on RubyGems as we need Bundler.
+Build-Depends: debhelper (>= 7.0.50~), dpkg-dev, sed, ruby-sane-dev
 Standards-Version: 3.8.4
 #Vcs-Git: git://git.debian.org/collab-maint/gemeinschaft.git
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/gemeinschaft.git;a=summary
@@ -24,42 +25,55 @@ Standards-Version: 3.8.4
 Package: gemeinschaft
 Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-sip-proxy, gemeinschaft-sip-pbx, gemeinschaft-web-service
-Suggests: gemeinschaft-doc
-Description: Gemeinschaft - the telephony system
- <insert long description, indented with spaces>
+Suggests: gemeinschaft-doc, gemeinschaft-tests
+Description: Gemeinschaft - telephony server
+ Gemeinschaft telephony server.
 
 
 Package: gemeinschaft-common
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-sensible-ruby (>= 1.9.2)
+Conflicts: gemeinschaft (<< 3.99)
+Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native
+Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev, libsqlite3-dev, libxml2-dev, libxslt1-dev, libfcgi-dev
+# Gems with native extensions:
+# - sqlite3      requires package libsqlite3-dev
+# - nokogiri     requires package libxml2-dev and libxslt1-dev
+# - bcrypt-ruby  requires package -
+# - fcgi         requires package libfcgi-dev
+Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
 Description: Gemeinschaft - common files
- <insert long description, indented with spaces>
+ Common files of the Gemeinschaft telephony server.
 
 
-Package: gemeinschaft-sane-ruby
+Package: gemeinschaft-ruby-gems-native
+Architecture: any
+Conflicts: gemeinschaft (<< 3.99)
+Depends: ${misc:Depends}, libsqlite3-0, libxml2, libxslt1.1, libfcgi0ldbl
+Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev (>= 1.9.2), libsqlite3-dev, libxml2-dev, libxslt1-dev, libfcgi-dev
+# Gems with native extensions:
+# - sqlite3      requires package libsqlite3-dev
+# - nokogiri     requires package libxml2-dev and libxslt1-dev
+# - bcrypt-ruby  requires package -
+# - fcgi         requires package libfcgi-dev
+Description: Gemeinschaft - common files
+ Common files of the Gemeinschaft telephony server.
+
+
+Package: gemeinschaft-tests
 Architecture: all
-Version: 1.9.2
-Depends: ruby1.9.1 (>= 1.9.2)
-Recommends: build-essential
-Suggests: ri1.9.1 (>= 1.9.2)
-Conflicts: ruby1.8, rubygems1.8, rubygems, libruby, libruby1.8, libruby1.9.1, rake, rails, rails-ruby1.8
-Description: Gemeinschaft - sane Ruby
- Sane Ruby including RubyGems, IRb and Rake, but without Debian's
- pre-1.9 ruby which was a real pain.
- .
- ruby1.9.1 provides rubygems1.9.1. RubyGems may compile native Gems
- and thus requires a compiler. Unfortunately ruby1.9.1 doesn't list
- a compiler in Depends or Recommends so we have to.
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Description: Gemeinschaft - automated tests
+ Tests of the Gemeinschaft telephony server.
 
 
 Package: gemeinschaft-sip-proxy
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
 Recommends: gemeinschaft-sip-pbx
 Pre-Depends: kamailio (>= 3.1)
 Replaces: kamailio
 Description: Gemeinschaft - SIP proxy
- <insert long description, indented with spaces>
+ SIP proxy configuration for the Gemeinschaft telephony server.
  .
  As Kamailio is not in the official Debian repository yet you may
  want to install it as per
@@ -79,9 +93,9 @@ Description: Gemeinschaft - SIP proxy
 
 Package: gemeinschaft-sip-pbx
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common, gemeinschaft-sip-proxy, gemeinschaft-sip-pbx-freeswitch
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), gemeinschaft-sip-proxy, gemeinschaft-sip-pbx-freeswitch
 Description: Gemeinschaft - SIP PBX
- <insert long description, indented with spaces>
+ SIP PBX configuration for the Gemeinschaft telephony server.
 
 
 Package:gemeinschaft-sip-pbx-freeswitch
@@ -90,9 +104,10 @@ Depends: ${misc:Depends}, gemeinschaft-sip-pbx
 Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
 Replaces: freeswitch
 Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
-Suggests: monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
+Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
 Description: Gemeinschaft - SIP PBX - FreeSwitch
- <insert long description, indented with spaces>
+ Configuration for FreeSwitch as a SIP PBX for the Gemeinschaft
+ telephony server.
  .
  FreeSwitch is not in the official Debian repository. You may want
  to build your own package from the upstream sources or use an
@@ -109,7 +124,7 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
   http://files.freeswitch.org/
  and make your own packages (if you want to) or download the sound
  files as .deb packages from
-  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
+  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drsivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
   http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-music/
  and install them (dpkg -i freeswitch-sounds-*.deb).
  .
@@ -123,15 +138,23 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
 
 Package:gemeinschaft-web-service
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common, lighttpd (>= 1.4)
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Pre-Depends: lighttpd (>= 1.4)
+Replaces: lighttpd
+Breaks: httpd
+Suggests: logrotate
 Provides: gemeinschaft-provisioning
 Description: Gemeinschaft - web service
- <insert long description, indented with spaces>
+ Web interface (HTML and XML API) of the Gemeinschaft telephony
+ server.
 
 
 Package: gemeinschaft-doc
+Section: doc
 Architecture: all
 Depends: ${misc:Depends}
+# Suggest graphviz as we include ERD.dot.
+Suggests: graphviz
 Description: Gemeinschaft - documentation
- <insert long description, indented with spaces>
+ Documentation for the Gemeinschaft telephony server.
 
