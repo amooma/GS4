@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for gemeinschaft-common
+# postinst script for gemeinschaft-ruby-gems-native-target-compile
 #
 # see: dh_installdeb(1)
 
@@ -20,7 +20,9 @@ set -e
 
 case "$1" in
 	configure)
+		# Install Gems from vendor/cache/*.gem into vendor/bundle/ :
 		cd /opt/gemeinschaft/
+		bundle install --local --deployment
 		bundle check
 	;;
 	

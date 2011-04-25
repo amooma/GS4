@@ -4,6 +4,8 @@ export DESTDIR
 DEB_VERSION:=$(shell dpkg-parsechangelog | sed -n -e 's/Version: //p')
 PACKAGES=$(shell dh_listpackages)
 
+XARGS_0_RM=xargs -0 -n 1 --no-run-if-empty 'rm'
+
 
 help:
 	@# In this case we need something that doesn't do anything as
@@ -20,29 +22,17 @@ help:
 	@ exit 0
 
 
-#all:
-
-
-#install:
-#	@echo "HELLO WORLD"
-#	#$(INSTALL) -m 644 ...... "$(DESTDIR)/foobar"
-
-
-install:
-	#git status | grep -q 'nothing to commit (working directory clean)'
-	#bundle install
-	#bundle install --path .
-	#bundle install --deployment
-	#bundle check
-	# package gems into vendor/cache/
-	bundle package
-	#bundle install --local --deployment
-
 
 clean:
-	@# called by debian/rules clean
-	# remove stuff that we don't want in the Debian package
-	find . -type f -name .DS_Store -print0 | xargs -0 -n 1 --no-run-if-empty rm
+	# Remove Debian packages:
+	
+	find .. -type f -name 'gemeinschaft_*.dsc'       -print0 | $(XARGS_0_RM)
+	find .. -type f -name 'gemeinschaft_*.tar.gz'    -print0 | $(XARGS_0_RM)
+	find .. -type f -name 'gemeinschaft_*_*.changes' -print0 | $(XARGS_0_RM)
+	
+	find .. -type f -name 'gemeinschaft_*_*.deb'     -print0 | $(XARGS_0_RM)
+	find .. -type f -name 'gemeinschaft-*_*_*.deb'   -print0 | $(XARGS_0_RM)
+
 
 
 deb: _have-dpkg-buildpackage

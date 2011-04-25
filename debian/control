@@ -5,7 +5,7 @@ Maintainer: Amooma GmbH <info@amooma.de>
 Homepage: http://www.amooma.de/
 # Build-dependency on RubyGems as we need Bundler.
 # Build-dependency on headers for native Gems.
-Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
 Standards-Version: 3.8.4
 #Vcs-Git: git://git.debian.org/collab-maint/gemeinschaft.git
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/gemeinschaft.git;a=summary
@@ -23,7 +23,7 @@ Package: gemeinschaft-common
 Architecture: all
 Conflicts: gemeinschaft (<< 3.99)
 Depends: ${misc:Depends}, gemeinschaft-ruby-gems (= ${binary:Version})
-Pre-Depends: ruby-sane (>= 1.9.2)
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2)
 Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
 Description: Gemeinschaft - common files
  Common files of the Gemeinschaft telephony server.
@@ -31,22 +31,18 @@ Description: Gemeinschaft - common files
 
 Package: gemeinschaft-ruby-gems
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile (= ${binary:Version})
-Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev
+Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile
+# Pre-depend on Ruby as we need GemBundler:
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-common (= ${binary:Version})
 Description: Gemeinschaft - required Ruby Gems (pure Ruby)
  Ruby Gems required by the Gemeinschaft telephony server.
 
 
 Package: gemeinschaft-ruby-gems-native
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl
-Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev, gemeinschaft-ruby-gems (= ${binary:Version})
-# Gems with native extensions:
-# - sqlite3        requires package libsqlite3-dev
-# - nokogiri       requires package libxml2-dev and libxslt1-dev
-# - bcrypt-ruby    requires package -
-# - fcgi           requires package libfcgi-dev
-# - ruby-graphviz  requires package libgraphviz-dev and graphviz ?
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, libgraphviz4
+# Pre-depend on Ruby as we need GemBundler:
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version})
 Description: Gemeinschaft - required Ruby Gems (native)
  Ruby Gems (with native extensions) required by the Gemeinschaft
  telephony server.
@@ -54,8 +50,15 @@ Description: Gemeinschaft - required Ruby Gems (native)
 
 Package: gemeinschaft-ruby-gems-native-target-compile
 Architecture: all
-Depends: ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl
-Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev, gemeinschaft-ruby-gems (= ${binary:Version}), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, libgraphviz4
+# Pre-depend on Ruby as we need GemBundler:
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev, gemeinschaft-ruby-gems (= ${binary:Version}), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+# Gems with native extensions:
+# - sqlite3        requires package libsqlite3-dev
+# - nokogiri       requires package libxml2-dev and libxslt1-dev
+# - bcrypt-ruby    requires package -
+# - fcgi           requires package libfcgi-dev
+# - ruby-graphviz  requires package libgraphviz-dev and libgraphviz4 / graphviz ?
 Provides: gemeinschaft-ruby-gems-native
 Conflicts: gemeinschaft-ruby-gems-native
 Description: Gemeinschaft - required Ruby Gems (compile on target)
