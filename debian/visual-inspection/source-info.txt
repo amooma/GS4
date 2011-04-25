@@ -6,10 +6,10 @@ Version: 4.0~beta1-1
 Maintainer: Amooma GmbH <info@amooma.de>
 Homepage: http://www.amooma.de/
 Standards-Version: 3.8.4
-Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
 Checksums-Sha1: 
- 6459348e572fd3a6396a8a78c5797bd07339b3f0 27055285 gemeinschaft_4.0~beta1-1.tar.gz
+ 61dbbbe293212fac1e25b42c9298734511319594 27040340 gemeinschaft_4.0~beta1-1.tar.gz
 Checksums-Sha256: 
- 548a535a722407e1223d65378bf36b44bae19f6b169365765f7dbd0e947f7fc0 27055285 gemeinschaft_4.0~beta1-1.tar.gz
+ 36b917cd5af29e810edb0adb813dcf30e191f077db28dfb1a5c96bd5982d3006 27040340 gemeinschaft_4.0~beta1-1.tar.gz
 Files: 
- e16187e4a3ac8937ca08103f58289102 27055285 gemeinschaft_4.0~beta1-1.tar.gz
+ 9347e345b4b5d964e63c1cfdfc8e99c1 27040340 gemeinschaft_4.0~beta1-1.tar.gz
