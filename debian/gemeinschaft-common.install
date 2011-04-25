@@ -60,8 +60,6 @@ README              opt/gemeinschaft/
 script/*            opt/gemeinschaft/script/
 
 vendor/plugins/*    opt/gemeinschaft/vendor/plugins/
-vendor/cache/*.gem  opt/gemeinschaft/vendor/cache/
-vendor/bundle       opt/gemeinschaft/vendor/
 
 #.bundle/config      opt/gemeinschaft/.bundle/
 

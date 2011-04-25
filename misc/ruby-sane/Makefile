@@ -31,3 +31,11 @@ deb-install: deb
 	rm ../Packages.gz
 	ruby -v
 
+
+
+# Local Variables:
+# mode: unix-shell-script
+# coding: utf-8
+# indent-tabs-mode: t
+# End:
+

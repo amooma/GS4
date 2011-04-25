@@ -1,0 +1,25 @@
+ new debian package, version 2.0.
+ size 7256690 bytes: control archive= 2664 bytes.
+     949 bytes,    21 lines      control              
+    5443 bytes,    64 lines      md5sums              
+ Package: gemeinschaft-ruby-gems-native-target-compile
+ Source: gemeinschaft
+ Version: 4.0~beta1-1
+ Architecture: all
+ Maintainer: Amooma GmbH <info@amooma.de>
+ Installed-Size: 7532
+ Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev, gemeinschaft-ruby-gems (= 4.0~beta1-1), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+ Depends: libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl
+ Conflicts: gemeinschaft-ruby-gems-native
+ Provides: gemeinschaft-ruby-gems-native
+ Section: comm
+ Priority: extra
+ Homepage: http://www.amooma.de/
+ Description: Gemeinschaft - required Ruby Gems (compile on target)
+  Ruby Gems (with native extensions) required by the Gemeinschaft
+  telephony server.
+  .
+  This package can be used on architectores for which
+  gemeinschaft-ruby-gems-native is not provided. It will compile
+  the Gems with native extensions during the installation on the
+  target system (in the postinst script).

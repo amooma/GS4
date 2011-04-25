@@ -1,0 +1,35 @@
+ new debian package, version 2.0.
+ size 1918 bytes: control archive= 758 bytes.
+     971 bytes,    31 lines      control              
+     172 bytes,     2 lines      md5sums              
+ Package: gemeinschaft-sip-proxy
+ Source: gemeinschaft
+ Version: 4.0~beta1-1
+ Architecture: all
+ Maintainer: Amooma GmbH <info@amooma.de>
+ Installed-Size: 32
+ Pre-Depends: kamailio (>= 3.1)
+ Depends: gemeinschaft-common (= 4.0~beta1-1)
+ Recommends: gemeinschaft-sip-pbx
+ Conflicts: openser, opensips, ser
+ Replaces: kamailio
+ Section: comm
+ Priority: extra
+ Homepage: http://www.amooma.de/
+ Description: Gemeinschaft - SIP proxy
+  SIP proxy configuration for the Gemeinschaft telephony server.
+  .
+  As Kamailio is not in the official Debian repository yet you may
+  want to install it as per
+   http://www.kamailio.org/dokuwiki/doku.php/packages:debs
+  .
+  Add the GPG key to your APT key list:
+   wget -q -O - http://deb.kamailio.org/kamailiodebkey.gpg | apt-key add -
+  .
+  Add the APT repository:
+  .
+   (
+   echo 'deb     http://deb.kamailio.org/kamailio squeeze main'
+   echo 'deb-src http://deb.kamailio.org/kamailio squeeze main'
+   ) > /etc/apt/sources.list.d/kamailio.list
+   aptitude update

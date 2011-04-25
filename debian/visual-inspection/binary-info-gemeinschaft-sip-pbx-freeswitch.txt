@@ -1,0 +1,47 @@
+ new debian package, version 2.0.
+ size 2422 bytes: control archive= 1199 bytes.
+    2634 bytes,    43 lines      control              
+     190 bytes,     2 lines      md5sums              
+ Package: gemeinschaft-sip-pbx-freeswitch
+ Source: gemeinschaft
+ Version: 4.0~beta1-1
+ Architecture: all
+ Maintainer: Amooma GmbH <info@amooma.de>
+ Installed-Size: 48
+ Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
+ Depends: gemeinschaft-sip-pbx (= 4.0~beta1-1)
+ Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
+ Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
+ Replaces: freeswitch
+ Section: comm
+ Priority: extra
+ Homepage: http://www.amooma.de/
+ Description: Gemeinschaft - SIP PBX - FreeSwitch
+  Configuration for FreeSwitch as a SIP PBX for the Gemeinschaft
+  telephony server.
+  .
+  FreeSwitch is not in the official Debian repository. You may want
+  to build your own package from the upstream sources or use an
+  existing APT repository, e.g.:
+  .
+   (
+   echo 'deb     http://www.kempgen.net/pkg/deb/ squeeze contrib'
+   echo 'deb-src http://www.kempgen.net/pkg/deb/ squeeze contrib'
+   ) > /etc/apt/sources.list.d/kempgen.list
+   aptitude update
+  .
+  Note that the freeswitch-sounds-* packages don't exist anywhere.
+  You will have to download the tarballs from
+   http://files.freeswitch.org/
+  and make your own packages (if you want to) or download the sound
+  files as .deb packages from
+   http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drsivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
+   http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-music/
+  and install them (dpkg -i freeswitch-sounds-*.deb).
+  .
+  Or your could add freeswitch-driver's PPA on LaunchPad (for Ubuntu)
+   deb     http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main
+   deb-src http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main
+  to your APT sources. It's for Ubuntu but the architecture-independant
+  sound files should work. You will have to use APT pinning though so
+  let's no go there. Get the tarballs.

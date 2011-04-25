@@ -1,0 +1,10 @@
+drwxr-xr-x root/root         0 2011-04-24 22:14 ./
+drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/
+drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/share/
+drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/share/doc/
+drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/share/doc/gemeinschaft/
+-rw-r--r-- root/root       926 2011-04-22 18:17 ./usr/share/doc/gemeinschaft/copyright
+-rw-r--r-- root/root      3743 2011-02-01 20:42 ./usr/share/doc/gemeinschaft/README.gz
+-rw-r--r-- root/root       245 2011-04-20 22:50 ./usr/share/doc/gemeinschaft/TODO.txt
+-rw-r--r-- root/root       175 2011-04-22 18:18 ./usr/share/doc/gemeinschaft/README.Debian
+-rw-r--r-- root/root       147 2011-04-23 00:32 ./usr/share/doc/gemeinschaft/changelog.Debian.gz

@@ -23,7 +23,14 @@ DEB_VERSION:=$(shell dpkg-parsechangelog | sed -n -e 's/Version: //p')
 #DEB_SRC_VERSION:=$(shell echo $(DEB_NOEPOCH_VERSION) | sed -e 's/-[^-]\+$$//')
 
 
+PACKAGE = $(firstword $(shell dh_listpackages))
+#PACKAGE="gemeinschaft"
+TMP     = $(CURDIR)/debian/$(PACKAGE)
+# http://pkg-perl.alioth.debian.org/debhelper.html
+
+
 print-version:
+	@@echo "Main package:      $(PACKAGE)"
 	@@echo "Debian version:    $(DEB_VERSION)"
 	@@echo "Debian version:    $(DEB_NOEPOCH_VERSION)"
 	@@echo "Debian version:    $(DEB_SRC_VERSION)"
@@ -110,6 +117,94 @@ print-version:
 # 
 # .PHONY: build build-arch build-indep clean binary-indep binary-arch binary install clean print-version
 
+
+_have-clean-working-dir:
+	@ if [ ! -f ".build_unclean" ]; then \
+		if [ -d ".git" ]; then \
+			if ! git status | grep -q 'nothing to commit (working directory clean)'; then \
+				( \
+				echo "##############################################################" ;\
+				echo "#  Git working directory should be clean. (git status)" ;\
+				echo "#  If you really want to build a package from an unclean" ;\
+				echo "#  working copy then \"touch .build_unclean\" and try again." ;\
+				echo "##############################################################" ;\
+				) >&2 ;\
+				exit 1 ;\
+			fi ;\
+		fi ;\
+	else \
+		( \
+		echo "##############################################################" ;\
+		echo "#  Building from an unclean working copy ..." ;\
+		echo "##############################################################" ;\
+		) >&2 ;\
+	fi
+
+
+
+override_dh_clean:
+	dh_clean
+	[ ! -f "$(TMP)/ERD.pdf" ] || rm "$(TMP)/ERD.pdf"
+	@ # [ ! -d "vendor/bundle" ] || rm -rf "vendor/bundle"
+
+
+override_dh_auto_build:
+	@ #dh_auto_build  # calls `make`
+	
+	# Package Gems into vendor/bundle/:
+	#
+	@ if [ ! -f "Gemfile.lock" ]; then \
+		( \
+		echo "##############################################################" ;\
+		echo "#  Gemfile.lock not found. It should be in your VCS." ;\
+		echo "##############################################################" ;\
+		) >&2 ;\
+		exit 1 ;\
+	fi
+	@ if ! bundle check; then \
+		( \
+		echo "##############################################################" ;\
+		echo "#  Did not find required Gems." ;\
+		echo "#  Please run \"bundle install\"." ;\
+		echo "##############################################################" ;\
+		) >&2 ;\
+		exit 1 ;\
+	fi
+	@ # Unfortunately "bundle package" (or "bundle install") downloads
+	@ # the Gems and compiles them in one step. "build" target must
+	@ # never download anything though.
+	
+	# Install Gems into vendor/bundle/:
+	#FIXME TODO Remove vendor/bundle when done, but not in a "clean"
+	# target.
+	bundle install --deployment --local
+	
+	# Install Gems into vendor/cache/:
+	bundle package
+	
+	bundle check
+
+
+override_dh_auto_install:
+	@ #dh_auto_install  # calls `make install`
+	
+	# Remove stuff that we don't want in the package (and which
+	# shouldn't be in the VCS):
+	find "$(TMP)" -type f -name '.DS_Store' -print0 \
+		| xargs -0 -n 1 --no-run-if-empty 'rm'
+	find "$(TMP)/log" -type f -name '*.log' -print0 \
+		| xargs -0 -n 1 --no-run-if-empty 'rm'
+	
+	# Check that there aren't any local modifications:
+	./debian/rules _have-clean-working-dir
+	
+	# Remove more stuff that we don't want in the package (which
+	# may be in the VCS):
+	find "$(TMP)" -type f -name '.git*' -print0 \
+		| xargs -0 -n 1 --no-run-if-empty 'rm'
+	find "$(TMP)" -type d -name '.git' -print0 \
+		| xargs -0 -n 1 --no-run-if-empty 'rm'
+	
 
 
 %:

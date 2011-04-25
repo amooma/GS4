@@ -1,0 +1,17 @@
+ new debian package, version 2.0.
+ size 12624886 bytes: control archive= 121237 bytes.
+     485 bytes,    13 lines      control              
+  555141 bytes,  4241 lines      md5sums              
+ Package: gemeinschaft-ruby-gems
+ Source: gemeinschaft
+ Version: 4.0~beta1-1
+ Architecture: all
+ Maintainer: Amooma GmbH <info@amooma.de>
+ Installed-Size: 45556
+ Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev
+ Depends: gemeinschaft-ruby-gems-native (= 4.0~beta1-1) | gemeinschaft-ruby-gems-native-target-compile
+ Section: comm
+ Priority: extra
+ Homepage: http://www.amooma.de/
+ Description: Gemeinschaft - required Ruby Gems (pure Ruby)
+  Ruby Gems required by the Gemeinschaft telephony server.
