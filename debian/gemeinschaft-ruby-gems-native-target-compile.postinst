@@ -22,7 +22,7 @@ case "$1" in
 	configure)
 		# Install Gems from vendor/cache/*.gem into vendor/bundle/ :
 		cd /opt/gemeinschaft/
-		bundle install --local --deployment
+		bundle install --deployment --local
 		bundle check
 	;;
 	

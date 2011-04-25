@@ -63,18 +63,18 @@ _have-clean-working-dir:
 
 override_dh_auto_clean:
 	@ #dh_auto_clean  # calls `make clean` (which removes the Debian packages)
+	[ ! -e "vendor/bundle" ] || rm -rf "vendor/bundle"
 
 
 override_dh_clean:
 	dh_clean
 	[ ! -f "$(TMP)/ERD.pdf" ] || rm "$(TMP)/ERD.pdf"
-	@ # [ ! -d "vendor/bundle" ] || rm -rf "vendor/bundle"
 
 
 override_dh_auto_build:
 	@ #dh_auto_build  # calls `make`
 	
-	# Package Gems into vendor/bundle/:
+	# Package Ruby Gems:
 	#
 	@ if [ ! -f "Gemfile.lock" ]; then \
 		( \
@@ -97,19 +97,25 @@ override_dh_auto_build:
 	@ # the Gems and compiles them in one step. "build" target must
 	@ # never download anything though.
 	
-	# Install Gems into vendor/bundle/ (for gemeinschaft-ruby-gems):
-	#FIXME TODO Remove vendor/bundle when done, but not in a "clean"
-	# target.
+	# Install Gems into vendor/bundle/ (for gemeinschaft-ruby-gems and gemeinschaft-ruby-gems-native):
 	bundle install --deployment --local
+	# Remove .bundle/config to make bundle forget the
+	# --deployment argument (BUNDLE_PATH: vendor/bundle):
+	[ ! -e .bundle/config ] || rm .bundle/config
 	
 	# Install Gems into vendor/cache/ (for gemeinschaft-ruby-gems-native-target-compile):
-	bundle package
+	bundle package --path 'vendor/cache'
+	# Remove .bundle/config to make bundle forget the
+	# --path argument:
+	[ ! -e .bundle/config ] || rm .bundle/config
 	
 	bundle check
 
 
 override_dh_auto_install:
 	@ #dh_auto_install  # calls `make install`
+	
+	find .            -type f -name '.DS_Store' -print0 | $(XARGS_0_RM)
 	
 	# Remove stuff that we don't want in the package (and which
 	# shouldn't be in the VCS):

@@ -1,5 +1,5 @@
  new debian package, version 2.0.
- size 1918 bytes: control archive= 759 bytes.
+ size 1918 bytes: control archive= 758 bytes.
      971 bytes,    31 lines      control              
      172 bytes,     2 lines      md5sums              
  Package: gemeinschaft-sip-proxy

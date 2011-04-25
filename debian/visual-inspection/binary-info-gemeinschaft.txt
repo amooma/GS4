@@ -1,5 +1,5 @@
  new debian package, version 2.0.
- size 5978 bytes: control archive= 562 bytes.
+ size 5980 bytes: control archive= 563 bytes.
      387 bytes,    12 lines      control              
      368 bytes,     5 lines      md5sums              
  Package: gemeinschaft
