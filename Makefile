@@ -68,6 +68,7 @@ deb: _have-dpkg-buildpackage
 		dpkg --info ../$${binpkg}_$(DEB_VERSION)_*.deb \
 			> debian/visual-inspection/binary-info-$${binpkg}.txt ;\
 		dpkg --contents ../$${binpkg}_$(DEB_VERSION)_*.deb \
+			| sed 's/ [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]/ /' \
 			> debian/visual-inspection/binary-contents-$${binpkg}.txt ;\
 	done
 

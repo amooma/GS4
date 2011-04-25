@@ -31,7 +31,7 @@ Description: Gemeinschaft - common files
 
 Package: gemeinschaft-ruby-gems
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile
+Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile (= ${binary:Version})
 Pre-Depends: ruby-sane (>= 1.9.2), ruby-sane-dev
 Description: Gemeinschaft - required Ruby Gems (pure Ruby)
  Ruby Gems required by the Gemeinschaft telephony server.

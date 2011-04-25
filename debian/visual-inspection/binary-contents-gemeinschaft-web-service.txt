@@ -1,7 +1,7 @@
-drwxr-xr-x root/root         0 2011-04-24 22:14 ./
-drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/
-drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/share/
-drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/share/doc/
-drwxr-xr-x root/root         0 2011-04-24 22:14 ./usr/share/doc/gemeinschaft-web-service/
--rw-r--r-- root/root       926 2011-04-22 18:17 ./usr/share/doc/gemeinschaft-web-service/copyright
--rw-r--r-- root/root       147 2011-04-23 00:32 ./usr/share/doc/gemeinschaft-web-service/changelog.Debian.gz
+drwxr-xr-x root/root         0  ./
+drwxr-xr-x root/root         0  ./usr/
+drwxr-xr-x root/root         0  ./usr/share/
+drwxr-xr-x root/root         0  ./usr/share/doc/
+drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-web-service/
+-rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft-web-service/copyright
+-rw-r--r-- root/root       147  ./usr/share/doc/gemeinschaft-web-service/changelog.Debian.gz
