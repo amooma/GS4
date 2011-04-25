@@ -21,7 +21,7 @@ deb:
 	echo "#  Building Debian packages ..." ;\
 	echo '##############################################################' ;\
 	)
-	dpkg-buildpackage -tc -us -uc
+	dpkg-buildpackage -b -tc -us -uc
 	@ ( \
 	echo '##############################################################' ;\
 	echo "#  Find the packages in ../ :" ;\
