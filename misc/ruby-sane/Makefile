@@ -1,4 +1,6 @@
 
+XARGS_0_RM=xargs -0 -n 1 --no-run-if-empty 'rm'
+
 help:
 	@# In this case we need something that doesn't do anything as
 	@# the first target because debhelper calls the Makefile
@@ -50,12 +52,12 @@ deb-install: deb
 	ruby -v
 
 clean:
-	[ ! -f ../ruby-sane_*.dsc       ] || rm ../ruby-sane_*.dsc
-	[ ! -f ../ruby-sane_*.tar.gz    ] || rm ../ruby-sane_*.tar.gz
-	[ ! -f ../ruby-sane_*_*.changes ] || rm ../ruby-sane_*_*.changes
+	find .. -type f -name 'ruby-sane_*.dsc'       -print0 | $(XARGS_0_RM)
+	find .. -type f -name 'ruby-sane_*.tar.gz'    -print0 | $(XARGS_0_RM)
+	find .. -type f -name 'ruby-sane_*_*.changes' -print0 | $(XARGS_0_RM)
 	
-	[ ! -f ../ruby-sane1.9.1_*_*.deb     ] || rm ../ruby-sane1.9.1_*_*.deb
-	[ ! -f ../ruby-sane1.9.1-dev_*_*.deb ] || rm ../ruby-sane1.9.1-dev_*_*.deb
+	find .. -type f -name 'ruby-sane*_*_*.deb'    -print0 | $(XARGS_0_RM)
+	find .. -type f -name 'ruby-sane*-*_*_*.deb'  -print0 | $(XARGS_0_RM)
 	
 	[ ! -f ../Packages.gz ] || rm ../Packages.gz
 
