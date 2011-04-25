@@ -41,12 +41,11 @@ case "$1" in
       --slave   "/usr/share/man/man1/gem.1.gz"  "gem.1.gz" \
           "/usr/share/man/man1/gem${ruby_pkg_abi}.1.gz" \
       --slave   "/usr/share/man/man1/rdoc.1.gz"  "rdoc.1.gz" \
-          "/usr/share/man/man1/rdoc${ruby_pkg_abi}.1.gz" \
-    || exit 1
+          "/usr/share/man/man1/rdoc${ruby_pkg_abi}.1.gz"
     update-alternatives --auto "ruby"
     
-    which ruby  || exit 1
-    ruby -v     || exit 1
+    which ruby
+    ruby -v
     
     # Use upstream RubyGems (which will install Gem executables into
     # /usr/bin from now on).
@@ -59,7 +58,7 @@ case "$1" in
     /usr/bin/update_rubygems
     rm -rf /var/lib/gems
     
-    gem install bundler   || exit 1
+    gem install bundler
     
     ## add RubyGems executable directory (bin wrappers) to PATH:
     #(

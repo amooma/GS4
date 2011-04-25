@@ -29,5 +29,13 @@ print-version:
 	@@echo "Debian version:    $(DEB_SRC_VERSION)"
 
 
+override_dh_auto_clean:
+	@ #dh_auto_clean  # calls `make clean` (which removes the Debian packages)
+
+
+override_dh_auto_build:
+	@ #dh_auto_build  # calls `make`
+
+
 %:
 	dh $@ 
