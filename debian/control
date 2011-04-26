@@ -22,8 +22,7 @@ Description: Gemeinschaft - telephony server
 Package: gemeinschaft-common
 Architecture: all
 Conflicts: gemeinschaft (<< 3.99)
-Depends: ${misc:Depends}, gemeinschaft-ruby-gems (= ${binary:Version})
-Pre-Depends: ruby-sane1.9.1 (>= 1.9.2)
+Depends: ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version})
 Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
 Description: Gemeinschaft - common files
  Common files of the Gemeinschaft telephony server.
@@ -31,18 +30,16 @@ Description: Gemeinschaft - common files
 
 Package: gemeinschaft-ruby-gems
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile
-# Pre-depend on Ruby as we need GemBundler:
-Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-common (= ${binary:Version})
+Depends: ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile
+# Depend on Ruby as we need GemBundler.
 Description: Gemeinschaft - required Ruby Gems (pure Ruby)
  Ruby Gems required by the Gemeinschaft telephony server.
 
 
 Package: gemeinschaft-ruby-gems-native
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, libgraphviz4
-# Pre-depend on Ruby as we need GemBundler:
-Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version}), libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, graphviz
+# Depend on Ruby as we need GemBundler.
 Description: Gemeinschaft - required Ruby Gems (native)
  Ruby Gems (with native extensions) required by the Gemeinschaft
  telephony server.
@@ -50,9 +47,9 @@ Description: Gemeinschaft - required Ruby Gems (native)
 
 Package: gemeinschaft-ruby-gems-native-target-compile
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, libgraphviz4
-# Pre-depend on Ruby as we need GemBundler:
-Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev, gemeinschaft-ruby-gems (= ${binary:Version}), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, graphviz
+# Depend on Ruby as we need GemBundler.
+Pre-Depends: gemeinschaft-ruby-gems (= ${binary:Version}), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
 # Gems with native extensions:
 # - sqlite3        requires package libsqlite3-dev
 # - nokogiri       requires package libxml2-dev and libxslt1-dev
@@ -80,7 +77,7 @@ Description: Gemeinschaft - automated tests
 
 Package: gemeinschaft-sip-proxy
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), kamailio-presence-modules
 Pre-Depends: kamailio (>= 3.1)
 Replaces: kamailio
 Conflicts: ser, openser, opensips
