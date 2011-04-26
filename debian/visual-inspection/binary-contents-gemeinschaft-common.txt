@@ -203,7 +203,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/config/initializers/
 -rw-r--r-- root/root      2783  ./opt/gemeinschaft/config/routes.rb
 -rw-r--r-- root/root      1858  ./opt/gemeinschaft/Gemfile
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/
--rw-r--r-- root/root      6961  ./opt/gemeinschaft/db/schema.rb
+-rw-r--r-- root/root      6832  ./opt/gemeinschaft/db/schema.rb
 -rw-r--r-- root/root     12062  ./opt/gemeinschaft/db/seeds.rb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/migrate/
 -rw-r--r-- root/root       195  ./opt/gemeinschaft/db/migrate/20110420214332_add_phone_id_to_sip_account.rb
