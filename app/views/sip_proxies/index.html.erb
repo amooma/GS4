@@ -4,18 +4,16 @@
   <tr>
     <th>Host</th>
     <th>Port</th>
-    <th>Management host</th>
-    <th>Management port</th>
+    <th>Is on this node</th>
     <th></th>
-	<th></th>
+    <th></th>
   </tr>
 
 <% @sip_proxies.each do |sip_proxy| %>
   <tr>
     <td><%= sip_proxy.host %></td>
     <td><%= sip_proxy.port %></td>
-	<td><%= sip_proxy.management_host %></td>
-	<td><%= sip_proxy.management_port %></td>
+    <td><%= sip_proxy.is_local %></td>
     <td><%= link_to 'Show', sip_proxy %></td>
     <td><%= button_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
