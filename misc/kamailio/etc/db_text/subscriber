@@ -1,4 +1,1 @@
 username(str) domain(str) password(str) email_address(str) datetime_created(int) datetime_modified(int) ha1(str) ha1b(str) rpid(str,null)
-1001:x:x:x:1297415505:1297422962:70720b23d8d51852fd2b1c503018ef0e:x::
-1002:x:x:x:1297415519:1297422988:97449e38463d507525b3e8bb9c2085de:x::
-1003:x:x:x:1297415536:1297422934:349462838cbb62d08f6fd0d82bb65b84:x::
