@@ -720,6 +720,7 @@ Gemeinschaft4/debian/gemeinschaft-sip-pbx-freeswitch.install
 Gemeinschaft4/debian/gemeinschaft-tests.install
 Gemeinschaft4/debian/gemeinschaft-doc.docs
 Gemeinschaft4/debian/gemeinschaft-common.postrm
+Gemeinschaft4/debian/gemeinschaft-sip-pbx-freeswitch.postinst
 Gemeinschaft4/debian/gemeinschaft-sip-proxy.dirs
 Gemeinschaft4/debian/visual-inspection/
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-ruby-gems.txt
@@ -764,6 +765,7 @@ Gemeinschaft4/debian/README
 Gemeinschaft4/debian/gemeinschaft-ruby-gems-native.install
 Gemeinschaft4/debian/gemeinschaft-ruby-gems.install
 Gemeinschaft4/debian/gemeinschaft-doc.install
+Gemeinschaft4/debian/gemeinschaft-sip-proxy.postinst
 Gemeinschaft4/debian/source/
 Gemeinschaft4/debian/source/format
 Gemeinschaft4/README
