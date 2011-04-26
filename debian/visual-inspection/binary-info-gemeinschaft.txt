@@ -1,0 +1,16 @@
+ new debian package, version 2.0.
+ size 5980 bytes: control archive= 563 bytes.
+     387 bytes,    12 lines      control              
+     368 bytes,     5 lines      md5sums              
+ Package: gemeinschaft
+ Version: 4.0~beta1-1
+ Architecture: all
+ Maintainer: Amooma GmbH <info@amooma.de>
+ Installed-Size: 44
+ Depends: gemeinschaft-sip-proxy, gemeinschaft-sip-pbx, gemeinschaft-web-service
+ Suggests: gemeinschaft-doc, gemeinschaft-tests
+ Section: comm
+ Priority: extra
+ Homepage: http://www.amooma.de/
+ Description: Gemeinschaft - telephony server
+  Gemeinschaft telephony server.

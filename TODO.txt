@@ -1,15 +1,20 @@
 #TODO Zusammenführung:
 
 - doc/docbook von Cantina einbauen
-- db/seeds.rb von Cantina einbauen
 - lib/tasks/*.rake von Cantina einbauen
 ...
 
+- SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
 
-- SipProxy einbauen (mit Doku etc.)
+- freeswitch_call_processing web service anpassen,
+  siehe misc/freeswitch/fs-conf/dialplan/default.xml
 
+
+
+DONE:
+- DB models von Cantina
+- DB seeds von Cantina
+- gs-freeswitch-config reinziehen
 - gs-kamailio-config reinziehen
-
-- gs-freeswitch-conf reinziehen
 
 

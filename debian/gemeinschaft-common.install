@@ -1,0 +1,75 @@
+app/controllers/*.rb        opt/gemeinschaft/app/controllers/
+app/controllers/admin/*.rb  opt/gemeinschaft/app/controllers/admin/
+
+app/helpers/*.rb            opt/gemeinschaft/app/helpers/
+app/helpers/admin/*.rb      opt/gemeinschaft/app/helpers/admin/
+
+app/models/*.rb             opt/gemeinschaft/app/models/
+
+app/views/authentications/*.erb                 opt/gemeinschaft/app/views/authentications/
+app/views/extensions/*.erb                      opt/gemeinschaft/app/views/extensions/
+app/views/freeswitch_call_processing/*.erb      opt/gemeinschaft/app/views/freeswitch_call_processing/
+app/views/freeswitch_directory_entries/*.erb    opt/gemeinschaft/app/views/freeswitch_directory_entries/
+app/views/layouts/*.erb                         opt/gemeinschaft/app/views/layouts/
+app/views/provisioning_servers/*.erb            opt/gemeinschaft/app/views/provisioning_servers/
+app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
+app/views/sip_phones/*.erb                      opt/gemeinschaft/app/views/sip_phones/
+app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
+app/views/sip_servers/*.erb                     opt/gemeinschaft/app/views/sip_servers/
+app/views/voicemail_servers/*.erb               opt/gemeinschaft/app/views/voicemail_servers/
+
+app/views/admin/*.erb                           opt/gemeinschaft/app/views/admin/
+app/views/admin/setup/*.erb                     opt/gemeinschaft/app/views/admin/setup/
+app/views/admin/users/*.erb                     opt/gemeinschaft/app/views/admin/users/
+
+app/views/devise/confirmations/*.erb            opt/gemeinschaft/app/views/devise/confirmations/
+app/views/devise/mailer/*.erb                   opt/gemeinschaft/app/views/devise/mailer/
+app/views/devise/passwords/*.erb                opt/gemeinschaft/app/views/devise/passwords/
+app/views/devise/registrations/*.erb            opt/gemeinschaft/app/views/devise/registrations/
+app/views/devise/sessions/*.erb                 opt/gemeinschaft/app/views/devise/sessions/
+app/views/devise/shared/*.erb                   opt/gemeinschaft/app/views/devise/shared/
+app/views/devise/unlocks/*.erb                  opt/gemeinschaft/app/views/devise/unlocks/
+
+config/application.rb       opt/gemeinschaft/config/
+config/boot.rb              opt/gemeinschaft/config/
+config/database.yml         opt/gemeinschaft/config/
+config/routes.rb            opt/gemeinschaft/config/
+config/environment.rb       opt/gemeinschaft/config/
+
+config/environments/development.rb  opt/gemeinschaft/config/environments/
+config/environments/test.rb         opt/gemeinschaft/config/environments/
+config/environments/production.rb   opt/gemeinschaft/config/environments/
+
+config/initializers/*.rb    opt/gemeinschaft/config/initializers/
+config/locales/*.yml        opt/gemeinschaft/config/locales/
+
+config.ru           opt/gemeinschaft/
+Gemfile             opt/gemeinschaft/
+Gemfile.lock        opt/gemeinschaft/
+
+lib/*.rb            opt/gemeinschaft/lib/
+#lib/tasks/*.rb      opt/gemeinschaft/tasks/
+
+db/schema.rb        opt/gemeinschaft/db/
+db/seeds.rb         opt/gemeinschaft/db/
+db/migrate/*.rb     opt/gemeinschaft/db/migrate/
+
+public              opt/gemeinschaft/
+Rakefile            opt/gemeinschaft/
+README              opt/gemeinschaft/
+script/*            opt/gemeinschaft/script/
+
+vendor/plugins/*    opt/gemeinschaft/vendor/plugins/
+
+#.bundle/config      opt/gemeinschaft/.bundle/
+
+tmp/cache           opt/gemeinschaft/tmp/
+tmp/pids            opt/gemeinschaft/tmp/
+tmp/sessions        opt/gemeinschaft/tmp/
+tmp/sockets         opt/gemeinschaft/tmp/
+
+log                 opt/gemeinschaft/
+
+
+#bundle install --local --deployment
+

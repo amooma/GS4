@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+#
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# Modified to make a template file for a multi-binary package with separated
+# build-arch and build-indep targets  by Bill Allombert 2001
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+
+
+DEB_VERSION:=$(shell dpkg-parsechangelog | sed -n -e 's/Version: //p')
+#DEB_NOEPOCH_VERSION:=$(shell echo $(DEB_VERSION) | cut -d':' -f 2)
+#DEB_SRC_VERSION:=$(shell echo $(DEB_NOEPOCH_VERSION) | sed -e 's/-[^-]\+$$//')
+
+
+print-version:
+	@@echo "Debian version:    $(DEB_VERSION)"
+	@@echo "Debian version:    $(DEB_NOEPOCH_VERSION)"
+	@@echo "Debian version:    $(DEB_SRC_VERSION)"
+
+
+override_dh_auto_clean:
+	@ #dh_auto_clean  # calls `make clean` (which removes the Debian packages)
+
+
+override_dh_auto_build:
+	@ #dh_auto_build  # calls `make`
+
+
+%:
+	dh $@ 

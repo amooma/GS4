@@ -25,13 +25,48 @@ will build the domains ACL using this value.
 		<!--
 		You can place files in the default directory to get included.
 		-->
-		<X-PRE-PROCESS cmd="include" data="default/*.xml" />
+		<!--<X -PRE-PROCESS cmd="include" data="default/*.xml" />-->
 		
 		<!--
 		<extension name="gs_main">
 			<condition field="destination_number" expression="^.*$">
 				<action application="socket" data="127.0.0.1:8084 async full" />
 				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" /><!- - 503 Service Unavailable - ->
+			</condition>
+		</extension>
+		-->
+		
+		<!--
+		#TODO Integrate these extensions from
+		http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc
+		https://github.com/amooma/gs-freeswitch-conf/commit/7b52ea6e8e47c876bfbc7a28b6e041c28d7d2d91#diff-2
+		into the freeswitch_call_processing web service which is
+		queried by GS.js.
+		
+		<extension name="kam-vbox">
+			<condition field="destination_number" expression="^vb-(.+)$">
+				<action application="answer" />
+				<action application="voicemail" data="default ${domain_name} $1" />
+			</condition>
+		</extension>
+		
+		<extension name="kam-vmenu">
+			<condition field="destination_number" expression="^vm-(.+)$">
+				<action application="voicemail" data="check default ${domain_name} $1" />
+			</condition>
+		</extension>
+		
+		<extension name="kam-kbridge">
+			<condition field="destination_number" expression="^kb-(.+)$">
+				<action application="set" data="proxy_media=true" />
+				<action application="set" data="call_timeout=50" />
+				<action application="set" data="continue_on_fail=true" />
+				<action application="set" data="hangup_after_bridge=true" />
+				<action application="set" data="sip_invite_domain=192.168.178.23" />
+				<action application="export" data="sip_contact_user=ufs" />
+				<action application="bridge" data="sofia/$${domain}/$1@192.168.178.23" />
+				<action application="answer" />
+				<action application="voicemail" data="default ${domain_name} $1" />
 			</condition>
 		</extension>
 		-->

@@ -1,0 +1,24 @@
+ new debian package, version 2.0.
+ size 145314 bytes: control archive= 8896 bytes.
+       0 bytes,     0 lines      conffiles            
+     523 bytes,    15 lines      control              
+   23112 bytes,   256 lines      md5sums              
+     969 bytes,    41 lines   *  postinst             #!/bin/sh
+     908 bytes,    37 lines   *  postrm               #!/bin/sh
+     663 bytes,    35 lines   *  preinst              #!/bin/sh
+     850 bytes,    38 lines   *  prerm                #!/bin/sh
+ Package: gemeinschaft-common
+ Source: gemeinschaft
+ Version: 4.0~beta1-1
+ Architecture: all
+ Maintainer: Amooma GmbH <info@amooma.de>
+ Installed-Size: 1612
+ Pre-Depends: ruby-sane1.9.1 (>= 1.9.2)
+ Depends: gemeinschaft-ruby-gems (= 4.0~beta1-1)
+ Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
+ Conflicts: gemeinschaft (<< 3.99)
+ Section: comm
+ Priority: extra
+ Homepage: http://www.amooma.de/
+ Description: Gemeinschaft - common files
+  Common files of the Gemeinschaft telephony server.

@@ -1,0 +1,173 @@
+Source: gemeinschaft
+Section: comm
+Priority: extra
+Maintainer: Amooma GmbH <info@amooma.de>
+Homepage: http://www.amooma.de/
+# Build-dependency on RubyGems as we need Bundler.
+# Build-dependency on headers for native Gems.
+Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+Standards-Version: 3.8.4
+#Vcs-Git: git://git.debian.org/collab-maint/gemeinschaft.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/gemeinschaft.git;a=summary
+
+
+Package: gemeinschaft
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-sip-proxy, gemeinschaft-sip-pbx, gemeinschaft-web-service
+Suggests: gemeinschaft-doc, gemeinschaft-tests
+Description: Gemeinschaft - telephony server
+ Gemeinschaft telephony server.
+
+
+Package: gemeinschaft-common
+Architecture: all
+Conflicts: gemeinschaft (<< 3.99)
+Depends: ${misc:Depends}, gemeinschaft-ruby-gems (= ${binary:Version})
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2)
+Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
+Description: Gemeinschaft - common files
+ Common files of the Gemeinschaft telephony server.
+
+
+Package: gemeinschaft-ruby-gems
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-ruby-gems-native (= ${binary:Version}) | gemeinschaft-ruby-gems-native-target-compile
+# Pre-depend on Ruby as we need GemBundler:
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-common (= ${binary:Version})
+Description: Gemeinschaft - required Ruby Gems (pure Ruby)
+ Ruby Gems required by the Gemeinschaft telephony server.
+
+
+Package: gemeinschaft-ruby-gems-native
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, libgraphviz4
+# Pre-depend on Ruby as we need GemBundler:
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version})
+Description: Gemeinschaft - required Ruby Gems (native)
+ Ruby Gems (with native extensions) required by the Gemeinschaft
+ telephony server.
+
+
+Package: gemeinschaft-ruby-gems-native-target-compile
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, libgraphviz4
+# Pre-depend on Ruby as we need GemBundler:
+Pre-Depends: ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev, gemeinschaft-ruby-gems (= ${binary:Version}), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
+# Gems with native extensions:
+# - sqlite3        requires package libsqlite3-dev
+# - nokogiri       requires package libxml2-dev and libxslt1-dev
+# - bcrypt-ruby    requires package -
+# - fcgi           requires package libfcgi-dev
+# - ruby-graphviz  requires package libgraphviz-dev and libgraphviz4 / graphviz ?
+Provides: gemeinschaft-ruby-gems-native
+Conflicts: gemeinschaft-ruby-gems-native
+Description: Gemeinschaft - required Ruby Gems (compile on target)
+ Ruby Gems (with native extensions) required by the Gemeinschaft
+ telephony server.
+ .
+ This package can be used on architectores for which
+ gemeinschaft-ruby-gems-native is not provided. It will compile
+ the Gems with native extensions during the installation on the
+ target system (in the postinst script).
+
+
+Package: gemeinschaft-tests
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Description: Gemeinschaft - automated tests
+ Tests of the Gemeinschaft telephony server.
+
+
+Package: gemeinschaft-sip-proxy
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Pre-Depends: kamailio (>= 3.1)
+Replaces: kamailio
+Conflicts: ser, openser, opensips
+Recommends: gemeinschaft-sip-pbx
+Description: Gemeinschaft - SIP proxy
+ SIP proxy configuration for the Gemeinschaft telephony server.
+ .
+ As Kamailio is not in the official Debian repository yet you may
+ want to install it as per
+  http://www.kamailio.org/dokuwiki/doku.php/packages:debs
+ .
+ Add the GPG key to your APT key list:
+  wget -q -O - http://deb.kamailio.org/kamailiodebkey.gpg | apt-key add -
+ .
+ Add the APT repository:
+ .
+  (
+  echo 'deb     http://deb.kamailio.org/kamailio squeeze main'
+  echo 'deb-src http://deb.kamailio.org/kamailio squeeze main'
+  ) > /etc/apt/sources.list.d/kamailio.list
+  aptitude update
+
+
+Package: gemeinschaft-sip-pbx
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), gemeinschaft-sip-proxy (= ${binary:Version}), gemeinschaft-sip-pbx-freeswitch (= ${binary:Version})
+Description: Gemeinschaft - SIP PBX
+ SIP PBX configuration for the Gemeinschaft telephony server.
+
+
+Package: gemeinschaft-sip-pbx-freeswitch
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-sip-pbx (= ${binary:Version})
+Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
+Replaces: freeswitch
+Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
+Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
+Description: Gemeinschaft - SIP PBX - FreeSwitch
+ Configuration for FreeSwitch as a SIP PBX for the Gemeinschaft
+ telephony server.
+ .
+ FreeSwitch is not in the official Debian repository. You may want
+ to build your own package from the upstream sources or use an
+ existing APT repository, e.g.:
+ .
+  (
+  echo 'deb     http://www.kempgen.net/pkg/deb/ squeeze contrib'
+  echo 'deb-src http://www.kempgen.net/pkg/deb/ squeeze contrib'
+  ) > /etc/apt/sources.list.d/kempgen.list
+  aptitude update
+ .
+ Note that the freeswitch-sounds-* packages don't exist anywhere.
+ You will have to download the tarballs from
+  http://files.freeswitch.org/
+ and make your own packages (if you want to) or download the sound
+ files as .deb packages from
+  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drsivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
+  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-music/
+ and install them (dpkg -i freeswitch-sounds-*.deb).
+ .
+ Or your could add freeswitch-driver's PPA on LaunchPad (for Ubuntu)
+  deb     http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main
+  deb-src http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main 
+ to your APT sources. It's for Ubuntu but the architecture-independant
+ sound files should work. You will have to use APT pinning though so
+ let's no go there. Get the tarballs.
+
+
+Package: gemeinschaft-web-service
+Architecture: all
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Pre-Depends: lighttpd (>= 1.4.28)
+Replaces: lighttpd
+Breaks: httpd
+Suggests: logrotate
+Provides: gemeinschaft-provisioning
+Description: Gemeinschaft - web service
+ Web interface (HTML and XML API) of the Gemeinschaft telephony
+ server.
+
+
+Package: gemeinschaft-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+# Suggest graphviz as we include ERD.dot.
+Suggests: graphviz
+Description: Gemeinschaft - documentation
+ Documentation for the Gemeinschaft telephony server.
+

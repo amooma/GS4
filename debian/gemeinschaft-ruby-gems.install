@@ -1,0 +1,72 @@
+# bin wrappers (not compiled):
+vendor/bundle/ruby/1.9.1/bin/*      opt/gemeinschaft/vendor/bundle/ruby/1.9.1/bin/
+
+# documentation:
+#vendor/bundle/ruby/1.9.1/doc        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/
+
+# gemspecs:
+vendor/bundle/ruby/1.9.1/specifications/*.gemspec     opt/gemeinschaft/vendor/bundle/ruby/1.9.1/specifications/
+
+# gems (the archives):
+vendor/bundle/ruby/1.9.1/cache        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/
+
+
+# List all gems here that are not in gemeinschaft-ruby-gems-native.install
+vendor/bundle/ruby/1.9.1/gems/abstract-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/actionmailer-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/actionpack-[0-9]*           opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/activemodel-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/activerecord-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/activeresource-[0-9]*       opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/activesupport-[0-9]*        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/acts_as_list-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/addressable-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/arel-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/builder-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/default_value_for-[0-9]*    opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/devise-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/erubis-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/factory_girl-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/factory_girl_rails-[0-9]*   opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/faker-[0-9]*                opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/faraday-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/hirb-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/i18n-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/mail-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/mime-types-[0-9]*           opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/multi_json-[0-9]*           opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/multipart-post-[0-9]*       opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/net-ldap-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oa-basic-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oa-core-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oa-enterprise-[0-9]*        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oa-more-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oa-oauth-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oa-openid-[0-9]*            opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oauth-[0-9]*                opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/oauth2-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/omniauth-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/polyglot-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/pyu-ruby-sasl-[0-9]*        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rack-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rack-mount-[0-9]*           opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rack-openid-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rack-test-[0-9]*            opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rails-[0-9]*                opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rails3-generators-[0-9]*    opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rails-erd-[0-9]*            opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/railties-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rake-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rest-client-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/rubyntlm-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/ruby-openid-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/ruby-openid-apps-discovery-[0-9]*    opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/shoulda-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/simple_form-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/sqlite3-ruby-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/syslogger-[0-9]*            opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/thor-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/treetop-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/tzinfo-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/warden-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+
