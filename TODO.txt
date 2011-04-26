@@ -1,7 +1,6 @@
 #TODO Zusammenführung:
 
 - doc/docbook von Cantina einbauen
-- db/seeds.rb von Cantina einbauen
 - lib/tasks/*.rake von Cantina einbauen
 ...
 
@@ -10,9 +9,8 @@
 
 - gs-kamailio-config reinziehen
 
-- gs-freeswitch-conf reinziehen: Done.
-  - ToDo: freeswitch_call_processing web service anpassen,
-    siehe misc/freeswitch/fs-conf/dialplan/default.xml
+- freeswitch_call_processing web service anpassen,
+  siehe misc/freeswitch/fs-conf/dialplan/default.xml
 
 
 
