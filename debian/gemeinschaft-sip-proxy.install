@@ -1,0 +1,3 @@
+misc/kamailio/etc/*.cfg         etc/kamailio/
+misc/kamailio/etc/db_text/*     etc/kamailio/db_text/
+

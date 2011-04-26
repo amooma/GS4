@@ -711,13 +711,16 @@ Gemeinschaft4/log/development.log
 Gemeinschaft4/config.ru
 Gemeinschaft4/Amooma-Gemeinschaft4.komodoproject
 Gemeinschaft4/debian/
+Gemeinschaft4/debian/gemeinschaft-sip-proxy.install
 Gemeinschaft4/debian/copyright
 Gemeinschaft4/debian/rules
 Gemeinschaft4/debian/compat
 Gemeinschaft4/debian/watch.ex
+Gemeinschaft4/debian/gemeinschaft-sip-pbx-freeswitch.install
 Gemeinschaft4/debian/gemeinschaft-tests.install
 Gemeinschaft4/debian/gemeinschaft-doc.docs
 Gemeinschaft4/debian/gemeinschaft-common.postrm
+Gemeinschaft4/debian/gemeinschaft-sip-proxy.dirs
 Gemeinschaft4/debian/visual-inspection/
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-ruby-gems.txt
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-ruby-gems-native-target-compile.txt
