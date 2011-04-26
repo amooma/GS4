@@ -4,13 +4,17 @@
 - lib/tasks/*.rake von Cantina einbauen
 ...
 
-
-- SipProxy einbauen (mit Doku etc.)
-
-- gs-kamailio-config reinziehen
+- SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
 
 - freeswitch_call_processing web service anpassen,
   siehe misc/freeswitch/fs-conf/dialplan/default.xml
 
+
+
+DONE:
+- DB models von Cantina
+- DB seeds von Cantina
+- gs-freeswitch-config reinziehen
+- gs-kamailio-config reinziehen
 
 
