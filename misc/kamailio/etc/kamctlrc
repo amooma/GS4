@@ -18,25 +18,25 @@
 # DBENGINE=MYSQL
 
 ## database host
-# DBHOST=localhost
+DBHOST=localhost
 
 ## database name (for ORACLE this is TNS name)
-# DBNAME=openser
+DBNAME=kamailio
 
 # database path used by dbtext or db_berkeley
 # DB_PATH="/usr/local/etc/kamailio/dbtext"
 
 ## database read/write user
-# DBRWUSER=openser
+DBRWUSER=kamailio
 
 ## password for database read/write user
-# DBRWPW="openserrw"
+DBRWPW="kamailio"
 
 ## database read only user
-# DBROUSER=openserro
+DBROUSER=kamailio
 
 ## password for database read only user
-# DBROPW=openserro
+DBROPW="kamailio"
 
 ## database super user (for ORACLE this is 'scheme-creator' user)
 # DBROOTUSER="root"
