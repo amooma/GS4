@@ -20,12 +20,8 @@
   <%= f.text_field :port %>
 </div>
 <div class="field">
-  <%= f.label :management_host, "Management host (if managed by Gemeinschaft)" %><br />
-  <%= f.text_field :management_host %>
-</div>
-<div class="field">
-  <%= f.label :management_port, "Management port (if managed by Gemeinschaft)" %><br />
-  <%= f.text_field :management_port %>
+  <%= f.label :name, "On this host" %><br />
+  <%= f.check_box :is_local %>
 </div>
 <div class="field">
   <%= f.label :last_sip_proxy_id, "Take over accounts" %><br />

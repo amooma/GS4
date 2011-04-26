@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110420214532) do
+ActiveRecord::Schema.define(:version => 20110426190457) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -186,17 +186,15 @@ ActiveRecord::Schema.define(:version => 20110420214532) do
     t.datetime "updated_at"
     t.string   "host"
     t.integer  "port"
-    t.string   "management_host"
-    t.integer  "management_port"
+    t.boolean  "is_local"
   end
 
   create_table "sip_servers", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "host"
-    t.integer  "management_port"
     t.integer  "port"
-    t.string   "management_host"
+    t.boolean  "is_local"
   end
 
   create_table "users", :force => true do |t|

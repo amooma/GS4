@@ -8,14 +8,8 @@
   <%= (! @sip_server.port.blank?) ? @sip_server.port : "none" %>
 </p>
 <p>
-<p>
-  <b>Management host:</b>
-  <%= @sip_server.management_host %>
+  <b>Is on this node</b>
+  <%= @sip_server.is_local %>
 </p>
-<p>
-  <b>Management port:</b>
-  <%= (! @sip_server.management_port.blank?) ? @sip_server.management_port : "none" %>
-</p>
-
 
 <%= link_to 'Back', sip_servers_path %>

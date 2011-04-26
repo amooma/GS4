@@ -8,12 +8,8 @@
   <%= (! @sip_proxy.port.blank?) ? @sip_proxy.port : "none" %>
 </p>
 <p>
-  <b>Management host:</b>
-  <%= @sip_proxy.management_host %>
-</p>	
-<p>
-  <b>Management port:</b>
-  <%= (! @sip_proxy.management_port.blank?) ? @sip_proxy.management_port : "none" %>
+  <b>Is on this node</b>
+  <%= @sip_proxy.is_local %>
 </p>
 
 
