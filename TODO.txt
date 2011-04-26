@@ -10,6 +10,9 @@
 
 - gs-kamailio-config reinziehen
 
-- gs-freeswitch-conf reinziehen
+- gs-freeswitch-conf reinziehen: Done.
+  - ToDo: freeswitch_call_processing web service anpassen,
+    siehe misc/freeswitch/fs-conf/dialplan/default.xml
+
 
 
