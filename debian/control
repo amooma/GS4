@@ -77,7 +77,7 @@ Description: Gemeinschaft - automated tests
 
 Package: gemeinschaft-sip-proxy
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), kamailio-presence-modules
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
 Pre-Depends: kamailio (>= 3.1)
 Replaces: kamailio
 Conflicts: ser, openser, opensips
