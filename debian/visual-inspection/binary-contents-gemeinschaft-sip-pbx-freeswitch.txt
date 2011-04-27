@@ -12,7 +12,7 @@ drwxr-xr-x root/root         0  ./opt/freeswitch/scripts/
 drwxr-xr-x root/root         0  ./opt/freeswitch/conf/
 drwxr-xr-x root/root         0  ./opt/freeswitch/conf/dialplan/
 -rw-r--r-- root/root      2345  ./opt/freeswitch/conf/dialplan/features.xml
--rw-r--r-- root/root      1652  ./opt/freeswitch/conf/dialplan/default.xml
+-rw-r--r-- root/root      3108  ./opt/freeswitch/conf/dialplan/default.xml
 -rw-r--r-- root/root      1706  ./opt/freeswitch/conf/freeswitch.xml
 -rw-r--r-- root/root      7804  ./opt/freeswitch/conf/vars.xml
 -rw-r--r-- root/root      1428  ./opt/freeswitch/conf/voicemail.tpl
