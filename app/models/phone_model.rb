@@ -1,12 +1,13 @@
 class PhoneModel < ActiveRecord::Base
 default_value_for :max_number_of_sip_accounts, 1
+  
   default_value_for :number_of_keys, 0
   default_value_for :ssl, false
   default_value_for :http_port, 80
   default_value_for :http_request_timeout, 5
   default_value_for :random_password_length, 8
   default_value_for :random_password_contains_of, ((0 ..9).to_a + ('A'..'Z').to_a + ('a'..'z').to_a).join
-
+  
   # Validations
   #
   validates_presence_of :name
@@ -20,11 +21,11 @@ default_value_for :max_number_of_sip_accounts, 1
   validates_presence_of     :number_of_keys
   validates_numericality_of :number_of_keys, :only_integer => true, :greater_than_or_equal_to => 0
 
-  validates_presence_of :random_password_length
+  validates_presence_of     :random_password_length
   validates_numericality_of :random_password_length, :only_integer => true, :greater_than_or_equal_to => 0
 
-  validates_presence_of :random_password_contains_of
-  validates_length_of :random_password_contains_of, :minimum => 1
+  validates_presence_of     :random_password_contains_of
+  validates_length_of       :random_password_contains_of, :minimum => 1
 
   validate :does_a_manufacturer_to_this_phone_model_exist
   validate :validate_url
@@ -35,27 +36,27 @@ default_value_for :max_number_of_sip_accounts, 1
   #
   belongs_to :manufacturer
   has_many :phone_model_keys, :order => 'position', :dependent => :destroy
-
+  
   has_many :phone_model_mac_addresses, :dependent => :destroy
   has_many :phones, :dependent => :destroy
-
+  
   has_many :phone_model_codecs, :order => 'position', :dependent => :destroy
   has_many :codecs, :through => :phone_model_codecs
-
+  
   # Find a phone_model by a given MAC Address
   #
   def self.find_by_mac_address(mac_address)
     phone_model = nil
     if !(
-      mac_address.class != String or 
-      mac_address == nil or 
-      mac_address.upcase.gsub(/[^A-F0-9]/,'').length > 12 or 
-      mac_address.upcase.gsub(/[^A-F0-9]/,'').length < 7
-      )
+       mac_address.class != String \
+    || mac_address == nil \
+    || mac_address.upcase.gsub(/[^A-F0-9]/,'').length > 12 \
+    || mac_address.upcase.gsub(/[^A-F0-9]/,'').length < 7 \
+    )
       mac_address = mac_address.upcase.gsub(/[^A-F0-9]/,'')
       (6 .. mac_address.length).each do |length|
         phone_model_mac_addresses = PhoneModelMacAddress.where(:starts_with => mac_address[0,length])
-	phone_model = PhoneModel.where(:id => phone_model_mac_addresses.first.phone_model_id).first if !phone_model_mac_addresses.first.nil?
+          phone_model = PhoneModel.where(:id => phone_model_mac_addresses.first.phone_model_id).first if !phone_model_mac_addresses.first.nil?
         break if !phone_model.nil?
       end
     end
