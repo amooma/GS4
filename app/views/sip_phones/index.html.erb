@@ -13,6 +13,7 @@
 <% @sip_phones.each { |sip_phone|
   prov_server = sip_phone.provisioning_server_id ? @prov_servers.find( sip_phone.provisioning_server_id ) : nil
   if prov_server
+    #OPTIMIZE Remove CantinaPhone.
     CantinaPhone.set_resource( "http://#{prov_server.name}:#{prov_server.port}/" )
     # FIXME https once it is implemented
   end
@@ -29,6 +30,7 @@
     <td><%=
       if prov_server
         begin
+          #OPTIMIZE Remove CantinaPhone.
           CantinaPhone.find( sip_phone.phone_id ).mac_address
         rescue ActiveResource::ResourceNotFound => e
           "(not found!)"

@@ -106,6 +106,7 @@ class SipPhonesController < ApplicationController
       provisioning_server = ProvisioningServer.find(@sip_phone.provisioning_server_id).name
       port = ProvisioningServer.find(@sip_phone.provisioning_server_id).port
       CantinaPhone.set_resource( "http://#{provisioning_server}:#{port}" )
+      #OPTIMIZE Remove CantinaPhone.
     end
   end  
 end

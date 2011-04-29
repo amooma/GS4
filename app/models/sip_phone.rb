@@ -71,6 +71,7 @@ class SipPhone < ActiveRecord::Base
 		end
 		logger.debug "Trying to find CantinaPhone with ID #{cantina_phone_id.inspect} on #{cantina_resource.inspect} ..."
 		begin
+			#OPTIMIZE Remove CantinaPhone.
 			CantinaPhone.set_resource( cantina_resource )
 			cantina_phone = CantinaPhone.find( cantina_phone_id )
 			return cantina_phone || nil
