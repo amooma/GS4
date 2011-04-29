@@ -18,7 +18,7 @@ class AServer < ActiveRecord::Base
   validate_ip_port          :port, :allow_nil => true  # empty SIP port means default SIP port (SRV lookups)
   validates_uniqueness_of   :port, :scope => :host
   
-  
-  
+  validates_inclusion_of    :is_local, :in => [ true, false ], :allow_nil => false
+  validates_uniqueness_of   :is_local, :if => Proc.new { |me| me.is_local }  #OPTIMIZE Edit once domains are implemented.
   
 end

@@ -69,26 +69,25 @@ class SipProxyTest < ActiveSupport::TestCase
   }
   
   
-  # valid config_port
+  # valid is_local
   [
-    1,
-    65535,
-  ].each { |port|
-    should "be valid with config_port #{port.inspect}" do
-      assert Factory.build( :sip_proxy, :management_port => port, :management_host => 'h1.test.de' ).valid?
+    true,
+    false,
+  ].each { |is_local|
+    should "be valid with is_local #{is_local.inspect}" do
+      assert Factory.build( :sip_proxy, :is_local => is_local ).valid?
     end
   }
   
-  # invalid config_port
+  # invalid is_local
   [
-    '',
     nil,
     'foo',
-    -1,
-    65536,
-  ].each { |port|
-    should "not be valid with config_port #{port.inspect}" do
-      assert ! Factory.build( :sip_proxy, :management_port => port, :management_host => 'h1.test.de' ).valid?
+    '',
+    1,
+  ].each { |is_local|
+    should "not be valid with is_local #{is_local.inspect}" do
+      assert ! Factory.build( :sip_proxy, :is_local => is_local ).valid?
     end
   }
   
