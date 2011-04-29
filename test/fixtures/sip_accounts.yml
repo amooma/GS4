@@ -5,7 +5,6 @@ one:
   auth_name: MyString
   password: MyString
   realm: MyString
-  phone_number: 1
   sip_server_id: 1
   sip_proxy_id: 1
 
@@ -14,6 +13,5 @@ two:
   auth_name: MyString
   password: MyString
   realm: MyString
-  phone_number: 1
   sip_server_id: 1
   sip_proxy_id: 1
