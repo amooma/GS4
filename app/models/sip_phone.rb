@@ -19,6 +19,7 @@ class SipPhone < ActiveRecord::Base
 	}
 	
 	# The phone_id must never change, once it has been set.
+	#OPTIMIZE Do we still need phone_id?
 	validate {
 		if phone_id_was != nil \
 		&& phone_id != phone_id_was
