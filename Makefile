@@ -18,6 +18,7 @@ help:
 	@ echo " make install..................: Install"
 	@ echo " make deb .....................: Make Debian packages."
 	@ echo " make clean ...................: Remove all generated files"
+	@ echo " make local-apt-repo ..........: Create a local APT repository"
 	@ echo ""
 	@ exit 0
 
@@ -32,7 +33,30 @@ clean:
 	
 	find .. -type f -name 'gemeinschaft_*_*.deb'     -print0 | $(XARGS_0_RM)
 	find .. -type f -name 'gemeinschaft-*_*_*.deb'   -print0 | $(XARGS_0_RM)
+	
+	[ ! -f ../Packages.gz ] || rm ../Packages.gz
 
+
+../Packages.gz: ../*.deb
+	cd .. && dpkg-scanpackages -m . | gzip -9 > Packages.gz
+
+local-apt-repo: ../Packages.gz
+	@ if [ "$(shell id -u)." = "0." ]; then \
+		echo "deb  file:$(PWD)/..  /" \
+		  > /etc/apt/sources.list.d/tmp-local-gemeinschaft.list ;\
+		aptitude update ;\
+		echo 'aptitude search gemeinschaft' ;\
+		aptitude search gemeinschaft ;\
+	else \
+		echo '##############################################################' ;\
+		echo "#  Created ../Packages.gz." ;\
+		echo "#  Please add the APT repository (as root user):" ;\
+		echo '   echo "deb  file:'$(PWD)'/..  /" \\' ;\
+		echo '     > /etc/apt/sources.list.d/tmp-local-gemeinschaft.list' ;\
+		echo '   aptitude update' ;\
+		echo '   aptitude search gemeinschaft' ;\
+		echo '##############################################################' ;\
+	fi
 
 
 deb: _have-dpkg-buildpackage

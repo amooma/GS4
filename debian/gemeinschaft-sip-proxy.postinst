@@ -20,12 +20,15 @@ set -e
 
 case "$1" in
 	configure)
+		invoke-rc.d kamailio stop
 		sed \
 			-e 's/^#* *\(RUN_KAMAILIO\)=.*/\1=yes/' \
 			-e 's/^#* *\(DUMP_CORE\)=.*/\1=no/' \
 			/etc/default/kamailio > /etc/default/kamailio-NEW
 		mv -f /etc/default/kamailio-NEW /etc/default/kamailio
-		invoke-rc.d kamailio restart
+		invoke-rc.d kamailio start
+		# Note: Kamailio's init script does not properly support
+		# "restart" (it exits 255 instead of 0).
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)
