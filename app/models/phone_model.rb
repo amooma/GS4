@@ -1,5 +1,6 @@
 class PhoneModel < ActiveRecord::Base
-default_value_for :max_number_of_sip_accounts, 1
+  
+  default_value_for :max_number_of_sip_accounts, 1
   
   default_value_for :number_of_keys, 0
   default_value_for :ssl, false
@@ -14,19 +15,19 @@ default_value_for :max_number_of_sip_accounts, 1
   
   validates_presence_of     :manufacturer_id
   validates_numericality_of :manufacturer_id, :only_integer => true
-
+  
   validates_presence_of     :max_number_of_sip_accounts
   validates_numericality_of :max_number_of_sip_accounts, :only_integer => true, :greater_than_or_equal_to => 1
-
+  
   validates_presence_of     :number_of_keys
   validates_numericality_of :number_of_keys, :only_integer => true, :greater_than_or_equal_to => 0
-
+  
   validates_presence_of     :random_password_length
   validates_numericality_of :random_password_length, :only_integer => true, :greater_than_or_equal_to => 0
-
+  
   validates_presence_of     :random_password_consists_of
   validates_length_of       :random_password_consists_of, :minimum => 1
-
+  
   validate :does_a_manufacturer_to_this_phone_model_exist
   validate :validate_url
   validate :validate_max_number_of_sip_accounts_for_an_existing_phone_model
@@ -78,11 +79,11 @@ default_value_for :max_number_of_sip_accounts, 1
   end
   
   private
-
+  
   # Validates if the phone model has a manufacturer.
   def does_a_manufacturer_to_this_phone_model_exist
     if ! Manufacturer.exists?(:id => self.manufacturer_id)
-      errors.add(:manufacturer_id, "There is no Manufacturer with the given id #{self.manufacturer_id}.")
+      errors.add(:manufacturer_id, "There is no manufacturer with the given ID #{self.manufacturer_id}.")
     end      
   end
   
@@ -116,7 +117,7 @@ default_value_for :max_number_of_sip_accounts, 1
       end
     end
   end
- 
+  
   # Validates the number of number_of_keys on a phone_model
   # If you change the number number_of_keys on an already
   # existing model the system checks if there are any phones with 
@@ -133,4 +134,5 @@ default_value_for :max_number_of_sip_accounts, 1
       end
     end
   end
+  
 end
