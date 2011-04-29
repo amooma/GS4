@@ -2,6 +2,9 @@ require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
   
+  # We don't use ActiveResource any more.
+=begin
+  
   def create_sip_account_without_phone
     @sip_server = Factory.create(:sip_server,
       :management_host => "10.5.5.1",
@@ -741,4 +744,5 @@ class SipAccountTest < ActiveSupport::TestCase
     ActiveResource::HttpMock.reset!
   end
   
+=end
 end
