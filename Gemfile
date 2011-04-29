@@ -58,6 +58,12 @@ group :production do
 	gem 'syslogger', '~> 1.2'
 end
 
+group :development do
+	# run ./script/annotate to annotate
+	gem 'annotate-models'
+end
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
