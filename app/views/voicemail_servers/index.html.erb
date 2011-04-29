@@ -7,7 +7,6 @@
     <th>Is on this node?</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @voicemail_servers.each do |voicemail_server| %>
@@ -16,7 +15,6 @@
     <td><%= voicemail_server.port %></td>
     <td><%= voicemail_server.is_local ? "yes" : "no" %></td>
     <td><%= link_to 'Show', voicemail_server %></td>
-    <td><%= link_to 'Edit', edit_voicemail_server_path(voicemail_server) %></td>
     <td><%= button_to 'Destroy', voicemail_server, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
