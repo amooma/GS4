@@ -1,7 +1,7 @@
 class ExtensionsController < ApplicationController
   
   before_filter :authenticate_user!
-  
+  before_filter { @sip_accounts = SipAccount.all}  
   # GET /extensions
   # GET /extensions.xml
   def index

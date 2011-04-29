@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sip_account_id: 1
+  extension_id: 1
+  position: 1
+
+two:
+  sip_account_id: 1
+  extension_id: 1
+  position: 1

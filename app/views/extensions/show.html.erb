@@ -1,14 +1,18 @@
 
 <p>
-  <b>SIP user ID:</b>
-  <%= @extension.sip_account_id %>
-</p>
-
-<p>
   <b>Extension:</b>
   <%= @extension.extension %>
 </p>
 
+<p>
+  <b>Destination:</b>
+  <%= @extension.destination %>
+</p>
+
+<p>
+    <b>Active:</b>
+    <%= @extension.active %>
+</p>
 
 <%= link_to 'Edit', edit_extension_path(@extension) %> |
 <%= link_to 'Back', extensions_path %>

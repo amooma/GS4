@@ -31,10 +31,6 @@
     <%= f.text_field :realm %>
   </div>
   <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
-  </div>
-  <div class="field">
     <%= f.label :sip_server_id, "SIP server" %><br />
     <%= f.select( :sip_server_id,
       @sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },

@@ -23,8 +23,12 @@
 </p>
 
 <p>
-  <b>Phone number:</b>
-  <%= @sip_account.phone_number %>
+  <b>Extensions:</b>
+  <ul>
+  <% @sip_account.extensions.each do |extension| %>
+    <li><%= extension.extension %></li>  
+  <% end %>
+  </ul>
 </p>
 
 <p>

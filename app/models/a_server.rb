@@ -6,13 +6,11 @@ class AServer < ActiveRecord::Base
   
   before_validation( :on => :update ) {
     if self.host            != self.host_was \
-    || self.port            != self.port_was \
-    
+    || self.port            != self.port_was
       errors.add( :base , "#{self.class.to_s} cannot be changed. Please create a new one." )
     end
   }
   
-  validates_uniqueness_of   :is_local, :if => Proc.new { |me| me.is_local}
   validates_presence_of     :host
   validate_hostname_or_ip   :host
   validates_uniqueness_of   :host, :case_sensitive => false, :scope => :port

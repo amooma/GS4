@@ -9,7 +9,7 @@ class AdminController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if SipServer.count == 0 || ProvisioningServer.count == 0
+    if SipServer.count == 0 || SipProxy.count == 0
       respond_to do |format|
         format.html { redirect_to(admin_setup_index_path) }
       end
@@ -19,7 +19,6 @@ class AdminController < ApplicationController
       @number_of_sip_phones    = SipPhone.count
       @number_of_sip_proxies   = SipProxy.count
       @number_of_sip_servers   = SipServer.count
-      @number_of_prov_servers  = ProvisioningServer.count
       @number_of_extensions    = Extension.count
       respond_to do |format|
         format.html

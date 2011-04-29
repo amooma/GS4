@@ -1,15 +1,14 @@
-require 'connection_checks'
-
 class SipAccount < ActiveRecord::Base
   
-  include ConnectionChecks
   
   belongs_to :sip_server       , :validate => true
   belongs_to :sip_proxy        , :validate => true
   belongs_to :voicemail_server , :validate => true
   belongs_to :phone            , :validate => true
-  belongs_to :extension        , :validate => true
   belongs_to :user             , :validate => true
+  
+  has_many :sip_account_to_extensions, :dependent => :destroy
+  has_many :extensions, :through => :sip_account_to_extensions
   
   acts_as_list :scope => :user
   
@@ -25,12 +24,7 @@ class SipAccount < ActiveRecord::Base
   
   validate_password         :password
   
-  validates_presence_of     :phone_number
-  validates_format_of       :phone_number, :with => /\A [1-9][0-9]{,9} \z/x,
-    :allow_blank => false,
-    :allow_nil   => false
-  validates_numericality_of :phone_number, :greater_than_or_equal_to => 1
-  
+    
   validates_numericality_of :voicemail_pin,
     :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
     :only_integer => true,

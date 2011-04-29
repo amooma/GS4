@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426190457) do
+ActiveRecord::Schema.define(:version => 20110429100725) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20110426190457) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sip_account_id"
+    t.string   "destination"
+    t.boolean  "active"
   end
 
   create_table "manufacturers", :force => true do |t|
@@ -157,12 +159,19 @@ ActiveRecord::Schema.define(:version => 20110426190457) do
     t.datetime "updated_at"
   end
 
+  create_table "sip_account_to_extensions", :force => true do |t|
+    t.integer  "sip_account_id"
+    t.integer  "extension_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sip_accounts", :force => true do |t|
     t.integer  "user_id"
     t.string   "auth_name"
     t.string   "password"
     t.string   "realm"
-    t.integer  "phone_number"
     t.integer  "sip_server_id"
     t.integer  "sip_proxy_id"
     t.datetime "created_at"
@@ -222,10 +231,9 @@ ActiveRecord::Schema.define(:version => 20110426190457) do
   create_table "voicemail_servers", :force => true do |t|
     t.string   "host"
     t.integer  "port"
-    t.string   "management_host"
-    t.integer  "management_port"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_local"
   end
 
 end

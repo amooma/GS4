@@ -2,6 +2,8 @@ class SipProxy < AServer
   
   has_many :sip_accounts, :dependent => :restrict
   validates_uniqueness_of :host
+  validates_uniqueness_of   :is_local, :if => Proc.new { |me| me.is_local}
+
   attr_accessor :last_sip_proxy_id
   
   after_create {
