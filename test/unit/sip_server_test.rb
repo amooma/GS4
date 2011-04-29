@@ -74,7 +74,7 @@ class SipServerTest < ActiveSupport::TestCase
     1,
     65535,
   ].each { |port|
-    should "be valid with management_port #{port.inspect}" do
+    should "be valid with port #{port.inspect}" do
       assert Factory.build( :sip_server, :port => port ).valid?
     end
   }
@@ -87,7 +87,7 @@ class SipServerTest < ActiveSupport::TestCase
     -1,
     65536,
   ].each { |port|
-    should "not be valid with management_port #{port.inspect}" do
+    should "not be valid with port #{port.inspect}" do
       assert ! Factory.build( :sip_server, :port => port ).valid?
     end
   }
@@ -113,11 +113,6 @@ class SipServerTest < ActiveSupport::TestCase
       assert ! Factory.build( :sip_server, :is_local => is_local ).valid?
     end
   }
-  
-  
-  should "not be valid when not managed by gs but management_port given" do
-    assert ! Factory.build( :sip_server, :management_port => 3000 ).valid?
-  end
   
   
   should "not be valid when host and port not unique" do
