@@ -1,15 +1,18 @@
 
 <p>
-  <b>Host:</b>
+  <b>SIP host:</b>
   <%= @sip_server.host %>
 </p>
+
 <p>
-  <b>Port:</b>
-  <%= (! @sip_server.port.blank?) ? @sip_server.port : "none" %>
+  <b>SIP port:</b>
+  <%= @sip_server.port %>
 </p>
+
 <p>
-  <b>Is on this node</b>
-  <%= @sip_server.is_local %>
+  <b>Is on this node?:</b>
+  <%= @sip_server.is_local ? "yes" : "no" %>
 </p>
+
 
 <%= link_to 'Back', sip_servers_path %>

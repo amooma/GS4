@@ -2,7 +2,6 @@
   <% if @voicemail_server.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@voicemail_server.errors.count, "error") %> prohibited this voicemail_server from being saved:</h2>
-
       <ul>
       <% @voicemail_server.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -20,12 +19,8 @@
     <%= f.text_field :port %>
   </div>
   <div class="field">
-    <%= f.label :management_host %><br />
-    <%= f.text_field :management_host %>
-  </div>
-  <div class="field">
-    <%= f.label :management_port %><br />
-    <%= f.text_field :management_port %>
+    <%= f.check_box :is_local %>
+    <%= f.label :is_local, "Is on this node" %>
   </div>
   <div class="actions">
     <%= f.submit %>

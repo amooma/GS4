@@ -10,13 +10,8 @@
 </p>
 
 <p>
-  <b>Management host:</b>
-  <%= @voicemail_server.management_host %>
-</p>
-
-<p>
-  <b>Management port:</b>
-  <%= @voicemail_server.management_port %>
+  <b>Is on this node?:</b>
+  <%= @voicemail_server.is_local ? "yes" : "no" %>
 </p>
 
 

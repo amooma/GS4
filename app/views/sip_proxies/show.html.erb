@@ -1,15 +1,17 @@
 
 <p>
-  <b>Host:</b>
+  <b>SIP host:</b>
   <%= @sip_proxy.host %>
 </p>
+
 <p>
-  <b>Port:</b>
-  <%= (! @sip_proxy.port.blank?) ? @sip_proxy.port : "none" %>
+  <b>SIP port:</b>
+  <%= @sip_proxy.port %>
 </p>
+
 <p>
-  <b>Is on this node</b>
-  <%= @sip_proxy.is_local %>
+  <b>Is on this node?:</b>
+  <%= @sip_proxy.is_local ? "yes" : "no" %>
 </p>
 
 

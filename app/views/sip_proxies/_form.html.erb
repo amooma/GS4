@@ -11,17 +11,18 @@
   </ul>
 </div>
 <% end %>
+
 <div class="field">
-  <%= f.label :host, "Host" %><br />
+  <%= f.label :host, "SIP host" %><br />
   <%= f.text_field :host %>
 </div>
 <div class="field">
-  <%= f.label :port, "Port" %><br />
+  <%= f.label :port, "SIP port" %><br />
   <%= f.text_field :port %>
 </div>
 <div class="field">
-  <%= f.label :name, "On this host" %><br />
   <%= f.check_box :is_local %>
+  <%= f.label :is_local, "Is on this node" %>
 </div>
 <div class="field">
   <%= f.label :last_sip_proxy_id, "Take over accounts" %><br />
@@ -29,7 +30,7 @@
     @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
     { :include_blank => true }
   ) %>
-  </div>
+</div>
 <div class="actions">
   <%= f.submit %>
 </div>

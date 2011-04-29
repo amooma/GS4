@@ -1,10 +1,10 @@
-<h1>Listing SIP proxies</h1>
+<h1>SIP proxies</h1>
 
 <table>
   <tr>
-    <th>Host</th>
-    <th>Port</th>
-    <th>Is on this node</th>
+    <th>SIP host</th>
+    <th>SIP port</th>
+    <th>Is on this node?</th>
     <th></th>
     <th></th>
   </tr>
@@ -13,7 +13,7 @@
   <tr>
     <td><%= sip_proxy.host %></td>
     <td><%= sip_proxy.port %></td>
-    <td><%= sip_proxy.is_local %></td>
+    <td><%= sip_proxy.is_local ? "yes" : "no" %></td>
     <td><%= link_to 'Show', sip_proxy %></td>
     <td><%= button_to 'Destroy', sip_proxy, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
