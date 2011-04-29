@@ -10,7 +10,6 @@ Gemeinschaft4::Application.routes.draw do
 	devise_for :users
 	
 	resources :sip_accounts
-	resources :provisioning_servers
 	resources :sip_phones
 	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]
