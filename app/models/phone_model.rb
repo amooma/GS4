@@ -6,7 +6,7 @@ default_value_for :max_number_of_sip_accounts, 1
   default_value_for :http_port, 80
   default_value_for :http_request_timeout, 5
   default_value_for :random_password_length, 8
-  default_value_for :random_password_contains_of, ((0 ..9).to_a + ('A'..'Z').to_a + ('a'..'z').to_a).join
+  default_value_for :random_password_consists_of, ((0 ..9).to_a + ('A'..'Z').to_a + ('a'..'z').to_a).join
   
   # Validations
   #
@@ -24,8 +24,8 @@ default_value_for :max_number_of_sip_accounts, 1
   validates_presence_of     :random_password_length
   validates_numericality_of :random_password_length, :only_integer => true, :greater_than_or_equal_to => 0
 
-  validates_presence_of     :random_password_contains_of
-  validates_length_of       :random_password_contains_of, :minimum => 1
+  validates_presence_of     :random_password_consists_of
+  validates_length_of       :random_password_consists_of, :minimum => 1
 
   validate :does_a_manufacturer_to_this_phone_model_exist
   validate :validate_url
@@ -71,7 +71,7 @@ default_value_for :max_number_of_sip_accounts, 1
     else
       new_password = String.new
       for i in 0 .. self.random_password_length
-         new_password += self.random_password_contains_of.scan(/./).sort_by {rand}.first
+         new_password += self.random_password_consists_of.scan(/./).sort_by {rand}.first
       end
       new_password
     end

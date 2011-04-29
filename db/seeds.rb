@@ -187,7 +187,7 @@ aastra.phone_models.create(:name => '51i',  :max_number_of_sip_accounts => 1, :n
 
 # Set http parameters
 aastra.phone_models.each do |phone_model|
-  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'logout.html', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => '22222', :random_password_contains_of => (0 ..9).to_a.join)
+  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'logout.html', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => '22222', :random_password_consists_of => (0 ..9).to_a.join)
 end
 
 aastra.phone_models.each do |phone_model|

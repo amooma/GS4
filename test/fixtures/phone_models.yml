@@ -13,7 +13,7 @@ one:
   ssl: false
   http_request_timeout: 1
   random_password_length: 1
-  random_password_contains_of: MyString
+  random_password_consists_of: MyString
 
 two:
   name: MyString
@@ -28,4 +28,4 @@ two:
   ssl: false
   http_request_timeout: 1
   random_password_length: 1
-  random_password_contains_of: MyString
+  random_password_consists_of: MyString
