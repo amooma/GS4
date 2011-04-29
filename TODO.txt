@@ -2,6 +2,7 @@
 
 - doc/docbook von Cantina einbauen
 - lib/tasks/*.rake von Cantina einbauen
+- Tabellen "phones" und "sip_phones" zusammenführen?
 ...
 
 - SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
