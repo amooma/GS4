@@ -101,33 +101,26 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			
 			logger.info(_bold( "[FS] Request for user #{_arg(:user)}@#{_arg(:domain)} (for #{type}) ..." ))
 			
-			#OPTIMIZE Improve finding the SIP account:
+			# Find the SIP account:
+			# Find SIP account by auth_name:
 			@sip_account = nil
 			if ! @sip_account
-				# Find SIP account by auth_name:
 				@sip_account = SipAccount.where({
 					:auth_name      => _arg(:user)
-				}).joins(:sip_server).where(:sip_servers => {
-					:host           => _arg(:domain)
-				}).first
+				}) #\ #OPTIMIZE Use domain as well once multiple domains are implemented.
+				#.joins(:sip_server).where(:sip_servers => {
+				#	:host           => _arg(:domain)
+				#}).first
 			end
-			if ! @sip_account
-				# Find SIP account by phone_number:
-				@sip_account = SipAccount.where({
-					:phone_number   => _arg(:user)
-				}).joins(:sip_server).where(:sip_servers => {
-					:host           => _arg(:domain)
-				}).first
-			end
-			if ! @sip_account
-				# Find SIP account by extension:
-				@sip_account = SipAccount.where({
-				}).joins(:sip_server).where(:sip_servers => {
-					:host           => _arg(:domain)
-				}).joins(:extension).where(:extensions => {
-					:extension      => _arg(:user)
-				}).first
-			end
+			## Find SIP account by extension (this is now done by Kamailio):
+			#if ! @sip_account
+			#	@sip_account = SipAccount.where({
+			#	}).joins(:sip_server).where(:sip_servers => {
+			#		:host           => _arg(:domain)
+			#	}).joins(:extension).where(:extensions => {
+			#		:extension      => _arg(:user)
+			#	}).first
+			#end
 			
 			#puts "-------------------{"
 			#puts @sip_account.inspect
