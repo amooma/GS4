@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  management_host: host1.local
+  management_port: 80
+  title: MyNode1
+
+two:
+  management_host: host2.local
+  management_port: 80
+  title: MyNode2

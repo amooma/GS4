@@ -14,6 +14,7 @@ module ApplicationHelper
           { :text => "SIP Servers"          , :url => sip_servers_path },
           { :text => "SIP Proxies"          , :url => sip_proxies_path },
           { :text => "Voicemail Servers"    , :url => voicemail_servers_path },
+          { :text => "Nodes"                , :url => nodes_path },
         ]},
       ]
     else

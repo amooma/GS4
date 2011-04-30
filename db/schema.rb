@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110429200000) do
+ActiveRecord::Schema.define(:version => 20110430014323) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20110429200000) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "nodes", :force => true do |t|
+    t.string   "management_host", :limit => 64, :null => false
+    t.integer  "management_port", :limit => 4
+    t.string   "title",           :limit => 60, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "nodes", ["management_host", "management_port"], :name => "management_host_port", :unique => true
+  add_index "nodes", ["title"], :name => "title", :unique => true
 
   create_table "ouis", :force => true do |t|
     t.string   "value"

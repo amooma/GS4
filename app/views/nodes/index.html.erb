@@ -1,0 +1,28 @@
+<h1>Nodes</h1>
+
+<table>
+	<tr>
+		<th>Management host</th>
+		<th>Management port</th>
+		<th>Title</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+<% @nodes.each { |node| %>
+	<tr>
+		<td><%= node.management_host %></td>
+		<td><%= node.management_port %></td>
+		<td><%= node.title %></td>
+		<td><%= link_to 'Show', node %></td>
+		<td><%#= link_to 'Edit', edit_node_path(node) %></td>
+		<td><%#= button_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete %></td>
+	</tr>
+<% } %>
+</table>
+
+<br />
+
+<%#= link_to 'New node', new_node_path %>
+

@@ -1,0 +1,28 @@
+<%= form_for(@node) do |f| %>
+<% if @node.errors.any? %>
+<div id="error_explanation">
+<h2><%= pluralize(@node.errors.count, "error") %> prohibited this node from being saved:</h2>
+<ul>
+	<% @node.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</ul>
+</div>
+<% end %>
+
+<div class="field">
+	<%= f.label      :management_host %><br />
+	<%= f.text_field :management_host %>
+</div>
+<div class="field">
+	<%= f.label      :management_port %><br />
+	<%= f.text_field :management_port %>
+</div>
+<div class="field">
+	<%= f.label      :title %><br />
+	<%= f.text_field :title %>
+</div>
+<div class="actions">
+	<%= f.submit %>
+</div>
+<% end %>
