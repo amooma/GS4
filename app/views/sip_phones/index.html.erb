@@ -2,8 +2,8 @@
 
 <table>
   <tr>
-    <th>Provisioning server</th>
-    <th>Phone ID on prov. server</th>
+    <th>Node</th>
+    <th>Phone ID on node</th>
     <th>MAC address</th>
     <th></th>
     <th></th>
@@ -11,31 +11,31 @@
   </tr>
 
 <% @sip_phones.each { |sip_phone|
-  prov_server = sip_phone.provisioning_server_id ? @prov_servers.find( sip_phone.provisioning_server_id ) : nil
-  if prov_server
+  node = sip_phone.node_id ? @nodes.find( sip_phone.node_id ) : nil
+  if node
     #OPTIMIZE Remove CantinaPhone.
-    CantinaPhone.set_resource( "http://#{prov_server.name}:#{prov_server.port}/" )
+    CantinaPhone.set_resource( "http://#{node.management_host}:#{node.management_port}/" )
     # FIXME https once it is implemented
   end
 %>  
   <tr>
     <td><%=
-      prov_server ? prov_server.name : ''
+      node ? node.management_host : ''
     %><%=
-      prov_server && prov_server.port ? ":#{prov_server.port}" : ''
+      node && node.management_port ? ":#{node.management_port}" : ''
     %><%=
-      sip_phone.provisioning_server_id ? " (ID #{sip_phone.provisioning_server_id})" : '-'
+      sip_phone.node_id ? " (ID #{sip_phone.node_id})" : '-'
     %></td>
     <td><%= sip_phone.phone_id || '-' %></td>
     <td><%=
-      if prov_server
+      if node
         begin
           #OPTIMIZE Remove CantinaPhone.
           CantinaPhone.find( sip_phone.phone_id ).mac_address
         rescue ActiveResource::ResourceNotFound => e
           "(not found!)"
         rescue Errno::ECONNREFUSED, Errno::EADDRNOTAVAIL, Errno::EHOSTDOWN, ActiveResource::TimeoutError => e
-          "(Failed to connect to the provisioning server!)"
+          "(Failed to connect to the node / provisioning server!)"
         end
       else
         '-'

@@ -1,19 +1,19 @@
 class SipPhone < ActiveRecord::Base
 	
 	has_many   :sip_accounts, :dependent => :destroy
-	belongs_to :provisioning_server, :validate => true
+	belongs_to :node, :validate => true
 	
-	validates_presence_of     :provisioning_server
+	validates_presence_of     :node
 	
 	validates_numericality_of :phone_id, :only_integer => true
-	validates_uniqueness_of   :phone_id, :scope => :provisioning_server_id
+	validates_uniqueness_of   :phone_id, :scope => :node_id   #OPTIMIZE Still true?
 	
 	
 	# The provisioning server must never change, once it has been set.
 	validate {
-		if provisioning_server_id_was != nil \
-		&& provisioning_server_id != provisioning_server_id_was
-			errors.add( :provisioning_server_id, "must not change. You have to delete the SIP phone and create it on the other provisioning server." )
+		if node_id_was != nil \
+		&& node_id != node_id_was
+			errors.add( :node_id, "must not change. You have to delete the SIP phone and create it on the other node / provisioning server." )
 			return false
 		end
 	}
@@ -31,8 +31,8 @@ class SipPhone < ActiveRecord::Base
 	# If the phone does not belong to a provisioning server then the
 	# phone_id has to be nil.
 	validate {
-		if provisioning_server_id.blank? && (! phone_id.blank?)
-			errors.add( :phone_id, "must be blank if the phone does not belong to a provisioning server." )
+		if node_id.blank? && (! phone_id.blank?)
+			errors.add( :phone_id, "must be blank if the phone does not belong to a node / provisioning server." )
 			return false
 		end
 	}
@@ -40,16 +40,16 @@ class SipPhone < ActiveRecord::Base
 	# If the phone belongs to a provisioning server then the phone_id
 	# must not be nil.
 	validate {
-		if (! provisioning_server_id.blank?) && phone_id.blank?
-			errors.add( :phone_id, "must not be blank if the phone belongs to a provisioning server." )
+		if (! node_id.blank?) && phone_id.blank?
+			errors.add( :phone_id, "must not be blank if the phone belongs to a node / provisioning server." )
 			return false
 		end
 	}
 	
 	# Validate existence of the phone on the provisioning server.
 	after_validation {
-		if (! provisioning_server_id.blank?) && (! phone_id.blank?)
-			cantina_phone = self.cantina_phone_by_id( phone_id )
+		if (! node_id.blank?) && (! phone_id.blank?)
+			cantina_phone = self.cantina_phone_by_id( phone_id )  #FIXME
 			case cantina_phone
 				when false
 					errors.add( :base, "Failed to connect to the provisioning server." )
@@ -63,7 +63,7 @@ class SipPhone < ActiveRecord::Base
 		end
 	}
 	
-	def cantina_phone_by_id( cantina_phone_id )
+	def cantina_phone_by_id( cantina_phone_id )  #FIXME
 		cantina_resource = provisioning_server_base_url()
 		if ! cantina_resource
 			# SipPhone has no provisioning server.
@@ -81,7 +81,7 @@ class SipPhone < ActiveRecord::Base
 		end
 	end
 	
-	def provisioning_server_base_url
+	def provisioning_server_base_url  #FIXME
 		scheme = 'http'
 		host   = '0.0.0.0'  # this will not work on purpose
 		port   = 0          # this will not work on purpose

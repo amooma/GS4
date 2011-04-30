@@ -1,19 +1,19 @@
 
 <p>
-  <b>Provisioning server:</b>
+  <b>Node:</b>
 <%
-	prov_server = @sip_phone.provisioning_server_id ? @prov_servers.find( @sip_phone.provisioning_server_id ) : nil
+	node = @sip_phone.node_id ? @nodes.find( @sip_phone.node_id ) : nil
 %><%=
-	prov_server ? prov_server.name : ''
+	node ? node.management_host : ''
 %><%=
-	prov_server && prov_server.port ? ":#{prov_server.port}" : ''
+	node && node.management_port ? ":#{node.management_port}" : ''
 %><%=
-	@sip_phone.provisioning_server_id ? " (ID #{@sip_phone.provisioning_server_id})" : "(none)"
+	@sip_phone.node_id ? " (ID #{@sip_phone.node_id})" : "(none)"
 %>
 </p>
 
 <p>
-  <b>Phone ID on prov. server:</b>
+  <b>Phone ID on node:</b>
   <%= @sip_phone.phone_id || "(none)" %>
 </p>
 

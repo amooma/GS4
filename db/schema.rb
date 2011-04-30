@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110430014323) do
+ActiveRecord::Schema.define(:version => 20110430041212) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -189,9 +189,9 @@ ActiveRecord::Schema.define(:version => 20110430014323) do
 
   create_table "sip_phones", :force => true do |t|
     t.integer  "phone_id"
-    t.integer  "provisioning_server_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "node_id"
   end
 
   create_table "sip_proxies", :force => true do |t|

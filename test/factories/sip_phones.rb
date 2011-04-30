@@ -2,5 +2,5 @@
 
 Factory.define :sip_phone do |f|
   f.sequence(:phone_id) { |n| 4000 + n }
-  f.association :provisioning_server
+  f.association :node
 end

@@ -8,7 +8,7 @@ class AdminControllerTest < ActionController::TestCase
   
   setup do
     @sip_server = Factory.create(:sip_server)
-    @provisioning_server = Factory.create(:provisioning_server)
+    @node = Factory.create(:node)
     @user = Factory.create(:user)
     an_admin_username = 'admin1'
     @admin_user = User.where( :username => an_admin_username ).first

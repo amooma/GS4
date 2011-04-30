@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :provisioning_server_id, "Provisioning server" %><br />
-    <%= f.select( :provisioning_server_id,
-      @prov_servers.collect {|r| [ "#{r.name}" + (r.port ? ":#{r.port.to_s}" : '') + " (ID #{r.id})", r.id ] },
-      { :include_blank => true, :selected => @sip_phone.provisioning_server_id }
+    <%= f.label :node_id, "Node" %><br />
+    <%= f.select( :node_id,
+      @nodes.collect {|r| [ "#{r.title} (#{r.management_host}" + (r.port ? ":#{r.management_port.to_s}" : '') + ")", r.id ] },
+      { :include_blank => true, :selected => @sip_phone.node_id }
     ) %>
   </div>
-<% if @sip_phone.provisioning_server_id %>
+<% if @sip_phone.node_id %>
   <div class="field">
-    <%= f.label :phone_id, "Phone on prov. server" %><br />
+    <%= f.label :phone_id, "Phone on node" %><br />
     <%
       begin
-        @cantina_phones = CantinaPhone.all  #OPTIMIZE - set this in the controller?
+        @cantina_phones = CantinaPhone.all  #OPTIMIZE - set this in the controller? #FIXME Remove Cantina...
       rescue => e
         %>
         <div class="app_alert">
-          <%= "Failed to get available phones from provisioning server. (#{e.class}, #{e.message})" %>
+          <%= "Failed to get available phones from node / provisioning server. (#{e.class}, #{e.message})" %>
         </div>
         <%
       end
@@ -36,7 +36,7 @@
       end
     %>
     <%= f.select( :phone_id,
-      @cantina_phones.collect {|p| [p.mac_address, p.id]},
+      @cantina_phones.collect {|p| [p.mac_address, p.id]},  #FIXME Remove Cantina...
       :label_method => :mac_address
     ) %>
   </div>
