@@ -14,7 +14,8 @@ Gemeinschaft4::Application.routes.draw do
 	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :nodes                , :only => [ :index, :show ] # for now
-	# Remember to comment-in the tests once you enable more routes for the nodes.
+	# Remember to comment-in the tests in test/functional/nodes_controller_test.rb
+	# once you enable more routes for the nodes.
 	resources :voicemail_servers
 	resources :extensions
 	
