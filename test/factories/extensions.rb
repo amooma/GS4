@@ -1,3 +1,6 @@
 Factory.define :extension do |f|
-  f.sequence(:extension) { |n| n }
+  f.sequence( :extension      ) { |n| "x#{n}" }
+  f.sequence( :destination    ) { |n| "y#{n}" }
+  f.sequence( :active         ) { |n| true }
+  f.sequence( :sip_account_id ) { |n| nil }
 end
