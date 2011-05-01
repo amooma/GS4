@@ -11,7 +11,6 @@ app/views/extensions/*.erb                      opt/gemeinschaft/app/views/exten
 app/views/freeswitch_call_processing/*.erb      opt/gemeinschaft/app/views/freeswitch_call_processing/
 app/views/freeswitch_directory_entries/*.erb    opt/gemeinschaft/app/views/freeswitch_directory_entries/
 app/views/layouts/*.erb                         opt/gemeinschaft/app/views/layouts/
-app/views/provisioning_servers/*.erb            opt/gemeinschaft/app/views/provisioning_servers/
 app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
 app/views/sip_phones/*.erb                      opt/gemeinschaft/app/views/sip_phones/
 app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
