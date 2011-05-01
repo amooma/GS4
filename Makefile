@@ -142,6 +142,9 @@ deb: _have-dpkg-buildpackage
 	echo '##############################################################' ;\
 	echo "#  Done." ;\
 	echo "#  Find the Debian packages in \"../\"." ;\
+	echo "#  You may want to run 'make local-apt-repo' as root to" ;\
+	echo "#  create a local APT repository and have it added to your" ;\
+	echo "#  APT sources." ;\
 	echo '##############################################################' ;\
 	)
 
