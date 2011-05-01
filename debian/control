@@ -79,7 +79,7 @@ Package: gemeinschaft-sip-proxy
 Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
 Pre-Depends: kamailio (>= 3.1)
-Replaces: kamailio
+Replaces: kamailio, gemeinschaft-sip-proxy
 Conflicts: ser, openser, opensips
 Recommends: gemeinschaft-sip-pbx
 Description: Gemeinschaft - SIP proxy
@@ -112,7 +112,7 @@ Package: gemeinschaft-sip-pbx-freeswitch
 Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-sip-pbx (= ${binary:Version})
 Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
-Replaces: freeswitch
+Replaces: freeswitch, gemeinschaft-sip-pbx-freeswitch
 Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
 Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
 Description: Gemeinschaft - SIP PBX - FreeSwitch
@@ -150,7 +150,7 @@ Package: gemeinschaft-web-service
 Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
 Pre-Depends: lighttpd (>= 1.4.28)
-Replaces: lighttpd
+Replaces: lighttpd, gemeinschaft-web-service
 Breaks: httpd
 Suggests: logrotate
 Provides: gemeinschaft-provisioning

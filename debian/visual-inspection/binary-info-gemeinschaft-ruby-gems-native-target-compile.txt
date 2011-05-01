@@ -1,14 +1,14 @@
  new debian package, version 2.0.
- size 7257240 bytes: control archive= 3217 bytes.
+ size 7283764 bytes: control archive= 3252 bytes.
      969 bytes,    21 lines      control              
-    5443 bytes,    64 lines      md5sums              
+    5533 bytes,    65 lines      md5sums              
     1095 bytes,    43 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-ruby-gems-native-target-compile
  Source: gemeinschaft
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 7536
+ Installed-Size: 7568
  Pre-Depends: gemeinschaft-ruby-gems (= 4.0~beta1-1), build-essential, libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
  Depends: ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev, libsqlite3-0 (>= 3.7), libxml2, libxslt1.1, libfcgi0ldbl, graphviz
  Conflicts: gemeinschaft-ruby-gems-native

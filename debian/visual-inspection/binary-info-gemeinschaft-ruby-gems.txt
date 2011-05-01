@@ -1,13 +1,13 @@
  new debian package, version 2.0.
- size 12624504 bytes: control archive= 121226 bytes.
+ size 12676162 bytes: control archive= 122152 bytes.
      463 bytes,    12 lines      control              
-  555141 bytes,  4241 lines      md5sums              
+  558776 bytes,  4271 lines      md5sums              
  Package: gemeinschaft-ruby-gems
  Source: gemeinschaft
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 45556
+ Installed-Size: 45812
  Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems-native (= 4.0~beta1-1) | gemeinschaft-ruby-gems-native-target-compile
  Section: comm
  Priority: extra

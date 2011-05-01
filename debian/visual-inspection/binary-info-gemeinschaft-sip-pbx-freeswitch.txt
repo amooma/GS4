@@ -1,6 +1,6 @@
  new debian package, version 2.0.
- size 34582 bytes: control archive= 2904 bytes.
-    2635 bytes,    43 lines      control              
+ size 34470 bytes: control archive= 2903 bytes.
+    2668 bytes,    43 lines      control              
     3113 bytes,    37 lines      md5sums              
     1241 bytes,    46 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-sip-pbx-freeswitch
@@ -13,7 +13,7 @@
  Depends: gemeinschaft-sip-pbx (= 4.0~beta1-1)
  Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
  Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
- Replaces: freeswitch
+ Replaces: freeswitch, gemeinschaft-sip-pbx-freeswitch
  Section: comm
  Priority: extra
  Homepage: http://www.amooma.de/

@@ -22,6 +22,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/vendor/cache/
 -rw-r--r-- root/root     11776  ./opt/gemeinschaft/vendor/cache/rubyntlm-0.1.1.gem
 -rw-r--r-- root/root     94208  ./opt/gemeinschaft/vendor/cache/addressable-2.2.4.gem
 -rw-r--r-- root/root     47104  ./opt/gemeinschaft/vendor/cache/mime-types-1.16.gem
+-rw-r--r-- root/root     29184  ./opt/gemeinschaft/vendor/cache/annotate-models-1.0.4.gem
 -rw-r--r-- root/root     55808  ./opt/gemeinschaft/vendor/cache/sqlite3-1.3.3.gem
 -rw-r--r-- root/root      7168  ./opt/gemeinschaft/vendor/cache/oa-openid-0.2.0.gem
 -rw-r--r-- root/root     37888  ./opt/gemeinschaft/vendor/cache/simple_form-1.3.1.gem

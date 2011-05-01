@@ -1,7 +1,7 @@
  new debian package, version 2.0.
- size 10488 bytes: control archive= 1404 bytes.
+ size 10398 bytes: control archive= 1408 bytes.
      153 bytes,     5 lines      conffiles            
-     971 bytes,    31 lines      control              
+     995 bytes,    31 lines      control              
      172 bytes,     2 lines      md5sums              
     1295 bytes,    48 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-sip-proxy
@@ -14,7 +14,7 @@
  Depends: gemeinschaft-common (= 4.0~beta1-1)
  Recommends: gemeinschaft-sip-pbx
  Conflicts: openser, opensips, ser
- Replaces: kamailio
+ Replaces: gemeinschaft-sip-proxy, kamailio
  Section: comm
  Priority: extra
  Homepage: http://www.amooma.de/
