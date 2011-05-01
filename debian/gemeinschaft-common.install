@@ -11,6 +11,7 @@ app/views/extensions/*.erb                      opt/gemeinschaft/app/views/exten
 app/views/freeswitch_call_processing/*.erb      opt/gemeinschaft/app/views/freeswitch_call_processing/
 app/views/freeswitch_directory_entries/*.erb    opt/gemeinschaft/app/views/freeswitch_directory_entries/
 app/views/layouts/*.erb                         opt/gemeinschaft/app/views/layouts/
+app/views/nodes/*.erb                           opt/gemeinschaft/app/views/nodes/
 app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
 app/views/sip_phones/*.erb                      opt/gemeinschaft/app/views/sip_phones/
 app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
@@ -68,7 +69,4 @@ tmp/sessions        opt/gemeinschaft/tmp/
 tmp/sockets         opt/gemeinschaft/tmp/
 
 log                 opt/gemeinschaft/
-
-
-#bundle install --local --deployment
 

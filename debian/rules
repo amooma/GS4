@@ -97,16 +97,16 @@ override_dh_auto_build:
 	@ # the Gems and compiles them in one step. "build" target must
 	@ # never download anything though.
 	
+	# Install Gems into vendor/cache/ (for gemeinschaft-ruby-gems-native-target-compile):
+	bundle package
+	# Remove .bundle/config to make bundle forget the
+	# --path argument:
+	[ ! -e .bundle/config ] || rm .bundle/config
+	
 	# Install Gems into vendor/bundle/ (for gemeinschaft-ruby-gems and gemeinschaft-ruby-gems-native):
 	bundle install --deployment --local
 	# Remove .bundle/config to make bundle forget the
 	# --deployment argument (BUNDLE_PATH: vendor/bundle):
-	[ ! -e .bundle/config ] || rm .bundle/config
-	
-	# Install Gems into vendor/cache/ (for gemeinschaft-ruby-gems-native-target-compile):
-	bundle package --path 'vendor/cache'
-	# Remove .bundle/config to make bundle forget the
-	# --path argument:
 	[ ! -e .bundle/config ] || rm .bundle/config
 	
 	bundle check

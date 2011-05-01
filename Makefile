@@ -35,6 +35,10 @@ clean:
 	find .. -type f -name 'gemeinschaft-*_*_*.deb'   -print0 | $(XARGS_0_RM)
 	
 	[ ! -f ../Packages.gz ] || rm ../Packages.gz
+	
+	# Remove .bundle/config to make bundle forget the
+	# --path argument:
+	[ ! -e .bundle/config ] || rm .bundle/config
 
 
 ../Packages.gz: ../*.deb
@@ -71,6 +75,7 @@ deb: _have-dpkg-buildpackage
 		exit 1 ;\
 	fi
 	dpkg-buildpackage -tc -us -uc
+	
 	mkdir -p debian/visual-inspection
 	find debian/visual-inspection -type f -name '*.txt' -print0 \
 		| xargs -0 -n 1 --no-run-if-empty 'rm'
@@ -85,6 +90,59 @@ deb: _have-dpkg-buildpackage
 			| sed 's/ [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]/ /' \
 			> debian/visual-inspection/binary-contents-$${binpkg}.txt ;\
 	done
+	
+	@ echo "Checking if there are views that we didn't include in the package ..."
+	@ for view_file in `ls -1 app/views/*/*.erb app/views/*/*/*.erb` ; do \
+		pkg="gemeinschaft-common" ;\
+		if ! grep -q -F "/opt/gemeinschaft/$$view_file" "debian/visual-inspection/binary-contents-$$pkg.txt" ; then \
+			( \
+			echo '##############################################################' ;\
+			echo "#  Package $$pkg does not contain view \"$$view_file\"!" ;\
+			echo '##############################################################' ;\
+			) >&2 ;\
+			exit 1 ;\
+		fi ;\
+	done
+	
+	@ echo "Checking if there are Ruby Gems that we didn't include in the package ..."
+	@ for gem in `ls -1 vendor/cache/*.gem` ; do \
+		gem=`basename "$$gem" | sed -e 's/\.gem//'` ;\
+		\
+		pkg="gemeinschaft-ruby-gems-native-target-compile" ;\
+		found="0" ;\
+		grep -q -F "/opt/gemeinschaft/vendor/cache/$$gem.gem" "debian/visual-inspection/binary-contents-$$pkg.txt" && found="1" ;\
+		if [ "$$found." != "1." ]; then \
+			( \
+			echo '##############################################################' ;\
+			echo "#  Ruby Gem \"$$gem\" not found in package" ;\
+			echo "#  $$pkg" ;\
+			echo '##############################################################' ;\
+			) >&2 ;\
+			exit 1 ;\
+		fi ;\
+		\
+		pkg1="gemeinschaft-ruby-gems" ;\
+		pkg2="gemeinschaft-ruby-gems-native" ;\
+		found="0" ;\
+		grep -q -F "/opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/$$gem/" "debian/visual-inspection/binary-contents-$$pkg1.txt" && found="1" ;\
+		grep -q -F "/opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/$$gem/" "debian/visual-inspection/binary-contents-$$pkg2.txt" && found="1" ;\
+		if [ "$$found." != "1." ]; then \
+			( \
+			echo '##############################################################' ;\
+			echo "#  Ruby Gem \"$$gem\" not found in package" ;\
+			echo "#  $$pkg1 or $$pkg2" ;\
+			echo '##############################################################' ;\
+			) >&2 ;\
+			exit 1 ;\
+		fi ;\
+	done
+	
+	@ ( \
+	echo '##############################################################' ;\
+	echo "#  Done." ;\
+	echo "#  Find the Debian packages in \"../\"." ;\
+	echo '##############################################################' ;\
+	)
 
 
 _have-dpkg-buildpackage:

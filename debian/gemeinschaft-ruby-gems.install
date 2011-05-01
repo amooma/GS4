@@ -21,6 +21,7 @@ vendor/bundle/ruby/1.9.1/gems/activeresource-[0-9]*       opt/gemeinschaft/vendo
 vendor/bundle/ruby/1.9.1/gems/activesupport-[0-9]*        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/acts_as_list-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/addressable-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/annotate-models-[0-9]*      opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/arel-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/builder-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/default_value_for-[0-9]*    opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
