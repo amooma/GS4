@@ -9,13 +9,9 @@ drwxr-xr-x root/root         0  ./opt/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/tmp/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/tmp/sessions/
--rw-r--r-- root/root         0  ./opt/gemeinschaft/tmp/sessions/.gitkeep
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/tmp/cache/
--rw-r--r-- root/root         0  ./opt/gemeinschaft/tmp/cache/.gitkeep
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/tmp/pids/
--rw-r--r-- root/root         0  ./opt/gemeinschaft/tmp/pids/.gitkeep
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/tmp/sockets/
--rw-r--r-- root/root         0  ./opt/gemeinschaft/tmp/sockets/.gitkeep
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/helpers/
 -rw-r--r-- root/root      1060  ./opt/gemeinschaft/app/helpers/application_helper.rb
@@ -272,9 +268,6 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/script/
 -rwxr-xr-x root/root        94  ./opt/gemeinschaft/script/erd
 -rwxr-xr-x root/root       359  ./opt/gemeinschaft/script/annotate
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/log/
--rw-r--r-- root/root   7252306  ./opt/gemeinschaft/log/test.log
--rw-r--r-- root/root         0  ./opt/gemeinschaft/log/.gitkeep
--rw-r--r-- root/root   1230485  ./opt/gemeinschaft/log/development.log
 -rw-r--r-- root/root       206  ./opt/gemeinschaft/config.ru
 -rw-r--r-- root/root      9126  ./opt/gemeinschaft/README
 -rw-r--r-- root/root       273  ./opt/gemeinschaft/Rakefile

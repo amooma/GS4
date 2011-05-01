@@ -63,10 +63,4 @@ vendor/plugins/*    opt/gemeinschaft/vendor/plugins/
 
 #.bundle/config      opt/gemeinschaft/.bundle/
 
-tmp/cache           opt/gemeinschaft/tmp/
-tmp/pids            opt/gemeinschaft/tmp/
-tmp/sessions        opt/gemeinschaft/tmp/
-tmp/sockets         opt/gemeinschaft/tmp/
-
-log                 opt/gemeinschaft/
 

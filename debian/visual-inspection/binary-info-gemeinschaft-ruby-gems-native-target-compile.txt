@@ -1,5 +1,4 @@
  new debian package, version 2.0.
- size 7283764 bytes: control archive= 3252 bytes.
      969 bytes,    21 lines      control              
     5533 bytes,    65 lines      md5sums              
     1095 bytes,    43 lines   *  postinst             #!/bin/sh

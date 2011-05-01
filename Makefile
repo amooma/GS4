@@ -85,6 +85,7 @@ deb: _have-dpkg-buildpackage
 		> debian/visual-inspection/source-contents.txt
 	for binpkg in $(PACKAGES); do \
 		dpkg --info ../$${binpkg}_$(DEB_VERSION)_*.deb \
+			| grep -vEe '^\s*size\s*[0-9]+\s*b' \
 			> debian/visual-inspection/binary-info-$${binpkg}.txt ;\
 		dpkg --contents ../$${binpkg}_$(DEB_VERSION)_*.deb \
 			| sed 's/ [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]/ /' \

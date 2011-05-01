@@ -1,2 +1,9 @@
 opt/gemeinschaft
 
+opt/gemeinschaft/tmp/cache
+opt/gemeinschaft/tmp/pids
+opt/gemeinschaft/tmp/sessions
+opt/gemeinschaft/tmp/sockets
+
+opt/gemeinschaft/log
+

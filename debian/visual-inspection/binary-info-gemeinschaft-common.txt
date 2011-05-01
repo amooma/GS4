@@ -1,8 +1,7 @@
  new debian package, version 2.0.
- size 523146 bytes: control archive= 9190 bytes.
        0 bytes,     0 lines      conffiles            
      511 bytes,    14 lines      control              
-   23738 bytes,   260 lines      md5sums              
+   23255 bytes,   253 lines      md5sums              
      969 bytes,    41 lines   *  postinst             #!/bin/sh
      908 bytes,    37 lines   *  postrm               #!/bin/sh
      663 bytes,    35 lines   *  preinst              #!/bin/sh
@@ -12,7 +11,7 @@
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 9928
+ Installed-Size: 1624
  Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= 4.0~beta1-1)
  Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
  Conflicts: gemeinschaft (<< 3.99)

@@ -1,5 +1,4 @@
  new debian package, version 2.0.
- size 10398 bytes: control archive= 1408 bytes.
      153 bytes,     5 lines      conffiles            
      995 bytes,    31 lines      control              
      172 bytes,     2 lines      md5sums              

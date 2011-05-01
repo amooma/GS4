@@ -1,5 +1,4 @@
  new debian package, version 2.0.
- size 2560096 bytes: control archive= 17012 bytes.
      580 bytes,    13 lines      control              
    76394 bytes,   612 lines      md5sums              
  Package: gemeinschaft-ruby-gems-native
