@@ -25,8 +25,9 @@ digraph Gemeinschaft4 {
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="active">active <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="destination">destination <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="extension">extension <font face="Arial Italic" color="grey60">integer</font></td></tr>
-  <tr><td align="left" width="130" port="sip_account_id">sip_account_id <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
   m_Manufacturer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -37,6 +38,16 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="ieee_name">ieee_name <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
   <tr><td align="left" width="130" port="url">url <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
+  m_Node [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Node</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="management_host">management_host <font face="Arial Italic" color="grey60">string (64) ∗</font></td></tr>
+  <tr><td align="left" width="130" port="management_port">management_port <font face="Arial Italic" color="grey60">integer (4)</font></td></tr>
+  <tr><td align="left" width="130" port="title">title <font face="Arial Italic" color="grey60">string (60) ∗</font></td></tr>
 </table>
 >];
   m_Oui [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -94,7 +105,7 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="max_number_of_sip_accounts">max_number_of_sip_accounts <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
   <tr><td align="left" width="130" port="number_of_keys">number_of_keys <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
-  <tr><td align="left" width="130" port="random_password_contains_of">random_password_contains_of <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="random_password_consists_of">random_password_consists_of <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
   <tr><td align="left" width="130" port="random_password_length">random_password_length <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="reboot_request_path">reboot_request_path <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="ssl">ssl <font face="Arial Italic" color="grey60">boolean</font></td></tr>
@@ -135,15 +146,6 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="succeeded">succeeded <font face="Arial Italic" color="grey60">boolean</font></td></tr>
 </table>
 >];
-  m_ProvisioningServer [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
-  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ProvisioningServer</font></td></tr>
-</table>
-|
-<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
-</table>
->];
   m_RebootRequest [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">RebootRequest</font></td></tr>
 </table>
@@ -161,7 +163,6 @@ digraph Gemeinschaft4 {
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="auth_name">auth_name <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="password">password <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="phone_number">phone_number <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="realm">realm <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="voicemail_pin">voicemail_pin <font face="Arial Italic" color="grey60">integer</font></td></tr>
@@ -169,6 +170,14 @@ digraph Gemeinschaft4 {
 >];
   m_SipAccountCodec [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipAccountCodec</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
+</table>
+>];
+  m_SipAccountToExtension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipAccountToExtension</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
@@ -189,8 +198,7 @@ digraph Gemeinschaft4 {
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="host">host <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="management_host">management_host <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="management_port">management_port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="is_local">is_local <font face="Arial Italic" color="grey60">boolean</font></td></tr>
   <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
@@ -200,8 +208,7 @@ digraph Gemeinschaft4 {
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="host">host <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="management_host">management_host <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="management_port">management_port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="is_local">is_local <font face="Arial Italic" color="grey60">boolean</font></td></tr>
   <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
@@ -232,8 +239,7 @@ digraph Gemeinschaft4 {
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="host">host <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="management_host">management_host <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
-  <tr><td align="left" width="130" port="management_port">management_port <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="is_local">is_local <font face="Arial Italic" color="grey60">boolean</font></td></tr>
   <tr><td align="left" width="130" port="port">port <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
@@ -246,11 +252,12 @@ digraph Gemeinschaft4 {
   m_Codec -> m_SipAccount [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
   m_Codec -> m_PhoneModelCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Codec -> m_PhoneModel [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
-  m_Extension -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Extension -> m_SipAccountToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Extension -> m_SipAccount [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
   m_Manufacturer -> m_PhoneModel [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Manufacturer -> m_Oui [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Manufacturer -> m_Phone [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
-  m_Phone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_Phone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Phone -> m_ProvisioningLogEntry [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_PhoneModel -> m_Phone [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Phone -> m_RebootRequest [arrowhead = "normal", arrowtail = "none", weight = "2"]
@@ -264,7 +271,8 @@ digraph Gemeinschaft4 {
   m_PhoneModel -> m_PhoneModelKey [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_PhoneModel -> m_PhoneModelMacAddress [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_PhoneModel -> m_PhoneModelCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  m_ProvisioningServer -> m_SipPhone [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  m_SipPhone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipAccount -> m_SipAccountToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipAccount -> m_SipAccountCodec [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_SipPhone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_Node -> m_SipPhone [arrowhead = "normal", arrowtail = "none", weight = "1"]
 }
