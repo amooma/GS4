@@ -7,4 +7,6 @@ drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-odbc-sqlite3/
 -rw-r--r-- root/root       147  ./usr/share/doc/gemeinschaft-odbc-sqlite3/changelog.Debian.gz
 drwxr-xr-x root/root         0  ./opt/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/
--rw-r--r-- root/root       174  ./opt/gemeinschaft/gemeinschaft-production.odbc.ini
+drwxr-xr-x root/root         0  ./opt/gemeinschaft/misc/
+drwxr-xr-x root/root         0  ./opt/gemeinschaft/misc/odbc/
+-rw-r--r-- root/root       174  ./opt/gemeinschaft/misc/odbc/gemeinschaft-production.odbc.ini

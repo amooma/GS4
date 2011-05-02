@@ -1,6 +1,6 @@
  new debian package, version 2.0.
-     315 bytes,     9 lines      conffiles            
-    1363 bytes,    39 lines      control              
+      27 bytes,     1 lines      conffiles            
+    1362 bytes,    39 lines      control              
      172 bytes,     2 lines      md5sums              
     1227 bytes,    47 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-sip-proxy
@@ -8,7 +8,7 @@
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 108
+ Installed-Size: 72
  Pre-Depends: kamailio (>= 3.2.0)
  Depends: gemeinschaft-common (= 4.0~beta1-1), gemeinschaft-odbc-sqlite3 (= 4.0~beta1-1), kamailio-unixodbc-modules, kamailio-presence-modules
  Recommends: gemeinschaft-sip-pbx

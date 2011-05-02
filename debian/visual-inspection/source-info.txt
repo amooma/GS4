@@ -8,8 +8,8 @@ Homepage: http://www.amooma.de/
 Standards-Version: 3.8.4
 Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
 Checksums-Sha1: 
- 8e494cff87f14baf20012e15cc55cb61439157e2 12709168 gemeinschaft_4.0~beta1-1.tar.gz
+ c8b10a4ead35131b25e3a6014f34cd28a7439786 12709043 gemeinschaft_4.0~beta1-1.tar.gz
 Checksums-Sha256: 
- 94ddaad78391481e5ac7b84fda1d24f13c180526046aedeabdba155e770c97b6 12709168 gemeinschaft_4.0~beta1-1.tar.gz
+ 6101b1d95f712e15ab9ce2684b96e93608592550de9edd7a2199eae185f68226 12709043 gemeinschaft_4.0~beta1-1.tar.gz
 Files: 
- 32fe3b1d5ef5bbe5c5fcbe17750aa171 12709168 gemeinschaft_4.0~beta1-1.tar.gz
+ 69dc3c40fcbbb7ae6f421037e59cbd22 12709043 gemeinschaft_4.0~beta1-1.tar.gz
