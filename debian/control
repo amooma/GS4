@@ -100,6 +100,14 @@ Description: Gemeinschaft - SIP proxy
   echo 'deb-src http://deb.kamailio.org/kamailio squeeze main'
   ) > /etc/apt/sources.list.d/kamailio.list
   aptitude update
+ .
+ Note: The Debian packages of kamailio 3.1 ("stable") don't work.
+ You will have to use 3.2.
+ .
+  (
+  echo 'deb     http://deb.kamailio.org/kamailiodev-nightly squeeze main'
+  ) > /etc/apt/sources.list.d/kamailio.list
+  aptitude update
 
 
 Package: gemeinschaft-sip-pbx
