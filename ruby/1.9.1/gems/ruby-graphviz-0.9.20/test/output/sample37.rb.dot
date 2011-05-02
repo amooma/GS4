@@ -1,0 +1,50 @@
+digraph Solarsys {
+  Sun [label = "Sun\n", fillcolor = "orange", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+subgraph  {
+  rank = "same";
+  Moon [label = "Moon\n", fillcolor = "red", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Earth [label = "Earth\n", fillcolor = "blue", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Moon -> Earth [penwidth = "2", color = "black", labeltooltip = "distance"]
+}
+  Sun -> Earth [penwidth = "2", color = "black", labeltooltip = "distance"]
+subgraph  {
+  rank = "same";
+  Mercury [label = "Mercury\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Mercury [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Venus [label = "Venus\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Venus [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Mars [label = "Mars\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Mars [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Jupiter [label = "Jupiter\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Jupiter [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Saturn [label = "Saturn\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Saturn [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Uranus [label = "Uranus\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Uranus [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Neptune [label = "Neptune\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Neptune [label = "distance", penwidth = "2", color = "black"]
+}
+subgraph  {
+  rank = "same";
+  Pluto [label = "Pluto\n", fillcolor = "green", penwidth = "2", shape = "circle", fontsize = "12", style = "filled"];
+  Sun -> Pluto [label = "distance", penwidth = "2", color = "black"]
+}
+}

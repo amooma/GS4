@@ -1,0 +1,24 @@
+digraph G {
+  rankdir = "LR"; bgcolor = "transparent"; truecolor = "true";
+  node [label = "N"];
+subgraph  {
+  rank = "same";
+  mygraph [label = "# mygraph.dot\ldigraph G {\l  Hello -> World\l}\l", shape = "note", fontname = "Courier", fontsize = "10"];
+  image [label = "", shape = "note", image = "./hello.png"];
+}
+subgraph  {
+  rank = "same";
+  mysite [label = "\nexample.com\n ", shape = "component", fontname = "Arial"];
+  dotgraph [label = "\ndotgraph.net\n ", shape = "component", fontname = "Arial"];
+  dotgraph -> mysite [color = "red"]
+  mysite -> dotgraph [color = "blue"]
+}
+subgraph cluster_0 {
+  fontsize = "10"; fontname = "Courier"; color = "black"; label = "my_page.html";
+  zeimage [label = "", shape = "note", image = "./hello.png"];
+}
+  mygraph -> mysite [color = "blue"]
+  dotgraph -> image [color = "red"]
+  image -> dotgraph [color = "red"]
+  mysite -> zeimage [color = "red"]
+}

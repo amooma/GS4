@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pres_uri: MyString
+  pres_id: MyString
+  event: 1
+  expires: 1
+  desired_expires: 1
+  flag: 1
+  etag: MyString
+  tuple_id: MyString
+  watcher_uri: MyString
+  call_id: MyString
+  to_tag: MyString
+  from_tag: MyString
+  cseq: 1
+  recors_route: MyString
+  contact: MyString
+  version: 1
+  extra_headers: MyString
+
+two:
+  pres_uri: MyString
+  pres_id: MyString
+  event: 1
+  expires: 1
+  desired_expires: 1
+  flag: 1
+  etag: MyString
+  tuple_id: MyString
+  watcher_uri: MyString
+  call_id: MyString
+  to_tag: MyString
+  from_tag: MyString
+  cseq: 1
+  recors_route: MyString
+  contact: MyString
+  version: 1
+  extra_headers: MyString

@@ -1,0 +1,6 @@
+acts-as-list.gemspec
+lib/acts_as_list.rb
+Manifest
+README
+tasks/deployment.rake
+test/list_test.rb
