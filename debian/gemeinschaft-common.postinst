@@ -28,9 +28,8 @@ case "$1" in
 		cd /opt/gemeinschaft/
 		export RAILS_ENV=production
 		#OPTIMIZE Use `rake db:setup` on installation,
-		# `rake db:migrate && rake db:seed` on upgrade.
-		rake db:migrate
-		rake db:seed
+		# `rake db:migrate` on upgrade.(?)
+		rake db:setup
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)
