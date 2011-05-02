@@ -1,4 +1,4 @@
-<%= simple_form_for @sip_account do |f| %>
+<%= simple_form_for( @sip_account ) { |f| %>
   <% if @sip_account.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sip_account.errors.count, "error") %> prohibited this sip_account from being saved:</h2>
@@ -12,47 +12,47 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id, "User" %><br />
+    <%= f.label :user_id, "User" %>
     <%= f.select( :user_id,
       @users.collect {|r| [ "#{r.sn}, #{r.gn} (#{r.username}, #{r.email})", r.id ] },
       { :include_blank => true, :selected => @sip_account.user_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :auth_name, "Auth. name" %><br />
+    <%= f.label :auth_name, "Auth. name" %>
     <%= f.text_field :auth_name %>
   </div>
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <%= f.text_field :password %>
   </div>
   <div class="field">
-    <%= f.label :realm %><br />
+    <%= f.label :realm %>
     <%= f.text_field :realm %>
   </div>
   <div class="field">
-    <%= f.label :sip_server_id, "SIP server" %><br />
+    <%= f.label :sip_server_id, "SIP server" %>
     <%= f.select( :sip_server_id,
       @sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_server_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :sip_proxy_id, "SIP proxy" %><br />
+    <%= f.label :sip_proxy_id, "SIP proxy" %>
     <%= f.select( :sip_proxy_id,
       @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_proxy_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :voicemail_server_id, "Voicemail server" %><br />
+    <%= f.label :voicemail_server_id, "Voicemail server" %>
     <%= f.select( :voicemail_server_id,
       @voicemail_servers.collect {|r| [ "#{r.host}#{r.port ? (':' + r.port.to_s) : ''}", r.id ] },
       { :include_blank => true, :selected => @sip_account.voicemail_server_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :voicemail_pin, "Voicemail PIN" %><br />
+    <%= f.label :voicemail_pin, "Voicemail PIN" %>
     <%= f.text_field :voicemail_pin %>
   </div>
   <div class="field">
@@ -62,4 +62,4 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<% } %>

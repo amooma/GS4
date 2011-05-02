@@ -1,4 +1,4 @@
-<%= simple_form_for @extension do |f| %>
+<%= simple_form_for( @extension ) { |f| %>
   <% if @extension.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@extension.errors.count, "error") %> prohibited this extension from being saved:</h2>
@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :extension %><br />
+    <%= f.label :extension %>
     <%= f.text_field :extension %>
   </div>
   <div class="field">
-    <%= f.label :destination %><br />
+    <%= f.label :destination %>
     <%= f.text_field :destination %>
   </div>
   <div class="field">
     <%= f.association :sip_accounts, :as => :select, :label_method => :auth_name,
       :include_blank => true, :multiple => false
+      #OPTIMIZE Make this a normal <select> without multiple="multiple".
     %>
-    
   </div>
   <div class="field">
     <%= f.label :active %><br />
@@ -32,4 +32,4 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<% } %>
