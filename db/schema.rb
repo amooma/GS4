@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110430041212) do
+ActiveRecord::Schema.define(:version => 20110502121521) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,26 @@ ActiveRecord::Schema.define(:version => 20110430041212) do
     t.integer  "sip_account_id"
     t.string   "destination"
     t.boolean  "active"
+  end
+
+  create_table "location", :force => true do |t|
+    t.string   "username"
+    t.string   "domain"
+    t.string   "contact"
+    t.string   "received"
+    t.string   "path"
+    t.datetime "expires"
+    t.float    "q"
+    t.string   "callid"
+    t.integer  "cseq"
+    t.datetime "last_modified"
+    t.integer  "flags"
+    t.string   "user_agent"
+    t.string   "socket"
+    t.integer  "methods"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cflags"
   end
 
   create_table "manufacturers", :force => true do |t|
@@ -146,6 +166,29 @@ ActiveRecord::Schema.define(:version => 20110430041212) do
     t.datetime "updated_at"
   end
 
+  create_table "pua", :force => true do |t|
+    t.string   "pres_uri"
+    t.string   "pres_id"
+    t.integer  "event"
+    t.integer  "expires"
+    t.integer  "desired_expires"
+    t.integer  "flag"
+    t.string   "etag"
+    t.string   "tuple_id"
+    t.string   "watcher_uri"
+    t.string   "call_id"
+    t.string   "to_tag"
+    t.string   "from_tag"
+    t.integer  "cseq"
+    t.string   "record_route"
+    t.string   "contact"
+    t.string   "remote_contact"
+    t.integer  "version"
+    t.string   "extra_headers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reboot_requests", :force => true do |t|
     t.integer  "phone_id"
     t.datetime "start"
@@ -210,6 +253,26 @@ ActiveRecord::Schema.define(:version => 20110430041212) do
     t.boolean  "is_local"
   end
 
+  create_table "subscriber", :force => true do |t|
+    t.string   "username"
+    t.string   "domain"
+    t.string   "password"
+    t.string   "email_address"
+    t.integer  "datetime_created"
+    t.integer  "datetime_modified"
+    t.string   "ha1"
+    t.string   "ha1b"
+    t.string   "rpid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tests", :force => true do |t|
+    t.string   "as"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
@@ -231,6 +294,13 @@ ActiveRecord::Schema.define(:version => 20110430041212) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "version", :force => true do |t|
+    t.string   "table_name"
+    t.integer  "table_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "voicemail_servers", :force => true do |t|
     t.string   "host"
