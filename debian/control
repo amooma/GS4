@@ -187,9 +187,14 @@ Description: Gemeinschaft - ODBC configuration for SQLite3
   echo 'deb-src http://ftp.debian.org/debian/ testing main'
   ) > /etc/apt/sources.list.d/testing.list
   (
+  echo 'Package: *'
+  echo 'Pin: release a=testing'
+  echo 'Pin-Priority: -1'
+  ) > /etc/apt/preferences.d/testing
+  (
   echo 'Package: libsqliteodbc'
   echo 'Pin: release a=testing'
-  echo 'Pin-Priority: 1000'
+  echo 'Pin-Priority: 999'
   ) > /etc/apt/preferences.d/libsqliteodbc
   aptitude update
   apt-cache policy libsqliteodbc
