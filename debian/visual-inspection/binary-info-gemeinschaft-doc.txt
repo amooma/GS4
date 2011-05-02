@@ -1,12 +1,12 @@
  new debian package, version 2.0.
      324 bytes,    12 lines      control              
-   20813 bytes,   227 lines      md5sums              
+   19554 bytes,   214 lines      md5sums              
  Package: gemeinschaft-doc
  Source: gemeinschaft
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 5160
+ Installed-Size: 4752
  Suggests: graphviz
  Section: doc
  Priority: extra

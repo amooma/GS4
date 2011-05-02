@@ -128,36 +128,6 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
-					<li><a href="./CantinaCodec.html">CantinaCodec</a></li>
-				
-					<li><a href="./CantinaManufacturer.html">CantinaManufacturer</a></li>
-				
-					<li><a href="./CantinaOui.html">CantinaOui</a></li>
-				
-					<li><a href="./CantinaPhone.html">CantinaPhone</a></li>
-				
-					<li><a href="./CantinaPhoneKey.html">CantinaPhoneKey</a></li>
-				
-					<li><a href="./CantinaPhoneKeyFunctionDefinition.html">CantinaPhoneKeyFunctionDefinition</a></li>
-				
-					<li><a href="./CantinaPhoneKeyToFunctionMapping.html">CantinaPhoneKeyToFunctionMapping</a></li>
-				
-					<li><a href="./CantinaPhoneModel.html">CantinaPhoneModel</a></li>
-				
-					<li><a href="./CantinaPhoneModelCodec.html">CantinaPhoneModelCodec</a></li>
-				
-					<li><a href="./CantinaPhoneModelKey.html">CantinaPhoneModelKey</a></li>
-				
-					<li><a href="./CantinaPhoneModelMacAddress.html">CantinaPhoneModelMacAddress</a></li>
-				
-					<li><a href="./CantinaProvisioningLogEntry.html">CantinaProvisioningLogEntry</a></li>
-				
-					<li><a href="./CantinaRebootRequest.html">CantinaRebootRequest</a></li>
-				
-					<li><a href="./CantinaSipAccount.html">CantinaSipAccount</a></li>
-				
-					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
-				
 					<li><a href="./Codec.html">Codec</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
@@ -173,6 +143,12 @@
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Node.html">Node</a></li>
+				
+					<li><a href="./NodesController.html">NodesController</a></li>
+				
+					<li><a href="./NodesHelper.html">NodesHelper</a></li>
 				
 					<li><a href="./Oui.html">Oui</a></li>
 				
@@ -196,17 +172,13 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
-					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
-				
-					<li><a href="./ProvisioningServersController.html">ProvisioningServersController</a></li>
-				
-					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
-				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountToExtension.html">SipAccountToExtension</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -337,10 +309,10 @@ Define the top navigation menu items
 11:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Accounts&quot;</span>  , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_accounts_path</span> },
 12:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Extensions&quot;</span>    , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">extensions_path</span> },
 13:         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Servers&quot;</span>       , <span class="ruby-value">:sub</span> =<span class="ruby-operator">&gt;</span> [
-14:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Provisioning Servers&quot;</span> , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">provisioning_servers_path</span> },
-15:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Servers&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_servers_path</span> },
-16:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Proxies&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_proxies_path</span> },
-17:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Voicemail Servers&quot;</span>    , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">voicemail_servers_path</span> },
+14:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Servers&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_servers_path</span> },
+15:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Proxies&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_proxies_path</span> },
+16:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Voicemail Servers&quot;</span>    , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">voicemail_servers_path</span> },
+17:           { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Nodes&quot;</span>                , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">nodes_path</span> },
 18:         ]},
 19:       ]
 20:     <span class="ruby-keyword kw">else</span>

@@ -77,10 +77,11 @@ Description: Gemeinschaft - automated tests
 
 Package: gemeinschaft-sip-proxy
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
-Pre-Depends: kamailio (>= 3.1)
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), kamailio-unixodbc-modules, kamailio-presence-modules
+Pre-Depends: kamailio (>= 3.2.0)
 Replaces: kamailio, gemeinschaft-sip-proxy
-Conflicts: ser, openser, opensips
+Conflicts: ser, openser, opensips, kamailio (= 3.1.3+squeeze1)
+# The kamailio 3.1.3 packages are broken. 3.1.1 works.
 Recommends: gemeinschaft-sip-pbx
 Description: Gemeinschaft - SIP proxy
  SIP proxy configuration for the Gemeinschaft telephony server.
@@ -97,6 +98,14 @@ Description: Gemeinschaft - SIP proxy
   (
   echo 'deb     http://deb.kamailio.org/kamailio squeeze main'
   echo 'deb-src http://deb.kamailio.org/kamailio squeeze main'
+  ) > /etc/apt/sources.list.d/kamailio.list
+  aptitude update
+ .
+ Note: The Debian packages of kamailio 3.1 ("stable") don't work.
+ You will have to use 3.2.
+ .
+  (
+  echo 'deb     http://deb.kamailio.org/kamailiodev-nightly squeeze main'
   ) > /etc/apt/sources.list.d/kamailio.list
   aptitude update
 
@@ -151,7 +160,6 @@ Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
 Pre-Depends: lighttpd (>= 1.4.28)
 Replaces: lighttpd, gemeinschaft-web-service
-Breaks: httpd
 Suggests: logrotate
 Provides: gemeinschaft-provisioning
 Description: Gemeinschaft - web service

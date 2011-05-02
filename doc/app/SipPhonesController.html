@@ -147,36 +147,6 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
-					<li><a href="./CantinaCodec.html">CantinaCodec</a></li>
-				
-					<li><a href="./CantinaManufacturer.html">CantinaManufacturer</a></li>
-				
-					<li><a href="./CantinaOui.html">CantinaOui</a></li>
-				
-					<li><a href="./CantinaPhone.html">CantinaPhone</a></li>
-				
-					<li><a href="./CantinaPhoneKey.html">CantinaPhoneKey</a></li>
-				
-					<li><a href="./CantinaPhoneKeyFunctionDefinition.html">CantinaPhoneKeyFunctionDefinition</a></li>
-				
-					<li><a href="./CantinaPhoneKeyToFunctionMapping.html">CantinaPhoneKeyToFunctionMapping</a></li>
-				
-					<li><a href="./CantinaPhoneModel.html">CantinaPhoneModel</a></li>
-				
-					<li><a href="./CantinaPhoneModelCodec.html">CantinaPhoneModelCodec</a></li>
-				
-					<li><a href="./CantinaPhoneModelKey.html">CantinaPhoneModelKey</a></li>
-				
-					<li><a href="./CantinaPhoneModelMacAddress.html">CantinaPhoneModelMacAddress</a></li>
-				
-					<li><a href="./CantinaProvisioningLogEntry.html">CantinaProvisioningLogEntry</a></li>
-				
-					<li><a href="./CantinaRebootRequest.html">CantinaRebootRequest</a></li>
-				
-					<li><a href="./CantinaSipAccount.html">CantinaSipAccount</a></li>
-				
-					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
-				
 					<li><a href="./Codec.html">Codec</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
@@ -192,6 +162,12 @@
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Node.html">Node</a></li>
+				
+					<li><a href="./NodesController.html">NodesController</a></li>
+				
+					<li><a href="./NodesHelper.html">NodesHelper</a></li>
 				
 					<li><a href="./Oui.html">Oui</a></li>
 				
@@ -215,17 +191,13 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
-					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
-				
-					<li><a href="./ProvisioningServersController.html">ProvisioningServersController</a></li>
-				
-					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
-				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountToExtension.html">SipAccountToExtension</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -480,14 +452,14 @@ GET /sip_phones/new GET /sip_phones/new.xml
     <span class="ruby-comment cmt"># File app/controllers/sip_phones_controller.rb, line 34</span>
 34:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
 35:     <span class="ruby-ivar">@sip_phone</span> = <span class="ruby-constant">SipPhone</span>.<span class="ruby-identifier">new</span>
-36:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-37:       <span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">first</span>
+36:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+37:       <span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">node</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">first</span>
 38:       <span class="ruby-identifier">setup_cantina_phone</span>
 39:     <span class="ruby-keyword kw">end</span>
 40:     
 41:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-42:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-43:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_provisioning_server_path</span>, <span class="ruby-value">:alert</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'To create a new sip_phone you have to create a provisioning server first.'</span>) }
+42:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+43:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_node_path</span>, <span class="ruby-value">:alert</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'To create a new SIP phone you have to create a node first.'</span>) }
 44:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_phone</span> }
 45:       <span class="ruby-keyword kw">else</span>
 46:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
@@ -620,12 +592,13 @@ PUT /sip_phones/1 PUT /sip_phones/1.xml
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/sip_phones_controller.rb, line 104</span>
 104:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_cantina_phone</span>
-105:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">provisioning_server_id</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
-106:       <span class="ruby-identifier">provisioning_server</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">provisioning_server_id</span>).<span class="ruby-identifier">name</span>
-107:       <span class="ruby-identifier">port</span> = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">provisioning_server_id</span>).<span class="ruby-identifier">port</span>
-108:       <span class="ruby-constant">CantinaPhone</span>.<span class="ruby-identifier">set_resource</span>( <span class="ruby-node">&quot;http://#{provisioning_server}:#{port}&quot;</span> )
-109:     <span class="ruby-keyword kw">end</span>
-110:   <span class="ruby-keyword kw">end</span></pre>
+105:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">node_id</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
+106:       <span class="ruby-identifier">host</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">find</span>( <span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">node_id</span> ).<span class="ruby-identifier">management_host</span>
+107:       <span class="ruby-identifier">port</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">find</span>( <span class="ruby-ivar">@sip_phone</span>.<span class="ruby-identifier">node_id</span> ).<span class="ruby-identifier">management_port</span>
+108:       <span class="ruby-constant">CantinaPhone</span>.<span class="ruby-identifier">set_resource</span>( <span class="ruby-node">&quot;http://#{host}:#{port}&quot;</span> )
+109:       <span class="ruby-comment cmt">#OPTIMIZE Remove CantinaPhone.</span>
+110:     <span class="ruby-keyword kw">end</span>
+111:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for gemeinschaft-common
+# postinst script for gemeinschaft-web-service
 #
 # see: dh_installdeb(1)
 
@@ -20,12 +20,8 @@ set -e
 
 case "$1" in
 	configure)
-		cd /opt/gemeinschaft/
-		bundle check
-		#OPTIMIZE Use `rake db:setup` on installation,
-		# `rake db:migrate && rake db:seed` on upgrade.
-		rake db:migrate
-		rake db:seed
+		invoke-rc.d lighttpd stop
+		invoke-rc.d lighttpd start
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)
