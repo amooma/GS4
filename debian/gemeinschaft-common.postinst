@@ -22,6 +22,10 @@ case "$1" in
 	configure)
 		cd /opt/gemeinschaft/
 		bundle check
+		#OPTIMIZE Use `rake db:setup` on installation,
+		# `rake db:migrate && rake db:seed` on upgrade.
+		rake db:migrate
+		rake db:seed
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)
