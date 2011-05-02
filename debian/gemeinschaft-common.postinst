@@ -24,7 +24,7 @@ case "$1" in
 		cd /opt/gemeinschaft/
 		bundle check
 		
-		echo "Migrating the database ..."
+		echo "Setting up the database ..."
 		cd /opt/gemeinschaft/
 		export RAILS_ENV=production
 		#OPTIMIZE Use `rake db:setup` on installation,
