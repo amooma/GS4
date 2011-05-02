@@ -4,6 +4,19 @@
 
 
 ################################################################
+# Nodes
+################################################################
+
+Node.create({
+	# management_host must be reachable from all nodes, i.e.
+	# "localhost" works if you have only 1 node.
+	:management_host  => 'localhost',
+	:management_port  => nil,  # default port
+	:title            => 'Single-server dummy node',
+})
+
+
+################################################################
 # Phone key function definitions
 ################################################################
 
