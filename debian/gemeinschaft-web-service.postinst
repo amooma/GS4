@@ -20,6 +20,7 @@ set -e
 
 case "$1" in
 	configure)
+		echo "Restarting web server ..."
 		invoke-rc.d lighttpd stop
 		invoke-rc.d lighttpd start
 	;;
