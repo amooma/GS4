@@ -24,6 +24,7 @@ case "$1" in
 		bundle check
 		#OPTIMIZE Use `rake db:setup` on installation,
 		# `rake db:migrate && rake db:seed` on upgrade.
+		export RAILS_ENV=production
 		rake db:migrate
 		rake db:seed
 	;;
