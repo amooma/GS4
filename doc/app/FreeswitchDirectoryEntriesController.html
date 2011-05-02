@@ -137,36 +137,6 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
-					<li><a href="./CantinaCodec.html">CantinaCodec</a></li>
-				
-					<li><a href="./CantinaManufacturer.html">CantinaManufacturer</a></li>
-				
-					<li><a href="./CantinaOui.html">CantinaOui</a></li>
-				
-					<li><a href="./CantinaPhone.html">CantinaPhone</a></li>
-				
-					<li><a href="./CantinaPhoneKey.html">CantinaPhoneKey</a></li>
-				
-					<li><a href="./CantinaPhoneKeyFunctionDefinition.html">CantinaPhoneKeyFunctionDefinition</a></li>
-				
-					<li><a href="./CantinaPhoneKeyToFunctionMapping.html">CantinaPhoneKeyToFunctionMapping</a></li>
-				
-					<li><a href="./CantinaPhoneModel.html">CantinaPhoneModel</a></li>
-				
-					<li><a href="./CantinaPhoneModelCodec.html">CantinaPhoneModelCodec</a></li>
-				
-					<li><a href="./CantinaPhoneModelKey.html">CantinaPhoneModelKey</a></li>
-				
-					<li><a href="./CantinaPhoneModelMacAddress.html">CantinaPhoneModelMacAddress</a></li>
-				
-					<li><a href="./CantinaProvisioningLogEntry.html">CantinaProvisioningLogEntry</a></li>
-				
-					<li><a href="./CantinaRebootRequest.html">CantinaRebootRequest</a></li>
-				
-					<li><a href="./CantinaSipAccount.html">CantinaSipAccount</a></li>
-				
-					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
-				
 					<li><a href="./Codec.html">Codec</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
@@ -182,6 +152,12 @@
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Node.html">Node</a></li>
+				
+					<li><a href="./NodesController.html">NodesController</a></li>
+				
+					<li><a href="./NodesHelper.html">NodesHelper</a></li>
 				
 					<li><a href="./Oui.html">Oui</a></li>
 				
@@ -205,17 +181,13 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
-					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
-				
-					<li><a href="./ProvisioningServersController.html">ProvisioningServersController</a></li>
-				
-					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
-				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountToExtension.html">SipAccountToExtension</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -305,12 +277,11 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="-arg-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_directory_entries_controller.rb, line 161</span>
-161:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_arg</span>( <span class="ruby-identifier">name</span> )
-162:         (
-163:                 <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
-164:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">query_parameters</span>[<span class="ruby-identifier">name</span>]
-165:         )<span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_directory_entries_controller.rb, line 167</span>
+167:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_arg</span>( <span class="ruby-identifier">name</span> )
+168:                 <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
+169:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">query_parameters</span>[<span class="ruby-identifier">name</span>]
+170:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -341,11 +312,10 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="-bold-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_directory_entries_controller.rb, line 167</span>
-167:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_bold</span>( <span class="ruby-identifier">str</span> )
-168:         (
-169:                 <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;\e[0;1m#{str} \e[0m &quot;</span>
-170:         )<span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_directory_entries_controller.rb, line 172</span>
+172:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_bold</span>( <span class="ruby-identifier">str</span> )
+173:                 <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;\e[0;1m#{str} \e[0m &quot;</span>
+174:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -370,7 +340,8 @@ params array as it overrides the &#8220;action&#8221; arg.!
 				<div class="method-description">
 					
 					<p>
-GET /freeswitch-directory-entries/search.xml
+GET  /freeswitch-directory-entries/search.xml POST
+/freeswitch-directory-entries/search.xml
 </p>
 					
 
@@ -378,154 +349,149 @@ GET /freeswitch-directory-entries/search.xml
 					<div class="method-source-code"
 						id="search-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_directory_entries_controller.rb, line 7</span>
-  7:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">search</span>()
-  8:         (
-  9:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:section</span>) <span class="ruby-operator">!=</span> <span class="ruby-value str">'directory'</span>); (
- 10:                         
- 11:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Expected section=directory.&quot;</span> ))
- 12:                         
- 13:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 14:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
- 15:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
- 16:                                                 <span class="ruby-value">:locals</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:msg</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Expected section=directory.&quot;</span> }
- 17:                                 }
- 18:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
- 19:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
- 20:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
- 21:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
- 22:                                 }
- 23:                         }
- 24:                         <span class="ruby-keyword kw">return</span>
- 25:                 )<span class="ruby-keyword kw">end</span>
- 26:                 
- 27:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'gateways'</span>); (
- 28:                         <span class="ruby-comment cmt"># list gateways and domain aliases (as in the Sofia SIP profile)</span>
- 29:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Startup</span>
- 30:                         
- 31:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Request for gateways ...&quot;</span> ))
- 32:                         
- 33:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 34:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
- 35:                                         <span class="ruby-comment cmt">#render :gateways_index, :layout =&gt; false</span>
- 36:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
- 37:                                 }
- 38:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
- 39:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
- 40:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
- 41:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
- 42:                                 }
- 43:                         }
- 44:                         <span class="ruby-keyword kw">return</span>
- 45:                 )<span class="ruby-keyword kw">end</span>
- 46:                 
- 47:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'network-list'</span>); (
- 48:                         <span class="ruby-comment cmt"># list ACL rules? users with ACL rules (cidr)?</span>
- 49:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#ACL</span>
- 50:                         
- 51:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Request for users with ACL rules ...&quot;</span> ))
- 52:                         
- 53:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 54:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
- 55:                                         <span class="ruby-comment cmt">#render :network_list_index, :layout =&gt; false</span>
- 56:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
- 57:                                 }
- 58:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
- 59:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
- 60:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
- 61:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
- 62:                                 }
- 63:                         }
- 64:                         <span class="ruby-keyword kw">return</span>
- 65:                 )<span class="ruby-keyword kw">end</span>
- 66:                 
- 67:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:key</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:key</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'id'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:user</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:domain</span>)); (
- 68:                         <span class="ruby-comment cmt"># user directory entry, used for voicemail as well</span>
- 69:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Authorization</span>
- 70:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Voicemail_request</span>
- 71:                         <span class="ruby-comment cmt"># or dial by user/&lt;username&gt; request for user item</span>
- 72:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Dial_by_user.2F.3Cusername.3E_Request</span>
- 73:                         
- 74:                         <span class="ruby-comment cmt"># Damn Rails doesn't pass a request argument named 'action'</span>
- 75:                         <span class="ruby-comment cmt"># to the params array because it overrides the &quot;action&quot; arg.!</span>
- 76:                         
- 77:                         <span class="ruby-identifier">type</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:action</span>)
- 78:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'sip_auth'</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'sip-auth'</span>
- 79:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'message-count'</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'voicemail'</span>
- 80:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'user_call'</span>     <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'dial-by-username'</span>
- 81:                                 <span class="ruby-keyword kw">else</span>
- 82:                                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:as_channel</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:as_channel</span>).<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^true|1$/</span>))
- 83:                                                 <span class="ruby-value str">'dial-by-username'</span>
- 84:                                         <span class="ruby-keyword kw">else</span>
- 85:                                                 <span class="ruby-value str">'unknown'</span>
- 86:                                         <span class="ruby-keyword kw">end</span>
- 87:                         <span class="ruby-keyword kw">end</span>
- 88:                         
- 89:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] Request for user #{_arg(:user)}@#{_arg(:domain)} (for #{type}) ...&quot;</span> ))
- 90:                         
- 91:                         <span class="ruby-comment cmt">#OPTIMIZE Improve finding the SIP account:</span>
- 92:                         <span class="ruby-ivar">@sip_account</span> = <span class="ruby-keyword kw">nil</span>
- 93:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@sip_account</span>
- 94:                                 <span class="ruby-comment cmt"># Find SIP account by auth_name:</span>
- 95:                                 <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
- 96:                                         <span class="ruby-value">:auth_name</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:user</span>)
- 97:                                 }).<span class="ruby-identifier">joins</span>(<span class="ruby-value">:sip_server</span>).<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
- 98:                                         <span class="ruby-value">:host</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:domain</span>)
- 99:                                 }).<span class="ruby-identifier">first</span>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_directory_entries_controller.rb, line 18</span>
+ 18:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">search</span>()
+ 19:         (
+ 20:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:section</span>) <span class="ruby-operator">!=</span> <span class="ruby-value str">'directory'</span>); (
+ 21:                         
+ 22:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Expected section=directory.&quot;</span> ))
+ 23:                         
+ 24:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 25:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
+ 26:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+ 27:                                                 <span class="ruby-value">:locals</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:msg</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Expected section=directory.&quot;</span> }
+ 28:                                 }
+ 29:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
+ 30:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
+ 31:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+ 32:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
+ 33:                                 }
+ 34:                         }
+ 35:                         <span class="ruby-keyword kw">return</span>
+ 36:                 )<span class="ruby-keyword kw">end</span>
+ 37:                 
+ 38:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'gateways'</span>); (
+ 39:                         <span class="ruby-comment cmt"># list gateways and domain aliases (as in the Sofia SIP profile)</span>
+ 40:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Startup</span>
+ 41:                         
+ 42:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Request for gateways ...&quot;</span> ))
+ 43:                         
+ 44:                         <span class="ruby-comment cmt">#@sip_servers = SipServer.all( :group =&gt; :host )</span>
+ 45:                         
+ 46:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 47:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
+ 48:                                         <span class="ruby-comment cmt">#render :domains_and_gateways_index, :layout =&gt; false</span>
+ 49:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+ 50:                                 }
+ 51:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
+ 52:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
+ 53:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+ 54:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
+ 55:                                 }
+ 56:                         }
+ 57:                         <span class="ruby-keyword kw">return</span>
+ 58:                 )<span class="ruby-keyword kw">end</span>
+ 59:                 
+ 60:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'network-list'</span>); (
+ 61:                         <span class="ruby-comment cmt"># list ACL rules? users with ACL rules (cidr)?</span>
+ 62:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#ACL</span>
+ 63:                         
+ 64:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Request for users with ACL rules ...&quot;</span> ))
+ 65:                         
+ 66:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 67:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
+ 68:                                         <span class="ruby-comment cmt">#render :network_list_index, :layout =&gt; false</span>
+ 69:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+ 70:                                 }
+ 71:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
+ 72:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
+ 73:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+ 74:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
+ 75:                                 }
+ 76:                         }
+ 77:                         <span class="ruby-keyword kw">return</span>
+ 78:                 )<span class="ruby-keyword kw">end</span>
+ 79:                 
+ 80:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:key</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:key</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'id'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:user</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:domain</span>)); (
+ 81:                         <span class="ruby-comment cmt"># user directory entry, used for voicemail as well</span>
+ 82:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Authorization</span>
+ 83:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Voicemail_request</span>
+ 84:                         <span class="ruby-comment cmt"># or dial by user/&lt;username&gt; request for user item</span>
+ 85:                         <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_xml_curl#Dial_by_user.2F.3Cusername.3E_Request</span>
+ 86:                         
+ 87:                         <span class="ruby-comment cmt"># Damn Rails doesn't pass a request argument named 'action'</span>
+ 88:                         <span class="ruby-comment cmt"># to the params array because it overrides the &quot;action&quot; arg.!</span>
+ 89:                         
+ 90:                         <span class="ruby-identifier">type</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:action</span>)
+ 91:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'sip_auth'</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'sip-auth'</span>
+ 92:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'message-count'</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'voicemail'</span>
+ 93:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'user_call'</span>     <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'dial-by-username'</span>
+ 94:                                 <span class="ruby-keyword kw">else</span>
+ 95:                                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">_arg</span>(<span class="ruby-value">:as_channel</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:as_channel</span>).<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^true|1$/</span>))
+ 96:                                                 <span class="ruby-value str">'dial-by-username'</span>
+ 97:                                         <span class="ruby-keyword kw">else</span>
+ 98:                                                 <span class="ruby-value str">'unknown'</span>
+ 99:                                         <span class="ruby-keyword kw">end</span>
 100:                         <span class="ruby-keyword kw">end</span>
-101:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@sip_account</span>
-102:                                 <span class="ruby-comment cmt"># Find SIP account by phone_number:</span>
-103:                                 <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
-104:                                         <span class="ruby-value">:phone_number</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:user</span>)
-105:                                 }).<span class="ruby-identifier">joins</span>(<span class="ruby-value">:sip_server</span>).<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
-106:                                         <span class="ruby-value">:host</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:domain</span>)
-107:                                 }).<span class="ruby-identifier">first</span>
-108:                         <span class="ruby-keyword kw">end</span>
-109:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@sip_account</span>
-110:                                 <span class="ruby-comment cmt"># Find SIP account by extension:</span>
-111:                                 <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
-112:                                 }).<span class="ruby-identifier">joins</span>(<span class="ruby-value">:sip_server</span>).<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
-113:                                         <span class="ruby-value">:host</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:domain</span>)
-114:                                 }).<span class="ruby-identifier">joins</span>(<span class="ruby-value">:extension</span>).<span class="ruby-identifier">where</span>(<span class="ruby-value">:extensions</span> =<span class="ruby-operator">&gt;</span> {
-115:                                         <span class="ruby-value">:extension</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:user</span>)
-116:                                 }).<span class="ruby-identifier">first</span>
-117:                         <span class="ruby-keyword kw">end</span>
-118:                         
-119:                         <span class="ruby-comment cmt">#puts &quot;-------------------{&quot;</span>
-120:                         <span class="ruby-comment cmt">#puts @sip_account.inspect</span>
-121:                         <span class="ruby-comment cmt">#puts &quot;-------------------}&quot;</span>
-122:                         
-123:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-124:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
-125:                                         <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
-126:                                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:account_show</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
-127:                                         <span class="ruby-keyword kw">else</span>
-128:                                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
-129:                                         <span class="ruby-keyword kw">end</span>
-130:                                 }
-131:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
-132:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
-133:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
-134:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
-135:                                 }
-136:                         }
-137:                         <span class="ruby-keyword kw">return</span>
-138:                 )<span class="ruby-keyword kw">end</span>
-139:                 
-140:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Unknown request!&quot;</span> ))
-141:                 
-142:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-143:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
-144:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
-145:                         }
-146:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
-147:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
-148:                                         <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
-149:                                         <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
-150:                         }
-151:                 }
-152:                 <span class="ruby-keyword kw">return</span>
-153:         )<span class="ruby-keyword kw">end</span></pre>
+101:                         
+102:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] Request for user #{_arg(:user)}@#{_arg(:domain)} (for #{type}) ...&quot;</span> ))
+103:                         
+104:                         <span class="ruby-comment cmt"># Find the SIP account:</span>
+105:                         <span class="ruby-comment cmt"># Find SIP account by auth_name:</span>
+106:                         <span class="ruby-ivar">@sip_account</span> = <span class="ruby-keyword kw">nil</span>
+107:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@sip_account</span>
+108:                                 <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
+109:                                         <span class="ruby-value">:auth_name</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_arg</span>(<span class="ruby-value">:user</span>)
+110:                                 }) <span class="ruby-comment cmt">#\ #OPTIMIZE Use domain as well once multiple domains are implemented.</span>
+111:                                 <span class="ruby-comment cmt">#.joins(:sip_server).where(:sip_servers =&gt; {</span>
+112:                                 <span class="ruby-comment cmt">#   :host           =&gt; _arg(:domain)</span>
+113:                                 <span class="ruby-comment cmt">#}).first</span>
+114:                         <span class="ruby-keyword kw">end</span>
+115:                         <span class="ruby-comment cmt">## Find SIP account by extension (this is now done by Kamailio):</span>
+116:                         <span class="ruby-comment cmt">#if ! @sip_account</span>
+117:                         <span class="ruby-comment cmt">#    @sip_account = SipAccount.where({</span>
+118:                         <span class="ruby-comment cmt">#    }).joins(:sip_server).where(:sip_servers =&gt; {</span>
+119:                         <span class="ruby-comment cmt">#            :host           =&gt; _arg(:domain)</span>
+120:                         <span class="ruby-comment cmt">#    }).joins(:extension).where(:extensions =&gt; {</span>
+121:                         <span class="ruby-comment cmt">#            :extension      =&gt; _arg(:user)</span>
+122:                         <span class="ruby-comment cmt">#    }).first</span>
+123:                         <span class="ruby-comment cmt">#end</span>
+124:                         
+125:                         <span class="ruby-comment cmt">#puts &quot;-------------------{&quot;</span>
+126:                         <span class="ruby-comment cmt">#puts @sip_account.inspect</span>
+127:                         <span class="ruby-comment cmt">#puts &quot;-------------------}&quot;</span>
+128:                         
+129:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+130:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
+131:                                         <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+132:                                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:account_show</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+133:                                         <span class="ruby-keyword kw">else</span>
+134:                                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+135:                                         <span class="ruby-keyword kw">end</span>
+136:                                 }
+137:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
+138:                                         <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
+139:                                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+140:                                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
+141:                                 }
+142:                         }
+143:                         <span class="ruby-keyword kw">return</span>
+144:                 )<span class="ruby-keyword kw">end</span>
+145:                 
+146:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Unknown request!&quot;</span> ))
+147:                 
+148:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+149:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
+150:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:empty_result</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+151:                         }
+152:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
+153:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
+154:                                         <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+155:                                         <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
+156:                         }
+157:                 }
+158:                 <span class="ruby-keyword kw">return</span>
+159:         )<span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

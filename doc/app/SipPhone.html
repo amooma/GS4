@@ -135,36 +135,6 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
-					<li><a href="./CantinaCodec.html">CantinaCodec</a></li>
-				
-					<li><a href="./CantinaManufacturer.html">CantinaManufacturer</a></li>
-				
-					<li><a href="./CantinaOui.html">CantinaOui</a></li>
-				
-					<li><a href="./CantinaPhone.html">CantinaPhone</a></li>
-				
-					<li><a href="./CantinaPhoneKey.html">CantinaPhoneKey</a></li>
-				
-					<li><a href="./CantinaPhoneKeyFunctionDefinition.html">CantinaPhoneKeyFunctionDefinition</a></li>
-				
-					<li><a href="./CantinaPhoneKeyToFunctionMapping.html">CantinaPhoneKeyToFunctionMapping</a></li>
-				
-					<li><a href="./CantinaPhoneModel.html">CantinaPhoneModel</a></li>
-				
-					<li><a href="./CantinaPhoneModelCodec.html">CantinaPhoneModelCodec</a></li>
-				
-					<li><a href="./CantinaPhoneModelKey.html">CantinaPhoneModelKey</a></li>
-				
-					<li><a href="./CantinaPhoneModelMacAddress.html">CantinaPhoneModelMacAddress</a></li>
-				
-					<li><a href="./CantinaProvisioningLogEntry.html">CantinaProvisioningLogEntry</a></li>
-				
-					<li><a href="./CantinaRebootRequest.html">CantinaRebootRequest</a></li>
-				
-					<li><a href="./CantinaSipAccount.html">CantinaSipAccount</a></li>
-				
-					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
-				
 					<li><a href="./Codec.html">Codec</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
@@ -180,6 +150,12 @@
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Node.html">Node</a></li>
+				
+					<li><a href="./NodesController.html">NodesController</a></li>
+				
+					<li><a href="./NodesHelper.html">NodesHelper</a></li>
 				
 					<li><a href="./Oui.html">Oui</a></li>
 				
@@ -203,17 +179,13 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
-					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
-				
-					<li><a href="./ProvisioningServersController.html">ProvisioningServersController</a></li>
-				
-					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
-				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountToExtension.html">SipAccountToExtension</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -298,23 +270,24 @@
 					<div class="method-source-code"
 						id="cantina-phone-by-id-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/sip_phone.rb, line 65</span>
-65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cantina_phone_by_id</span>( <span class="ruby-identifier">cantina_phone_id</span> )
-66:                 <span class="ruby-identifier">cantina_resource</span> = <span class="ruby-identifier">provisioning_server_base_url</span>()
-67:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">cantina_resource</span>
-68:                         <span class="ruby-comment cmt"># SipPhone has no provisioning server.</span>
-69:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-70:                 <span class="ruby-keyword kw">end</span>
-71:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Trying to find CantinaPhone with ID #{cantina_phone_id.inspect} on #{cantina_resource.inspect} ...&quot;</span>
-72:                 <span class="ruby-keyword kw">begin</span>
-73:                         <span class="ruby-constant">CantinaPhone</span>.<span class="ruby-identifier">set_resource</span>( <span class="ruby-identifier">cantina_resource</span> )
-74:                         <span class="ruby-identifier">cantina_phone</span> = <span class="ruby-constant">CantinaPhone</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">cantina_phone_id</span> )
-75:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">cantina_phone</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">nil</span>
-76:                 <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ECONNREFUSED</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EADDRNOTAVAIL</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EHOSTDOWN</span>, <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeoutError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-77:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})&quot;</span>
-78:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-79:                 <span class="ruby-keyword kw">end</span>
-80:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/sip_phone.rb, line 66</span>
+66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cantina_phone_by_id</span>( <span class="ruby-identifier">cantina_phone_id</span> )  <span class="ruby-comment cmt">#FIXME</span>
+67:                 <span class="ruby-identifier">cantina_resource</span> = <span class="ruby-identifier">provisioning_server_base_url</span>()
+68:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">cantina_resource</span>
+69:                         <span class="ruby-comment cmt"># SipPhone has no provisioning server.</span>
+70:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+71:                 <span class="ruby-keyword kw">end</span>
+72:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Trying to find CantinaPhone with ID #{cantina_phone_id.inspect} on #{cantina_resource.inspect} ...&quot;</span>
+73:                 <span class="ruby-keyword kw">begin</span>
+74:                         <span class="ruby-comment cmt">#OPTIMIZE Remove CantinaPhone.</span>
+75:                         <span class="ruby-constant">CantinaPhone</span>.<span class="ruby-identifier">set_resource</span>( <span class="ruby-identifier">cantina_resource</span> )
+76:                         <span class="ruby-identifier">cantina_phone</span> = <span class="ruby-constant">CantinaPhone</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">cantina_phone_id</span> )
+77:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">cantina_phone</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">nil</span>
+78:                 <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ECONNREFUSED</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EADDRNOTAVAIL</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EHOSTDOWN</span>, <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeoutError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+79:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Failed to connect to Cantina provisioning server at #{cantina_resource.inspect}. (#{e.class}, #{e.message})&quot;</span>
+80:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+81:                 <span class="ruby-keyword kw">end</span>
+82:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -345,35 +318,35 @@
 					<div class="method-source-code"
 						id="provisioning-server-base-url-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_phone.rb, line 82</span>
- 82:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">provisioning_server_base_url</span>
- 83:                 <span class="ruby-identifier">scheme</span> = <span class="ruby-value str">'http'</span>
- 84:                 <span class="ruby-identifier">host</span>   = <span class="ruby-value str">'0.0.0.0'</span>  <span class="ruby-comment cmt"># this will not work on purpose</span>
- 85:                 <span class="ruby-identifier">port</span>   = <span class="ruby-value">0</span>          <span class="ruby-comment cmt"># this will not work on purpose</span>
- 86:                 <span class="ruby-identifier">path</span>   = <span class="ruby-value str">'/'</span>
- 87:                 
- 88:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_server_id</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_server</span>
- 89:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;SipPhone #{self.id.inspect} has no provisioning server. Alright.&quot;</span>
- 90:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>  <span class="ruby-comment cmt"># phone without provisioning</span>
- 91:                 <span class="ruby-keyword kw">else</span>
- 92:                         <span class="ruby-identifier">prov_server</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_server</span>
- 93:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prov_server</span>
- 94:                                 <span class="ruby-identifier">scheme</span> = <span class="ruby-value str">'http'</span>  <span class="ruby-comment cmt"># TODO - https as soon as it is implemented.</span>
- 95:                                 <span class="ruby-identifier">host</span>   = <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">blank?</span>
- 96:                                 <span class="ruby-identifier">port</span>   = <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">port</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">port</span>.<span class="ruby-identifier">blank?</span>
- 97:                                 <span class="ruby-identifier">path</span>   = <span class="ruby-value str">'/'</span>
- 98:                         <span class="ruby-keyword kw">end</span>
- 99:                 <span class="ruby-keyword kw">end</span>
-100:                 
-101:                 <span class="ruby-identifier">ret</span> = <span class="ruby-value str">'%s://%s%s%s'</span> <span class="ruby-operator">%</span> [
-102:                         <span class="ruby-identifier">scheme</span>,
-103:                         <span class="ruby-identifier">host</span>,
-104:                         <span class="ruby-identifier">port</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;:#{port.to_s}&quot;</span>,
-105:                         <span class="ruby-identifier">path</span>,
-106:                 ]
-107:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;SipPhone #{self.id.inspect} has prov. server #{ret.inspect}.&quot;</span>
-108:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ret</span>
-109:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_phone.rb, line 84</span>
+ 84:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">provisioning_server_base_url</span>  <span class="ruby-comment cmt">#FIXME</span>
+ 85:                 <span class="ruby-identifier">scheme</span> = <span class="ruby-value str">'http'</span>
+ 86:                 <span class="ruby-identifier">host</span>   = <span class="ruby-value str">'0.0.0.0'</span>  <span class="ruby-comment cmt"># this will not work on purpose</span>
+ 87:                 <span class="ruby-identifier">port</span>   = <span class="ruby-value">0</span>          <span class="ruby-comment cmt"># this will not work on purpose</span>
+ 88:                 <span class="ruby-identifier">path</span>   = <span class="ruby-value str">'/'</span>
+ 89:                 
+ 90:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_server_id</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_server</span>
+ 91:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;SipPhone #{self.id.inspect} has no provisioning server. Alright.&quot;</span>
+ 92:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>  <span class="ruby-comment cmt"># phone without provisioning</span>
+ 93:                 <span class="ruby-keyword kw">else</span>
+ 94:                         <span class="ruby-identifier">prov_server</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_server</span>
+ 95:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prov_server</span>
+ 96:                                 <span class="ruby-identifier">scheme</span> = <span class="ruby-value str">'http'</span>  <span class="ruby-comment cmt"># TODO - https as soon as it is implemented.</span>
+ 97:                                 <span class="ruby-identifier">host</span>   = <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">blank?</span>
+ 98:                                 <span class="ruby-identifier">port</span>   = <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">port</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">prov_server</span>.<span class="ruby-identifier">port</span>.<span class="ruby-identifier">blank?</span>
+ 99:                                 <span class="ruby-identifier">path</span>   = <span class="ruby-value str">'/'</span>
+100:                         <span class="ruby-keyword kw">end</span>
+101:                 <span class="ruby-keyword kw">end</span>
+102:                 
+103:                 <span class="ruby-identifier">ret</span> = <span class="ruby-value str">'%s://%s%s%s'</span> <span class="ruby-operator">%</span> [
+104:                         <span class="ruby-identifier">scheme</span>,
+105:                         <span class="ruby-identifier">host</span>,
+106:                         <span class="ruby-identifier">port</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;:#{port.to_s}&quot;</span>,
+107:                         <span class="ruby-identifier">path</span>,
+108:                 ]
+109:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;SipPhone #{self.id.inspect} has prov. server #{ret.inspect}.&quot;</span>
+110:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ret</span>
+111:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

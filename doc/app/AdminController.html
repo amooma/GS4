@@ -137,36 +137,6 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
-					<li><a href="./CantinaCodec.html">CantinaCodec</a></li>
-				
-					<li><a href="./CantinaManufacturer.html">CantinaManufacturer</a></li>
-				
-					<li><a href="./CantinaOui.html">CantinaOui</a></li>
-				
-					<li><a href="./CantinaPhone.html">CantinaPhone</a></li>
-				
-					<li><a href="./CantinaPhoneKey.html">CantinaPhoneKey</a></li>
-				
-					<li><a href="./CantinaPhoneKeyFunctionDefinition.html">CantinaPhoneKeyFunctionDefinition</a></li>
-				
-					<li><a href="./CantinaPhoneKeyToFunctionMapping.html">CantinaPhoneKeyToFunctionMapping</a></li>
-				
-					<li><a href="./CantinaPhoneModel.html">CantinaPhoneModel</a></li>
-				
-					<li><a href="./CantinaPhoneModelCodec.html">CantinaPhoneModelCodec</a></li>
-				
-					<li><a href="./CantinaPhoneModelKey.html">CantinaPhoneModelKey</a></li>
-				
-					<li><a href="./CantinaPhoneModelMacAddress.html">CantinaPhoneModelMacAddress</a></li>
-				
-					<li><a href="./CantinaProvisioningLogEntry.html">CantinaProvisioningLogEntry</a></li>
-				
-					<li><a href="./CantinaRebootRequest.html">CantinaRebootRequest</a></li>
-				
-					<li><a href="./CantinaSipAccount.html">CantinaSipAccount</a></li>
-				
-					<li><a href="./CantinaSipAccountCodec.html">CantinaSipAccountCodec</a></li>
-				
 					<li><a href="./Codec.html">Codec</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
@@ -182,6 +152,12 @@
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./Node.html">Node</a></li>
+				
+					<li><a href="./NodesController.html">NodesController</a></li>
+				
+					<li><a href="./NodesHelper.html">NodesHelper</a></li>
 				
 					<li><a href="./Oui.html">Oui</a></li>
 				
@@ -205,17 +181,13 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
-					<li><a href="./ProvisioningServer.html">ProvisioningServer</a></li>
-				
-					<li><a href="./ProvisioningServersController.html">ProvisioningServersController</a></li>
-				
-					<li><a href="./ProvisioningServersHelper.html">ProvisioningServersHelper</a></li>
-				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountToExtension.html">SipAccountToExtension</a></li>
 				
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
@@ -302,7 +274,7 @@
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 11</span>
 11:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-12:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+12:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
 13:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 14:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
 15:       <span class="ruby-keyword kw">end</span>
@@ -312,13 +284,12 @@
 19:       <span class="ruby-ivar">@number_of_sip_phones</span>    = <span class="ruby-constant">SipPhone</span>.<span class="ruby-identifier">count</span>
 20:       <span class="ruby-ivar">@number_of_sip_proxies</span>   = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span>
 21:       <span class="ruby-ivar">@number_of_sip_servers</span>   = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span>
-22:       <span class="ruby-ivar">@number_of_prov_servers</span>  = <span class="ruby-constant">ProvisioningServer</span>.<span class="ruby-identifier">count</span>
-23:       <span class="ruby-ivar">@number_of_extensions</span>    = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">count</span>
-24:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-25:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
-26:       <span class="ruby-keyword kw">end</span>
-27:     <span class="ruby-keyword kw">end</span>
-28:   <span class="ruby-keyword kw">end</span></pre>
+22:       <span class="ruby-ivar">@number_of_extensions</span>    = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">count</span>
+23:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+24:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+25:       <span class="ruby-keyword kw">end</span>
+26:     <span class="ruby-keyword kw">end</span>
+27:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -355,12 +326,12 @@
 					<div class="method-source-code"
 						id="check-if-admin-account-exists-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 36</span>
-36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_admin_account_exists</span>
-37:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-38:       <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_admin_setup_path</span>)
-39:     <span class="ruby-keyword kw">end</span>
-40:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 35</span>
+35:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_admin_account_exists</span>
+36:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+37:       <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_admin_setup_path</span>)
+38:     <span class="ruby-keyword kw">end</span>
+39:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -391,10 +362,10 @@
 					<div class="method-source-code"
 						id="rescue-missing-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 32</span>
-32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
-33:     <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value str">'/db_migrate_missing'</span>)
-34:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
+32:     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-value str">'/db_migrate_missing.html'</span> )
+33:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
