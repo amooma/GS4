@@ -160,7 +160,6 @@ Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
 Pre-Depends: lighttpd (>= 1.4.28)
 Replaces: lighttpd, gemeinschaft-web-service
-Breaks: httpd
 Suggests: logrotate
 Provides: gemeinschaft-provisioning
 Description: Gemeinschaft - web service

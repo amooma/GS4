@@ -728,6 +728,7 @@ Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft.txt
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-doc.txt
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-sip-pbx-freeswitch.txt
 Gemeinschaft4/debian/gemeinschaft-sip-pbx-freeswitch.dirs
+Gemeinschaft4/debian/gemeinschaft-web-service.postinst
 Gemeinschaft4/debian/gemeinschaft-common.conffiles
 Gemeinschaft4/debian/control
 Gemeinschaft4/debian/gemeinschaft-common.prerm
@@ -739,6 +740,7 @@ Gemeinschaft4/debian/changelog
 Gemeinschaft4/debian/README.Debian
 Gemeinschaft4/debian/gemeinschaft-common.postinst
 Gemeinschaft4/debian/gemeinschaft-ruby-gems-native-target-compile.postinst
+Gemeinschaft4/debian/gemeinschaft-web-service.install
 Gemeinschaft4/debian/gemeinschaft-common.install
 Gemeinschaft4/debian/docs
 Gemeinschaft4/debian/README
