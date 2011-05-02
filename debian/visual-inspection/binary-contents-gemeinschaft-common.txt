@@ -31,6 +31,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/helpers/admin/
 -rw-r--r-- root/root        22  ./opt/gemeinschaft/app/helpers/user_helper.rb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/models/
 -rw-r--r-- root/root       460  ./opt/gemeinschaft/app/models/node.rb
+-rw-r--r-- root/root        58  ./opt/gemeinschaft/app/models/pua.rb
 -rw-r--r-- root/root       907  ./opt/gemeinschaft/app/models/a_server.rb
 -rw-r--r-- root/root       266  ./opt/gemeinschaft/app/models/phone_model_mac_address.rb
 -rw-r--r-- root/root      3532  ./opt/gemeinschaft/app/models/sip_phone.rb
@@ -41,13 +42,16 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/models/
 -rw-r--r-- root/root       419  ./opt/gemeinschaft/app/models/sip_server.rb
 -rw-r--r-- root/root       289  ./opt/gemeinschaft/app/models/sipproxy_subscriber.rb
 -rw-r--r-- root/root       618  ./opt/gemeinschaft/app/models/voicemail_server.rb
+-rw-r--r-- root/root        72  ./opt/gemeinschaft/app/models/subscriber.rb
 -rw-r--r-- root/root      5810  ./opt/gemeinschaft/app/models/phone_model.rb
 -rw-r--r-- root/root       594  ./opt/gemeinschaft/app/models/oui.rb
+-rw-r--r-- root/root        66  ./opt/gemeinschaft/app/models/version.rb
 -rw-r--r-- root/root       719  ./opt/gemeinschaft/app/models/user.rb
 -rw-r--r-- root/root       243  ./opt/gemeinschaft/app/models/authentication.rb
 -rw-r--r-- root/root       266  ./opt/gemeinschaft/app/models/reboot_request.rb
 -rw-r--r-- root/root      1182  ./opt/gemeinschaft/app/models/sip_account_codec.rb
 -rw-r--r-- root/root       728  ./opt/gemeinschaft/app/models/phone_model_codec.rb
+-rw-r--r-- root/root        68  ./opt/gemeinschaft/app/models/location.rb
 -rw-r--r-- root/root       259  ./opt/gemeinschaft/app/models/manufacturer.rb
 -rw-r--r-- root/root       586  ./opt/gemeinschaft/app/models/codec.rb
 -rw-r--r-- root/root      4846  ./opt/gemeinschaft/app/models/phone_key.rb
@@ -81,7 +85,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/views/freeswitch_director
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/views/freeswitch_call_processing/
 -rw-r--r-- root/root       221  ./opt/gemeinschaft/app/views/freeswitch_call_processing/actions.xml.erb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/views/sip_accounts/
--rw-r--r-- root/root      2113  ./opt/gemeinschaft/app/views/sip_accounts/_form.html.erb
+-rw-r--r-- root/root      2065  ./opt/gemeinschaft/app/views/sip_accounts/_form.html.erb
 -rw-r--r-- root/root      1103  ./opt/gemeinschaft/app/views/sip_accounts/index.html.erb
 -rw-r--r-- root/root       544  ./opt/gemeinschaft/app/views/sip_accounts/new.html.erb
 -rw-r--r-- root/root       131  ./opt/gemeinschaft/app/views/sip_accounts/edit.html.erb
@@ -141,7 +145,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/views/sip_servers/
 -rw-r--r-- root/root       128  ./opt/gemeinschaft/app/views/sip_servers/edit.html.erb
 -rw-r--r-- root/root       234  ./opt/gemeinschaft/app/views/sip_servers/show.html.erb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/views/extensions/
--rw-r--r-- root/root       908  ./opt/gemeinschaft/app/views/extensions/_form.html.erb
+-rw-r--r-- root/root       964  ./opt/gemeinschaft/app/views/extensions/_form.html.erb
 -rw-r--r-- root/root       627  ./opt/gemeinschaft/app/views/extensions/index.html.erb
 -rw-r--r-- root/root        85  ./opt/gemeinschaft/app/views/extensions/new.html.erb
 -rw-r--r-- root/root       125  ./opt/gemeinschaft/app/views/extensions/edit.html.erb
@@ -185,8 +189,8 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/config/initializers/
 -rw-r--r-- root/root      2948  ./opt/gemeinschaft/config/routes.rb
 -rw-r--r-- root/root      1946  ./opt/gemeinschaft/Gemfile
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/
--rw-r--r-- root/root      7227  ./opt/gemeinschaft/db/schema.rb
--rw-r--r-- root/root     12062  ./opt/gemeinschaft/db/seeds.rb
+-rw-r--r-- root/root      8810  ./opt/gemeinschaft/db/schema.rb
+-rw-r--r-- root/root     15288  ./opt/gemeinschaft/db/seeds.rb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/migrate/
 -rw-r--r-- root/root       195  ./opt/gemeinschaft/db/migrate/20110420214332_add_phone_id_to_sip_account.rb
 -rw-r--r-- root/root       236  ./opt/gemeinschaft/db/migrate/20110430041134_remove_provisioning_server_id_from_sip_phones.rb
@@ -216,7 +220,10 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/migrate/
 -rw-r--r-- root/root       301  ./opt/gemeinschaft/db/migrate/20110420092754_create_provisioning_log_entries.rb
 -rw-r--r-- root/root       203  ./opt/gemeinschaft/db/migrate/20110329093003_remove_sip_user_id_from_extension.rb
 -rw-r--r-- root/root       206  ./opt/gemeinschaft/db/migrate/20110209212927_add_sip_phone_id_to_sip_account.rb
+-rw-r--r-- root/root       236  ./opt/gemeinschaft/db/migrate/20110502100211_create_version.rb
 -rw-r--r-- root/root       272  ./opt/gemeinschaft/db/migrate/20110207192458_create_authentications.rb
+-rw-r--r-- root/root       180  ./opt/gemeinschaft/db/migrate/20110502121521_add_cflags_to_location.rb
+-rw-r--r-- root/root       517  ./opt/gemeinschaft/db/migrate/20110502114819_create_location.rb
 -rw-r--r-- root/root       293  ./opt/gemeinschaft/db/migrate/20110420092406_create_phone_model_codecs.rb
 -rw-r--r-- root/root       200  ./opt/gemeinschaft/db/migrate/20110216214808_add_config_port_to_sip_proxy.rb
 -rw-r--r-- root/root       282  ./opt/gemeinschaft/db/migrate/20110420092515_create_phone_model_keys.rb
@@ -242,6 +249,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/migrate/
 -rw-r--r-- root/root       210  ./opt/gemeinschaft/db/migrate/20110327122024_remove_managed_by_gs_from_sip_proxy.rb
 -rw-r--r-- root/root       301  ./opt/gemeinschaft/db/migrate/20110420093053_create_reboot_requests.rb
 -rw-r--r-- root/root       350  ./opt/gemeinschaft/db/migrate/20110420091643_create_phones.rb
+-rw-r--r-- root/root       422  ./opt/gemeinschaft/db/migrate/20110502120032_create_subscriber.rb
 -rw-r--r-- root/root       181  ./opt/gemeinschaft/db/migrate/20110327194013_add_port_to_sip_server.rb
 -rw-r--r-- root/root       243  ./opt/gemeinschaft/db/migrate/20110206194508_create_extensions.rb
 -rw-r--r-- root/root       211  ./opt/gemeinschaft/db/migrate/20110327204828_remove_managed_by_gs_from_sip_server.rb
@@ -249,7 +257,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/migrate/
 -rw-r--r-- root/root       212  ./opt/gemeinschaft/db/migrate/20110327194140_add_management_host_to_sip_server.rb
 -rw-r--r-- root/root       224  ./opt/gemeinschaft/db/migrate/20110329203130_rename_column_host_port_to_port_in_sip_proxies.rb
 -rw-r--r-- root/root       293  ./opt/gemeinschaft/db/migrate/20110420093155_create_sip_account_codecs.rb
--rw-r--r-- root/root      1112  ./opt/gemeinschaft/db/migrate/20110430014323_create_nodes.rb
+-rw-r--r-- root/root       859  ./opt/gemeinschaft/db/migrate/20110430014323_create_nodes.rb
 -rw-r--r-- root/root       158  ./opt/gemeinschaft/db/migrate/20110207180353_add_gn_to_users.rb
 -rw-r--r-- root/root       259  ./opt/gemeinschaft/db/migrate/20110206194418_create_provisioning_servers.rb
 -rw-r--r-- root/root       212  ./opt/gemeinschaft/db/migrate/20110329150942_add_management_port_to_sip_proxy.rb
@@ -257,12 +265,12 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/db/migrate/
 -rw-r--r-- root/root       227  ./opt/gemeinschaft/db/migrate/20110327160434_add_voicemail_server_id_to_sip_account.rb
 -rw-r--r-- root/root       196  ./opt/gemeinschaft/db/migrate/20110326104119_add_position_to_sip_account.rb
 -rw-r--r-- root/root       201  ./opt/gemeinschaft/db/migrate/20110216214824_add_config_port_to_sip_server.rb
+-rw-r--r-- root/root       625  ./opt/gemeinschaft/db/migrate/20110502113455_create_pua.rb
 -rw-r--r-- root/root       185  ./opt/gemeinschaft/db/migrate/20110327194420_remove_name_from_sip_server.rb
 -rw-r--r-- root/root       199  ./opt/gemeinschaft/db/migrate/20110428140836_add_destination_to_extension.rb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/lib/
 -rw-r--r-- root/root       509  ./opt/gemeinschaft/lib/connection_checks.rb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/script/
--rwxr-xr-x root/root       117  ./opt/gemeinschaft/script/test
 -rwxr-xr-x root/root       295  ./opt/gemeinschaft/script/rails
 -rwxr-xr-x root/root       229  ./opt/gemeinschaft/script/notes
 -rwxr-xr-x root/root        94  ./opt/gemeinschaft/script/erd
@@ -281,7 +289,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/public/javascripts/
 -rw-r--r-- root/root     38467  ./opt/gemeinschaft/public/javascripts/effects.js
 -rw-r--r-- root/root     34787  ./opt/gemeinschaft/public/javascripts/controls.js
 -rw-r--r-- root/root      5850  ./opt/gemeinschaft/public/javascripts/rails.js
--rwxr-xr-x root/root       771  ./opt/gemeinschaft/public/dispatch.fcgi
+-rwxr-xr-x root/root       765  ./opt/gemeinschaft/public/dispatch.fcgi
 -rw-r--r-- root/root      2271  ./opt/gemeinschaft/public/favicon.png
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/public/images/
 -rw-r--r-- root/root      6646  ./opt/gemeinschaft/public/images/rails.png

@@ -1,12 +1,13 @@
  new debian package, version 2.0.
-    1090 bytes,    33 lines      control              
-     178 bytes,     2 lines      md5sums              
+    1208 bytes,    38 lines      control              
+     262 bytes,     3 lines      md5sums              
+    1107 bytes,    43 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-odbc-sqlite3
  Source: gemeinschaft
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 32
+ Installed-Size: 48
  Pre-Depends: unixodbc (>> 2.2), odbcinst (>> 2.2), libsqliteodbc (>= 0.89)
  Replaces: gemeinschaft-odbc-sqlite3
  Section: comm
@@ -27,9 +28,14 @@
    echo 'deb-src http://ftp.debian.org/debian/ testing main'
    ) > /etc/apt/sources.list.d/testing.list
    (
+   echo 'Package: *'
+   echo 'Pin: release a=testing'
+   echo 'Pin-Priority: -1'
+   ) > /etc/apt/preferences.d/testing
+   (
    echo 'Package: libsqliteodbc'
    echo 'Pin: release a=testing'
-   echo 'Pin-Priority: 1000'
+   echo 'Pin-Priority: 999'
    ) > /etc/apt/preferences.d/libsqliteodbc
    aptitude update
    apt-cache policy libsqliteodbc

@@ -159,7 +159,6 @@ drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft/app/images/
 drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft/docbook/
 -rw-r--r-- root/root     33269  ./usr/share/doc/gemeinschaft/docbook/setup10.png
 -rw-r--r-- root/root      2121  ./usr/share/doc/gemeinschaft/docbook/install-squeeze.xml.gz
--rw-r--r-- root/root      4101  ./usr/share/doc/gemeinschaft/docbook/leitlinie-sichere-tk-anlagen.dbkXXXX.gz
 -rw-r--r-- root/root     26222  ./usr/share/doc/gemeinschaft/docbook/setup12.png
 -rw-r--r-- root/root     22036  ./usr/share/doc/gemeinschaft/docbook/setup1.png
 -rw-r--r-- root/root      2121  ./usr/share/doc/gemeinschaft/docbook/sicherheitskonzept-section-strukturanalyse.dbk.gz
@@ -228,7 +227,7 @@ drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft/docbook/small_pix/
 -rw-r--r-- root/root     32617  ./usr/share/doc/gemeinschaft/docbook/setup7.png
 -rw-r--r-- root/root     23825  ./usr/share/doc/gemeinschaft/docbook/setup3.png
 -rw-r--r-- root/root     28492  ./usr/share/doc/gemeinschaft/docbook/setup9.png
--rw-r--r-- root/root      1334  ./usr/share/doc/gemeinschaft/docbook/sicherheitskonzept-und-architektur.dbk
+-rw-r--r-- root/root      1269  ./usr/share/doc/gemeinschaft/docbook/sicherheitskonzept-und-architektur.dbk
 -rw-r--r-- root/root      1813  ./usr/share/doc/gemeinschaft/ERD.dot.gz
 drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-doc/
 -rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft-doc/copyright

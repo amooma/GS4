@@ -7,4 +7,4 @@ drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-web-service/
 -rw-r--r-- root/root       147  ./usr/share/doc/gemeinschaft-web-service/changelog.Debian.gz
 drwxr-xr-x root/root         0  ./etc/
 drwxr-xr-x root/root         0  ./etc/lighttpd/
--rw-r--r-- root/root      1709  ./etc/lighttpd/lighttpd.conf
+-rw-r--r-- root/root      1736  ./etc/lighttpd/lighttpd.conf

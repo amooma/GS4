@@ -36,6 +36,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/test/fixtures/
 -rw-r--r-- root/root       265  ./opt/gemeinschaft/test/fixtures/reboot_requests.yml
 -rw-r--r-- root/root       189  ./opt/gemeinschaft/test/fixtures/sip_account_to_extensions.yml
 -rw-r--r-- root/root       185  ./opt/gemeinschaft/test/fixtures/authentications.yml
+-rw-r--r-- root/root       625  ./opt/gemeinschaft/test/fixtures/locations.yml
 -rw-r--r-- root/root       155  ./opt/gemeinschaft/test/fixtures/extensions.yml
 -rw-r--r-- root/root       210  ./opt/gemeinschaft/test/fixtures/voicemail_servers.yml
 -rw-r--r-- root/root       321  ./opt/gemeinschaft/test/fixtures/phone_keys.yml
@@ -45,11 +46,14 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/test/fixtures/
 -rw-r--r-- root/root       163  ./opt/gemeinschaft/test/fixtures/ouis.yml
 -rw-r--r-- root/root       181  ./opt/gemeinschaft/test/fixtures/phone_model_codecs.yml
 -rw-r--r-- root/root       166  ./opt/gemeinschaft/test/fixtures/sip_servers.yml
+-rw-r--r-- root/root       709  ./opt/gemeinschaft/test/fixtures/puas.yml
+-rw-r--r-- root/root       169  ./opt/gemeinschaft/test/fixtures/versions.yml
 -rw-r--r-- root/root       515  ./opt/gemeinschaft/test/fixtures/users.yml
 -rw-r--r-- root/root       209  ./opt/gemeinschaft/test/fixtures/phone_key_to_function_mappings.yml
 -rw-r--r-- root/root       195  ./opt/gemeinschaft/test/fixtures/manufacturers.yml
 -rw-r--r-- root/root       139  ./opt/gemeinschaft/test/fixtures/sip_phones.yml
 -rw-r--r-- root/root       181  ./opt/gemeinschaft/test/fixtures/sip_account_codecs.yml
+-rw-r--r-- root/root       449  ./opt/gemeinschaft/test/fixtures/subscribers.yml
 -rw-r--r-- root/root       733  ./opt/gemeinschaft/test/fixtures/phone_models.yml
 -rw-r--r-- root/root       185  ./opt/gemeinschaft/test/fixtures/provisioning_log_entries.yml
 -rw-r--r-- root/root       164  ./opt/gemeinschaft/test/fixtures/sip_proxies.yml
@@ -78,6 +82,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/test/unit/helpers/admin/
 -rw-r--r-- root/root      3976  ./opt/gemeinschaft/test/unit/sip_phone_test.rb
 -rw-r--r-- root/root       167  ./opt/gemeinschaft/test/unit/provisioning_log_entry_test.rb
 -rw-r--r-- root/root       160  ./opt/gemeinschaft/test/unit/phone_model_key_test.rb
+-rw-r--r-- root/root       155  ./opt/gemeinschaft/test/unit/location_test.rb
 -rw-r--r-- root/root       173  ./opt/gemeinschaft/test/unit/phone_key_function_definition_test.rb
 -rw-r--r-- root/root       150  ./opt/gemeinschaft/test/unit/oui_test.rb
 -rw-r--r-- root/root      3088  ./opt/gemeinschaft/test/unit/sip_proxy_test.rb
@@ -89,11 +94,14 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/test/unit/admin/
 -rw-r--r-- root/root       167  ./opt/gemeinschaft/test/unit/phone_model_mac_address_test.rb
 -rw-r--r-- root/root      5079  ./opt/gemeinschaft/test/unit/sip_account_test.rb
 -rw-r--r-- root/root       160  ./opt/gemeinschaft/test/unit/reboot_request_test.rb
+-rw-r--r-- root/root       150  ./opt/gemeinschaft/test/unit/pua_test.rb
 -rw-r--r-- root/root       152  ./opt/gemeinschaft/test/unit/codec_test.rb
 -rw-r--r-- root/root       155  ./opt/gemeinschaft/test/unit/phone_key_test.rb
+-rw-r--r-- root/root       154  ./opt/gemeinschaft/test/unit/version_test.rb
 -rw-r--r-- root/root       162  ./opt/gemeinschaft/test/unit/phone_model_codec_test.rb
 -rw-r--r-- root/root     34344  ./opt/gemeinschaft/test/unit/sip_account_active_resources_test.rb
 -rw-r--r-- root/root       159  ./opt/gemeinschaft/test/unit/manufacturer_test.rb
+-rw-r--r-- root/root       157  ./opt/gemeinschaft/test/unit/subscriber_test.rb
 -rw-r--r-- root/root       168  ./opt/gemeinschaft/test/unit/sip_account_to_extension_test.rb
 -rw-r--r-- root/root       151  ./opt/gemeinschaft/test/unit/node_test.rb
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/test/performance/

@@ -1,7 +1,7 @@
  new debian package, version 2.0.
     2668 bytes,    43 lines      control              
     3113 bytes,    37 lines      md5sums              
-    1241 bytes,    46 lines   *  postinst             #!/bin/sh
+    1275 bytes,    47 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-sip-pbx-freeswitch
  Source: gemeinschaft
  Version: 4.0~beta1-1
