@@ -2,7 +2,7 @@
        0 bytes,     0 lines      conffiles            
      511 bytes,    14 lines      control              
    23967 bytes,   261 lines      md5sums              
-    1243 bytes,    50 lines   *  postinst             #!/bin/sh
+    1214 bytes,    49 lines   *  postinst             #!/bin/sh
      908 bytes,    37 lines   *  postrm               #!/bin/sh
      663 bytes,    35 lines   *  preinst              #!/bin/sh
      850 bytes,    38 lines   *  prerm                #!/bin/sh

@@ -53,7 +53,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/app/models/
 -rw-r--r-- root/root       728  ./opt/gemeinschaft/app/models/phone_model_codec.rb
 -rw-r--r-- root/root        68  ./opt/gemeinschaft/app/models/location.rb
 -rw-r--r-- root/root       259  ./opt/gemeinschaft/app/models/manufacturer.rb
--rw-r--r-- root/root       586  ./opt/gemeinschaft/app/models/codec.rb
+-rw-r--r-- root/root       601  ./opt/gemeinschaft/app/models/codec.rb
 -rw-r--r-- root/root      4846  ./opt/gemeinschaft/app/models/phone_key.rb
 -rw-r--r-- root/root      4769  ./opt/gemeinschaft/app/models/phone.rb
 -rw-r--r-- root/root      1000  ./opt/gemeinschaft/app/models/phone_key_to_function_mapping.rb
