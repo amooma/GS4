@@ -17,7 +17,7 @@ class Rack::PathInfoRewriter
   def initialize(app)
     @app = app
   end
-
+  
   def call(env)
     env.delete('SCRIPT_NAME')
     parts = env['REQUEST_URI'].split('?')
@@ -27,4 +27,9 @@ class Rack::PathInfoRewriter
   end
 end
 
-Rack::Handler::FastCGI.run( Rack::PathInfoRewriter.new( Gemeinschaft4::Application ))
+Rack::Handler::FastCGI.run(
+  Rack::PathInfoRewriter.new(
+    Gemeinschaft4::Application
+  )
+)
+
