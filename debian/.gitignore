@@ -1,0 +1,6 @@
+# ignore temporary directories for the packages:
+/gemeinschaft*/
+
+# ignore temporary debhelper logs:
+/*.debhelper.log
+
