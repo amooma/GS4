@@ -40,6 +40,41 @@ Gemeinschaft4::Application.routes.draw do
 		resources :setup
 	end
 	
+	# Cantina
+	resources :reboot_requests, :only => [:index, :show, :create, :new ]
+
+	resources :manufacturer_snom, :only => [:index ]
+	resources :manufacturer_aastra, :only => [:index ]
+	resources :manufacturer_tiptel, :only => [:index ]
+
+	resources :provisioning_log_entries, :only => [:index, :show]
+	resources :phone_model_mac_addresses
+	match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
+
+	# http://guides.rubyonrails.org/routing.html#nested-resources
+	resources :phones do
+		resources :sip_accounts
+	end
+	resources :sip_accounts do
+		resources :phone_keys
+	end
+
+	resources :codecs
+
+	resources :sip_account_codecs
+
+	resources :phone_key_function_definitions
+
+	resources :phone_model_keys
+
+	resources :manufacturers do
+		resources :phone_models
+	end
+
+	resources :phone_models do
+		resources :phones
+	end
+
 	# The priority is based upon order of creation:
 	# first created -> highest priority.
 	
