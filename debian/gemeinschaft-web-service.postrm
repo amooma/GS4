@@ -21,17 +21,18 @@ set -e
 
 case "$1" in
 	purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-		if [ "$1" = "remove" ]; then
-			conffile="/etc/lighttpd/lighttpd.conf"
-			echo "Removing diversion for \"$conffile\" ..." >&2
-			dpkg-divert \
-				--package "gemeinschaft-web-service" \
-				--remove --rename \
-				--divert \
-				"$conffile.distrib" \
-				"$conffile" \
-				|| true
-		fi
+		#OPTIMIZE
+		#if [ "$1" = "remove" ]; then
+		#	conffile="/etc/lighttpd/lighttpd.conf"
+		#	echo "Removing diversion for \"$conffile\" ..." >&2
+		#	dpkg-divert \
+		#		--package "gemeinschaft-web-service" \
+		#		--remove --rename \
+		#		--divert \
+		#		"$conffile.distrib" \
+		#		"$conffile" \
+		#		|| true
+		#fi
 	;;
 	
 	*)

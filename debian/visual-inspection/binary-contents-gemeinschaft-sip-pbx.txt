@@ -1,7 +1,0 @@
-drwxr-xr-x root/root         0  ./
-drwxr-xr-x root/root         0  ./usr/
-drwxr-xr-x root/root         0  ./usr/share/
-drwxr-xr-x root/root         0  ./usr/share/doc/
-drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-sip-pbx/
--rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft-sip-pbx/copyright
--rw-r--r-- root/root       147  ./usr/share/doc/gemeinschaft-sip-pbx/changelog.Debian.gz

@@ -16,17 +16,18 @@ set -e
 
 case "$1" in
 	install|upgrade)
-		if [ "$1" = "install" -o "$1" = "upgrade" ]; then
-			conffile="/etc/lighttpd/lighttpd.conf"
-			echo "Adding diversion for \"$conffile\" ..." >&2
-			dpkg-divert \
-				--package "gemeinschaft-web-service" \
-				--add --rename \
-				--divert \
-				"$conffile.distrib" \
-				"$conffile" \
-				|| true
-		fi
+		#OPTIMIZE
+		#if [ "$1" = "install" -o "$1" = "upgrade" ]; then
+		#	conffile="/etc/lighttpd/lighttpd.conf"
+		#	echo "Adding diversion for \"$conffile\" ..." >&2
+		#	dpkg-divert \
+		#		--package "gemeinschaft-web-service" \
+		#		--add --rename \
+		#		--divert \
+		#		"$conffile.distrib" \
+		#		"$conffile" \
+		#		|| true
+		#fi
 	;;
 	
 	abort-upgrade)

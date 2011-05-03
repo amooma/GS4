@@ -720,13 +720,11 @@ Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-doc.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-sip-pbx-freeswitch.txt
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-web-service.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-ruby-gems-native.txt
-Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-sip-pbx.txt
 Gemeinschaft4/debian/visual-inspection/source-info.txt
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-sip-proxy.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-sip-proxy.txt
 Gemeinschaft4/debian/visual-inspection/binary-contents-gemeinschaft-common.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-tests.txt
-Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-sip-pbx.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-web-service.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft-ruby-gems.txt
 Gemeinschaft4/debian/visual-inspection/binary-info-gemeinschaft.txt

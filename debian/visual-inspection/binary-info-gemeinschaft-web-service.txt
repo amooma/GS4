@@ -1,18 +1,17 @@
  new debian package, version 2.0.
       28 bytes,     1 lines      conffiles            
-     518 bytes,    17 lines      control              
+     506 bytes,    16 lines      control              
      176 bytes,     2 lines      md5sums              
     1372 bytes,    51 lines   *  postinst             #!/bin/sh
-    1201 bytes,    48 lines   *  postrm               #!/bin/sh
-     972 bytes,    46 lines   *  preinst              #!/bin/sh
+    1224 bytes,    49 lines   *  postrm               #!/bin/sh
+     995 bytes,    47 lines   *  preinst              #!/bin/sh
  Package: gemeinschaft-web-service
  Source: gemeinschaft
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
  Installed-Size: 60
- Pre-Depends: lighttpd (>= 1.4.28)
- Depends: gemeinschaft-common (= 4.0~beta1-1), adduser
+ Depends: gemeinschaft-common (= 4.0~beta1-1), lighttpd (>= 1.4.28), adduser
  Suggests: logrotate
  Replaces: gemeinschaft-web-service, lighttpd
  Provides: gemeinschaft-provisioning

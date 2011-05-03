@@ -16,21 +16,22 @@ set -e
 
 case "$1" in
 	install|upgrade)
-		if [ "$1" = "install" -o "$1" = "upgrade" ]; then
-			confdir="/opt/freeswitch/conf"
-			echo "Adding diversions for \"$confdir/\" ..." >&2
-			mkdir -p "$confdir.distrib"
-			cd "$confdir" && find . -type f \
-			| while read conffile; do
-				dpkg-divert \
-					--package "gemeinschaft-sip-pbx-freeswitch" \
-					--add --rename \
-					--divert \
-					"$confdir.distrib/$conffile" \
-					"$confdir/$conffile" \
-					|| true
-			done
-		fi
+		#OPTIMIZE
+		#if [ "$1" = "install" -o "$1" = "upgrade" ]; then
+		#	confdir="/opt/freeswitch/conf"
+		#	echo "Adding diversions for \"$confdir/\" ..." >&2
+		#	mkdir -p "$confdir.distrib"
+		#	cd "$confdir" && find . -type f \
+		#	| while read conffile; do
+		#		dpkg-divert \
+		#			--package "gemeinschaft-sip-pbx-freeswitch" \
+		#			--add --rename \
+		#			--divert \
+		#			"$confdir.distrib/$conffile" \
+		#			"$confdir/$conffile" \
+		#			|| true
+		#	done
+		#fi
 	;;
 	
 	abort-upgrade)

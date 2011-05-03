@@ -21,24 +21,25 @@ set -e
 
 case "$1" in
 	purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-		if [ "$1" = "remove" ]; then
-			confdir="/opt/freeswitch/conf"
-			if [ -d "$confdir.distrib/." ]; then
-				echo "Removing diversions for \"$confdir/\" ..." >&2
-				mkdir -p "$confdir"
-				cd "$confdir.distrib" && find . -type f \
-				| while read conffile; do
-					dpkg-divert \
-						--package "gemeinschaft-sip-pbx-freeswitch" \
-						--remove --rename \
-						--divert \
-						"$confdir.distrib/$conffile" \
-						"$confdir/$conffile" \
-						|| true
-				done
-				rm -rf "$confdir.distrib" || true
-			fi
-		fi
+		#OPTIMIZE
+		#if [ "$1" = "remove" ]; then
+		#	confdir="/opt/freeswitch/conf"
+		#	if [ -d "$confdir.distrib/." ]; then
+		#		echo "Removing diversions for \"$confdir/\" ..." >&2
+		#		mkdir -p "$confdir"
+		#		cd "$confdir.distrib" && find . -type f \
+		#		| while read conffile; do
+		#			dpkg-divert \
+		#				--package "gemeinschaft-sip-pbx-freeswitch" \
+		#				--remove --rename \
+		#				--divert \
+		#				"$confdir.distrib/$conffile" \
+		#				"$confdir/$conffile" \
+		#				|| true
+		#		done
+		#		rm -rf "$confdir.distrib" || true
+		#	fi
+		#fi
 	;;
 	
 	*)

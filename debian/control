@@ -77,11 +77,11 @@ Description: Gemeinschaft - automated tests
 
 Package: gemeinschaft-sip-proxy
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), adduser, gemeinschaft-odbc-sqlite3 (= ${binary:Version}), kamailio-unixodbc-modules, kamailio-presence-modules
-Pre-Depends: kamailio (>= 3.2.0)
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), adduser, gemeinschaft-odbc-sqlite3 (= ${binary:Version}), kamailio (>= 3.1.0), kamailio-unixodbc-modules, kamailio-presence-modules
 Replaces: kamailio, gemeinschaft-sip-proxy
-Conflicts: ser, openser, opensips, kamailio (= 3.1.3+squeeze1)
-# The kamailio 3.1.3 packages are broken. 3.1.1 works.
+Conflicts: ser, openser, opensips, kamailio (= 3.1.3+squeeze1), kamailio (= 3.1.3+squeeze2) [amd64]
+# kamailio 3.1.1 (31-nightly) works. The kamailio 3.1.3+squeeze1
+# (stable) packages are broken. 3.1.3+squeeze2 (stable) works.
 Recommends: gemeinschaft-sip-pbx
 Description: Gemeinschaft - SIP proxy
  SIP proxy configuration for the Gemeinschaft telephony server.
@@ -101,8 +101,10 @@ Description: Gemeinschaft - SIP proxy
   ) > /etc/apt/sources.list.d/kamailio.list
   aptitude update
  .
- Note: The Debian packages of kamailio 3.1 ("stable") don't work.
- You will have to use 3.2.
+ Note: The Debian packages of kamailio 3.1.3+squeeze1 (stable) were
+ broken. 3.1.1 (31-nightly) works. 3.1.3+squeeze2 (stable) works
+ (i386). YMMV. If the "stable" (3.1) packages don't work for you
+ then you will have to use the packages ot the upcoming 3.2 release.
  .
   (
   echo 'deb     http://deb.kamailio.org/kamailiodev-nightly squeeze main'
@@ -110,19 +112,12 @@ Description: Gemeinschaft - SIP proxy
   aptitude update
 
 
-Package: gemeinschaft-sip-pbx
-Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), gemeinschaft-sip-proxy (= ${binary:Version}), gemeinschaft-sip-pbx-freeswitch (= ${binary:Version})
-Description: Gemeinschaft - SIP PBX
- SIP PBX configuration for the Gemeinschaft telephony server.
-
-
 Package: gemeinschaft-sip-pbx-freeswitch
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-sip-pbx (= ${binary:Version})
-Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
-Replaces: freeswitch, gemeinschaft-sip-pbx-freeswitch
-Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
+Provides: gemeinschaft-sip-pbx
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), freeswitch (>= 1.0.6), freeswitch-spidermonkey
+Replaces: freeswitch, freeswitch-spidermonkey, gemeinschaft-sip-pbx-freeswitch
+Recommends: gemeinschaft-sip-proxy, freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
 Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
 Description: Gemeinschaft - SIP PBX - FreeSwitch
  Configuration for FreeSwitch as a SIP PBX for the Gemeinschaft
@@ -157,8 +152,7 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
 
 Package: gemeinschaft-web-service
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), adduser
-Pre-Depends: lighttpd (>= 1.4.28)
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), lighttpd (>= 1.4.28), adduser
 Replaces: lighttpd, gemeinschaft-web-service
 Suggests: logrotate
 Provides: gemeinschaft-provisioning
