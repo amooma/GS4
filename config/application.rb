@@ -37,7 +37,7 @@ module Gemeinschaft4
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [ :password, :voicemail_pin ]
     
     
     # this setting is needed for Devise:
