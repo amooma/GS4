@@ -21,11 +21,11 @@
     <td><%= sip_account.user %></td>
     <td><%= sip_account.password %></td>
     <td><%= sip_account.registrar %></td>
-		<% if sip_account.phone_keys.count > 0%>
+    <% if sip_account.phone_keys.count > 0%>
     <td><%= link_to  'Phone keys', sip_account_phone_keys_path(sip_account)  %></td>
-		<% else %>
+    <% else %>
     <td><%= link_to  'New phone key', new_sip_account_phone_key_path(sip_account)  %></td>
-		<% end %>
+    <% end %>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
     <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
