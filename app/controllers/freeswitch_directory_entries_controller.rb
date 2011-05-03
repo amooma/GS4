@@ -119,26 +119,27 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			# Find SIP account by auth_name:
 			@sip_account = nil
 			if ! @sip_account
-				@sip_account = SipAccount.where({
+				@sip_account = (SipAccount.where({
 					:auth_name      => _arg(:user)
-				}) #\ #OPTIMIZE Use domain as well once multiple domains are implemented.
-				#.joins(:sip_server).where(:sip_servers => {
-				#	:host           => _arg(:domain)
-				#}).first
+				})
+				.joins(:sip_server).where(:sip_servers => {
+					:host           => _arg(:domain)
+				})
+				.first)
 			end
 			## Find SIP account by extension (this is now done by Kamailio):
 			#if ! @sip_account
-			#	@sip_account = SipAccount.where({
+			#	@sip_account = (SipAccount.where({
 			#	}).joins(:sip_server).where(:sip_servers => {
 			#		:host           => _arg(:domain)
-			#	}).joins(:extension).where(:extensions => {
+			#	})
+			#	.joins(:extension).where(:extensions => {
 			#		:extension      => _arg(:user)
-			#	}).first
+			#	})
+			#	.first)
 			#end
 			
-			#puts "-------------------{"
-			#puts @sip_account.inspect
-			#puts "-------------------}"
+			logger.debug "SIP account: #{@sip_account.inspect}"
 			
 			respond_to { |format|
 				format.xml {
