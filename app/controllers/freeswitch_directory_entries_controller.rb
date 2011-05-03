@@ -3,15 +3,29 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 	# Allow access from 127.0.0.1 and [::1] only.
 	prepend_before_filter { |controller|
 		if ! request.local?
-			logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
-			render :status => '403 None of your business',
-				:layout => false, :content_type => 'text/plain',
-				:text => "<!-- This is none of your business. -->"
-			# Maybe allow access in "development" mode?
+			if user_signed_in?  #OPTIMIZE && is admin
+				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
+			else
+				logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
+				render :status => '403 None of your business',
+					:layout => false, :content_type => 'text/plain',
+					:text => "<!-- This is none of your business. -->"
+				# Maybe allow access in "development" mode?
+			end
 		end
 	}
 	#before_filter :authenticate_user!
 	#OPTIMIZE Implement SSL with client certificates.
+	
+	# Examples:
+	# Request domains and gateways:
+	#  /freeswitch-directory-entries/search.xml?section=directory&purpose=gateways
+	# Request users with ACL rules:
+	#  /freeswitch-directory-entries/search.xml?section=directory&purpose=network-list
+	# Request an account entry (for SIP authentication / voicemail / dial-by-username):
+	#  /freeswitch-directory-entries/search.xml?section=directory&key=id&user=USER&domain=DOMAIN&action=sip_auth
+	#  /freeswitch-directory-entries/search.xml?section=directory&key=id&user=USER&domain=DOMAIN&action=message-count
+	#  /freeswitch-directory-entries/search.xml?section=directory&key=id&user=USER&domain=DOMAIN&action=user_call
 	
 	# GET  /freeswitch-directory-entries/search.xml
 	# POST /freeswitch-directory-entries/search.xml
@@ -39,7 +53,7 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			# list gateways and domain aliases (as in the Sofia SIP profile)
 			# http://wiki.freeswitch.org/wiki/Mod_xml_curl#Startup
 			
-			logger.info(_bold( "[FS] Request for gateways ..." ))
+			logger.info(_bold( "[FS] Request for domains and gateways ..." ))
 			
 			#@sip_servers = SipServer.all( :group => :host )
 			
