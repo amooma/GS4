@@ -17,15 +17,20 @@ set -e
 case "$1" in
 	install|upgrade)
 		if [ "$1" = "install" -o "$1" = "upgrade" ]; then
-			conffile="/etc/kamailio/kamailio.cfg"
-			echo "Adding diversion for \"$conffile\" ..." >&2
-			dpkg-divert \
-				--package "gemeinschaft-sip-proxy" \
-				--add --rename \
-				--divert \
-				"$conffile.distrib" \
-				"$conffile" \
-				|| true
+			for conffile in \
+				"/etc/kamailio/kamailio.cfg" \
+				"/etc/kamailio/kamctlrc" \
+				"/etc/kamailio/dictionary.kamailio" \
+			; do
+				echo "Adding diversion for \"$conffile\" ..." >&2
+				dpkg-divert \
+					--package "gemeinschaft-sip-proxy" \
+					--add --rename \
+					--divert \
+					"$conffile.distrib" \
+					"$conffile" \
+					|| true
+			done
 		fi
 	;;
 	

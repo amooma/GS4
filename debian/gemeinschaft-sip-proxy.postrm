@@ -22,15 +22,20 @@ set -e
 case "$1" in
 	purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 		if [ "$1" = "remove" ]; then
-			conffile="/etc/kamailio/kamailio.cfg"
-			echo "Removing diversion for \"$conffile\" ..." >&2
-			dpkg-divert \
-				--package "gemeinschaft-sip-proxy" \
-				--remove --rename \
-				--divert \
-				"$conffile.distrib" \
-				"$conffile" \
-				|| true
+			for conffile in \
+				"/etc/kamailio/kamailio.cfg" \
+				"/etc/kamailio/kamctlrc" \
+				"/etc/kamailio/dictionary.kamailio" \
+			; do
+				echo "Removing diversion for \"$conffile\" ..." >&2
+				dpkg-divert \
+					--package "gemeinschaft-sip-proxy" \
+					--remove --rename \
+					--divert \
+					"$conffile.distrib" \
+					"$conffile" \
+					|| true
+			done
 		fi
 	;;
 	
