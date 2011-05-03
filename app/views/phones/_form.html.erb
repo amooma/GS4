@@ -1,0 +1,40 @@
+<%= form_for(@phone) do |f| %>
+  <% if @phone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@phone.errors.count, "error") %> prohibited this phone from being saved:</h2>
+
+      <ul>
+      <% @phone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mac_address, 'MAC address' %><br />
+    <%= f.text_field :mac_address %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_model_id %><br />
+    <%= f.select( :phone_model_id,
+      @phone_models.collect {|r| [ r.name, r.id ] },
+      { :include_blank => false, :selected => @phone.phone_model_id }
+    ) %>
+  </div>
+  <div class="field">
+    <%= f.label :ip_address, 'IP address' %><br />
+    <%= f.text_field :ip_address %>
+  </div>
+  <div class="field">
+    <%= f.label :http_user, 'HTTP user' %><br />
+    <%= f.text_field :http_user %>
+  </div>
+  <div class="field">
+    <%= f.label :http_password, 'HTTP password' %><br />
+    <%= f.text_field :http_password %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

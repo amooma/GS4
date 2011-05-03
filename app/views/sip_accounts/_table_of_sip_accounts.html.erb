@@ -1,0 +1,33 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>MAC Adress</th>
+    <th>Auth. user</th>
+    <th>User</th>
+    <th>Password</th>
+    <th>Registrar</th>
+    <th>Phone keys</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% sip_accounts.each do |sip_account| %>
+  <tr>
+    <td><%= link_to sip_account.name, sip_account %></td>
+    <td><%= sip_account.phone.phone_model.name %></td>
+    <td><%= link_to sip_account.phone.mac_address, sip_account.phone %></td>
+    <td><%= sip_account.auth_user %></td>
+    <td><%= sip_account.user %></td>
+    <td><%= sip_account.password %></td>
+    <td><%= sip_account.registrar %></td>
+		<% if sip_account.phone_keys.count > 0%>
+    <td><%= link_to  'Phone keys', sip_account_phone_keys_path(sip_account)  %></td>
+		<% else %>
+    <td><%= link_to  'New phone key', new_sip_account_phone_key_path(sip_account)  %></td>
+		<% end %>
+    <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
+    <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

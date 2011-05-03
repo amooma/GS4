@@ -1,0 +1,38 @@
+<table>
+  <tr>
+    <th>MAC address</th>
+    <th>Manufacturer</th>
+    <th>Phone model</th>
+    <th>IP address</th>
+    <th>SIP accounts</th>
+    <th>Reboot</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% phones.each do |phone| %>
+  <tr>
+    <td><%= link_to phone.mac_address, phone %></td>
+    <td><%= link_to truncate(phone.phone_model.manufacturer.name, :length => 20), phone.phone_model.manufacturer %></td>
+    <td><%= link_to phone.phone_model.name, phone.phone_model %></td>
+    <td><%= phone.ip_address %></td>
+    <td>
+      <ul>
+        <li><%= link_to 'create new sip account', new_phone_sip_account_path(phone) %></li>
+<% phone.sip_accounts.each do |sip_account| %>
+        <li><%= link_to sip_account.name, phone_sip_account_path(phone, sip_account) %></li>
+<% end %>
+      </ul>
+    </td>
+    <td>
+	<% if phone.rebootable? %>
+    <%= link_to 'Reboot', phone_reboot_path(phone), :confirm => "Do you really want to reboot this #{phone.phone_model.name}?" %>
+    <% else %>
+    <small>(IP address is unknown or reboot_path is nil)</small>
+    <% end %>
+    </td>
+    <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
+    <td><%= button_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

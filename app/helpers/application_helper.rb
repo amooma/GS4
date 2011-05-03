@@ -7,7 +7,7 @@ module ApplicationHelper
       menu_items = [
         { :text => "Admin"         , :url => admin_index_path },
         { :text => "Users"         , :url => admin_users_path },
-        { :text => "Phones"        , :url => sip_phones_path },
+        { :text => "Phones"        , :url => phones_path },
         { :text => "SIP Accounts"  , :url => sip_accounts_path },
         { :text => "Extensions"    , :url => extensions_path },
         { :text => "Servers"       , :sub => [

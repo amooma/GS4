@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>MAC address:</b>
+  <%= @phone.mac_address %>
+</p>
+
+<p>
+  <b>Phone model:</b>
+  <%= link_to @phone.phone_model.name, @phone.phone_model %>
+</p>
+
+<p>
+  <b>IP address:</b>
+  <%= @phone.ip_address %>
+</p>
+
+<%= link_to 'Edit', edit_phone_path(@phone) %>
+
+<h2>SIP Accounts</h2>
+<p>
+<% if @sip_accounts.count < @phone.phone_model.max_number_of_sip_accounts %>
+  <%= link_to 'Create a new sip account for this phone.', new_phone_sip_account_path(@phone) %>	
+<% else %>
+  The phone model <%= @phone.phone_model.name %> allows only <%= @phone.phone_model.max_number_of_sip_accounts %> sip accounts. To create one you have to delete one first.
+<% end %>
+</p>
+
+<%= render :partial => 'sip_accounts/table_of_sip_accounts', :locals => {:sip_accounts => @sip_accounts} %>
