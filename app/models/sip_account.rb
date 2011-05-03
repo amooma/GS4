@@ -1,5 +1,6 @@
 class SipAccount < ActiveRecord::Base
   
+  #TODO Remove extension_id from sip_accounts database table.
   
   belongs_to :sip_server       , :validate => true
   belongs_to :sip_proxy        , :validate => true
