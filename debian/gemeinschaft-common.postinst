@@ -61,7 +61,7 @@ case "$1" in
 		# `rake db:migrate` on upgrade.(?)
 		rake db:setup
 		chown gemeinschaft:gemeinschaft /opt/gemeinschaft/db/*.sqlite3
-		chmod 770 /opt/gemeinschaft/db/*.sqlite3
+		chmod 660 /opt/gemeinschaft/db/*.sqlite3
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)
