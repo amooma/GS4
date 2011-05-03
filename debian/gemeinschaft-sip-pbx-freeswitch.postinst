@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
 	configure)
-		echo "Restarting SIP B2BUA ..."
+		echo "Restarting SIP B2BUA ..." >&2
 		invoke-rc.d freeswitch stop
 		sed \
 			-e 's/^#* *\(FREESWITCH_ENABLED\)=.*/\1="true"/' \

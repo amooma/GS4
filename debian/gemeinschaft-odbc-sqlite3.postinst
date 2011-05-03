@@ -21,7 +21,7 @@ set -e
 case "$1" in
 	configure)
 		# Add ODBC DSN for Gemeinschaft to /etc/odbc.ini:
-		echo "Adding ODBC DSN ..."
+		echo "Adding ODBC DSN ..." >&2
 		cd /opt/gemeinschaft/
 		odbcinst -i -s -l -f misc/odbc/gemeinschaft-production.odbc.ini
 	;;

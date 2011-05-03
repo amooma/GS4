@@ -20,11 +20,11 @@ set -e
 
 case "$1" in
 	configure)
-		echo "Checking if Ruby Gems are installed ..."
+		echo "Checking if Ruby Gems are installed ..." >&2
 		cd /opt/gemeinschaft/
 		bundle check
 		
-		echo "Setting up the database ..."
+		echo "Setting up the database ..." >&2
 		cd /opt/gemeinschaft/
 		export RAILS_ENV=production
 		#OPTIMIZE Use `rake db:setup` on installation,

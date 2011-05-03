@@ -21,7 +21,7 @@ set -e
 case "$1" in
 	configure)
 		# Install Gems from vendor/cache/*.gem into vendor/bundle/ :
-		echo "Installing Ruby Gems ..."
+		echo "Installing Ruby Gems ..." >&2
 		cd /opt/gemeinschaft/
 		bundle install --deployment --local
 		bundle check

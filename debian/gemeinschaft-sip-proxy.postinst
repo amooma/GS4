@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
 	configure)
-		echo "Restarting SIP proxy ..."
+		echo "Restarting SIP proxy ..." >&2
 		invoke-rc.d kamailio stop
 		sed \
 			-e 's/^#* *\(RUN_KAMAILIO\)=.*/\1=yes/' \
