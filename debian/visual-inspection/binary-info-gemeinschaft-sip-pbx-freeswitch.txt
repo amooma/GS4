@@ -1,13 +1,15 @@
  new debian package, version 2.0.
     2668 bytes,    43 lines      control              
     3113 bytes,    37 lines      md5sums              
-    1275 bytes,    47 lines   *  postinst             #!/bin/sh
+    1279 bytes,    47 lines   *  postinst             #!/bin/sh
+    1434 bytes,    55 lines   *  postrm               #!/bin/sh
+    1109 bytes,    50 lines   *  preinst              #!/bin/sh
  Package: gemeinschaft-sip-pbx-freeswitch
  Source: gemeinschaft
  Version: 4.0~beta1-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 288
+ Installed-Size: 296
  Pre-Depends: freeswitch (>= 1.0.6), freeswitch-spidermonkey
  Depends: gemeinschaft-sip-pbx (= 4.0~beta1-1)
  Recommends: freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)

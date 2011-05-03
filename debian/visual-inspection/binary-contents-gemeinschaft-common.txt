@@ -289,7 +289,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/public/javascripts/
 -rw-r--r-- root/root     38467  ./opt/gemeinschaft/public/javascripts/effects.js
 -rw-r--r-- root/root     34787  ./opt/gemeinschaft/public/javascripts/controls.js
 -rw-r--r-- root/root      5850  ./opt/gemeinschaft/public/javascripts/rails.js
--rwxr-xr-x root/root       765  ./opt/gemeinschaft/public/dispatch.fcgi
+-rwxr-xr-x root/root       777  ./opt/gemeinschaft/public/dispatch.fcgi
 -rw-r--r-- root/root      2271  ./opt/gemeinschaft/public/favicon.png
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/public/images/
 -rw-r--r-- root/root      6646  ./opt/gemeinschaft/public/images/rails.png
