@@ -22,7 +22,7 @@ Description: Gemeinschaft - telephony server
 Package: gemeinschaft-common
 Architecture: all
 Conflicts: gemeinschaft (<< 3.99)
-Depends: ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version})
+Depends: ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version}), adduser
 Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
 Description: Gemeinschaft - common files
  Common files of the Gemeinschaft telephony server.
@@ -77,7 +77,7 @@ Description: Gemeinschaft - automated tests
 
 Package: gemeinschaft-sip-proxy
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), gemeinschaft-odbc-sqlite3 (= ${binary:Version}), kamailio-unixodbc-modules, kamailio-presence-modules
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), adduser, gemeinschaft-odbc-sqlite3 (= ${binary:Version}), kamailio-unixodbc-modules, kamailio-presence-modules
 Pre-Depends: kamailio (>= 3.2.0)
 Replaces: kamailio, gemeinschaft-sip-proxy
 Conflicts: ser, openser, opensips, kamailio (= 3.1.3+squeeze1)
@@ -157,7 +157,7 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
 
 Package: gemeinschaft-web-service
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version})
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), adduser
 Pre-Depends: lighttpd (>= 1.4.28)
 Replaces: lighttpd, gemeinschaft-web-service
 Suggests: logrotate

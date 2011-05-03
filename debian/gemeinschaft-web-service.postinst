@@ -20,6 +20,15 @@ set -e
 
 case "$1" in
 	configure)
+		# Add Lighttpd user to group "gemeinschaft" so it can access
+		# "/opt/gemeinschaft/db/*.sqlite3":
+		USER="www-data"
+		gemeinschaft_group="gemeinschaft"
+		if groups "$USER" | grep -w -q -v "$gemeinschaft_group"; then
+			echo "Adding user \"$USER\" to group \"$gemeinschaft_group\" ..." >&2
+			adduser "$USER" "$gemeinschaft_group"
+		fi
+		
 		echo "Restarting web server ..." >&2
 		invoke-rc.d lighttpd stop
 		invoke-rc.d lighttpd start

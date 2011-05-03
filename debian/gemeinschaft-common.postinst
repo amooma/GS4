@@ -20,6 +20,36 @@ set -e
 
 case "$1" in
 	configure)
+		# Add user
+		if ! getent passwd "gemeinschaft" >> /dev/null ; then
+			echo "Adding system user for Gemeinschaft ..." >&2
+			adduser --system --group --quiet \
+				--home "/opt/gemeinschaft" \
+				--no-create-home --disabled-login \
+				--gecos "Gemeinschaft telephony server" \
+				"gemeinschaft"
+		fi
+		
+		# Add user to required groups
+		#for group in "dialout" "audio"; do
+		#	if groups "gemeinschaft" | grep -w -q -v "$group"; then
+		#		adduser "gemeinschaft" "$group"
+		#	fi
+		#done
+		
+		for dir in \
+			"/opt/gemeinschaft/log" \
+			"/opt/gemeinschaft/tmp/pids" \
+			"/opt/gemeinschaft/tmp/sessions" \
+			"/opt/gemeinschaft/tmp/sockets" \
+			"/opt/gemeinschaft/db" \
+		; do
+			if ! dpkg-statoverride --list "$dir" >> /dev/null ; then
+				chown gemeinschaft:gemeinschaft "$dir"
+				chmod 770 "$dir"
+			fi
+		done
+		
 		echo "Checking if Ruby Gems are installed ..." >&2
 		cd /opt/gemeinschaft/
 		bundle check
@@ -30,6 +60,8 @@ case "$1" in
 		#OPTIMIZE Use `rake db:setup` on installation,
 		# `rake db:migrate` on upgrade.(?)
 		rake db:setup
+		chown gemeinschaft:gemeinschaft /opt/gemeinschaft/db/*.sqlite3
+		chmod 770 /opt/gemeinschaft/db/*.sqlite3
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)
