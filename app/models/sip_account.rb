@@ -1,7 +1,5 @@
 class SipAccount < ActiveRecord::Base
   
-  #TODO Remove extension_id from sip_accounts database table.
-  
   belongs_to :sip_server       , :validate => true
   belongs_to :sip_proxy        , :validate => true
   belongs_to :voicemail_server , :validate => true
@@ -20,7 +18,6 @@ class SipAccount < ActiveRecord::Base
   validates_presence_of     :sip_proxy
   validates_presence_of     :voicemail_server , :if => Proc.new { |me| me.voicemail_server_id }
   validates_presence_of     :phone            , :if => Proc.new { |me| me.phone_id }
-  validates_presence_of     :extension        , :if => Proc.new { |me| me.extension_id }
   validates_presence_of     :user             , :if => Proc.new { |me| me.user_id }
   
   validate_password         :password
