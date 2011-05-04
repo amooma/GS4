@@ -1,0 +1,40 @@
+#! /usr/bin/env ruby
+
+def hl( str )
+	return "\e[1m#{str}\e[0m"
+end
+
+def sys( cmd )
+	if ! system cmd
+		STDERR.puts "Error #{$?.exitstatus}."
+		exit 1
+	end
+end
+
+language_and_voice = "en-us-callie"
+version = "1.0.15"
+rates = [
+	 8000,
+	16000,
+#	32000,
+#	48000,
+]
+rates.each { |rate|
+	puts ""
+	puts "### Downloading #{hl(language_and_voice)} @ #{hl(rate)} Hz, version #{hl(version)} ..."
+	puts "#"
+	
+	sys "cd /opt/freeswitch/sounds/ \
+	&& wget -c 'http://files.freeswitch.org/freeswitch-sounds-#{language_and_voice}-#{rate}-#{version}.tar.gz' 2>&1"
+	
+	sys "cd /opt/freeswitch/sounds/ \
+	&& tar -xzf 'freeswitch-sounds-#{language_and_voice}-#{rate}-#{version}.tar.gz'"
+}
+rates.each { |rate|
+	sys "cd /opt/freeswitch/sounds/ \
+	&& rm 'freeswitch-sounds-#{language_and_voice}-#{rate}-#{version}.tar.gz'"
+}
+puts ""
+puts "Done."
+puts ""
+

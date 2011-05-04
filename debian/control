@@ -147,7 +147,9 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
   deb-src http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main 
  to your APT sources. It's for Ubuntu but the architecture-independant
  sound files should work. You will have to use APT pinning though so
- let's no go there. Get the tarballs.
+ let's no go there.
+ Get the tarballs. You may want to use the "download-freeswitch-sounds"
+ script.
 
 
 Package: gemeinschaft-web-service
