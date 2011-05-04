@@ -35,5 +35,54 @@ class SipAccount < ActiveRecord::Base
     :in => [ nil ],
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
+
+  after_validation( :on => :create ) do
+    if (! self.sip_server_id.nil?) && (! self.sip_proxy_id.nil?) && (self.sip_proxy.is_local?)
+      create_subscriber()
+    end
+  end
   
+  after_validation( :on => :update ) do
+    if (! self.sip_server_id.nil?) && (! self.sip_proxy_id.nil?) && (self.sip_proxy.is_local?)
+      update_subscriber()
+    end
+  end
+  
+  before_destroy do
+    delete_subscriber()
+  end
+  
+  def create_subscriber()
+    subscriber = Subscriber.create(
+      :username   =>  self.auth_name,
+      :domain     =>  self.sip_server.host,
+      :password   =>  self.password,
+      :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
+    )
+    if ! subscriber.valid?
+      errors.add( :base, "Failed to create subscriber")
+    end
+  end
+  
+  def update_subscriber()
+    subscriber_update = Subscriber.find_by_username( self.auth_name_was )
+    subscriber = subscriber_update.update_attributes(
+      :username   =>  self.auth_name,
+      :domain     =>  self.sip_server.host,
+      :password   =>  self.password,
+      :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
+    )
+    if ! subscriber
+      errors.add( :base, "Failed to update subscriber")
+    end
+  end
+  
+  def delete_subscriber()
+    subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
+    if subscriber_delete
+      if ! subscriber_delete.destroy
+        errors.add( :base, "Failed to delete subscriber")
+      end
+    end
+  end
 end
