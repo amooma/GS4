@@ -31,11 +31,11 @@
 	<section>
 		<h2>SIP phones</h2>
 		<ul>
-			<li><%= link_to( "List all SIP phones (#{@number_of_sip_phones})",
-				url_for(:controller => '/sip_phones', :action => 'index')
+			<li><%= link_to( "List all SIP phones (#{@number_of_phones})",
+				url_for(:controller => '/phones', :action => 'index')
 			) %></li>
 			<li><%= link_to( "Create a new SIP phone",
-				url_for(:controller => '/sip_phones', :action => 'new')
+				url_for(:controller => '/phones', :action => 'new')
 			) %></li>
 		</ul>
 	</section>

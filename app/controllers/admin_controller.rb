@@ -16,7 +16,7 @@ class AdminController < ApplicationController
     else
       @number_of_users         = User.count
       @number_of_sip_accounts  = SipAccount.count
-      @number_of_sip_phones    = SipPhone.count
+      @number_of_phones    = Phone.count
       @number_of_sip_proxies   = SipProxy.count
       @number_of_sip_servers   = SipServer.count
       @number_of_extensions    = Extension.count
