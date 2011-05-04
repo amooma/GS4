@@ -39,7 +39,11 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts/new.xml
   def new
     @sip_account = SipAccount.new
-    
+    @sip_account.phone_id = params[:phone_id]
+    @sip_account.user_id = params[:user_id]
+    @sip_account.sip_server_id = params[:sip_server_id]
+    @sip_account.sip_proxy_id = params[:sip_proxy_id]
+    @sip_account.voicemail_server_id = params[:voicemail_server_id]
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account }
