@@ -11,28 +11,54 @@ def sys( cmd )
 	end
 end
 
-language_and_voice = "en-us-callie"
-version = "1.0.15"
-rates = [
-	 8000,
-	16000,
-#	32000,
-#	48000,
-]
-rates.each { |rate|
-	puts ""
-	puts "### Downloading #{hl(language_and_voice)} @ #{hl(rate)} Hz, version #{hl(version)} ..."
-	puts "#"
-	
-	sys "cd /opt/freeswitch/sounds/ \
-	&& wget -c 'http://files.freeswitch.org/freeswitch-sounds-#{language_and_voice}-#{rate}-#{version}.tar.gz' 2>&1"
-	
-	sys "cd /opt/freeswitch/sounds/ \
-	&& tar -xzf 'freeswitch-sounds-#{language_and_voice}-#{rate}-#{version}.tar.gz'"
+fs_sounds_dir = "/opt/freeswitch/sounds"
+
+languages = {
+	:"en-us-callie" => {
+		:version => "1.0.15",
+		:rates => [
+				 8000,
+				16000,
+			#	32000,
+			#	48000,
+		],
+	},
+	:"music" => {
+		:version => "1.0.8",
+		:rates => [
+				 8000,
+				16000,
+			#	32000,
+			#	48000,
+		],
+	},
 }
-rates.each { |rate|
-	sys "cd /opt/freeswitch/sounds/ \
-	&& rm 'freeswitch-sounds-#{language_and_voice}-#{rate}-#{version}.tar.gz'"
+
+
+languages.each { |lang_and_voice, lang_info|
+	version = lang_info[:version]
+	lang_info[:rates].each { |rate|
+		puts ""
+		testfile = lang_and_voice.to_sym == :"music" \
+			? "#{rate}/partita-no-3-in-e-major-bwv-1006-1-preludio.wav" \
+			: "digits/#{rate}/star.wav"
+		if File::exists?( "#{fs_sounds_dir}/#{lang_and_voice.to_s.gsub(/-/,'/')}/#{testfile}" )
+			puts "### sounds-#{hl(lang_and_voice)} @ #{hl(rate)} Hz exists."
+			next
+		end
+		
+		puts "### Downloading sounds-#{hl(lang_and_voice)} @ #{hl(rate)} Hz, version #{hl(version)} ..."
+		puts "#"
+		
+		sys "cd #{fs_sounds_dir}/ \
+		&& wget -c 'http://files.freeswitch.org/freeswitch-sounds-#{lang_and_voice}-#{rate}-#{version}.tar.gz' 2>&1"
+		
+		sys "cd #{fs_sounds_dir}/ \
+		&& tar -xzf 'freeswitch-sounds-#{lang_and_voice}-#{rate}-#{version}.tar.gz' 2>&1"
+		
+		f = "#{fs_sounds_dir}/freeswitch-sounds-#{lang_and_voice}-#{rate}-#{version}.tar.gz"
+		File::unlink( f ) if File::exists?( f )
+	}
 }
 puts ""
 puts "Done."
