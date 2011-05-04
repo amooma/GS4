@@ -4,6 +4,6 @@
 
 find . -type f \
   | grep -vEe '/(\.git/|.idea/|doc/app/|script/notes|log/|debian/visual-inspection/|public/javascripts/controls\.js)' \
-  | xargs grep --color -IEe '(TODO|FIXME|OPTIMIZE)'
+  | xargs grep --color -IEe '(FIXME|TODO|OPTIMIZE)'
 
 
