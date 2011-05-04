@@ -20,10 +20,11 @@
     <%= f.text_field :destination %>
   </div>
   <div class="field">
-    <%= f.association :sip_accounts, :as => :select, :label_method => :auth_name,
-      :include_blank => true, :multiple => false
-      #OPTIMIZE Make this a normal <select> without multiple="multiple".
-    %>
+    <%= f.label :sip_account_id, "SIP account" %>
+    <%= f.select( :sip_account_id,
+      @sip_accounts.collect { |r| [ "#{r.auth_name}", r.id ] },
+      { :include_blank => true, :selected => @extension.sip_account_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.check_box :active %>
