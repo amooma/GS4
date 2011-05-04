@@ -42,6 +42,8 @@ class SipAccount < ActiveRecord::Base
   after_validation( :on => :update ) do
     if (! self.sip_server_id.nil?) && (! self.sip_proxy_id.nil?) && (self.sip_proxy.is_local?)
       update_subscriber()
+    else
+      delete_subscriber()
     end
   end
   
@@ -63,22 +65,28 @@ class SipAccount < ActiveRecord::Base
   
   def update_subscriber()
     subscriber_update = Subscriber.find_by_username( self.auth_name_was )
-    subscriber = subscriber_update.update_attributes(
-      :username   =>  self.auth_name,
-      :domain     =>  self.sip_server.host,
-      :password   =>  self.password,
-      :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
-    )
-    if ! subscriber
-      errors.add( :base, "Failed to update subscriber")
+    if (! subscriber_update.nil?)
+      subscriber = subscriber_update.update_attributes(
+        :username   =>  self.auth_name,
+        :domain     =>  self.sip_server.host,
+        :password   =>  self.password,
+        :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
+      )
+      if ! subscriber
+        errors.add( :base, "Failed to update subscriber")
+      end
+    else
+      create_subscriber()
     end
   end
   
   def delete_subscriber()
-    subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
-    if subscriber_delete
-      if ! subscriber_delete.destroy
-        errors.add( :base, "Failed to delete subscriber")
+    if (! self.sip_proxy_id_was.nil?) && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local?)
+      subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
+      if subscriber_delete
+        if ! subscriber_delete.destroy
+          errors.add( :base, "Failed to delete subscriber")
+        end
       end
     end
   end
