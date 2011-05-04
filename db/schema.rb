@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110504083805) do
+ActiveRecord::Schema.define(:version => 20110504152152) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20110504083805) do
     t.integer  "extension"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sip_account_id"
     t.string   "destination"
     t.boolean  "active"
   end
