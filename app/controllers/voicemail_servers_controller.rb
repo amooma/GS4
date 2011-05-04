@@ -28,7 +28,9 @@ class VoicemailServersController < ApplicationController
   # GET /voicemail_servers/new.xml
   def new
     @voicemail_server = VoicemailServer.new
-
+    if VoicemailServer.count == 0
+      @voicemail_server.host = local_ip
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @voicemail_server }

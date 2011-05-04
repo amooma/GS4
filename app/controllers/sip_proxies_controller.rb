@@ -30,7 +30,9 @@ class SipProxiesController < ApplicationController
   # GET /sip_proxies/new.xml
   def new
     @sip_proxy = SipProxy.new
-    
+    if SipProxy.count == 0
+      @sip_proxy.host = local_ip
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_proxy }
