@@ -30,7 +30,9 @@ class SipServersController < ApplicationController
   # GET /sip_servers/new.xml
   def new
     @sip_server = SipServer.new
-   
+    if SipServer.count == 0
+      @sip_server.host = local_ip
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_server }
