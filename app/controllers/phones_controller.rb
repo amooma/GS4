@@ -1,4 +1,8 @@
 class PhonesController < ApplicationController
+
+
+  before_filter :authenticate_user!
+
   # GET /phones
   # GET /phones.xml
   def index
