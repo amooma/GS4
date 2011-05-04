@@ -3,5 +3,5 @@
 
 # The lang files in /opt/freeswitch/conf/lang/ are provided by
 # the freeswitch-lang-* packages.
-/lang/*
+/lang
 
