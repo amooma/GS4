@@ -1,0 +1,29 @@
+<h1>Listing subscribers</h1>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Domain</th>
+    <th>Password</th>
+    <th>Email address</th>
+    <th>Ha1</th>
+    <th>Ha1b</th>
+    <th>Rpid</th>
+    <th></th>
+  </tr>
+
+<% @subscribers.each do |subscriber| %>
+  <tr>
+    <td><%= subscriber.username %></td>
+    <td><%= subscriber.domain %></td>
+    <td><%= subscriber.password %></td>
+    <td><%= subscriber.email_address %></td>
+    <td><%= subscriber.ha1 %></td>
+    <td><%= subscriber.ha1b %></td>
+    <td><%= subscriber.rpid %></td>
+    <td><%= link_to 'Show', subscriber %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
