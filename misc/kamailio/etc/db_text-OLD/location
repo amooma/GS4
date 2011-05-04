@@ -1,1 +1,0 @@
-username(str) contact(str) expires(int) q(double) callid(str) cseq(int)
