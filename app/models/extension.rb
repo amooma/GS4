@@ -1,5 +1,7 @@
 class Extension < ActiveRecord::Base
   
+  #OPTIMIZE extension must be a string (instead of an integer).
+  
   has_many :sip_account_to_extensions, :dependent => :destroy
   has_many :sip_accounts, :through => :sip_account_to_extensions
   
