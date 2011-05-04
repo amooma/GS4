@@ -6,12 +6,14 @@
 	When you hear someone say "sofia profile" this is what they are talking about.
 	-->
 	<!-- http://wiki.freeswitch.org/wiki/Sofia_Configuration_Files -->
+	
 	<!-- aliases are other names that will work as a valid profile name for this profile -->
 	<aliases>
 		<!--
 		<alias name="default" />
 		-->
 	</aliases>
+	
 	<!-- Outbound Registrations -->
 	<gateways>
 		<X-PRE-PROCESS cmd="include" data="internal/*.xml" />
@@ -54,7 +56,8 @@
 		<!-- ip address to use for rtp, DO NOT USE HOSTNAMES ONLY IP ADDRESSES -->
 		<param name="rtp-ip" value="$${local_ip_v4}" />
 		<!-- ip address to bind to, DO NOT USE HOSTNAMES ONLY IP ADDRESSES -->
-		<param name="sip-ip" value="$${local_ip_v4}" />
+		<!--<param name="sip-ip" value="$${local_ip_v4}" />-->
+		<param name="sip-ip" value="127.0.0.1" />
 		<param name="hold-music" value="$${hold_music}" />
 		<param name="apply-nat-acl" value="nat.auto" />
 		
