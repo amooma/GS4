@@ -192,18 +192,19 @@
 		<!--<param name="vad" value="out" />-->
 		<!--<param name="vad" value="both" />-->
 		<!--<param name="alias" value="sip:10.0.1.251:5555" />-->
+		
 		<!--
 		These are enabled to make the default config work better out of the box.
 		If you need more than ONE domain you'll need to not use these options.
 		-->
 		<!-- all inbound reg will look in this domain for the users -->
-		<param name="force-register-domain" value="$${domain}" />
+		<!--<param name="force-register-domain" value="$${domain}" />-->
 		<!-- force the domain in subscriptions to this value -->
-		<param name="force-subscription-domain" value="$${domain}" />
+		<!--<param name="force-subscription-domain" value="$${domain}" />-->
 		<!-- all inbound reg will stored in the db using this domain -->
-		<param name="force-register-db-domain" value="$${domain}" />
+		<!--<param name="force-register-db-domain" value="$${domain}" />-->
 		<!-- force suscription expires to a lower value than requested -->
-		<!--<param name="force-subscription-expires" value="60" />-->
+		<param name="force-subscription-expires" value="120" />
 		<!-- disable register and transfer which may be undesirable in a public switch -->
 		<!--<param name="disable-transfer" value="true" />-->
 		<!--<param name="disable-register" value="true" />-->
@@ -232,6 +233,7 @@
 		Note: comment out to restore the behavior before 2008-09-29
 		-->
 		<param name="challenge-realm" value="auto_from" />
+		
 		<!--<param name="disable-rtp-auto-adjust" value="true" />-->
 		<!-- on inbound calls make the uuid of the session equal to the sip call id of that call -->
 		<!--<param name="inbound-use-callid-as-uuid" value="true" />-->

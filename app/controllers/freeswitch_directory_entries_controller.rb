@@ -55,12 +55,12 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			
 			logger.info(_bold( "[FS] Request for domains and gateways ..." ))
 			
-			#@sip_servers = SipServer.all( :group => :host )
+			@sip_servers = SipServer.where( :is_local => true ) #.group( :host )
 			
 			respond_to { |format|
 				format.xml {
-					#render :domains_and_gateways_index, :layout => false
-					render :empty_result, :layout => false
+					render :domains_and_gateways_index, :layout => false
+					#render :empty_result, :layout => false
 				}
 				format.all {
 					render :status => '406 Not Acceptable',
@@ -115,35 +115,53 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			
 			logger.info(_bold( "[FS] Request for user #{_arg(:user)}@#{_arg(:domain)} (for #{type}) ..." ))
 			
-			# Find the SIP account:
+			# Find the SIP account(s):
+			# (The query should not return more than 1 SIP account in most cases.)
+			@sip_accounts = []
+			
 			# Find SIP account by auth_name:
-			@sip_account = nil
-			if ! @sip_account
-				@sip_account = (SipAccount.where({
-					:auth_name      => _arg(:user)
+			sip_accounts = (
+				SipAccount.where({
+					:auth_name      => _arg(:user),
 				})
 				.joins(:sip_server).where(:sip_servers => {
-					:host           => _arg(:domain)
+					:host           => _arg(:domain),
+					:is_local       => true,
 				})
-				.first)
-			end
+			)
+			@sip_accounts = @sip_accounts.concat( sip_accounts.to_a ) if sip_accounts
+			
 			## Find SIP account by extension (this is now done by Kamailio):
-			#if ! @sip_account
-			#	@sip_account = (SipAccount.where({
-			#	}).joins(:sip_server).where(:sip_servers => {
-			#		:host           => _arg(:domain)
+			#sip_accounts = (
+			#	SipAccount.where({
+			#	})
+			#	.joins(:sip_server).where(:sip_servers => {
+			#		:host           => _arg(:domain),
+			#		:is_local       => true,
 			#	})
 			#	.joins(:extension).where(:extensions => {
-			#		:extension      => _arg(:user)
+			#		:extension      => _arg(:user),
 			#	})
-			#	.first)
-			#end
+			#)
+			#@sip_accounts = @sip_accounts.concat( sip_accounts.to_a ) if sip_accounts
 			
-			logger.debug "SIP account: #{@sip_account.inspect}"
+			@sip_accounts.each { |acct|
+				logger.debug(_bold( "[FS] SIP account: " + (
+					acct \
+					? "id: #{acct[:id].inspect}" \
+					+ ", user_id: #{acct[:user_id].inspect}" \
+					+ ", auth_name: #{acct[:auth_name].inspect}" \
+					+ ", realm: #{acct[:realm].inspect}" \
+					+ ", sip_server: " + (acct.sip_server ? acct.sip_server.hostinfo.inspect : 'nil') \
+					+ ", sip_proxy: " + (acct.sip_proxy  ? acct.sip_proxy.hostinfo.inspect : 'nil') \
+					+ ", voicemail_server: " + (acct.voicemail_server ? acct.voicemail_server.hostinfo.inspect : 'nil') \
+					: acct.inspect
+				)))
+			}
 			
 			respond_to { |format|
 				format.xml {
-					if (@sip_account)
+					if (@sip_accounts.length > 0)
 						render :account_show, :layout => false
 					else
 						render :empty_result, :layout => false
@@ -185,7 +203,7 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 	end
 	
 	def _bold( str )
-		return "\e[0;1m#{str} \e[0m "
+		return "\e[0;32;1m#{str} \e[0m "
 	end
 	
 	
