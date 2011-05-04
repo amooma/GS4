@@ -68,6 +68,9 @@ will build the domains ACL using this value.
 		
 		<extension name="kam-vmenu-self">
 			<condition field="destination_number" expression="^-vmenu-$">
+				<!-- User has been authenticated in Kamailio for this extension. -->
+				
+				<action application="log" data="INFO [GS] User ${sip_from_user}@${domain_name} is checking the voicemail ..." />
 				<!--
 				<action application="set" data="voicemail_authorized=${sip_authorized}" />
 				-->
@@ -87,9 +90,10 @@ will build the domains ACL using this value.
 			<!--
 			<condition field="destination_number" expression="^.*$">
 			-->
-			<condition field="destination_number" expression="^-kb-(.+)$">
+			<condition field="destination_number" expression="^-kambridge-(.+)$">
 				<action application="javascript" data="./GS.js" />
-				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" /><!-- 503 Service Unavailable -->
+				<!-- Send 503 Service Unavailable -->
+				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" />
 			</condition>
 		</extension>
 		
