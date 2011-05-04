@@ -3,7 +3,7 @@ class ExtensionsController < ApplicationController
   before_filter :authenticate_user!
   
   before_filter {
-    @sip_accounts = SipAccount.all
+    @sip_accounts = SipAccount.order([ :auth_name, :sip_server_id ])
   }
   
   # GET /extensions
