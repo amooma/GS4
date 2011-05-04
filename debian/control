@@ -138,7 +138,7 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
   http://files.freeswitch.org/
  and make your own packages (if you want to) or download the sound
  files as .deb packages from
-  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drsivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
+  http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
   http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-music/
  and install them (dpkg -i freeswitch-sounds-*.deb).
  .
