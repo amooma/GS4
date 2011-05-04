@@ -28,6 +28,7 @@ class ExtensionsController < ApplicationController
   # GET /extensions/new.xml
   def new
     @extension = Extension.new
+    @extension.active = true
 
     respond_to do |format|
       format.html # new.html.erb
