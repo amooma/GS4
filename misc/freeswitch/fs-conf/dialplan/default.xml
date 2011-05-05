@@ -94,7 +94,7 @@ will build the domains ACL using this value.
 				<!--
 				<action application="set" data="proxy_media=true" />
 				-->
-				<action application="javascript" data="./GS.js" />
+				<action application="javascript" data="GS.js" />
 				<!-- Send 503 Service Unavailable -->
 				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" />
 			</condition>
