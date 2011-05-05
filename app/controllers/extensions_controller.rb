@@ -31,8 +31,8 @@ class ExtensionsController < ApplicationController
   # GET /extensions/new
   # GET /extensions/new.xml
   def new
-    @extension = Extension.new
-    @extension.active = true
+    @sip_account = SipAccount.find(params[:sip_account_id])
+    @extension = @sip_account.extensions.new(:active => true)
     
     respond_to do |format|
       format.html # new.html.erb
@@ -48,10 +48,11 @@ class ExtensionsController < ApplicationController
   # POST /extensions
   # POST /extensions.xml
   def create
-    @extension = Extension.new(params[:extension])
-    
+    @sip_account = SipAccount.find(params[:sip_account_id])
+    @extension = @sip_account.extensions.new(params[:extension])
+        
     respond_to do |format|
-      if @extension.save
+      if @sip_account.save
         format.html { redirect_to(@extension, :notice => 'Extension was successfully created.') }
         format.xml  { render :xml => @extension, :status => :created, :location => @extension }
       else

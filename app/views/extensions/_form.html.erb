@@ -1,4 +1,4 @@
-<%= simple_form_for( @extension ) { |f| %>
+<%= simple_form_for([@sip_account, @extension]) { |f| %>
   <% if @extension.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@extension.errors.count, "error") %> prohibited this extension from being saved:</h2>
@@ -19,13 +19,6 @@
     <%= f.label :destination %>
     <%= f.text_field :destination %>
     <%#OPTIMIZE If SIP account is set then set destination automatically or vice-versa. %>
-  </div>
-  <div class="field">
-    <%= f.label :sip_account_id, "SIP account" %>
-    <%= f.select( :sip_account_id,
-      @sip_accounts.collect { |r| [ "#{r.auth_name}", r.id ] },
-      { :include_blank => true, :selected => @extension.sip_account_id }
-    ) %>
   </div>
   <div class="field">
     <%= f.check_box :active %>

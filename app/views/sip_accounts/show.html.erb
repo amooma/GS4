@@ -28,6 +28,7 @@
   <% @sip_account.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
   <% end %>
+    <li><%= link_to 'create extension', new_sip_account_extension_path(@sip_account) %>
   </ul>
 </p>
 
