@@ -242,6 +242,7 @@ try {
 				var xml_obj = new XML( curl_response_data );
 			}
 			catch (e if e instanceof SyntaxError) {
+				log( LOG_INFO, "Response from web service is:\n-----------------\n"+ curl_response_data +"\n-----------------" );
 				log( LOG_ERROR, "XML error: "+ e.message );
 				throw new Error( "Response is not valid XML!" );
 			}
@@ -349,7 +350,8 @@ try {
 	exit();
 }
 catch (e) {
-	//log( LOG_ERROR, e.message +" ("+ e.name +") in "+ e.fileName +", line "+ e.lineNumber );
+	/*
+	//log( LOG_ERROR, (e.name != 'Error' ? e.name +": " : '') + e.message +" in "+ e.fileName +", line "+ e.lineNumber );
 	// logged anyway by FreeSwitch when we re-throw the exception.
 	if (session) {
 		if (session.answered()) {
@@ -359,5 +361,13 @@ catch (e) {
 		}
 	}
 	throw e;
+	*/
+	
+	log( LOG_ERROR, (e.name != 'Error' ? e.name +": " : '') + e.message +" in "+ e.fileName +", line "+ e.lineNumber );
+	// Fallback mode:
+	log( LOG_WARNING, "Fallback mode ..." );
+	dst = session.destination.replace( /^-kambridge-/, '' );
+	session.execute( 'export', 'sip_contact_user=ufs' );
+	session.execute( 'bridge', 'sofia/internal/'+dst+'@127.0.0.1' );
 }
 

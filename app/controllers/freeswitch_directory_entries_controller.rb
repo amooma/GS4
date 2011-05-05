@@ -4,6 +4,7 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 	prepend_before_filter { |controller|
 		if ! request.local?
 			if user_signed_in?  #OPTIMIZE && is admin
+				# For debugging purposes.
 				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
 			else
 				logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))

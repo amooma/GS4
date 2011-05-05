@@ -91,6 +91,9 @@ will build the domains ACL using this value.
 			<condition field="destination_number" expression="^.*$">
 			-->
 			<condition field="destination_number" expression="^-kambridge-(.+)$">
+				<!--
+				<action application="set" data="proxy_media=true" />
+				-->
 				<action application="javascript" data="./GS.js" />
 				<!-- Send 503 Service Unavailable -->
 				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" />
@@ -100,7 +103,7 @@ will build the domains ACL using this value.
 		<!--
 		#OPTIMIZE This should be the fallback if GS.js fails
 		<extension name="kam-kbridge">
-			<condition field="destination_number" expression="^-kb-(.+)$">
+			<condition field="destination_number" expression="^-kambridge-(.+)$">
 				<action application="set" data="proxy_media=true" />
 				<action application="set" data="call_timeout=50" />
 				<action application="set" data="sip_invite_domain=192.168.178.23" />
