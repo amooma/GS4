@@ -1,6 +1,6 @@
 class ExtensionsController < ApplicationController
-  
   before_filter :authenticate_user!
+  before_filter :find_sip_account
   
   before_filter {
     @sip_accounts = SipAccount.order([ :auth_name, :sip_server_id ])
@@ -9,7 +9,11 @@ class ExtensionsController < ApplicationController
   # GET /extensions
   # GET /extensions.xml
   def index
-    @extensions = Extension.all
+    if @sip_account.nil?
+      @extensions = Extension.all
+    else
+      @extensions = @sip_account.extensions
+    end
     
     respond_to do |format|
       format.html # index.html.erb
@@ -20,7 +24,11 @@ class ExtensionsController < ApplicationController
   # GET /extensions/1
   # GET /extensions/1.xml
   def show
-    @extension = Extension.find(params[:id])
+    if @sip_account.nil?
+      @extension = Extension.find(params[:id])
+    else
+      @extension = @sip_account.extensions.find(params[:id])
+    end
     
     respond_to do |format|
       format.html # show.html.erb
@@ -31,8 +39,11 @@ class ExtensionsController < ApplicationController
   # GET /extensions/new
   # GET /extensions/new.xml
   def new
-    @sip_account = SipAccount.find(params[:sip_account_id])
-    @extension = @sip_account.extensions.new(:active => true)
+    if @sip_account.nil?
+      @extension = Extension.new
+    else
+      @extension = @sip_account.extensions.build(:active => true)
+    end
     
     respond_to do |format|
       format.html # new.html.erb
@@ -42,17 +53,24 @@ class ExtensionsController < ApplicationController
   
   # GET /extensions/1/edit
   def edit
-    @extension = Extension.find(params[:id])
+    if @sip_account.nil?
+      @extension = Extension.find(params[:id])
+    else
+      @extension = @sip_account.extensions.find(params[:id])
+    end
   end
   
   # POST /extensions
   # POST /extensions.xml
   def create
-    @sip_account = SipAccount.find(params[:sip_account_id])
-    @extension = @sip_account.extensions.new(params[:extension])
+    if @sip_account.nil?
+      @extension = Extension.new(params[:extension])
+    else
+      @extension = @sip_account.extensions.build(params[:extension])
+    end
         
     respond_to do |format|
-      if @sip_account.save
+      if @extension.save
         format.html { redirect_to(@extension, :notice => 'Extension was successfully created.') }
         format.xml  { render :xml => @extension, :status => :created, :location => @extension }
       else
@@ -87,6 +105,13 @@ class ExtensionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(extensions_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  private
+  def find_sip_account
+    if defined?(params).nil? and !params[:sip_account_id].nil?
+      @sip_account = SipAccount.find(params[:sip_account_id])
     end
   end
   
