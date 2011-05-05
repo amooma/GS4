@@ -18,6 +18,36 @@ class FreeswitchCallProcessingController < ApplicationController
 	#before_filter :authenticate_user!
 	#OPTIMIZE Implement SSL with client certificates.
 	
+	# http://wiki.freeswitch.org/wiki/Mod_logfile#Log_Levels
+	FS_LOG_CONSOLE = 0
+	FS_LOG_ALERT   = 1
+	FS_LOG_CRIT    = 2
+	FS_LOG_ERROR   = 3
+	FS_LOG_WARNING = 4
+	FS_LOG_NOTICE  = 5
+	FS_LOG_INFO    = 6
+	FS_LOG_DEBUG   = 7
+	
+	def action_log( level, message )
+		log_level_fs = case level
+			when FS_LOG_DEBUG   ; 'DEBUG'
+			when FS_LOG_INFO    ; 'INFO'
+			when FS_LOG_NOTICE  ; 'NOTICE'
+			when FS_LOG_WARNING ; 'WARNING'
+			when FS_LOG_ERROR   ; 'ERR'
+			when FS_LOG_CRIT    ; 'CRIT'
+			when FS_LOG_ALERT   ; 'ALERT'
+			when FS_LOG_CONSOLE ; 'CONSOLE'
+			else                ; 'CONSOLE'
+		end
+		action :log, "#{log_level_fs} ### [GS] #{message}"
+	end
+	
+	def action( app, data = nil )
+		@dp_actions = [] if ! @dp_actions  # the FreeSwitch dialplan actions
+		@dp_actions << [ app, data ]
+	end
+	
 	# GET  /freeswitch-call-processing/actions.xml
 	# POST /freeswitch-call-processing/actions.xml
 	def actions()
@@ -52,15 +82,13 @@ class FreeswitchCallProcessingController < ApplicationController
 		# are" i.e. what you have done already.
 		# And you have to explicitly send "_continue" as the last
 		# application.
-		
-		@dp_actions = []
-		
+				
 		if call_dst_sip_userinfo.blank?
 			case _arg( 'Answer-State' )
 				when 'ringing'
-					@dp_actions << { :app => :respond   , :data => '404 Not Found' }  # or '400 Bad Request'? or '484 Address Incomplete'?
+					action :respond   , '404 Not Found'  # or '400 Bad Request'? or '484 Address Incomplete'?
 				else
-					@dp_actions << { :app => :hangup    , :data => '' }
+					action :hangup    , ''
 			end
 		else
 			
@@ -68,15 +96,15 @@ class FreeswitchCallProcessingController < ApplicationController
 			# (Alias lookup has already been done in kamailio.cfg.)
 			
 			#FIXME Just an example ...
-			#@dp_actions << { :app => :set       , :data => 'effective_caller_id_number=1234567' }
-			#@dp_actions << { :app => :bridge    , :data => "sofia/internal/#{call_dst_real_sip_username}" }
-			#@dp_actions << { :app => :answer    , :data => '' }
-			#@dp_actions << { :app => :sleep     , :data => 1000 }
-			#@dp_actions << { :app => :playback  , :data => 'tone_stream://%(500, 0, 640)' }
-			#@dp_actions << { :app => :set       , :data => 'voicemail_authorized=${sip_authorized}' }
-			#@dp_actions << { :app => :voicemail , :data => "default $${domain} #{call_dst_real_sip_username}" }
-			#@dp_actions << { :app => :hangup    , :data => '' }
-			#@dp_actions << { :app => :_continue }
+			#action :set       , 'effective_caller_id_number=1234567'
+			#action :bridge    , "sofia/internal/#{call_dst_real_sip_username}"
+			#action :answer
+			#action :sleep     , 1000
+			#action :playback  , 'tone_stream://%(500, 0, 640)'
+			#action :set       , 'voicemail_authorized=${sip_authorized}'
+			#action :voicemail , "default $${domain} #{call_dst_real_sip_username}"
+			#action :hangup
+			#action :_continue
 			
 			
 			# http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc#dialplan
@@ -84,18 +112,18 @@ class FreeswitchCallProcessingController < ApplicationController
 			#OPTIMIZE Implement call-forwardings here ...
 			
 			# Ring the SIP user via Kamailio for 30 seconds:
-			@dp_actions << { :app => :log       , :data => "INFO [GS] Calling #{call_dst_real_sip_username} ..." }
-			@dp_actions << { :app => :set       , :data => "call_timeout=5" }
-			@dp_actions << { :app => :export    , :data => "sip_contact_user=ufs" }
-			@dp_actions << { :app => :bridge    , :data => "sofia/internal/#{call_dst_real_sip_username}@127.0.0.1" }
+			action_log( FS_LOG_INFO, "Calling #{call_dst_real_sip_username} ..." )
+			action :set       , "call_timeout=5"
+			action :export    , "sip_contact_user=ufs"
+			action :bridge    , "sofia/internal/#{call_dst_real_sip_username}@127.0.0.1"
 			
 			#OPTIMIZE Implement call-forward on busy/unavailable here ...
 			
 			# Go to voicemail:
-			@dp_actions << { :app => :log       , :data => "INFO [GS] Going to voicemail ..." }
-			@dp_actions << { :app => :answer    , :data => '' }
-			@dp_actions << { :app => :voicemail , :data => "default #{call_dst_sip_domain} #{call_dst_real_sip_username}" }
-			@dp_actions << { :app => :hangup    , :data => '' }
+			action_log( FS_LOG_INFO, "Going to voicemail ..." )
+			action :answer
+			action :voicemail , "default #{call_dst_sip_domain} #{call_dst_real_sip_username}"
+			action :hangup
 			
 			
 		end
