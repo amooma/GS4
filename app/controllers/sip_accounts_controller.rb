@@ -44,6 +44,12 @@ class SipAccountsController < ApplicationController
     @sip_account.sip_server_id = params[:sip_server_id]
     @sip_account.sip_proxy_id = params[:sip_proxy_id]
     @sip_account.voicemail_server_id = params[:voicemail_server_id]
+    if SipServer.count == 1
+      @sip_account.sip_server = SipServer.first
+    end
+    if SipProxy.count == 1
+      @sip_account.sip_proxy = SipProxy.first
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account }

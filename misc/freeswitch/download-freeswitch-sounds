@@ -1,0 +1,66 @@
+#! /usr/bin/env ruby
+
+def hl( str )
+	return "\e[1m#{str}\e[0m"
+end
+
+def sys( cmd )
+	if ! system cmd
+		STDERR.puts "Error #{$?.exitstatus}."
+		exit 1
+	end
+end
+
+fs_sounds_dir = "/opt/freeswitch/sounds"
+
+languages = {
+	:"en-us-callie" => {
+		:version => "1.0.15",
+		:rates => [
+				 8000,
+				16000,
+			#	32000,
+			#	48000,
+		],
+	},
+	:"music" => {
+		:version => "1.0.8",
+		:rates => [
+				 8000,
+				16000,
+			#	32000,
+			#	48000,
+		],
+	},
+}
+
+
+languages.each { |lang_and_voice, lang_info|
+	version = lang_info[:version]
+	lang_info[:rates].each { |rate|
+		puts ""
+		testfile = lang_and_voice.to_sym == :"music" \
+			? "#{rate}/partita-no-3-in-e-major-bwv-1006-1-preludio.wav" \
+			: "digits/#{rate}/star.wav"
+		if File::exists?( "#{fs_sounds_dir}/#{lang_and_voice.to_s.gsub(/-/,'/')}/#{testfile}" )
+			puts "### sounds-#{hl(lang_and_voice)} @ #{hl(rate)} Hz exists."
+			next
+		end
+		
+		puts "### Downloading sounds-#{hl(lang_and_voice)} @ #{hl(rate)} Hz, version #{hl(version)} ..."
+		puts "#"
+		
+		sys "cd #{fs_sounds_dir}/ \
+		&& wget -c 'http://files.freeswitch.org/freeswitch-sounds-#{lang_and_voice}-#{rate}-#{version}.tar.gz' 2>&1"
+		
+		sys "cd #{fs_sounds_dir}/ \
+		&& tar -xzf 'freeswitch-sounds-#{lang_and_voice}-#{rate}-#{version}.tar.gz' 2>&1"
+		
+		f = "#{fs_sounds_dir}/freeswitch-sounds-#{lang_and_voice}-#{rate}-#{version}.tar.gz"
+		File::unlink( f ) if File::exists?( f )
+	}
+}
+puts ""
+puts "Done."
+puts ""
+

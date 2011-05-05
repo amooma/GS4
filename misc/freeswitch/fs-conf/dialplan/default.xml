@@ -11,6 +11,17 @@ will build the domains ACL using this value.
 -->
 <!-- http://wiki.freeswitch.org/wiki/Dialplan_XML -->
 <include>
+	
+	<context name="public">
+		<!-- Send the SIP traffic sent by Kamailio from context "public" to "default": -->
+		<extension name="from-kamailio">
+			<condition field="network_addr" expression="^127\.0\.0\.1$" />
+			<condition field="destination_number" expression="^(.+)$">
+				<action application="transfer" data="$1 XML default" />
+			</condition>
+		</extension>
+	</context>
+	
 	<context name="default">
 		
 		<extension name="unloop">
@@ -40,37 +51,59 @@ will build the domains ACL using this value.
 		<!--
 		Voicemail extensions can be static
 		-->
+		<!--
 		<extension name="kam-vbox">
-			<condition field="destination_number" expression="^-vb-(.+)$">
+			<condition field="destination_number" expression="^-vbox-(.+)$">
 				<action application="answer" />
 				<action application="voicemail" data="default ${domain_name} $1" />
 			</condition>
 		</extension>
 		
 		<extension name="kam-vmenu">
-			<condition field="destination_number" expression="^-vm-(.+)$">
+			<condition field="destination_number" expression="^-vmenu-(.+)$">
 				<action application="voicemail" data="check default ${domain_name} $1" />
+			</condition>
+		</extension>
+		-->
+		
+		<extension name="kam-vmenu-self">
+			<condition field="destination_number" expression="^-vmenu-$">
+				<!-- User has been authenticated in Kamailio for this extension. -->
+				
+				<action application="log" data="INFO [GS] User ${sip_from_user}@${domain_name} is checking the voicemail ..." />
+				<!--
+				<action application="set" data="voicemail_authorized=${sip_authorized}" />
+				-->
+				<action application="set" data="voicemail_authorized=true" />
+				<!--
+				<action application="voicemail" data="check default ${sip_to_host} ${sip_from_user}" />
+				-->
+				<action application="voicemail" data="check default ${domain_name} ${sip_from_user}" />
 			</condition>
 		</extension>
 		
 		<!--
 		Dynamic part
 		-->
-		<extension name="gs_main">
+		<extension name="gs-main">
 			<condition field="${module_exists(mod_spidermonkey)}" expression="true" />
 			<!--
 			<condition field="destination_number" expression="^.*$">
 			-->
-			<condition field="destination_number" expression="^-kb-(.+)$">
-				<action application="javascript" data="./GS.js" />
-				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" /><!-- 503 Service Unavailable -->
+			<condition field="destination_number" expression="^-kambridge-(.+)$">
+				<!--
+				<action application="set" data="proxy_media=true" />
+				-->
+				<action application="javascript" data="GS.js" />
+				<!-- Send 503 Service Unavailable -->
+				<action application="hangup" data="NORMAL_TEMPORARY_FAILURE" />
 			</condition>
 		</extension>
 		
 		<!--
 		#OPTIMIZE This should be the fallback if GS.js fails
 		<extension name="kam-kbridge">
-			<condition field="destination_number" expression="^-kb-(.+)$">
+			<condition field="destination_number" expression="^-kambridge-(.+)$">
 				<action application="set" data="proxy_media=true" />
 				<action application="set" data="call_timeout=50" />
 				<action application="set" data="sip_invite_domain=192.168.178.23" />
