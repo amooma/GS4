@@ -8,9 +8,9 @@
     <th>Realm</th>
     <th>SIP server ID</th>
     <th>SIP proxy ID</th>
-    <th>Extensions</th>
     <th>Voicemail server ID</th>
     <th>Caller Name</th>
+    <th>Extensions</th>
     <th>SIP phone</th>
     <th></th>
     <th></th>
@@ -25,6 +25,8 @@
     <td><%= sip_account.realm %></td>
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
+    <td><%= sip_account.voicemail_server_id %></td>
+    <td><%= sip_account.caller_name %></td>
     <td>
     <% if !sip_account.extensions.nil? %>
       <ul>
@@ -34,8 +36,6 @@
       </ul>
     <% end %>
     </td>
-    <td><%= sip_account.voicemail_server_id %></td>
-    <td><%= sip_account.caller_name %></td>
     <td>
       <% if ! sip_account.phone.nil? %>
         <%= sip_account.phone.mac_address %>
