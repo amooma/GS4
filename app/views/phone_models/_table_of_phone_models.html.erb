@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Manufacturer</th>
+    <th>Number of phones</th>
+    <th>Max number of SIP accounts</th>
+    <th>Number of keys</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% phone_models.each do |phone_model| %>
+  <tr class="<%= cycle("even", "odd") %>">
+    <td><%= link_to phone_model.name, phone_model %></td>
+    <td><%= link_to truncate(phone_model.manufacturer.name, :length => 15), phone_model.manufacturer %></td>
+    <td><%= phone_model.phones.count %></td>
+    <td><%= phone_model.max_number_of_sip_accounts %></td>
+    <td><%= phone_model.number_of_keys %></td>
+    <td><%= link_to 'Edit', edit_phone_model_path(phone_model) %></td>
+    <td><%= button_to 'Destroy', phone_model, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

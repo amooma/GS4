@@ -1,0 +1,9 @@
+<h1>Listing phone models</h1>
+
+<%= link_to 'Create new Phone model', new_phone_model_path %>
+<br />
+<br />
+
+<%= render :partial => 'table_of_phone_models', :locals => {:phone_models => @phone_models} %>
+
+

@@ -1,0 +1,25 @@
+<h1>Listing manufacturers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Homepage</th>
+    <th>Phone models</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @manufacturers.each do |manufacturer| %>
+  <tr class="<%= cycle("even", "odd") %>">
+    <td><%= link_to manufacturer.name, manufacturer %></td>
+    <td><%= link_to manufacturer.url, manufacturer.url, :target => '_blank' %></td>
+    <td><%= manufacturer.phone_models.count %></td>
+    <td><%= link_to 'Edit', edit_manufacturer_path(manufacturer) %></td>
+    <td><%= button_to 'Destroy', manufacturer, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Manufacturer', new_manufacturer_path %>
