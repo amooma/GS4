@@ -49,6 +49,8 @@ Gemeinschaft4::Application.routes.draw do
 	resources :manufacturer_aastra, :only => [:index ]
 	resources :manufacturer_tiptel, :only => [:index ]
 
+	match 'settings-:mac_address' => 'manufacturer_snom#show', :format => 'xml', :constraints  => { :mac_address  => /000413.*/ } 
+        
 	resources :provisioning_log_entries, :only => [:index, :show]
 	resources :phone_model_mac_addresses
 	match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot

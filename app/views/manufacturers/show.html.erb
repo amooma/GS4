@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @manufacturer.name %>
+</p>
+
+<%= link_to 'Edit', edit_manufacturer_path(@manufacturer) %>
+
+<h2>Phone models by this manufacturer</h2>
+<p>
+<%= link_to 'Create a new phone model', new_manufacturer_phone_model_path(@manufacturer) %>	
+</p>
+
+<% if @manufacturer.phone_models.count > 0 %>
+<%= render :partial => '/phone_models/table_of_phone_models', :locals => {:phone_models => @manufacturer.phone_models} %>
+<% end %>
