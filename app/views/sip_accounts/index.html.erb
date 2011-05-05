@@ -10,6 +10,7 @@
     <th>SIP proxy ID</th>
     <th>Extensions</th>
     <th>Voicemail server ID</th>
+    <th>Caller Name</th>
     <th>SIP phone</th>
     <th></th>
     <th></th>
@@ -34,6 +35,7 @@
         <% end %>
     </td>
     <td><%= sip_account.voicemail_server_id %></td>
+    <td><%= sip_account.caller_name %></td>
     <td>
       <% if ! sip_account.phone.nil? %>
         <%= sip_account.phone.mac_address %>
