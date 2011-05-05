@@ -30,7 +30,10 @@
   <% end %>
   </ul>
 </p>
-
+<p>
+  <b>Caller name:</b>
+  <%= @sip_account.caller_name %>
+</p>
 <p>
   <b>SIP server:</b>
   <%= @sip_account.sip_server_id ? "ID #{@sip_account.sip_server_id}" : "-" %>
