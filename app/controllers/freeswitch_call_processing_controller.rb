@@ -95,7 +95,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			call_dst_real_sip_username = call_dst_sip_userinfo  # un-alias
 			# (Alias lookup has already been done in kamailio.cfg.)
 			
-			#FIXME Just an example ...
+			# Here's an example: {
 			#action :set       , 'effective_caller_id_number=1234567'
 			#action :bridge    , "sofia/internal/#{call_dst_real_sip_username}"
 			#action :answer
@@ -105,6 +105,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			#action :voicemail , "default $${domain} #{call_dst_real_sip_username}"
 			#action :hangup
 			#action :_continue
+			# end of example }
 			
 			
 			# http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc#dialplan

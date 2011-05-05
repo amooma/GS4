@@ -42,23 +42,23 @@ xml.settings {
 			sact = sip_accounts[idx]
 			sac = {
 				:id                       => (is_defined ? sact.id                       : nil ),
-				:name                     => (is_defined ? sact.name                     : ''  ),
+				:name                     => (is_defined ? sact.auth_name                : ''  ),
 				:phone_id                 => (is_defined ? sact.phone_id                 : nil ),
-				:auth_user                => (is_defined ? sact.auth_user                : ''  ),
-				:user                     => (is_defined ? sact.user                     : ''  ),
+				:auth_user                => (is_defined ? sact.auth_name                : ''  ),
+				:user                     => (is_defined ? sact.auth_name                : ''  ),
 				:password                 => (is_defined ? sact.password                 : ''  ),
-				:registrar                => (is_defined ? sact.registrar                : nil ),
-				:registrar_port           => (is_defined ? sact.registrar_port           : nil ),
-				:outbound_proxy           => (is_defined ? sact.outbound_proxy           : nil ),
-				:outbound_proxy_port      => (is_defined ? sact.outbound_proxy_port      : nil ),
-				:sip_proxy                => (is_defined ? sact.sip_proxy                : nil ),
-				:sip_proxy_port           => (is_defined ? sact.sip_proxy_port           : nil ),
+				:registrar                => (is_defined ? sact.sip_proxy.host           : nil ),
+				:registrar_port           => (is_defined ? sact.sip_proxy.port           : nil ),
+				:outbound_proxy           => (is_defined ? sact.sip_proxy.host           : nil ),
+				:outbound_proxy_port      => (is_defined ? sact.sip_proxy.port           : nil ),
+				:sip_proxy                => (is_defined ? sact.sip_proxy.host           : nil ),
+				:sip_proxy_port           => (is_defined ? sact.sip_proxy.port           : nil ),
 				:realm                    => (is_defined ? sact.realm                    : nil ),
-				:screen_name              => (is_defined ? sact.screen_name              : nil ),
-				:display_name             => (is_defined ? sact.display_name             : nil ),
-				:registration_expiry_time => (is_defined ? sact.registration_expiry_time : nil ),
-				:dtmf_mode                => (is_defined ? sact.dtmf_mode                : nil ),
-				:remote_password          => (is_defined ? sact.remote_password          : nil ),
+				:screen_name              => (is_defined ? sact.caller_name              : nil ),
+				:display_name             => (is_defined ? sact.caller_name              : nil ),
+				:registration_expiry_time => 3600,
+				:dtmf_mode                => 'rfc2833',
+				:remote_password          => (is_defined ? sact.password          : nil ),
 				:position                 => (is_defined ? sact.position                 : nil ),
 			}
 			
@@ -94,28 +94,6 @@ xml.settings {
 			xml.user_dynamic_payload(   'on'                  , saopts_rw ) # "Turns on dynamic payload type for G726."
 			xml.user_g726_packing_order('on'                  , saopts_r  ) # on = RFC 3551, off = AAL2
 			xml.codec_size(             '20'                  , saopts_rw )
-			
-			xml.comment! "codecs for SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
-			# See http://wiki.snom.com/Settings/codec_name
-			# (Note: Snom's documentation is wrong.)
-			sac_codec_names = ( is_defined ? sact.codecs.all.map{|r| r.name } : [] )
-			snom_codec_i = 1
-			max_snom_codec_i = 7
-			sac_codec_names.each { |codec_name|
-				snom_codec_name = codec_mapping_snom[codec_name]
-				if (! snom_codec_name.blank?)
-					xml.tag! "codec#{snom_codec_i}_name", snom_codec_name.to_s, saopts_r
-					snom_codec_i += 1
-					break if snom_codec_i > max_snom_codec_i
-				end
-			}
-			if snom_codec_i <= max_snom_codec_i
-				while snom_codec_i <= max_snom_codec_i
-					snom_codec_name = ''  # Snom didn't document what to put here.
-					xml.tag! "codec#{snom_codec_i}_name", snom_codec_name.to_s, saopts_r
-					snom_codec_i += 1
-				end
-			end
 		}
 	end
 	
@@ -124,48 +102,17 @@ xml.settings {
 	xml.tag! 'functionKeys' do
 		
 		softkeys = []
-		snom_sip_acct_idx = 0
-		@phone.sip_accounts.each { |sip_account|
-			#snom_sip_acct_idx = sip_account.position
-			snom_sip_acct_idx += 1
-			# Let's hope that we get the sip_accounts in the same
-			# order as above.
-			# Here we know the sip_account .
-			sip_account.phone_keys.each { |phone_key|
-				# Here we know phone_key.value .
-				# Here we know phone_key.phone_model_key.position .
-				# Here we know phone_key.phone_key_function_definition.name .
-				type = case (phone_key.phone_key_function_definition ? phone_key.phone_key_function_definition.name.downcase : nil)
-					when 'blf'              ; 'blf' # or 'dest'
-					when 'speed dial'       ; 'speed'
-					when 'actionurl'        ; 'url'
-					when 'line'             ; 'line'
-					when 'phone-spec. fn.'  ; 'none'  # or nil to make it undefined
-					when 'label'            ; 'none'  # or nil to make it undefined
-					when 'xml'              ; 'xml'
-					when 'intercom'         ; 'icom'
-					when 'parking'          ; 'orbit'
-					when 'recording'        ; 'recorder'
-					when 'dtmf'             ; 'dtmf'
-					when 'ptt'              ; 'p2t'
-					when 'button'           ; 'button'
-					when 'presence'         ; 'presence'
-					when 'transfer'         ; 'transfer'
-					when 'redirect'         ; 'redirect'
-					when 'auto-answer'      ; 'autoanswer'
-					when 'def. function?'   ; 'none'  # or nil to make it undefined
-					else                    ; 'none'  # or nil to make it undefined
-						# Someone renamed a PhoneKeyFunctionDefinition.
-				end
-				softkeys << {
-					:pos     => (phone_key.phone_model_key ? phone_key.phone_model_key.position : nil),
-					:type    => type,
-					:val     => phone_key.value,
-				#	:label   => phone_key.label,
-					:acctidx => snom_sip_acct_idx,
-				}
+		
+		@phone.phone_model.phone_model_keys.each { |phone_key|
+			softkeys << {
+				:pos     => phone_key.position,
+				:type    => 'none',
+				:val     => '',
+			#	:label   => phone_key.label,
+				:acctidx => 1,
 			}
 		}
+		
 		
 		snom_softkeys = {}
 		softkeys.each { |softkey|
