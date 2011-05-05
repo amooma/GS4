@@ -26,13 +26,13 @@
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
     <td>
-	    <% if !sip_account.extensions.nil? %>
-	    <ul>
-    	<% sip_account.extensions.each do |extension| %>
-          <li><%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %></li>
-        <% end %>
-        </ul>
-        <% end %>
+    <% if !sip_account.extensions.nil? %>
+      <ul>
+      <% sip_account.extensions.each do |extension| %>
+        <li><%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %></li>
+      <% end %>
+      </ul>
+    <% end %>
     </td>
     <td><%= sip_account.voicemail_server_id %></td>
     <td><%= sip_account.caller_name %></td>
