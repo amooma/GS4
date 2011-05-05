@@ -19,9 +19,9 @@
     <td>
       <ul>
         <li><%= link_to 'create new sip account', new_phone_sip_account_path(phone) %></li>
-<% phone.sip_accounts.each do |sip_account| %>
+<% phone.sip_accounts.each { |sip_account| %>
         <li><%= link_to sip_account.auth_name, phone_sip_account_path(phone, sip_account) %></li>
-<% end %>
+<% } %>
       </ul>
     </td>
     <td>
