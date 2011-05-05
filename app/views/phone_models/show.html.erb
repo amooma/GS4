@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<%= render :partial => 'show_single_phone', :locals => {:phone_model => @phone_model} %>
+
+<%= link_to 'Edit', edit_phone_model_path(@phone_model) %>
+
+<h2>Phones</h2>
+<p>
+<%= link_to 'Create a new phone', new_phone_model_phone_path(@phone_model) %>	
+</p>
+
+<% if @phone_model.phones.count > 0 %>
+<%= render :partial => 'phones/table_of_phones', :locals => {:phones => @phone_model.phones} %>
+<% end %>
