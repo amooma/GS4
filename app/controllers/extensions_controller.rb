@@ -65,19 +65,30 @@ class ExtensionsController < ApplicationController
   def create
     if @sip_account.nil?
       @extension = Extension.new(params[:extension])
+      
+      respond_to do |format|
+        if @extension.save
+          format.html { redirect_to(@extension, :notice => 'Extension was successfully created.') }
+          format.xml  { render :xml => @extension, :status => :created, :location => @extension }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
+        end
+      end
     else
       @extension = @sip_account.extensions.build(params[:extension])
-    end
-        
-    respond_to do |format|
-      if @extension.save
-        format.html { redirect_to(@extension, :notice => 'Extension was successfully created.') }
-        format.xml  { render :xml => @extension, :status => :created, :location => @extension }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
+
+      respond_to do |format|
+        if @sip_account.save
+          format.html { redirect_to(@sip_account, :notice => 'Extension was successfully created.') }
+          format.xml  { render :xml => @sip_account, :status => :created, :location => @extension }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
+        end
       end
     end
+        
   end
   
   # PUT /extensions/1
@@ -110,7 +121,7 @@ class ExtensionsController < ApplicationController
   
   private
   def find_sip_account
-    if defined?(params).nil? and !params[:sip_account_id].nil?
+    if !params[:sip_account_id].nil?
       @sip_account = SipAccount.find(params[:sip_account_id])
     end
   end

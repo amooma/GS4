@@ -1,4 +1,4 @@
-<%= simple_form_for([@sip_account, @extension]) { |f| %>
+<%= simple_form_for [@sip_account, @extension]  do |f| %>
   <% if @extension.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@extension.errors.count, "error") %> prohibited this extension from being saved:</h2>
@@ -28,4 +28,4 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% } %>
+<% end %>
