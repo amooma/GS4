@@ -116,7 +116,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			action_log( FS_LOG_INFO, "Calling #{call_dst_real_sip_username} ..." )
 			action :set       , "call_timeout=5"
 			action :export    , "sip_contact_user=ufs"
-			action :bridge    , "sofia/internal/#{call_dst_real_sip_username}@127.0.0.1"
+			action :bridge    , "sofia/internal/#{call_dst_real_sip_username}@#{call_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 			
 			#OPTIMIZE Implement call-forward on busy/unavailable here ...
 			
