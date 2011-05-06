@@ -1,4 +1,5 @@
 class ExtensionsController < ApplicationController
+  
   before_filter :authenticate_user!
   before_filter :find_sip_account
   
@@ -77,7 +78,7 @@ class ExtensionsController < ApplicationController
       end
     else
       @extension = @sip_account.extensions.build(params[:extension])
-
+      
       respond_to do |format|
         if @sip_account.save
           format.html { redirect_to(@sip_account, :notice => 'Extension was successfully created.') }
@@ -88,7 +89,6 @@ class ExtensionsController < ApplicationController
         end
       end
     end
-        
   end
   
   # PUT /extensions/1
@@ -120,8 +120,9 @@ class ExtensionsController < ApplicationController
   end
   
   private
+  
   def find_sip_account
-    if !params[:sip_account_id].nil?
+    if ! params[:sip_account_id].nil?
       @sip_account = SipAccount.find(params[:sip_account_id])
     end
   end
