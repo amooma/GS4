@@ -1,3 +1,5 @@
+#OPTIMIZE Do we still need this model?
+
 # Model from "SipProxy" SIP proxy management API:
 #
 class SipproxyDbalias < ActiveResource::Base

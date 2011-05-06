@@ -17,29 +17,35 @@ class Phone < ActiveRecord::Base
 	
 	after_validation :save_old_last_ip_address
 	
-	has_many :sip_accounts, :order => 'position', :dependent => :destroy
 	
-	has_many :phone_keys, :through => :sip_accounts
+	has_many    :sip_accounts, :order => 'position', :dependent => :destroy
 	
-	has_many :provisioning_log_entries, :order => 'created_at'
+	has_many    :phone_keys, :through => :sip_accounts
 	
-	belongs_to :phone_model
+	has_many    :provisioning_log_entries, :order => 'created_at'
 	
-	has_many :reboot_requests, :order => 'start', :dependent => :destroy
+	belongs_to  :phone_model
+	
+	has_many    :reboot_requests, :order => 'start', :dependent => :destroy
 	
 	
 	# log a provisioning
-	def log_provisioning( memo = nil, succeeded = true )
+	#
+	def log_provisioning( memo=nil, succeeded=true )
 		self.provisioning_log_entries.create( :memo => memo, :succeeded => true )
 	end
 	
 	# Is the system able to reboot this phone?
+	#
 	def rebootable?
-		return ((! self.phone_model.reboot_request_path.blank?) \
-			&& (! self.ip_address.blank?))
+		return (
+			(! self.ip_address.blank?) &&
+			(! self.phone_model.reboot_request_path.blank?)
+		)
 	end
 	
 	# Reboots this phone
+	#
 	def reboot
 	(
 		begin
@@ -53,8 +59,9 @@ class Phone < ActiveRecord::Base
 				http.open_timeout = self.phone_model.http_request_timeout
 				http.read_timeout = self.phone_model.http_request_timeout
 				
-				if (self.http_user.blank?) && (self.http_password.blank?)
-					self.http_user = self.phone_model.default_http_user
+				if (self.http_user     .blank?) \
+				&& (self.http_password .blank?)
+					self.http_user     = self.phone_model.default_http_user
 					self.http_password = self.phone_model.default_http_password
 				end
 				
@@ -99,7 +106,7 @@ class Phone < ActiveRecord::Base
 				return success
 			)end
 			#OPTIMIZE Return something here.
-		)
+		#)
 		#rescue => error
 		#(
 		#	reboot_request.update_attributes({
@@ -107,8 +114,7 @@ class Phone < ActiveRecord::Base
 		#		:successful => false,
 		#	})
 		#	return 'error'  #OPTIMIZE return false?
-		#)end
-		end
+		)end
 	)end
 	
 	private
