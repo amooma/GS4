@@ -1,9 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  sip_account_id: 1
   extension: 1
-
+  destination: 1
+  active: false
 two:
-  sip_account_id: 1
-  extension: 1
+  extension: 2
+  destination: 2
+  active: false

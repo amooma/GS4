@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class PhoneModelMacAddressTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  should "be valid" do
+    assert Factory.build(:phone_model_mac_address).valid?
   end
 end
