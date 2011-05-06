@@ -12,6 +12,7 @@
     <th>Caller Name</th>
     <th>Extensions</th>
     <th>SIP phone</th>
+    <th>Registered</th>
     <th></th>
     <th></th>
     <th></th>
@@ -40,6 +41,9 @@
       <% if ! sip_account.phone.nil? %>
         <%= sip_account.phone.mac_address %>
       <% end %>
+    </td>
+    <td>
+    <%= Location.where(:username =>"#{sip_account.auth_name}").empty? ? "Yes" : "No"%>
     </td>
     <td><%= link_to 'Show', sip_account %></td>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>

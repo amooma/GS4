@@ -28,7 +28,7 @@
   <% @sip_account.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
   <% end %>
-    <li><%= link_to 'create extension', new_sip_account_extension_path(@sip_account) %>
+    <li><%= link_to 'create extension', new_sip_account_extension_path(@sip_account, {:destination => @sip_account.auth_name}) %>
   </ul>
 </p>
 <p>
@@ -65,6 +65,11 @@
   <% if @sip_account.phone %>
     MAC: <%= @sip_account.phone.mac_address %> 
   <% end %>
+</p>
+
+<p>
+  <b>Registered:</b>
+  <%= Location.where(:username =>"#{@sip_account.auth_name}").empty? ? "Yes" : "No"%>
 </p>
 
 <p>
