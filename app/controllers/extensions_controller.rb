@@ -43,7 +43,10 @@ class ExtensionsController < ApplicationController
     if @sip_account.nil?
       @extension = Extension.new
     else
-      @extension = @sip_account.extensions.build(:active => true, :destination => params[:destination])
+      @extension = @sip_account.extensions.build({
+      	:active      => true,
+      	:destination => params[:destination],
+      })
     end
     
     respond_to do |format|
@@ -66,9 +69,10 @@ class ExtensionsController < ApplicationController
   def create
     if @sip_account.nil?
       @extension = Extension.new(params[:extension])
+      
       respond_to do |format|
         if @extension.save
-          format.html { redirect_to(@extension, :notice => 'Extension was successfully created.') }
+          format.html { redirect_to( @extension, :notice => 'Extension was successfully created.' )}
           format.xml  { render :xml => @extension, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -80,7 +84,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @sip_account.save
-          format.html { redirect_to(@sip_account, :notice => 'Extension was successfully created.') }
+          format.html { redirect_to( @sip_account, :notice => 'Extension was successfully created.' )}
           format.xml  { render :xml => @sip_account, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -96,8 +100,8 @@ class ExtensionsController < ApplicationController
     @extension = Extension.find(params[:id])
     
     respond_to do |format|
-      if @extension.update_attributes(params[:extension])
-        format.html { redirect_to(@extension, :notice => 'Extension was successfully updated.') }
+      if @extension.update_attributes( params[:extension] )
+        format.html { redirect_to( @extension, :notice => 'Extension was successfully updated.' )}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -109,7 +113,7 @@ class ExtensionsController < ApplicationController
   # DELETE /extensions/1
   # DELETE /extensions/1.xml
   def destroy
-    @extension = Extension.find(params[:id])
+    @extension = Extension.find( params[:id] )
     @extension.destroy
     
     respond_to do |format|
@@ -122,7 +126,7 @@ class ExtensionsController < ApplicationController
   
   def find_sip_account
     if ! params[:sip_account_id].nil?
-      @sip_account = SipAccount.find(params[:sip_account_id])
+      @sip_account = SipAccount.find( params[:sip_account_id] )
     end
   end
   
