@@ -69,7 +69,7 @@
 
 <p>
   <b>Registered:</b>
-  <%= Location.where(:username =>"#{@sip_account.auth_name}").empty? ? "Yes" : "No"%>
+  <%= Location.where(:username =>"#{@sip_account.auth_name}").empty? ? "No" : "Yes"%>
 </p>
 
 <p>

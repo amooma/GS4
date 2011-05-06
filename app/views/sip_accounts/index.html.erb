@@ -43,7 +43,7 @@
       <% end %>
     </td>
     <td>
-    <%= Location.where(:username =>"#{sip_account.auth_name}").empty? ? "Yes" : "No"%>
+    <%= Location.where(:username =>"#{sip_account.auth_name}").empty? ? "No" : "Yes"%>
     </td>
     <td><%= link_to 'Show', sip_account %></td>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
