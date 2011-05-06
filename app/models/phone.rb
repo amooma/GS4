@@ -53,8 +53,7 @@ class Phone < ActiveRecord::Base
 				http.open_timeout = self.phone_model.http_request_timeout
 				http.read_timeout = self.phone_model.http_request_timeout
 				
-				if (self.http_user     .length() == 0) \
-				&& (self.http_password .length() == 0)
+				if (self.http_user.blank?) && (self.http_password.blank?)
 					self.http_user = self.phone_model.default_http_user
 					self.http_password = self.phone_model.default_http_password
 				end
@@ -101,14 +100,15 @@ class Phone < ActiveRecord::Base
 			)end
 			#OPTIMIZE Return something here.
 		)
-		rescue => error
-		(
-			reboot_request.update_attributes({
-				:end        => Time.now,
-				:successful => false,
-			})
-			return 'error'  #OPTIMIZE return false?
-		)end
+		#rescue => error
+		#(
+		#	reboot_request.update_attributes({
+		#		:end        => Time.now,
+		#		:successful => false,
+		#	})
+		#	return 'error'  #OPTIMIZE return false?
+		#)end
+		end
 	)end
 	
 	private
