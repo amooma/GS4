@@ -42,7 +42,7 @@ class ExtensionsController < ApplicationController
     if @sip_account.nil?
       @extension = Extension.new
     else
-      @extension = @sip_account.extensions.build(:active => true)
+      @extension = @sip_account.extensions.build(:active => true, :destination => params[:destination])
     end
     
     respond_to do |format|
@@ -65,7 +65,6 @@ class ExtensionsController < ApplicationController
   def create
     if @sip_account.nil?
       @extension = Extension.new(params[:extension])
-      
       respond_to do |format|
         if @extension.save
           format.html { redirect_to(@extension, :notice => 'Extension was successfully created.') }
