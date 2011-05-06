@@ -4,6 +4,7 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Gemeinschaft4::Application.initialize!
 
+
 AUTH_DB_ENGINE = 'odbc'
 
 if (Rails.env.production?)
