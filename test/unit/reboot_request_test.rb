@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class RebootRequestTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  should "be valid" do
+    assert Factory.build(:reboot_request).valid?
   end
 end

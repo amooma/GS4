@@ -14,7 +14,7 @@ one:
   to_tag: MyString
   from_tag: MyString
   cseq: 1
-  recors_route: MyString
+  record_route: MyString
   contact: MyString
   version: 1
   extra_headers: MyString
@@ -33,7 +33,7 @@ two:
   to_tag: MyString
   from_tag: MyString
   cseq: 1
-  recors_route: MyString
+  record_route: MyString
   contact: MyString
   version: 1
   extra_headers: MyString
