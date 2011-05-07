@@ -1,5 +1,4 @@
 #OPTIMIZE doc/docbook von Cantina einbauen
 #OPTIMIZE lib/tasks/*.rake von Cantina einbauen
 #OPTIMIZE SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
-#OPTIMIZE freeswitch_call_processing web service anpassen
 
