@@ -171,7 +171,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
-				cid_display = "#{src_sip_account ? src_sip_account.caller_name : '-----'}"
+				cid_display = "#{src_sip_account ? src_sip_account.caller_name : ''}"
 				cid_user    = "#{src_sip_user}"
 				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
 			else
@@ -301,8 +301,10 @@ class FreeswitchCallProcessingController < ApplicationController
 	end
 	
 	# Like sip_displayname_encode() but enclosed in double quotes.
+	# Returns an empty string (no quotes) for .blank?() strings
 	#
 	def sip_displayname_quote( str )
+		return '' if str.blank?
 		return '"' << sip_displayname_encode( str ).to_s << '"'
 	end
 	
