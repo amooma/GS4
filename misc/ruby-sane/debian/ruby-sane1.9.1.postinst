@@ -59,7 +59,7 @@ case "$1" in
     rm -rf /var/lib/gems
     
     gem install bundler --version "1.0.12"
-    #OPTIMIZE bundler v. 1.0.13 is broken.
+    #OPTIMIZE ? bundler v. 1.0.13 is broken. We'll use 1.0.12 for now.
     
     ## add RubyGems executable directory (bin wrappers) to PATH:
     #(
