@@ -224,6 +224,7 @@ class FreeswitchCallProcessingController < ApplicationController
 							action_log( FS_LOG_INFO, "Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ..." )
 							action :answer
 							action :sleep, 250
+							action :set, "voicemail_alternate_greet_id=#{ sip_user_encode( dst_sip_dnis_user )}"
 							action :voicemail, "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
 						#end
 					end
