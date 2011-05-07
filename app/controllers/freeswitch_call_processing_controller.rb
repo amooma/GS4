@@ -107,12 +107,12 @@ class FreeswitchCallProcessingController < ApplicationController
 			<< " ..."
 		))
 		
-		if false
+		if false  # you may want to enable this during debugging
 			_args.each { |k,v|
 				case v
 					when String
 						logger.debug( "   #{k.ljust(36)} = #{v.inspect}" )
-					#when Hash
+					#when Hash  # not used (yet?)
 					#	v.each { |k1,v1|
 					#		logger.debug( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
 					#	}
@@ -166,9 +166,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			# Note: P-Asserted-Identity is set in Kamailio.
 			#
 			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
-			
-			logger.info(_bold( "[FS] CALLER NAME: " ))
-			
+						
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
 				cid_display = "#{src_sip_account ? src_sip_account.caller_name : ''}"
