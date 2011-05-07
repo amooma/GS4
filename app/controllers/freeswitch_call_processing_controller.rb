@@ -56,11 +56,12 @@ class FreeswitchCallProcessingController < ApplicationController
 	(
 		sip_call_id           = _arg( 'var_sip_call_id' )
 		
-		src_sip_user          = _arg( 'Caller-Username' )
+		src_sip_user          = _arg( 'var_sip_from_user' )  # / var_sip_from_user_stripped ?
 		
 		src_cid_sip_domain    = _arg( 'var_sip_from_host' )
-		src_cid_sip_user      = _arg( 'Caller-Caller-ID-Number' )  # / var_sip_from_user / var_sip_from_user_stripped
-		src_cid_sip_display   = _arg( 'Caller-Caller-ID-Name' )  # / var_sip_from_display
+		#src_sip_user          = _arg( 'Caller-Username' )
+		src_cid_sip_user      = _arg( 'Caller-Caller-ID-Number' )
+		src_cid_sip_display   = _arg( 'var_sip_from_display' )  # Caller-Caller-ID-Name is not always present
 		
 		dst_sip_user          = _arg( 'Caller-Destination-Number' )  # / var_sip_req_user
 		#dst_sip_domain        = _arg( 'var_sip_req_host' )
@@ -169,7 +170,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
-				cid_display = "#{src_sip_account ? src_sip_account.caller_name : ''}"
+				cid_display = src_sip_account ? src_sip_account.caller_name : "[?] #{src_cid_sip_display}"
 				cid_user    = "#{src_sip_user}"
 				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
 			else
