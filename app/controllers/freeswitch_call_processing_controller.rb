@@ -1,3 +1,5 @@
+# ruby encoding: utf-8
+
 class FreeswitchCallProcessingController < ApplicationController
 (
 	# Allow access from 127.0.0.1 and [::1] only.
@@ -52,26 +54,72 @@ class FreeswitchCallProcessingController < ApplicationController
 	# POST /freeswitch-call-processing/actions.xml
 	def actions()
 	(
-		call_src_sip_username     = _arg( 'Caller-Username' )
-		call_src_cid_userinfo     = _arg( 'Caller-Caller-ID-Number' )
-		call_src_cid_displayname  = _arg( 'Caller-Caller-ID-Name' )
-		call_dst_sip_userinfo     = _arg( 'Caller-Destination-Number' )
-		call_dst_sip_domain       = _arg( 'var_sip_to_host' )
+		sip_call_id           = _arg( 'var_sip_call_id' )
+		
+		src_sip_user          = _arg( 'Caller-Username' )
+		
+		src_cid_sip_domain    = _arg( 'var_sip_from_host' )
+		src_cid_sip_user      = _arg( 'Caller-Caller-ID-Number' )  # / var_sip_from_user / var_sip_from_user_stripped
+		src_cid_sip_display   = _arg( 'Caller-Caller-ID-Name' )  # / var_sip_from_display
+		
+		dst_sip_user          = _arg( 'Caller-Destination-Number' )  # / var_sip_req_user
+		#dst_sip_domain        = _arg( 'var_sip_req_host' )
+		dst_sip_domain        = _arg( 'var_sip_to_host' )
+		
+		dst_sip_dnis_user     = _arg( 'var_sip_to_user' )
+		# This is the number as dialed by the caller (before unaliasing in Kamailio).
 		
 		# Strip "-kambridge-" prefix added in kamailio.cfg:
-		call_dst_sip_userinfo = call_dst_sip_userinfo.gsub( /^-kambridge-/, '' )
+		dst_sip_user = dst_sip_user.gsub( /^-kambridge-/, '' )
 		
-		logger.info(_bold( "[FS] Call-proc. request, acct. #{call_src_sip_username.inspect} as #{call_src_cid_userinfo.inspect} (#{call_src_cid_displayname.inspect}) -> #{call_dst_sip_userinfo.inspect} ..." ))
-		_args.each { |k,v|
-			case v
-				when String
-					#logger.debug( "   #{k.ljust(36)} = #{v.inspect}" )
-				#when Hash
-				#	v.each { |k1,v1|
-				#		logger.debug( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
-				#	}
-			end
-		}
+		dst_sip_user_real = dst_sip_user  # un-alias
+		# (Alias lookup has already been done in kamailio.cfg.)
+		
+		src_sip_account = (
+			SipAccount.where({
+				:auth_name => src_sip_user
+			})
+			.joins( :sip_server )
+			.where( :sip_servers => {
+				:host => src_cid_sip_domain
+			})
+			.first )
+		
+		dst_sip_account = (
+			SipAccount.where({
+				:auth_name => dst_sip_user_real
+			})
+			.joins( :sip_server )
+			.where( :sip_servers => {
+				:host => dst_sip_domain
+			})
+			.first )
+		
+		logger.info(_bold( "[FS] SIP Call-ID: #{sip_call_id}" ))
+		logger.info(_bold( "[FS] Call" \
+			<< " from #{ sip_displayname_quote( src_cid_sip_display )}" \
+			<< " <#{ sip_user_encode( src_cid_sip_user )}@#{ src_cid_sip_domain }>" \
+			<< " (SIP acct. " << (src_sip_account ? "##{ src_sip_account.id }" : "unknown").to_s << ")" \
+			<< " to" \
+			<< " alias <#{ sip_user_encode( dst_sip_dnis_user )}> ->" \
+			<< " <#{ sip_user_encode( dst_sip_user )}@#{ dst_sip_domain }>" \
+			<< " (SIP acct. " << (dst_sip_account ? "##{ dst_sip_account.id }" : "unknown").to_s << ")" \
+			<< " ..."
+		))
+		
+		if false
+			_args.each { |k,v|
+				case v
+					when String
+						logger.debug( "   #{k.ljust(36)} = #{v.inspect}" )
+					#when Hash
+					#	v.each { |k1,v1|
+					#		logger.debug( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
+					#	}
+				end
+			}
+		end
+		
 		
 		# For FreeSwitch dialplan applications see
 		# http://wiki.freeswitch.org/wiki/Mod_dptools
@@ -83,7 +131,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		# And you have to explicitly send "_continue" as the last
 		# application.
 				
-		if call_dst_sip_userinfo.blank?
+		if dst_sip_user.blank?
 			case _arg( 'Answer-State' )
 				when 'ringing'
 					action :respond   , '404 Not Found'  # or '400 Bad Request'? or '484 Address Incomplete'?
@@ -91,18 +139,14 @@ class FreeswitchCallProcessingController < ApplicationController
 					action :hangup    , ''
 			end
 		else
-			
-			call_dst_real_sip_username = call_dst_sip_userinfo  # un-alias
-			# (Alias lookup has already been done in kamailio.cfg.)
-			
 			# Here's an example: {
 			#action :set       , 'effective_caller_id_number=1234567'
-			#action :bridge    , "sofia/internal/#{call_dst_real_sip_username}"
+			#action :bridge    , "sofia/internal/#{dst_sip_user_real}"
 			#action :answer
 			#action :sleep     , 1000
 			#action :playback  , 'tone_stream://%(500, 0, 640)'
 			#action :set       , 'voicemail_authorized=${sip_authorized}'
-			#action :voicemail , "default $${domain} #{call_dst_real_sip_username}"
+			#action :voicemail , "default $${domain} #{dst_sip_user_real}"
 			#action :hangup
 			#action :_continue
 			# end of example }
@@ -110,20 +154,51 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			# http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc#dialplan
 			
+			
 			#OPTIMIZE Implement call-forwardings here ...
 			
+			
 			# Ring the SIP user via Kamailio for 30 seconds:
-			action_log( FS_LOG_INFO, "Calling #{call_dst_real_sip_username} ..." )
-			action :set       , "call_timeout=30"  #OPTIMIZE
+			action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
+			
+			
+			# Caller-ID:
+			# Note: P-Asserted-Identity is set in Kamailio.
+			#
+			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
+			
+			logger.info(_bold( "[FS] CALLER NAME: " ))
+			
+			clir = false  #OPTIMIZE Read from SIP account.
+			if ! clir
+				cid_display = "#{src_sip_account ? src_sip_account.caller_name : '-----'}"
+				cid_user    = "#{src_sip_user}"
+				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
+			else
+				cid_display = "Anonymous"  # RFC 2543, RFC 3325
+				cid_user    = 'anonymous'  # RFC 2543, RFC 3325
+				cid_host    = "anonymous.invalid"  # or "127.0.0.1"
+			end
+			
+			# RFC 2543:
+			action :set, "effective_caller_id_number=#{ sip_user_encode( cid_user )}"
+			action :set, "effective_caller_id_name=#{ sip_displayname_encode( cid_display )}"
+			# RFC 3325:
+			action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} <sip:#{ sip_user_encode( cid_user )}@#{ cid_host }>"
+			# RFC 3325, RFC 3323:
+			action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
+			
+			
+			action :set       , "call_timeout=30"
 			action :export    , "sip_contact_user=ufs"
-			action :bridge    , "sofia/internal/#{call_dst_real_sip_username}@#{call_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+			action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 			
 			#OPTIMIZE Implement call-forward on busy/unavailable here ...
 			
 			# Go to voicemail:
 			action_log( FS_LOG_INFO, "Going to voicemail ..." )
 			action :answer
-			action :voicemail , "default #{call_dst_sip_domain} #{call_dst_real_sip_username}"
+			action :voicemail , "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
 			action :hangup
 			
 			
@@ -162,6 +237,86 @@ class FreeswitchCallProcessingController < ApplicationController
 	
 	def _bold( str )
 		return "\e[0;32;1m#{str} \e[0m "
+	end
+	
+	# Encode special characters in a SIP username.
+	# See the "user" rule in http://tools.ietf.org/html/rfc3261 .
+	#
+	def sip_user_encode( str )  #OPTIMIZE
+		# Sanitize control characters. They could be encoded but cause
+		# problems for many implementations:
+		str = str.gsub( /[\x00-\x1F]+/, ' ' )
+		
+		# FreeSwitch doesn't handle " " even in its encoded form:
+		str = str.gsub( / +/, '' )
+		
+		#unsafe = /[^a-zA-Z0-9\-_.!~*'()&=+$,;?\/]/
+		unsafe = /[^a-zA-Z0-9\-_.!~*'()&=+$,;?]/  # without "/" (which are special for FreeSwitch)
+		return percent_encode_re( str, unsafe )
+	end
+	
+	#OPTIMIZE We may want to add a sip_tel_subscriber_encode() method
+	# which refers to the "telephone-subscriber" rule from
+	# http://tools.ietf.org/html/rfc3261 .
+	
+	# Encode special characters in a SIP display-name.
+	# See the "display-name"/"qdtext"/"quoted-pair" rules in
+	# http://tools.ietf.org/html/rfc3261 .
+	#
+	def sip_displayname_encode( str )
+		#orig_str = str
+		str = str.to_s.force_encoding( Encoding::ASCII_8BIT )
+		
+		# Sanitize control characters. They could be encoded but cause
+		# problems for many implementations:
+		str = str.gsub( /[\x00-\x1F]+/, ' ' )
+		
+		# FreeSwitch doesn't handle "<", ">" even in its encoded forms:
+		str = str.gsub( /[<>]+/, ' ' )
+		
+		# without "/", ":", "<", ">" (which are special for FreeSwitch)
+		safe = /(?:
+			  [ !\#\$\%&'()*+,\-.0-9;=?@A-Z\[\]^_`a-z{|}~]
+			| [\xC0-\xDF][\x80-\xBF]{1}
+			| [\xE0-\xEF][\x80-\xBF]{2}
+			| [\xF0-\xF7][\x80-\xBF]{3}
+			| [\xF8-\xFB][\x80-\xBF]{4}
+			| [\xFC-\xFD][\x80-\xBF]{5}
+		)+/xn
+		ret = []
+		str = str.to_s << 'a'  # add a safe char at the end so we get a match
+		pos = 0
+		while ((safe_part = safe.match( str, pos )) != nil)
+			# add the unsafe part before the current match:
+			#ret << "-" + "{" + str[ pos, safe_part.begin(0)-pos ] + "}"
+			ret << percent_encode_re( str[ pos, safe_part.begin(0)-pos ], /./ )
+			
+			# add the safe part:
+			ret << safe_part.to_s
+			
+			pos = safe_part.end(0)
+		end
+		ret = ret.join('')
+		ret = ret[ 0, ret.bytesize-1 ].force_encoding( Encoding::UTF_8 )
+		#logger.info( "##############     #{orig_str}  =>  #{ret}    " )
+		return ret
+	end
+	
+	# Like sip_displayname_encode() but enclosed in double quotes.
+	#
+	def sip_displayname_quote( str )
+		return '"' << sip_displayname_encode( str ).to_s << '"'
+	end
+	
+	def percent_encode_re( str, re_unsafe )
+		return str.to_s.gsub( re_unsafe ) {
+			unsafe_char = $&
+			esc = ''
+			unsafe_char.each_byte { |ub|
+				esc << sprintf('%%%02X', ub)  # must be uppercase!
+			}
+			esc
+		}.force_encoding( Encoding::US_ASCII )
 	end
 	
 )end
