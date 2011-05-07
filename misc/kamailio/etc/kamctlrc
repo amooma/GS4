@@ -48,7 +48,6 @@ DBROPW="kamailio"
 # SQL definitions
 # If you change this definitions here, then you must change them 
 # in db/schema/entities.xml too.
-# FIXME
 
 # FOREVER="2020-05-28 21:32:15"
 # DEFAULT_ALIASES_EXPIRES=$FOREVER
