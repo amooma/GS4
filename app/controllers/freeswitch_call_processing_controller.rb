@@ -139,7 +139,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				else
 					action :hangup    , ''
 			end
-		else
+		else (
 			# Here's an example: {
 			#action :set       , 'effective_caller_id_number=1234567'
 			#action :bridge    , "sofia/internal/#{dst_sip_user_real}"
@@ -154,13 +154,6 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			
 			# http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc#dialplan
-			
-			
-			#OPTIMIZE Implement call-forwardings here ...
-			
-			
-			# Ring the SIP user via Kamailio for 30 seconds:
-			action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
 			
 			
 			# Caller-ID:
@@ -194,19 +187,50 @@ class FreeswitchCallProcessingController < ApplicationController
 			action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
 			
 			
-			action :set       , "call_timeout=30"
-			action :export    , "sip_contact_user=ufs"
-			action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+			# Call-forwardings:
+			if dst_sip_account
+				#OPTIMIZE Implement call-forwardings here ...
+			end
 			
-			#OPTIMIZE Implement call-forward on busy/unavailable here ...
+			# Ring the SIP user via Kamailio for 30 seconds:
+			if dst_sip_account
+				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
+				action :set       , "call_timeout=30"  #OPTIMIZE Read from CF-after-timeout
+				action :export    , "sip_contact_user=ufs"
+				action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+			end
+			
+			# Call-forwardings:
+			if dst_sip_account
+				#OPTIMIZE Implement call-forward on busy/unavailable here ...
+			end
 			
 			# Go to voicemail:
-			action_log( FS_LOG_INFO, "Going to voicemail ..." )
-			action :answer
-			action :voicemail , "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
+			if dst_sip_account
+				if ! dst_sip_account.voicemail_server
+					action_log( FS_LOG_INFO, "SIP account #{dst_sip_user_real} doesn't have a voicemail server." )
+				else
+					if ! dst_sip_account.voicemail_server.is_local
+						action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} isn't local." )
+						action :respond, "480 No voicemail here"  #OPTIMIZE
+					else
+						#if dst_sip_account.voicemail_server.host != dst_sip_domain
+						#	action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} is local but #{dst_sip_account.voicemail_server.host.inspect} != #{dst_sip_domain.inspect}." )
+						#	action :respond, "480 No voicemail here"  #OPTIMIZE
+						#else
+							action_log( FS_LOG_INFO, "Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ..." )
+							action :answer
+							action :sleep, 250
+							action :voicemail, "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
+						#end
+					end
+				end
+			end
+			
+			
 			action :hangup
 			
-		end
+		)end
 		
 		respond_to { |format|
 			format.xml {
