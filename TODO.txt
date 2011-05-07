@@ -1,21 +1,5 @@
-#TODO Zusammenführung:
-
-- doc/docbook von Cantina einbauen
-- lib/tasks/*.rake von Cantina einbauen
-- Tabellen "phones" und "sip_phones" zusammenführen?
-...
-
-- SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
-
-- freeswitch_call_processing web service anpassen,
-  siehe misc/freeswitch/fs-conf/dialplan/default.xml
-
-
-
-DONE:
-- DB models von Cantina
-- DB seeds von Cantina
-- gs-freeswitch-config reinziehen
-- gs-kamailio-config reinziehen
-
+#OPTIMIZE doc/docbook von Cantina einbauen
+#OPTIMIZE lib/tasks/*.rake von Cantina einbauen
+#OPTIMIZE SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
+#OPTIMIZE freeswitch_call_processing web service anpassen
 
