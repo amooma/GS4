@@ -17,6 +17,9 @@ class Extension < ActiveRecord::Base
   # Active extensions must be unique:
   validates_uniqueness_of :extension, :scope => :active, :if => Proc.new{|me| me.active}
   
+  #OPTIMIZE Do not allow "anonymous" as an extension. It is reserved. (RFC 2543, RFC 3325)
+  # And add a test that makes sure "anonymous" is invalid.
+  
   # Destination must not be nil or blank:
   validates_presence_of   :destination
   # Destination must be a valid SIP "user" per RFC 3261:
