@@ -201,9 +201,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			action :voicemail , "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
 			action :hangup
 			
-			
 		end
-		
 		
 		respond_to { |format|
 			format.xml {
