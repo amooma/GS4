@@ -101,12 +101,14 @@ class SipPhonesController < ApplicationController
   end
   
   private
+  
   def setup_cantina_phone
     if @sip_phone.node_id != nil
       host = Node.find( @sip_phone.node_id ).management_host
       port = Node.find( @sip_phone.node_id ).management_port
       CantinaPhone.set_resource( "http://#{host}:#{port}" )
-      #OPTIMIZE Remove CantinaPhone.
+      #FIXME Remove CantinaPhone.
     end
   end  
+  
 end
