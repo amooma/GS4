@@ -108,6 +108,11 @@ class FreeswitchCallProcessingController < ApplicationController
 			<< " ..."
 		))
 		
+		if src_sip_account
+			logger.info(_bold( "[FS] Source account is #{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }" ))
+			action :set_user, "#{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }"
+		end
+		
 		if false  # you may want to enable this during debugging
 			_args.each { |k,v|
 				case v
@@ -152,8 +157,6 @@ class FreeswitchCallProcessingController < ApplicationController
 			#action :_continue
 			# end of example }
 			
-			
-			# http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc#dialplan
 			
 			
 			# Caller-ID:
