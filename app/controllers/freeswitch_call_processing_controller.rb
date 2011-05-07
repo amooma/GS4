@@ -171,7 +171,13 @@ class FreeswitchCallProcessingController < ApplicationController
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
 				cid_display = src_sip_account ? src_sip_account.caller_name : "[?] #{src_cid_sip_display}"
-				cid_user    = "#{src_sip_user}"
+				if src_sip_account
+					extensions = src_sip_account.extensions.where( :active => true )
+					preferred_extension = extensions.first  #OPTIMIZE Depends on the gateway.
+					cid_user = preferred_extension ? "#{preferred_extension.extension}" : 'anonymous'
+				else
+					cid_user = "#{src_sip_user}"
+				end
 				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
 			else
 				cid_display = "Anonymous"  # RFC 2543, RFC 3325
@@ -240,6 +246,8 @@ class FreeswitchCallProcessingController < ApplicationController
 	# See the "user" rule in http://tools.ietf.org/html/rfc3261 .
 	#
 	def sip_user_encode( str )  #OPTIMIZE
+		str = str.to_s
+		
 		# Sanitize control characters. They could be encoded but cause
 		# problems for many implementations:
 		str = str.gsub( /[\x00-\x1F]+/, ' ' )
