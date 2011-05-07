@@ -63,7 +63,7 @@ class SipPhone < ActiveRecord::Base
 		end
 	}
 	
-	def cantina_phone_by_id( cantina_phone_id )  #FIXME
+	def cantina_phone_by_id( cantina_phone_id )  #FIXME Remove Cantina stuff.
 		cantina_resource = provisioning_server_base_url()
 		if ! cantina_resource
 			# SipPhone has no provisioning server.
@@ -71,7 +71,7 @@ class SipPhone < ActiveRecord::Base
 		end
 		logger.debug "Trying to find CantinaPhone with ID #{cantina_phone_id.inspect} on #{cantina_resource.inspect} ..."
 		begin
-			#OPTIMIZE Remove CantinaPhone.
+			#FIXME Remove CantinaPhone.
 			CantinaPhone.set_resource( cantina_resource )
 			cantina_phone = CantinaPhone.find( cantina_phone_id )
 			return cantina_phone || nil
