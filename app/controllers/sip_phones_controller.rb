@@ -63,7 +63,7 @@ class SipPhonesController < ApplicationController
     
     respond_to do |format|
       if @sip_phone.save
-        format.html { redirect_to(@sip_phone, :notice => 'Sip phone was successfully created.') }
+        format.html { redirect_to(@sip_phone, :notice => 'SIP phone was successfully created.') }
         format.xml  { render :xml => @sip_phone, :status => :created, :location => @sip_phone }
       else
         format.html { render :action => "new" }
@@ -79,7 +79,7 @@ class SipPhonesController < ApplicationController
     setup_cantina_phone
     respond_to do |format|
       if @sip_phone.update_attributes(params[:sip_phone])
-        format.html { redirect_to(@sip_phone, :notice => 'Sip phone was successfully updated.') }
+        format.html { redirect_to(@sip_phone, :notice => 'SIP phone was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
