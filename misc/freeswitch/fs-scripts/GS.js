@@ -209,7 +209,7 @@ try {
 				},              // callback
 				buffer_obj,     // argument to the callback
 				'',             // credentials ("user:password")
-				5,              // timeout in seconds
+				8,              // timeout in seconds
 				'application/x-www-form-urlencoded'  // Content-Type
 			);
 			t = (new Date()).getTime() - t;
