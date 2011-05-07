@@ -6,8 +6,8 @@ class SipAccount < ActiveRecord::Base
   belongs_to :phone            , :validate => true
   belongs_to :user             , :validate => true
   
-  has_many :sip_account_to_extensions, :dependent => :destroy  #OPTIMIZE :order => 'position' ?
-  has_many :extensions, :through => :sip_account_to_extensions
+  has_many :sip_account_to_extensions, :dependent => :destroy   #OPTIMIZE :order => 'position' ?
+  has_many :extensions, :through => :sip_account_to_extensions  #OPTIMIZE :order => 'position' ?
   
   acts_as_list :scope => :user
   
