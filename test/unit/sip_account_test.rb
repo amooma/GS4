@@ -9,45 +9,12 @@ class SipAccountTest < ActiveSupport::TestCase
     assert Factory.build( :sip_account ).valid?
   end
   
-  # test that two Factories in a row work
-  should "have a valid factory setup for two Factories in a row" do
+  # test that two factories in a row work
+  should "have a valid factory setup for two factories in a row" do
     Factory.create(:sip_account)
     assert Factory.build( :sip_account ).valid?
   end
-
   
-  # valid extension
-  [
-    '123',
-    '1',
-    '123456',
-  ].each { |extension|
-    should "be valid with extension #{extension.inspect}" do
-      assert Factory.build( :sip_account, :phone_number => extension ).valid?
-    end
-  }
-  
-  # invalid extension
-  [
-    nil,
-    '',
-    'foo',
-    '12345678901',
-    '123foo',
-    '012foo',
-    'foo123',
-  # '01',
-    '-',
-    '+',
-    -1,
-    '-1',
-    '-0',
-  # '+10',
-  ].each { |extension|
-    should "not be valid with extension #{extension.inspect}" do
-      assert ! Factory.build( :sip_account, :phone_number => extension ).valid?
-    end
-  }
   
   # invalid auth_name
   #
@@ -153,27 +120,15 @@ class SipAccountTest < ActiveSupport::TestCase
   end
   
   
-  should "be possible to set sip_phone_id to nil" do
-    assert Factory.build( :sip_account, :sip_phone_id => nil ).valid?
+  should "be possible to set phone_id to nil" do
+    assert Factory.build( :sip_account, :phone_id => nil ).valid?
   end
   
-  should "not be possible to set a sip_phone_id that does not exist" do
-    sip_phone = Factory.create( :sip_phone )
-    sip_phone_id = sip_phone.id
-    sip_phone.destroy
-    assert ! Factory.build( :sip_account, :sip_phone_id => sip_phone_id ).valid?
-  end
-  
-  
-  should "be possible to set extension_id to nil" do
-    assert Factory.build( :sip_account, :extension_id => nil ).valid?
-  end
-  
-  should "not be possible to set a sip_phone_id that does not exist" do
-    extension = Factory.create( :extension )
-    extension_id = extension.id
-    extension.destroy
-    assert ! Factory.build( :sip_account, :extension_id => extension_id ).valid?
+  should "not be possible to set a phone_id that does not exist" do
+    phone = Factory.create( :phone )
+    phone_id = phone.id
+    phone.destroy
+    assert ! Factory.build( :sip_account, :phone_id => phone_id ).valid?
   end
   
   

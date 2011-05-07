@@ -87,7 +87,7 @@ class SipPhone < ActiveRecord::Base
 		port   = 0          # this will not work on purpose
 		path   = '/'
 		
-		if self.provisioning_server_id.blank? || ! self.provisioning_server
+		if self.node_id.blank? || ! self.provisioning_server
 			logger.debug "SipPhone #{self.id.inspect} has no provisioning server. Alright."
 			return nil  # phone without provisioning
 		else
