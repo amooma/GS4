@@ -167,7 +167,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			# Note: P-Asserted-Identity is set in Kamailio.
 			#
 			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
-						
+			
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
 				cid_display = src_sip_account ? src_sip_account.caller_name : "[?] #{src_cid_sip_display}"
