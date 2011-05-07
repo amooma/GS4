@@ -159,7 +159,13 @@
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
+					<li><a href="./Location.html">Location</a></li>
+				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
 				
 					<li><a href="./Node.html">Node</a></li>
 				
@@ -187,7 +193,13 @@
 				
 					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
 				
+					<li><a href="./PhoneModelsController.html">PhoneModelsController</a></li>
+				
+					<li><a href="./PhonesController.html">PhonesController</a></li>
+				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./Pua.html">Pua</a></li>
 				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
@@ -223,9 +235,15 @@
 				
 					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
 				
+					<li><a href="./Subscriber.html">Subscriber</a></li>
+				
+					<li><a href="./SubscribersController.html">SubscribersController</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./Version.html">Version</a></li>
 				
 					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
 				
@@ -282,20 +300,20 @@ POST /sip_accounts POST /sip_accounts.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 56</span>
-56:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-57:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account</span>])
-58:     
-59:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-60:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">save</span>
-61:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip account was successfully created.'</span>) }
-62:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span> }
-63:       <span class="ruby-keyword kw">else</span>
-64:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-65:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-66:       <span class="ruby-keyword kw">end</span>
-67:     <span class="ruby-keyword kw">end</span>
-68:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 66</span>
+66:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+67:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account</span>])
+68:     
+69:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+70:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">save</span>
+71:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip account was successfully created.'</span>) }
+72:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span> }
+73:       <span class="ruby-keyword kw">else</span>
+74:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+75:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+76:       <span class="ruby-keyword kw">end</span>
+77:     <span class="ruby-keyword kw">end</span>
+78:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -328,16 +346,16 @@ DELETE /sip_accounts/1 DELETE /sip_accounts/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 88</span>
-88:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-89:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-90:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">destroy</span>
-91:     
-92:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-93:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">sip_accounts_url</span>) }
-94:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-95:     <span class="ruby-keyword kw">end</span>
-96:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 98</span>
+ 98:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+ 99:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+100:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">destroy</span>
+101:     
+102:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+103:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">sip_accounts_url</span>) }
+104:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+105:     <span class="ruby-keyword kw">end</span>
+106:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -370,10 +388,10 @@ GET /sip_accounts/1/edit
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 50</span>
-50:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-51:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-52:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 60</span>
+60:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+61:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+62:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -450,12 +468,22 @@ GET /sip_accounts/new GET /sip_accounts/new.xml
     <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 40</span>
 40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
 41:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">new</span>
-42:     
-43:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-44:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-45:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span> }
-46:     <span class="ruby-keyword kw">end</span>
-47:   <span class="ruby-keyword kw">end</span></pre>
+42:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">phone_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_id</span>]
+43:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>]
+44:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">sip_server_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_server_id</span>]
+45:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">sip_proxy_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_proxy_id</span>]
+46:     <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">voicemail_server_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:voicemail_server_id</span>]
+47:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+48:       <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">sip_server</span> = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">first</span>
+49:     <span class="ruby-keyword kw">end</span>
+50:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+51:       <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">sip_proxy</span> = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">first</span>
+52:     <span class="ruby-keyword kw">end</span>
+53:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+54:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+55:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span> }
+56:     <span class="ruby-keyword kw">end</span>
+57:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -529,20 +557,20 @@ PUT /sip_accounts/1 PUT /sip_accounts/1.xml
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 72</span>
-72:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-73:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-74:     
-75:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-76:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account</span>])
-77:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip account was successfully updated.'</span>) }
-78:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-79:       <span class="ruby-keyword kw">else</span>
-80:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-81:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-82:       <span class="ruby-keyword kw">end</span>
-83:     <span class="ruby-keyword kw">end</span>
-84:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_accounts_controller.rb, line 82</span>
+82:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+83:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+84:     
+85:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+86:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account</span>])
+87:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip account was successfully updated.'</span>) }
+88:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+89:       <span class="ruby-keyword kw">else</span>
+90:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+91:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+92:       <span class="ruby-keyword kw">end</span>
+93:     <span class="ruby-keyword kw">end</span>
+94:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

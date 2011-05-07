@@ -155,7 +155,13 @@
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
+					<li><a href="./Location.html">Location</a></li>
+				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
 				
 					<li><a href="./Node.html">Node</a></li>
 				
@@ -183,7 +189,13 @@
 				
 					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
 				
+					<li><a href="./PhoneModelsController.html">PhoneModelsController</a></li>
+				
+					<li><a href="./PhonesController.html">PhonesController</a></li>
+				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./Pua.html">Pua</a></li>
 				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
@@ -219,9 +231,15 @@
 				
 					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
 				
+					<li><a href="./Subscriber.html">Subscriber</a></li>
+				
+					<li><a href="./SubscribersController.html">SubscribersController</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./Version.html">Version</a></li>
 				
 					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
 				
@@ -278,20 +296,20 @@ POST /sip_proxies POST /sip_proxies.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_proxies_controller.rb, line 42</span>
-42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-43:     <span class="ruby-ivar">@sip_proxy</span> = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_proxy</span>])
-44:     
-45:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-46:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">save</span>
-47:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_proxy</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip proxy was successfully created.'</span>) }
-48:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span> }
-49:       <span class="ruby-keyword kw">else</span>
-50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-51:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-52:       <span class="ruby-keyword kw">end</span>
-53:     <span class="ruby-keyword kw">end</span>
-54:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_proxies_controller.rb, line 44</span>
+44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+45:     <span class="ruby-ivar">@sip_proxy</span> = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_proxy</span>])
+46:     
+47:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+48:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">save</span>
+49:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_proxy</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip proxy was successfully created.'</span>) }
+50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span> }
+51:       <span class="ruby-keyword kw">else</span>
+52:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+54:       <span class="ruby-keyword kw">end</span>
+55:     <span class="ruby-keyword kw">end</span>
+56:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -324,16 +342,16 @@ DELETE /sip_proxies/1 DELETE /sip_proxies/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_proxies_controller.rb, line 59</span>
-59:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-60:     <span class="ruby-ivar">@sip_proxy</span> = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-61:     <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">destroy</span>
-62:     
-63:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-64:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">sip_proxies_url</span>) }
-65:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-66:     <span class="ruby-keyword kw">end</span>
-67:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_proxies_controller.rb, line 61</span>
+61:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+62:     <span class="ruby-ivar">@sip_proxy</span> = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+63:     <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">destroy</span>
+64:     
+65:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+66:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">sip_proxies_url</span>) }
+67:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+68:     <span class="ruby-keyword kw">end</span>
+69:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -408,12 +426,14 @@ GET /sip_proxies/new GET /sip_proxies/new.xml
     <span class="ruby-comment cmt"># File app/controllers/sip_proxies_controller.rb, line 31</span>
 31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
 32:     <span class="ruby-ivar">@sip_proxy</span> = <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">new</span>
-33:     
-34:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-35:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span> }
-37:     <span class="ruby-keyword kw">end</span>
-38:   <span class="ruby-keyword kw">end</span></pre>
+33:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+34:       <span class="ruby-ivar">@sip_proxy</span>.<span class="ruby-identifier">host</span> = <span class="ruby-identifier">local_ip</span>
+35:     <span class="ruby-keyword kw">end</span>
+36:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+38:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_proxy</span> }
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
