@@ -1,16 +1,16 @@
  new debian package, version 2.0.
-    2735 bytes,    43 lines      control              
+    2797 bytes,    45 lines      control              
     3113 bytes,    37 lines      md5sums              
     1279 bytes,    47 lines   *  postinst             #!/bin/sh
     1464 bytes,    56 lines   *  postrm               #!/bin/sh
     1136 bytes,    51 lines   *  preinst              #!/bin/sh
  Package: gemeinschaft-sip-pbx-freeswitch
  Source: gemeinschaft
- Version: 4.0~beta1-1
+ Version: 4.0~beta2-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
  Installed-Size: 296
- Depends: gemeinschaft-common (= 4.0~beta1-1), freeswitch (>= 1.0.6), freeswitch-spidermonkey
+ Depends: gemeinschaft-common (= 4.0~beta2-1), freeswitch (>= 1.0.6), freeswitch-spidermonkey
  Recommends: gemeinschaft-sip-proxy, freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
  Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
  Replaces: freeswitch, freeswitch-spidermonkey, gemeinschaft-sip-pbx-freeswitch
@@ -37,7 +37,7 @@
    http://files.freeswitch.org/
   and make your own packages (if you want to) or download the sound
   files as .deb packages from
-   http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drsivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
+   http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-en-us-callie/
    http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu/pool/main/f/freeswitch-sounds-music/
   and install them (dpkg -i freeswitch-sounds-*.deb).
   .
@@ -46,4 +46,6 @@
    deb-src http://ppa.launchpad.net/freeswitch-drivers/freeswitch-nightly-drivers/ubuntu maverick main
   to your APT sources. It's for Ubuntu but the architecture-independant
   sound files should work. You will have to use APT pinning though so
-  let's no go there. Get the tarballs.
+  let's no go there.
+  Get the tarballs. You may want to use the "download-freeswitch-sounds"
+  script.

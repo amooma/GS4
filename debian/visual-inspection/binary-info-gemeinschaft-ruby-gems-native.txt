@@ -3,11 +3,11 @@
    76394 bytes,   612 lines      md5sums              
  Package: gemeinschaft-ruby-gems-native
  Source: gemeinschaft
- Version: 4.0~beta1-1
+ Version: 4.0~beta2-1
  Architecture: i386
  Maintainer: Amooma GmbH <info@amooma.de>
  Installed-Size: 6736
- Depends: libc6 (>= 2.3.6-6~), libfcgi0ldbl, libruby1.9.1 (>= 1.9.2.0), libsqlite3-0 (>= 3.7.3), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25), ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= 4.0~beta1-1), graphviz
+ Depends: libc6 (>= 2.3.6-6~), libfcgi0ldbl, libruby1.9.1 (>= 1.9.2.0), libsqlite3-0 (>= 3.7.3), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25), ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= 4.0~beta2-1), graphviz
  Section: comm
  Priority: extra
  Homepage: http://www.amooma.de/

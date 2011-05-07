@@ -3,11 +3,11 @@
   558776 bytes,  4271 lines      md5sums              
  Package: gemeinschaft-ruby-gems
  Source: gemeinschaft
- Version: 4.0~beta1-1
+ Version: 4.0~beta2-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
  Installed-Size: 45812
- Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems-native (= 4.0~beta1-1) | gemeinschaft-ruby-gems-native-target-compile
+ Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems-native (= 4.0~beta2-1) | gemeinschaft-ruby-gems-native-target-compile
  Section: comm
  Priority: extra
  Homepage: http://www.amooma.de/
