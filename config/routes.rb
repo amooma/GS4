@@ -50,7 +50,7 @@ Gemeinschaft4::Application.routes.draw do
 	resources :manufacturer_snom    , :only => [ :index ]
 	resources :manufacturer_aastra  , :only => [ :index ]
 	resources :manufacturer_tiptel  , :only => [ :index ]
-	
+	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',
 		:constraints => { :mac_address => /000413.*/ } 
