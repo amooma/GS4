@@ -24,6 +24,11 @@
 
 <p>
   <b>Extensions:</b>
+  <% if @sip_account.extensions.count == 0 %>
+    <div class="noticebox">
+      You need to create an extension to make phonecalls!
+  </div>
+  <% end %>
   <ul>
   <% @sip_account.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
