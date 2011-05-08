@@ -51,6 +51,7 @@ class SipAccountsController < ApplicationController
     end
     if SipProxy.count == 1
       @sip_account.sip_proxy = SipProxy.first
+      @sip_account.realm = SipProxy.first.host
     end
     respond_to do |format|
       format.html # new.html.erb
