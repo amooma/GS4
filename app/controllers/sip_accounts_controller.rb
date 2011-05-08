@@ -44,6 +44,8 @@ class SipAccountsController < ApplicationController
     @sip_account.sip_server_id = params[:sip_server_id]
     @sip_account.sip_proxy_id = params[:sip_proxy_id]
     @sip_account.voicemail_server_id = params[:voicemail_server_id]
+    @sip_account.auth_name = SecureRandom.hex(10)
+    @sip_account.password = SecureRandom.hex(15)
     if SipServer.count == 1
       @sip_account.sip_server = SipServer.first
     end
