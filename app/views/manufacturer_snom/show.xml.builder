@@ -93,8 +93,9 @@ xml.settings {
 			xml.user_full_sdp_answer(   'on'                  , saopts_rw )
 			xml.user_dynamic_payload(   'on'                  , saopts_rw ) # "Turns on dynamic payload type for G726."
 			xml.user_g726_packing_order('on'                  , saopts_r  ) # on = RFC 3551, off = AAL2
+			xml.user_srtp(             'off'                 , saopts_rw )
+			xml.user_savp(             'off'                 , saopts_rw )
 			xml.codec_size(             '20'                  , saopts_rw )
-			
 			codec_i = 1
 			max_codec_i = 7
 			@codec_mapping_snom.each do |codec_name, codec_id|
