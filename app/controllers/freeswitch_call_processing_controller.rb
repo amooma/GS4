@@ -166,13 +166,14 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
-				cid_display = src_sip_account ? src_sip_account.caller_name : "[?] #{src_cid_sip_display}"
 				if src_sip_account
-					extensions = src_sip_account.extensions.where( :active => true )
+					cid_display = src_sip_account.caller_name
+					extensions  = src_sip_account.extensions.where( :active => true )
 					preferred_extension = extensions.first  #OPTIMIZE Depends on the gateway.
-					cid_user = preferred_extension ? "#{preferred_extension.extension}" : 'anonymous'
+					cid_user    = preferred_extension ? "#{preferred_extension.extension}" : 'anonymous'
 				else
-					cid_user = "#{src_sip_user}"
+					cid_display = "[?] #{src_cid_sip_display}"
+					cid_user    = "#{src_sip_user}"
 				end
 				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
 			else
