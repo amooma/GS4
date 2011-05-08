@@ -13,7 +13,8 @@ class SipAccount < ActiveRecord::Base
   
   validate_username         :auth_name
   validates_uniqueness_of   :auth_name, :case_sensitive => false, :scope => :sip_server_id
-  
+  # As long as caller_name stays here
+  validates_presence_of     :caller_name
   validates_presence_of     :sip_server
   validates_presence_of     :sip_proxy
   validates_presence_of     :voicemail_server , :if => Proc.new { |me| me.voicemail_server_id }
