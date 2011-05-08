@@ -3,7 +3,7 @@ class ManufacturerSnomController < ApplicationController
 	def show
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@phone = Phone.where(:mac_address => mac_address).first
-		
+		@my_local_ip = local_ip
 		##### Codec mapping {
 		# map from Codec names as in seeds.rb to their respective name
 		# (or rather: number) on Snom:
