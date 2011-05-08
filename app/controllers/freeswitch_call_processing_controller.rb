@@ -331,7 +331,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		end
 		ret = ret.join('')
 		ret = ret[ 0, ret.bytesize-1 ].force_encoding( Encoding::UTF_8 )
-		#logger.info( "##############     #{orig_str}  =>  #{ret}    " )
+		#logger.debug( "sip_displayname_encode( #{orig_str.inspect} )  =>  #{ret.inspect}" )
 		return ret
 	end
 	
