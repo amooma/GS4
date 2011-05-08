@@ -159,7 +159,13 @@
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
+					<li><a href="./Location.html">Location</a></li>
+				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
 				
 					<li><a href="./Node.html">Node</a></li>
 				
@@ -187,7 +193,13 @@
 				
 					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
 				
+					<li><a href="./PhoneModelsController.html">PhoneModelsController</a></li>
+				
+					<li><a href="./PhonesController.html">PhonesController</a></li>
+				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./Pua.html">Pua</a></li>
 				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
@@ -223,9 +235,15 @@
 				
 					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
 				
+					<li><a href="./Subscriber.html">Subscriber</a></li>
+				
+					<li><a href="./SubscribersController.html">SubscribersController</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./Version.html">Version</a></li>
 				
 					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
 				
@@ -266,7 +284,7 @@
 				<div class="method-heading">
 				
 					<span class="method-name">log_provisioning</span><span
-						class="method-args">(memo = nil, succeeded = true)</span>
+						class="method-args">( memo=nil, succeeded=true )</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -283,9 +301,9 @@ log a provisioning
 						id="log-provisioning-source">
 <pre>
     <span class="ruby-comment cmt"># File app/models/phone.rb, line 36</span>
-36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_provisioning</span>(<span class="ruby-identifier">memo</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">succeeded</span> = <span class="ruby-keyword kw">true</span>)
-37:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_log_entries</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:memo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">memo</span>, <span class="ruby-value">:succeeded</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
-38:   <span class="ruby-keyword kw">end</span></pre>
+36:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_provisioning</span>( <span class="ruby-identifier">memo</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">succeeded</span>=<span class="ruby-keyword kw">true</span> )
+37:                 <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">provisioning_log_entries</span>.<span class="ruby-identifier">create</span>( <span class="ruby-value">:memo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">memo</span>, <span class="ruby-value">:succeeded</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> )
+38:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -318,58 +336,74 @@ Reboots this phone
 					<div class="method-source-code"
 						id="reboot-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone.rb, line 46</span>
-46:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reboot</span>
-47:     <span class="ruby-identifier">reboot_request</span> = <span class="ruby-constant">RebootRequest</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:phone_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>)
-48:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'net/http'</span>
-49: 
-50:     <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">http_port</span>)
-51:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">http</span>)
-52:       <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">ssl</span>
-53:       <span class="ruby-identifier">http</span>.<span class="ruby-identifier">open_timeout</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">http_request_timeout</span>
-54:       <span class="ruby-identifier">http</span>.<span class="ruby-identifier">read_timeout</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">http_request_timeout</span>
-55:       <span class="ruby-keyword kw">if</span> ((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>.<span class="ruby-identifier">length</span>() <span class="ruby-operator">==</span> <span class="ruby-value">0</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span>.<span class="ruby-identifier">length</span>() <span class="ruby-operator">==</span> <span class="ruby-value">0</span>))
-56:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">default_http_user</span>
-57:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">default_http_password</span>
-58:       <span class="ruby-keyword kw">end</span>   
-59:       <span class="ruby-keyword kw">if</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'logout.html'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">manufacturer</span>.<span class="ruby-identifier">ieee_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;DeTeWe-Deutsche Telephonwerke&quot;</span>)
-60:         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'logout.html'</span>, <span class="ruby-keyword kw">nil</span>)
-61:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span>)
-62:         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
-63:         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'logout.html'</span>, <span class="ruby-keyword kw">nil</span>)
-64:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span>)
-65:         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
-66:         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'reset.html'</span>, <span class="ruby-keyword kw">nil</span>)
-67:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">set_form_data</span>({<span class="ruby-value str">&quot;resetOption&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;0&quot;</span>})
-68:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span>)
-69:         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
-70:       <span class="ruby-keyword kw">elsif</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'/cgi-bin/ConfigManApp.com'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">manufacturer</span>.<span class="ruby-identifier">ieee_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD&quot;</span>)
-71:         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'/cgi-bin/ConfigManApp.com'</span>, <span class="ruby-keyword kw">nil</span>)
-72:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">set_form_data</span>({<span class="ruby-value str">&quot;PAGEID&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;7&quot;</span>, <span class="ruby-value str">&quot;CONFIG_DATA&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;REBOOT&quot;</span>})
-73:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span>)
-74:         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
-75:       <span class="ruby-keyword kw">else</span>
-76:         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span>, <span class="ruby-keyword kw">nil</span>)
-77:         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span>)
-78:         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
-79:       <span class="ruby-keyword kw">end</span>
-80:       <span class="ruby-identifier">success</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>
-81:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;200&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">true</span>
-82:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;302&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">true</span>
-83:       <span class="ruby-keyword kw">else</span> <span class="ruby-keyword kw">false</span>
-84:       <span class="ruby-keyword kw">end</span>
-85:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">success</span>
-86:         <span class="ruby-identifier">reboot_request</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>, <span class="ruby-value">:successful</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
-87:       <span class="ruby-keyword kw">else</span>
-88:         <span class="ruby-identifier">reboot_request</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>, <span class="ruby-value">:successful</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>)
-89:       <span class="ruby-keyword kw">end</span>
-90:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">success</span>
-91:     <span class="ruby-keyword kw">end</span>
-92:     
-93:   <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
-94:     <span class="ruby-identifier">reboot_request</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>, <span class="ruby-value">:successful</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>)
-95:     <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'error'</span>
-96:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone.rb, line 51</span>
+ 51:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reboot</span>
+ 52:         (
+ 53:                 <span class="ruby-keyword kw">begin</span>
+ 54:                 (
+ 55:                         <span class="ruby-identifier">reboot_request</span> = <span class="ruby-constant">RebootRequest</span>.<span class="ruby-identifier">create</span>( <span class="ruby-value">:phone_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span> )
+ 56:                         <span class="ruby-identifier">require</span> <span class="ruby-value str">'net/http'</span>
+ 57:                         
+ 58:                         <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">http_port</span> )
+ 59:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">http</span>); (
+ 60:                                 <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span>      = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">ssl</span>
+ 61:                                 <span class="ruby-identifier">http</span>.<span class="ruby-identifier">open_timeout</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">http_request_timeout</span>
+ 62:                                 <span class="ruby-identifier">http</span>.<span class="ruby-identifier">read_timeout</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">http_request_timeout</span>
+ 63:                                 
+ 64:                                 <span class="ruby-keyword kw">if</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>     .<span class="ruby-identifier">blank?</span>)                                  <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> .<span class="ruby-identifier">blank?</span>)
+ 65:                                         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>     = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">default_http_user</span>
+ 66:                                         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">default_http_password</span>
+ 67:                                 <span class="ruby-keyword kw">end</span>
+ 68:                                 
+ 69:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">manufacturer</span>.<span class="ruby-identifier">ieee_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;DeTeWe-Deutsche Telephonwerke&quot;</span>                                  <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'logout.html'</span>
+ 70:                                         
+ 71:                                         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value str">'logout.html'</span>, <span class="ruby-keyword kw">nil</span> )
+ 72:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> )
+ 73:                                         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>( <span class="ruby-identifier">request</span> )
+ 74:                                         
+ 75:                                         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value str">'logout.html'</span>, <span class="ruby-keyword kw">nil</span> )
+ 76:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> )
+ 77:                                         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>( <span class="ruby-identifier">request</span> )
+ 78:                                         
+ 79:                                         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value str">'reset.html'</span>, <span class="ruby-keyword kw">nil</span> )
+ 80:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">set_form_data</span>({ <span class="ruby-value str">'resetOption'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'0'</span> })
+ 81:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> )
+ 82:                                         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>( <span class="ruby-identifier">request</span> )
+ 83:                                         
+ 84:                                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">manufacturer</span>.<span class="ruby-identifier">ieee_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD&quot;</span>                                  <span class="ruby-operator">&amp;&amp;</span>    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'/cgi-bin/ConfigManApp.com'</span>
+ 85:                                         
+ 86:                                         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value str">'/cgi-bin/ConfigManApp.com'</span>, <span class="ruby-keyword kw">nil</span> )
+ 87:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">set_form_data</span>({ <span class="ruby-value str">'PAGEID'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'7'</span>, <span class="ruby-value str">'CONFIG_DATA'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'REBOOT'</span> })
+ 88:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> )
+ 89:                                         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>( <span class="ruby-identifier">request</span> )
+ 90:                                 <span class="ruby-keyword kw">else</span>
+ 91:                                         <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span>, <span class="ruby-keyword kw">nil</span> )
+ 92:                                         <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_user</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">http_password</span> )
+ 93:                                         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>( <span class="ruby-identifier">request</span> )
+ 94:                                 <span class="ruby-keyword kw">end</span>
+ 95:                                 
+ 96:                                 <span class="ruby-identifier">success</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>
+ 97:                                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'200'</span>; <span class="ruby-keyword kw">true</span>
+ 98:                                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'302'</span>; <span class="ruby-keyword kw">true</span>
+ 99:                                         <span class="ruby-keyword kw">else</span>      ; <span class="ruby-keyword kw">false</span>
+100:                                 <span class="ruby-keyword kw">end</span>
+101:                                 <span class="ruby-identifier">reboot_request</span>.<span class="ruby-identifier">update_attributes</span>({
+102:                                         <span class="ruby-value">:end</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>,
+103:                                         <span class="ruby-value">:successful</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">success</span>,
+104:                                 })
+105:                                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">success</span>
+106:                         )<span class="ruby-keyword kw">end</span>
+107:                         <span class="ruby-comment cmt">#OPTIMIZE Return something here.</span>
+108:                 <span class="ruby-comment cmt">#)</span>
+109:                 <span class="ruby-comment cmt">#rescue =&gt; error</span>
+110:                 <span class="ruby-comment cmt">#(</span>
+111:                 <span class="ruby-comment cmt">#     reboot_request.update_attributes({</span>
+112:                 <span class="ruby-comment cmt">#             :end        =&gt; Time.now,</span>
+113:                 <span class="ruby-comment cmt">#             :successful =&gt; false,</span>
+114:                 <span class="ruby-comment cmt">#     })</span>
+115:                 <span class="ruby-comment cmt">#     return 'error'  #OPTIMIZE return false?</span>
+116:                 )<span class="ruby-keyword kw">end</span>
+117:         )<span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -402,10 +436,13 @@ Is the system able to reboot this phone?
 					<div class="method-source-code"
 						id="rebootable--source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone.rb, line 41</span>
-41:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rebootable?</span>
-42:     <span class="ruby-keyword kw">return</span> ((<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span>.<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address</span>.<span class="ruby-identifier">blank?</span>))
-43:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/phone.rb, line 42</span>
+42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rebootable?</span>
+43:                 <span class="ruby-keyword kw">return</span> (
+44:                         (<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address</span>.<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">&amp;&amp;</span>
+45:                         (<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">reboot_request_path</span>.<span class="ruby-identifier">blank?</span>)
+46:                 )
+47:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -444,13 +481,14 @@ Make sure that a given MAC address really belongs to a given manufacturer
 					<div class="method-source-code"
 						id="cross-check-mac-address-with-ouis-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone.rb, line 120</span>
-120:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cross_check_mac_address_with_ouis</span>
-121:     <span class="ruby-identifier">oui</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)[<span class="ruby-value">0</span>,<span class="ruby-value">6</span>]
-122:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Oui</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">oui</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">or</span> <span class="ruby-constant">Oui</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">oui</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">manufacturer</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">manufacturer</span>
-123:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:mac_address</span>, <span class="ruby-node">&quot;The given mac address doesn't match to the OUIs of the manufacturer #{self.phone_model.manufacturer.name}.&quot;</span> )
-124:     <span class="ruby-keyword kw">end</span>
-125:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone.rb, line 149</span>
+149:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cross_check_mac_address_with_ouis</span>
+150:                 <span class="ruby-identifier">oui</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">to_s</span>().<span class="ruby-identifier">upcase</span>().<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[^A-F0-9]/</span>, <span class="ruby-value str">''</span> )[<span class="ruby-value">0</span>,<span class="ruby-value">6</span>]
+151:                 <span class="ruby-identifier">oui_obj</span> = <span class="ruby-constant">Oui</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">oui</span> )
+152:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">oui_obj</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>                  <span class="ruby-operator">||</span> <span class="ruby-identifier">oui_obj</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">manufacturer</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">manufacturer</span>
+153:                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:mac_address</span>, <span class="ruby-node">&quot;The given MAC address doesn't match the OUIs of the manufacturer #{self.phone_model.manufacturer.name}.&quot;</span> )
+154:                 <span class="ruby-keyword kw">end</span>
+155:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -483,10 +521,10 @@ Formats a MAC address.
 					<div class="method-source-code"
 						id="format-mac-address-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone.rb, line 101</span>
-101:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_mac_address</span>
-102:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-103:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone.rb, line 126</span>
+126:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_mac_address</span>
+127:                 <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">to_s</span>().<span class="ruby-identifier">upcase</span>().<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[^A-F0-9]/</span>, <span class="ruby-value str">''</span> )
+128:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -519,12 +557,12 @@ Saves the last IP address
 					<div class="method-source-code"
 						id="save-old-last-ip-address-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone.rb, line 113</span>
-113:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_old_last_ip_address</span>
-114:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address_changed?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address_was</span>
-115:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">last_ip_address</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address_was</span>
-116:     <span class="ruby-keyword kw">end</span>
-117:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone.rb, line 140</span>
+140:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_old_last_ip_address</span>
+141:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address_changed?</span>                  <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address_was</span>
+142:                         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">last_ip_address</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ip_address_was</span>
+143:                 <span class="ruby-keyword kw">end</span>
+144:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -557,12 +595,12 @@ Validates if the phone model exists.
 					<div class="method-source-code"
 						id="validate-phone-model-exists-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone.rb, line 106</span>
-106:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_phone_model_exists</span>()
-107:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_id</span> )
-108:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_id</span>, <span class="ruby-node">&quot;There is no phone model with the given ID #{self.phone_model_id}.&quot;</span> )
-109:     <span class="ruby-keyword kw">end</span>
-110:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone.rb, line 132</span>
+132:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_phone_model_exists</span>
+133:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_id</span> )
+134:                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_id</span>, <span class="ruby-node">&quot;There is no phone model with the given ID #{self.phone_model_id}.&quot;</span> )
+135:                 <span class="ruby-keyword kw">end</span>
+136:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

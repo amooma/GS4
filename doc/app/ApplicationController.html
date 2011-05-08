@@ -65,6 +65,15 @@
 
 			<!-- Method Quickref -->
 			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-local_ip">#local_ip</a></li>
+					
+				</ul>
+			</div>
+			
 
 			<!-- Included Modules -->
 			
@@ -138,7 +147,13 @@
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
+					<li><a href="./Location.html">Location</a></li>
+				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
 				
 					<li><a href="./Node.html">Node</a></li>
 				
@@ -166,7 +181,13 @@
 				
 					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
 				
+					<li><a href="./PhoneModelsController.html">PhoneModelsController</a></li>
+				
+					<li><a href="./PhonesController.html">PhonesController</a></li>
+				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./Pua.html">Pua</a></li>
 				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
@@ -202,9 +223,15 @@
 				
 					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
 				
+					<li><a href="./Subscriber.html">Subscriber</a></li>
+				
+					<li><a href="./SubscribersController.html">SubscribersController</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./Version.html">Version</a></li>
 				
 					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
 				
@@ -235,6 +262,46 @@
 
 		<!-- Methods -->
 		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="local-ip-method" class="method-detail ">
+				<a name="method-i-local_ip"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">local_ip</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="local-ip-source">
+<pre>
+   <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 7</span>
+7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">local_ip</span>
+8:     <span class="ruby-constant">UDPSocket</span>.<span class="ruby-identifier">open</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-value str">&quot;255.255.255.254&quot;</span>, <span class="ruby-value">1</span>); <span class="ruby-identifier">s</span>.<span class="ruby-identifier">addr</span>.<span class="ruby-identifier">last</span>}
+9:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

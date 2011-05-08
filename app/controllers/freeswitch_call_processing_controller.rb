@@ -56,11 +56,12 @@ class FreeswitchCallProcessingController < ApplicationController
 	(
 		sip_call_id           = _arg( 'var_sip_call_id' )
 		
-		src_sip_user          = _arg( 'Caller-Username' )
+		src_sip_user          = _arg( 'var_sip_from_user' )  # / var_sip_from_user_stripped ?
 		
 		src_cid_sip_domain    = _arg( 'var_sip_from_host' )
-		src_cid_sip_user      = _arg( 'Caller-Caller-ID-Number' )  # / var_sip_from_user / var_sip_from_user_stripped
-		src_cid_sip_display   = _arg( 'Caller-Caller-ID-Name' )  # / var_sip_from_display
+		#src_sip_user          = _arg( 'Caller-Username' )
+		src_cid_sip_user      = _arg( 'Caller-Caller-ID-Number' )
+		src_cid_sip_display   = _arg( 'var_sip_from_display' )  # Caller-Caller-ID-Name is not always present
 		
 		dst_sip_user          = _arg( 'Caller-Destination-Number' )  # / var_sip_req_user
 		#dst_sip_domain        = _arg( 'var_sip_req_host' )
@@ -107,12 +108,17 @@ class FreeswitchCallProcessingController < ApplicationController
 			<< " ..."
 		))
 		
-		if false
+		if src_sip_account
+			logger.info(_bold( "[FS] Source account is #{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }" ))
+			action :set_user, "#{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }"
+		end
+		
+		if false  # you may want to enable this during debugging
 			_args.each { |k,v|
 				case v
 					when String
 						logger.debug( "   #{k.ljust(36)} = #{v.inspect}" )
-					#when Hash
+					#when Hash  # not used (yet?)
 					#	v.each { |k1,v1|
 					#		logger.debug( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
 					#	}
@@ -138,7 +144,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				else
 					action :hangup    , ''
 			end
-		else
+		else (
 			# Here's an example: {
 			#action :set       , 'effective_caller_id_number=1234567'
 			#action :bridge    , "sofia/internal/#{dst_sip_user_real}"
@@ -152,27 +158,22 @@ class FreeswitchCallProcessingController < ApplicationController
 			# end of example }
 			
 			
-			# http://kb.asipto.com/freeswitch:kamailio-3.1.x-freeswitch-1.0.6d-sbc#dialplan
-			
-			
-			#OPTIMIZE Implement call-forwardings here ...
-			
-			
-			# Ring the SIP user via Kamailio for 30 seconds:
-			action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
-			
 			
 			# Caller-ID:
 			# Note: P-Asserted-Identity is set in Kamailio.
 			#
 			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
 			
-			logger.info(_bold( "[FS] CALLER NAME: " ))
-			
 			clir = false  #OPTIMIZE Read from SIP account.
 			if ! clir
-				cid_display = "#{src_sip_account ? src_sip_account.caller_name : '-----'}"
-				cid_user    = "#{src_sip_user}"
+				cid_display = src_sip_account ? src_sip_account.caller_name : "[?] #{src_cid_sip_display}"
+				if src_sip_account
+					extensions = src_sip_account.extensions.where( :active => true )
+					preferred_extension = extensions.first  #OPTIMIZE Depends on the gateway.
+					cid_user = preferred_extension ? "#{preferred_extension.extension}" : 'anonymous'
+				else
+					cid_user = "#{src_sip_user}"
+				end
 				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
 			else
 				cid_display = "Anonymous"  # RFC 2543, RFC 3325
@@ -189,19 +190,51 @@ class FreeswitchCallProcessingController < ApplicationController
 			action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
 			
 			
-			action :set       , "call_timeout=30"
-			action :export    , "sip_contact_user=ufs"
-			action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+			# Call-forwardings:
+			if dst_sip_account
+				#OPTIMIZE Implement call-forwardings here ...
+			end
 			
-			#OPTIMIZE Implement call-forward on busy/unavailable here ...
+			# Ring the SIP user via Kamailio for 30 seconds:
+			if dst_sip_account
+				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
+				action :set       , "call_timeout=30"  #OPTIMIZE Read from CF-after-timeout
+				action :export    , "sip_contact_user=ufs"
+				action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+			end
+			
+			# Call-forwardings:
+			if dst_sip_account
+				#OPTIMIZE Implement call-forward on busy/unavailable here ...
+			end
 			
 			# Go to voicemail:
-			action_log( FS_LOG_INFO, "Going to voicemail ..." )
-			action :answer
-			action :voicemail , "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
+			if dst_sip_account
+				if ! dst_sip_account.voicemail_server
+					action_log( FS_LOG_INFO, "SIP account #{dst_sip_user_real} doesn't have a voicemail server." )
+				else
+					if ! dst_sip_account.voicemail_server.is_local
+						action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} isn't local." )
+						action :respond, "480 No voicemail here"  #OPTIMIZE
+					else
+						#if dst_sip_account.voicemail_server.host != dst_sip_domain
+						#	action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} is local but #{dst_sip_account.voicemail_server.host.inspect} != #{dst_sip_domain.inspect}." )
+						#	action :respond, "480 No voicemail here"  #OPTIMIZE
+						#else
+							action_log( FS_LOG_INFO, "Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ..." )
+							action :answer
+							action :sleep, 250
+							action :set, "voicemail_alternate_greet_id=#{ sip_user_encode( dst_sip_dnis_user )}"
+							action :voicemail, "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
+						#end
+					end
+				end
+			end
+			
+			
 			action :hangup
 			
-		end
+		)end
 		
 		respond_to { |format|
 			format.xml {
@@ -241,6 +274,8 @@ class FreeswitchCallProcessingController < ApplicationController
 	# See the "user" rule in http://tools.ietf.org/html/rfc3261 .
 	#
 	def sip_user_encode( str )  #OPTIMIZE
+		str = str.to_s
+		
 		# Sanitize control characters. They could be encoded but cause
 		# problems for many implementations:
 		str = str.gsub( /[\x00-\x1F]+/, ' ' )
@@ -301,8 +336,10 @@ class FreeswitchCallProcessingController < ApplicationController
 	end
 	
 	# Like sip_displayname_encode() but enclosed in double quotes.
+	# Returns an empty string (no quotes) for .blank?() strings
 	#
 	def sip_displayname_quote( str )
+		return '' if str.blank?
 		return '"' << sip_displayname_encode( str ).to_s << '"'
 	end
 	

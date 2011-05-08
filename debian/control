@@ -79,7 +79,8 @@ Package: gemeinschaft-sip-proxy
 Architecture: all
 Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), adduser, gemeinschaft-odbc-sqlite3 (= ${binary:Version}), kamailio (>= 3.1.0), kamailio-unixodbc-modules, kamailio-presence-modules
 Replaces: kamailio, gemeinschaft-sip-proxy
-Conflicts: ser, openser, opensips, kamailio (= 3.1.3+squeeze1), kamailio (= 3.1.3+squeeze2) [amd64]
+Conflicts: ser, openser, opensips, kamailio (= 3.1.3+squeeze1)
+#Conflicts: kamailio (= 3.1.3+squeeze2) [amd64]
 # kamailio 3.1.1 (31-nightly) works. The kamailio 3.1.3+squeeze1
 # (stable) packages are broken. 3.1.3+squeeze2 (stable) works.
 Recommends: gemeinschaft-sip-pbx

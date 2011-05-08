@@ -1,5 +1,7 @@
 class Phone < ActiveRecord::Base
 	
+	#OPTIMIZE Combine Phone and SipPhone into one model?
+	
 	before_validation :format_mac_address
 	
 	validates_presence_of     :mac_address

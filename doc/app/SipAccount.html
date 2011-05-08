@@ -65,6 +65,19 @@
 
 			<!-- Method Quickref -->
 			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-create_subscriber">#create_subscriber</a></li>
+					
+					<li><a href="#method-i-delete_subscriber">#delete_subscriber</a></li>
+					
+					<li><a href="#method-i-update_subscriber">#update_subscriber</a></li>
+					
+				</ul>
+			</div>
+			
 
 			<!-- Included Modules -->
 			
@@ -138,7 +151,13 @@
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
+					<li><a href="./Location.html">Location</a></li>
+				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
 				
 					<li><a href="./Node.html">Node</a></li>
 				
@@ -166,7 +185,13 @@
 				
 					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
 				
+					<li><a href="./PhoneModelsController.html">PhoneModelsController</a></li>
+				
+					<li><a href="./PhonesController.html">PhonesController</a></li>
+				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./Pua.html">Pua</a></li>
 				
 					<li><a href="./RebootRequest.html">RebootRequest</a></li>
 				
@@ -202,9 +227,15 @@
 				
 					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
 				
+					<li><a href="./Subscriber.html">Subscriber</a></li>
+				
+					<li><a href="./SubscribersController.html">SubscribersController</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./Version.html">Version</a></li>
 				
 					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
 				
@@ -235,6 +266,142 @@
 
 		<!-- Methods -->
 		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="create-subscriber-method" class="method-detail ">
+				<a name="method-i-create_subscriber"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">create_subscriber</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="create-subscriber-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 54</span>
+54:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_subscriber</span>()
+55:     <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">create</span>(
+56:       <span class="ruby-value">:username</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name</span>,
+57:       <span class="ruby-value">:domain</span>     =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_server</span>.<span class="ruby-identifier">host</span>,
+58:       <span class="ruby-value">:password</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">password</span>,
+59:       <span class="ruby-value">:ha1</span>        =<span class="ruby-operator">&gt;</span>  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-node">&quot;#{self.auth_name}:#{self.sip_server.host}:#{self.password}&quot;</span> )
+60:     )
+61:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber</span>.<span class="ruby-identifier">valid?</span>
+62:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to create subscriber&quot;</span>)
+63:     <span class="ruby-keyword kw">end</span>
+64:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="delete-subscriber-method" class="method-detail ">
+				<a name="method-i-delete_subscriber"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">delete_subscriber</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="delete-subscriber-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 83</span>
+83:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_subscriber</span>()
+84:     <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_proxy_id_was</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_proxy_id_was</span>).<span class="ruby-identifier">is_local?</span>)
+85:       <span class="ruby-identifier">subscriber_delete</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">find_by_username</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name_was</span> )
+86:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subscriber_delete</span>
+87:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber_delete</span>.<span class="ruby-identifier">destroy</span>
+88:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to delete subscriber&quot;</span>)
+89:         <span class="ruby-keyword kw">end</span>
+90:       <span class="ruby-keyword kw">end</span>
+91:     <span class="ruby-keyword kw">end</span>
+92:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="update-subscriber-method" class="method-detail ">
+				<a name="method-i-update_subscriber"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">update_subscriber</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="update-subscriber-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 66</span>
+66:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_subscriber</span>()
+67:     <span class="ruby-identifier">subscriber_update</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">find_by_username</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name_was</span> )
+68:     <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber_update</span>.<span class="ruby-identifier">nil?</span>)
+69:       <span class="ruby-identifier">subscriber</span> = <span class="ruby-identifier">subscriber_update</span>.<span class="ruby-identifier">update_attributes</span>(
+70:         <span class="ruby-value">:username</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name</span>,
+71:         <span class="ruby-value">:domain</span>     =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_server</span>.<span class="ruby-identifier">host</span>,
+72:         <span class="ruby-value">:password</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">password</span>,
+73:         <span class="ruby-value">:ha1</span>        =<span class="ruby-operator">&gt;</span>  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-node">&quot;#{self.auth_name}:#{self.sip_server.host}:#{self.password}&quot;</span> )
+74:       )
+75:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber</span>
+76:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to update subscriber&quot;</span>)
+77:       <span class="ruby-keyword kw">end</span>
+78:     <span class="ruby-keyword kw">else</span>
+79:       <span class="ruby-identifier">create_subscriber</span>()
+80:     <span class="ruby-keyword kw">end</span>
+81:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

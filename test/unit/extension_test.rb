@@ -1,9 +1,55 @@
 require 'test_helper'
 
 class ExtensionTest < ActiveSupport::TestCase
-  
-  should "have a valid factory" do
-    assert Factory.build(:extension).valid?
-  end
-  
+	
+	should "have a valid factory" do
+		assert Factory.build(:extension).valid?
+	end
+	
+	
+	# valid extension
+	[
+		'123',
+		'1',
+		'123456',
+		'foo',
+		'12345678901',
+		'123foo',
+		'012foo',
+		'01',
+		'foo123',
+		'hans.test',
+		'-',
+		'+',
+		'-1',
+		'-0',
+		'+10',
+		'azAZ09+*#.-_',
+	].each { |value|
+		should "be valid with value #{value.inspect}" do
+			e = Factory.build( :extension, :extension => value )
+			assert e.valid?
+		end
+		
+		should "be valid with value #{value.inspect} (and actually store it)" do
+			e = Factory.build( :extension, :extension => value )
+			# Check that the Extension actually stored the string
+			# without casting it to an integer:
+			assert e.extension == value
+		end
+	}
+	
+	# invalid extension
+	[
+		nil,
+		'',
+		-1,
+	].each { |extension|
+		should "not be valid with extension #{extension.inspect}" do
+			assert ! Factory.build( :extension, :extension => extension ).valid?
+		end
+	}
+	
+	
+	
 end

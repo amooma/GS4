@@ -63,7 +63,7 @@ class SipPhonesController < ApplicationController
     
     respond_to do |format|
       if @sip_phone.save
-        format.html { redirect_to(@sip_phone, :notice => 'Sip phone was successfully created.') }
+        format.html { redirect_to(@sip_phone, :notice => 'SIP phone was successfully created.') }
         format.xml  { render :xml => @sip_phone, :status => :created, :location => @sip_phone }
       else
         format.html { render :action => "new" }
@@ -79,7 +79,7 @@ class SipPhonesController < ApplicationController
     setup_cantina_phone
     respond_to do |format|
       if @sip_phone.update_attributes(params[:sip_phone])
-        format.html { redirect_to(@sip_phone, :notice => 'Sip phone was successfully updated.') }
+        format.html { redirect_to(@sip_phone, :notice => 'SIP phone was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -101,12 +101,14 @@ class SipPhonesController < ApplicationController
   end
   
   private
+  
   def setup_cantina_phone
     if @sip_phone.node_id != nil
       host = Node.find( @sip_phone.node_id ).management_host
       port = Node.find( @sip_phone.node_id ).management_port
       CantinaPhone.set_resource( "http://#{host}:#{port}" )
-      #OPTIMIZE Remove CantinaPhone.
+      #FIXME Remove CantinaPhone.
     end
   end  
+  
 end

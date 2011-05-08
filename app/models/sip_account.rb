@@ -6,8 +6,8 @@ class SipAccount < ActiveRecord::Base
   belongs_to :phone            , :validate => true
   belongs_to :user             , :validate => true
   
-  has_many :sip_account_to_extensions, :dependent => :destroy
-  has_many :extensions, :through => :sip_account_to_extensions
+  has_many :sip_account_to_extensions, :dependent => :destroy   #OPTIMIZE :order => 'position' ?
+  has_many :extensions, :through => :sip_account_to_extensions  #OPTIMIZE :order => 'position' ?
   
   acts_as_list :scope => :user
   
@@ -32,24 +32,28 @@ class SipAccount < ActiveRecord::Base
     :in => [ nil ],
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
-
-  after_validation( :on => :create ) do
-    if (! self.sip_server_id.nil?) && (! self.sip_proxy_id.nil?) && (self.sip_proxy.is_local?)
+  
+  after_validation( :on => :create ) {
+    if (! self.sip_server_id.nil?) \
+    && (! self.sip_proxy_id.nil?) \
+    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
       create_subscriber()
     end
-  end
+  }
   
-  after_validation( :on => :update ) do
-    if (! self.sip_server_id.nil?) && (! self.sip_proxy_id.nil?) && (self.sip_proxy.is_local?)
+  after_validation( :on => :update ) {
+    if (! self.sip_server_id.nil?) \
+    && (! self.sip_proxy_id.nil?) \
+    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
       update_subscriber()
     else
       delete_subscriber()
     end
-  end
+  }
   
-  before_destroy do
+  before_destroy {
     delete_subscriber()
-  end
+  }
   
   def create_subscriber()
     subscriber = Subscriber.create(
@@ -81,7 +85,8 @@ class SipAccount < ActiveRecord::Base
   end
   
   def delete_subscriber()
-    if (! self.sip_proxy_id_was.nil?) && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local?)
+    if (! self.sip_proxy_id_was.nil?) \
+    && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local)  #FIXME self.sip_proxy can be nil
       subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
       if subscriber_delete
         if ! subscriber_delete.destroy
@@ -90,4 +95,5 @@ class SipAccount < ActiveRecord::Base
       end
     end
   end
+  
 end

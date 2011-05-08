@@ -4,7 +4,7 @@
     1111 bytes,    43 lines   *  postinst             #!/bin/sh
  Package: gemeinschaft-odbc-sqlite3
  Source: gemeinschaft
- Version: 4.0~beta1-1
+ Version: 4.0~beta2-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
  Installed-Size: 56

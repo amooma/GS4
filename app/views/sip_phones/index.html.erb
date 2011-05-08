@@ -13,7 +13,7 @@
 <% @sip_phones.each { |sip_phone|
   node = sip_phone.node_id ? @nodes.find( sip_phone.node_id ) : nil
   if node
-    #OPTIMIZE Remove CantinaPhone.
+    #FIXME Remove CantinaPhone.
     CantinaPhone.set_resource( "http://#{node.management_host}:#{node.management_port}/" )
     # FIXME https once it is implemented
   end
@@ -30,7 +30,7 @@
     <td><%=
       if node
         begin
-          #OPTIMIZE Remove CantinaPhone.
+          #FIXME Remove CantinaPhone.
           CantinaPhone.find( sip_phone.phone_id ).mac_address
         rescue ActiveResource::ResourceNotFound => e
           "(not found!)"
