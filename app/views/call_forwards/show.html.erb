@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sip account:</b>
+  <%= @call_forward.sip_account_id %>
+</p>
+
+<p>
+  <b>Call forward reason:</b>
+  <%= @call_forward.call_forward_reason_id %>
+</p>
+
+<p>
+  <b>Destination:</b>
+  <%= @call_forward.destination %>
+</p>
+
+<p>
+  <b>Call timeout:</b>
+  <%= @call_forward.call_timeout %>
+</p>
+
+
+<%= link_to 'Edit', edit_call_forward_path(@call_forward) %> |
+<%= link_to 'Back', call_forwards_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sip_account_id: 1
+  call_forward_reason_id: 1
+  destination: MyString
+  call_timeout: 1
+
+two:
+  sip_account_id: 1
+  call_forward_reason_id: 1
+  destination: MyString
+  call_timeout: 1

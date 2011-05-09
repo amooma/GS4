@@ -1,0 +1,29 @@
+<h1>Listing call_forwards</h1>
+
+<table>
+  <tr>
+    <th>Sip account</th>
+    <th>Call forward reason</th>
+    <th>Destination</th>
+    <th>Call timeout</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @call_forwards.each do |call_forward| %>
+  <tr>
+    <td><%= call_forward.sip_account_id %></td>
+    <td><%= call_forward.call_forward_reason_id %></td>
+    <td><%= call_forward.destination %></td>
+    <td><%= call_forward.call_timeout %></td>
+    <td><%= link_to 'Show', call_forward %></td>
+    <td><%= link_to 'Edit', edit_call_forward_path(call_forward) %></td>
+    <td><%= link_to 'Destroy', call_forward, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Call forward', new_call_forward_path %>
