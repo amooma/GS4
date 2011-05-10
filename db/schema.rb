@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110505104403) do
+ActiveRecord::Schema.define(:version => 20110509111856) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -20,8 +20,31 @@ ActiveRecord::Schema.define(:version => 20110505104403) do
     t.datetime "updated_at"
   end
 
+  create_table "call_forward_reasons", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "call_forwards", :force => true do |t|
+    t.integer  "sip_account_id"
+    t.integer  "call_forward_reason_id"
+    t.string   "destination"
+    t.integer  "call_timeout"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "codecs", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conferences", :force => true do |t|
+    t.string   "name"
+    t.integer  "pin"
+    t.integer  "extension_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

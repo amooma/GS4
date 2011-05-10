@@ -1,0 +1,33 @@
+<%= form_for(@call_forward) do |f| %>
+  <% if @call_forward.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@call_forward.errors.count, "error") %> prohibited this call_forward from being saved:</h2>
+
+      <ul>
+      <% @call_forward.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sip_account_id %><br />
+    <%= f.text_field :sip_account_id %>
+  </div>
+  <div class="field">
+    <%= f.label :call_forward_reason_id %><br />
+    <%= f.text_field :call_forward_reason_id %>
+  </div>
+  <div class="field">
+    <%= f.label :destination %><br />
+    <%= f.text_field :destination %>
+  </div>
+  <div class="field">
+    <%= f.label :call_timeout %><br />
+    <%= f.text_field :call_timeout %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

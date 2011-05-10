@@ -1,5 +1,9 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  resources :call_forwards
+
+  resources :conferences
+
 	get "setup/index"
 	get "setup/create"
 	get "setup/new"

@@ -343,3 +343,5 @@ Version.create(:table_name => "globalblacklist", :table_version => "1")
 Version.create(:table_name => "htable", :table_version => "1")
 Version.create(:table_name => "purplemap", :table_version => "1")
 Version.create(:table_name => "uacreg", :table_version => "1")
+
+Extension.create(:extension => "80", :destination => "-vmmenue-", :active => true)
