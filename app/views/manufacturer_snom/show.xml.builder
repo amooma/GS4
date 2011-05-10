@@ -23,7 +23,8 @@ xml.settings {
 		xml.retry_after_failed_register( '70', :perm => 'RW' )
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
-		xml.dkey_directory("url http://#{@my_local_ip}#{phone_book_internal_users_path}")
+		
+		xml.dkey_directory( "url http://#{@my_local_ip}#{phone_book_internal_users_path}", :perm => 'RW' )
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
@@ -96,6 +97,7 @@ xml.settings {
 			xml.user_srtp(              'off'                 , saopts_rw )
 			xml.user_savp(              'off'                 , saopts_rw )
 			xml.codec_size(             '20'                  , saopts_rw )
+			
 			codec_i = 1
 			max_codec_i = 7
 			@codec_mapping_snom.each do |codec_name, codec_id|
