@@ -1,4 +1,4 @@
-<%= form_for(@call_forward) do |f| %>
+<%= simple_form_for @call_forward do |f| %>
   <% if @call_forward.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@call_forward.errors.count, "error") %> prohibited this call_forward from being saved:</h2>
@@ -12,12 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :sip_account_id %><br />
-    <%= f.text_field :sip_account_id %>
+    <%= f.association :sip_account, :label_method => :caller_name %>
   </div>
   <div class="field">
-    <%= f.label :call_forward_reason_id %><br />
-    <%= f.text_field :call_forward_reason_id %>
+    <%= f.association :call_forward_reason, :label_method => :value %>
   </div>
   <div class="field">
     <%= f.label :destination %><br />
