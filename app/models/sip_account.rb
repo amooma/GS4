@@ -13,7 +13,8 @@ class SipAccount < ActiveRecord::Base
   
   validate_username         :auth_name
   validates_uniqueness_of   :auth_name, :case_sensitive => false, :scope => :sip_server_id
-  
+  # As long as caller_name stays here
+  validates_presence_of     :caller_name
   validates_presence_of     :sip_server
   validates_presence_of     :sip_proxy
   validates_presence_of     :voicemail_server , :if => Proc.new { |me| me.voicemail_server_id }
@@ -22,7 +23,9 @@ class SipAccount < ActiveRecord::Base
   
   validate_password         :password
   
-    
+  after_validation :phone_reboot
+  before_destroy :phone_reboot
+ 
   validates_numericality_of :voicemail_pin,
     :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
     :only_integer => true,
@@ -95,5 +98,7 @@ class SipAccount < ActiveRecord::Base
       end
     end
   end
-  
+  def phone_reboot
+    self.phone.reboot if self.phone
+  end
 end

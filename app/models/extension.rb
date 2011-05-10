@@ -25,7 +25,7 @@ class Extension < ActiveRecord::Base
   # Destination must be a valid SIP "user" per RFC 3261:
   validate_username       :destination
   # Destination must have a destination that we support:
-  validates_format_of     :destination, :with => /^[a-zA-Z0-9+*#][a-zA-Z0-9+*#.\-_]*$/,
+  validates_format_of     :destination, :with => /^[a-zA-Z0-9+*#\-][a-zA-Z0-9+*#.\-_]*$/,
     :allow_nil => false, :allow_blank => false
   
   
