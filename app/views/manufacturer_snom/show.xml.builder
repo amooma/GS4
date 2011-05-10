@@ -24,7 +24,8 @@ xml.settings {
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
 		
-		xml.dkey_directory( "url http://#{@my_local_ip}#{phone_book_internal_users_path}", :perm => 'RW' )
+		#OPTIMIZE http/https protocol for dkey_directory
+		xml.dkey_directory( "url http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}#{phone_book_internal_users_path}", :perm => 'RW' )	
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
