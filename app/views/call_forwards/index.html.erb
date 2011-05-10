@@ -13,8 +13,8 @@
 
 <% @call_forwards.each do |call_forward| %>
   <tr>
-    <td><%= call_forward.sip_account_id %></td>
-    <td><%= call_forward.call_forward_reason_id %></td>
+    <td><%= call_forward.sip_account.caller_name %> (id <%= call_forward.sip_account_id %>)</td>
+    <td><%= call_forward.call_forward_reason.value %></td>
     <td><%= call_forward.destination %></td>
     <td><%= call_forward.call_timeout %></td>
     <td><%= link_to 'Show', call_forward %></td>
