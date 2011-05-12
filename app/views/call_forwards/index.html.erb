@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Sip account</th>
+    <th>Source</th>
     <th>Call forward reason</th>
     <th>Destination</th>
     <th>Call timeout</th>
@@ -14,6 +15,7 @@
 <% @call_forwards.each do |call_forward| %>
   <tr>
     <td><%= call_forward.sip_account.caller_name %> (id <%= call_forward.sip_account_id %>)</td>
+    <td><%= call_forward.source %></td>
     <td><%= call_forward.call_forward_reason.value %></td>
     <td><%= call_forward.destination %></td>
     <td><%= call_forward.call_timeout %></td>

@@ -15,6 +15,10 @@
     <%= f.association :sip_account, :label_method => :caller_name %>
   </div>
   <div class="field">
+    <%= f.label :source %><br />
+    <%= f.text_field :source %>
+  </div>
+  <div class="field">
     <%= f.association :call_forward_reason, :label_method => :value %>
   </div>
   <div class="field">
