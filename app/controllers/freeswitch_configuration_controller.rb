@@ -6,6 +6,7 @@ class FreeswitchConfigurationController < ApplicationController
 		@sounds_dir = '/'
 		@hold_music = 'local_stream://moh'
 		@internal_sip_port = 15060
+		@external_sip_port = 15080
 		@timezones = timezones()
 		respond_to { |format|
 				format.xml 
