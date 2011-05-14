@@ -25,6 +25,9 @@
   <%= @call_forward.call_timeout %>
 </p>
 
-
+<p>
+  <b>Active:</b>
+  <%= @call_forward.active %>
+</p>
 <%= link_to 'Edit', edit_call_forward_path(@call_forward) %> |
 <%= link_to 'Back', call_forwards_path %>

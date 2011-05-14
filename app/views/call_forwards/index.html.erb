@@ -7,6 +7,7 @@
     <th>Call forward reason</th>
     <th>Destination</th>
     <th>Call timeout</th>
+    <th>Active</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= call_forward.call_forward_reason.value %></td>
     <td><%= call_forward.destination %></td>
     <td><%= call_forward.call_timeout %></td>
+    <td><%= call_forward.active %></td>
     <td><%= link_to 'Show', call_forward %></td>
     <td><%= link_to 'Edit', edit_call_forward_path(call_forward) %></td>
     <td><%= link_to 'Destroy', call_forward, :confirm => 'Are you sure?', :method => :delete %></td>
