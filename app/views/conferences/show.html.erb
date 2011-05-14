@@ -10,11 +10,19 @@
   <%= @conference.pin %>
 </p>
 
-<p>
-  <b>Extension:</b>
-  <%= @conference.extension_id %>
+<b>Extensions:</b>
+  <% if @conference.extensions.count == 0 %>
+    <div class="noticebox">
+      You need to create an extension to be able to call the conference room!
+  </div>
+  <% end %>
+  <ul>
+  <% @conference.extensions.each do |extension| %>
+    <li><%= extension.extension %></li>  
+  <% end %>
+    <li><%= link_to 'create extension', new_conference_extension_path(@conference, {:destination => @conference.uuid}) %>
+  </ul>
 </p>
-
 
 <%= link_to 'Edit', edit_conference_path(@conference) %> |
 <%= link_to 'Back', conferences_path %>

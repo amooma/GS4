@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  conference_id: 1
+  extension_id: 1
+  position: 1
+
+two:
+  conference_id: 1
+  extension_id: 1
+  position: 1

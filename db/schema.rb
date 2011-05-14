@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110513125149) do
+ActiveRecord::Schema.define(:version => 20110514204413) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -43,12 +43,20 @@ ActiveRecord::Schema.define(:version => 20110513125149) do
     t.datetime "updated_at"
   end
 
+  create_table "conference_to_extensions", :force => true do |t|
+    t.integer  "conference_id"
+    t.integer  "extension_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "conferences", :force => true do |t|
     t.string   "name"
     t.integer  "pin"
-    t.integer  "extension_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uuid"
   end
 
   create_table "extensions", :force => true do |t|

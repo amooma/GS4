@@ -19,10 +19,7 @@
     <%= f.label :pin %><br />
     <%= f.text_field :pin %>
   </div>
-  <div class="field">
-    <%= f.label :extension_id %><br />
-    <%= f.text_field :extension_id %>
-  </div>
+  <%= f.hidden_field :uuid %>
   <div class="actions">
     <%= f.submit %>
   </div>

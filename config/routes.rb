@@ -16,6 +16,9 @@ Gemeinschaft4::Application.routes.draw do
 	resources :sip_accounts do
 		resources :extensions
 	end
+	resources :conferences do
+		resources :extensions
+	end
 	resources :sip_phones
 	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]

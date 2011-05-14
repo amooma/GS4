@@ -2,7 +2,6 @@ class ExtensionsController < ApplicationController
   
   before_filter :authenticate_user!
   before_filter :find_sip_account
-  
   before_filter {
     @sip_accounts = SipAccount.order([ :auth_name, :sip_server_id ])
   }
@@ -40,9 +39,10 @@ class ExtensionsController < ApplicationController
   # GET /extensions/new
   # GET /extensions/new.xml
   def new
-    if @sip_account.nil?
-      @extension = Extension.new
-    else
+    if @sip_account.nil? && @conference.nil?
+            @extension = Extension.new
+
+    else 
       @extension = @sip_account.extensions.build({
       	:active      => true,
       	:destination => params[:destination],
@@ -129,5 +129,5 @@ class ExtensionsController < ApplicationController
       @sip_account = SipAccount.find( params[:sip_account_id] )
     end
   end
-  
+ 
 end
