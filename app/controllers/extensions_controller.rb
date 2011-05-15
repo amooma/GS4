@@ -148,7 +148,7 @@ class ExtensionsController < ApplicationController
       @sip_account = SipAccount.find( params[:sip_account_id] )
     end
   end
- def find_conference
+  def find_conference
     if ! params[:conference_id].nil?
       @conference = Conference.find( params[:conference_id] )
     end
