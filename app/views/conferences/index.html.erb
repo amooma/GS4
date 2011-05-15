@@ -14,9 +14,18 @@
   <tr>
     <td><%= conference.name %></td>
     <td><%= conference.pin %></td>
+    <td>
+    <% if !conference.extensions.nil? %>
+      <ul>
+      <% conference.extensions.each do |extension| %>
+        <li><%= link_to extension.extension, conference_extension_path(conference, extension) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </td>
     <td><%= link_to 'Show', conference %></td>
     <td><%= link_to 'Edit', edit_conference_path(conference) %></td>
-    <td><%= link_to 'Destroy', conference, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', conference, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

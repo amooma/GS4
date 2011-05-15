@@ -1,4 +1,4 @@
-<%= simple_form_for @extension  do |f| %>
+<%= simple_form_for [@sip_account, @extension]  do |f| %>
 
   <% if @extension.errors.any? %>
     <div id="error_explanation">

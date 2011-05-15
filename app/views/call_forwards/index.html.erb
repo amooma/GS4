@@ -23,7 +23,7 @@
     <td><%= call_forward.active %></td>
     <td><%= link_to 'Show', call_forward %></td>
     <td><%= link_to 'Edit', edit_call_forward_path(call_forward) %></td>
-    <td><%= link_to 'Destroy', call_forward, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', call_forward, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

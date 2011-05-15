@@ -2,8 +2,11 @@ class ExtensionsController < ApplicationController
   
   before_filter :authenticate_user!
   before_filter :find_sip_account
+  before_filter :find_conference
+  # OTIMIZE Where is this used?
   before_filter {
     @sip_accounts = SipAccount.order([ :auth_name, :sip_server_id ])
+    @conferences = Conference.order([ :uuid ])
   }
   
   # GET /extensions
@@ -39,14 +42,18 @@ class ExtensionsController < ApplicationController
   # GET /extensions/new
   # GET /extensions/new.xml
   def new
-    if @sip_account.nil? && @conference.nil?
-            @extension = Extension.new
-
-    else 
+    if ! @sip_account.nil?
       @extension = @sip_account.extensions.build({
-      	:active      => true,
-      	:destination => params[:destination],
+      :active      => true,
+      :destination => params[:destination],
       })
+    elsif ! @conference.nil?
+      @extension = @conference.extensions.build({
+      :active      => true,
+      :destination => params[:destination],
+      })
+    else
+      @extension = Extension.new
     end
     
     respond_to do |format|
@@ -67,25 +74,37 @@ class ExtensionsController < ApplicationController
   # POST /extensions
   # POST /extensions.xml
   def create
-    if @sip_account.nil?
-      @extension = Extension.new(params[:extension])
+    if ! @sip_account.nil?
+     @extension = @sip_account.extensions.build(params[:extension])
       
       respond_to do |format|
-        if @extension.save
-          format.html { redirect_to( @extension, :notice => 'Extension was successfully created.' )}
-          format.xml  { render :xml => @extension, :status => :created, :location => @extension }
+        if @sip_account.save
+          format.html { redirect_to( @sip_account, :notice => 'Extension was successfully created.' )}
+          format.xml  { render :xml => @sip_account, :status => :created, :location => @extension }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
+        end
+      end
+    elsif ! @conference.nil?
+      @extension = @conference.extensions.build(params[:extension])
+      
+      respond_to do |format|
+        if @conference.save
+          format.html { redirect_to( @conference, :notice => 'Extension was successfully created.' )}
+          format.xml  { render :xml => @conference, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
           format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
         end
       end
     else
-      @extension = @sip_account.extensions.build(params[:extension])
+     @extension = Extension.new(params[:extension])
       
       respond_to do |format|
-        if @sip_account.save
-          format.html { redirect_to( @sip_account, :notice => 'Extension was successfully created.' )}
-          format.xml  { render :xml => @sip_account, :status => :created, :location => @extension }
+        if @extension.save
+          format.html { redirect_to( @extension, :notice => 'Extension was successfully created.' )}
+          format.xml  { render :xml => @extension, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
           format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
@@ -129,5 +148,9 @@ class ExtensionsController < ApplicationController
       @sip_account = SipAccount.find( params[:sip_account_id] )
     end
   end
- 
+ def find_conference
+    if ! params[:conference_id].nil?
+      @conference = Conference.find( params[:conference_id] )
+    end
+  end
 end

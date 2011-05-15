@@ -1,6 +1,12 @@
 <h1>Editing extension</h1>
 
-<%= render 'form' %>
+<% if ! @sip_account.nil? %>
+  <%= render 'form_sip_account' %>
+<% elsif ! @conference.nil? %>
+  <%= render 'form_conference' %>
+<% else %>
+    <%= render 'form' %>
+<% end %>
 
 <%= link_to 'Show', @extension %> |
 <%= link_to 'Back', extensions_path %>
