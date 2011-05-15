@@ -7,4 +7,7 @@ class Conference < ActiveRecord::Base
   validates_numericality_of :pin
   
   validate_username :uuid
+  # OPTIMIZE :uuid length = "-conference-" + 10
+  validates_format_of :uuid, :with => /^-conference-.*$/,
+    :allow_nil => false, :allow_blank => false
 end
