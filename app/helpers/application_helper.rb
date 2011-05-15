@@ -11,6 +11,7 @@ module ApplicationHelper
         { :text => "SIP Accounts"  , :url => sip_accounts_path },
         { :text => "Callforwards", :url => call_forwards_path },
         { :text => "Extensions"    , :url => extensions_path },
+        { :text => "Conferences" , :url => conferences_path},
         { :text => "Servers"       , :sub => [
           { :text => "SIP Domains"          , :url => sip_servers_path },
           { :text => "SIP Proxies"          , :url => sip_proxies_path },
