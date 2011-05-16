@@ -25,7 +25,6 @@ xml.document(:type => 'freeswitch/xml') {
 		
 		xml.configuration(:name => 'conference.conf', :description => 'Audio Conference') {
 			xml.advertise {
-				xml.room(:name => "30@#{@domain}", :status => 'PBX')
 			}
 			xml.tag!('caller-controls') {
 				xml.group(:name => 'default') {
@@ -125,6 +124,15 @@ xml.document(:type => 'freeswitch/xml') {
 			}
 		}
 
+		xml.configuration(:name => 'xml_rpc.conf', :description => 'XML RPC') {
+			xml.settings {
+				xml.param(:name => 'http-port', :value => '8080')
+				xml.param(:name => 'auth-realm', :value => 'freeswitch')
+				xml.param(:name => 'auth-user', :value => 'freeswitch')
+				xml.param(:name => 'auth-pass', :value => 'works')
+			}
+		}
+
 		xml.configuration(:name => 'xml_curl.conf', :description => 'cURL XML Gateway') {
 			xml.bindings {
 				xml.binding(:name => 'our users directory') {
@@ -175,6 +183,7 @@ xml.document(:type => 'freeswitch/xml') {
 			xml.modules {
 				xml.tag!('load', :module => 'mod_console')
 				xml.tag!('load', :module => 'mod_logfile')
+				xml.tag!('load', :module => 'mod_xml_rpc')
 				xml.tag!('load', :module => 'mod_xml_curl')
 				xml.tag!('load', :module => 'mod_cdr_csv')
 				xml.tag!('load', :module => 'mod_event_socket')
@@ -209,6 +218,8 @@ xml.document(:type => 'freeswitch/xml') {
 			}
 		}
 
+		
+
 		xml.configuration(:name => 'timezones.conf', :description => 'Timezones') {
 			xml.timezones {
 				@timezones.each_pair do |name, value|
@@ -216,6 +227,8 @@ xml.document(:type => 'freeswitch/xml') {
 				end
 			}
 		}
+
+		
 
 		xml.configuration(:name => 'voicemail.conf', :description => 'Voicemail') {
 			xml.settings {
@@ -377,6 +390,12 @@ xml.document(:type => 'freeswitch/xml') {
 				xml.condition(:field => '${unroll_loops}', :expression => '^true$')
 				xml.condition(:field => '${sip_looped_call}', :expression => '^true$') {
 					xml.action(:application => 'deflect', :data => '${destination_number}')
+				}
+			}
+			xml.extension(:name => 'kam-vbox') {
+				xml.condition(:field => 'destination_number', :expression => '^-vbox-(.+)$') {
+					xml.action(:application => 'answer', :data => 'voicemail_authorized=true')
+					xml.action(:application => 'voicemail', :data => 'default ${domain_name} $1')
 				}
 			}
 			xml.extension(:name => 'kam-vmenu-self') {
