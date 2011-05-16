@@ -58,6 +58,18 @@ will build the domains ACL using this value.
 				<action application="voicemail" data="default ${domain_name} $1" />
 			</condition>
 		</extension>
+		<extension name="kam-park-in">
+    			<condition field="destination_number" expression="^-park-in-$">
+       				<action application="valet_park" data="valet_lot auto in 8000 9000"/>
+			</condition>
+		</extension>
+		 <extension name="kam-park-out">
+   			<condition field="destination_number" expression="^-park-out-$">
+     				<action application="answer"/>
+			    	<action application="valet_park" data="valet_lot ask 4 4 10000 ivr/ivr-enter_ext_pound.wav"/>
+			</condition>
+ 		</extension>
+
 		<!--	
 		<extension name="kam-vmenu">
 			<condition field="destination_number" expression="^-vmenu-(.+)$">
