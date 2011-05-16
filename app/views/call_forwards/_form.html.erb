@@ -19,7 +19,7 @@
     <%= f.text_field :source %>
   </div>
   <div class="field">
-    <%= f.association :call_forward_reason, :label_method => :value %>
+    <%= f.association :call_forward_reason, :label_method => :value, :include_blank => false %>
   </div>
   <div class="field">
     <%= f.label :destination %><br />
