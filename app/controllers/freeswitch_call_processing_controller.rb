@@ -203,15 +203,31 @@ class FreeswitchCallProcessingController < ApplicationController
 				call_forward_always = CallForward.where(
 					:sip_account_id => dst_sip_account.id,
 					:active => true,
-					:source => ""
+					:source => "#{src_cid_sip_user}"
 					).joins( :call_forward_reason ).where(
 					:call_forward_reasons => { :value => "always"}
 					).first
-				if call_forward_always.destination == "voicemail"
-					call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+				if ! call_forward_always
+				
+					call_forward_always = CallForward.where(
+						:sip_account_id => dst_sip_account.id,
+						:active => true,
+						:source => ""
+						).joins( :call_forward_reason ).where(
+						:call_forward_reasons => { :value => "always"}
+						).first 
 				end
+				
 				if call_forward_always
-					action :transfer , "#{call_forward_always.destination} XML default"
+					if call_forward_always.destination == "voicemail"
+						call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+					end
+				
+					if call_forward_always.destination.blank?
+						action :respond , "480 Blacklisted"
+					else
+						action :transfer , "#{call_forward_always.destination} XML default"
+					end
 				end
 				#OPTIMIZE Implement call-forwardings here ...
 			end
