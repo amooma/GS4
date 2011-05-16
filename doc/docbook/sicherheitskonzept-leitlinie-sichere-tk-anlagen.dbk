@@ -90,7 +90,18 @@
   <para>Dabei werden auch diejenigen Punkte genannt die
   <emphasis>nicht</emphasis> Bestandteile der vorgenommenen Analyse sind, da
   sie außerhalb des vorgesehenen, bestimmungsgemäßen Einsatzes der Anlage
-  liegen.</para>
+  liegen. Da eine Risiko- und Gefährdungsanalyse nicht auf alle
+  Einsatzszenarien gleichermaßen zutrifft muß sie zwangsläufig generalisieren
+  bzw. von typischen Standard-Szenarien ausgehen. Bei besonderen Szenarien
+  oder erhöhtem Schutzbedarf kann hier lediglich eine Hilfestellung geboten
+  werden, ggf. ist jedoch eine bedarfgerechte Analyse der betreffenden Punkte
+  vorzunehmen. Je nach Institution haben die aufgeführten Punkte
+  unterschiedliche Gewichtungen. Beispielsweise hätte eine Live-Übertragung
+  aus einem Wetter-Studio zu einem Radio-Sender meist geringere Anforderungen
+  an die Vertraulichkeit. Bei einem Notruf läge die Priorität auf einer hohen
+  Verfügbarkeit. Verschiedene Firmen/Organisationen haben sehr
+  unterschiedliche Anforderungen an die Verfügbarkeit, Vertraulichkeit und
+  Integrität von z.B. Sprachnachrichten oder Fax-Übertragungen.</para>
 
   <note>
     <para>Sofern nicht anders angegeben sind die im Folgenden genannten
