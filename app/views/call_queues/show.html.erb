@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @call_queue.name %>
+</p>
+
+<p>
+  <b>Uuid:</b>
+  <%= @call_queue.uuid %>
+</p>
+<b>Extensions:</b>
+  <% if @call_queue.extensions.count == 0 %>
+    <div class="noticebox">
+      You need to create an extension to call the queue!
+  </div>
+  <% end %>
+  <ul>
+  <% @call_queue.extensions.each do |extension| %>
+    <li><%= extension.extension %></li>  
+  <% end %>
+    <li><%= link_to 'create extension', new_call_queue_extension_path(@call_queue, {:destination => @call_queue.uuid}) %>
+  </ul>
+</p>
+
+<%= link_to 'Edit', edit_call_queue_path(@call_queue) %> |
+<%= link_to 'Back', call_queues_path %>

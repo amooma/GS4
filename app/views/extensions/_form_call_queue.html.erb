@@ -1,0 +1,32 @@
+<%= simple_form_for [@call_queue, @extension]  do |f| %>
+
+  <% if @extension.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@extension.errors.count, "error") %> prohibited this extension from being saved:</h2>
+
+      <ul>
+      <% @extension.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :extension %>
+    <%= f.text_field :extension %>
+  </div>
+  <div class="field">
+    <%= f.label :destination %>
+    <%= f.text_field :destination, :readonly => ! @extension.destination.nil? %>
+    <%#OPTIMIZE If SIP account is set then set destination automatically or vice-versa. %>
+  </div>
+  <div class="field">
+    <%= f.check_box :active %>
+    <%= f.label :active %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  call_queue_id: 1
+  extension_id: 1
+
+two:
+  call_queue_id: 1
+  extension_id: 1
