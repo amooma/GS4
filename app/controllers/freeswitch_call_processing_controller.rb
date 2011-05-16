@@ -200,11 +200,24 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			# Call-forwardings:
 			if dst_sip_account
+				call_forward_always = CallForward.where(
+					:sip_account_id => dst_sip_account.id,
+					:active => true,
+					:source => ""
+					).joins( :call_forward_reason ).where(
+					:call_forward_reasons => { :value => "always"}
+					).first
+				if call_forward_always.destination == "voicemail"
+					call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+				end
+				if call_forward_always
+					action :transfer , "#{call_forward_always.destination} XML default"
+				end
 				#OPTIMIZE Implement call-forwardings here ...
 			end
 			
 			# Ring the SIP user via Kamailio for 30 seconds:
-			if dst_sip_account
+			if dst_sip_account 
 				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
 				action :set       , "call_timeout=30"  #OPTIMIZE Read from CF-after-timeout
 				action :export    , "sip_contact_user=ufs"
