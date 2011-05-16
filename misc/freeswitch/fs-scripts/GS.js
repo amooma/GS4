@@ -33,7 +33,7 @@ try {
 	}
 	
 	// Sets the auto hangup option forcing the session to terminate when the javascript terminates.
-	session.setAutoHangup( true );
+	session.setAutoHangup( false );
 	
 	session.setHangupHook( function ( hup_session, how ) {
 		log( LOG_INFO, "Session "+ hup_session.name +" ended by "+ how +", ISUP cause: "+ hup_session.causecode +" ("+ hup_session.cause +")" );
