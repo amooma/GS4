@@ -76,6 +76,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		dst_sip_user_real = dst_sip_user  # un-alias
 		# (Alias lookup has already been done in kamailio.cfg.)
 		
+		
 		src_sip_account = (
 			SipAccount.where({
 				:auth_name => src_sip_user
@@ -85,17 +86,23 @@ class FreeswitchCallProcessingController < ApplicationController
 				:host => src_cid_sip_domain
 			})
 			.first )
+		dst_sip_account = nil
+		dst_conference = nil
+		dst_queue = nil
 		
-		dst_sip_account = (
-			SipAccount.where({
-				:auth_name => dst_sip_user_real
-			})
-			.joins( :sip_server )
-			.where( :sip_servers => {
-				:host => dst_sip_domain
-			})
-			.first )
-		
+		if dst_sip_user_real.match(/^-conference-.*/)
+			dst_conference = Conference.where(:uuid => dst_sip_user_real).first
+		else
+			dst_sip_account = (
+				SipAccount.where({
+					:auth_name => dst_sip_user_real
+				})
+				.joins( :sip_server )
+				.where( :sip_servers => {
+					:host => dst_sip_domain
+				})
+				.first )
+		end
 		logger.info(_bold( "[FS] SIP Call-ID: #{sip_call_id}" ))
 		logger.info(_bold( "[FS] Call" \
 			<< " from #{ sip_displayname_quote( src_cid_sip_display )}" \
@@ -137,7 +144,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		# And you have to explicitly send "_continue" as the last
 		# application.
 				
-		if dst_sip_user.blank?
+		if dst_sip_user.blank? && dst_conference.blank?
 			case _arg( 'Answer-State' )
 				when 'ringing'
 					action :respond   , '404 Not Found'  # or '400 Bad Request'? or '484 Address Incomplete'?
@@ -202,7 +209,11 @@ class FreeswitchCallProcessingController < ApplicationController
 				action :set       , "call_timeout=30"  #OPTIMIZE Read from CF-after-timeout
 				action :export    , "sip_contact_user=ufs"
 				action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+			elsif dst_conference
+				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
+				action :conference	, "#{dst_conference.uuid}@default+#{dst_conference.pin}"
 			end
+			
 			
 			# Call-forwardings:
 			if dst_sip_account
