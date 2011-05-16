@@ -54,4 +54,6 @@
   <xi:include href="sicherheitskonzept-section-strukturanalyse.dbk" />
 
   <xi:include href="sicherheitskonzept-section-schutzbedarfsfeststellung.dbk" />
+
+  <xi:include href="sicherheitskonzept-leitlinie-sichere-tk-anlagen.dbk" />
 </section>

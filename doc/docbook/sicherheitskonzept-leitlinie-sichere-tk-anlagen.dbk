@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section version="5.0" xml:id="leitlinie-sichere-tk-anlagen" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Vergleich mit der „Technische[n] Leitlinie Sichere TK-Anlagen“ des
+  BSI</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Nachfolgend analysieren und beschreiben wir die Telefonanlage
+  Gemeinschaft4 anhand der „<citetitle>Technische[n] Leitlinie Sichere
+  TK-Anlagen</citetitle>“ (TLSTK, BSI TL-02103, Version 1.0 vom 1.7.2008) des
+  Bundesamtes für Sicherheit in der Informationstechnik (BSI), siehe <link
+  xlink:href="https://www.bsi.bund.de/ContentBSI/Publikationen/Broschueren/tkanlagen/TL02103_htm.html">https://www.bsi.bund.de/ContentBSI/Publikationen/Broschueren/tkanlagen/TL02103_htm.html</link>.</para>
+
+  <sidebar>
+    <bibliolist>
+      <title>Literaturverzeichnis</title>
+
+      <biblioentry xreflabel="TLSTK" xml:id="biblio-tlstk">
+        <abbrev>TLSTK</abbrev>
+
+        <citetitle>Technische Leitlinie Sichere TK-Anlagen</citetitle>
+
+        <title>Technische Leitlinie Sichere TK-Anlagen</title>
+
+        <titleabbrev>TLSTK</titleabbrev>
+
+        <volumenum>BSI TL-02103</volumenum>
+
+        <edition>Version 1.0</edition>
+
+        <date>2008-07-01</date>
+
+        <author>
+          <orgname>Bundesamt für Sicherheit in der Informationstechnik
+          (BSI)</orgname>
+
+          <uri
+          xlink:href="http://www.bsi.bund.de/">http://www.bsi.bund.de/</uri>
+        </author>
+
+        <copyright>
+          <year>2008</year>
+
+          <holder>Bundesamt für Sicherheit in der Informationstechnik</holder>
+        </copyright>
+
+        <bibliocoverage temporal="dcmiperiod">scheme=W3C-DTF; end=2008-05;
+        name=Stand der Technik bis Mai 2008;</bibliocoverage>
+
+        <bibliosource class="uri"><link
+        xlink:href="https://www.bsi.bund.de/ContentBSI/Publikationen/Broschueren/tkanlagen/TL02103_htm.html">https://www.bsi.bund.de/ContentBSI/Publikationen/Broschueren/tkanlagen/TL02103_htm.html</link></bibliosource>
+      </biblioentry>
+    </bibliolist>
+  </sidebar>
+
+  <para>Die TLSTK nennt im Teil 1 (<quote><citetitle>Gefährdungen, Maßnahmen
+  und Konzepte</citetitle></quote>) Gefährdungen (G-TK-…) und
+  Sicherheitsmaßnahmen (M-TK-…), im Teil 2
+  (<quote><citetitle>Beschaffungsleitfaden</citetitle></quote>)
+  Anforderungs-/Auswahlkriterien (A-TK-…) und Prüfkriterien (P-TK-…).</para>
+</section>
