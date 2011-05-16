@@ -3,10 +3,12 @@ class ExtensionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_sip_account
   before_filter :find_conference
+  before_filter :find_call_queue
   # OTIMIZE Where is this used?
   before_filter {
     @sip_accounts = SipAccount.order([ :auth_name, :sip_server_id ])
     @conferences = Conference.order([ :uuid ])
+    @call_queues = CallQueue.order([ :uuid ])
   }
   
   # GET /extensions
@@ -52,6 +54,11 @@ class ExtensionsController < ApplicationController
       :active      => true,
       :destination => params[:destination],
       })
+    elsif ! @call_queue.nil?
+      @extension = @call_queue.extensions.build({
+      :active      => true,
+      :destination => params[:destination],
+      })
     else
       @extension = Extension.new
     end
@@ -93,6 +100,18 @@ class ExtensionsController < ApplicationController
         if @conference.save
           format.html { redirect_to( @conference, :notice => 'Extension was successfully created.' )}
           format.xml  { render :xml => @conference, :status => :created, :location => @extension }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
+        end
+      end
+    elsif ! @call_queue.nil?
+      @extension = @call_queue.extensions.build(params[:extension])
+      
+      respond_to do |format|
+        if @call_queue.save
+          format.html { redirect_to( @call_queue, :notice => 'Extension was successfully created.' )}
+          format.xml  { render :xml => @call_queue, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
           format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
@@ -151,6 +170,11 @@ class ExtensionsController < ApplicationController
   def find_conference
     if ! params[:conference_id].nil?
       @conference = Conference.find( params[:conference_id] )
+    end
+  end
+  def find_call_queue
+    if ! params[:call_queue_id].nil?
+      @call_queue = CallQueue.find( params[:call_queue_id] )
     end
   end
 end

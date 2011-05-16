@@ -4,6 +4,8 @@
   <%= render 'form_sip_account' %>
 <% elsif ! @conference.nil? %>
   <%= render 'form_conference' %>
+<% elsif ! @call_queue.nil? %>
+  <%= render 'form_call_queue' %>
 <% else %>
     <%= render 'form' %>
 <% end %>

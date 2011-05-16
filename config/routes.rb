@@ -1,5 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  resources :call_queues
+
   resources :call_forwards
 
   resources :conferences
@@ -17,6 +19,9 @@ Gemeinschaft4::Application.routes.draw do
 		resources :extensions
 	end
 	resources :conferences do
+		resources :extensions
+	end
+	resources :call_queues do
 		resources :extensions
 	end
 	resources :sip_phones
