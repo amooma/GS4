@@ -51,14 +51,14 @@ will build the domains ACL using this value.
 		<!--
 		Voicemail extensions can be static
 		-->
-		<!--
+		
 		<extension name="kam-vbox">
 			<condition field="destination_number" expression="^-vbox-(.+)$">
 				<action application="answer" />
 				<action application="voicemail" data="default ${domain_name} $1" />
 			</condition>
 		</extension>
-		
+		<!--	
 		<extension name="kam-vmenu">
 			<condition field="destination_number" expression="^-vmenu-(.+)$">
 				<action application="voicemail" data="check default ${domain_name} $1" />
