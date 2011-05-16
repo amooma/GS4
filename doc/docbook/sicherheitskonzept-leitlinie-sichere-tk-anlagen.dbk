@@ -114,13 +114,12 @@
       <title>ISDN-TK-Anlagen</title>
 
       <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine
-      ISDN-TK-Anlage. <quote>Gemeinschaft</quote> ist eine VoIP-TK-Anlage
-      (SIP), die &#8211; falls vom Administrator gewünscht &#8211; über ein
-      Media-Gateway mit dem ISDN-Netz verbunden werden kann. Das Media-Gateway
-      ist eine eigenständige Komponente (es sind diverse Lösungen erhältlich),
-      die separat zu betrachten ist. Für <quote>Gemeinschaft</quote> ist die
-      Grenze der Betrachtung und des <quote>Gefahrenübergangs</quote> die
-      VoIP-Anbindung.</para>
+      ISDN-TK-Anlage. „Gemeinschaft“ ist eine VoIP-TK-Anlage (SIP), die
+      &#8211; falls vom Administrator gewünscht &#8211; über ein Media-Gateway
+      mit dem ISDN-Netz verbunden werden kann. Das Media-Gateway ist eine
+      eigenständige Komponente (es sind diverse Lösungen erhältlich), die
+      separat zu betrachten ist. Für „Gemeinschaft“ ist die Grenze der
+      Betrachtung und des „Gefahrenübergangs“ die VoIP-Anbindung.</para>
     </section>
 
     <section>
@@ -291,13 +290,12 @@
       <title>Hybrid-Systeme</title>
 
       <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine ISDN-
-      und somit auch nicht um eine Hybrid-TK-Anlage.
-      <quote>Gemeinschaft</quote> ist eine VoIP-TK-Anlage (SIP), die &#8211;
-      falls vom Administrator gewünscht &#8211; über ein Media-Gateway mit dem
-      ISDN-Netz verbunden werden kann. Das Media-Gateway ist eine
-      eigenständige Komponente (es sind diverse Lösungen erhältlich), die
-      separat zu betrachten ist. Für <quote>Gemeinschaft</quote> ist die
-      Grenze der Betrachtung und des <quote>Gefahrenübergangs</quote> die
+      und somit auch nicht um eine Hybrid-TK-Anlage. „Gemeinschaft“ ist eine
+      VoIP-TK-Anlage (SIP), die &#8211; falls vom Administrator gewünscht
+      &#8211; über ein Media-Gateway mit dem ISDN-Netz verbunden werden kann.
+      Das Media-Gateway ist eine eigenständige Komponente (es sind diverse
+      Lösungen erhältlich), die separat zu betrachten ist. Für „Gemeinschaft“
+      ist die Grenze der Betrachtung und des „Gefahrenübergangs“ die
       VoIP-Anbindung.</para>
     </section>
 
@@ -334,7 +332,7 @@
 
         <para>Es ist zu beachten daß die Kommunikation mit einer Vielzahl der
         ITSPs nicht verschlüsselt stattfindet (so wie auch bei einem
-        <quote>normalen</quote> ISDN-Anschluß).</para>
+        „normalen“ ISDN-Anschluß).</para>
 
         <section>
           <title><literal>G-TK-44</literal> Unzureichende Regelungen für den
@@ -362,7 +360,8 @@
       <section>
         <title>Technisches Versagen</title>
 
-        <para></para>
+        <para>Siehe G-TK-46. Die TK-Anlage „Gemeinschaft“ bietet
+        SBC-Funktionalität.</para>
       </section>
 
       <section>
@@ -378,11 +377,11 @@
 
           <para>Maßnahme: Es ist ratsam die Anlage über möglichst wenige
           Protokolle anzubinden um die Anzahl der möglichen Fehlerquellen
-          durch mehrere Protokoll-Stacks zu minimieren. Gemeinschaft wird ggf.
-          per SIP angebunden. Durch den kombinierten, für alle Installationen
-          verpflichtenden Einsatz eines SIP-Proxies ist die Funktionalität
-          eines Session Border Controllers (SBC) enthalten. Im SIP-Proxy
-          werden durch <literal>mod-ratelimit</literal>
+          durch mehrere Protokoll-Stacks zu minimieren. „Gemeinschaft“ wird
+          ggf. per SIP angebunden. Durch den kombinierten, für alle
+          Installationen verpflichtenden Einsatz eines SIP-Proxies ist die
+          Funktionalität eines Session Border Controllers (SBC) enthalten. Im
+          SIP-Proxy werden durch <literal>mod-ratelimit</literal>
           Denial-of-Service-Angriffe (DoS) abgewehrt, sowie
           Format-String-Fehler durch <literal>mod-sanity</literal>. Beides
           sollte zusätzlich auch beim ITSP durchgeführt werden.</para>
@@ -400,8 +399,8 @@
       möglich drahtlose Systeme anzubinden &#8211; z.B. über Gateways zu GSM
       oder zu DECT &#8211;, diese bedürfen jedoch entsprechend einer separaten
       Analyse die ggf. im Rahmen eines Anschluß-Projektes vorzunehmen wäre.
-      Für <quote>Gemeinschaft</quote> ist die Grenze der Betrachtung und des
-      <quote>Gefahrenübergangs</quote> die VoIP-Anbindung.</para>
+      Für „Gemeinschaft“ ist die Grenze der Betrachtung und des
+      „Gefahrenübergangs“ die VoIP-Anbindung.</para>
     </section>
   </section>
 </section>
