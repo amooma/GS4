@@ -345,3 +345,9 @@ Version.create(:table_name => "purplemap", :table_version => "1")
 Version.create(:table_name => "uacreg", :table_version => "1")
 
 Extension.create(:extension => "80", :destination => "-vmmenue-", :active => true)
+
+call_forward_reasons = ['busy', 'noanswer', 'offline', 'always']
+
+call_forward_reasons.each do |reason|
+	CallForwardReason.create(:value => reason)
+end
