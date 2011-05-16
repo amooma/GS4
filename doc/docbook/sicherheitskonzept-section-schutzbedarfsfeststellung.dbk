@@ -254,15 +254,15 @@
     <section xml:id="schutzbedarf-provisioning-server">
       <title>Provisioning-Server</title>
 
-      <para>Der Provisioning-Server („Cantina“) dient der Konfiguration der
-      Telefone. Bei einem Ausfall würden die Telefone ihre derzeitige
-      Konfiguration beibehalten, Änderungen könnten nicht mehr automatisiert
-      sondern nur noch manuell vorgenommen werden. Nach unserer Erwartung
-      würde ein vorübergehender Ausfall in den meisten Fällen kein Problem
-      darstellen, da mit den Geräten in ihrer derzeitigen Konfiguration
-      weiterhin telefoniert werden kann. Die Software ist aus öffentlichen
-      Quellen wiederherstellbar. Im weiteren Projekt sind hier noch
-      Anpassungen der Betrachtung der Schutzwürdigkeit erforderlich.</para>
+      <para>Der Provisioning-Server dient der Konfiguration der Telefone. Bei
+      einem Ausfall würden die Telefone ihre derzeitige Konfiguration
+      beibehalten, Änderungen könnten nicht mehr automatisiert sondern nur
+      noch manuell vorgenommen werden. Nach unserer Erwartung würde ein
+      vorübergehender Ausfall in den meisten Fällen kein Problem darstellen,
+      da mit den Geräten in ihrer derzeitigen Konfiguration weiterhin
+      telefoniert werden kann. Die Software ist aus öffentlichen Quellen
+      wiederherstellbar. Im weiteren Projekt sind hier noch Anpassungen der
+      Betrachtung der Schutzwürdigkeit erforderlich.</para>
     </section>
 
     <section xml:id="schutzbedarf-sip-proxy">
@@ -283,11 +283,7 @@
       <title>FreeSwitch</title>
 
       <para>FreeSwitch kommt als B2BUA für TK-Anlagen-Funktionen zum Einsatz.
-      Die Software ist aus öffentlichen Quellen wiederherstellbar. Der
-      Schutzbedarf im Hinblick auf die Verfügbarkeit ist hier als etwas
-      weniger hoch als beim SIP-Proxy anzusehen, da ohne FreeSwitch zumindest
-      noch in einem Notbetrieb telefoniert werden kann. Hier ist im weiteren
-      Projekt noch eine nähere Betrachtung erforderlich.</para>
+      Die Software ist aus öffentlichen Quellen wiederherstellbar.</para>
     </section>
 
     <section xml:id="schutzbedarf-verbindung-telefone">
@@ -334,16 +330,6 @@
       hier verschlüsselte Verbindungen zum Einsatz kommen, die allerdings das
       Vorhandensein spezieller Hardware (oder Software) auf beiden Seiten
       erforderlich machen.</para>
-    </section>
-
-    <section xml:id="schutzbedarf-anpassungen">
-      <title>Weitere Anpassungen</title>
-
-      <para>Basierend auf dieser ersten Abschätzung erfolgt die weitere
-      Modellierung in der Phase 3 des Sicherheitskonzepts. Dabei ist eine
-      laufende Kontrolle der Ergebnisse der Strukturanalyse und der
-      Schutzbedarfsbestimmung im Projekt erforderlich, da im weiteren
-      Änderungen in der Struktur möglich sind.</para>
     </section>
   </section>
 </section>
