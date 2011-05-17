@@ -1233,35 +1233,58 @@
           <title><literal>M-TK-30</literal> Ende-zu-Ende-Verschlüsselung des
           Medienstroms</title>
 
-          <para></para>
+          <para>Aufgrund des erhöhten Schutzbedarfs kommt SRTP bzw. ZRTP als
+          Verschlüsselung des RTP-Medien-Stroms zum Einsatz. Die
+          Schlüssellänge beträgt mindestens 128 Bit. Die Verschlüsselung
+          erfolgt zwischen den terminierenden SIP-Geräten, d.h. zwischen zwei
+          Endgeräten bzw. zwischen einem Endgerät und einem Gateway, SBC,
+          Voicemail- oder Konferenzzerver (wobei die Aufgaben des SBC,
+          Voicemail- und Konferenzzerver in einer Standard-Installation von
+          „Gemeinschaft“ erfüllt werden).</para>
         </section>
 
         <section xml:id="tlstk-m-tk-31">
           <title><literal>M-TK-31</literal> Verschlüsselung der
           Signalisierung</title>
 
-          <para></para>
+          <para>Bei erhöhtem Schutzbedarf wird die SIP-Signalisierung zwischen
+          Endgerät und Telefonie-Server verschlüsselt. Dabei kommt TLS zum
+          Einsatz oder alternativ eine auf IPsec- oder anderen VPN-Techniken
+          basierende Verschlüsselungstechnik.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-32">
           <title><literal>M-TK-32</literal> Authentisierung zwischen
           Endgeräten und Servern des VoIP-Systems</title>
 
-          <para></para>
+          <para>#OPTIMIZE Sobald geeignete Endgeräte verfügbar sind ist dieser
+          Punkt noch auszuarbeiten.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-33">
           <title><literal>M-TK-33</literal> Authentisierung zwischen
           Servern</title>
 
-          <para></para>
+          <para>In der Standard-Installation befinden sich alle VoIP-Dienste
+          von Gemeinschaft auf einem einzigen (aktiven) Server, die
+          Kommunikation zwischen den Diensten findet also nicht über das
+          Netzwerk statt.</para>
+
+          <para>In einer vom Standard-Setup abweichenden Installation mit
+          verteilten Servern wird die Kommunikation zwischen diesen
+          verschlüsselt.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-34">
           <title><literal>M-TK-34</literal> Redundanz der
           Telefonie-Server</title>
 
-          <para></para>
+          <para>Gemeinschaft ist ein „Knoten“. Je nach Größe der Institution
+          und Anforderungen an die Redundanz können auch mehrere solcher
+          Knoten betrieben werden. Das genaue Vorgehen (Cold-/Hot-Standby,
+          Active-Active, Virtualisierungsumgebung, ...) hängt von den
+          jeweiligen Erfordernissen ab. Ein Setup bei dem keine Gespräche
+          unterbrochen werden ist möglich.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-35">
@@ -1269,14 +1292,30 @@
           von denen die Funktion des Telefonie-Servers und des
           Telefonie-Diensts unmittelbar abhängt</title>
 
-          <para></para>
+          <para>Server wie PSTN-Gateways (sofern in der jeweiligen
+          Installation vorhanden) müssen bei Bedarf redundant ausgelegt
+          werden. Gleiches gilt für beispielsweise DNS-Server. Beides liegt
+          außerhalb des Einflußbereichs der VoIP-TK-Anlage „Gemeinschaft“ und
+          ist Aufgabe des Netzwerk-Administrators.</para>
+
+          <para>Um die Telefonie weniger abhängig vom DNS-Server zu machen
+          können in Gemeinschaft IP-Adressen statt Host-Namen verwendet
+          werden.</para>
+
+          <para>Ebenso können in Gemeinschaft mehrere ausgehende Routen als
+          Fallback festgelegt werden.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-36">
           <title><literal>M-TK-36</literal> Schaffung eines zusätzlichen
           PSTN-Ersatzanschlusses für Notrufe</title>
 
-          <para></para>
+          <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
+          damit in der Verwantwortung des Netzwerk-Administrators (bzw. der in
+          der jeweiligen Institution zuständigen Personen) bei Bedarf
+          zusätzlich herkömmliche ISDN- oder Analog-Telefone anzubringen die
+          direkt an einen PSTN-Anschluß angebunden sind um im Falle eines
+          Ausfalls der VoIP-Telefonie dennoch Notrufe zu ermöglichen.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-37">
