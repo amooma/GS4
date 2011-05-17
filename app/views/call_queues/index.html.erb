@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Uuid</th>
+    <th>Extension</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +12,15 @@
 <% @call_queues.each do |call_queue| %>
   <tr>
     <td><%= call_queue.name %></td>
-    <td><%= call_queue.uuid %></td>
+    <td>
+    <% if !call_queue.extensions.nil? %>
+      <ul>
+      <% call_queue.extensions.each do |extension| %>
+        <li><%= link_to extension.extension, call_queue_extension_path(call_queue, extension) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </td>
     <td><%= link_to 'Show', call_queue %></td>
     <td><%= link_to 'Edit', edit_call_queue_path(call_queue) %></td>
     <td><%= link_to 'Destroy', call_queue, :confirm => 'Are you sure?', :method => :delete %></td>
