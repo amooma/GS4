@@ -1403,40 +1403,93 @@
           <title><literal>M-TK-42</literal> Sicherung von IP-Telefonen in
           unübersichtlichen Umgebungen</title>
 
-          <para></para>
+          <para>In unübersichtlichen Umgebungen (Lobbys, Besprechungsräume
+          etc.) werden laut Empfehlung von Gemeinschaft nur Endgeräte mit
+          eingeschränktem Funktionsumfang eingesetzt, d.h. beispielsweise
+          keine Telefone mit integriertem Ethernet-Switch (bzw. falls
+          vorhanden so wird dieser durch das Provisioning von Gemeinschaft
+          deaktiviert).</para>
+
+          <para>Die Berechtigungen der betreffenden „technischen“ (d.h. nicht
+          personenbezogenen) SIP-Accounts können in Gemeinschaft konfiguriert
+          werden.</para>
+
+          <para>Zusätzlich liegt es in der Verantwortung des Administrators
+          der IT-Infrastruktur den VoIP-Geräten keine IP-Kommunikation in das
+          Datennetz zu ermöglichen (auf den Switches).</para>
+
+          <para>Weiterhin liegt es außerhalb des Einflußbereichs von
+          Gemeinschaft die Geräte mechanisch vor Diebstahl zu schützen.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-43">
           <title><literal>M-TK-43</literal> Warnung bei unsicheren
           Einstellungen</title>
 
-          <para></para>
+          <para>Für den erhöhten Schutzbedarf werden die Geräte von
+          Gemeinschaft durch die Provisionierung so konfiguriert daß unsichere
+          Merkmale &#8211; insbesondere eine deaktivierte
+          Ende-zu-Ende-Verschlüsselung &#8211; durch durch einen Hinweis
+          (optisch/akustisch) erkennbar gemacht werden.</para>
+
+          <para>Da die konkrete Umsetzung des Hinweises nicht von Gemeinschaft
+          beeinflußbar sondern abhängig vom Endgerät und der jeweiligen
+          Firmware ist (entsprechende Endgeräte sind derzeit noch nicht
+          verbreitet) dürfen bei erhöhtem Schutzbedarf nur entsprechend
+          ausgestattete und getestete Endgeräte eingesetzt werden.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-44">
           <title><literal>M-TK-44</literal> Prozess zur Behandlung des
           Verlusts eines VoIP-Endgeräts</title>
 
-          <para></para>
+          <para>Auf VoIP-Endgeräten ist Sorgfalt geboten bei der Speicherung
+          vertrauenswürdiger Daten. Generell sollen beispielsweise Paßwörter
+          oder Schlüssel ausschließlich für die VoIP-Kommunikation dienen (und
+          nicht etwa identisch sein mit solchen die auch Zugriffe auf andere
+          Dienste ermöglichen). Diese werden daher von Gemeinschaft
+          entsprechend generiert bzw. über ein Identitätsmanagement-System
+          (IdM, IdMS, IMS) verwaltet und importiert.</para>
+
+          <para>Es muß ein Prozeß vorhanden sein um den Verlust eines
+          IP-Telefons zu behandeln. Hierzu bietet es sich an die betreffenden
+          Zertifikate zu sperren (CRL) und das Paßwort des Accounts in
+          Gemeinschaft zu ändern.</para>
+
+          <para>#OPTIMIZE Hier das Vorgehen genauer beschreiben sobald ein
+          geeignetes IP-Telefon verfügbar ist.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-45">
           <title><literal>M-TK-45</literal> Absicherung der Firmware</title>
 
-          <para></para>
+          <para>Die Integrität und Authentizität von Firmware-Dateien muß
+          überprüft werden. Voraussetzung hierfür ist daß der Hersteller seine
+          Firmware digital signiert und eine Prüfsumme bereitstellt.</para>
+
+          <para>#OPTIMIZE Konkretes Vorgehen beschreiben sobald ein geeignetes
+          IP-Telefon mit entsprechender Firmware verfügbar ist. (Beispiel:
+          Mitlieferung der Firmware im Image des Gemeinschaft-Systems oder
+          Prüfung durch den IT-Administrator.)</para>
         </section>
 
         <section xml:id="tlstk-m-tk-46">
           <title><literal>M-TK-46</literal> Absicherung von
           Konfigurationsdateien</title>
 
-          <para></para>
+          <para>Die Übertragung der Konfigurationsparameter vom
+          Provisioning-Dienst in Gemeinschaft zu den Telefonen erfolgt
+          verschlüsselt per HTTPS mit Authentisierung.</para>
+
+          <para>#OPTIMIZE Genauer beschreiben sobald ein geeignetes IP-Telefon
+          mit entsprechender Firmware verfügbar ist.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-47">
           <title><literal>M-TK-47</literal> Sicherheit von Softphones</title>
 
-          <para></para>
+          <para>Softphones kommen derzeit nicht zum Einsatz, somit sind
+          Sicherheitsschwachstellen auf PCs hier nicht relevant.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-48">
