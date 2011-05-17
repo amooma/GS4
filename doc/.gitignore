@@ -1,2 +1,6 @@
 /tmp
 
+/docbook-schema
+/docbook-xsl-*
+/docbook-xsl
+

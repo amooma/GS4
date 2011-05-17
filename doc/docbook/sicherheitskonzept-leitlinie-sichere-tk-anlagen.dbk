@@ -111,10 +111,10 @@
     entsprechend angelehnt um eine leichtere Übersicht zu ermöglichen.</para>
   </note>
 
-  <section>
+  <section xml:id="tlstk-g-gefaehrdungslage">
     <title>Gefährdungslage</title>
 
-    <section>
+    <section xml:id="tlstk-g-systemuebergreifende-aspekte">
       <title>Systemübergreifende Aspekte</title>
 
       <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
@@ -122,7 +122,7 @@
       sind.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-isdn-tk-anlagen">
       <title>ISDN-TK-Anlagen</title>
 
       <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine
@@ -134,34 +134,160 @@
       Betrachtung und des „Gefahrenübergangs“ die VoIP-Anbindung.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-voip-systeme">
       <title>VoIP-Systeme</title>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-hoehere-gewalt">
         <title>Höhere Gewalt</title>
 
         <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
         Gefährdungen durch höhere Gewalt zu die in den
-        IT-Grundschutz-Katalogen des BSI genannt sind. Eine VoIP-TK-Anlage hat
-        zusätzlich folgende spezielle Gefährdungen:</para>
+        IT-Grundschutz-Katalogen des BSI genannt sind.</para>
 
-        <section>
+        <para>Maßnahmen:<simplelist>
+            <member><xref linkend="tlstk-m-tk-53" /></member>
+
+            <member><xref linkend="tlstk-m-tk-54" /></member>
+
+            <member><xref linkend="tlstk-m-tk-55" /></member>
+
+            <member><xref linkend="tlstk-m-tk-60" /></member>
+
+            <member><xref linkend="tlstk-m-tk-61" /></member>
+
+            <member><xref linkend="tlstk-m-tk-62" /></member>
+
+            <member><xref linkend="tlstk-m-tk-63" /></member>
+
+            <member><xref linkend="tlstk-m-tk-72" /></member>
+
+            <member><xref linkend="tlstk-m-tk-73" /></member>
+
+            <member><xref linkend="tlstk-m-tk-74" /></member>
+
+            <member><xref linkend="tlstk-m-tk-140" /></member>
+
+            <member><xref linkend="tlstk-m-tk-141" /></member>
+
+            <member><xref linkend="tlstk-m-tk-142" /></member>
+
+            <member><xref linkend="tlstk-m-tk-145" /></member>
+
+            <member><xref linkend="tlstk-m-tk-146" /></member>
+
+            <member><xref linkend="tlstk-m-tk-150" /></member>
+
+            <member><xref linkend="tlstk-m-tk-152" /></member>
+          </simplelist></para>
+
+        <para>Eine VoIP-TK-Anlage hat zusätzlich folgende spezielle
+        Gefährdungen:</para>
+
+        <section xml:id="tlstk-g-tk-20">
           <title><literal>G-TK-20</literal> Ausfall der mitgenutzten
           IP-Infrastruktur</title>
 
           <para>Gefährdung: Ausfall der Netzwerk-Infrastruktur und
           mitgenutzter Dienste wie DNS und DHCP.</para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-54" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-57" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-61" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-63" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-141" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-21">
           <title><literal>G-TK-21</literal> Ausfall eines für VoIP
           mitgenutzten Weitverkehrsnetzes</title>
 
           <para>Gefährdung: Ausfall des WAN.</para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-54" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-57" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-61" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-141" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+            </simplelist></para>
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-organisatorische-maengel">
         <title>Organisatorische Mängel</title>
 
         <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
@@ -169,136 +295,814 @@
         IT-Grundschutz-Katalogen des BSI genannt sind. Eine VoIP-TK-Anlage hat
         zusätzlich folgende spezielle Gefährdungen:</para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-22">
           <title><literal>G-TK-22</literal> Unzureichende Regelungen für den
           Einsatz von VoIP</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-23">
           <title><literal>G-TK-23</literal> Unzureichende Harmonisierung
           zwischen IT- und VoIP-Betrieb</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-57" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-61" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-24">
           <title><literal>G-TK-24</literal> Fehlende, ungeeignete und
           inkompatible Betriebsmittel für VoIP</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-63" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-141" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-145" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-25">
           <title><literal>G-TK-25</literal> Unzureichende Verwaltung und
           Kontrolle von Zugangs- und Zugriffsmöglichkeiten auf
           VoIP-Endgeräte</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-45" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-26">
           <title><literal>G-TK-26</literal> Kein ordnungsgemäßer
           Benutzerwechsel für VoIP-Endgeräte</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-27">
           <title><literal>G-TK-27</literal> Mangelhafte Behandlung der
           Archivierung von Sprachnachrichten und elektronischen
           Fax-Nachrichten</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-28">
           <title><literal>G-TK-28</literal> Unzulängliche vertragliche
           Regelungen für externe Leistungen zur VoIP-Lösung</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-45" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-29">
           <title><literal>G-TK-29</literal> Unzureichende Regelungen für das
           Ende der externen Dienstleistungen für eine VoIP-Lösung</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-menschliche-fehlhandlungen">
         <title>Menschliche Fehlhandlungen</title>
 
         <para>… durch Administratoren sowie Endanwender der
         VoIP-TK-Anlage.</para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-30">
           <title><literal>G-TK-30</literal> Vertraulichkeits- oder
           Integritätsverlust von Daten durch Fehlverhalten der
           VoIP-Benutzer</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-147" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-31">
           <title><literal>G-TK-31</literal> Unstrukturierte Datenhaltung durch
           VoIP-Nutzer</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-32">
           <title><literal>G-TK-32</literal> Konfigurationsfehler und
           Bedienungsfehler bei VoIP-Lösungen</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-45" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-54" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-33">
           <title><literal>G-TK-33</literal> Fehlerhafte Administration von
           Zugangs- und Zugriffsrechten zu VoIP-Installationen</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-technisches-versagen">
         <title>Technisches Versagen</title>
 
         <para></para>
+
+        <para>Maßnahmen:<simplelist>
+            <member><xref linkend="tlstk-m-tk-34" /></member>
+
+            <member><xref linkend="tlstk-m-tk-35" /></member>
+
+            <member><xref linkend="tlstk-m-tk-36" /></member>
+
+            <member><xref linkend="tlstk-m-tk-37" /></member>
+
+            <member><xref linkend="tlstk-m-tk-39" /></member>
+
+            <member><xref linkend="tlstk-m-tk-45" /></member>
+
+            <member><xref linkend="tlstk-m-tk-53" /></member>
+
+            <member><xref linkend="tlstk-m-tk-54" /></member>
+
+            <member><xref linkend="tlstk-m-tk-55" /></member>
+
+            <member><xref linkend="tlstk-m-tk-56" /></member>
+
+            <member><xref linkend="tlstk-m-tk-57" /></member>
+
+            <member><xref linkend="tlstk-m-tk-60" /></member>
+
+            <member><xref linkend="tlstk-m-tk-63" /></member>
+
+            <member><xref linkend="tlstk-m-tk-72" /></member>
+
+            <member><xref linkend="tlstk-m-tk-73" /></member>
+
+            <member><xref linkend="tlstk-m-tk-140" /></member>
+
+            <member><xref linkend="tlstk-m-tk-141" /></member>
+
+            <member><xref linkend="tlstk-m-tk-142" /></member>
+
+            <member><xref linkend="tlstk-m-tk-145" /></member>
+
+            <member><xref linkend="tlstk-m-tk-146" /></member>
+
+            <member><xref linkend="tlstk-m-tk-148" /></member>
+
+            <member><xref linkend="tlstk-m-tk-150" /></member>
+
+            <member><xref linkend="tlstk-m-tk-151" /></member>
+          </simplelist></para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-vorsaetzliche-handlungen">
         <title>Vorsätzliche Handlungen</title>
 
-        <para></para>
-
-        <section>
+        <section xml:id="tlstk-g-tk-34">
           <title><literal>G-TK-34</literal> Denial-of-Service-Angriffe auf
           VoIP</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-33" /></member>
+
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-35">
           <title><literal>G-TK-35</literal> Abhören der
           VoIP-Kommunikation</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-33" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-36">
           <title><literal>G-TK-36</literal> Missbräuchlicher Zugriff auf
           VoIP-Geräte</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-147" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
       </section>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-hybrid-systeme">
       <title>Hybrid-Systeme</title>
 
       <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine ISDN-
@@ -311,7 +1115,7 @@
       VoIP-Anbindung.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-tk-applikationen-und-mehrwertdienste">
       <title>TK-Applikationen und Mehrwertdienste</title>
 
       <para>(Bindeglieder zwischen Tele- und Daten-Kommunikation)</para>
@@ -320,13 +1124,13 @@
       entsprechend anzupassen.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-ip-anlagenanschluss">
       <title>IP-Anlagenanschluss</title>
 
       <para>(d.h. IP-basierte Anbindung der TK-Anlage an das öffentliche
       Telefonnetz über einen externen Carrier/Provider/ITSP)</para>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-hoehere-gewalt">
         <title>Höhere Gewalt</title>
 
         <para>Die Gefährdungen liegen hier auf der Übertragungsstrecke zum
@@ -339,47 +1143,47 @@
         Anbindung nach extern) nicht betrachtet.</para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-organisatorische-maengel">
         <title>Organisatorische Mängel</title>
 
         <para>Es ist zu beachten daß die Kommunikation mit einer Vielzahl der
         ITSPs nicht verschlüsselt stattfindet (so wie auch bei einem
         „normalen“ ISDN-Anschluß).</para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-44">
           <title><literal>G-TK-44</literal> Unzureichende Regelungen für den
           IP-Anlagenanschluss mit dem ITSP</title>
 
-          <para></para>
+          <para>Zum derzeitigen Stand noch keine ITSP-Anbindung.</para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-45">
           <title><literal>G-TK-45</literal> Unzureichende oder fehlende
           Planung der Absicherung für die Erweiterung der Außenanbindung um
           eine VoIP-Komponente</title>
 
-          <para></para>
+          <para>Zum derzeitigen Stand noch keine ITSP-Anbindung.</para>
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-menschliche-fehlhandlungen">
         <title>Menschliche Fehlhandlungen</title>
 
         <para>Siehe Gefährdungen durch menschliche Fehlhandlungen für einen
         Internet-Zugang wie in den IT-Grundschutz-Katalogen genannt.</para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-technisches-versagen">
         <title>Technisches Versagen</title>
 
         <para>Siehe G-TK-46. Die TK-Anlage „Gemeinschaft“ bietet
         SBC-Funktionalität.</para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-vorsaetzliche-handlungen">
         <title>Vorsätzliche Handlungen</title>
 
-        <section>
+        <section xml:id="tlstk-g-tk-46">
           <title><literal>G-TK-46</literal> Übertragung von schadenstiftender
           Software über die IP-Kommunikation mit VoIP-Netzelementen des
           ITSP</title>
@@ -401,7 +1205,7 @@
       </section>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-mobile-und-drahtlose-systeme">
       <title>Mobile und drahtlose Systeme</title>
 
       <para>(GSM, UMTS, WLAN, DECT, Bluetooth)</para>
@@ -413,6 +1217,467 @@
       Analyse die ggf. im Rahmen eines Anschluß-Projektes vorzunehmen wäre.
       Für „Gemeinschaft“ ist die Grenze der Betrachtung und des
       „Gefahrenübergangs“ die VoIP-Anbindung.</para>
+    </section>
+  </section>
+
+  <section xml:id="tlstk-m-sicherheitsmassnahmen">
+    <title>Sicherheitsmaßnahmen</title>
+
+    <section xml:id="tlstk-m-voip-systeme">
+      <title>VoIP-Systeme</title>
+
+      <section xml:id="tlstk-m-voip-systeme-server-und-anwendungen">
+        <title>Server und Anwendungen</title>
+
+        <section xml:id="tlstk-m-tk-30">
+          <title><literal>M-TK-30</literal> Ende-zu-Ende-Verschlüsselung des
+          Medienstroms</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-31">
+          <title><literal>M-TK-31</literal> Verschlüsselung der
+          Signalisierung</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-32">
+          <title><literal>M-TK-32</literal> Authentisierung zwischen
+          Endgeräten und Servern des VoIP-Systems</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-33">
+          <title><literal>M-TK-33</literal> Authentisierung zwischen
+          Servern</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-34">
+          <title><literal>M-TK-34</literal> Redundanz der
+          Telefonie-Server</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-35">
+          <title><literal>M-TK-35</literal> Redundanz der Server und Gateways,
+          von denen die Funktion des Telefonie-Servers und des
+          Telefonie-Diensts unmittelbar abhängt</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-36">
+          <title><literal>M-TK-36</literal> Schaffung eines zusätzlichen
+          PSTN-Ersatzanschlusses für Notrufe</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-37">
+          <title><literal>M-TK-37</literal> Automatische PSTN-Umschaltung für
+          Filialen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-38">
+          <title><literal>M-TK-38</literal> Absicherung von Telefonie-Daten im
+          Verzeichnisdienst</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-39">
+          <title><literal>M-TK-39</literal> Verfügbarkeit kritischer
+          Telefonie-Daten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-40">
+          <title><literal>M-TK-40</literal> Einschränkungen von DNS für
+          VoIP</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-41">
+          <title><literal>M-TK-41</literal> Einschränkung von ENUM</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-voip-systeme-endgeraete">
+        <title>Endgeräte</title>
+
+        <section xml:id="tlstk-m-tk-42">
+          <title><literal>M-TK-42</literal> Sicherung von IP-Telefonen in
+          unübersichtlichen Umgebungen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-43">
+          <title><literal>M-TK-43</literal> Warnung bei unsicheren
+          Einstellungen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-44">
+          <title><literal>M-TK-44</literal> Prozess zur Behandlung des
+          Verlusts eines VoIP-Endgeräts</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-45">
+          <title><literal>M-TK-45</literal> Absicherung der Firmware</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-46">
+          <title><literal>M-TK-46</literal> Absicherung von
+          Konfigurationsdateien</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-47">
+          <title><literal>M-TK-47</literal> Sicherheit von Softphones</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-48">
+          <title><literal>M-TK-48</literal> Sichere Konfiguration von PC-Ports
+          an IP-Telefonen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-49">
+          <title><literal>M-TK-49</literal> Sichere Konfiguration von IP und
+          von IP-basierten Diensten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-50">
+          <title><literal>M-TK-50</literal> Einschränkung des lokalen Zugriffs
+          auf die Konfiguration des IP-Telefons</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-51">
+          <title><literal>M-TK-51</literal> Benutzerabhängige
+          Berechtigungen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-52">
+          <title><literal>M-TK-52</literal> Schutz von Teilnehmer-spezifischen
+          Daten auf einem IP-Telefon</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-voip-systeme-netzwerk">
+        <title>Netzwerk</title>
+
+        <section xml:id="tlstk-m-tk-53">
+          <title><literal>M-TK-53</literal> Sichere Konfiguration der
+          Netzwerk-Komponenten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-54">
+          <title><literal>M-TK-54</literal> Sicheres Routing</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-55">
+          <title><literal>M-TK-55</literal> Absicherung von
+          Switch-Ports</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-56">
+          <title><literal>M-TK-56</literal> Absicherung der
+          DHCP-Nutzung</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-57">
+          <title><literal>M-TK-57</literal> Quality of Service im
+          Netzwerk</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-58">
+          <title><literal>M-TK-58</literal> Zugangskontrolle zum
+          Netzwerk</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-59">
+          <title><literal>M-TK-59</literal> MAC Security im Anschlussbereich
+          für Endgeräte</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-60">
+          <title><literal>M-TK-60</literal> Netztrennung für VoIP</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-61">
+          <title><literal>M-TK-61</literal> Angemessene Verfügbarkeit des LAN
+          für die Verwendung von VoIP</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-62">
+          <title><literal>M-TK-62</literal> Angemessene Verfügbarkeit der vom
+          VoIP-System genutzten Netzdienste</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-63">
+          <title><literal>M-TK-63</literal> Angemessene Verfügbarkeit der
+          Stromversorgung für IP-Telefone</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-voip-systeme-netz-und-systemmanagement">
+        <title>Netz- und Systemmanagement</title>
+
+        <section xml:id="tlstk-m-tk-64">
+          <title><literal>M-TK-64</literal> Sichere Administration des
+          Telefonie-Servers</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-65">
+          <title><literal>M-TK-65</literal> Sichere Administration von
+          PSTN-Gateways</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-66">
+          <title><literal>M-TK-66</literal> Sichere Administration von
+          Anwendungs- und Management-Servern</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-67">
+          <title><literal>M-TK-67</literal> Sichere Administration von
+          Abrechnungs- und Gebührenerfassungssystemen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-68">
+          <title><literal>M-TK-68</literal> Sichere Verwaltung von
+          Teilnehmerprofilen</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-69">
+          <title><literal>M-TK-69</literal> Sichere Administration von
+          Endgeräten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-70">
+          <title><literal>M-TK-70</literal> Sichere Administration von
+          Netzkomponenten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-71">
+          <title><literal>M-TK-71</literal> Überwachung der Komponenten des
+          VoIP-Systems</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-voip-systeme-uebergreifende-aspekte">
+        <title>Übergreifende Aspekte</title>
+
+        <section xml:id="tlstk-m-tk-72">
+          <title><literal>M-TK-72</literal> Produktauswahl von VoIP-Lösungen
+          unter Sicherheitsgesichtspunkten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-73">
+          <title><literal>M-TK-73</literal> Datensicherung für die Elemente
+          des VoIP-Systems</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-74">
+          <title><literal>M-TK-74</literal> Notfallvorsorge für das
+          VoIP-System</title>
+
+          <para></para>
+        </section>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-systemuebergreifende-aspekte">
+      <title>Systemübergreifende Aspekte</title>
+
+      <section xml:id="tlstk-m-systemuebergreifende-aspekte-netzinfrastruktur">
+        <title>Auslegung der passiven Netzinfrastruktur bei erhöhtem
+        Schutzbedarf</title>
+
+        <section xml:id="tlstk-m-tk-140">
+          <title><literal>M-TK-140</literal> Sichere Kabelführung</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-141">
+          <title><literal>M-TK-141</literal> Redundante Kabelführung</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-systemuebergreifende-aspekte-absicherung-von-servern">
+        <title>Absicherung von Servern des Telekommunikationssystems</title>
+
+        <section xml:id="tlstk-m-tk-142">
+          <title><literal>M-TK-142</literal> Härtung von Servern des
+          Telekommunikationssystems</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-143">
+          <title><literal>M-TK-143</literal> Einschränkung und Kontrolle von
+          Berechtigungen für die Administration eines Servers des
+          Telekommunikationssystems</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-144">
+          <title><literal>M-TK-144</literal> Einschränkung und Kontrolle des
+          Zugangs zu einem Server des Telekommunikationssystems</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-145">
+          <title><literal>M-TK-145</literal> Physikalische Sicherheit der
+          Server</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-146">
+          <title><literal>M-TK-146</literal> Mehrstufiges
+          Backup-Konzept</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-147">
+          <title><literal>M-TK-147</literal> Schutz vor schadenstiftender
+          Software</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-148">
+          <title><literal>M-TK-148</literal> Software-Sicherheit inkl.
+          Patch-Management</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-systemuebergreifende-aspekte-netz-und-systemmanagement">
+        <title>Sicheres Netz- und Systemmanagement</title>
+
+        <section xml:id="tlstk-m-tk-149">
+          <title><literal>M-TK-149</literal> Sichere Konfiguration des
+          Netzwerkmanagement-Protokolls</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-150">
+          <title><literal>M-TK-150</literal> Überwachung der Komponenten des
+          Telekommunikationssystems</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-systemuebergreifende-aspekte-datenschutz">
+        <title>Datenschutz</title>
+
+        <section xml:id="tlstk-m-tk-151">
+          <title><literal>M-TK-151</literal> Schutz von
+          Verbindungsdaten</title>
+
+          <para></para>
+        </section>
+
+        <section xml:id="tlstk-m-tk-152">
+          <title><literal>M-TK-152</literal> Sichere Außerbetriebnahme von
+          Komponenten des Telekommunikationssystems</title>
+
+          <para></para>
+        </section>
+      </section>
+
+      <section xml:id="tlstk-m-systemuebergreifende-aspekte-auswahl-von-diensteanbietern">
+        <title>Auswahl von Diensteanbietern</title>
+
+        <section xml:id="tlstk-m-tk-153">
+          <title><literal>M-TK-153</literal> Nachweis der Vertrauenswürdigkeit
+          des Diensteanbieters</title>
+
+          <para></para>
+        </section>
+      </section>
     </section>
   </section>
 </section>
