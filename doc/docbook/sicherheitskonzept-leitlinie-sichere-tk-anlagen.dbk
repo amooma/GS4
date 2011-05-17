@@ -144,6 +144,42 @@
         Gefährdungen durch höhere Gewalt zu die in den
         IT-Grundschutz-Katalogen des BSI genannt sind.</para>
 
+        <para>Maßnahmen:<simplelist>
+            <member><xref linkend="tlstk-m-tk-53" /></member>
+
+            <member><xref linkend="tlstk-m-tk-54" /></member>
+
+            <member><xref linkend="tlstk-m-tk-55" /></member>
+
+            <member><xref linkend="tlstk-m-tk-60" /></member>
+
+            <member><xref linkend="tlstk-m-tk-61" /></member>
+
+            <member><xref linkend="tlstk-m-tk-62" /></member>
+
+            <member><xref linkend="tlstk-m-tk-63" /></member>
+
+            <member><xref linkend="tlstk-m-tk-72" /></member>
+
+            <member><xref linkend="tlstk-m-tk-73" /></member>
+
+            <member><xref linkend="tlstk-m-tk-74" /></member>
+
+            <member><xref linkend="tlstk-m-tk-140" /></member>
+
+            <member><xref linkend="tlstk-m-tk-141" /></member>
+
+            <member><xref linkend="tlstk-m-tk-142" /></member>
+
+            <member><xref linkend="tlstk-m-tk-145" /></member>
+
+            <member><xref linkend="tlstk-m-tk-146" /></member>
+
+            <member><xref linkend="tlstk-m-tk-150" /></member>
+
+            <member><xref linkend="tlstk-m-tk-152" /></member>
+          </simplelist></para>
+
         <para>Eine VoIP-TK-Anlage hat zusätzlich folgende spezielle
         Gefährdungen:</para>
 
@@ -153,6 +189,50 @@
 
           <para>Gefährdung: Ausfall der Netzwerk-Infrastruktur und
           mitgenutzter Dienste wie DNS und DHCP.</para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-54" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-57" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-61" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-63" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-141" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-21">
@@ -160,6 +240,50 @@
           mitgenutzten Weitverkehrsnetzes</title>
 
           <para>Gefährdung: Ausfall des WAN.</para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-54" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-57" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-61" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-141" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+            </simplelist></para>
         </section>
       </section>
 
@@ -176,6 +300,24 @@
           Einsatz von VoIP</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-23">
@@ -183,6 +325,34 @@
           zwischen IT- und VoIP-Betrieb</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-57" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-61" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-24">
@@ -190,6 +360,68 @@
           inkompatible Betriebsmittel für VoIP</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-62" /></member>
+
+              <member><xref linkend="tlstk-m-tk-63" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-71" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-141" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-145" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-25">
@@ -198,6 +430,54 @@
           VoIP-Endgeräte</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-45" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-26">
@@ -205,6 +485,28 @@
           Benutzerwechsel für VoIP-Endgeräte</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-27">
@@ -213,6 +515,14 @@
           Fax-Nachrichten</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-28">
@@ -220,6 +530,38 @@
           Regelungen für externe Leistungen zur VoIP-Lösung</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-45" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-29">
@@ -227,6 +569,34 @@
           Ende der externen Dienstleistungen für eine VoIP-Lösung</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+
+              <member><xref linkend="tlstk-m-tk-74" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
       </section>
 
@@ -242,6 +612,76 @@
           VoIP-Benutzer</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-147" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-31">
@@ -249,6 +689,24 @@
           VoIP-Nutzer</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-73" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-32">
@@ -256,6 +714,74 @@
           Bedienungsfehler bei VoIP-Lösungen</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-45" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-54" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-148" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-33">
@@ -263,6 +789,68 @@
           Zugangs- und Zugriffsrechten zu VoIP-Installationen</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-67" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
       </section>
 
@@ -270,18 +858,124 @@
         <title>Technisches Versagen</title>
 
         <para></para>
+
+        <para>Maßnahmen:<simplelist>
+            <member><xref linkend="tlstk-m-tk-34" /></member>
+
+            <member><xref linkend="tlstk-m-tk-35" /></member>
+
+            <member><xref linkend="tlstk-m-tk-36" /></member>
+
+            <member><xref linkend="tlstk-m-tk-37" /></member>
+
+            <member><xref linkend="tlstk-m-tk-39" /></member>
+
+            <member><xref linkend="tlstk-m-tk-45" /></member>
+
+            <member><xref linkend="tlstk-m-tk-53" /></member>
+
+            <member><xref linkend="tlstk-m-tk-54" /></member>
+
+            <member><xref linkend="tlstk-m-tk-55" /></member>
+
+            <member><xref linkend="tlstk-m-tk-56" /></member>
+
+            <member><xref linkend="tlstk-m-tk-57" /></member>
+
+            <member><xref linkend="tlstk-m-tk-60" /></member>
+
+            <member><xref linkend="tlstk-m-tk-63" /></member>
+
+            <member><xref linkend="tlstk-m-tk-72" /></member>
+
+            <member><xref linkend="tlstk-m-tk-73" /></member>
+
+            <member><xref linkend="tlstk-m-tk-140" /></member>
+
+            <member><xref linkend="tlstk-m-tk-141" /></member>
+
+            <member><xref linkend="tlstk-m-tk-142" /></member>
+
+            <member><xref linkend="tlstk-m-tk-145" /></member>
+
+            <member><xref linkend="tlstk-m-tk-146" /></member>
+
+            <member><xref linkend="tlstk-m-tk-148" /></member>
+
+            <member><xref linkend="tlstk-m-tk-150" /></member>
+
+            <member><xref linkend="tlstk-m-tk-151" /></member>
+          </simplelist></para>
       </section>
 
       <section xml:id="tlstk-g-voip-systeme-vorsaetzliche-handlungen">
         <title>Vorsätzliche Handlungen</title>
-
-        <para></para>
 
         <section xml:id="tlstk-g-tk-34">
           <title><literal>G-TK-34</literal> Denial-of-Service-Angriffe auf
           VoIP</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-33" /></member>
+
+              <member><xref linkend="tlstk-m-tk-34" /></member>
+
+              <member><xref linkend="tlstk-m-tk-35" /></member>
+
+              <member><xref linkend="tlstk-m-tk-36" /></member>
+
+              <member><xref linkend="tlstk-m-tk-37" /></member>
+
+              <member><xref linkend="tlstk-m-tk-39" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-64" /></member>
+
+              <member><xref linkend="tlstk-m-tk-65" /></member>
+
+              <member><xref linkend="tlstk-m-tk-66" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-35">
@@ -289,6 +983,44 @@
           VoIP-Kommunikation</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-30" /></member>
+
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-33" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-56" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-70" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
 
         <section xml:id="tlstk-g-tk-36">
@@ -296,6 +1028,76 @@
           VoIP-Geräte</title>
 
           <para></para>
+
+          <para>Maßnahmen:<simplelist>
+              <member><xref linkend="tlstk-m-tk-31" /></member>
+
+              <member><xref linkend="tlstk-m-tk-32" /></member>
+
+              <member><xref linkend="tlstk-m-tk-38" /></member>
+
+              <member><xref linkend="tlstk-m-tk-40" /></member>
+
+              <member><xref linkend="tlstk-m-tk-41" /></member>
+
+              <member><xref linkend="tlstk-m-tk-42" /></member>
+
+              <member><xref linkend="tlstk-m-tk-43" /></member>
+
+              <member><xref linkend="tlstk-m-tk-44" /></member>
+
+              <member><xref linkend="tlstk-m-tk-46" /></member>
+
+              <member><xref linkend="tlstk-m-tk-47" /></member>
+
+              <member><xref linkend="tlstk-m-tk-48" /></member>
+
+              <member><xref linkend="tlstk-m-tk-49" /></member>
+
+              <member><xref linkend="tlstk-m-tk-50" /></member>
+
+              <member><xref linkend="tlstk-m-tk-51" /></member>
+
+              <member><xref linkend="tlstk-m-tk-52" /></member>
+
+              <member><xref linkend="tlstk-m-tk-53" /></member>
+
+              <member><xref linkend="tlstk-m-tk-55" /></member>
+
+              <member><xref linkend="tlstk-m-tk-58" /></member>
+
+              <member><xref linkend="tlstk-m-tk-59" /></member>
+
+              <member><xref linkend="tlstk-m-tk-60" /></member>
+
+              <member><xref linkend="tlstk-m-tk-68" /></member>
+
+              <member><xref linkend="tlstk-m-tk-69" /></member>
+
+              <member><xref linkend="tlstk-m-tk-72" /></member>
+
+              <member><xref linkend="tlstk-m-tk-140" /></member>
+
+              <member><xref linkend="tlstk-m-tk-142" /></member>
+
+              <member><xref linkend="tlstk-m-tk-143" /></member>
+
+              <member><xref linkend="tlstk-m-tk-144" /></member>
+
+              <member><xref linkend="tlstk-m-tk-146" /></member>
+
+              <member><xref linkend="tlstk-m-tk-147" /></member>
+
+              <member><xref linkend="tlstk-m-tk-149" /></member>
+
+              <member><xref linkend="tlstk-m-tk-150" /></member>
+
+              <member><xref linkend="tlstk-m-tk-151" /></member>
+
+              <member><xref linkend="tlstk-m-tk-152" /></member>
+
+              <member><xref linkend="tlstk-m-tk-153" /></member>
+            </simplelist></para>
         </section>
       </section>
     </section>
@@ -352,7 +1154,7 @@
           <title><literal>G-TK-44</literal> Unzureichende Regelungen für den
           IP-Anlagenanschluss mit dem ITSP</title>
 
-          <para></para>
+          <para>Zum derzeitigen Stand noch keine ITSP-Anbindung.</para>
         </section>
 
         <section xml:id="tlstk-g-tk-45">
@@ -360,7 +1162,7 @@
           Planung der Absicherung für die Erweiterung der Außenanbindung um
           eine VoIP-Komponente</title>
 
-          <para></para>
+          <para>Zum derzeitigen Stand noch keine ITSP-Anbindung.</para>
         </section>
       </section>
 
