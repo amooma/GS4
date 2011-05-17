@@ -3,8 +3,8 @@ class FreeswitchConfigurationController < ApplicationController
 	def load()
 		@local_ip = local_ip
 		@domain = local_ip
-		@sounds_dir = '/'
-		@hold_music = 'local_stream://moh'
+		@sounds_dir = '$${sounds_dir}'
+		@hold_music = '$${hold_music}'
 		@internal_sip_port = 15060
 		@external_sip_port = 15080
 		@timezones = timezones()
