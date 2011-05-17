@@ -53,7 +53,7 @@
 
   <xi:include href="sicherheitskonzept-strukturanalyse.dbk" />
 
-  <xi:include href="sicherheitskonzept-section-schutzbedarfsfeststellung.dbk" />
+  <xi:include href="sicherheitskonzept-schutzbedarfsfeststellung.dbk" />
 
   <xi:include href="sicherheitskonzept-tlstk.dbk" />
 </chapter>
