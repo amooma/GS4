@@ -107,8 +107,9 @@
   <note>
     <para>Sofern nicht anders angegeben sind die im Folgenden genannten
     Bezeichnungen der Gefährdungen aus <citation><biblioref
-    linkend="biblio-tlstk" /></citation> übernommen und die Struktur
-    entsprechend angelehnt um eine leichtere Übersicht zu ermöglichen.</para>
+    linkend="biblio-tlstk" /></citation> übernommen und die Struktur sowie
+    einige Formulierungen entsprechend angelehnt um eine leichtere Übersicht
+    zu ermöglichen.</para>
   </note>
 
   <section xml:id="tlstk-g-gefaehrdungslage">
@@ -1315,41 +1316,83 @@
           der jeweiligen Institution zuständigen Personen) bei Bedarf
           zusätzlich herkömmliche ISDN- oder Analog-Telefone anzubringen die
           direkt an einen PSTN-Anschluß angebunden sind um im Falle eines
-          Ausfalls der VoIP-Telefonie dennoch Notrufe zu ermöglichen.</para>
+          kompletten Ausfalls der VoIP-Telefonie dennoch Notrufe zu
+          ermöglichen.</para>
+
+          <para>Der Administrator ist angehalten die VoIP-Server,
+          Infrastruktur (Switches) und Endgeräte (ggf. per PoE) an eine USV
+          anzuschließen.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-37">
           <title><literal>M-TK-37</literal> Automatische PSTN-Umschaltung für
           Filialen</title>
 
-          <para></para>
+          <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
+          damit in der Verwantwortung des Netzwerk-Administrators per WAN/VPN
+          an zentrale Telefonie-Server angebundene Filialen oder Außenstellen
+          zusätzlich mit einer lokalen PSTN-Anbindung über ein lokales
+          Media-Gateway auszustatten.</para>
+
+          <para>Gemeinschaft ist als „Knoten“ konzipiert. Ein Knoten in einer
+          Filiale kann auch bei einem Ausfall der WAN-Strecke noch
+          eigenständig Telefonate durchführen. In Gemeinschaft besteht die
+          Möglichkeit entsprechende ausgehende Routen als lokale Fallbacks zu
+          definieren.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-38">
           <title><literal>M-TK-38</literal> Absicherung von Telefonie-Daten im
           Verzeichnisdienst</title>
 
-          <para></para>
+          <para>Sofern die Institution einen Verzeichnisdienst wie LDAP
+          betreibt und befüllt liegt es außerhalb des EInflußbereichs der
+          TK-Anlage diese (z.B. personenbezogenen) Daten im Hinblick auf
+          Vertraulichkeit, Verfügbarkeit und Integrität entsprechend
+          abzusichern.</para>
+
+          <para>Teilnehmerdaten wie Benutzer-spezifische Einstellungen liegen
+          in einer eigenen Datenbank der TK-Anlage. Dabei werden Paßwörter
+          nicht im Klartext sondern als Hashes hinterlegt, beispielsweise
+          Paßwörter für den Zugriff auf die Web-Oberfläche als SHA-Hash mit
+          „<foreignphrase xml:lang="en">Salt</foreignphrase>“.</para>
+
+          <para>Der IT-Administrator ist angehalten diese Daten in einem
+          LDAP-Verzeichnisdienst ebenso nicht im Klartext zu
+          hinterlegen.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-39">
           <title><literal>M-TK-39</literal> Verfügbarkeit kritischer
           Telefonie-Daten</title>
 
-          <para></para>
+          <para>Teilnehmer-Profile und -Einstellungen (wie z.B.
+          Rufumleitungen) müssen dem Schutzbedarf in der jeweiligen
+          Institution angemessen angemessen verfügbar gemacht werden. Dies ist
+          durch Software auf der TK-Anlage möglich (Backups, Hot-Standby)
+          und/oder durch Hardware (RAID, …). Entsprechende Maßnahmen sind
+          nicht durch die TK-Anlage allein zu garantieren sondern liegen immer
+          auch in der Verantwortung des IT-Administrators.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-40">
           <title><literal>M-TK-40</literal> Einschränkungen von DNS für
           VoIP</title>
 
-          <para></para>
+          <para>In der TK-Anlage und über das Provisioning damit auch in den
+          Endgeräten können sowohl Host-Namen als auch IP-Adressen verwendet
+          werden. Der Administrator ist angehalten entweder einen gesicherten,
+          separaten, internen DNS-Server in statischer Konfiguration für
+          Anfragen von VoIP-Geräten zu verwenden, oder bei erhöhtem
+          Schutzbedarf ggf. gänzlich auf Host-Namen zu verzichten und direkt
+          IP-Adressen einzugeben.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-41">
           <title><literal>M-TK-41</literal> Einschränkung von ENUM</title>
 
-          <para></para>
+          <para>ENUM kommt derzeit nicht zum Einsatz, somit besteht hier keine
+          Gefährdung.</para>
         </section>
       </section>
 
