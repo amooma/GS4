@@ -1496,14 +1496,23 @@
           <title><literal>M-TK-48</literal> Sichere Konfiguration von PC-Ports
           an IP-Telefonen</title>
 
-          <para></para>
+          <para>Sofern vorhanden werden PC-Ports an IP-Telefonen
+          deaktiviert.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-49">
           <title><literal>M-TK-49</literal> Sichere Konfiguration von IP und
           von IP-basierten Diensten</title>
 
-          <para></para>
+          <para>Sofern das eingesetzte IP-Telefon entsprechende Einstellungen
+          bietet werden das Versenden und die Reaktion auf Gratuitous ARP
+          deaktivert. Sofern der Administrator andere Firmware-Versionen
+          einsetzt muß er das Verhalten der Endgeräte entsprechend
+          testen.</para>
+
+          <para>Viele IP-Telefone bieten einen auf dem Gerät integrierten
+          Web-Server zur Konfiguration und zum Auslesen von Log-Daten. Dieser
+          wird durch das Provisioning von Gemeinschaft deaktiviert.</para>
         </section>
 
         <section xml:id="tlstk-m-tk-50">
