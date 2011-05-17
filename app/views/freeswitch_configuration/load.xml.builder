@@ -93,7 +93,6 @@ xml.document(:type => 'freeswitch/xml') {
 				xml.param(:name => 'delete-all-outbound-member-on-startup', :value => 'false')
 			}
 			xml.fifos {
-				xml.fifo(:name => "queue1@#{@domain}", :importance => '0')
 			}
 		}
 
@@ -390,6 +389,38 @@ xml.document(:type => 'freeswitch/xml') {
 				xml.condition(:field => '${unroll_loops}', :expression => '^true$')
 				xml.condition(:field => '${sip_looped_call}', :expression => '^true$') {
 					xml.action(:application => 'deflect', :data => '${destination_number}')
+				}
+			}
+			xml.extension(:name => 'kam-park-in') {
+				xml.condition(:field => 'destination_number', :expression => '^-park-in-$') {
+					xml.action(:application => 'valet_park', :data => 'valet_lot auto in 8000 8999')
+				}
+			}
+			xml.extension(:name => 'kam-park-out') {
+				xml.condition(:field => 'destination_number', :expression => '^-park-out-$') {
+					xml.action(:application => 'answer')
+					xml.action(:application => 'valet_park', :data => 'valet_lot ask 4 4 10000 ivr/ivr-enter_ext_pound.wav')
+				}
+			}
+			xml.extension(:name => 'kam-queue-login') {
+				xml.condition(:field => 'destination_number', :expression => '^-queue-login-(.*)$') {
+					xml.action(:application => 'answer')
+					xml.action(:application => 'set', :data => 'result=${fifo_member(add $1 {fifo_member_wait=nowait}user/${user_name} )')
+					xml.action(:application => 'playback', :data => 'ivr/ivr-you_are_now_logged_in.wav')
+				}
+			}
+			xml.extension(:name => 'kam-queue-logout') {
+				xml.condition(:field => 'destination_number', :expression => '^-queue-logout-(.*)$') {
+					xml.action(:application => 'answer')
+					xml.action(:application => 'set', :data => 'result=${fifo_member(del $1 {fifo_member_wait=nowait}user/${user_name})}')
+					xml.action(:application => 'playback', :data => 'ivr/ivr-you_are_now_logged_out.wav')
+				}
+			}
+			xml.extension(:name => 'kam-queue-in') {
+				xml.condition(:field => 'destination_number', :expression => '^-queue-(.*)$') {
+					xml.action(:application => 'answer')
+					xml.action(:application => 'playback', :data => 'ivr/ivr-hold_connect_call.wav')
+					xml.action(:application => 'fifo', :data => '$1 in')
 				}
 			}
 			xml.extension(:name => 'kam-vbox') {
