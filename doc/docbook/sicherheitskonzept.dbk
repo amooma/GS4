@@ -51,7 +51,7 @@
   Berücksichtigung finden. Hierzu werden im folgenden diese beiden Phasen
   genauer betrachtet.</para>
 
-  <xi:include href="sicherheitskonzept-section-strukturanalyse.dbk" />
+  <xi:include href="sicherheitskonzept-strukturanalyse.dbk" />
 
   <xi:include href="sicherheitskonzept-section-schutzbedarfsfeststellung.dbk" />
 
