@@ -1,0 +1,57 @@
+h1 { font-size: 2.5em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.9em; }
+h4 { font-size: 1.6em; }
+h5 { font-size: 1.3em; }
+h6 { font-size: 1.0em; }
+
+.author {
+	font-size: 1.0em;
+	text-align: right;
+	font-size: 0.95em;
+	margin: 0.5em 0;
+}
+.author .author {
+	padding: 0;
+	margin: 0;
+}
+
+.tip .title,
+.note .title,
+.important .title,
+.caution .title,
+.warning { font-size: 1.0em; }
+
+.tip,
+.note,
+.important,
+.caution,
+.warning {
+	background: #eee;
+	border: 1px solid #ddd;
+	padding: 0.3em;
+	margin: 0.5em;
+}
+
+.screen,
+.programlisting,
+.literallayout {
+	background: #eef;
+	border: 1px solid #ccf;
+	padding: 0.3em;
+}
+
+.toc {
+	background: #eee;
+	border: 1px dashed #ccc;
+	padding: 0.3em;
+}
+
+.sidebar {
+	background: #efe;
+	border: 1px solid #cfc;
+	padding: 0.3em;
+}
+
+.title .literal { font-size: 1.2em; padding: 0 0.5em; color: #0b0; }
+

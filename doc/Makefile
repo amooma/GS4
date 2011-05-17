@@ -17,7 +17,7 @@ help:
 	@ echo " ## Targets:"
 	@ echo ""
 #	@ echo " make odt .....................: Generate OpenOffice text file"
-	@ echo " make html ....................: Generate one HTML page"
+	@ echo " make html-onefile ............: Generate one HTML page"
 #	@ echo " make html-chunk...............: Generate HTML pages"
 	@ echo " make clean ...................: Remove all generated files"
 	@ echo ""
@@ -34,7 +34,8 @@ tmp:
 
 tmp/_tmp_dir-stamp: tmp
 	date '+%Y-%m-%d %H:%M:00 %z' > tmp/_tmp_dir-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 tmp/_have-xmllint-stamp: tmp/_tmp_dir-stamp
@@ -53,7 +54,8 @@ tmp/_have-xmllint-stamp: tmp/_tmp_dir-stamp
 		exit 1; \
 	fi
 	date > tmp/_have-xmllint-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 tmp/_have-xsltproc-stamp: tmp/_tmp_dir-stamp
@@ -72,7 +74,8 @@ tmp/_have-xsltproc-stamp: tmp/_tmp_dir-stamp
 		exit 1; \
 	fi
 	date > tmp/_have-xsltproc-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 tmp/_have-tidy-stamp: tmp/_tmp_dir-stamp
@@ -91,7 +94,8 @@ tmp/_have-tidy-stamp: tmp/_tmp_dir-stamp
 		exit 1; \
 	fi
 	date > tmp/_have-tidy-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 tmp/_have-docbook2odf-stamp: tmp/_tmp_dir-stamp
@@ -110,45 +114,52 @@ tmp/_have-docbook2odf-stamp: tmp/_tmp_dir-stamp
 		exit 1; \
 	fi
 	date > tmp/_have-docbook2odf-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 tmp/_have-docbook-schema-stamp: tmp/_tmp_dir-stamp
 	@ echo "Checking for DocBook schema ..."
 	@ if [ ! -f "$(docbook_schema_file)" ]; then \
-		echo '############################################################'; \
-		echo '#  DocBook schema not found.                               #'; \
-		echo '#  Please install docbook5-xml.                            #'; \
-		if [ `which aptitude 2>>/dev/null` ]; then \
-			echo '#  ( sudo aptitude install docbook5-xml )'; \
-		else \
-		if [ `which apt-get 2>>/dev/null` ]; then \
-			echo '#  ( sudo apt-get install docbook5-xml )'; \
-		fi; fi; \
-		echo '############################################################'; \
-		exit 1; \
+		if [ ! -f "docbook-schema/docbookxi.rng" ]; then \
+			echo '############################################################'; \
+			echo '#  DocBook schema not found.                               #'; \
+			echo '#  Please install docbook5-xml.                            #'; \
+			if [ `which aptitude 2>>/dev/null` ]; then \
+				echo '#  ( sudo aptitude install docbook5-xml )'; \
+			else \
+			if [ `which apt-get 2>>/dev/null` ]; then \
+				echo '#  ( sudo apt-get install docbook5-xml )'; \
+			fi; fi; \
+			echo '############################################################'; \
+			exit 1; \
+		fi ;\
 	fi
 	date > tmp/_have-docbook-schema-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 tmp/_have-docbook-xsl-stamp: tmp/_tmp_dir-stamp
 	@ echo "Checking for DocBook XSL ..."
 	@ if [ ! -d "$(docbook_xsl_path)/." ]; then \
-		echo '############################################################'; \
-		echo '#  DocBook XSL not found.                                  #'; \
-		echo '#  Please install docbook-xsl.                             #'; \
-		if [ `which aptitude 2>>/dev/null` ]; then \
-			echo '#  ( sudo aptitude install docbook-xsl )'; \
-		else \
-		if [ `which apt-get 2>>/dev/null` ]; then \
-			echo '#  ( sudo apt-get install docbook-xsl )'; \
-		fi; fi; \
-		echo '############################################################'; \
-		exit 1; \
+		if [ ! -d "docbook-xsl/." ]; then \
+			echo '############################################################'; \
+			echo '#  DocBook XSL not found.                                  #'; \
+			echo '#  Please install docbook-xsl.                             #'; \
+			if [ `which aptitude 2>>/dev/null` ]; then \
+				echo '#  ( sudo aptitude install docbook-xsl )'; \
+			else \
+			if [ `which apt-get 2>>/dev/null` ]; then \
+				echo '#  ( sudo apt-get install docbook-xsl )'; \
+			fi; fi; \
+			echo '############################################################'; \
+			exit 1; \
+		fi ;\
 	fi
 	date > tmp/_have-docbook-xsl-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 
 
 
@@ -160,14 +171,24 @@ tmp/_docbook-valid-stamp: $(docbook_sources) tmp/_have-xmllint-stamp tmp/_have-d
 #		--dtdvalidfpi "-//OASIS//DTD DocBook XML 5.0//EN" \
 #		docbook/index.xml \
 #		; ERR=$$? ; echo "$$ERR" > tmp/_docbook-valid-err
+	
+	if [ -f "docbook-schema/docbookxi.rng" ]; then \
+		the_schema_file="docbook-schema/docbookxi.rng" ;\
+	elif [ -f "$(docbook_schema_file)" ]; then \
+		the_schema_file="$(docbook_schema_file)" ;\
+	else \
+		exit 1 ;\
+	fi ;\
 	$(xmllint) --dropdtd --noout \
-		--relaxng $(docbook_schema_file) \
+		--relaxng "$$the_schema_file" \
 		$(docbook_index_file)
+	
 	@ echo '############################################################';
 	@ echo '#  DocBook sources are valid.                              #';
 	@ echo '############################################################';
 	date > tmp/_docbook-valid-stamp
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 	
 
 validate: tmp/_docbook-valid-stamp
@@ -179,7 +200,8 @@ tmp/docbook-one-file.dbk: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-
 		--xinclude --nonet \
 		--output "tmp/docbook-one-file.dbk" \
 		$(docbook_index_file)
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 	@ echo "tmp/docbook-one-file.dbk DONE"
 
 tmp/docbook-one-file-no-ns.dbk: tmp/docbook-one-file.dbk
@@ -187,29 +209,30 @@ tmp/docbook-one-file-no-ns.dbk: tmp/docbook-one-file.dbk
 	sed -e 's/xmlns=["][^"]*["]/ /' \
 	  tmp/docbook-one-file.dbk \
 	  > tmp/docbook-one-file-no-ns.dbk
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 	@ echo "tmp/docbook-one-file-no-ns.dbk DONE"
 
 
-odt: out.odt
+#odt: out.odt
+#
+#out.odt: tmp/docbook-one-file-no-ns.dbk tmp/_have-docbook2odf-stamp
+#	docbook2odf "tmp/docbook-one-file-no-ns.dbk" -o "out.odt" -f -v -d
 
-out.odt: tmp/docbook-one-file-no-ns.dbk tmp/_have-docbook2odf-stamp
-	docbook2odf "tmp/docbook-one-file-no-ns.dbk" -o "out.odt" -f -v -d
 
-
-roundtrip: tmp/docbook-one-file-no-ns.dbk tmp/_docbook-valid-stamp tmp/_have-xsltproc-stamp tmp/_have-docbook-xsl-stamp
-	mkdir -p roundtrip
-	$(xsltproc) \
-		--xinclude \
-		--novalid \
-		--stringparam 'current.docid' 'foo' \
-		-o "roundtrip/contents.xml" \
-		"/usr/share/xml/docbook/stylesheet/docbook-xsl/roundtrip/dbk2ooo.xsl" \
-		"tmp/docbook-one-file-no-ns.dbk"
+#roundtrip: tmp/docbook-one-file-no-ns.dbk tmp/_docbook-valid-stamp tmp/_have-xsltproc-stamp tmp/_have-docbook-xsl-stamp
+#	mkdir -p roundtrip
+#	$(xsltproc) \
+#		--xinclude \
+#		--novalid \
+#		--stringparam 'current.docid' 'foo' \
+#		-o "roundtrip/contents.xml" \
+#		"/usr/share/xml/docbook/stylesheet/docbook-xsl/roundtrip/dbk2ooo.xsl" \
+#		"tmp/docbook-one-file-no-ns.dbk"
 	
 
 
-html: html-onefile-xsl
+html-onefile: html-onefile-xsl
 
 html-onefile-xsl: html-onefile/index.html
 
@@ -219,14 +242,25 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 	@ echo '############################################################';
 	@ echo "Transforming to HTML ..."
 	mkdir -p html-onefile
+	
+	if [ -d "docbook-xsl/." ]; then \
+		the_docbook_xsl_path="docbook-xsl" ;\
+	elif [ -d "$(docbook_xsl_path)/." ]; then \
+		the_docbook_xsl_path="$(docbook_xsl_path)" ;\
+	else \
+		exit 1 ;\
+	fi ;\
 	$(xsltproc) \
 		--xinclude \
 		--novalid \
 		--stringparam 'current.docid' 'foo' \
+		--stringparam 'html.stylesheet' 'style.css' \
 		-o "html-onefile/" \
-		"/usr/share/xml/docbook/stylesheet/docbook-xsl/xhtml/onechunk.xsl" \
+		"$$the_docbook_xsl_path/xhtml/onechunk.xsl" \
 		$(docbook_index_file)
-	touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	
+	#touch -d "`cat tmp/_tmp_dir-stamp`" tmp
+	touch -r tmp/_tmp_dir-stamp tmp
 	@ echo '############################################################';
 	@ echo '#  HTML (onefile via XSLT) done.                           #';
 	@ echo '############################################################';
@@ -236,12 +270,12 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 		$(tidy) \
 			--add-xml-decl no --assume-xml-procins yes --doctype auto \
 			--input-xml no --output-xhtml yes \
-			--join-classes no --logical-emphasis no --merge-divs no --merge-spans no \
+			--join-classes no --logical-emphasis no --merge-divs no \
 			--ncr yes --numeric-entities no \
 			--quote-marks yes --quote-nbsp yes \
 			--show-errors 100 --show-warnings yes \
 			--indent-spaces 2 --tab-size 2 --vertical-space no \
-			--markup yes --sort-attributes none \
+			--markup yes \
 			--wrap 180 --wrap-attributes no \
 			--wrap-asp no --wrap-php no --wrap-script-literals no --wrap-sections no \
 			--char-encoding utf8 --input-encoding utf8 --output-encoding utf8 --output-bom no \
@@ -253,6 +287,8 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 			; e=$$? ; [ ".$$e" = ".0" -o ".$$e" = ".1" ] || exit 1 ;\
 		mv $$html_file.tidied $$html_file ;\
 	done
+	@# --merge-spans no
+	@# --sort-attributes none
 	@ echo '############################################################';
 	@ echo '#  HTML (onefile, tidy) done.                              #';
 	@ echo '############################################################';
@@ -260,9 +296,9 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 
 
 clean:
-	[ ! -e "tmp"          ] || rm -rf "tmp"
-	[ ! -e "out.odt"      ] || rm -rf "out.odt"
-	[ ! -e "html-onefile" ] || rm -rf "html-onefile"
+	[ ! -e "tmp" ] || rm -rf "tmp"
+	[ ! -f "out.odt" ] || rm -f "out.odt"
+	[ ! -f "html-onefile/index.html" ] || rm -f "html-onefile/index.html"
 
 
 .PHONY: help clean odt validate
