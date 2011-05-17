@@ -55,3 +55,23 @@ h6 { font-size: 1.0em; }
 
 .title .literal { font-size: 1.2em; padding: 0 0.5em; color: #0b0; }
 
+.screenshot {
+	/*border: 1px solid #ccc;*/
+	padding: 0.4em;
+	margin: 1.0em;
+	text-align: center;
+}
+.screenshot img {
+	border: 1px solid #000;
+	margin: 0.2em;
+}
+.screenshot .caption {
+	text-align: center;
+	margin: 0;
+	font-size: 0.9em;
+}
+.screenshot .caption p {
+	margin: 0.1em 0;
+	padding: 0.1em;
+}
+

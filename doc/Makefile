@@ -255,6 +255,7 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 		--novalid \
 		--stringparam 'current.docid' 'foo' \
 		--stringparam 'html.stylesheet' 'style.css' \
+		--stringparam 'img.src.path' 'img/' \
 		-o "html-onefile/" \
 		"$$the_docbook_xsl_path/xhtml/onechunk.xsl" \
 		$(docbook_index_file)
@@ -292,6 +293,9 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 	@ echo '############################################################';
 	@ echo '#  HTML (onefile, tidy) done.                              #';
 	@ echo '############################################################';
+	
+	mkdir -p html-onefile/img/
+	cp -a docbook/*.png html-onefile/img/
 
 
 
