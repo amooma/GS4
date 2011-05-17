@@ -16,7 +16,7 @@ ERD.pdf
 /vendor/bundle
 .settings/*
 .idea/*
-
+misc/freeswitch/fs-conf/freeswitch-gemeinschaft4.xml
 # ignore .build_unclean (used by "make deb")
 /.build_unclean
 
