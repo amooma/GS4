@@ -63,5 +63,5 @@
 
   <xi:include href="data-model.xml" />
 
-  <xi:include href="sicherheitskonzept-und-architektur.dbk" />
+  <xi:include href="architektur.dbk" />
 </book>
