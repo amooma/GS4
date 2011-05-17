@@ -111,10 +111,10 @@
     entsprechend angelehnt um eine leichtere Übersicht zu ermöglichen.</para>
   </note>
 
-  <section>
+  <section xml:id="tlstk-gefaehrdungslage">
     <title>Gefährdungslage</title>
 
-    <section>
+    <section xml:id="tlstk-g-systemuebergreifende-aspekte">
       <title>Systemübergreifende Aspekte</title>
 
       <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
@@ -122,7 +122,7 @@
       sind.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-isdn-tk-anlagen">
       <title>ISDN-TK-Anlagen</title>
 
       <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine
@@ -134,18 +134,20 @@
       Betrachtung und des „Gefahrenübergangs“ die VoIP-Anbindung.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-voip-systeme">
       <title>VoIP-Systeme</title>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-hoehere-gewalt">
         <title>Höhere Gewalt</title>
 
         <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
         Gefährdungen durch höhere Gewalt zu die in den
-        IT-Grundschutz-Katalogen des BSI genannt sind. Eine VoIP-TK-Anlage hat
-        zusätzlich folgende spezielle Gefährdungen:</para>
+        IT-Grundschutz-Katalogen des BSI genannt sind.</para>
 
-        <section>
+        <para>Eine VoIP-TK-Anlage hat zusätzlich folgende spezielle
+        Gefährdungen:</para>
+
+        <section xml:id="tlstk-g-tk-20">
           <title><literal>G-TK-20</literal> Ausfall der mitgenutzten
           IP-Infrastruktur</title>
 
@@ -153,7 +155,7 @@
           mitgenutzter Dienste wie DNS und DHCP.</para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-21">
           <title><literal>G-TK-21</literal> Ausfall eines für VoIP
           mitgenutzten Weitverkehrsnetzes</title>
 
@@ -161,7 +163,7 @@
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-organisatorische-maengel">
         <title>Organisatorische Mängel</title>
 
         <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
@@ -169,28 +171,28 @@
         IT-Grundschutz-Katalogen des BSI genannt sind. Eine VoIP-TK-Anlage hat
         zusätzlich folgende spezielle Gefährdungen:</para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-22">
           <title><literal>G-TK-22</literal> Unzureichende Regelungen für den
           Einsatz von VoIP</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-23">
           <title><literal>G-TK-23</literal> Unzureichende Harmonisierung
           zwischen IT- und VoIP-Betrieb</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-24">
           <title><literal>G-TK-24</literal> Fehlende, ungeeignete und
           inkompatible Betriebsmittel für VoIP</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-25">
           <title><literal>G-TK-25</literal> Unzureichende Verwaltung und
           Kontrolle von Zugangs- und Zugriffsmöglichkeiten auf
           VoIP-Endgeräte</title>
@@ -198,14 +200,14 @@
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-26">
           <title><literal>G-TK-26</literal> Kein ordnungsgemäßer
           Benutzerwechsel für VoIP-Endgeräte</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-27">
           <title><literal>G-TK-27</literal> Mangelhafte Behandlung der
           Archivierung von Sprachnachrichten und elektronischen
           Fax-Nachrichten</title>
@@ -213,14 +215,14 @@
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-28">
           <title><literal>G-TK-28</literal> Unzulängliche vertragliche
           Regelungen für externe Leistungen zur VoIP-Lösung</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-29">
           <title><literal>G-TK-29</literal> Unzureichende Regelungen für das
           Ende der externen Dienstleistungen für eine VoIP-Lösung</title>
 
@@ -228,13 +230,13 @@
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-menschliche-fehlhandlungen">
         <title>Menschliche Fehlhandlungen</title>
 
         <para>… durch Administratoren sowie Endanwender der
         VoIP-TK-Anlage.</para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-30">
           <title><literal>G-TK-30</literal> Vertraulichkeits- oder
           Integritätsverlust von Daten durch Fehlverhalten der
           VoIP-Benutzer</title>
@@ -242,21 +244,21 @@
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-31">
           <title><literal>G-TK-31</literal> Unstrukturierte Datenhaltung durch
           VoIP-Nutzer</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-32">
           <title><literal>G-TK-32</literal> Konfigurationsfehler und
           Bedienungsfehler bei VoIP-Lösungen</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-33">
           <title><literal>G-TK-33</literal> Fehlerhafte Administration von
           Zugangs- und Zugriffsrechten zu VoIP-Installationen</title>
 
@@ -264,32 +266,32 @@
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-technisches-versagen">
         <title>Technisches Versagen</title>
 
         <para></para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-voip-systeme-vorsaetzliche-handlungen">
         <title>Vorsätzliche Handlungen</title>
 
         <para></para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-34">
           <title><literal>G-TK-34</literal> Denial-of-Service-Angriffe auf
           VoIP</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-35">
           <title><literal>G-TK-35</literal> Abhören der
           VoIP-Kommunikation</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-36">
           <title><literal>G-TK-36</literal> Missbräuchlicher Zugriff auf
           VoIP-Geräte</title>
 
@@ -298,7 +300,7 @@
       </section>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-hybrid-systeme">
       <title>Hybrid-Systeme</title>
 
       <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine ISDN-
@@ -311,7 +313,7 @@
       VoIP-Anbindung.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-tk-applikationen-und-mehrwertdienste">
       <title>TK-Applikationen und Mehrwertdienste</title>
 
       <para>(Bindeglieder zwischen Tele- und Daten-Kommunikation)</para>
@@ -320,13 +322,13 @@
       entsprechend anzupassen.</para>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-ip-anlagenanschluss">
       <title>IP-Anlagenanschluss</title>
 
       <para>(d.h. IP-basierte Anbindung der TK-Anlage an das öffentliche
       Telefonnetz über einen externen Carrier/Provider/ITSP)</para>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-hoehere-gewalt">
         <title>Höhere Gewalt</title>
 
         <para>Die Gefährdungen liegen hier auf der Übertragungsstrecke zum
@@ -339,21 +341,21 @@
         Anbindung nach extern) nicht betrachtet.</para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-organisatorische-maengel">
         <title>Organisatorische Mängel</title>
 
         <para>Es ist zu beachten daß die Kommunikation mit einer Vielzahl der
         ITSPs nicht verschlüsselt stattfindet (so wie auch bei einem
         „normalen“ ISDN-Anschluß).</para>
 
-        <section>
+        <section xml:id="tlstk-g-tk-44">
           <title><literal>G-TK-44</literal> Unzureichende Regelungen für den
           IP-Anlagenanschluss mit dem ITSP</title>
 
           <para></para>
         </section>
 
-        <section>
+        <section xml:id="tlstk-g-tk-45">
           <title><literal>G-TK-45</literal> Unzureichende oder fehlende
           Planung der Absicherung für die Erweiterung der Außenanbindung um
           eine VoIP-Komponente</title>
@@ -362,24 +364,24 @@
         </section>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-menschliche-fehlhandlungen">
         <title>Menschliche Fehlhandlungen</title>
 
         <para>Siehe Gefährdungen durch menschliche Fehlhandlungen für einen
         Internet-Zugang wie in den IT-Grundschutz-Katalogen genannt.</para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-technisches-versagen">
         <title>Technisches Versagen</title>
 
         <para>Siehe G-TK-46. Die TK-Anlage „Gemeinschaft“ bietet
         SBC-Funktionalität.</para>
       </section>
 
-      <section>
+      <section xml:id="tlstk-g-ip-anlagenanschluss-vorsaetzliche-handlungen">
         <title>Vorsätzliche Handlungen</title>
 
-        <section>
+        <section xml:id="tlstk-g-tk-46">
           <title><literal>G-TK-46</literal> Übertragung von schadenstiftender
           Software über die IP-Kommunikation mit VoIP-Netzelementen des
           ITSP</title>
@@ -401,7 +403,7 @@
       </section>
     </section>
 
-    <section>
+    <section xml:id="tlstk-g-mobile-und-drahtlose-systeme">
       <title>Mobile und drahtlose Systeme</title>
 
       <para>(GSM, UMTS, WLAN, DECT, Bluetooth)</para>
