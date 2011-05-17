@@ -405,19 +405,19 @@ xml.document(:type => 'freeswitch/xml') {
 			xml.extension(:name => 'kam-queue-login') {
 				xml.condition(:field => 'destination_number', :expression => '^-queue-login-(.*)$') {
 					xml.action(:application => 'answer')
-					xml.action(:application => 'set', :data => 'result=${fifo_member(add $1 {fifo_member_wait=nowait}user/${user_name} )')
+					xml.action(:application => 'set', :data => 'result=${fifo_member(add $1 {fifo_member_wait=nowait}user/${sip_from_user}@${domain_name}}')
 					xml.action(:application => 'playback', :data => 'ivr/ivr-you_are_now_logged_in.wav')
 				}
 			}
 			xml.extension(:name => 'kam-queue-logout') {
 				xml.condition(:field => 'destination_number', :expression => '^-queue-logout-(.*)$') {
 					xml.action(:application => 'answer')
-					xml.action(:application => 'set', :data => 'result=${fifo_member(del $1 {fifo_member_wait=nowait}user/${user_name})}')
+					xml.action(:application => 'set', :data => 'result=${fifo_member(del $1 {fifo_member_wait=nowait}user/${sip_from_user}@${domain_name}}')
 					xml.action(:application => 'playback', :data => 'ivr/ivr-you_are_now_logged_out.wav')
 				}
 			}
 			xml.extension(:name => 'kam-queue-in') {
-				xml.condition(:field => 'destination_number', :expression => '^-queue-(.*)$') {
+				xml.condition(:field => 'destination_number', :expression => '^-kambridge-(-queue-.*)$') {
 					xml.action(:application => 'answer')
 					xml.action(:application => 'playback', :data => 'ivr/ivr-hold_connect_call.wav')
 					xml.action(:application => 'fifo', :data => '$1 in')
