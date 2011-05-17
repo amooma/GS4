@@ -53,9 +53,9 @@
     <xi:include href="installation-ror-debian-5.xml" />
 
     <xi:include href="installation-gs4.xml" />
-  </chapter>
 
-  <xi:include href="install-squeeze.xml" />
+    <xi:include href="install-squeeze.xml" />
+  </chapter>
 
   <xi:include href="frontend.xml" />
 
@@ -64,4 +64,6 @@
   <xi:include href="data-model.xml" />
 
   <xi:include href="architektur.dbk" />
+
+  <xi:include href="sicherheitskonzept.dbk" />
 </book>
