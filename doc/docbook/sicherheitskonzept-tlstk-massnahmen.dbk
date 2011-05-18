@@ -331,7 +331,15 @@
         <title><literal>M-TK-51</literal> Benutzerabhängige
         Berechtigungen</title>
 
-        <para></para>
+        <para>Die Tk-Anlage Gemeinschaft unterstützt das An- und Abmelden von
+        Benutzern an Telefonen („Hot-Desking“ / „Mobility“) mittels
+        PIN-Nummern. Aus Sicherheitsgründen gibt es &#8211; zusätzlich zu der
+        Absicherung durch die PIN-Nummer &#8211; ein Berechtigungssystem.
+        Durch dieses ist definierbar welcher Benutzer sich an welchen
+        Endgeräten einloggen darf, inklusive Zeitfenstern und automatischer
+        Abmeldung nach einer gewissen Zeit der Inaktivität. Nach automatischem
+        Ausloggen erhält das Telefon ein Standard-Profil das nur Notrufe
+        tätigen kann und optional interne Telefonate.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-52">
