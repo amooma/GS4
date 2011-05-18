@@ -639,34 +639,56 @@
         Berechtigungen für die Administration eines Servers des
         Telekommunikationssystems</title>
 
-        <para></para>
+        <para>Ein Berechtigungssystem für die Web-Schnittstellen von
+        Gemeinschaft mit Benutzern, Gruppen und Rollen ist im weiteren Verlauf
+        des Projektes noch zu entwickeln.</para>
+
+        <para>Technische oder personalisierte Unix-Benutzer mit
+        Administrationsrechten können soweit erforderlich vom IT-Administrator
+        angelegt werden. Die Rechte sind dabei möglichst restriktiv zu
+        vergeben.</para>
+
+        <para>Je nach Schutzbedarf sollte es vermieden werden externen
+        Wartungs-Dienstleistern Shell-Zugriff auf das System zu geben.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-144">
         <title><literal>M-TK-144</literal> Einschränkung und Kontrolle des
         Zugangs zu einem Server des Telekommunikationssystems</title>
 
-        <para></para>
+        <para>Sofern der TK-Server in die Authentisierungsmechanismen der
+        Institution eingebunden werden sollen ist diese für die konkrete
+        Umsetzung (Verzeichnisdienst, Smart-Cards) verantwortlich.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-145">
         <title><literal>M-TK-145</literal> Physikalische Sicherheit der
         Server</title>
 
-        <para></para>
+        <para>Die TK-Server sind durch verschlossene Server-Räume und
+        -Schränke vor physischem Zugriff durch Unberechtigte zu schützen, bei
+        erhöhtem Schutzbedarf mit elektronischer Zugangskontrolle mit
+        Protokollierung und Video-Überwachung. Ebenso ist ein Schutz vor
+        Umwelteinflüssen (Feuer, Wasser, Blitzschlag etc.) erforderlich. Die
+        physische Absicherung obliegt der jeweiligen Institution.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-146">
         <title><literal>M-TK-146</literal> Mehrstufiges Backup-Konzept</title>
 
-        <para></para>
+        <para>Die konkrete Umsetzung von Backup-Mechanismen ist Aufgabe der
+        IT-Administratoren.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-147">
         <title><literal>M-TK-147</literal> Schutz vor schadenstiftender
         Software</title>
 
-        <para></para>
+        <para>Die TK-Anlage Gemeinschaft wird in der Standard-Installation als
+        Image bereitgestellt das auf einem gehärteten System basiert. Eine
+        Firewall (IPtables per Shorewall) und ein Host-basiertes
+        IDS-/IPS-System (intrusion detection/prevention system) sind auf dem
+        System vorhanden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-148">
