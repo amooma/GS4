@@ -432,28 +432,47 @@
       <section xml:id="tlstk-m-tk-60">
         <title><literal>M-TK-60</literal> Netztrennung für VoIP</title>
 
-        <para></para>
+        <para>Der Netzwerk-Administrator ist angehalten für die
+        VoIP-Kommunikation ein separates VLAN zu verwenden zu dem per
+        Zugangskontrolle auf den Switchen nur die VoIP-Geräte zugeordnet
+        werden. Sofern vorhanden sind Übergänge von der VoIP-Sicherheitszone
+        zum Datennetz &#8211; beispielsweise zum DHCP-Server &#8211;
+        entsprechend abzusichern, bei erhöhtem Schutzbedarf mit einer
+        Firewall. Bei erhöhtem Schutzbedarf sollte &#8211; nach Abwägung des
+        Restrisikos und der Verhältnismäßigkeit &#8211; ggf. sogar ein
+        physisch getrenntes VoIP-Netz aufgebaut werden, entweder für alle
+        Endgeräte oder nur für Notruf-Telefone und Geräte in besonders
+        kritischen Bereichen.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-61">
         <title><literal>M-TK-61</literal> Angemessene Verfügbarkeit des LAN
         für die Verwendung von VoIP</title>
 
-        <para></para>
+        <para>Die LAN-Infrastruktur ist vom Netzwerk-Administrator nach
+        Möglichkeit hochverfügbar auszulegen. Die in der TLSTK genannten
+        Punkte sind: Vermeidung von Single Points of Failure, strukturierte
+        Kabelführung, Wege-Redundanz, Modul-Redundanz, permanente
+        Überwachung.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-62">
         <title><literal>M-TK-62</literal> Angemessene Verfügbarkeit der vom
         VoIP-System genutzten Netzdienste</title>
 
-        <para></para>
+        <para>Von der VoIP-Telefonie mitgenutze Dienste wie z.B. DHCP, DNS,
+        Verzeichnisdienste sind vom IT-Administrator redundant und verfügbar
+        auszulegen.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-63">
         <title><literal>M-TK-63</literal> Angemessene Verfügbarkeit der
         Stromversorgung für IP-Telefone</title>
 
-        <para></para>
+        <para>Der IT-Administrator hat dafür Sorge zu tragen daß für die
+        IP-Telefone eine angemessene Stromversorgung per USV verfügbar ist,
+        sowohl bei der Versorgung per PoE (Power over Ethernet) als auch
+        herkömmlich.</para>
       </section>
     </section>
 
