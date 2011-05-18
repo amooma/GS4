@@ -366,46 +366,67 @@
         <title><literal>M-TK-53</literal> Sichere Konfiguration der
         Netzwerk-Komponenten</title>
 
-        <para></para>
+        <para>Die sichere Konfiguration der zur VoIP-Infrastuktur gehörenden
+        Switche und Router liegt außerhalb des Einflußbereichs der TK-Anlage
+        Gemeinschaft und damit im Verantwortungsbereich des
+        Netzwerk-Administrators.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-54">
         <title><literal>M-TK-54</literal> Sicheres Routing</title>
 
-        <para></para>
+        <para>Die sichere Konfiguration der zur VoIP-Infrastuktur gehörenden
+        Switche und Router im Hinblick auf Routing-Tabellen und den sicheren
+        Austausch von Routing-Informationen liegt außerhalb des
+        Einflußbereichs der TK-Anlage Gemeinschaft und damit im
+        Verantwortungsbereich des Netzwerk-Administrators.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-55">
         <title><literal>M-TK-55</literal> Absicherung von Switch-Ports</title>
 
-        <para></para>
+        <para>Die sichere Konfiguration von Access-Ports an Switchen &#8211;
+        beispielsweise im Bezug auf verschiedene Spoofing-Attacken &#8211;
+        liegt außerhalb des Einflußbereichs der TK-Anlage Gemeinschaft und
+        damit im Verantwortungsbereich des Netzwerk-Administrators.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-56">
         <title><literal>M-TK-56</literal> Absicherung der DHCP-Nutzung</title>
 
-        <para></para>
+        <para>Der Netzwerk-Administrator ist angehalten auf den Switches die
+        Mechanismen zur Blockierung von DHCP-Snooping zu aktivieren.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-57">
         <title><literal>M-TK-57</literal> Quality of Service im
         Netzwerk</title>
 
-        <para></para>
+        <para>Es obliegt dem Netzwerk-Administrator die Netzwerk-Infrastruktur
+        ausreichend zu dimensionieren. Bei Anbindung per WAN soll darauf
+        geachtet werden daß der Provider Service-Klassen (QoS) unterstützt und
+        die Übertragung von Sprachdaten in nahezu der höchsten Klasse
+        stattfindet.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-58">
         <title><literal>M-TK-58</literal> Zugangskontrolle zum
         Netzwerk</title>
 
-        <para></para>
+        <para>Bei erhöhtem Schutzbedarf soll der Netzwerk-Administrator die
+        LAN-Zugänge der VoIP-Endgeräte durch IEEE 802.1X mit EAP-TLS
+        absichern. EAP-MD5 ist zu vermeiden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-59">
         <title><literal>M-TK-59</literal> MAC Security im Anschlussbereich für
         Endgeräte</title>
 
-        <para></para>
+        <para>Mit der TK-Anlage Gemeinschaft kommt
+        Ende-zu-Ende-Verschlüsselung zum Einsatz.</para>
+
+        <para>Zusätzlich obliegt es dem Netzwerk-Administrator die LAN-Zugänge
+        per IEEE 802.1AE abzusichern.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-60">
