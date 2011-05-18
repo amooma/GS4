@@ -483,14 +483,24 @@
         <title><literal>M-TK-64</literal> Sichere Administration des
         Telefonie-Servers</title>
 
-        <para></para>
+        <para>Der TK-Server wird (neben reinen Paketen auch als) komplettes
+        Image bereitgestellt und basiert dann auf einem bereits gehärteten
+        Betriebssystem. Dadurch ist auch eine möglichst sichere
+        Grundkonfiguration mit einem verschlüsselten Dateisystem
+        vorhanden.</para>
+
+        <para>Die weitere Verantwortung den Zugriff (auch physisch) auf den
+        Server abzusichern liegt in der Verantwortung der jeweiligen
+        Institution.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-65">
         <title><literal>M-TK-65</literal> Sichere Administration von
         PSTN-Gateways</title>
 
-        <para></para>
+        <para>Die Administration von PSTN-Gateways liegt außerhalb des
+        Einflußbereichs von Gemeinschaft und damit in der Verantwortung des
+        IT-Administrators.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-66">
