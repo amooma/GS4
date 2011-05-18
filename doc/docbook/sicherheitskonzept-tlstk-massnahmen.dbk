@@ -20,603 +20,596 @@
     </authorgroup>
   </info>
 
-    <section xml:id="tlstk-m-voip-systeme">
-      <title>VoIP-Systeme</title>
+  <section xml:id="tlstk-m-voip-systeme">
+    <title>VoIP-Systeme</title>
 
-      <section xml:id="tlstk-m-voip-systeme-server-und-anwendungen">
-        <title>Server und Anwendungen</title>
+    <section xml:id="tlstk-m-voip-systeme-server-und-anwendungen">
+      <title>Server und Anwendungen</title>
 
-        <section xml:id="tlstk-m-tk-30">
-          <title><literal>M-TK-30</literal> Ende-zu-Ende-Verschlüsselung des
-          Medienstroms</title>
+      <section xml:id="tlstk-m-tk-30">
+        <title><literal>M-TK-30</literal> Ende-zu-Ende-Verschlüsselung des
+        Medienstroms</title>
 
-          <para>Aufgrund des erhöhten Schutzbedarfs kommt SRTP bzw. ZRTP als
-          Verschlüsselung des RTP-Medien-Stroms zum Einsatz. Die
-          Schlüssellänge beträgt mindestens 128 Bit. Die Verschlüsselung
-          erfolgt zwischen den terminierenden SIP-Geräten, d.h. zwischen zwei
-          Endgeräten bzw. zwischen einem Endgerät und einem Gateway, SBC,
-          Voicemail- oder Konferenzzerver (wobei die Aufgaben des SBC,
-          Voicemail- und Konferenzzerver in einer Standard-Installation von
-          „Gemeinschaft“ erfüllt werden).</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-31">
-          <title><literal>M-TK-31</literal> Verschlüsselung der
-          Signalisierung</title>
-
-          <para>Bei erhöhtem Schutzbedarf wird die SIP-Signalisierung zwischen
-          Endgerät und Telefonie-Server verschlüsselt. Dabei kommt TLS zum
-          Einsatz oder alternativ eine auf IPsec- oder anderen VPN-Techniken
-          basierende Verschlüsselungstechnik.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-32">
-          <title><literal>M-TK-32</literal> Authentisierung zwischen
-          Endgeräten und Servern des VoIP-Systems</title>
-
-          <para>#OPTIMIZE Sobald geeignete Endgeräte verfügbar sind ist dieser
-          Punkt noch auszuarbeiten.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-33">
-          <title><literal>M-TK-33</literal> Authentisierung zwischen
-          Servern</title>
-
-          <para>In der Standard-Installation befinden sich alle VoIP-Dienste
-          von Gemeinschaft auf einem einzigen (aktiven) Server, die
-          Kommunikation zwischen den Diensten findet also nicht über das
-          Netzwerk statt.</para>
-
-          <para>In einer vom Standard-Setup abweichenden Installation mit
-          verteilten Servern wird die Kommunikation zwischen diesen
-          verschlüsselt.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-34">
-          <title><literal>M-TK-34</literal> Redundanz der
-          Telefonie-Server</title>
-
-          <para>Gemeinschaft ist ein „Knoten“. Je nach Größe der Institution
-          und Anforderungen an die Redundanz können auch mehrere solcher
-          Knoten betrieben werden. Das genaue Vorgehen (Cold-/Hot-Standby,
-          Active-Active, Virtualisierungsumgebung, ...) hängt von den
-          jeweiligen Erfordernissen ab. Ein Setup bei dem keine Gespräche
-          unterbrochen werden ist möglich.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-35">
-          <title><literal>M-TK-35</literal> Redundanz der Server und Gateways,
-          von denen die Funktion des Telefonie-Servers und des
-          Telefonie-Diensts unmittelbar abhängt</title>
-
-          <para>Server wie PSTN-Gateways (sofern in der jeweiligen
-          Installation vorhanden) müssen bei Bedarf redundant ausgelegt
-          werden. Gleiches gilt für beispielsweise DNS-Server. Beides liegt
-          außerhalb des Einflußbereichs der VoIP-TK-Anlage „Gemeinschaft“ und
-          ist Aufgabe des Netzwerk-Administrators.</para>
-
-          <para>Um die Telefonie weniger abhängig vom DNS-Server zu machen
-          können in Gemeinschaft IP-Adressen statt Host-Namen verwendet
-          werden.</para>
-
-          <para>Ebenso können in Gemeinschaft mehrere ausgehende Routen als
-          Fallback festgelegt werden.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-36">
-          <title><literal>M-TK-36</literal> Schaffung eines zusätzlichen
-          PSTN-Ersatzanschlusses für Notrufe</title>
-
-          <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
-          damit in der Verwantwortung des Netzwerk-Administrators (bzw. der in
-          der jeweiligen Institution zuständigen Personen) bei Bedarf
-          zusätzlich herkömmliche ISDN- oder Analog-Telefone anzubringen die
-          direkt an einen PSTN-Anschluß angebunden sind um im Falle eines
-          kompletten Ausfalls der VoIP-Telefonie dennoch Notrufe zu
-          ermöglichen.</para>
-
-          <para>Der Administrator ist angehalten die VoIP-Server,
-          Infrastruktur (Switches) und Endgeräte (ggf. per PoE) an eine USV
-          anzuschließen.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-37">
-          <title><literal>M-TK-37</literal> Automatische PSTN-Umschaltung für
-          Filialen</title>
-
-          <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
-          damit in der Verwantwortung des Netzwerk-Administrators per WAN/VPN
-          an zentrale Telefonie-Server angebundene Filialen oder Außenstellen
-          zusätzlich mit einer lokalen PSTN-Anbindung über ein lokales
-          Media-Gateway auszustatten.</para>
-
-          <para>Gemeinschaft ist als „Knoten“ konzipiert. Ein Knoten in einer
-          Filiale kann auch bei einem Ausfall der WAN-Strecke noch
-          eigenständig Telefonate durchführen. In Gemeinschaft besteht die
-          Möglichkeit entsprechende ausgehende Routen als lokale Fallbacks zu
-          definieren.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-38">
-          <title><literal>M-TK-38</literal> Absicherung von Telefonie-Daten im
-          Verzeichnisdienst</title>
-
-          <para>Sofern die Institution einen Verzeichnisdienst wie LDAP
-          betreibt und befüllt liegt es außerhalb des EInflußbereichs der
-          TK-Anlage diese (z.B. personenbezogenen) Daten im Hinblick auf
-          Vertraulichkeit, Verfügbarkeit und Integrität entsprechend
-          abzusichern.</para>
-
-          <para>Teilnehmerdaten wie Benutzer-spezifische Einstellungen liegen
-          in einer eigenen Datenbank der TK-Anlage. Dabei werden Paßwörter
-          nicht im Klartext sondern als Hashes hinterlegt, beispielsweise
-          Paßwörter für den Zugriff auf die Web-Oberfläche als SHA-Hash mit
-          „<foreignphrase xml:lang="en">Salt</foreignphrase>“.</para>
-
-          <para>Der IT-Administrator ist angehalten diese Daten in einem
-          LDAP-Verzeichnisdienst ebenso nicht im Klartext zu
-          hinterlegen.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-39">
-          <title><literal>M-TK-39</literal> Verfügbarkeit kritischer
-          Telefonie-Daten</title>
-
-          <para>Teilnehmer-Profile und -Einstellungen (wie z.B.
-          Rufumleitungen) müssen dem Schutzbedarf in der jeweiligen
-          Institution angemessen angemessen verfügbar gemacht werden. Dies ist
-          durch Software auf der TK-Anlage möglich (Backups, Hot-Standby)
-          und/oder durch Hardware (RAID, …). Entsprechende Maßnahmen sind
-          nicht durch die TK-Anlage allein zu garantieren sondern liegen immer
-          auch in der Verantwortung des IT-Administrators.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-40">
-          <title><literal>M-TK-40</literal> Einschränkungen von DNS für
-          VoIP</title>
-
-          <para>In der TK-Anlage und über das Provisioning damit auch in den
-          Endgeräten können sowohl Host-Namen als auch IP-Adressen verwendet
-          werden. Der Administrator ist angehalten entweder einen gesicherten,
-          separaten, internen DNS-Server in statischer Konfiguration für
-          Anfragen von VoIP-Geräten zu verwenden, oder bei erhöhtem
-          Schutzbedarf ggf. gänzlich auf Host-Namen zu verzichten und direkt
-          IP-Adressen einzugeben.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-41">
-          <title><literal>M-TK-41</literal> Einschränkung von ENUM</title>
-
-          <para>ENUM kommt derzeit nicht zum Einsatz, somit besteht hier keine
-          Gefährdung.</para>
-        </section>
+        <para>Aufgrund des erhöhten Schutzbedarfs kommt SRTP bzw. ZRTP als
+        Verschlüsselung des RTP-Medien-Stroms zum Einsatz. Die Schlüssellänge
+        beträgt mindestens 128 Bit. Die Verschlüsselung erfolgt zwischen den
+        terminierenden SIP-Geräten, d.h. zwischen zwei Endgeräten bzw.
+        zwischen einem Endgerät und einem Gateway, SBC, Voicemail- oder
+        Konferenzzerver (wobei die Aufgaben des SBC, Voicemail- und
+        Konferenzzerver in einer Standard-Installation von „Gemeinschaft“
+        erfüllt werden).</para>
       </section>
 
-      <section xml:id="tlstk-m-voip-systeme-endgeraete">
-        <title>Endgeräte</title>
+      <section xml:id="tlstk-m-tk-31">
+        <title><literal>M-TK-31</literal> Verschlüsselung der
+        Signalisierung</title>
 
-        <section xml:id="tlstk-m-tk-42">
-          <title><literal>M-TK-42</literal> Sicherung von IP-Telefonen in
-          unübersichtlichen Umgebungen</title>
-
-          <para>In unübersichtlichen Umgebungen (Lobbys, Besprechungsräume
-          etc.) werden laut Empfehlung von Gemeinschaft nur Endgeräte mit
-          eingeschränktem Funktionsumfang eingesetzt, d.h. beispielsweise
-          keine Telefone mit integriertem Ethernet-Switch (bzw. falls
-          vorhanden so wird dieser durch das Provisioning von Gemeinschaft
-          deaktiviert).</para>
-
-          <para>Die Berechtigungen der betreffenden „technischen“ (d.h. nicht
-          personenbezogenen) SIP-Accounts können in Gemeinschaft konfiguriert
-          werden.</para>
-
-          <para>Zusätzlich liegt es in der Verantwortung des Administrators
-          der IT-Infrastruktur den VoIP-Geräten keine IP-Kommunikation in das
-          Datennetz zu ermöglichen (auf den Switches).</para>
-
-          <para>Weiterhin liegt es außerhalb des Einflußbereichs von
-          Gemeinschaft die Geräte mechanisch vor Diebstahl zu schützen.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-43">
-          <title><literal>M-TK-43</literal> Warnung bei unsicheren
-          Einstellungen</title>
-
-          <para>Für den erhöhten Schutzbedarf werden die Geräte von
-          Gemeinschaft durch die Provisionierung so konfiguriert daß unsichere
-          Merkmale &#8211; insbesondere eine deaktivierte
-          Ende-zu-Ende-Verschlüsselung &#8211; durch durch einen Hinweis
-          (optisch/akustisch) erkennbar gemacht werden.</para>
-
-          <para>Da die konkrete Umsetzung des Hinweises nicht von Gemeinschaft
-          beeinflußbar sondern abhängig vom Endgerät und der jeweiligen
-          Firmware ist (entsprechende Endgeräte sind derzeit noch nicht
-          verbreitet) dürfen bei erhöhtem Schutzbedarf nur entsprechend
-          ausgestattete und getestete Endgeräte eingesetzt werden.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-44">
-          <title><literal>M-TK-44</literal> Prozess zur Behandlung des
-          Verlusts eines VoIP-Endgeräts</title>
-
-          <para>Auf VoIP-Endgeräten ist Sorgfalt geboten bei der Speicherung
-          vertrauenswürdiger Daten. Generell sollen beispielsweise Paßwörter
-          oder Schlüssel ausschließlich für die VoIP-Kommunikation dienen (und
-          nicht etwa identisch sein mit solchen die auch Zugriffe auf andere
-          Dienste ermöglichen). Diese werden daher von Gemeinschaft
-          entsprechend generiert bzw. über ein Identitätsmanagement-System
-          (IdM, IdMS, IMS) verwaltet und importiert.</para>
-
-          <para>Es muß ein Prozeß vorhanden sein um den Verlust eines
-          IP-Telefons zu behandeln. Hierzu bietet es sich an die betreffenden
-          Zertifikate zu sperren (CRL) und das Paßwort des Accounts in
-          Gemeinschaft zu ändern.</para>
-
-          <para>#OPTIMIZE Hier das Vorgehen genauer beschreiben sobald ein
-          geeignetes IP-Telefon verfügbar ist.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-45">
-          <title><literal>M-TK-45</literal> Absicherung der Firmware</title>
-
-          <para>Die Integrität und Authentizität von Firmware-Dateien muß
-          überprüft werden. Voraussetzung hierfür ist daß der Hersteller seine
-          Firmware digital signiert und eine Prüfsumme bereitstellt.</para>
-
-          <para>#OPTIMIZE Konkretes Vorgehen beschreiben sobald ein geeignetes
-          IP-Telefon mit entsprechender Firmware verfügbar ist. (Beispiel:
-          Mitlieferung der Firmware im Image des Gemeinschaft-Systems oder
-          Prüfung durch den IT-Administrator.)</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-46">
-          <title><literal>M-TK-46</literal> Absicherung von
-          Konfigurationsdateien</title>
-
-          <para>Die Übertragung der Konfigurationsparameter vom
-          Provisioning-Dienst in Gemeinschaft zu den Telefonen erfolgt
-          verschlüsselt per HTTPS mit Authentisierung.</para>
-
-          <para>#OPTIMIZE Genauer beschreiben sobald ein geeignetes IP-Telefon
-          mit entsprechender Firmware verfügbar ist.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-47">
-          <title><literal>M-TK-47</literal> Sicherheit von Softphones</title>
-
-          <para>Softphones kommen derzeit nicht zum Einsatz, somit sind
-          Sicherheitsschwachstellen auf PCs hier nicht relevant.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-48">
-          <title><literal>M-TK-48</literal> Sichere Konfiguration von PC-Ports
-          an IP-Telefonen</title>
-
-          <para>Sofern vorhanden werden PC-Ports an IP-Telefonen
-          deaktiviert.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-49">
-          <title><literal>M-TK-49</literal> Sichere Konfiguration von IP und
-          von IP-basierten Diensten</title>
-
-          <para>Sofern das eingesetzte IP-Telefon entsprechende Einstellungen
-          bietet werden das Versenden und die Reaktion auf Gratuitous ARP
-          deaktivert. Sofern der Administrator andere Firmware-Versionen
-          einsetzt muß er das Verhalten der Endgeräte entsprechend
-          testen.</para>
-
-          <para>Viele IP-Telefone bieten einen auf dem Gerät integrierten
-          Web-Server zur Konfiguration und zum Auslesen von Log-Daten. Dieser
-          wird durch das Provisioning von Gemeinschaft deaktiviert.</para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-50">
-          <title><literal>M-TK-50</literal> Einschränkung des lokalen Zugriffs
-          auf die Konfiguration des IP-Telefons</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-51">
-          <title><literal>M-TK-51</literal> Benutzerabhängige
-          Berechtigungen</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-52">
-          <title><literal>M-TK-52</literal> Schutz von Teilnehmer-spezifischen
-          Daten auf einem IP-Telefon</title>
-
-          <para></para>
-        </section>
+        <para>Bei erhöhtem Schutzbedarf wird die SIP-Signalisierung zwischen
+        Endgerät und Telefonie-Server verschlüsselt. Dabei kommt TLS zum
+        Einsatz oder alternativ eine auf IPsec- oder anderen VPN-Techniken
+        basierende Verschlüsselungstechnik.</para>
       </section>
 
-      <section xml:id="tlstk-m-voip-systeme-netzwerk">
-        <title>Netzwerk</title>
+      <section xml:id="tlstk-m-tk-32">
+        <title><literal>M-TK-32</literal> Authentisierung zwischen Endgeräten
+        und Servern des VoIP-Systems</title>
 
-        <section xml:id="tlstk-m-tk-53">
-          <title><literal>M-TK-53</literal> Sichere Konfiguration der
-          Netzwerk-Komponenten</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-54">
-          <title><literal>M-TK-54</literal> Sicheres Routing</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-55">
-          <title><literal>M-TK-55</literal> Absicherung von
-          Switch-Ports</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-56">
-          <title><literal>M-TK-56</literal> Absicherung der
-          DHCP-Nutzung</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-57">
-          <title><literal>M-TK-57</literal> Quality of Service im
-          Netzwerk</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-58">
-          <title><literal>M-TK-58</literal> Zugangskontrolle zum
-          Netzwerk</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-59">
-          <title><literal>M-TK-59</literal> MAC Security im Anschlussbereich
-          für Endgeräte</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-60">
-          <title><literal>M-TK-60</literal> Netztrennung für VoIP</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-61">
-          <title><literal>M-TK-61</literal> Angemessene Verfügbarkeit des LAN
-          für die Verwendung von VoIP</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-62">
-          <title><literal>M-TK-62</literal> Angemessene Verfügbarkeit der vom
-          VoIP-System genutzten Netzdienste</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-63">
-          <title><literal>M-TK-63</literal> Angemessene Verfügbarkeit der
-          Stromversorgung für IP-Telefone</title>
-
-          <para></para>
-        </section>
+        <para>#OPTIMIZE Sobald geeignete Endgeräte verfügbar sind ist dieser
+        Punkt noch auszuarbeiten.</para>
       </section>
 
-      <section xml:id="tlstk-m-voip-systeme-netz-und-systemmanagement">
-        <title>Netz- und Systemmanagement</title>
+      <section xml:id="tlstk-m-tk-33">
+        <title><literal>M-TK-33</literal> Authentisierung zwischen
+        Servern</title>
 
-        <section xml:id="tlstk-m-tk-64">
-          <title><literal>M-TK-64</literal> Sichere Administration des
-          Telefonie-Servers</title>
+        <para>In der Standard-Installation befinden sich alle VoIP-Dienste von
+        Gemeinschaft auf einem einzigen (aktiven) Server, die Kommunikation
+        zwischen den Diensten findet also nicht über das Netzwerk
+        statt.</para>
 
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-65">
-          <title><literal>M-TK-65</literal> Sichere Administration von
-          PSTN-Gateways</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-66">
-          <title><literal>M-TK-66</literal> Sichere Administration von
-          Anwendungs- und Management-Servern</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-67">
-          <title><literal>M-TK-67</literal> Sichere Administration von
-          Abrechnungs- und Gebührenerfassungssystemen</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-68">
-          <title><literal>M-TK-68</literal> Sichere Verwaltung von
-          Teilnehmerprofilen</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-69">
-          <title><literal>M-TK-69</literal> Sichere Administration von
-          Endgeräten</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-70">
-          <title><literal>M-TK-70</literal> Sichere Administration von
-          Netzkomponenten</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-71">
-          <title><literal>M-TK-71</literal> Überwachung der Komponenten des
-          VoIP-Systems</title>
-
-          <para></para>
-        </section>
+        <para>In einer vom Standard-Setup abweichenden Installation mit
+        verteilten Servern wird die Kommunikation zwischen diesen
+        verschlüsselt.</para>
       </section>
 
-      <section xml:id="tlstk-m-voip-systeme-uebergreifende-aspekte">
-        <title>Übergreifende Aspekte</title>
+      <section xml:id="tlstk-m-tk-34">
+        <title><literal>M-TK-34</literal> Redundanz der
+        Telefonie-Server</title>
 
-        <section xml:id="tlstk-m-tk-72">
-          <title><literal>M-TK-72</literal> Produktauswahl von VoIP-Lösungen
-          unter Sicherheitsgesichtspunkten</title>
+        <para>Gemeinschaft ist ein „Knoten“. Je nach Größe der Institution und
+        Anforderungen an die Redundanz können auch mehrere solcher Knoten
+        betrieben werden. Das genaue Vorgehen (Cold-/Hot-Standby,
+        Active-Active, Virtualisierungsumgebung, ...) hängt von den jeweiligen
+        Erfordernissen ab. Ein Setup bei dem keine Gespräche unterbrochen
+        werden ist möglich.</para>
+      </section>
 
-          <para></para>
-        </section>
+      <section xml:id="tlstk-m-tk-35">
+        <title><literal>M-TK-35</literal> Redundanz der Server und Gateways,
+        von denen die Funktion des Telefonie-Servers und des Telefonie-Diensts
+        unmittelbar abhängt</title>
 
-        <section xml:id="tlstk-m-tk-73">
-          <title><literal>M-TK-73</literal> Datensicherung für die Elemente
-          des VoIP-Systems</title>
+        <para>Server wie PSTN-Gateways (sofern in der jeweiligen Installation
+        vorhanden) müssen bei Bedarf redundant ausgelegt werden. Gleiches gilt
+        für beispielsweise DNS-Server. Beides liegt außerhalb des
+        Einflußbereichs der VoIP-TK-Anlage „Gemeinschaft“ und ist Aufgabe des
+        Netzwerk-Administrators.</para>
 
-          <para></para>
-        </section>
+        <para>Um die Telefonie weniger abhängig vom DNS-Server zu machen
+        können in Gemeinschaft IP-Adressen statt Host-Namen verwendet
+        werden.</para>
 
-        <section xml:id="tlstk-m-tk-74">
-          <title><literal>M-TK-74</literal> Notfallvorsorge für das
-          VoIP-System</title>
+        <para>Ebenso können in Gemeinschaft mehrere ausgehende Routen als
+        Fallback festgelegt werden.</para>
+      </section>
 
-          <para></para>
-        </section>
+      <section xml:id="tlstk-m-tk-36">
+        <title><literal>M-TK-36</literal> Schaffung eines zusätzlichen
+        PSTN-Ersatzanschlusses für Notrufe</title>
+
+        <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
+        damit in der Verwantwortung des Netzwerk-Administrators (bzw. der in
+        der jeweiligen Institution zuständigen Personen) bei Bedarf zusätzlich
+        herkömmliche ISDN- oder Analog-Telefone anzubringen die direkt an
+        einen PSTN-Anschluß angebunden sind um im Falle eines kompletten
+        Ausfalls der VoIP-Telefonie dennoch Notrufe zu ermöglichen.</para>
+
+        <para>Der Administrator ist angehalten die VoIP-Server, Infrastruktur
+        (Switches) und Endgeräte (ggf. per PoE) an eine USV
+        anzuschließen.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-37">
+        <title><literal>M-TK-37</literal> Automatische PSTN-Umschaltung für
+        Filialen</title>
+
+        <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
+        damit in der Verwantwortung des Netzwerk-Administrators per WAN/VPN an
+        zentrale Telefonie-Server angebundene Filialen oder Außenstellen
+        zusätzlich mit einer lokalen PSTN-Anbindung über ein lokales
+        Media-Gateway auszustatten.</para>
+
+        <para>Gemeinschaft ist als „Knoten“ konzipiert. Ein Knoten in einer
+        Filiale kann auch bei einem Ausfall der WAN-Strecke noch eigenständig
+        Telefonate durchführen. In Gemeinschaft besteht die Möglichkeit
+        entsprechende ausgehende Routen als lokale Fallbacks zu
+        definieren.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-38">
+        <title><literal>M-TK-38</literal> Absicherung von Telefonie-Daten im
+        Verzeichnisdienst</title>
+
+        <para>Sofern die Institution einen Verzeichnisdienst wie LDAP betreibt
+        und befüllt liegt es außerhalb des EInflußbereichs der TK-Anlage diese
+        (z.B. personenbezogenen) Daten im Hinblick auf Vertraulichkeit,
+        Verfügbarkeit und Integrität entsprechend abzusichern.</para>
+
+        <para>Teilnehmerdaten wie Benutzer-spezifische Einstellungen liegen in
+        einer eigenen Datenbank der TK-Anlage. Dabei werden Paßwörter nicht im
+        Klartext sondern als Hashes hinterlegt, beispielsweise Paßwörter für
+        den Zugriff auf die Web-Oberfläche als SHA-Hash mit „<foreignphrase
+        xml:lang="en">Salt</foreignphrase>“.</para>
+
+        <para>Der IT-Administrator ist angehalten diese Daten in einem
+        LDAP-Verzeichnisdienst ebenso nicht im Klartext zu hinterlegen.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-39">
+        <title><literal>M-TK-39</literal> Verfügbarkeit kritischer
+        Telefonie-Daten</title>
+
+        <para>Teilnehmer-Profile und -Einstellungen (wie z.B. Rufumleitungen)
+        müssen dem Schutzbedarf in der jeweiligen Institution angemessen
+        angemessen verfügbar gemacht werden. Dies ist durch Software auf der
+        TK-Anlage möglich (Backups, Hot-Standby) und/oder durch Hardware
+        (RAID, …). Entsprechende Maßnahmen sind nicht durch die TK-Anlage
+        allein zu garantieren sondern liegen immer auch in der Verantwortung
+        des IT-Administrators.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-40">
+        <title><literal>M-TK-40</literal> Einschränkungen von DNS für
+        VoIP</title>
+
+        <para>In der TK-Anlage und über das Provisioning damit auch in den
+        Endgeräten können sowohl Host-Namen als auch IP-Adressen verwendet
+        werden. Der Administrator ist angehalten entweder einen gesicherten,
+        separaten, internen DNS-Server in statischer Konfiguration für
+        Anfragen von VoIP-Geräten zu verwenden, oder bei erhöhtem Schutzbedarf
+        ggf. gänzlich auf Host-Namen zu verzichten und direkt IP-Adressen
+        einzugeben.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-41">
+        <title><literal>M-TK-41</literal> Einschränkung von ENUM</title>
+
+        <para>ENUM kommt derzeit nicht zum Einsatz, somit besteht hier keine
+        Gefährdung.</para>
       </section>
     </section>
 
-    <section xml:id="tlstk-m-systemuebergreifende-aspekte">
-      <title>Systemübergreifende Aspekte</title>
+    <section xml:id="tlstk-m-voip-systeme-endgeraete">
+      <title>Endgeräte</title>
 
-      <section xml:id="tlstk-m-systemuebergreifende-aspekte-netzinfrastruktur">
-        <title>Auslegung der passiven Netzinfrastruktur bei erhöhtem
-        Schutzbedarf</title>
+      <section xml:id="tlstk-m-tk-42">
+        <title><literal>M-TK-42</literal> Sicherung von IP-Telefonen in
+        unübersichtlichen Umgebungen</title>
 
-        <section xml:id="tlstk-m-tk-140">
-          <title><literal>M-TK-140</literal> Sichere Kabelführung</title>
+        <para>In unübersichtlichen Umgebungen (Lobbys, Besprechungsräume etc.)
+        werden laut Empfehlung von Gemeinschaft nur Endgeräte mit
+        eingeschränktem Funktionsumfang eingesetzt, d.h. beispielsweise keine
+        Telefone mit integriertem Ethernet-Switch (bzw. falls vorhanden so
+        wird dieser durch das Provisioning von Gemeinschaft
+        deaktiviert).</para>
 
-          <para></para>
-        </section>
+        <para>Die Berechtigungen der betreffenden „technischen“ (d.h. nicht
+        personenbezogenen) SIP-Accounts können in Gemeinschaft konfiguriert
+        werden.</para>
 
-        <section xml:id="tlstk-m-tk-141">
-          <title><literal>M-TK-141</literal> Redundante Kabelführung</title>
+        <para>Zusätzlich liegt es in der Verantwortung des Administrators der
+        IT-Infrastruktur den VoIP-Geräten keine IP-Kommunikation in das
+        Datennetz zu ermöglichen (auf den Switches).</para>
 
-          <para></para>
-        </section>
+        <para>Weiterhin liegt es außerhalb des Einflußbereichs von
+        Gemeinschaft die Geräte mechanisch vor Diebstahl zu schützen.</para>
       </section>
 
-      <section xml:id="tlstk-m-systemuebergreifende-aspekte-absicherung-von-servern">
-        <title>Absicherung von Servern des Telekommunikationssystems</title>
+      <section xml:id="tlstk-m-tk-43">
+        <title><literal>M-TK-43</literal> Warnung bei unsicheren
+        Einstellungen</title>
 
-        <section xml:id="tlstk-m-tk-142">
-          <title><literal>M-TK-142</literal> Härtung von Servern des
-          Telekommunikationssystems</title>
+        <para>Für den erhöhten Schutzbedarf werden die Geräte von Gemeinschaft
+        durch die Provisionierung so konfiguriert daß unsichere Merkmale
+        &#8211; insbesondere eine deaktivierte Ende-zu-Ende-Verschlüsselung
+        &#8211; durch durch einen Hinweis (optisch/akustisch) erkennbar
+        gemacht werden.</para>
 
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-143">
-          <title><literal>M-TK-143</literal> Einschränkung und Kontrolle von
-          Berechtigungen für die Administration eines Servers des
-          Telekommunikationssystems</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-144">
-          <title><literal>M-TK-144</literal> Einschränkung und Kontrolle des
-          Zugangs zu einem Server des Telekommunikationssystems</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-145">
-          <title><literal>M-TK-145</literal> Physikalische Sicherheit der
-          Server</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-146">
-          <title><literal>M-TK-146</literal> Mehrstufiges
-          Backup-Konzept</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-147">
-          <title><literal>M-TK-147</literal> Schutz vor schadenstiftender
-          Software</title>
-
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-148">
-          <title><literal>M-TK-148</literal> Software-Sicherheit inkl.
-          Patch-Management</title>
-
-          <para></para>
-        </section>
+        <para>Da die konkrete Umsetzung des Hinweises nicht von Gemeinschaft
+        beeinflußbar sondern abhängig vom Endgerät und der jeweiligen Firmware
+        ist (entsprechende Endgeräte sind derzeit noch nicht verbreitet)
+        dürfen bei erhöhtem Schutzbedarf nur entsprechend ausgestattete und
+        getestete Endgeräte eingesetzt werden.</para>
       </section>
 
-      <section xml:id="tlstk-m-systemuebergreifende-aspekte-netz-und-systemmanagement">
-        <title>Sicheres Netz- und Systemmanagement</title>
+      <section xml:id="tlstk-m-tk-44">
+        <title><literal>M-TK-44</literal> Prozess zur Behandlung des Verlusts
+        eines VoIP-Endgeräts</title>
 
-        <section xml:id="tlstk-m-tk-149">
-          <title><literal>M-TK-149</literal> Sichere Konfiguration des
-          Netzwerkmanagement-Protokolls</title>
+        <para>Auf VoIP-Endgeräten ist Sorgfalt geboten bei der Speicherung
+        vertrauenswürdiger Daten. Generell sollen beispielsweise Paßwörter
+        oder Schlüssel ausschließlich für die VoIP-Kommunikation dienen (und
+        nicht etwa identisch sein mit solchen die auch Zugriffe auf andere
+        Dienste ermöglichen). Diese werden daher von Gemeinschaft entsprechend
+        generiert bzw. über ein Identitätsmanagement-System (IdM, IdMS, IMS)
+        verwaltet und importiert.</para>
 
-          <para></para>
-        </section>
+        <para>Es muß ein Prozeß vorhanden sein um den Verlust eines
+        IP-Telefons zu behandeln. Hierzu bietet es sich an die betreffenden
+        Zertifikate zu sperren (CRL) und das Paßwort des Accounts in
+        Gemeinschaft zu ändern.</para>
 
-        <section xml:id="tlstk-m-tk-150">
-          <title><literal>M-TK-150</literal> Überwachung der Komponenten des
-          Telekommunikationssystems</title>
-
-          <para></para>
-        </section>
+        <para>#OPTIMIZE Hier das Vorgehen genauer beschreiben sobald ein
+        geeignetes IP-Telefon verfügbar ist.</para>
       </section>
 
-      <section xml:id="tlstk-m-systemuebergreifende-aspekte-datenschutz">
-        <title>Datenschutz</title>
+      <section xml:id="tlstk-m-tk-45">
+        <title><literal>M-TK-45</literal> Absicherung der Firmware</title>
 
-        <section xml:id="tlstk-m-tk-151">
-          <title><literal>M-TK-151</literal> Schutz von
-          Verbindungsdaten</title>
+        <para>Die Integrität und Authentizität von Firmware-Dateien muß
+        überprüft werden. Voraussetzung hierfür ist daß der Hersteller seine
+        Firmware digital signiert und eine Prüfsumme bereitstellt.</para>
 
-          <para></para>
-        </section>
-
-        <section xml:id="tlstk-m-tk-152">
-          <title><literal>M-TK-152</literal> Sichere Außerbetriebnahme von
-          Komponenten des Telekommunikationssystems</title>
-
-          <para></para>
-        </section>
+        <para>#OPTIMIZE Konkretes Vorgehen beschreiben sobald ein geeignetes
+        IP-Telefon mit entsprechender Firmware verfügbar ist. (Beispiel:
+        Mitlieferung der Firmware im Image des Gemeinschaft-Systems oder
+        Prüfung durch den IT-Administrator.)</para>
       </section>
 
-      <section xml:id="tlstk-m-systemuebergreifende-aspekte-auswahl-von-diensteanbietern">
-        <title>Auswahl von Diensteanbietern</title>
+      <section xml:id="tlstk-m-tk-46">
+        <title><literal>M-TK-46</literal> Absicherung von
+        Konfigurationsdateien</title>
 
-        <section xml:id="tlstk-m-tk-153">
-          <title><literal>M-TK-153</literal> Nachweis der Vertrauenswürdigkeit
-          des Diensteanbieters</title>
+        <para>Die Übertragung der Konfigurationsparameter vom
+        Provisioning-Dienst in Gemeinschaft zu den Telefonen erfolgt
+        verschlüsselt per HTTPS mit Authentisierung.</para>
 
-          <para></para>
-        </section>
+        <para>#OPTIMIZE Genauer beschreiben sobald ein geeignetes IP-Telefon
+        mit entsprechender Firmware verfügbar ist.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-47">
+        <title><literal>M-TK-47</literal> Sicherheit von Softphones</title>
+
+        <para>Softphones kommen derzeit nicht zum Einsatz, somit sind
+        Sicherheitsschwachstellen auf PCs hier nicht relevant.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-48">
+        <title><literal>M-TK-48</literal> Sichere Konfiguration von PC-Ports
+        an IP-Telefonen</title>
+
+        <para>Sofern vorhanden werden PC-Ports an IP-Telefonen
+        deaktiviert.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-49">
+        <title><literal>M-TK-49</literal> Sichere Konfiguration von IP und von
+        IP-basierten Diensten</title>
+
+        <para>Sofern das eingesetzte IP-Telefon entsprechende Einstellungen
+        bietet werden das Versenden und die Reaktion auf Gratuitous ARP
+        deaktivert. Sofern der Administrator andere Firmware-Versionen
+        einsetzt muß er das Verhalten der Endgeräte entsprechend
+        testen.</para>
+
+        <para>Viele IP-Telefone bieten einen auf dem Gerät integrierten
+        Web-Server zur Konfiguration und zum Auslesen von Log-Daten. Dieser
+        wird durch das Provisioning von Gemeinschaft deaktiviert.</para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-50">
+        <title><literal>M-TK-50</literal> Einschränkung des lokalen Zugriffs
+        auf die Konfiguration des IP-Telefons</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-51">
+        <title><literal>M-TK-51</literal> Benutzerabhängige
+        Berechtigungen</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-52">
+        <title><literal>M-TK-52</literal> Schutz von Teilnehmer-spezifischen
+        Daten auf einem IP-Telefon</title>
+
+        <para></para>
       </section>
     </section>
+
+    <section xml:id="tlstk-m-voip-systeme-netzwerk">
+      <title>Netzwerk</title>
+
+      <section xml:id="tlstk-m-tk-53">
+        <title><literal>M-TK-53</literal> Sichere Konfiguration der
+        Netzwerk-Komponenten</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-54">
+        <title><literal>M-TK-54</literal> Sicheres Routing</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-55">
+        <title><literal>M-TK-55</literal> Absicherung von Switch-Ports</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-56">
+        <title><literal>M-TK-56</literal> Absicherung der DHCP-Nutzung</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-57">
+        <title><literal>M-TK-57</literal> Quality of Service im
+        Netzwerk</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-58">
+        <title><literal>M-TK-58</literal> Zugangskontrolle zum
+        Netzwerk</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-59">
+        <title><literal>M-TK-59</literal> MAC Security im Anschlussbereich für
+        Endgeräte</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-60">
+        <title><literal>M-TK-60</literal> Netztrennung für VoIP</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-61">
+        <title><literal>M-TK-61</literal> Angemessene Verfügbarkeit des LAN
+        für die Verwendung von VoIP</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-62">
+        <title><literal>M-TK-62</literal> Angemessene Verfügbarkeit der vom
+        VoIP-System genutzten Netzdienste</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-63">
+        <title><literal>M-TK-63</literal> Angemessene Verfügbarkeit der
+        Stromversorgung für IP-Telefone</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-voip-systeme-netz-und-systemmanagement">
+      <title>Netz- und Systemmanagement</title>
+
+      <section xml:id="tlstk-m-tk-64">
+        <title><literal>M-TK-64</literal> Sichere Administration des
+        Telefonie-Servers</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-65">
+        <title><literal>M-TK-65</literal> Sichere Administration von
+        PSTN-Gateways</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-66">
+        <title><literal>M-TK-66</literal> Sichere Administration von
+        Anwendungs- und Management-Servern</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-67">
+        <title><literal>M-TK-67</literal> Sichere Administration von
+        Abrechnungs- und Gebührenerfassungssystemen</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-68">
+        <title><literal>M-TK-68</literal> Sichere Verwaltung von
+        Teilnehmerprofilen</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-69">
+        <title><literal>M-TK-69</literal> Sichere Administration von
+        Endgeräten</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-70">
+        <title><literal>M-TK-70</literal> Sichere Administration von
+        Netzkomponenten</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-71">
+        <title><literal>M-TK-71</literal> Überwachung der Komponenten des
+        VoIP-Systems</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-voip-systeme-uebergreifende-aspekte">
+      <title>Übergreifende Aspekte</title>
+
+      <section xml:id="tlstk-m-tk-72">
+        <title><literal>M-TK-72</literal> Produktauswahl von VoIP-Lösungen
+        unter Sicherheitsgesichtspunkten</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-73">
+        <title><literal>M-TK-73</literal> Datensicherung für die Elemente des
+        VoIP-Systems</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-74">
+        <title><literal>M-TK-74</literal> Notfallvorsorge für das
+        VoIP-System</title>
+
+        <para></para>
+      </section>
+    </section>
+  </section>
+
+  <section xml:id="tlstk-m-systemuebergreifende-aspekte">
+    <title>Systemübergreifende Aspekte</title>
+
+    <section xml:id="tlstk-m-systemuebergreifende-aspekte-netzinfrastruktur">
+      <title>Auslegung der passiven Netzinfrastruktur bei erhöhtem
+      Schutzbedarf</title>
+
+      <section xml:id="tlstk-m-tk-140">
+        <title><literal>M-TK-140</literal> Sichere Kabelführung</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-141">
+        <title><literal>M-TK-141</literal> Redundante Kabelführung</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-systemuebergreifende-aspekte-absicherung-von-servern">
+      <title>Absicherung von Servern des Telekommunikationssystems</title>
+
+      <section xml:id="tlstk-m-tk-142">
+        <title><literal>M-TK-142</literal> Härtung von Servern des
+        Telekommunikationssystems</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-143">
+        <title><literal>M-TK-143</literal> Einschränkung und Kontrolle von
+        Berechtigungen für die Administration eines Servers des
+        Telekommunikationssystems</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-144">
+        <title><literal>M-TK-144</literal> Einschränkung und Kontrolle des
+        Zugangs zu einem Server des Telekommunikationssystems</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-145">
+        <title><literal>M-TK-145</literal> Physikalische Sicherheit der
+        Server</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-146">
+        <title><literal>M-TK-146</literal> Mehrstufiges Backup-Konzept</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-147">
+        <title><literal>M-TK-147</literal> Schutz vor schadenstiftender
+        Software</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-148">
+        <title><literal>M-TK-148</literal> Software-Sicherheit inkl.
+        Patch-Management</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-systemuebergreifende-aspekte-netz-und-systemmanagement">
+      <title>Sicheres Netz- und Systemmanagement</title>
+
+      <section xml:id="tlstk-m-tk-149">
+        <title><literal>M-TK-149</literal> Sichere Konfiguration des
+        Netzwerkmanagement-Protokolls</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-150">
+        <title><literal>M-TK-150</literal> Überwachung der Komponenten des
+        Telekommunikationssystems</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-systemuebergreifende-aspekte-datenschutz">
+      <title>Datenschutz</title>
+
+      <section xml:id="tlstk-m-tk-151">
+        <title><literal>M-TK-151</literal> Schutz von Verbindungsdaten</title>
+
+        <para></para>
+      </section>
+
+      <section xml:id="tlstk-m-tk-152">
+        <title><literal>M-TK-152</literal> Sichere Außerbetriebnahme von
+        Komponenten des Telekommunikationssystems</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section xml:id="tlstk-m-systemuebergreifende-aspekte-auswahl-von-diensteanbietern">
+      <title>Auswahl von Diensteanbietern</title>
+
+      <section xml:id="tlstk-m-tk-153">
+        <title><literal>M-TK-153</literal> Nachweis der Vertrauenswürdigkeit
+        des Diensteanbieters</title>
+
+        <para></para>
+      </section>
+    </section>
+  </section>
 </section>
