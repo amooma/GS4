@@ -40,4 +40,6 @@
     </itemizedlist></para>
 
   <xi:include href="beschreibung.dbk" />
+
+  <xi:include href="data-model.xml" />
 </chapter>
