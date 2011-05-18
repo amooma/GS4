@@ -348,7 +348,7 @@ Extension.create(:extension => "80", :destination => "-vmmenue-", :active => tru
 Extension.create(:extension => "90", :destination => "-park-in-", :active => true)
 Extension.create(:extension => "99", :destination => "-park-out-", :active => true)
 
-call_forward_reasons = ['busy', 'noanswer', 'offline', 'always']
+call_forward_reasons = ['busy', 'noanswer', 'offline', 'always', 'assistant']
 
 call_forward_reasons.each do |reason|
 	CallForwardReason.create(:value => reason)
