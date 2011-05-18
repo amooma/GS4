@@ -595,7 +595,7 @@
         Notrufe abgesetzt werden oder zur Schadensbehebung Telefonate mit
         Externen geführt werden, beispielsweise mit Support-Firmen.</para>
 
-        <para>#OPTIMIZE Notfallplan mit Sofortmaßnahmen beschreiben.</para>
+        <para>#OPTIMIZE Notfallplan mit Sofortmaßnahmen nennen.</para>
       </section>
     </section>
   </section>
@@ -610,13 +610,15 @@
       <section xml:id="tlstk-m-tk-140">
         <title><literal>M-TK-140</literal> Sichere Kabelführung</title>
 
-        <para></para>
+        <para>Sichere Kabelführung ist grundsätzlich (d.h. nicht
+        TK-spezifisch) Aufgabe der jeweiligen Institution.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-141">
         <title><literal>M-TK-141</literal> Redundante Kabelführung</title>
 
-        <para></para>
+        <para>Redundante Kabelführung ist grundsätzlich (d.h. nicht
+        TK-spezifisch) Aufgabe der jeweiligen Institution.</para>
       </section>
     </section>
 
@@ -627,7 +629,9 @@
         <title><literal>M-TK-142</literal> Härtung von Servern des
         Telekommunikationssystems</title>
 
-        <para></para>
+        <para>In der Standard-Installation wird die TK-Anlage Gemeinschaft
+        bereits als ein komplettes Image bereitgestellt das auf einem
+        minimalen und gehärteten System basiert.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-143">
