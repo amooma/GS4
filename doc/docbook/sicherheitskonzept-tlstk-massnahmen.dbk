@@ -534,21 +534,32 @@
         <title><literal>M-TK-69</literal> Sichere Administration von
         Endgeräten</title>
 
-        <para></para>
+        <para>Nach der Provisionierung der Endgeräte per HTTPS findet auf
+        diese kein weiterer administrativer Zugriff statt.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-70">
         <title><literal>M-TK-70</literal> Sichere Administration von
         Netzkomponenten</title>
 
-        <para></para>
+        <para>Die Administration der Netzwerk-Infrastruktur (Switches, Router)
+        liegt außerhalb des Einflußbereichs von Gemeinschaft und somit in der
+        Verantwortung des Netzwerk-Administrators.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-71">
         <title><literal>M-TK-71</literal> Überwachung der Komponenten des
         VoIP-Systems</title>
 
-        <para></para>
+        <para>Die Überwachung der Telefonie-Server ist Aufgabe des
+        IT-Administrators. Gemeinschaft stellt als Schnittstelle optional
+        SNMPv3 bereit, die von der Institution in ihre
+        Monitoring-Infrastruktur zu integrieren ist.</para>
+
+        <para>Bei erhöhtem Schutzbedarf ist zusätzlich eine Überwachung der
+        Qualität der Medien-Ströme (in Bezug auf jitter, latency, packet loss)
+        anzuraten. Dies wird ggf. in einem Anschlußprojekt in Gemeinschaft
+        umgesetzt.</para>
       </section>
     </section>
 
@@ -559,21 +570,32 @@
         <title><literal>M-TK-72</literal> Produktauswahl von VoIP-Lösungen
         unter Sicherheitsgesichtspunkten</title>
 
-        <para></para>
+        <para>In der Standard-Installation wird die TK-Anlage Gemeinschaft
+        bereits als ein komplettes Image bereitgestellt das auf einem
+        minimalen und gehärteten System basiert.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-73">
         <title><literal>M-TK-73</literal> Datensicherung für die Elemente des
         VoIP-Systems</title>
 
-        <para></para>
+        <para>Backup-Mechanismen sind von den IT-Administratoren in den
+        zentralen Datensicherungsplan der Institution zu integrieren.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-74">
         <title><literal>M-TK-74</literal> Notfallvorsorge für das
         VoIP-System</title>
 
-        <para></para>
+        <para>Da ein kompletter Ausfall der Telefonie nach aller Möglichkeit
+        zu vermeiden ist bietet Gemeinschaft einen automatischen
+        Notfall-Modus, wodurch selbst bei einem Ausfall der Kern-Applikation
+        noch mit eingeschränkter Funktionalität telefoniert werden kann sofern
+        der Telefonie-Dienst selbst noch aktiv ist. So können beispielsweise
+        Notrufe abgesetzt werden oder zur Schadensbehebung Telefonate mit
+        Externen geführt werden, beispielsweise mit Support-Firmen.</para>
+
+        <para>#OPTIMIZE Notfallplan mit Sofortmaßnahmen beschreiben.</para>
       </section>
     </section>
   </section>
