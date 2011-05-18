@@ -507,21 +507,27 @@
         <title><literal>M-TK-66</literal> Sichere Administration von
         Anwendungs- und Management-Servern</title>
 
-        <para></para>
+        <para>TK-Anwendungen wie der Voicemail-Dienst befinden sich bei
+        Gemeinschaft in der Standart-Installation auf dem Telefonie-Server,
+        daher gilt hier <xref linkend="tlstk-m-tk-46" />.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-67">
         <title><literal>M-TK-67</literal> Sichere Administration von
         Abrechnungs- und Gebührenerfassungssystemen</title>
 
-        <para></para>
+        <para>Soweit die Institution zusätzliche Abrechnungssysteme einsetzt
+        hat sie dafür Sorge zu tragen diese Systeme und den Transport der
+        Daten zu diesen abzusichern.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-68">
         <title><literal>M-TK-68</literal> Sichere Verwaltung von
         Teilnehmerprofilen</title>
 
-        <para></para>
+        <para>Angefertigte Backups der Konfigurations- und Log-Daten müssen
+        auf dem Transportweg und bei der Speicherung abgesichert sein. Dazu
+        sollten verschlüsselte Backups zum Einsatz kommen.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-69">
