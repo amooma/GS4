@@ -312,7 +312,19 @@
         <title><literal>M-TK-50</literal> Einschränkung des lokalen Zugriffs
         auf die Konfiguration des IP-Telefons</title>
 
-        <para></para>
+        <para>Auf IP-Telefonen können über Tasten und Menüs lokal am Gerät
+        Einstellungen verändert werden. Dabei ist zu unterscheiden zwischen
+        unkritischen Einstellungen wie z.B. Display-Kontrast oder
+        Headset-Lautstärke &#8211; diese dürfen vom Benutzer verändert werden
+        &#8211; und sicherheitsrelevanten Parametern wie z.B.
+        Netzwerk-Einstellungen. Letztere sind werksseitig meist mit einem
+        Standard-Paßwort (wie „0000“) belegt. Um hier eine Manipulation zu
+        vermeiden werden diese Einstellungen vom Provisioning-System von
+        Gemeinschaft mit einem regelmäßig wechselnden, (pseudo-)zufällig
+        generierten, möglichst langen Paßwort bzw. PIN-Nummer gesichert.
+        Dieses Paßwort wird den Anwendern nicht bekanntgegeben, denn alle
+        Einstellungen sind über die TK-Anlage und deren Provisioning-System
+        vorzunehmen.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-51">
