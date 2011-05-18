@@ -695,7 +695,21 @@
         <title><literal>M-TK-148</literal> Software-Sicherheit inkl.
         Patch-Management</title>
 
-        <para></para>
+        <para>Gemeinschaft wird in der Standard-Installation als Image
+        bereitgestellt das auf einem gehärteten System basiert. Als
+        Betriebssystem kommt dabei Debian Linux in der stabilen Version
+        („stable“) zum Einsatz. Sicherheitsrelevante Änderungen werden daher
+        über das Palet-Management-System der Linux-Distribution
+        bereitgestellt.</para>
+
+        <para>TK-Installationen mit ihren jeweiligen Endgeräten und
+        Komponenten wie Gateways können z.T. heterogene Umgebungen bilden. Es
+        ist hier erforderlich eine möglichst ähnliche/identische Test-Umgebung
+        einzurichten und neue Software-Versionen im Zusammenspiel mit den
+        anderen Komponenten vor dem produktiven Einsatz zu testen.</para>
+
+        <para>Durchgeführte Änderungen am System sind von den
+        IT-Administratoren zu dokumentieren (Change Management).</para>
       </section>
     </section>
 
@@ -706,14 +720,27 @@
         <title><literal>M-TK-149</literal> Sichere Konfiguration des
         Netzwerkmanagement-Protokolls</title>
 
-        <para></para>
+        <para>Die TK-Anlage Gemeinschaft stellt optional eine
+        SNMPv3-Schnittstelle bereit. Aus Sicherheitsgründen ist der Zugriff
+        per SNMPv1 oder SNMPv2 nicht erlaubt.</para>
+
+        <para>Die Institution sollte einen Syslog-Server betreiben und die
+        TK-Anlage so konfigurieren daß sicherheitsrelevante Ereignisse
+        verschlüsselt auf diesen übertragen werden.</para>
+
+        <para>Der Zugriff auf den TK-Server per Telnet ist nicht gestattet.
+        Optional kann &#8211; sofern Shell-Zugriff per Netzwerk erforderlich
+        ist &#8211; SSHv2 aktiviert werden. In der Standard-Installation ist
+        auch dies deaktiviert.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-150">
         <title><literal>M-TK-150</literal> Überwachung der Komponenten des
         Telekommunikationssystems</title>
 
-        <para></para>
+        <para>Die IT-Administratoren haben die TK-Anlage der erforderlichen
+        Verfügbarkeit entsprechend mit einem zentralen System per SNMP und
+        Syslog zu überwachen.</para>
       </section>
     </section>
 
@@ -723,14 +750,31 @@
       <section xml:id="tlstk-m-tk-151">
         <title><literal>M-TK-151</literal> Schutz von Verbindungsdaten</title>
 
-        <para></para>
+        <para>Auf der TK-Anlage Gemeinschaft fallen CDRs (Call Detail Records,
+        also Verbindungsdaten) an und werden gespeichert. Die CDRs enthalten
+        auch Personen-bezogene Daten oder erlauben Rückschlüsse auf Personen.
+        Diese Daten sind besonders schutzwürdig und müssen entsprechend der
+        jeweils gültigen Datenschutz-Gesetze (Bundesdatenschutzgesetz,
+        Telekommunikationsgesetz) sowie innerbetrieblichen
+        Datenschutz-Regelungen behandelt werden. Beispielsweise sind bei
+        privaten Gesprächen die Telefonnummern zu anonymisieren.</para>
+
+        <para>Die Einhaltung der für die jeweilige Institution gültigen
+        Gesetze und Regelungen sind von dieser sicherzustellen. Private
+        Gespräche und deren Anonymisierung in Gemeinschaft wird ggf. in einem
+        Anschluß-Projekt implementiert.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-152">
         <title><literal>M-TK-152</literal> Sichere Außerbetriebnahme von
         Komponenten des Telekommunikationssystems</title>
 
-        <para></para>
+        <para>Auf Datenträgern der TK-Anlage werden schutzbedürftige und
+        personenbezogene Daten gespeichert. Es obliegt der jeweiligen
+        Institution diese Datenträger bei der Außerbetriebnahme sicher zu
+        entsorgen, d.h. diese so zu löschen daß sie nicht mehr lesbar sind,
+        ggf. auch physisch zu zerstören. Die konkrete Vorgehensweise hängt
+        dabei von den jeweiligen Datenträgern ab.</para>
       </section>
     </section>
 
@@ -741,7 +785,9 @@
         <title><literal>M-TK-153</literal> Nachweis der Vertrauenswürdigkeit
         des Diensteanbieters</title>
 
-        <para></para>
+        <para>Die Auswahl von Diensteanbietern (beispielsweise Providern) in
+        Bezug auf deren Vertrauenswürdigkeit obliegt der jeweiligen
+        Institution.</para>
       </section>
     </section>
   </section>
