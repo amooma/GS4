@@ -331,22 +331,31 @@
         <title><literal>M-TK-51</literal> Benutzerabhängige
         Berechtigungen</title>
 
-        <para>Die Tk-Anlage Gemeinschaft unterstützt das An- und Abmelden von
+        <para>Die TK-Anlage Gemeinschaft unterstützt das An- und Abmelden von
         Benutzern an Telefonen („Hot-Desking“ / „Mobility“) mittels
-        PIN-Nummern. Aus Sicherheitsgründen gibt es &#8211; zusätzlich zu der
+        PIN-Nummern. Gemeinschaft verlangt PIN-Nummern mit einer einstellbaren
+        Mindestlänge. Dabei gibt es generell ein menschliches Problem:
+        PIN-Nummern die länger als 4 bis 6 Ziffern sind werden häufig per
+        Post-It-Zetteln an das Endgerät geklebt.</para>
+
+        <para>Aus Sicherheitsgründen gibt es &#8211; zusätzlich zu der
         Absicherung durch die PIN-Nummer &#8211; ein Berechtigungssystem.
         Durch dieses ist definierbar welcher Benutzer sich an welchen
         Endgeräten einloggen darf, inklusive Zeitfenstern und automatischer
         Abmeldung nach einer gewissen Zeit der Inaktivität. Nach automatischem
         Ausloggen erhält das Telefon ein Standard-Profil das nur Notrufe
-        tätigen kann und optional interne Telefonate.</para>
+        tätigen kann und das optional interne Telefonate ermöglicht.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-52">
         <title><literal>M-TK-52</literal> Schutz von Teilnehmer-spezifischen
         Daten auf einem IP-Telefon</title>
 
-        <para></para>
+        <para>Mit der TK-Anlage Gemeinschaft wird in der Standard-Installation
+        die Speicherung der folgenden Teilnehmer-spezifischen Daten auf den
+        Telefonen deaktiviert: Anruflisten, persönliche Kontakte,
+        Dienstmerkmale. Diese Daten werden in der Datenbank der TK-Anlage
+        verwaltet.</para>
       </section>
     </section>
 
