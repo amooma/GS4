@@ -236,7 +236,7 @@ html-onefile: html-onefile-xsl
 
 html-onefile-xsl: html-onefile/index.html
 
-html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-xsltproc-stamp tmp/_have-docbook-xsl-stamp tmp/_have-tidy-stamp
+html-onefile/index.html: $(docbook_sources) Makefile tmp/_docbook-valid-stamp tmp/_have-xsltproc-stamp tmp/_have-docbook-xsl-stamp tmp/_have-tidy-stamp
 	@ echo '############################################################';
 	@ echo '#  Making HTML (onefile via XSLT) ...                         #';
 	@ echo '############################################################';
@@ -256,6 +256,11 @@ html-onefile/index.html: $(docbook_sources) tmp/_docbook-valid-stamp tmp/_have-x
 		--stringparam 'current.docid' 'foo' \
 		--stringparam 'html.stylesheet' 'style.css' \
 		--stringparam 'img.src.path' 'img/' \
+		--stringparam 'generate.section.toc.level' '4' \
+		--stringparam 'toc.section.depth' '2' \
+		--stringparam 'section.autolabel' '1' \
+		--stringparam 'section.autolabel.max.depth' '4' \
+		--stringparam 'html.cellspacing' '0' \
 		-o "html-onefile/" \
 		"$$the_docbook_xsl_path/xhtml/onechunk.xsl" \
 		$(docbook_index_file)

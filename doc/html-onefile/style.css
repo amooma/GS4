@@ -3,7 +3,9 @@ h2 { font-size: 2.2em; }
 h3 { font-size: 1.9em; }
 h4 { font-size: 1.6em; }
 h5 { font-size: 1.3em; }
-h6 { font-size: 1.0em; }
+h6 { font-size: 1.1em; }
+
+body { margin: 0; padding: 1em 5%; }
 
 .author {
 	font-size: 1.0em;
@@ -53,7 +55,16 @@ h6 { font-size: 1.0em; }
 	padding: 0.3em;
 }
 
-.title .literal { font-size: 1.2em; padding: 0 0.5em; color: #0b0; }
+.title .literal {
+	font-size: 1.08em;
+	padding: 0 0.2em;
+	color: #0b0;
+	font-family: Courier, Courier New, Monaco, monospace;
+}
+
+p { padding: 0.1em 0.14em; margin: 0.8em 0; }
+
+.section { margin: 3em 0; }
 
 .screenshot {
 	/*border: 1px solid #ccc;*/
