@@ -1,7 +1,7 @@
 class SipAccountToExtension < ActiveRecord::Base
   
   belongs_to :sip_account
-  belongs_to :extension
+  belongs_to :extension, :dependent => :destroy
   
   acts_as_list :scope => :sip_account
   
