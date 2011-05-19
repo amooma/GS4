@@ -61,8 +61,6 @@
 
   <xi:include href="integration.xml" />
 
-  <xi:include href="data-model.xml" />
-
   <xi:include href="architektur.dbk" />
 
   <xi:include href="sicherheitskonzept.dbk" />

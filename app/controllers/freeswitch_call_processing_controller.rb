@@ -76,6 +76,27 @@ class FreeswitchCallProcessingController < ApplicationController
 		dst_sip_user_real = dst_sip_user  # un-alias
 		# (Alias lookup has already been done in kamailio.cfg.)
 		
+		call_disposition = _arg( 'originate_disposition')
+		
+		forward_reasons = ['UNALLOCATED_NUMBER',
+				   'NO_ROUTE_DESTINATION',
+				   'USER_BUSY',
+				   'NO_USER_RESPONSE',
+				   'NO_ANSWER',
+				   'CALL_REJECTED',
+				   'SWITCH_CONGESTION',
+				   'REQUESTED_CHAN_UNAVAIL'
+				   ]
+		busy_reasons = ['USER_BUSY',
+			       'CALL_REJECTED'
+			       ]
+		offline_reasons = ['NO_ROUTE_DESTINATION',
+				  'NO_USER_RESPONSE',
+				  'CALL_REJECTED',
+				   'SWITCH_CONGESTION',
+				   'REQUESTED_CHAN_UNAVAIL'
+				  ]
+		noanswer_reasons = [ 'NO_ANSWER']
 		
 		src_sip_account = (
 			SipAccount.where({
@@ -143,7 +164,19 @@ class FreeswitchCallProcessingController < ApplicationController
 		# are" i.e. what you have done already.
 		# And you have to explicitly send "_continue" as the last
 		# application.
-				
+		if  forward_reasons.include? call_disposition 
+			if ! dst_sip_user.blank?
+				action :blafasel
+				if busy_reasons.include? call_disposition
+				elsif offline_reasons.include? call_disposition
+				elsif noanswer_reasons.include? call_dispositiondst_sip_user.blank?
+				else
+					action :hangup    , ''
+				end
+			end
+			
+		end
+		
 		if dst_sip_user.blank? && dst_conference.blank?
 			case _arg( 'Answer-State' )
 				when 'ringing'
@@ -229,7 +262,6 @@ class FreeswitchCallProcessingController < ApplicationController
 						action :transfer , "#{call_forward_always.destination} XML default"
 					end
 				end
-				#OPTIMIZE Implement call-forwardings here ...
 			end
 			
 			# Ring the SIP user via Kamailio for 30 seconds:
@@ -244,11 +276,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			end
 			
 			
-			# Call-forwardings:
-			if dst_sip_account
-				#OPTIMIZE Implement call-forward on busy/unavailable here ...
-			end
-			
+						
 			# Go to voicemail:
 			if dst_sip_account
 				if ! dst_sip_account.voicemail_server
@@ -273,7 +301,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			end
 			
 			
-			action :hangup
+			action :_continue
 			
 		)end
 		
