@@ -39,6 +39,9 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :subscribers          , :only => [ :index, :show ]
 	
+	
+
+
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,
@@ -68,6 +71,67 @@ Gemeinschaft4::Application.routes.draw do
 	resources :manufacturer_snom    , :only => [ :index ]
 	resources :manufacturer_aastra  , :only => [ :index ]
 	resources :manufacturer_tiptel  , :only => [ :index ]
+
+	match '/manufacturer_snom/:mac_address/xml_menu',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'xml_menu',
+		:format     => :'xml'
+
+	match '/manufacturer_snom/:mac_address/:sip_account/xml_menu',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'xml_menu',
+		:format     => :'xml'	
+
+	match '/manufacturer_snom/:mac_address/phone_book_internal',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'phone_book_internal',
+		:format     => :'xml'
+
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding',
+		:format     => :'xml'
+	
+	match '/manufacturer_snom/:mac_address/call_forwarding',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'sip_accounts',
+		:format     => :'xml'
+
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/always',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_always',
+		:format     => :'xml'
+	
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/busy',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_busy',
+		:format     => :'xml'
+	
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/noanswer',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_noanswer',
+		:format     => :'xml'
+	
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/offline',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_offline',
+		:format     => :'xml'	
+	
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/save',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_save',
+		:format     => :'xml'
+	
 	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',
