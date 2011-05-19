@@ -4,7 +4,8 @@ class ExtensionsController < ApplicationController
   before_filter :find_sip_account
   before_filter :find_conference
   before_filter :find_call_queue
-  # OTIMIZE Where is this used?
+  #OPTIMIZE Where is this used?
+  
   before_filter {
     @sip_accounts = SipAccount.order([ :auth_name, :sip_server_id ])
     @conferences = Conference.order([ :uuid ])
