@@ -21,3 +21,8 @@ xml.SnomIPPhoneMenu {
 		xml.URL("#{@provisioning_server_url}/call_forwarding.xml")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
