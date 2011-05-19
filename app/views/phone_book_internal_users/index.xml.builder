@@ -10,3 +10,8 @@ xml.SnomIPPhoneDirectory {
     end
   }
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
