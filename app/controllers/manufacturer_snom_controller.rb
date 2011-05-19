@@ -151,7 +151,7 @@ class ManufacturerSnomController < ApplicationController
 		if (call_forward)
 			@message = "SAVED"
 		else
-			@message = "NOT SAVED #{call_forward.errors}"
+			@message = "NOT SAVED"
 		end
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
 	end
@@ -178,10 +178,14 @@ class ManufacturerSnomController < ApplicationController
 	GS_CALLFORWARD_OFFLINE = 3
 	GS_CALLFORWARD_ALWAYS = 4
 	
-	def get_call_forward(sip_account, reason)
-		call_forward = SipAccount.find_by_auth_name(sip_account).call_forwards.where(:call_forward_reason_id => reason, :active => true, :source => '').first
+	def get_call_forward(auth_name, reason)
+		sip_account = SipAccount.find_by_auth_name(auth_name)
+		if (sip_account.nil?)
+			return nil
+		end
+		call_forward = sip_account.call_forwards.where(:call_forward_reason_id => reason, :active => true, :source => '').first
 		if (call_forward.nil?)
-			call_forward = SipAccount.find_by_auth_name(sip_account).call_forwards.where(:call_forward_reason_id => reason, :active => false, :source => '').first
+			call_forward = SipAccount.find_by_auth_name(auth_name).call_forwards.where(:call_forward_reason_id => reason, :active => false, :source => '').first
 		end
 		return call_forward
 	end
@@ -193,7 +197,7 @@ class ManufacturerSnomController < ApplicationController
 		return ''
 	end
 	
-	def save_call_forward(sip_account, reason, destination, timeout = nil)
+ 	def save_call_forward(auth_name, reason, destination, timeout = nil)
 		if (reason != GS_CALLFORWARD_NOANSWER)
 			timeout = nil
 		else
@@ -203,10 +207,14 @@ class ManufacturerSnomController < ApplicationController
 			end
 		end
 		
-		call_forward = get_call_forward(sip_account, reason)
+		call_forward = get_call_forward(auth_name, reason)
 		if (call_forward.nil?) 
 			if (! destination.blank?)
-				call_forward = SipAccount.find_by_auth_name(sip_account).call_forwards.create(
+				sip_account = SipAccount.find_by_auth_name(auth_name)
+				if (sip_account.nil?)
+					return false
+				end
+				call_forward = sip_account.call_forwards.create(
 					:active => true,
 					:source => '',
 					:call_forward_reason_id => reason,
