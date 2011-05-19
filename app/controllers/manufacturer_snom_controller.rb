@@ -116,8 +116,6 @@ class ManufacturerSnomController < ApplicationController
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
 	end
 	
-	
-	
 	def call_forwarding_save
 		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
@@ -173,6 +171,7 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	private
+	
 	GS_CALLFORWARD_BUSY = 1
 	GS_CALLFORWARD_NOANSWER = 2
 	GS_CALLFORWARD_OFFLINE = 3
@@ -197,7 +196,7 @@ class ManufacturerSnomController < ApplicationController
 		return ''
 	end
 	
- 	def save_call_forward(auth_name, reason, destination, timeout = nil)
+	def save_call_forward(auth_name, reason, destination, timeout = nil)
 		if (reason != GS_CALLFORWARD_NOANSWER)
 			timeout = nil
 		else
