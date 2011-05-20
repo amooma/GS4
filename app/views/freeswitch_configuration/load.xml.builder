@@ -2,6 +2,8 @@ xml.instruct!
 
 xml.document(:type => 'freeswitch/xml') {
 
+	xml.tag!('X-PRE-PROCESS', :cmd => 'set', :data => 'domain=$${local_ip_v4}')
+	xml.tag!('X-PRE-PROCESS', :cmd => 'set', :data => 'domain_name=$${domain}')
 	xml.tag!('X-PRE-PROCESS', :cmd => 'set', :data => 'sound_prefix=$${sounds_dir}/en/us/callie')
 	xml.tag!('X-PRE-PROCESS', :cmd => 'set', :data => 'hold_music=local_stream://moh')
 	xml.tag!('X-PRE-PROCESS', :cmd => 'set', :data => 'use_profile=internal')
