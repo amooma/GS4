@@ -24,6 +24,14 @@ xml.settings {
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
 		
+		sip_account =  @phone.sip_accounts.first
+		if (! sip_account.nil?)
+			xml.alert_group_ring_text(@phone.sip_accounts.first.auth_name, :perm => 'RW')
+		else
+			xml.alert_group_ring_text('alert-group', :perm => 'RW')
+		end
+		xml.alert_group_ring_sound('Silent', :perm => 'RW')
+
 		xml.dkey_directory( "url #{@provisioning_server_url}/phone_book_internal.xml", :perm => 'RW' )	
 		xml.dkey_menu( "url #{@provisioning_server_url}/xml_menu.xml", :perm => 'RW' )
 		sip_accounts = {}

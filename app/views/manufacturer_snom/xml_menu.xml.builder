@@ -8,7 +8,7 @@ xml.SnomIPPhoneMenu {
 	}
 	xml.MenuItem {
 		xml.Name('Call Forwarding')
-		xml.URL("#{@provisioning_server_url}/call_forwarding.xml")
+		xml.URL("#{@provisioning_server_url}#{@sip_account_url}/call_forwarding.xml")
 	}
 	xml.SoftKeyItem {
 		xml.Name('F1')
@@ -18,6 +18,11 @@ xml.SnomIPPhoneMenu {
 	xml.SoftKeyItem {
 		xml.Name('F2')
 		xml.Label('CF')
-		xml.URL("#{@provisioning_server_url}/call_forwarding.xml")
+		xml.URL("#{@provisioning_server_url}#{@sip_account_url}/call_forwarding.xml")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

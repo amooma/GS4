@@ -39,6 +39,7 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :subscribers          , :only => [ :index, :show ]
 	
+	
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,
@@ -68,7 +69,46 @@ Gemeinschaft4::Application.routes.draw do
 	resources :manufacturer_snom    , :only => [ :index ]
 	resources :manufacturer_aastra  , :only => [ :index ]
 	resources :manufacturer_tiptel  , :only => [ :index ]
+	
+	match '/manufacturer_snom/:mac_address/:action',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:format     => :'xml'
+	
+	match '/manufacturer_snom/:mac_address/:sip_account/:action',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:format     => :'xml'
+	
+	# OPTIMIZE Optimize the routes in following. Change the controller so it doesn't use names for the actions that don't easily map to URLs.
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/always',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_always',
+		:format     => :'xml'
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/busy',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_busy',
+		:format     => :'xml'
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/noanswer',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_noanswer',
+		:format     => :'xml'
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/offline',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_offline',
+		:format     => :'xml'
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/save',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_save',
+		:format     => :'xml'
+	
 	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'
+	
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',
 		:constraints => { :mac_address => /000413.*/ } 
