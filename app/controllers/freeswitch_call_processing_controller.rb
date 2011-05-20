@@ -76,7 +76,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		dst_sip_user_real = dst_sip_user  # un-alias
 		# (Alias lookup has already been done in kamailio.cfg.)
 		
-		call_disposition = _arg( 'originate_disposition')
+		call_disposition = _arg( 'var_originate_disposition')
 		
 		forward_reasons = ['UNALLOCATED_NUMBER',
 				   'NO_ROUTE_DESTINATION',
@@ -164,18 +164,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		# are" i.e. what you have done already.
 		# And you have to explicitly send "_continue" as the last
 		# application.
-		if  forward_reasons.include? call_disposition 
-			if ! dst_sip_user.blank?
-				action :blafasel
-				if busy_reasons.include? call_disposition
-				elsif offline_reasons.include? call_disposition
-				elsif noanswer_reasons.include? call_dispositiondst_sip_user.blank?
-				else
-					action :hangup    , ''
-				end
-			end
-			
-		end
+		
 		
 		if dst_sip_user.blank? && dst_conference.blank?
 			case _arg( 'Answer-State' )
@@ -202,6 +191,108 @@ class FreeswitchCallProcessingController < ApplicationController
 			# Caller-ID:
 			# Note: P-Asserted-Identity is set in Kamailio.
 			#
+			if  forward_reasons.include? call_disposition 
+				if ! dst_sip_user.blank?
+					if busy_reasons.include? call_disposition
+						call_forward = CallForward.where(
+							:sip_account_id => dst_sip_account.id,
+							:active => true,
+							:source => "#{src_cid_sip_user}"
+							).joins( :call_forward_reason ).where(
+							:call_forward_reasons => { :value => "busy"}
+							).first
+						
+						if ! call_forward
+						
+							call_forward_always = CallForward.where(
+								:sip_account_id => dst_sip_account.id,
+								:active => true,
+								:source => ""
+								).joins( :call_forward_reason ).where(
+								:call_forward_reasons => { :value => "busy"}
+								).first 
+						end
+						
+						if call_forward_always
+							if call_forward_always.destination == "voicemail"
+								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+							end
+						
+							if call_forward_always.destination.blank?
+								action :respond , "480 Blacklisted"
+							else
+								action :transfer , "#{call_forward_always.destination} XML default"
+							end
+						end
+					
+					elsif offline_reasons.include? call_disposition
+					call_forward = CallForward.where(
+							:sip_account_id => dst_sip_account.id,
+							:active => true,
+							:source => "#{src_cid_sip_user}"
+							).joins( :call_forward_reason ).where(
+							:call_forward_reasons => { :value => "offline"}
+							).first
+						
+						if ! call_forward
+						
+							call_forward_always = CallForward.where(
+								:sip_account_id => dst_sip_account.id,
+								:active => true,
+								:source => ""
+								).joins( :call_forward_reason ).where(
+								:call_forward_reasons => { :value => "offline"}
+								).first 
+						end
+						
+						if call_forward_always
+							if call_forward_always.destination == "voicemail"
+								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+							end
+						
+							if call_forward_always.destination.blank?
+								action :respond , "480 Blacklisted"
+							else
+								action :transfer , "#{call_forward_always.destination} XML default"
+							end
+						end
+					elsif noanswer_reasons.include? call_disposition
+						call_forward = CallForward.where(
+							:sip_account_id => dst_sip_account.id,
+							:active => true,
+							:source => "#{src_cid_sip_user}"
+							).joins( :call_forward_reason ).where(
+							:call_forward_reasons => { :value => "noanswer"}
+							).first
+						
+						if ! call_forward
+						
+							call_forward_always = CallForward.where(
+								:sip_account_id => dst_sip_account.id,
+								:active => true,
+								:source => ""
+								).joins( :call_forward_reason ).where(
+								:call_forward_reasons => { :value => "noanswer"}
+								).first 
+						end
+						
+						if call_forward_always
+							if call_forward_always.destination == "voicemail"
+								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+							end
+						
+							if call_forward_always.destination.blank?
+								action :respond , "480 Blacklisted"
+							else
+								action :transfer , "#{call_forward_always.destination} XML default"
+							end
+						end
+					else
+					action :hangup    , ''
+					end
+				end
+			#return	# OPTIMIZE Double check for better solution.
+			end
 			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
 			
 			clir = false  #OPTIMIZE Read from SIP account.
@@ -300,8 +391,8 @@ class FreeswitchCallProcessingController < ApplicationController
 				end
 			end
 			
-			
-			action :_continue
+			action :hangup
+			#action :_continue
 			
 		)end
 		
