@@ -187,10 +187,6 @@ class FreeswitchCallProcessingController < ApplicationController
 			# end of example }
 			
 			
-			
-			# Caller-ID:
-			# Note: P-Asserted-Identity is set in Kamailio.
-			#
 			if  forward_reasons.include? call_disposition 
 				if ! dst_sip_user.blank?
 					if busy_reasons.include? call_disposition
@@ -293,6 +289,11 @@ class FreeswitchCallProcessingController < ApplicationController
 				end
 			#return	# OPTIMIZE Double check for better solution.
 			end
+			
+			
+			# Caller-ID:
+			# Note: P-Asserted-Identity is set in Kamailio.
+			#
 			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
 			
 			clir = false  #OPTIMIZE Read from SIP account.
