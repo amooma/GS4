@@ -71,7 +71,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		# This is the number as dialed by the caller (before unaliasing in Kamailio).
 		
 		# Strip "-kambridge-" prefix added in kamailio.cfg:
-		dst_sip_user = dst_sip_user.gsub( /^-kambridge-/, '' )
+		dst_sip_user = dst_sip_user.to_s.gsub( /^-kambridge-/, '' )
 		
 		dst_sip_user_real = dst_sip_user  # un-alias
 		# (Alias lookup has already been done in kamailio.cfg.)
