@@ -53,30 +53,18 @@ class FreeswitchCallProcessingController < ApplicationController
 	end
 	
 	
-	forward_reasons = [
-		'UNALLOCATED_NUMBER',
-		'NO_ROUTE_DESTINATION',
-		'USER_BUSY',
-		'NO_USER_RESPONSE',
-		'NO_ANSWER',
-		'CALL_REJECTED',
-		'SWITCH_CONGESTION',
-		'REQUESTED_CHAN_UNAVAIL',
-	]
-	busy_reasons = [
-		'USER_BUSY',
-		'CALL_REJECTED',
-	]
-	offline_reasons = [
-		'NO_ROUTE_DESTINATION',
-		'NO_USER_RESPONSE',
-		'CALL_REJECTED',
-		'SWITCH_CONGESTION',
-		'REQUESTED_CHAN_UNAVAIL',
-	]
-	noanswer_reasons = [
-		'NO_ANSWER',
-	]
+	CALL_FORWARD_REASONS_MAP = {  # Values must be :busy, :noanswer or :offline.
+		'UNALLOCATED_NUMBER'       => :offline,  #OPTIMIZE ?
+		'NO_ROUTE_DESTINATION'     => :offline,
+		'USER_BUSY'                => :busy,
+		'NO_USER_RESPONSE'         => :offline,
+		'NO_ANSWER'                => :noanswer,
+		'CALL_REJECTED'            => :busy,      # or :offline
+		'SWITCH_CONGESTION'        => :offline,
+		'REQUESTED_CHAN_UNAVAIL'   => :offline,
+		'NO_USER_RESPONSE'         => :offline,
+		'SUBSCRIBER_ABSENT'        => :offline,
+	}
 	
 	
 	# GET  /freeswitch-call-processing/actions.xml
@@ -105,7 +93,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		dst_sip_user_real = dst_sip_user  # un-alias
 		# (Alias lookup has already been done in kamailio.cfg.)
 		
-		call_disposition = _arg( 'var_originate_disposition')
+		call_disposition      = _arg( 'var_originate_disposition' )
 		
 		
 		src_sip_account = nil
@@ -209,219 +197,105 @@ class FreeswitchCallProcessingController < ApplicationController
 			# end of example }
 			
 			
-			if forward_reasons.include? call_disposition ; (
-				if ! dst_sip_user.blank? ; (
+			if call_disposition.blank?; (
+				# We didn't try to call the SIP account yet.
+				
+				# Check unconditional call-forwarding ("always"):
+				#
+				call_forward = find_call_forward( dst_sip_account, :always, src_cid_sip_user )
+				
+				if call_forward; (
+					# We have an unconditional call-forward.
 					
-					if busy_reasons.include? call_disposition
-						
-						call_forward = CallForward.where({
-								:sip_account_id => dst_sip_account.id,
-								:active         => true,
-								:source         => "#{src_cid_sip_user}"
-							}).joins( :call_forward_reason ).where({
-								:call_forward_reasons => { :value => "busy" }
-							}).first
-						
-						if ! call_forward
-							call_forward_always = CallForward.where({
-									:sip_account_id => dst_sip_account.id,
-									:active         => true,
-									:source         => ""
-								}).joins( :call_forward_reason ).where({
-									:call_forward_reasons => { :value => "busy" }
-								}).first 
-						end
-						
-						if call_forward_always
-							if call_forward_always.destination == "voicemail"
-								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
-							end
-							
-							if call_forward_always.destination.blank?
-								action :respond , "480 Blacklisted"
-							else
-								action :transfer , "#{call_forward_always.destination} XML default"
-							end
-						end
-						
-					elsif offline_reasons.include? call_disposition
-						
-						call_forward = CallForward.where(
-								:sip_account_id => dst_sip_account.id,
-								:active => true,
-								:source => "#{src_cid_sip_user}"
-							).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "offline" }
-							).first
-						
-						if ! call_forward
-							call_forward_always = CallForward.where(
-									:sip_account_id => dst_sip_account.id,
-									:active => true,
-									:source => ""
-								).joins( :call_forward_reason ).where(
-									:call_forward_reasons => { :value => "offline" }
-								).first 
-						end
-						
-						if call_forward_always
-							if call_forward_always.destination == "voicemail"
-								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
-							end
-							
-							if call_forward_always.destination.blank?
-								action :respond , "480 Blacklisted"
-							else
-								action :transfer , "#{call_forward_always.destination} XML default"
-							end
-						end
-						
-					elsif noanswer_reasons.include? call_disposition
-						
-						call_forward = CallForward.where(
-								:sip_account_id => dst_sip_account.id,
-								:active => true,
-								:source => "#{src_cid_sip_user}"
-							).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "noanswer" }
-							).first
-						
-						if ! call_forward
-							call_forward_always = CallForward.where(
-									:sip_account_id => dst_sip_account.id,
-									:active => true,
-									:source => ""
-								).joins( :call_forward_reason ).where(
-									:call_forward_reasons => { :value => "noanswer" }
-								).first 
-						end
-						
-						if call_forward_always
-							if call_forward_always.destination == "voicemail"
-								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
-							end
-							
-							if call_forward_always.destination.blank?
-								action :respond, "480 Blacklisted"
-							else
-								action :transfer, "#{call_forward_always.destination} XML default"
-							end
-						end
-						
+					if call_forward.destination.blank?
+						action :respond, "480 Blacklisted"
 					else
-						action :hangup, ''
+						check_valid_voicemail_box_destination( call_forward.destination )
+						action :transfer, "#{sip_user_encode( call_forward.destination )} XML default"
 					end
+					
+				) else (
+					# Call the SIP account.
+					
+					# Caller-ID:
+					# Note: P-Asserted-Identity is set in Kamailio.
+					#
+					action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
+					
+					clir = false  #OPTIMIZE Read from SIP account.
+					if ! clir
+						if src_sip_account
+							cid_display = src_sip_account.caller_name
+							extensions  = src_sip_account.extensions.where( :active => true )
+							preferred_extension = extensions.first  #OPTIMIZE Depends on the gateway.
+							cid_user    = preferred_extension ? "#{preferred_extension.extension}" : 'anonymous'
+						else
+							cid_display = "[?] #{src_cid_sip_display}"
+							cid_user    = "#{src_sip_user}"
+						end
+						cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
+					else
+						cid_display = "Anonymous"  # RFC 2543, RFC 3325
+						cid_user    = 'anonymous'  # RFC 2543, RFC 3325
+						cid_host    = "anonymous.invalid"  # or "127.0.0.1"
+					end
+					
+					# RFC 2543:
+					action :set, "effective_caller_id_number=#{ sip_user_encode( cid_user )}"
+					action :set, "effective_caller_id_name=#{ sip_displayname_encode( cid_display )}"
+					# RFC 3325:
+					action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} <sip:#{ sip_user_encode( cid_user )}@#{ cid_host }>"
+					# RFC 3325, RFC 3323:
+					action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
+					
+					
+					# Get timeout from call-forward on timeout ("noanswer"):
+					#
+					call_forward = find_call_forward( dst_sip_account, :noanswer, src_cid_sip_user )
+					timeout = call_forward ? call_forward.call_timeout.to_i : 30
+					if timeout < 1; timeout = 1; end
+					
+					# Ring the SIP user via Kamailio:
+					#
+					if dst_sip_account 
+						action_log( FS_LOG_INFO, "Calling SIP account #{dst_sip_user_real} ..." )
+						action :set       , "call_timeout=#{timeout}"
+						action :export    , "sip_contact_user=ufs"
+						action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+						action :_continue
+					elsif dst_conference
+						action_log( FS_LOG_INFO, "Calling conference #{dst_sip_user_real} ..." )
+						action :conference	, "#{sip_user_encode( dst_conference.uuid )}@default+#{sip_user_encode( dst_conference.pin )}"
+					end
+										
 				)end
-				#return	# OPTIMIZE Double check for better solution.
-			)end
-			
-			
-			# Caller-ID:
-			# Note: P-Asserted-Identity is set in Kamailio.
-			#
-			action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
-			
-			clir = false  #OPTIMIZE Read from SIP account.
-			if ! clir
-				if src_sip_account
-					cid_display = src_sip_account.caller_name
-					extensions  = src_sip_account.extensions.where( :active => true )
-					preferred_extension = extensions.first  #OPTIMIZE Depends on the gateway.
-					cid_user    = preferred_extension ? "#{preferred_extension.extension}" : 'anonymous'
-				else
-					cid_display = "[?] #{src_cid_sip_display}"
-					cid_user    = "#{src_sip_user}"
-				end
-				cid_host    = "#{dst_sip_domain}"  #OPTIMIZE
-			else
-				cid_display = "Anonymous"  # RFC 2543, RFC 3325
-				cid_user    = 'anonymous'  # RFC 2543, RFC 3325
-				cid_host    = "anonymous.invalid"  # or "127.0.0.1"
-			end
-			
-			# RFC 2543:
-			action :set, "effective_caller_id_number=#{ sip_user_encode( cid_user )}"
-			action :set, "effective_caller_id_name=#{ sip_displayname_encode( cid_display )}"
-			# RFC 3325:
-			action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} <sip:#{ sip_user_encode( cid_user )}@#{ cid_host }>"
-			# RFC 3325, RFC 3323:
-			action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
-			
-			
-			# Call-forwardings:
-			#
-			if dst_sip_account
 				
-				call_forward_always = CallForward.where(
-						:sip_account_id => dst_sip_account.id,
-						:active => true,
-						:source => "#{src_cid_sip_user}"
-					).joins( :call_forward_reason ).where(
-						:call_forward_reasons => { :value => "always" }
-					).first
+			) else (
+				# We have already tried to call the SIP account but it failed.
 				
-				if ! call_forward_always
-					call_forward_always = CallForward.where(
-							:sip_account_id => dst_sip_account.id,
-							:active => true,
-							:source => ""
-						).joins( :call_forward_reason ).where(
-							:call_forward_reasons => { :value => "always" }
-						).first 
-				end
+				call_forward_reason = CALL_FORWARD_REASONS_MAP[ call_disposition ]
+				logger.info(_bold( "[FS] Bridge disposition: #{call_disposition.inspect} => #{call_forward_reason.inspect}" ))
 				
-				if call_forward_always
-					if call_forward_always.destination == "voicemail"
-						call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
-					end
+				if call_forward_reason
 					
-					if call_forward_always.destination.blank?
-						action :respond , "480 Blacklisted"
+					# Check call-forwards on busy ("busy") / unavailable ("noanswer") / offline ("offline"):
+					#
+					call_forward = find_call_forward( dst_sip_account, call_forward_reason, src_cid_sip_user )
+					if call_forward
+						if call_forward.destination.blank?
+							action :respond, "480 Blacklisted"
+						else
+							check_valid_voicemail_box_destination( call_forward.destination )
+							action :transfer, "#{sip_user_encode( call_forward.destination )} XML default"
+						end
 					else
-						action :transfer , "#{call_forward_always.destination} XML default"
+						action :hangup
 					end
-				end
-			end
-			
-			# Ring the SIP user via Kamailio for 30 seconds:
-			#
-			if dst_sip_account 
-				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
-				action :set       , "call_timeout=30"  #OPTIMIZE Read from CF-after-timeout
-				action :export    , "sip_contact_user=ufs"
-				action :bridge    , "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
-			elsif dst_conference
-				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
-				action :conference	, "#{dst_conference.uuid}@default+#{dst_conference.pin}"
-			end
-			
-			
-			# Go to voicemail:
-			#
-			if dst_sip_account
-				if ! dst_sip_account.voicemail_server
-					action_log( FS_LOG_INFO, "SIP account #{dst_sip_user_real} doesn't have a voicemail server." )
 				else
-					if ! dst_sip_account.voicemail_server.is_local
-						action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} isn't local." )
-						action :respond, "480 No voicemail here"  #OPTIMIZE
-					else
-						#if dst_sip_account.voicemail_server.host != dst_sip_domain
-						#	action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} is local but #{dst_sip_account.voicemail_server.host.inspect} != #{dst_sip_domain.inspect}." )
-						#	action :respond, "480 No voicemail here"  #OPTIMIZE
-						#else
-							action_log( FS_LOG_INFO, "Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ..." )
-							action :answer
-							action :sleep, 250
-							action :set, "voicemail_alternate_greet_id=#{ sip_user_encode( dst_sip_dnis_user )}"
-							action :voicemail, "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
-						#end
-					end
+					action :hangup
 				end
-			end
-			
-			action :hangup
-			#action :_continue
+				
+			)end
 			
 		)end
 		
@@ -437,6 +311,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		}
 		return
 	)end
+	
 	
 	# Returns the request parameter from the content (for POST) or
 	# the query parameter from the URL (for GET) or nil.
@@ -455,9 +330,11 @@ class FreeswitchCallProcessingController < ApplicationController
 			: request.query_parameters
 	end
 	
+	
 	def _bold( str )
 		return "\e[0;32;1m#{str} \e[0m "
 	end
+	
 	
 	# Encode special characters in a SIP username.
 	# See the "user" rule in http://tools.ietf.org/html/rfc3261 .
@@ -476,6 +353,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		unsafe = /[^a-zA-Z0-9\-_.!~*'()&=+$,;?]/  # without "/" (which are special for FreeSwitch)
 		return percent_encode_re( str, unsafe )
 	end
+	
 	
 	#OPTIMIZE We may want to add a sip_tel_subscriber_encode() method
 	# which refers to the "telephone-subscriber" rule from
@@ -524,6 +402,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		return ret
 	end
 	
+	
 	# Like sip_displayname_encode() but enclosed in double quotes.
 	# Returns an empty string (no quotes) for .blank?() strings
 	#
@@ -531,6 +410,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		return '' if str.blank?
 		return '"' << sip_displayname_encode( str ).to_s << '"'
 	end
+	
 	
 	def percent_encode_re( str, re_unsafe )
 		return str.to_s.gsub( re_unsafe ) {
@@ -542,5 +422,70 @@ class FreeswitchCallProcessingController < ApplicationController
 			esc
 		}.force_encoding( Encoding::US_ASCII )
 	end
+	
+	
+	# Finds a call forwarding rule of a SIP account by reason and source.
+	#
+	def find_call_forward( sip_account, reason, source )
+		return nil if ! sip_account
+		
+		[ source, '' ].each { |the_source|
+			call_forward = (
+				CallForward.where({
+					:sip_account_id => sip_account.id,
+					:active         => true,
+					:source         => the_source.to_s,
+				})
+				.joins( :call_forward_reason )
+				.where( :call_forward_reasons => {
+					:value => reason.to_s,
+				})
+				.first )
+			break if call_forward
+		}
+		
+		if call_forward
+			if call_forward.destination == "voicemail"
+				call_forward.destination = "-vbox-#{sip_account.auth_name}"
+			end
+		end
+		
+		return call_forward
+	end
+	
+	
+	def check_valid_voicemail_box_destination( destination )
+		if destination.to_s.match( /^-vbox-/, '' )
+			vbox_sip_user = destination.to_s.gsub( /^-vbox-/, '' )  # this is a SIP account's auth_name
+			#OPTIMIZE Where's the destination's domain?
+			
+			#TODO Check that the SIP account referenced by "-vbox-..." actually
+			# has a voicemail_server etc.
+			
+			#if dst_sip_account
+			#	if ! dst_sip_account.voicemail_server
+			#		action_log( FS_LOG_INFO, "SIP account #{dst_sip_user_real} doesn't have a voicemail server." )
+			#	else
+			#		if ! dst_sip_account.voicemail_server.is_local
+			#			action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} isn't local." )
+			#			action :respond, "480 No voicemail here"  #OPTIMIZE
+			#		else
+			#			#if dst_sip_account.voicemail_server.host != dst_sip_domain
+			#			#	action_log( FS_LOG_INFO, "Voicemail server of SIP account #{dst_sip_user_real} is local but #{dst_sip_account.voicemail_server.host.inspect} != #{dst_sip_domain.inspect}." )
+			#			#	action :respond, "480 No voicemail here"  #OPTIMIZE
+			#			#else
+			#				action_log( FS_LOG_INFO, "Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ..." )
+			#				action :answer
+			#				action :sleep, 250
+			#				action :set, "voicemail_alternate_greet_id=#{ sip_user_encode( dst_sip_dnis_user )}"
+			#				action :voicemail, "default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}"
+			#			#end
+			#		end
+			#	end
+			#end
+			
+		end
+	end
+	
 	
 )end
