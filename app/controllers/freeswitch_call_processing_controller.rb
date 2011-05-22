@@ -119,8 +119,12 @@ class FreeswitchCallProcessingController < ApplicationController
 		dst_conference  = nil
 		dst_queue       = nil
 		
-		if dst_sip_user_real.match(/^-conference-.*/)
-			dst_conference = Conference.where( :uuid => dst_sip_user_real ).first
+		if dst_sip_user_real.match( /^-conference-.*/ )
+			dst_conference = (
+				Conference.where({
+					:uuid => dst_sip_user_real
+				})
+				.first )
 		else
 			dst_sip_account = (
 				SipAccount.where({
