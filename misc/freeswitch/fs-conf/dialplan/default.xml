@@ -32,7 +32,6 @@ will build the domains ACL using this value.
 		</extension>
 		
 		
-		
 		<!--
 		You can place files in the default directory to get included.
 		-->
@@ -48,10 +47,8 @@ will build the domains ACL using this value.
 		-->
 		
 		
-		<!--
-		Voicemail extensions can be static
-		-->
 		
+		<!-- Voicemail -->
 		<extension name="kam-vbox">
 			<condition field="destination_number" expression="^-vbox-(.+)$">
 				<action application="answer" />
@@ -59,20 +56,9 @@ will build the domains ACL using this value.
 			</condition>
 		</extension>
 		
-		<extension name="kam-park-in">
-			<condition field="destination_number" expression="^-park-in-$">
-				<action application="valet_park" data="valet_lot auto in 8000 9000" />
-			</condition>
-		</extension>
 		
-		<extension name="kam-park-out">
-			<condition field="destination_number" expression="^-park-out-$">
-				<action application="answer" />
-				<action application="valet_park" data="valet_lot ask 4 4 10000 ivr/ivr-enter_ext_pound.wav" />
-			</condition>
-		</extension>
-		
-		<!--	
+		<!-- Voicemail menu (any SIP account) -->
+		<!--
 		<extension name="kam-vmenu">
 			<condition field="destination_number" expression="^-vmenu-(.+)$">
 				<action application="voicemail" data="check default ${domain_name} $1" />
@@ -80,6 +66,8 @@ will build the domains ACL using this value.
 		</extension>
 		-->
 		
+		
+		<!-- Voicemail menu (this SIP account) -->
 		<extension name="kam-vmenu-self">
 			<condition field="destination_number" expression="^-vmenu-$">
 				<!-- User has been authenticated in Kamailio for this extension. -->
@@ -96,9 +84,25 @@ will build the domains ACL using this value.
 			</condition>
 		</extension>
 		
-		<!--
-		Dynamic part
-		-->
+		
+		<!-- Parking -->
+		<extension name="kam-park-in">
+			<condition field="destination_number" expression="^-park-in-$">
+				<action application="valet_park" data="valet_lot auto in 8000 9000" />
+			</condition>
+		</extension>
+		
+		
+		<!-- Parking -->
+		<extension name="kam-park-out">
+			<condition field="destination_number" expression="^-park-out-$">
+				<action application="answer" />
+				<action application="valet_park" data="valet_lot ask 4 4 10000 ivr/ivr-enter_ext_pound.wav" />
+			</condition>
+		</extension>
+		
+		
+		<!-- Dynamic part -->
 		<extension name="gs-main">
 			<condition field="${module_exists(mod_spidermonkey)}" expression="true" />
 			<!--
@@ -114,18 +118,6 @@ will build the domains ACL using this value.
 			</condition>
 		</extension>
 		
-		<!--
-		#OPTIMIZE This should be the fallback if GS.js fails
-		<extension name="kam-kbridge">
-			<condition field="destination_number" expression="^-kambridge-(.+)$">
-				<action application="set" data="proxy_media=true" />
-				<action application="set" data="call_timeout=50" />
-				<action application="set" data="sip_invite_domain=192.168.178.23" />
-				<action application="export" data="sip_contact_user=ufs" />
-				<action application="bridge" data="sofia/$${domain}/$1@192.168.178.23" />
-			</condition>
-		</extension>
-		-->
 		
 	</context>
 </include>
