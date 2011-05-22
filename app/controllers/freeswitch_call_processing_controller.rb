@@ -78,25 +78,32 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		call_disposition = _arg( 'var_originate_disposition')
 		
-		forward_reasons = ['UNALLOCATED_NUMBER',
-				   'NO_ROUTE_DESTINATION',
-				   'USER_BUSY',
-				   'NO_USER_RESPONSE',
-				   'NO_ANSWER',
-				   'CALL_REJECTED',
-				   'SWITCH_CONGESTION',
-				   'REQUESTED_CHAN_UNAVAIL'
-				   ]
-		busy_reasons = ['USER_BUSY',
-			       'CALL_REJECTED'
-			       ]
-		offline_reasons = ['NO_ROUTE_DESTINATION',
-				  'NO_USER_RESPONSE',
-				  'CALL_REJECTED',
-				   'SWITCH_CONGESTION',
-				   'REQUESTED_CHAN_UNAVAIL'
-				  ]
-		noanswer_reasons = [ 'NO_ANSWER']
+		
+		forward_reasons = [
+			'UNALLOCATED_NUMBER',
+			'NO_ROUTE_DESTINATION',
+			'USER_BUSY',
+			'NO_USER_RESPONSE',
+			'NO_ANSWER',
+			'CALL_REJECTED',
+			'SWITCH_CONGESTION',
+			'REQUESTED_CHAN_UNAVAIL',
+		]
+		busy_reasons = [
+			'USER_BUSY',
+			'CALL_REJECTED',
+		]
+		offline_reasons = [
+			'NO_ROUTE_DESTINATION',
+			'NO_USER_RESPONSE',
+			'CALL_REJECTED',
+			'SWITCH_CONGESTION',
+			'REQUESTED_CHAN_UNAVAIL',
+		]
+		noanswer_reasons = [
+			'NO_ANSWER',
+		]
+		
 		
 		src_sip_account = (
 			SipAccount.where({
@@ -107,12 +114,13 @@ class FreeswitchCallProcessingController < ApplicationController
 				:host => src_cid_sip_domain
 			})
 			.first )
+		
 		dst_sip_account = nil
-		dst_conference = nil
-		dst_queue = nil
+		dst_conference  = nil
+		dst_queue       = nil
 		
 		if dst_sip_user_real.match(/^-conference-.*/)
-			dst_conference = Conference.where(:uuid => dst_sip_user_real).first
+			dst_conference = Conference.where( :uuid => dst_sip_user_real ).first
 		else
 			dst_sip_account = (
 				SipAccount.where({
@@ -124,6 +132,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				})
 				.first )
 		end
+		
 		logger.info(_bold( "[FS] SIP Call-ID: #{sip_call_id}" ))
 		logger.info(_bold( "[FS] Call" \
 			<< " from #{ sip_displayname_quote( src_cid_sip_display )}" \
@@ -166,7 +175,8 @@ class FreeswitchCallProcessingController < ApplicationController
 		# application.
 		
 		
-		if dst_sip_user.blank? && dst_conference.blank?
+		if dst_sip_user   .blank? \
+		&& dst_conference .blank?
 			case _arg( 'Answer-State' )
 				when 'ringing'
 					action :respond   , '404 Not Found'  # or '400 Bad Request'? or '484 Address Incomplete'?
@@ -187,88 +197,58 @@ class FreeswitchCallProcessingController < ApplicationController
 			# end of example }
 			
 			
-			if  forward_reasons.include? call_disposition 
-				if ! dst_sip_user.blank?
-					if busy_reasons.include? call_disposition
-						call_forward = CallForward.where(
-							:sip_account_id => dst_sip_account.id,
-							:active => true,
-							:source => "#{src_cid_sip_user}"
-							).joins( :call_forward_reason ).where(
-							:call_forward_reasons => { :value => "busy"}
-							).first
-						
-						if ! call_forward
-						
-							call_forward_always = CallForward.where(
-								:sip_account_id => dst_sip_account.id,
-								:active => true,
-								:source => ""
-								).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "busy"}
-								).first 
-						end
-						
-						if call_forward_always
-							if call_forward_always.destination == "voicemail"
-								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
-							end
-						
-							if call_forward_always.destination.blank?
-								action :respond , "480 Blacklisted"
-							else
-								action :transfer , "#{call_forward_always.destination} XML default"
-							end
-						end
+			if forward_reasons.include? call_disposition ; (
+				if ! dst_sip_user.blank? ; (
 					
+					if busy_reasons.include? call_disposition
+						
+						call_forward = CallForward.where({
+								:sip_account_id => dst_sip_account.id,
+								:active         => true,
+								:source         => "#{src_cid_sip_user}"
+							}).joins( :call_forward_reason ).where({
+								:call_forward_reasons => { :value => "busy" }
+							}).first
+						
+						if ! call_forward
+							call_forward_always = CallForward.where({
+									:sip_account_id => dst_sip_account.id,
+									:active         => true,
+									:source         => ""
+								}).joins( :call_forward_reason ).where({
+									:call_forward_reasons => { :value => "busy" }
+								}).first 
+						end
+						
+						if call_forward_always
+							if call_forward_always.destination == "voicemail"
+								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+							end
+							
+							if call_forward_always.destination.blank?
+								action :respond , "480 Blacklisted"
+							else
+								action :transfer , "#{call_forward_always.destination} XML default"
+							end
+						end
+						
 					elsif offline_reasons.include? call_disposition
-					call_forward = CallForward.where(
-							:sip_account_id => dst_sip_account.id,
-							:active => true,
-							:source => "#{src_cid_sip_user}"
-							).joins( :call_forward_reason ).where(
-							:call_forward_reasons => { :value => "offline"}
-							).first
 						
-						if ! call_forward
-						
-							call_forward_always = CallForward.where(
-								:sip_account_id => dst_sip_account.id,
-								:active => true,
-								:source => ""
-								).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "offline"}
-								).first 
-						end
-						
-						if call_forward_always
-							if call_forward_always.destination == "voicemail"
-								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
-							end
-						
-							if call_forward_always.destination.blank?
-								action :respond , "480 Blacklisted"
-							else
-								action :transfer , "#{call_forward_always.destination} XML default"
-							end
-						end
-					elsif noanswer_reasons.include? call_disposition
 						call_forward = CallForward.where(
-							:sip_account_id => dst_sip_account.id,
-							:active => true,
-							:source => "#{src_cid_sip_user}"
+								:sip_account_id => dst_sip_account.id,
+								:active => true,
+								:source => "#{src_cid_sip_user}"
 							).joins( :call_forward_reason ).where(
-							:call_forward_reasons => { :value => "noanswer"}
+								:call_forward_reasons => { :value => "offline"}
 							).first
 						
 						if ! call_forward
-						
 							call_forward_always = CallForward.where(
-								:sip_account_id => dst_sip_account.id,
-								:active => true,
-								:source => ""
+									:sip_account_id => dst_sip_account.id,
+									:active => true,
+									:source => ""
 								).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "noanswer"}
+									:call_forward_reasons => { :value => "offline"}
 								).first 
 						end
 						
@@ -276,19 +256,52 @@ class FreeswitchCallProcessingController < ApplicationController
 							if call_forward_always.destination == "voicemail"
 								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
 							end
-						
+							
 							if call_forward_always.destination.blank?
 								action :respond , "480 Blacklisted"
 							else
 								action :transfer , "#{call_forward_always.destination} XML default"
 							end
 						end
+						
+					elsif noanswer_reasons.include? call_disposition
+						
+						call_forward = CallForward.where(
+								:sip_account_id => dst_sip_account.id,
+								:active => true,
+								:source => "#{src_cid_sip_user}"
+							).joins( :call_forward_reason ).where(
+								:call_forward_reasons => { :value => "noanswer"}
+							).first
+						
+						if ! call_forward
+							call_forward_always = CallForward.where(
+									:sip_account_id => dst_sip_account.id,
+									:active => true,
+									:source => ""
+								).joins( :call_forward_reason ).where(
+									:call_forward_reasons => { :value => "noanswer"}
+								).first 
+						end
+						
+						if call_forward_always
+							if call_forward_always.destination == "voicemail"
+								call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
+							end
+							
+							if call_forward_always.destination.blank?
+								action :respond, "480 Blacklisted"
+							else
+								action :transfer, "#{call_forward_always.destination} XML default"
+							end
+						end
+						
 					else
-					action :hangup    , ''
+						action :hangup, ''
 					end
-				end
-			#return	# OPTIMIZE Double check for better solution.
-			end
+				)end
+				#return	# OPTIMIZE Double check for better solution.
+			)end
 			
 			
 			# Caller-ID:
@@ -324,22 +337,24 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			
 			# Call-forwardings:
+			#
 			if dst_sip_account
-				call_forward_always = CallForward.where(
-					:sip_account_id => dst_sip_account.id,
-					:active => true,
-					:source => "#{src_cid_sip_user}"
-					).joins( :call_forward_reason ).where(
-					:call_forward_reasons => { :value => "always"}
-					).first
-				if ! call_forward_always
 				
-					call_forward_always = CallForward.where(
+				call_forward_always = CallForward.where(
 						:sip_account_id => dst_sip_account.id,
 						:active => true,
-						:source => ""
-						).joins( :call_forward_reason ).where(
+						:source => "#{src_cid_sip_user}"
+					).joins( :call_forward_reason ).where(
 						:call_forward_reasons => { :value => "always"}
+					).first
+				
+				if ! call_forward_always
+					call_forward_always = CallForward.where(
+							:sip_account_id => dst_sip_account.id,
+							:active => true,
+							:source => ""
+						).joins( :call_forward_reason ).where(
+							:call_forward_reasons => { :value => "always"}
 						).first 
 				end
 				
@@ -347,7 +362,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					if call_forward_always.destination == "voicemail"
 						call_forward_always.destination	= "-vbox-#{dst_sip_user_real}"
 					end
-				
+					
 					if call_forward_always.destination.blank?
 						action :respond , "480 Blacklisted"
 					else
@@ -357,6 +372,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			end
 			
 			# Ring the SIP user via Kamailio for 30 seconds:
+			#
 			if dst_sip_account 
 				action_log( FS_LOG_INFO, "Calling #{dst_sip_user_real} ..." )
 				action :set       , "call_timeout=30"  #OPTIMIZE Read from CF-after-timeout
@@ -368,8 +384,8 @@ class FreeswitchCallProcessingController < ApplicationController
 			end
 			
 			
-						
 			# Go to voicemail:
+			#
 			if dst_sip_account
 				if ! dst_sip_account.voicemail_server
 					action_log( FS_LOG_INFO, "SIP account #{dst_sip_user_real} doesn't have a voicemail server." )
