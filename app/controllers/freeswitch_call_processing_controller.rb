@@ -20,6 +20,7 @@ class FreeswitchCallProcessingController < ApplicationController
 	#before_filter :authenticate_user!
 	#OPTIMIZE Implement SSL with client certificates.
 	
+	
 	# http://wiki.freeswitch.org/wiki/Mod_logfile#Log_Levels
 	FS_LOG_CONSOLE = 0
 	FS_LOG_ALERT   = 1
@@ -45,10 +46,38 @@ class FreeswitchCallProcessingController < ApplicationController
 		action :log, "#{log_level_fs} ### [GS] #{message}"
 	end
 	
+	
 	def action( app, data = nil )
 		@dp_actions = [] if ! @dp_actions  # the FreeSwitch dialplan actions
 		@dp_actions << [ app, data ]
 	end
+	
+	
+	forward_reasons = [
+		'UNALLOCATED_NUMBER',
+		'NO_ROUTE_DESTINATION',
+		'USER_BUSY',
+		'NO_USER_RESPONSE',
+		'NO_ANSWER',
+		'CALL_REJECTED',
+		'SWITCH_CONGESTION',
+		'REQUESTED_CHAN_UNAVAIL',
+	]
+	busy_reasons = [
+		'USER_BUSY',
+		'CALL_REJECTED',
+	]
+	offline_reasons = [
+		'NO_ROUTE_DESTINATION',
+		'NO_USER_RESPONSE',
+		'CALL_REJECTED',
+		'SWITCH_CONGESTION',
+		'REQUESTED_CHAN_UNAVAIL',
+	]
+	noanswer_reasons = [
+		'NO_ANSWER',
+	]
+	
 	
 	# GET  /freeswitch-call-processing/actions.xml
 	# POST /freeswitch-call-processing/actions.xml
@@ -79,62 +108,41 @@ class FreeswitchCallProcessingController < ApplicationController
 		call_disposition = _arg( 'var_originate_disposition')
 		
 		
-		forward_reasons = [
-			'UNALLOCATED_NUMBER',
-			'NO_ROUTE_DESTINATION',
-			'USER_BUSY',
-			'NO_USER_RESPONSE',
-			'NO_ANSWER',
-			'CALL_REJECTED',
-			'SWITCH_CONGESTION',
-			'REQUESTED_CHAN_UNAVAIL',
-		]
-		busy_reasons = [
-			'USER_BUSY',
-			'CALL_REJECTED',
-		]
-		offline_reasons = [
-			'NO_ROUTE_DESTINATION',
-			'NO_USER_RESPONSE',
-			'CALL_REJECTED',
-			'SWITCH_CONGESTION',
-			'REQUESTED_CHAN_UNAVAIL',
-		]
-		noanswer_reasons = [
-			'NO_ANSWER',
-		]
-		
-		
-		src_sip_account = (
-			SipAccount.where({
-				:auth_name => src_sip_user
-			})
-			.joins( :sip_server )
-			.where( :sip_servers => {
-				:host => src_cid_sip_domain
-			})
-			.first )
-		
+		src_sip_account = nil
 		dst_sip_account = nil
 		dst_conference  = nil
 		dst_queue       = nil
 		
-		if dst_sip_user_real.match( /^-conference-.*/ )
-			dst_conference = (
-				Conference.where({
-					:uuid => dst_sip_user_real
-				})
-				.first )
-		else
-			dst_sip_account = (
+		if ! src_sip_user.blank?
+			src_sip_account = (
 				SipAccount.where({
-					:auth_name => dst_sip_user_real
+					:auth_name => src_sip_user
 				})
 				.joins( :sip_server )
 				.where( :sip_servers => {
-					:host => dst_sip_domain
+					:host => src_cid_sip_domain
 				})
 				.first )
+		end
+		
+		if ! dst_sip_user_real.blank?
+			if dst_sip_user_real.match( /^-conference-.*/ )
+				dst_conference = (
+					Conference.where({
+						:uuid => dst_sip_user_real
+					})
+					.first )
+			else
+				dst_sip_account = (
+					SipAccount.where({
+						:auth_name => dst_sip_user_real
+					})
+					.joins( :sip_server )
+					.where( :sip_servers => {
+						:host => dst_sip_domain
+					})
+					.first )
+			end
 		end
 		
 		logger.info(_bold( "[FS] SIP Call-ID: #{sip_call_id}" ))
@@ -243,7 +251,7 @@ class FreeswitchCallProcessingController < ApplicationController
 								:active => true,
 								:source => "#{src_cid_sip_user}"
 							).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "offline"}
+								:call_forward_reasons => { :value => "offline" }
 							).first
 						
 						if ! call_forward
@@ -252,7 +260,7 @@ class FreeswitchCallProcessingController < ApplicationController
 									:active => true,
 									:source => ""
 								).joins( :call_forward_reason ).where(
-									:call_forward_reasons => { :value => "offline"}
+									:call_forward_reasons => { :value => "offline" }
 								).first 
 						end
 						
@@ -275,7 +283,7 @@ class FreeswitchCallProcessingController < ApplicationController
 								:active => true,
 								:source => "#{src_cid_sip_user}"
 							).joins( :call_forward_reason ).where(
-								:call_forward_reasons => { :value => "noanswer"}
+								:call_forward_reasons => { :value => "noanswer" }
 							).first
 						
 						if ! call_forward
@@ -284,7 +292,7 @@ class FreeswitchCallProcessingController < ApplicationController
 									:active => true,
 									:source => ""
 								).joins( :call_forward_reason ).where(
-									:call_forward_reasons => { :value => "noanswer"}
+									:call_forward_reasons => { :value => "noanswer" }
 								).first 
 						end
 						
@@ -349,7 +357,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						:active => true,
 						:source => "#{src_cid_sip_user}"
 					).joins( :call_forward_reason ).where(
-						:call_forward_reasons => { :value => "always"}
+						:call_forward_reasons => { :value => "always" }
 					).first
 				
 				if ! call_forward_always
@@ -358,7 +366,7 @@ class FreeswitchCallProcessingController < ApplicationController
 							:active => true,
 							:source => ""
 						).joins( :call_forward_reason ).where(
-							:call_forward_reasons => { :value => "always"}
+							:call_forward_reasons => { :value => "always" }
 						).first 
 				end
 				
