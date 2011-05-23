@@ -98,7 +98,9 @@ class SipAccount < ActiveRecord::Base
       end
     end
   end
+  
   def phone_reboot
     self.phone.reboot if self.phone
   end
+  
 end
