@@ -9,4 +9,5 @@ class PhoneBookInternalUsersController < ApplicationController
      ormat.xml  { render :xml => @sip_accounts }
 	} 
   end
+  
 end

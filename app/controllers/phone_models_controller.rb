@@ -1,4 +1,7 @@
 class PhoneModelsController < ApplicationController
+  
+  #TODO before_filter :authenticate_user!
+  
   # GET /phone_models
   # GET /phone_models.xml
   def index
@@ -94,4 +97,5 @@ class PhoneModelsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

@@ -1,5 +1,7 @@
 class ManufacturerSnomController < ApplicationController
 	
+	#TODO Authentication
+	
 	def show
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@phone = Phone.where(:mac_address => mac_address).first

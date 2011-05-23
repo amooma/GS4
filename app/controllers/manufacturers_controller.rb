@@ -1,4 +1,7 @@
 class ManufacturersController < ApplicationController
+  
+  #TODO before_filter :authenticate_user!
+  
   # GET /manufacturers
   # GET /manufacturers.xml
   def index
@@ -80,4 +83,5 @@ class ManufacturersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

@@ -9,4 +9,5 @@ class PhoneBookInternalUsersController < ApplicationController
      format.xml
 	}
   end
+  
 end

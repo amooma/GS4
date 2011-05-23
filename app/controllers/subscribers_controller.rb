@@ -1,4 +1,7 @@
 class SubscribersController < ApplicationController
+  
+  #TODO before_filter :authenticate_user!
+  
   # GET /subscribers
   # GET /subscribers.xml
   def index
@@ -85,4 +88,5 @@ class SubscribersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

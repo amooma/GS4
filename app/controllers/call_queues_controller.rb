@@ -1,4 +1,7 @@
 class CallQueuesController < ApplicationController
+  
+  #TODO before_filter :authenticate_user!
+  
   # GET /call_queues
   # GET /call_queues.xml
   def index
@@ -81,4 +84,5 @@ class CallQueuesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end
