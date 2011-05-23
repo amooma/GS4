@@ -35,8 +35,8 @@
         beträgt mindestens 128 Bit. Die Verschlüsselung erfolgt zwischen den
         terminierenden SIP-Geräten, d.h. zwischen zwei Endgeräten bzw.
         zwischen einem Endgerät und einem Gateway, SBC, Voicemail- oder
-        Konferenzzerver (wobei die Aufgaben des SBC, Voicemail- und
-        Konferenzzerver in einer Standard-Installation von „Gemeinschaft“
+        Konferenz-Server (wobei die Aufgaben des SBC, Voicemail- und
+        Konferenz-Server in einer Standard-Installation von „Gemeinschaft“
         erfüllt werden).</para>
       </section>
 
