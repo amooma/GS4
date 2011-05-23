@@ -80,9 +80,9 @@
         <para>Gemeinschaft ist ein „Knoten“. Je nach Größe der Institution und
         Anforderungen an die Redundanz können auch mehrere solcher Knoten
         betrieben werden. Das genaue Vorgehen (Cold-/Hot-Standby,
-        Active-Active, Virtualisierungsumgebung, ...) hängt von den jeweiligen
-        Erfordernissen ab. Ein Setup bei dem keine Gespräche unterbrochen
-        werden ist möglich.</para>
+        Active&#8211;Active, Virtualisierungsumgebung, ...) hängt von den
+        jeweiligen Erfordernissen ab. Ein Setup bei dem keine Gespräche
+        unterbrochen werden ist möglich.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-35">
