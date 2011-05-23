@@ -205,7 +205,9 @@
         <title><literal>G-TK-22</literal> Unzureichende Regelungen für den
         Einsatz von VoIP</title>
 
-        <para></para>
+        <para>Die in der TLSTK genannten Beispiele sind: Unsichere Kopien von
+        Sprachmailbox-Nachrichten sowie das Abhören von Gesprächen durch
+        Netzwerk-Analyse-Software (Paket-Sniffer).</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-44" /></member>
@@ -230,7 +232,9 @@
         <title><literal>G-TK-23</literal> Unzureichende Harmonisierung
         zwischen IT- und VoIP-Betrieb</title>
 
-        <para></para>
+        <para>Die Verfügbarkeit der VoIP-Telefonie könnte gefährdet sein durch
+        eine unzureichende Abstimmung zwischen TK-Betrieb und dem sonstigen
+        IT-Betrieb.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-36" /></member>
@@ -265,7 +269,9 @@
         <title><literal>G-TK-24</literal> Fehlende, ungeeignete und
         inkompatible Betriebsmittel für VoIP</title>
 
-        <para></para>
+        <para>Es entstehen Gefährdungen dadurch daß die VoIP-Telefonie nicht
+        ausreichend in den IT-Planungen zu Betriebsmitteln berücksichtigt
+        wird.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-36" /></member>
