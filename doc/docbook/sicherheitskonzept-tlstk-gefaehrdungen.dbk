@@ -341,7 +341,8 @@
         Kontrolle von Zugangs- und Zugriffsmöglichkeiten auf
         VoIP-Endgeräte</title>
 
-        <para></para>
+        <para>Gefährdung: Zu viele lokal auf Endgeräten gespeicherte
+        Einstellungen bzw. nicht ausreichende Absicherung derselben.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -396,7 +397,11 @@
         <title><literal>G-TK-26</literal> Kein ordnungsgemäßer Benutzerwechsel
         für VoIP-Endgeräte</title>
 
-        <para></para>
+        <para>Sollten bei einem Benutzerwechsel („Hot-Desking“) an einem
+        IP-Telefon lokal am Gerät gespeicherte Daten zurückbleiben
+        (beispielsweise personenbezogene Daten wie Anruflisten,
+        Kontaktinformationen, …) so würde dies eine Gefährdung der
+        Vertraulichkeit und des Datenschutzes darstellen.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -426,7 +431,9 @@
         Archivierung von Sprachnachrichten und elektronischen
         Fax-Nachrichten</title>
 
-        <para></para>
+        <para>Gefährdung: Verlust an Vertraulichkeit oder Datenschutz durch
+        mangelhafte Archivierung/Backup. Eine Verletzung von
+        Aufbewahrungspflichten ist ebenso möglich.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-73" /></member>
@@ -441,7 +448,9 @@
         <title><literal>G-TK-28</literal> Unzulängliche vertragliche
         Regelungen für externe Leistungen zur VoIP-Lösung</title>
 
-        <para></para>
+        <para>Gefährdung: Weiterführen/Anlehnung an bestehende
+        Dienstleistungs- oder Wartungsverträge für ältere TK-Anlagen ohne
+        sorgfältige Anpassungen an den Einsatz von VoIP.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-42" /></member>
@@ -480,7 +489,7 @@
         <title><literal>G-TK-29</literal> Unzureichende Regelungen für das
         Ende der externen Dienstleistungen für eine VoIP-Lösung</title>
 
-        <para></para>
+        <para>Siehe <xref linkend="tlstk-g-tk-28" />.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-64" /></member>
