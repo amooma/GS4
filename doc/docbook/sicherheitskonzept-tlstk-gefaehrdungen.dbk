@@ -532,7 +532,9 @@
         Integritätsverlust von Daten durch Fehlverhalten der
         VoIP-Benutzer</title>
 
-        <para></para>
+        <para>Fehlverhalten von Benutzern kann zum Verlust von Vertraulichkeit
+        oder Integrität führen (z.B. Ausdrucken oder unzureichend geschützte
+        Speicherung auf mobilen Datenträgern).</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -609,7 +611,9 @@
         <title><literal>G-TK-31</literal> Unstrukturierte Datenhaltung durch
         VoIP-Nutzer</title>
 
-        <para></para>
+        <para>Gefährdung: Mehrfache Datenhaltung an mehreren Stellen ohne
+        Synchronisierung und ohne Garantierung des überall gleichen
+        Sicherheits-Niveaus.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-43" /></member>
@@ -634,7 +638,8 @@
         <title><literal>G-TK-32</literal> Konfigurationsfehler und
         Bedienungsfehler bei VoIP-Lösungen</title>
 
-        <para></para>
+        <para>Gefährdung: Fehlerhafte Konfiguration oder Bedienung von
+        TK-Servern oder -Endgeräten.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-32" /></member>
@@ -709,7 +714,8 @@
         <title><literal>G-TK-33</literal> Fehlerhafte Administration von
         Zugangs- und Zugriffsrechten zu VoIP-Installationen</title>
 
-        <para></para>
+        <para>Gefährdung: Der TK-Administrator könnte versehentlich falsche
+        Berechtigungen einstellen.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-34" /></member>
