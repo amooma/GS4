@@ -269,10 +269,8 @@
 
         <para>Die Übertragung der Konfigurationsparameter vom
         Provisioning-Dienst in Gemeinschaft zu den Telefonen erfolgt
-        verschlüsselt per HTTPS mit Authentisierung.</para>
-
-        <para>#OPTIMIZE Genauer beschreiben sobald ein geeignetes IP-Telefon
-        mit entsprechender Firmware verfügbar ist.</para>
+        verschlüsselt per HTTPS mit Authentisierung. Voraussetzung dafür sind
+        entsprechende IP-Telefone mit geeigneter Firmware.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-47">
@@ -592,7 +590,17 @@
         Notrufe abgesetzt werden oder zur Schadensbehebung Telefonate mit
         Externen geführt werden, beispielsweise mit Support-Firmen.</para>
 
-        <para>#OPTIMIZE Notfallplan mit Sofortmaßnahmen nennen.</para>
+        <para>Die jeweilige Institution hat in regelmäßigen Abständen zu
+        prüfen ob die getroffenen Vorkehrungen zur Systemwiederherstellung
+        funktionsfähig sind. Dies betrifft beispielsweise die Lesbarkeit von
+        Backup-Datenträgern, die Lauffähigkeit der Software auf
+        Ersatz-Hardware sowie Arbeitsabläufe.</para>
+
+        <para>Ebenso sollten in der jeweiligen Institution Notfallpläne
+        erstellt werden, beispielsweise ob separate Notfall-Anschlüsse ans
+        PSTN erforderlich sind. Es könnten auch Mobiltelefone an ausgewählte
+        Personen verteilt werden. Dabei ist die Bedeutung für die
+        Geschäftsprozesse zu berücksichtigen.</para>
       </section>
     </section>
   </section>
