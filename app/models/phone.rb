@@ -50,6 +50,7 @@ class Phone < ActiveRecord::Base
 	#
 	def reboot
 	(
+		if ! self.rebootable?; return false; end
 		begin
 		(
 			reboot_request = RebootRequest.create( :phone_id => self.id )
