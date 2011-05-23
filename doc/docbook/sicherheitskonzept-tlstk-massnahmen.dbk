@@ -54,8 +54,9 @@
         <title><literal>M-TK-32</literal> Authentisierung zwischen Endgeräten
         und Servern des VoIP-Systems</title>
 
-        <para>#OPTIMIZE Sobald geeignete Endgeräte verfügbar sind ist dieser
-        Punkt noch auszuarbeiten.</para>
+        <para>Zwischen den Endgeräten und dem VoIP-Server (Kamailio) findet
+        &#8211; entsprechende Endgeräte vorausgesetzt &#8211; eine
+        Authentisierung per TLS statt.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-33">
@@ -246,11 +247,8 @@
 
         <para>Es muß ein Prozeß vorhanden sein um den Verlust eines
         IP-Telefons zu behandeln. Hierzu bietet es sich an die betreffenden
-        Zertifikate zu sperren (CRL) und das Paßwort des Accounts in
-        Gemeinschaft zu ändern.</para>
-
-        <para>#OPTIMIZE Hier das Vorgehen genauer beschreiben sobald ein
-        geeignetes IP-Telefon verfügbar ist.</para>
+        Zertifikate zu sperren (per Certificate Revocation List, CRL) und das
+        Paßwort des Accounts in Gemeinschaft zu ändern.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-45">
@@ -260,10 +258,9 @@
         überprüft werden. Voraussetzung hierfür ist daß der Hersteller seine
         Firmware digital signiert und eine Prüfsumme bereitstellt.</para>
 
-        <para>#OPTIMIZE Konkretes Vorgehen beschreiben sobald ein geeignetes
-        IP-Telefon mit entsprechender Firmware verfügbar ist. (Beispiel:
-        Mitlieferung der Firmware im Image des Gemeinschaft-Systems oder
-        Prüfung durch den IT-Administrator.)</para>
+        <para>Die Firmware-Dateien werden entweder direkt im Image
+        („Appliance“) des Gemeinschaft-Systems mitgeliefert oder müssen vom
+        IT-Administrator geprüft werden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-46">
