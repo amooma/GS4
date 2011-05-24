@@ -1,11 +1,11 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :call_queues
-
-  resources :call_forwards
-
-  resources :conferences
-
+	resources :call_queues
+	
+	resources :call_forwards
+	
+	resources :conferences
+	
 	get "setup/index"
 	get "setup/create"
 	get "setup/new"
@@ -24,6 +24,7 @@ Gemeinschaft4::Application.routes.draw do
 	resources :call_queues do
 		resources :extensions
 	end
+	
 	resources :sip_phones
 	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]
@@ -111,7 +112,7 @@ Gemeinschaft4::Application.routes.draw do
 	
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',
-		:constraints => { :mac_address => /000413.*/ } 
+		:constraints => { :mac_address => /000413.*/ }
 	
 	resources :provisioning_log_entries, :only => [ :index, :show ]
 	resources :phone_model_mac_addresses
