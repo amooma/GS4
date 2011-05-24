@@ -7,7 +7,7 @@ db/*.sqlite3
 db/*.sqlite3-journal
 log/*.log
 tmp/**/*
-.project
+/.project
 *.komodoproject
 /.komodotools
 .tmp*~
@@ -15,7 +15,7 @@ ERD.pdf
 /vendor/cache
 /vendor/bundle
 .settings/*
-.idea/*
+/.idea
 misc/freeswitch/fs-conf/freeswitch-gemeinschaft4.xml
 # ignore .build_unclean (used by "make deb")
 /.build_unclean
