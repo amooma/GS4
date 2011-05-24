@@ -8,7 +8,7 @@ body {
 
 body, p, ol, ul, td {
 	font-family: "Arial", "Helvetica", sans-serif;
-	font-size:   10pt;
+	font-size: 10pt;
 	line-height: 1.35em;
 }
 
@@ -18,8 +18,12 @@ pre {
 	font-size: 11px;
 }
 
-a { color: #00c; }
-a:visited { color: #609; }
+a {
+	color: #00c;
+}
+a:visited {
+	color: #609;
+}
 a:hover,
 a:focus,
 a:active {
@@ -242,7 +246,9 @@ table tr.odd             > td {
 	Used to enhance navigation in lynx and screen readers
 	(@media braille, speech, tty).
 	*/
-	.tty { display: none; }
+	.tty {
+		display: none;
+	}
 }
 
 
@@ -306,8 +312,17 @@ table tr.odd             > td {
 			to(              hsla( 0, 0%, 100%, 0.2  ))
 			);
 	}
-	nav.hnav ul { padding: 0; margin: 0; }
-	nav.hnav ul:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+	nav.hnav ul {
+		padding: 0;
+		margin: 0;
+	}
+	nav.hnav ul:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
 	nav.hnav li:hover ul,
 	nav.hnav li:active ul,
 	nav.hnav li:focus ul {
@@ -384,9 +399,17 @@ table tr.odd             > td {
 		text-shadow: 1px 2px 4px #112;
 		text-shadow: 1px 2px 4px #112;
 	}
-	nav.hnav li:first-child a { border-left: none; }
-	nav.hnav li:last-child  a { border-right: none; }
-	nav.hnav li { position: relative; float: left; list-style-type: none; }
+	nav.hnav li:first-child a {
+		border-left: none;
+	}
+	nav.hnav li:last-child  a {
+		border-right: none;
+	}
+	nav.hnav li {
+		position: relative;
+		float: left;
+		list-style-type: none;
+	}
 	nav.hnav ul ul {
 		display: none;
 		width: 100%;
@@ -405,7 +428,9 @@ table tr.odd             > td {
 		color: #000;
 		text-shadow: 1px 1px 4px #aaa;
 	}
-	nav.hnav ul ul li { float: none; }
+	nav.hnav ul ul li {
+		float: none;
+	}
 	nav.hnav ul ul a:hover,
 	nav.hnav ul ul a:active,
 	nav.hnav ul ul a:focus {
