@@ -5,7 +5,6 @@
 /*
 @import "compass/reset";
 */
-/* line 11, ../../app/stylesheets/screen.scss */
 body {
 	background-color: #fff;
 	color: #000;
@@ -14,70 +13,59 @@ body {
 	margin: auto;
 }
 
-/* line 19, ../../app/stylesheets/screen.scss */
 body, p, ol, ul, td {
 	font-family: "Arial", "Helvetica", sans-serif;
 	font-size: 10pt;
 	line-height: 1.35em;
 }
 
-/* line 25, ../../app/stylesheets/screen.scss */
 pre {
 	background-color: #eee;
 	padding: 10px;
 	font-size: 11px;
 }
 
-/* line 31, ../../app/stylesheets/screen.scss */
 a {
 	color: #00c;
 }
 
-/* line 34, ../../app/stylesheets/screen.scss */
 a:visited {
 	color: #609;
 }
 
-/* line 39, ../../app/stylesheets/screen.scss */
 a:hover,
 a:focus,
 a:active {
 	text-shadow: 1px 2px 3px #aaa;
 }
 
-/* line 43, ../../app/stylesheets/screen.scss */
 div {
 	padding: 0;
 	margin: 0;
 }
 
-/* line 48, ../../app/stylesheets/screen.scss */
 div.field, div.actions {
 	margin-bottom: 10px;
 }
 
-/* line 53, ../../app/stylesheets/screen.scss */
 #notice, .app_notice {
 	padding: 0;
 	background-color: #dfd;
 	color: #090;
 }
 
-/* line 58, ../../app/stylesheets/screen.scss */
 #alert, .app_alert {
 	padding: 0;
 	background-color: #fdd;
 	color: #c00;
 }
 
-/* line 65, ../../app/stylesheets/screen.scss */
 .field_with_errors {
 	padding: 2px;
 	background-color: red;
 	display: table;
 }
 
-/* line 71, ../../app/stylesheets/screen.scss */
 #error_explanation {
 	width: 450px;
 	border: 2px solid red;
@@ -87,7 +75,6 @@ div.field, div.actions {
 	background-color: #f0f0f0;
 }
 
-/* line 80, ../../app/stylesheets/screen.scss */
 #error_explanation h2 {
 	text-align: left;
 	font-weight: bold;
@@ -99,13 +86,11 @@ div.field, div.actions {
 	color: #fff;
 }
 
-/* line 91, ../../app/stylesheets/screen.scss */
 #error_explanation ul li {
 	font-size: 12px;
 	list-style: square;
 }
 
-/* line 98, ../../app/stylesheets/screen.scss */
 table th,
 table td {
 	border-width: 1px;
@@ -117,30 +102,25 @@ table td {
 	background-color: #f3f3f3;
 }
 
-/* line 107, ../../app/stylesheets/screen.scss */
 table th {
 	background-color: #bbf;
 }
 
-/* line 112, ../../app/stylesheets/screen.scss */
 table tr:nth-child(even) > td,
 table tr.even > td {
 	background-color: #f0f0f0;
 }
 
-/* line 116, ../../app/stylesheets/screen.scss */
 table tr:nth-child(odd) > td,
 table tr.odd > td {
 	background-color: #dddddd;
 }
 
-/* line 121, ../../app/stylesheets/screen.scss */
 #header {
 	margin: 0 0 0.5em 0;
 	padding: 0 2pt 1pt 2pt;
 }
 
-/* line 126, ../../app/stylesheets/screen.scss */
 #user_nav {
 	text-align: right;
 	position: relative;
@@ -148,7 +128,6 @@ table tr.odd > td {
 	padding: 1px;
 }
 
-/* line 133, ../../app/stylesheets/screen.scss */
 #application {
 	text-align: left;
 	position: relative;
@@ -157,7 +136,6 @@ table tr.odd > td {
 	font-weight: bold;
 }
 
-/* line 141, ../../app/stylesheets/screen.scss */
 #content {
 	background-image: -moz-linear-gradient(top, #eeeeee, white 20pt);
 	background-image: -o-linear-gradient(top, #eeeeee, white 20pt);
@@ -171,7 +149,6 @@ table tr.odd > td {
 	padding: 2px  8px 0  8px;
 }
 
-/* line 155, ../../app/stylesheets/screen.scss */
 .clear {
 	display: block;
 	float: none;
@@ -180,7 +157,6 @@ table tr.odd > td {
 	visibility: hidden;
 }
 
-/* line 164, ../../app/stylesheets/screen.scss */
 .simple_form label {
 	float: left;
 	width: 180px;
@@ -188,29 +164,24 @@ table tr.odd > td {
 	margin: 2px 10px;
 }
 
-/* line 171, ../../app/stylesheets/screen.scss */
 .simple_form div.input {
 	margin-bottom: 10px;
 }
 
-/* line 175, ../../app/stylesheets/screen.scss */
 .simple_form div.boolean, .simple_form input[type='submit'] {
 	margin-left: 120px;
 }
 
-/* line 179, ../../app/stylesheets/screen.scss */
 .simple_form div.boolean label, .simple_form label.collection_radio {
 	float: none;
 	margin: 0;
 }
 
-/* line 184, ../../app/stylesheets/screen.scss */
 .simple_form label.collection_radio {
 	margin-right: 10px;
 	margin-left: 2px;
 }
 
-/* line 189, ../../app/stylesheets/screen.scss */
 .simple_form .error {
 	clear: left;
 	margin-left: 120px;
@@ -219,7 +190,6 @@ table tr.odd > td {
 	display: block;
 }
 
-/* line 197, ../../app/stylesheets/screen.scss */
 .simple_form .hint {
 	clear: left;
 	margin-left: 120px;
@@ -229,7 +199,6 @@ table tr.odd > td {
 	font-style: italic;
 }
 
-/* line 207, ../../app/stylesheets/screen.scss */
 .index_overview {
 	height: auto;
 	column-width: 23em;
@@ -251,12 +220,10 @@ table tr.odd > td {
 	orphans: 5;
 }
 
-/* line 228, ../../app/stylesheets/screen.scss */
 .index_overview section {
 	display: table;
 }
 
-/* line 233, ../../app/stylesheets/screen.scss */
 .noticebox {
 	margin: 0 0px 15px 0px;
 	padding: 5px;
@@ -282,13 +249,11 @@ table tr.odd > td {
 	Used to enhance navigation in lynx and screen readers
 	(@media braille, speech, tty).
 	*/
-	/* line 259, ../../app/stylesheets/screen.scss */
 	.tty {
 		display: none;
 	}
 }
 @media all and (max-width: 800px) {
-	/* line 269, ../../app/stylesheets/screen.scss */
 	nav.hnav {
 		display: block;
 		border-top: 1px dashed #00a;
@@ -299,14 +264,12 @@ table tr.odd > td {
 		min-width: 15em;
 	}
 
-	/* line 278, ../../app/stylesheets/screen.scss */
 	nav.hnav ul {
 		margin: 0;
 		padding: 0 0 0 2em;
 	}
 }
 @media all and (min-width: 800px) {
-	/* line 286, ../../app/stylesheets/screen.scss */
 	nav.hnav {
 		min-width: 750px;
 		display: block;
@@ -331,13 +294,11 @@ table tr.odd > td {
 		background-image: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0.5)), color-stop(50%, rgba(255, 255, 255, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.15)), to(rgba(255, 255, 255, 0.2)));
 	}
 
-	/* line 325, ../../app/stylesheets/screen.scss */
 	nav.hnav ul {
 		padding: 0;
 		margin: 0;
 	}
 
-	/* line 329, ../../app/stylesheets/screen.scss */
 	nav.hnav ul:after {
 		content: ".";
 		display: block;
@@ -346,7 +307,6 @@ table tr.odd > td {
 		visibility: hidden;
 	}
 
-	/* line 338, ../../app/stylesheets/screen.scss */
 	nav.hnav li:hover ul,
 	nav.hnav li:active ul,
 	nav.hnav li:focus ul {
@@ -369,7 +329,6 @@ table tr.odd > td {
 		border-top: 1px solid #000;
 	}
 
-	/* line 357, ../../app/stylesheets/screen.scss */
 	nav.hnav li {
 		font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
 		font-size: 11pt;
@@ -378,7 +337,6 @@ table tr.odd > td {
 		text-shadow: 1px 2px 4px #112;
 	}
 
-	/* line 364, ../../app/stylesheets/screen.scss */
 	nav.hnav li a {
 		display: block;
 		padding: 5pt 12pt 6pt 12pt;
@@ -390,12 +348,10 @@ table tr.odd > td {
 		text-decoration: none;
 	}
 
-	/* line 374, ../../app/stylesheets/screen.scss */
 	nav.hnav li li a {
 		text-align: left;
 	}
 
-	/* line 380, ../../app/stylesheets/screen.scss */
 	nav.hnav li a:hover,
 	nav.hnav li a:active,
 	nav.hnav li a:focus,
@@ -407,13 +363,11 @@ table tr.odd > td {
 		background-image: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0.5)), color-stop(50%, rgba(255, 255, 255, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.15)), to(rgba(255, 255, 255, 0.2)));
 	}
 
-	/* line 402, ../../app/stylesheets/screen.scss */
 	nav.hnav li a:focus {
 		outline: none;
 		/*text-decoration: underline;*/
 	}
 
-	/* line 408, ../../app/stylesheets/screen.scss */
 	nav.hnav a:hover,
 	nav.hnav a:focus,
 	nav.hnav a:active {
@@ -421,24 +375,20 @@ table tr.odd > td {
 		text-shadow: 1px 2px 4px #112;
 	}
 
-	/* line 412, ../../app/stylesheets/screen.scss */
 	nav.hnav li:first-child a {
 		border-left: none;
 	}
 
-	/* line 415, ../../app/stylesheets/screen.scss */
 	nav.hnav li:last-child a {
 		border-right: none;
 	}
 
-	/* line 418, ../../app/stylesheets/screen.scss */
 	nav.hnav li {
 		position: relative;
 		float: left;
 		list-style-type: none;
 	}
 
-	/* line 423, ../../app/stylesheets/screen.scss */
 	nav.hnav ul ul {
 		display: none;
 		width: 100%;
@@ -450,7 +400,6 @@ table tr.odd > td {
 		/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
 	}
 
-	/* line 433, ../../app/stylesheets/screen.scss */
 	nav.hnav ul ul a {
 		padding: 5px 10px;
 		border-left: none;
@@ -460,12 +409,10 @@ table tr.odd > td {
 		text-shadow: 1px 1px 4px #aaa;
 	}
 
-	/* line 441, ../../app/stylesheets/screen.scss */
 	nav.hnav ul ul li {
 		float: none;
 	}
 
-	/* line 446, ../../app/stylesheets/screen.scss */
 	nav.hnav ul ul a:hover,
 	nav.hnav ul ul a:active,
 	nav.hnav ul ul a:focus {
