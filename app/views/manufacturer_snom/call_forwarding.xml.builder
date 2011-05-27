@@ -1,7 +1,7 @@
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.SnomIPPhoneMenu {
-	xml.Title('Call Forwarding')
+	xml.Title("Call Forwarding - #{@sip_account_name}")
 	xml.MenuItem {
 		xml.Name("Unconditional - #{@always_destination}")
 		xml.URL("#{@provisioning_server_url}/call_forwarding/always.xml")
