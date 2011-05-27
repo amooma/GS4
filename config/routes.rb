@@ -81,7 +81,7 @@ Gemeinschaft4::Application.routes.draw do
 		:controller => :manufacturer_snom,
 		:format     => :'xml'
 	
-	# OPTIMIZE Optimize the routes in following. Change the controller so it doesn't use names for the actions that don't easily map to URLs.
+	#OPTIMIZE Optimize the routes in following. Change the controller so it doesn't use names for the actions that don't easily map to URLs.
 	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/always',
 		:via        => [ :get, :post ],
 		:controller => :manufacturer_snom,
