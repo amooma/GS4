@@ -13,3 +13,8 @@ xml.SnomIPPhoneMenu {
 		xml.URL("#{@provisioning_server_url}/xml_menu.xml")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

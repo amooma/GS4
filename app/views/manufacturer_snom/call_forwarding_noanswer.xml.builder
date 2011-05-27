@@ -41,3 +41,8 @@ else
 		}
 	}
 end
+
+
+# Local Variables:
+# mode: ruby
+# End:
