@@ -344,7 +344,7 @@ Version.create(:table_name => "htable", :table_version => "1")
 Version.create(:table_name => "purplemap", :table_version => "1")
 Version.create(:table_name => "uacreg", :table_version => "1")
 
-Extension.create(:extension => "80", :destination => "-vmmenue-", :active => true)
+Extension.create(:extension => "80", :destination => "-vmenu-", :active => true)
 Extension.create(:extension => "90", :destination => "-park-in-", :active => true)
 Extension.create(:extension => "99", :destination => "-park-out-", :active => true)
 
