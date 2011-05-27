@@ -6,6 +6,7 @@ xml.SnomIPPhoneDirectory {
       xml.tag!( 'DirectoryEntry' ) {
         xml.Name(      sip_account.caller_name )
         xml.Telephone( sip_account.extensions.where(:active => true).first.extension )
+        #FIXME sip_account.extensions.where(:active => true).first can be nil if the account doesn't have any active extensions.
       }
     end
   }
