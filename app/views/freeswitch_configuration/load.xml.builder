@@ -1,5 +1,7 @@
 xml.instruct!
 
+#TODO If you decide to go this route then import changes in misc/freeswitch/fs-conf/ into this file and delete misc/freeswitch/fs-conf/**.xml
+
 xml.document(:type => 'freeswitch/xml') {
 	
 	xml.tag!('X-PRE-PROCESS', :cmd => 'set', :data => 'domain=$${local_ip_v4}')
