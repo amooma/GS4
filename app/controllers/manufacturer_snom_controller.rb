@@ -81,6 +81,8 @@ class ManufacturerSnomController < ApplicationController
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
+	#OPTIMIZE Code smell: Duplicated code in call_forwarding_{always|busy|offline|noanswer}
+	
 	def call_forwarding_always
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@sip_account_name = get_sip_account_name()
