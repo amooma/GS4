@@ -64,7 +64,7 @@ echo -e "Installing sqlite-odbc\n"
 aptitude install libsqliteodbc/testing
 
 
-echo -e "Stoping services for configuration\n"
+echo -e "Stopping services for configuration\n"
 
 /etc/init.d/freeswitch stop
 /etc/init.d/lighttpd stop
