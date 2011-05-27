@@ -44,18 +44,18 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 			xml.tag!( 'caller-controls' ) {
 				xml.group( :name => 'default' ) {
-					xml.control( :action => 'mute' )
-					xml.control( :action => 'deaf mute', :digits => '*' )
-					xml.control( :action => 'energy up', :digits => '9' )
-					xml.control( :action => 'energy equ', :digits => '8' )
-					xml.control( :action => 'energy dn', :digits => '7' )
-					xml.control( :action => 'vol talk up', :digits => '3' )
-					xml.control( :action => 'vol talk zero', :digits => '2' )
-					xml.control( :action => 'vol talk dn', :digits => '1' )
-					xml.control( :action => 'vol listen up', :digits => '6' )
-					xml.control( :action => 'vol listen zero', :digits => '5' )
-					xml.control( :action => 'vol listen dn', :digits => '4' )
-					xml.control( :action => 'hangup', :digits => '#' )
+					xml.control( :action => 'mute'            )  #OPTIMIZE Is there a reason to skip :digits => '0' ?
+					xml.control( :action => 'deaf mute'       , :digits => '*' )
+					xml.control( :action => 'energy up'       , :digits => '9' )
+					xml.control( :action => 'energy equ'      , :digits => '8' )
+					xml.control( :action => 'energy dn'       , :digits => '7' )
+					xml.control( :action => 'vol talk up'     , :digits => '3' )
+					xml.control( :action => 'vol talk zero'   , :digits => '2' )
+					xml.control( :action => 'vol talk dn'     , :digits => '1' )
+					xml.control( :action => 'vol listen up'   , :digits => '6' )
+					xml.control( :action => 'vol listen zero' , :digits => '5' )
+					xml.control( :action => 'vol listen dn'   , :digits => '4' )
+					xml.control( :action => 'hangup'          , :digits => '#' )
 				}
 			}
 			xml.profiles {
