@@ -1,100 +1,133 @@
-#!/bin/bash
-
-#TODO Adjust this script or remove it.
-exit 1
-
-
+#!/bin/bash -x
 echo -e "Please enter your github.com username\n"
 read USER
 
 echo -e "Please enter your github.com password\n"
 read PASS
 
-echo "Updating apt cache"
+
+echo -e "Adding apt sources\n"
+
+(
+echo 'deb      http://www.kempgen.net/pkg/deb/ squeeze contrib'
+echo 'deb-src  http://www.kempgen.net/pkg/deb/ squeeze contrib'
+) > /etc/apt/sources.list.d/kempgen.list
+
+(
+echo 'deb http://deb.kamailio.org/kamailio squeeze main'
+echo 'deb-src http://deb.kamailio.org/kamailio squeeze main'
+) > /etc/apt/sources.list.d/kamailio.list
+
+
 aptitude update
 
-echo "Installing required packages."
-aptitude -y install curl git-core patch file \
-  build-essential bison \
-  openssl zlib1g-dev libssl-dev libreadline5-dev libxml2-dev \
-  libreadline5-dev libxml2-dev sqlite3 libsqlite3-dev libxslt-dev \
-  libfcgi-ruby1.9.1 libfcgi-dev lighttpd libpcre3-dev libyaml-dev \
-  nmap
+echo -e "Installing required packages\n"
 
-echo "Getting Ruby source"
-cd /usr/local/src
-wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p180.tar.bz2
-tar -xvjf ruby-1.9.2-p180.tar.bz2
-cd ruby-1.9.2-p180
+aptitude install -y --allow-untrusted git \
+make \
+build-essential \
+debhelper \
+libfcgi-dev \
+libxml++-dev \
+libxslt-dev \
+libsqlite3-dev \
+lighttpd \
+kamailio  \
+kamailio-unixodbc-modules \
+freeswitch \
+freeswitch-lua  \
+freeswitch-perl freeswitch-spidermonkey \
+freeswitch-lang-de  \
+freeswitch-lang-en
 
-echo "Building ruby"
 
-./configure
-make
+echo -e "Adding testing and setting pin-priotity\n"
+(
+echo 'deb     http://ftp.debian.org/debian/ testing main'
+echo 'deb-src http://ftp.debian.org/debian/ testing main'
+) > /etc/apt/sources.list.d/testing.list
+(
+echo 'Package: *'
+echo 'Pin: release a=testing'
+echo 'Pin-Priority: -1'
+) > /etc/apt/preferences.d/testing
+(
+echo 'Package: libsqliteodbc'
+echo 'Pin: release a=testing'
+echo 'Pin-Priority: 999'
+) > /etc/apt/preferences.d/libsqliteodbc
+aptitude update
+apt-cache policy libsqliteodbc
 
-echo "Installing ruby"
-make install
+echo -e "Installing sqlite-odbc\n"
 
-echo "Installing required gems"
-gem update
-gem install rake
-gem install bundler --version=1.0.7
+aptitude install libsqliteodbc/testing
 
-echo "Getting Gemeinschaft4, Cantina and sipproxy"
+
+echo -e "Stoping services for configuration\n"
+
+/etc/init.d/freeswitch stop
+/etc/init.d/lighttpd stop
+/etc/init.d/kamailio stop
+
+
+echo -e "Getting GS4\n"
+
 cd /opt
-PROJECTS="Gemeinschaft4 
-Cantina 
-sipproxy";
-for i in $PROJECTS
-do
-  cd /opt
-  
-  git clone -b master https://$USER:$PASS@github.com/amooma/$i.git
-  cd /opt/$i
-  
-  bundle install
-  
-  rake db:migrate RAILS_ENV=production
-  rake db:seed RAILS_ENV=production
-  
-  cd /opt/$i/public
-  bundle install --path .
-  chown -R www-data /opt/$i
-done
+git clone -b master https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git
 
-echo "Installing rewuired packages for Kamailio build"
-aptitude -y install gcc flex bison libmysqlclient-dev make \
-  libcurl4-openssl-dev libpcre3-dev libpcre++-dev
+echo -e "Installing ruby\n"
+cd /opt/Gemeinschaft4/misc/ruby-sane
+make deb-install
+gem install rails
+gem install rake -v 0.8.7
+gem uninstall rake -v 0.9.0
 
-echo "Getting Kamailio source"
-cd /usr/local/src
-git clone git://git.sip-router.org/sip-router kamailio
-cd kamailio
-git checkout -b 3.1 origin/3.1
 
-echo "Building Kamailio"
-make FLAVOUR=kamailio  include_modules="dbtext dialplan" cfg
-make PREFIX="/opt/kamailio-3.1" FLAVOUR=kamailio include_modules="db_text dialplan" cfg
-make all
+echo -e "Configuring odbc\n"
 
-echo "Installing Kamailio"
-make install
+echo "[gemeinschaft-production]
+Description=My SQLite test database
+Driver=SQLite3
+Database=/opt/gemeinschaft/db/production.sqlite3
+Timeout=2000" >> /etc/odbc.ini
 
-echo "Copy Kamailio and lighttpd configuration"
-cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.DIST
-cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/lighttpd.conf
-/etc/init.d/lighttpd restart
-cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
 
-echo "Fixing rights for webserver. Rights will be managed by SELinux in the future."
-chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
-chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
-chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
-chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
-cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
+ln -s /opt/Gemeinschaft4 /opt/gemeinschaft
 
-echo "Starting Kamailio"
-update-rc.d  kamailio defaults
+echo -e "Configuring freeswitch and kamailio\n"
+
+mv /etc/kamailio/ /etc/kamailio.dist
+ln -s /opt/Gemeinschaft4/misc/kamailio/etc /etc/kamailio
+sed -i 's/RUN_KAMAILIO=no/RUN_KAMAILIO=yes/' /etc/default/kamailio
+
+cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/
+
+mv /opt/freeswitch/conf /opt/freeswitch/conf.dist
+ln -s /opt/Gemeinschaft4/misc/freeswitch/fs-conf /opt/freeswitch/conf
+ln -s /opt/Gemeinschaft4/misc/freeswitch/fs-scripts/ /opt/freeswitch/scripts
+sed -i 's/FREESWITCH_ENABLED="false"/FREESWITCH_ENABLED="true"/' /etc/default/freeswitch
+mv /etc/init.d/freeswitch /etc/init.d/freeswitch.dist
+cp /opt/Gemeinschaft4/misc/freeswitch/freeswitch.init-script /etc/init.d/freeswitch
+
+echo -e "Setting up database\n"
+
+cd /opt/Gemeinschaft4
+bundle install
+rake db:migrate RAILS_ENV=production
+rake db:seed RAILS_ENV=production
+
+cd /opt/Gemeinschaft4/public
+bundle install --path .
+chown -R www-data /opt/Gemeinschaft4
+
+echo -e "Starting services\n"
+
+/etc/init.d/freeswitch start
+/etc/init.d/lighttpd start
 /etc/init.d/kamailio start
 
-echo "We are done."
+
+echo -e "\n\n"
+echo -e "We are done\n\n"
+
