@@ -45,10 +45,10 @@ class ManufacturerSnomController < ApplicationController
 	
 	def xml_menu
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		sip_accounts = Phone.find_by_mac_address(mac_address).sip_accounts.all
-		if (sip_accounts.count == 1) 
-			@sip_account_url = "/#{sip_accounts.first.auth_name}"
-		end
+		sip_accounts = Phone.find_by_mac_address(mac_address).sip_accounts
+		@sip_account_name = get_sip_account_name()
+		@sip_accounts_count = sip_accounts.count
+		@sip_account_url = "/#{@sip_account_name}"
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
 	end
 	
@@ -59,68 +59,65 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def call_forwarding
-		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		
-		call_forward_always = get_call_forward(sip_account, GS_CALLFORWARD_ALWAYS)
-		call_forward_noanswer = get_call_forward(sip_account, GS_CALLFORWARD_NOANSWER)
-		call_forward_busy = get_call_forward(sip_account, GS_CALLFORWARD_BUSY)
-		call_forward_offline = get_call_forward(sip_account, GS_CALLFORWARD_OFFLINE)
+		@sip_account_name = get_sip_account_name()
+		call_forward_always = get_call_forward(@sip_account_name, GS_CALLFORWARD_ALWAYS)
+		call_forward_noanswer = get_call_forward(@sip_account_name, GS_CALLFORWARD_NOANSWER)
+		call_forward_busy = get_call_forward(@sip_account_name, GS_CALLFORWARD_BUSY)
+		call_forward_offline = get_call_forward(@sip_account_name, GS_CALLFORWARD_OFFLINE)
 		@always_destination = destination_s(call_forward_always)
 		@noanswer_destination = destination_s(call_forward_noanswer)
 		@busy_destination = destination_s(call_forward_busy)
 		@offline_destination = destination_s(call_forward_offline)
 		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
 	def call_forwarding_always
-		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		call_forward_always = get_call_forward(sip_account, GS_CALLFORWARD_ALWAYS)
+		@sip_account_name = get_sip_account_name()
+		call_forward_always = get_call_forward(@sip_account_name, GS_CALLFORWARD_ALWAYS)
 		@always_destination = destination_s(call_forward_always)
 
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
 	def call_forwarding_busy
-		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		call_forward_busy = get_call_forward(sip_account, GS_CALLFORWARD_BUSY)
+		@sip_account_name = get_sip_account_name()
+		call_forward_busy = get_call_forward(@sip_account_name, GS_CALLFORWARD_BUSY)
 		@busy_destination = destination_s(call_forward_busy)
 
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account}"
 	end
 	
 	def call_forwarding_offline
-		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		call_forward_offline = get_call_forward(sip_account, GS_CALLFORWARD_OFFLINE)
+		@sip_account_name = get_sip_account_name()
+		call_forward_offline = get_call_forward(@sip_account_name, GS_CALLFORWARD_OFFLINE)
 		@offline_destination = destination_s(call_forward_offline)
 
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end	
 	
 	def call_forwarding_noanswer
-		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		if (! params[:noanswer_destination].nil?)
-			@destination = params[:noanswer_destination].to_s.gsub(/[^0-9\*\#]/,'')
-			if (@destination.blank?)
-				
-			end
+		if (params[:query_timeout] == '1')
+			@query_timeout = true
 		else
-			@destination = nil
+			@query_timeout = false
 		end
-		call_forward_noanswer = get_call_forward(sip_account, GS_CALLFORWARD_NOANSWER)
+		@sip_account_name = get_sip_account_name()
+		@destination = params[:noanswer_destination].to_s.gsub(/[^0-9\*\#]/,'')
+		call_forward_noanswer = get_call_forward(@sip_account_name, GS_CALLFORWARD_NOANSWER)
 		@noanswer_destination = destination_s(call_forward_noanswer)
 		@noanswer_timeout = 20
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
 	def call_forwarding_save
-		sip_account = params[:sip_account]
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+		@sip_account_name = get_sip_account_name()
 		reason = nil
 		timeout = nil
 		if (! params[:always_destination].nil?)
@@ -147,13 +144,13 @@ class ManufacturerSnomController < ApplicationController
 			return false
 		end
 		
-		call_forward = save_call_forward(sip_account, reason, destination, timeout)                 
+		call_forward = save_call_forward(@sip_account_name, reason, destination, timeout)                 
 		if (call_forward)
 			@message = "SAVED"
 		else
 			@message = "NOT SAVED"
 		end
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
 	def sip_accounts
@@ -179,6 +176,26 @@ class ManufacturerSnomController < ApplicationController
 	GS_CALLFORWARD_OFFLINE = 3
 	GS_CALLFORWARD_ALWAYS = 4
 	
+	def get_sip_account_name()
+		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+		sip_account_name = params[:sip_account]
+		sip_accounts = Phone.find_by_mac_address(mac_address).sip_accounts
+		if (sip_account_name.blank?)
+			sip_account = sip_accounts.first
+			if (! sip_account.blank?)
+				sip_account_name = sip_account.auth_name
+			end
+		else
+			sip_account = sip_accounts.find_by_auth_name(sip_account_name)
+			if (! sip_account.blank?)
+				sip_account_name = sip_account.auth_name
+			else
+				sip_account_name = nil
+			end
+		end
+		return sip_account_name
+	end
+	
 	def get_call_forward(auth_name, reason)
 		sip_account = SipAccount.find_by_auth_name(auth_name)
 		if (sip_account.nil?)
@@ -199,16 +216,17 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def save_call_forward(auth_name, reason, destination, timeout = nil)
-		if (reason != GS_CALLFORWARD_NOANSWER)
-			timeout = nil
-		else
+		if (reason == GS_CALLFORWARD_NOANSWER && (! destination.blank?))
 			timeout = timeout.to_i
 			if (timeout < 1 || timeout > 360)
 				timeout = 20
 			end
+		else
+			timeout = nil
 		end
-		
+
 		call_forward = get_call_forward(auth_name, reason)
+		
 		if (call_forward.nil?) 
 			if (! destination.blank?)
 				sip_account = SipAccount.find_by_auth_name(auth_name)

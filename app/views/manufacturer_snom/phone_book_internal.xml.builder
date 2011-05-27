@@ -4,9 +4,10 @@ xml.SnomIPPhoneDirectory {
 	xml.Title('Phone Book')
 	@sip_accounts.each { |sip_account|
 		if sip_account.extensions.count > 0 
+			extension = sip_account.extensions.where(:active => true).first.extension
 			xml.tag!('DirectoryEntry') {
-				xml.Name(sip_account.caller_name)
-				xml.Telephone(sip_account.extensions.where(:active => true).first.extension)
+				xml.Name("#{sip_account.caller_name}: #{extension}")
+				xml.Telephone(extension)
 			}
 		end
 	}
