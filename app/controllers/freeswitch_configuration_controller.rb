@@ -1,5 +1,7 @@
 class FreeswitchConfigurationController < ApplicationController
 	
+	#TODO Authentication. see FreeswitchDirectoryEntriesController / FreeswitchCallProcessingController.
+	
 	def load()
 		@local_ip = local_ip
 		@domain = local_ip
@@ -8,13 +10,14 @@ class FreeswitchConfigurationController < ApplicationController
 		@internal_sip_port = 15060
 		@external_sip_port = 15080
 		@timezones = timezones()
-		respond_to { |format|
-				format.xml 
-			}
 		
+		respond_to { |format|
+			format.xml 
+		}
 	end
 	
 	private
+	
 	def timezones()
 		return {
 			"Africa/Abidjan" => "GMT0",

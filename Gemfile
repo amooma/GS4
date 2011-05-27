@@ -32,8 +32,10 @@ gem 'hirb'
 # http://railscasts.com/episodes/234-simple-form
 gem "simple_form"
 
-#gem 'sass', '~> 3.1.1'
-#gem 'compass', '~> 0.11.1'
+gem 'sass', '~> 3.1.1'
+group :development do
+	gem 'compass', '~> 0.11.1'
+end
 
 # https://github.com/FooBarWidget/default_value_for
 gem 'default_value_for'

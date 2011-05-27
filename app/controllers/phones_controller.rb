@@ -1,8 +1,7 @@
 class PhonesController < ApplicationController
-
-
+  
   before_filter :authenticate_user!
-
+  
   # GET /phones
   # GET /phones.xml
   def index
@@ -115,4 +114,5 @@ class PhonesController < ApplicationController
     @phone.reboot
     redirect_to(@phone, :notice => 'Phone is in the process of rebooting.')
   end
+  
 end

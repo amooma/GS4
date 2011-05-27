@@ -20,6 +20,10 @@
     </authorgroup>
   </info>
 
+  <para>Hier werden die Gefährdungen aus der TLSTK genannt und jeweils zu den
+  entsprechenden in der TK-Anlage „Gemeinschaft“ umgesetzten
+  Sicherheitsmaßnahmen verlinkt.</para>
+
   <section xml:id="tlstk-g-systemuebergreifende-aspekte">
     <title>Systemübergreifende Aspekte</title>
 
@@ -205,7 +209,9 @@
         <title><literal>G-TK-22</literal> Unzureichende Regelungen für den
         Einsatz von VoIP</title>
 
-        <para></para>
+        <para>Die in der TLSTK genannten Beispiele sind: Unsichere Kopien von
+        Sprachmailbox-Nachrichten sowie das Abhören von Gesprächen durch
+        Netzwerk-Analyse-Software (Paket-Sniffer).</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-44" /></member>
@@ -230,7 +236,9 @@
         <title><literal>G-TK-23</literal> Unzureichende Harmonisierung
         zwischen IT- und VoIP-Betrieb</title>
 
-        <para></para>
+        <para>Die Verfügbarkeit der VoIP-Telefonie könnte gefährdet sein durch
+        eine unzureichende Abstimmung zwischen TK-Betrieb und dem sonstigen
+        IT-Betrieb.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-36" /></member>
@@ -265,7 +273,9 @@
         <title><literal>G-TK-24</literal> Fehlende, ungeeignete und
         inkompatible Betriebsmittel für VoIP</title>
 
-        <para></para>
+        <para>Es entstehen Gefährdungen dadurch daß die VoIP-Telefonie nicht
+        ausreichend in den IT-Planungen zu Betriebsmitteln berücksichtigt
+        wird.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-36" /></member>
@@ -335,7 +345,8 @@
         Kontrolle von Zugangs- und Zugriffsmöglichkeiten auf
         VoIP-Endgeräte</title>
 
-        <para></para>
+        <para>Gefährdung: Zu viele lokal auf Endgeräten gespeicherte
+        Einstellungen bzw. nicht ausreichende Absicherung derselben.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -390,7 +401,11 @@
         <title><literal>G-TK-26</literal> Kein ordnungsgemäßer Benutzerwechsel
         für VoIP-Endgeräte</title>
 
-        <para></para>
+        <para>Sollten bei einem Benutzerwechsel („Hot-Desking“) an einem
+        IP-Telefon lokal am Gerät gespeicherte Daten zurückbleiben
+        (beispielsweise personenbezogene Daten wie Anruflisten,
+        Kontaktinformationen, …) so würde dies eine Gefährdung der
+        Vertraulichkeit und des Datenschutzes darstellen.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -420,7 +435,9 @@
         Archivierung von Sprachnachrichten und elektronischen
         Fax-Nachrichten</title>
 
-        <para></para>
+        <para>Gefährdung: Verlust an Vertraulichkeit oder Datenschutz durch
+        mangelhafte Archivierung/Backup. Eine Verletzung von
+        Aufbewahrungspflichten ist ebenso möglich.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-73" /></member>
@@ -435,7 +452,9 @@
         <title><literal>G-TK-28</literal> Unzulängliche vertragliche
         Regelungen für externe Leistungen zur VoIP-Lösung</title>
 
-        <para></para>
+        <para>Gefährdung: Weiterführen/Anlehnung an bestehende
+        Dienstleistungs- oder Wartungsverträge für ältere TK-Anlagen ohne
+        sorgfältige Anpassungen an den Einsatz von VoIP.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-42" /></member>
@@ -474,7 +493,7 @@
         <title><literal>G-TK-29</literal> Unzureichende Regelungen für das
         Ende der externen Dienstleistungen für eine VoIP-Lösung</title>
 
-        <para></para>
+        <para>Siehe <xref linkend="tlstk-g-tk-28" />.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-64" /></member>
@@ -517,7 +536,9 @@
         Integritätsverlust von Daten durch Fehlverhalten der
         VoIP-Benutzer</title>
 
-        <para></para>
+        <para>Fehlverhalten von Benutzern kann zum Verlust von Vertraulichkeit
+        oder Integrität führen (z.B. Ausdrucken oder unzureichend geschützte
+        Speicherung auf mobilen Datenträgern).</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -594,7 +615,9 @@
         <title><literal>G-TK-31</literal> Unstrukturierte Datenhaltung durch
         VoIP-Nutzer</title>
 
-        <para></para>
+        <para>Gefährdung: Mehrfache Datenhaltung an mehreren Stellen ohne
+        Synchronisierung und ohne Garantierung des überall gleichen
+        Sicherheits-Niveaus.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-43" /></member>
@@ -619,7 +642,8 @@
         <title><literal>G-TK-32</literal> Konfigurationsfehler und
         Bedienungsfehler bei VoIP-Lösungen</title>
 
-        <para></para>
+        <para>Gefährdung: Fehlerhafte Konfiguration oder Bedienung von
+        TK-Servern oder -Endgeräten.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-32" /></member>
@@ -694,7 +718,8 @@
         <title><literal>G-TK-33</literal> Fehlerhafte Administration von
         Zugangs- und Zugriffsrechten zu VoIP-Installationen</title>
 
-        <para></para>
+        <para>Gefährdung: Der TK-Administrator könnte versehentlich falsche
+        Berechtigungen einstellen.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-34" /></member>
@@ -763,7 +788,9 @@
     <section xml:id="tlstk-g-voip-systeme-technisches-versagen">
       <title>Technisches Versagen</title>
 
-      <para></para>
+      <para>Gefährdung: Unzureichende Behandlung der in den
+      IT-Grundschutz-Katalogen genannten Gefährungen zum Baustein B 4.7
+      „VoIP“.</para>
 
       <para>Maßnahmen:<simplelist>
           <member><xref linkend="tlstk-m-tk-34" /></member>
@@ -821,7 +848,9 @@
         <title><literal>G-TK-34</literal> Denial-of-Service-Angriffe auf
         VoIP</title>
 
-        <para></para>
+        <para>Komponenten der VoIP-TK-Anlage, der Endgeräte sowie die
+        Netzwerk-Infrastruktur können Ziele von Denial-of-Service-Angriffen
+        (DoS) sein.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-31" /></member>
@@ -888,7 +917,8 @@
         <title><literal>G-TK-35</literal> Abhören der
         VoIP-Kommunikation</title>
 
-        <para></para>
+        <para>Gefährdung: Abhören der VoIP-Kommunikation z.B. mit Hilfe von
+        ARP-Spoofing, Rogue DHCP oder DNS-Spoofing.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-30" /></member>
@@ -933,7 +963,9 @@
         <title><literal>G-TK-36</literal> Missbräuchlicher Zugriff auf
         VoIP-Geräte</title>
 
-        <para></para>
+        <para>IP-Telefone werden immer leistungsfähiger und mächtiger im
+        Funktionsumfang. Dadurch steigt auch die Gefährdung aus Angriffen
+        durch unberechtigten/mißbräuchlichen Zugriff auf die Endgeräte.</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-31" /></member>
@@ -1026,8 +1058,8 @@
 
     <para>(Bindeglieder zwischen Tele- und Daten-Kommunikation)</para>
 
-    <para>Die Analyse der Gefährdungen ist im weiteren Verlauf des Projektes
-    entsprechend anzupassen.</para>
+    <para>Die Analyse der Gefährdungen ist ggf. entsprechend anzupassen sodaß
+    hinzukommende TK-Applikationen berücksichtigt werden.</para>
   </section>
 
   <section xml:id="tlstk-g-ip-anlagenanschluss">

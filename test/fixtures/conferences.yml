@@ -1,11 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: MyString1
   pin: 1
-  extension_id: 1
 
 two:
-  name: MyString
+  name: MyString2
   pin: 1
-  extension_id: 1

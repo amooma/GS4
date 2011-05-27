@@ -20,7 +20,7 @@
         <%= call_forward.sip_account.caller_name %> (id <%= call_forward.sip_account_id %>)</td>
       <% end %>
     <td><%= call_forward.source %></td>
-    <td><%= call_forward.call_forward_reason.value %></td>
+    <td><%= call_forward.call_forward_reason ? call_forward.call_forward_reason.value : '-' %></td>
     <td><%= call_forward.destination %></td>
     <td><%= call_forward.call_timeout %></td>
     <td><%= call_forward.active %></td>

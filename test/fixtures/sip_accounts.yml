@@ -2,16 +2,18 @@
 
 one:
   user_id: 1
-  auth_name: MyString
+  auth_name: mystring1
   password: MyString
   realm: MyString
   sip_server_id: 1
   sip_proxy_id: 1
+  caller_name: MyString
 
 two:
   user_id: 1
-  auth_name: MyString
+  auth_name: mystring2
   password: MyString
   realm: MyString
   sip_server_id: 1
   sip_proxy_id: 1
+  caller_name: MyString

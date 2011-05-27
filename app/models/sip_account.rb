@@ -24,7 +24,7 @@ class SipAccount < ActiveRecord::Base
   validate_password         :password
   
   after_validation :phone_reboot
-  before_destroy :phone_reboot
+  before_destroy   :phone_reboot
  
   validates_numericality_of :voicemail_pin,
     :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
@@ -98,7 +98,9 @@ class SipAccount < ActiveRecord::Base
       end
     end
   end
+  
   def phone_reboot
     self.phone.reboot if self.phone
   end
+  
 end

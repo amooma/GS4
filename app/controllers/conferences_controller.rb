@@ -1,4 +1,7 @@
 class ConferencesController < ApplicationController
+  
+  #TODO before_filter :authenticate_user!
+  
   # GET /conferences
   # GET /conferences.xml
   def index
@@ -80,4 +83,5 @@ class ConferencesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

@@ -7,6 +7,8 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
 	<meta name="viewport" content="width=850, initial-scale=1.0" />
 	<%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
+	<%= stylesheet_link_tag 'print.css', :media => 'print' %>
+	<!--[if IE]><%= stylesheet_link_tag 'ie.css', :media => 'screen, projection' %><![endif]-->
 	<%= csrf_meta_tag %>
 </head>
 <body>

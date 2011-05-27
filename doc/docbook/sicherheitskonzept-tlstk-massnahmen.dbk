@@ -35,8 +35,8 @@
         beträgt mindestens 128 Bit. Die Verschlüsselung erfolgt zwischen den
         terminierenden SIP-Geräten, d.h. zwischen zwei Endgeräten bzw.
         zwischen einem Endgerät und einem Gateway, SBC, Voicemail- oder
-        Konferenzzerver (wobei die Aufgaben des SBC, Voicemail- und
-        Konferenzzerver in einer Standard-Installation von „Gemeinschaft“
+        Konferenz-Server (wobei die Aufgaben des SBC, Voicemail- und
+        Konferenz-Server in einer Standard-Installation von „Gemeinschaft“
         erfüllt werden).</para>
       </section>
 
@@ -54,8 +54,9 @@
         <title><literal>M-TK-32</literal> Authentisierung zwischen Endgeräten
         und Servern des VoIP-Systems</title>
 
-        <para>#OPTIMIZE Sobald geeignete Endgeräte verfügbar sind ist dieser
-        Punkt noch auszuarbeiten.</para>
+        <para>Zwischen den Endgeräten und dem VoIP-Server (Kamailio) findet
+        &#8211; entsprechende Endgeräte vorausgesetzt &#8211; eine
+        Authentisierung per TLS statt.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-33">
@@ -79,9 +80,9 @@
         <para>Gemeinschaft ist ein „Knoten“. Je nach Größe der Institution und
         Anforderungen an die Redundanz können auch mehrere solcher Knoten
         betrieben werden. Das genaue Vorgehen (Cold-/Hot-Standby,
-        Active-Active, Virtualisierungsumgebung, ...) hängt von den jeweiligen
-        Erfordernissen ab. Ein Setup bei dem keine Gespräche unterbrochen
-        werden ist möglich.</para>
+        Active&#8211;Active, Virtualisierungsumgebung, ...) hängt von den
+        jeweiligen Erfordernissen ab. Ein Setup bei dem keine Gespräche
+        unterbrochen werden ist möglich.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-35">
@@ -246,11 +247,8 @@
 
         <para>Es muß ein Prozeß vorhanden sein um den Verlust eines
         IP-Telefons zu behandeln. Hierzu bietet es sich an die betreffenden
-        Zertifikate zu sperren (CRL) und das Paßwort des Accounts in
-        Gemeinschaft zu ändern.</para>
-
-        <para>#OPTIMIZE Hier das Vorgehen genauer beschreiben sobald ein
-        geeignetes IP-Telefon verfügbar ist.</para>
+        Zertifikate zu sperren (per Certificate Revocation List, CRL) und das
+        Paßwort des Accounts in Gemeinschaft zu ändern.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-45">
@@ -260,10 +258,9 @@
         überprüft werden. Voraussetzung hierfür ist daß der Hersteller seine
         Firmware digital signiert und eine Prüfsumme bereitstellt.</para>
 
-        <para>#OPTIMIZE Konkretes Vorgehen beschreiben sobald ein geeignetes
-        IP-Telefon mit entsprechender Firmware verfügbar ist. (Beispiel:
-        Mitlieferung der Firmware im Image des Gemeinschaft-Systems oder
-        Prüfung durch den IT-Administrator.)</para>
+        <para>Die Firmware-Dateien werden entweder direkt im Image
+        („Appliance“) des Gemeinschaft-Systems mitgeliefert oder müssen vom
+        IT-Administrator geprüft werden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-46">
@@ -272,10 +269,8 @@
 
         <para>Die Übertragung der Konfigurationsparameter vom
         Provisioning-Dienst in Gemeinschaft zu den Telefonen erfolgt
-        verschlüsselt per HTTPS mit Authentisierung.</para>
-
-        <para>#OPTIMIZE Genauer beschreiben sobald ein geeignetes IP-Telefon
-        mit entsprechender Firmware verfügbar ist.</para>
+        verschlüsselt per HTTPS mit Authentisierung. Voraussetzung dafür sind
+        entsprechende IP-Telefone mit geeigneter Firmware.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-47">
@@ -595,7 +590,17 @@
         Notrufe abgesetzt werden oder zur Schadensbehebung Telefonate mit
         Externen geführt werden, beispielsweise mit Support-Firmen.</para>
 
-        <para>#OPTIMIZE Notfallplan mit Sofortmaßnahmen nennen.</para>
+        <para>Die jeweilige Institution hat in regelmäßigen Abständen zu
+        prüfen ob die getroffenen Vorkehrungen zur Systemwiederherstellung
+        funktionsfähig sind. Dies betrifft beispielsweise die Lesbarkeit von
+        Backup-Datenträgern, die Lauffähigkeit der Software auf
+        Ersatz-Hardware sowie Arbeitsabläufe.</para>
+
+        <para>Ebenso sollten in der jeweiligen Institution Notfallpläne
+        erstellt werden, beispielsweise ob separate Notfall-Anschlüsse ans
+        PSTN erforderlich sind. Es könnten auch Mobiltelefone an ausgewählte
+        Personen verteilt werden. Dabei ist die Bedeutung für die
+        Geschäftsprozesse zu berücksichtigen.</para>
       </section>
     </section>
   </section>
