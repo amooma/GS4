@@ -3,15 +3,12 @@
 <table> 
 <th>Phone ID</th>
 <th>Phone model</th>
-<th>MAC</th>
+<th>MAC address</th>
 <% @phones.each do |p|%>
-
-<tr class="<%= cycle("even", "odd") %>"	> 
-<td><%= p.id %></td>
-<td><%= p.phone_model.name%></td>
-<td><%= link_to "#{p.mac_address}", "/settings-#{p.mac_address}"%></td>
-
-
+	<tr class="<%= cycle("even", "odd") %>"	> 
+	<td><%= p.id %></td>
+	<td><%= p.phone_model.name %></td>
+	<td><%= link_to "#{p.mac_address}", "/settings-#{p.mac_address}" %></td>
 <% end %>
 </tr>
 </table>
