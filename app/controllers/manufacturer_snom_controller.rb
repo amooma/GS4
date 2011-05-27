@@ -2,6 +2,12 @@ class ManufacturerSnomController < ApplicationController
 	
 	#TODO Authentication
 	
+	#OPTIMIZE Do not set @provisioning_server_url a dozen times. Use a before_filter!
+	# Same goes for mac_address and @sip_account_name.
+	#before_filter { |controller|
+	#	@provisioning_server_url = "..."
+	#}
+	
 	def show
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@phone = Phone.where(:mac_address => mac_address).first
@@ -21,7 +27,7 @@ class ManufacturerSnomController < ApplicationController
 		}
 		##### Codec mapping }
 		
-		if (! @phone.nil?)
+		if (! @phone.nil?)  #OPTIMIZE Simply write: if (@phone)
 			if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
 				@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 				@phone.update_attributes(:ip_address => request.remote_ip)
@@ -45,7 +51,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def xml_menu
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts
+		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil.
 		@sip_account_name = get_sip_account_name()
 		@sip_accounts_count = sip_accounts.count
 		@sip_account_url = "/#{@sip_account_name}"
@@ -93,11 +99,13 @@ class ManufacturerSnomController < ApplicationController
 		@busy_destination = destination_s( call_forward_busy )
 
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account}"
+		#FIXME Typo? Should @sip_account be @sip_account_name ?
 	end
 	
 	def call_forwarding_offline
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@sip_account_name = get_sip_account_name()
+		
 		call_forward_offline = get_call_forward( @sip_account_name, GS_CALLFORWARD_OFFLINE )
 		@offline_destination = destination_s( call_forward_offline )
 
@@ -126,19 +134,21 @@ class ManufacturerSnomController < ApplicationController
 		@sip_account_name = get_sip_account_name()
 		reason = nil
 		timeout = nil
-		if (! params[:always_destination].nil?)
+		
+		#OPTIMIZE Remove the "{always|busy|offline|noanswer}_destination" params. Use a "case" param and a "destination" param.
+		if (! params[:always_destination].nil?)         #OPTIMIZE Simply write: if (params[:always_destination])
 			@title = "Unconditional Call Forwarding"
 			reason = GS_CALLFORWARD_ALWAYS
 			destination = params[:always_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		elsif (! params[:busy_destination].nil?)
+		elsif (! params[:busy_destination].nil?)        #OPTIMIZE Simply write: if (params[:busy_destination])
 			@title = "Call Forwarding on Busy"
 			reason = GS_CALLFORWARD_BUSY
 			destination = params[:busy_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		elsif (! params[:offline_destination].nil?)
+		elsif (! params[:offline_destination].nil?)     #OPTIMIZE Simply write: if (params[:offline_destination])
 			@title = "Call Forwarding on Offline"
 			reason = GS_CALLFORWARD_OFFLINE
 			destination = params[:offline_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		elsif (! params[:noanswer_destination].nil?)
+		elsif (! params[:noanswer_destination].nil?)    #OPTIMIZE Simply write: if (params[:noanswer_destination])
 			@title = "Call Forwarding on No Answer"
 			reason = GS_CALLFORWARD_NOANSWER
 			destination = params[:noanswer_destination].to_s.gsub(/[^0-9\*\#]/,'')
@@ -162,7 +172,7 @@ class ManufacturerSnomController < ApplicationController
 	def sip_accounts
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
-		@sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts.all
+		@sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts.all  #FIXME Phone.find_by_mac_address( mac_address ) can be nil.
 	end
 	
 	def index
@@ -177,6 +187,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	private
 	
+	#FIXME Are these meant to be IDs? Don't store them as magic numbers here. IDs may change in the DB.
 	GS_CALLFORWARD_BUSY     = 1
 	GS_CALLFORWARD_NOANSWER = 2
 	GS_CALLFORWARD_OFFLINE  = 3
@@ -185,7 +196,7 @@ class ManufacturerSnomController < ApplicationController
 	def get_sip_account_name()
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		sip_account_name = params[:sip_account]
-		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts
+		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil.
 		if (sip_account_name.blank?)
 			sip_account = sip_accounts.first
 			if (! sip_account.blank?)
@@ -214,8 +225,10 @@ class ManufacturerSnomController < ApplicationController
 		return call_forward
 	end
 	
+	#OPTIMIZE What is destination_s() supposed to do?
 	def destination_s( call_forward )
-		if (! call_forward.nil? && call_forward.active?)
+		#FIXME Are you sure that "active?" is a valid method? Shouldn't it be "active" ?
+		if (! call_forward.nil? && call_forward.active?)   #OPTIMIZE Simply write: if (call_forward && ...)
 			return call_forward.destination.to_s
 		end
 		return ''
