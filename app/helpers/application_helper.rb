@@ -5,20 +5,31 @@ module ApplicationHelper
 	def top_menu_items
 		if user_signed_in?
 			menu_items = [
+				
 				{ :text => "Admin"         , :url => admin_index_path },
-				{ :text => "Users"         , :url => admin_users_path },
-				{ :text => "Phones"        , :url => phones_path },
-				{ :text => "SIP Accounts"  , :url => sip_accounts_path },
-				{ :text => "Callforwards"  , :url => call_forwards_path },
-				{ :text => "Extensions"    , :url => extensions_path },
-				{ :text => "Queues"        , :url => call_queues_path },
-				{ :text => "Conferences"   , :url => conferences_path},
-				{ :text => "Servers"       , :sub => [
-					{ :text => "SIP Domains"          , :url => sip_servers_path },
-					{ :text => "SIP Proxies"          , :url => sip_proxies_path },
-					{ :text => "Voicemail Servers"    , :url => voicemail_servers_path },
-					{ :text => "Nodes"                , :url => nodes_path },
+				
+				{ :text => "Accounts", :sub => [
+					{ :text => "Users"         , :url => admin_users_path },
+					{ :text => "SIP Accounts"  , :url => sip_accounts_path },
+					{ :text => "Callforwards"  , :url => call_forwards_path },
 				]},
+				
+				{ :text => "Phones"        , :url => phones_path },
+				
+				{ :text => "Extensions"    , :url => extensions_path },
+				
+				{ :text => "Media services", :sub => [
+					{ :text => "Queues"        , :url => call_queues_path },
+					{ :text => "Conferences"   , :url => conferences_path},
+				]},
+				
+				{ :text => "Servers", :sub => [
+					{ :text => "SIP Domains"       , :url => sip_servers_path },
+					{ :text => "SIP Proxies"       , :url => sip_proxies_path },
+					{ :text => "Voicemail Servers" , :url => voicemail_servers_path },
+					{ :text => "Nodes"             , :url => nodes_path },
+				]},
+				
 			]
 		else
 			menu_items = [
