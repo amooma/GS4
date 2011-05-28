@@ -9,10 +9,10 @@ module ApplicationHelper
         { :text => "Users"         , :url => admin_users_path },
         { :text => "Phones"        , :url => phones_path },
         { :text => "SIP Accounts"  , :url => sip_accounts_path },
-        { :text => "Callforwards", :url => call_forwards_path },
+        { :text => "Callforwards"  , :url => call_forwards_path },
         { :text => "Extensions"    , :url => extensions_path },
-        { :text => "Queues"         , :url => call_queues_path },
-        { :text => "Conferences" , :url => conferences_path},
+        { :text => "Queues"        , :url => call_queues_path },
+        { :text => "Conferences"   , :url => conferences_path},
         { :text => "Servers"       , :sub => [
           { :text => "SIP Domains"          , :url => sip_servers_path },
           { :text => "SIP Proxies"          , :url => sip_proxies_path },
