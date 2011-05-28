@@ -24,7 +24,7 @@
 				) %>
 			<% else %>
 				<%# Must NOT have an href attribute, NOT an empty href attribute! %>
-				<a<% safe_concat(' class="current_page_navigation"') if mark_as_current_page
+				<a<%= raw(' class="current_page_navigation"') if mark_as_current_page
 				%>><%= navigation_item[:text] %></a>
 			<% end %>
 			<% if navigation_item[:sub] %>
