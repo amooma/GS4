@@ -1,0 +1,38 @@
+
+Coding guidelines
+=======================
+
+You may have expected a long list here, but there is none.
+The essence is to keep the software architecture clean and to
+write good, readable code. :-)
+
+
+Read about anti-patterns in software design/architecture/
+development and programming.
+
+http://en.wikipedia.org/wiki/Anti-pattern
+http://de.wikipedia.org/wiki/Anti-Pattern
+http://c2.com/cgi/wiki?AntiPatternsCatalog
+
+Try to avoid those mistakes.
+
+
+Use tabs for indentation, i.e. at the beginning of lines
+(as always, in just about any decent programming language).
+
+Why? It has been discussed a thousand times. Search the web.
+A good percentage of the Ruby community seems to prefer two spaces.
+We tried to take that into consideration but there's a problem:
+2 spaces are too small and make the code look fluttery and
+unreadable. Essentially you'd need a Ruby IDE then with code
+folding, outlines etc. However we have wasted way too much time
+trying to find an IDE. None of them worked acceptably well on Mac
+OS X and various Linux distos so we finally gave up. Which means
+we decided against spaces. Tabs are _meant_ for indentation. Tabs
+are universal. Tabs have better support in most text editors and
+IDEs. Tabs are more "accessible". (There should be accessability
+guidelines for source code.) Everyone can set their preferred tab
+width. You still want a tab to look like 2 spaces? Fine, set your
+tab-width to 2. Just don't expand tabs.
+
+
