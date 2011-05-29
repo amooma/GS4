@@ -31,7 +31,7 @@ class SipProxiesController < ApplicationController
   def new
     @sip_proxy = SipProxy.new
     if SipProxy.count == 0
-      @sip_proxy.host = local_ip
+      @sip_proxy.host = request.env['SERVER_NAME']
     end
     respond_to do |format|
       format.html # new.html.erb

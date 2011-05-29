@@ -31,7 +31,7 @@ class SipServersController < ApplicationController
   def new
     @sip_server = SipServer.new
     if SipServer.count == 0
-      @sip_server.host = local_ip
+      @sip_server.host = request.env['SERVER_NAME']
     end
     respond_to do |format|
       format.html # new.html.erb

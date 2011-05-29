@@ -29,7 +29,7 @@ class VoicemailServersController < ApplicationController
   def new
     @voicemail_server = VoicemailServer.new
     if VoicemailServer.count == 0
-      @voicemail_server.host = local_ip
+      @voicemail_server.host = request.env['SERVER_NAME']
     end
     respond_to do |format|
       format.html # new.html.erb
