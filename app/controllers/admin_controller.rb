@@ -9,7 +9,7 @@ class AdminController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    if SipServer.count == 0 || SipProxy.count == 0
+    if SipServer.count == 0 || SipProxy.count == 0 || VoicemailServer.count == 0
       respond_to do |format|
         format.html { redirect_to(admin_setup_index_path) }
       end
