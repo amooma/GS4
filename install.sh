@@ -31,6 +31,7 @@ libfcgi-dev \
 libxml++-dev \
 libxslt-dev \
 libsqlite3-dev \
+libjpeg62 \
 lighttpd \
 kamailio  \
 kamailio-unixodbc-modules \
