@@ -226,7 +226,6 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.tag!( 'load', :module => 'mod_local_stream' )
 				xml.tag!( 'load', :module => 'mod_tone_stream' )
 				xml.tag!( 'load', :module => 'mod_spidermonkey' )
-				xml.tag!( 'load', :module => 'mod_lua' )
 				xml.tag!( 'load', :module => 'mod_say_en' )
 			}
 		}
