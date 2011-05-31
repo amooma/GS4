@@ -214,7 +214,6 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.tag!( 'load', :module => 'mod_expr' )
 				xml.tag!( 'load', :module => 'mod_fifo' )
 				xml.tag!( 'load', :module => 'mod_voicemail' )
-				xml.tag!( 'load', :module => 'mod_limit' )
 				xml.tag!( 'load', :module => 'mod_esf' )
 				xml.tag!( 'load', :module => 'mod_fsv' )
 				xml.tag!( 'load', :module => 'mod_valet_parking' )
