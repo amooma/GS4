@@ -1,4 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<X-PRE-PROCESS cmd="exec" data="wget -O /opt/gemeinschaft/misc/freeswitch/fs-conf/freeswitch-gemeinschaft4.xml http://127.0.0.1/freeswitch-configuration/freeswitch.xml"/>
-<X-PRE-PROCESS cmd="include" data="freeswitch-gemeinschaft4.xml"/> 
-
+<X-PRE-PROCESS cmd="exec" data="/opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh"/>
