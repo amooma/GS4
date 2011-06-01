@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter version="5.0" xml:id="sicherheitskonzept" xml:lang="de"
-         xmlns="http://docbook.org/ns/docbook"
+<chapter status="draft" version="5.0" xml:id="sicherheitskonzept"
+         xml:lang="de" xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:xi="http://www.w3.org/2001/XInclude"
          xmlns:svg="http://www.w3.org/2000/svg"
@@ -19,6 +19,112 @@
       </author>
     </authorgroup>
   </info>
+
+  <sidebar>
+    <formalpara>
+      <title>Änderungshistorie</title>
+
+      <para>Diese Änderungshistorie gilt nur für dieses Kapitel und
+      Unter-Abschnitte, nicht für die Dokumentation insgesamt. Hier werden die
+      wichtigsten Versionsschritte aus dem internen (nicht-linearen)
+      Versionsverwaltungssystem (<foreignphrase
+      xml:lang="en">VCS</foreignphrase>) „Git“ aufgeführt.<revhistory>
+          <revision>
+            <revnumber>Revision 0.1</revnumber>
+
+            <date>2011-02</date>
+
+            <revremark>Revision 0.1</revremark>
+          </revision>
+
+          <revision>
+            <revnumber>Revision 0.2-beta</revnumber>
+
+            <date>2011-05</date>
+
+            <revremark>Vorab-Zwischenstand zu Revision 0.2</revremark>
+          </revision>
+
+          <revision>
+            <revnumber>Revision 0.2</revnumber>
+
+            <date>2011-05</date>
+
+            <revremark>mit Vergleich der TLSTK</revremark>
+          </revision>
+        </revhistory></para>
+    </formalpara>
+  </sidebar>
+
+  <note>
+    <para>Dieses Kapitel ist ein Teil der gesamten Dokumentation, bezieht sich
+    an einigen Stellen auf diese und muß daher im Kontext derselben gelesen
+    werden.</para>
+  </note>
+
+  <note>
+    <para>Die Dokumentation liegt intern im DocBook-Format vor. DocBook
+    <footnote>
+        <simpara><link
+        xlink:href="http://de.wikipedia.org/wiki/DocBook">http://de.wikipedia.org/wiki/DocBook</link></simpara>
+
+        <simpara><link
+        xlink:href="http://en.wikipedia.org/wiki/DocBook">http://en.wikipedia.org/wiki/DocBook</link></simpara>
+      </footnote> ist ein offener Standard und eine semantische Markup-Sprache
+    der OASIS <footnote>
+        <simpara><link
+        xlink:href="http://de.wikipedia.org/wiki/Organization_for_the_Advancement_of_Structured_Information_Standards">http://de.wikipedia.org/wiki/Organization_for_the_Advancement_of_Structured_Information_Standards</link></simpara>
+
+        <simpara><link
+        xlink:href="http://en.wikipedia.org/wiki/OASIS_%28organization%29">http://en.wikipedia.org/wiki/OASIS_(organization)</link></simpara>
+      </footnote>.</para>
+
+    <para>Dadurch daß es reines XML ist eignet es sich zur Verwaltung in einem
+    <foreignphrase xml:lang="en">Version Control System</foreignphrase>
+    (<foreignphrase xml:lang="en">VCS</foreignphrase>) / <foreignphrase
+    xml:lang="en">Source Code Management System</foreignphrase>
+    (<foreignphrase xml:lang="en">SCM</foreignphrase>) <footnote>
+        <simpara><link
+        xlink:href="http://de.wikipedia.org/wiki/Versionsverwaltung">http://de.wikipedia.org/wiki/Versionsverwaltung</link></simpara>
+
+        <simpara><link
+        xlink:href="http://en.wikipedia.org/wiki/Revision_control">http://en.wikipedia.org/wiki/Revision_control</link></simpara>
+      </footnote> &#8211; anders als z.B. das <foreignphrase
+    xml:lang="en">Open Document Format</foreignphrase> (ODF) das eine
+    komprimierte Zip-Datei und somit binär ist.</para>
+
+    <para>Als <foreignphrase xml:lang="en">VCS</foreignphrase> kommt derzeit
+    das populäre „<foreignphrase xml:lang="en">Git</foreignphrase>“ zum
+    Einsatz. <footnote>
+        <simpara><link
+        xlink:href="http://de.wikipedia.org/wiki/Git">http://de.wikipedia.org/wiki/Git</link></simpara>
+
+        <simpara><link
+        xlink:href="http://en.wikipedia.org/wiki/Git_%28software%29">http://en.wikipedia.org/wiki/Git_(software)</link></simpara>
+      </footnote></para>
+
+    <para>DocBook wird von vielen Open-Source-Projekten als
+    Dokumentations-Format eingesetzt, beispielsweise vom <foreignphrase
+    xml:lang="en">Linux Documentation Project</foreignphrase> (<foreignphrase
+    xml:lang="en">TLDP</foreignphrase>) oder von <foreignphrase
+    xml:lang="en">KDE</foreignphrase>.</para>
+
+    <para>Zur internen Kommentierung kann der DocBook-<foreignphrase
+    xml:lang="en">Tag</foreignphrase> <tag class="starttag">remark</tag>
+    verwendet werden.</para>
+  </note>
+
+  <note>
+    <para>Wie auch andere Open-Source-Projekte setzen wir nicht voraus daß der
+    Leser (außer intern und bei internen Zwischenständen) mit einem
+    DocBook-Editor (wie z.B. dem <foreignphrase xml:lang="en">XMLmind XML
+    Editor</foreignphrase> <footnote>
+        <simpara><link
+        xlink:href="http://www.xmlmind.com/xmleditor/">http://www.xmlmind.com/xmleditor/</link></simpara>
+      </footnote>) vertraut ist. Die für ein breiteres Publikum freizugebenden
+    Revisionen werden daher (per XSL-Transformation) in ein „massentaugliches“
+    Format wie HTML oder PDF umgewandelt.</para>
+  </note>
 
   <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über die
   grundlegende Funktionsweise von Gemeinschaft4. Hierfür soll ein
