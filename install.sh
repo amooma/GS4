@@ -108,15 +108,13 @@ mv /opt/freeswitch/conf /opt/freeswitch/conf.dist
 ln -s /opt/Gemeinschaft4/misc/freeswitch/fs-conf /opt/freeswitch/conf
 ln -s /opt/Gemeinschaft4/misc/freeswitch/fs-scripts/ /opt/freeswitch/scripts
 sed -i 's/FREESWITCH_ENABLED="false"/FREESWITCH_ENABLED="true"/' /etc/default/freeswitch
-touch /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
-chown freeswitch:daemon /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 
 echo -e "Setting up database\n"
 
 cd /opt/Gemeinschaft4
 bundle install
-rake db:migrate RAILS_ENV=production
-rake db:seed RAILS_ENV=production
+bundle exec rake db:migrate RAILS_ENV=production
+bundle exec rake db:seed RAILS_ENV=production
 
 cd /opt/Gemeinschaft4/public
 bundle install --path .
@@ -124,10 +122,18 @@ chown -R www-data /opt/Gemeinschaft4
 
 echo -e "Starting services\n"
 
-/etc/init.d/freeswitch start
 /etc/init.d/lighttpd start
 /etc/init.d/kamailio start
 
+echo -e "Downloading FreeSWITCH sound files\n"
+
+/opt/Gemeinschaft4/misc/freeswitch/download-freeswitch-sounds
+
+echo -e "Retrieving FreeSWITCH configuration\n"
+
+/opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh >>/dev/null
+chown freeswitch:daemon /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+/etc/init.d/freeswitch start
 
 echo -e "\n\n"
 echo -e "We are done\n\n"
