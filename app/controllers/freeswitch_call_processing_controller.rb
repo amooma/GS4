@@ -441,16 +441,16 @@ class FreeswitchCallProcessingController < ApplicationController
 					:value => reason.to_s,
 				})
 				.first )
-			break if call_forward
+			
+			if call_forward
+				if call_forward.destination == "voicemail"
+					call_forward.destination = "-vbox-#{sip_account.auth_name}"
+				end
+				return call_forward
+			end
 		}
 		
-		if call_forward
-			if call_forward.destination == "voicemail"
-				call_forward.destination = "-vbox-#{sip_account.auth_name}"
-			end
-		end
-		
-		return call_forward
+		return nil
 	end
 	
 	
