@@ -87,6 +87,8 @@
     finanziellen Auswirkungen, die negative Außenwirkung oder andere
     Auswirkungen stark variieren. Es ist daher schwierig eine pausche und
     allgemeingültige Analyse durchzuführen.</para>
+
+    <para>Siehe auch: <xref linkend="leitlinie-sichere-tk-anlagen" />.</para>
   </note>
 
   <section xml:id="schutzbedarf-komponenten">
@@ -244,6 +246,9 @@
       Backup-Konzept anzuwenden. Die Backups sollten verschlüsselt sein, denn
       beispielsweise die Anruflisten können sensible Informationen enthalten.
       Als DBMS kommt SQLite3 zum Einsatz.</para>
+
+      <para>#OPTIMIZE An separater Stelle Backup-Empfehlungen nennen
+      (Meilenstein 7).</para>
     </section>
 
     <section xml:id="schutzbedarf-gemeinschaft4">
@@ -303,11 +308,11 @@
     <section xml:id="schutzbedarf-freeswitch">
       <title>FreeSwitch</title>
 
-      <para>FreeSwitch kommt als B2BUA für TK-Anlagen-Funktionen zum Einsatz.
-      Die Software ist aus öffentlichen Quellen wiederherstellbar. Da der
-      Betrieb der TK-Anlage durch Manipulation gestört werden kann und auch
-      Daten manipuliert werden können ist die erforderliche Integrität und
-      Vertraulichkeit als hoch einzuschätzen.</para>
+      <para>FreeSwitch kommt als SIP-B2BUA für TK-Anlagen-Funktionen zum
+      Einsatz. Die Software ist aus öffentlichen Quellen wiederherstellbar. Da
+      der Betrieb der TK-Anlage durch Manipulation gestört werden kann und
+      auch Daten manipuliert werden können ist die erforderliche Integrität
+      und Vertraulichkeit als hoch einzuschätzen.</para>
     </section>
 
     <section xml:id="schutzbedarf-verbindung-telefone">
@@ -334,26 +339,35 @@
     <section xml:id="schutzbedarf-verbindung-sip-trunk">
       <title>Verbindung SIP-Trunk</title>
 
-      <para>Die Möglichkeit der Anbindung der TK-Anlage an SIP-Trunks erfolgt
-      in einem späteren Projektschritt. SIP-Trunks sind beispielsweise denkbar
-      zu einem Telekom-Carrier ins öffentliche Telefonnetz oder zwischen zwei
+      <para>SIP-Trunks sind beispielsweise denkbar zu einem Telekom-Carrier
+      ins öffentliche Telefonnetz oder zwischen zwei
       Standorten/Organisationen/Firmen. Verfügbarkeit, Vertraulichkeit und
       Integrität sind hier normalerweise als hoch anzusehen. Die
       Sicherstellung der Verfügbarkeit der Netzwerk-Infrastruktur liegt in der
       Verantwortung des Administrators. Die TK-Anlage kann jedoch über mehrere
       SIP-Trunks angebunden werden die so konfiguriert werden können daß sie
       gegenseitig als Fallback dienen.</para>
+
+      <para>Laut Leistungsbeschreibung AP 2.2 ist die Konzeptionierung der
+      notwendigen Schnittstellen für SIP-Trunks (Anbindung von Filialen,
+      Anbindung ans PSTN per SIP-Trunk) Teil des Auftrags, jedoch nicht deren
+      Implementierung. Diese kann ggf. in optionalen Arbeitspaketen als
+      Anschlußprojekt umgesetzt werden. Siehe auch: <xref
+      linkend="tlstk-g-ip-anlagenanschluss" />.</para>
     </section>
 
     <section xml:id="schutzbedarf-verbindung-isdn-trunk">
       <title>Verbindung ISDN-Trunk</title>
 
       <para>Der Schutzbedarf eines ISDN-Anschlusses über ein Media-Gateway
-      wird in diesem Projektschritt noch nicht näher betrachtet. Er entspricht
+      wird in diesem Projektschritt nicht näher betrachtet. Er entspricht
       voraussichtlich in etwa dem eines SIP-Trunks. Unter Umständen können
       hier verschlüsselte Verbindungen zum Einsatz kommen, die allerdings das
       Vorhandensein spezieller Hardware (oder Software) auf beiden Seiten
       erforderlich machen.</para>
+
+      <para>Siehe auch: <xref linkend="tlstk-g-isdn-tk-anlagen" /> bzw. <xref
+      linkend="tlstk-g-hybrid-systeme" />.</para>
     </section>
   </section>
 </section>

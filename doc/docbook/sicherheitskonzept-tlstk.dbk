@@ -76,11 +76,10 @@
   Anforderungs-/Auswahlkriterien (A-TK-…) und Prüfkriterien (P-TK-…).</para>
 
   <para>Für die VoIP-Telefonanlage Gemeinschaft4 sind v.a. die Abschnitte zu
-  <quote>VoIP-Systeme[n]</quote>, <quote>TK-Applikationen und
-  Mehrwertdienste[n]</quote> sowie zu <quote>[s]ystemübergreifende[n]
-  Aspekte[n]</quote> heranzuziehen, wobei die Abschnitte zu
-  <quote>TK-Applikationen und Mehrwertdienste[n]</quote> zum derzeitigen Stand
-  noch nicht relevant sind.</para>
+  <quote>VoIP-Systeme[n]</quote> heranzuziehen, teilweise auch die zu
+  <quote>TK-Applikationen und Mehrwertdienste[n]</quote>, wobei letztere erst
+  im weiteren Projektverlauf relevant werden (siehe <xref
+  linkend="tlstk-g-tk-applikationen-und-mehrwertdienste" />).</para>
 
   <para>Grundsätzlich treffen auf VoIP-TK-Anlagen wie auf alle Computersysteme
   die Gefährdungen zu die in den IT-Grundschutz-Katalogen des BSI genannt

@@ -1056,10 +1056,176 @@
   <section xml:id="tlstk-g-tk-applikationen-und-mehrwertdienste">
     <title>TK-Applikationen und Mehrwertdienste</title>
 
-    <para>(Bindeglieder zwischen Tele- und Daten-Kommunikation)</para>
+    <para>Die TLSTK beschreibt <quote>TK-Applikationen und
+    Mehrwertdienste</quote> als <quote>Applikationen und Dienste
+    <replaceable>[…]</replaceable> im Umfeld von TK-Anlagen</quote> und als
+    &#8211; meist separate &#8211; <quote>Systeme, die ein Bindeglied zwischen
+    Tele- und Daten-Kommunikation darstellen</quote>.</para>
 
-    <para>Die Analyse der Gefährdungen ist ggf. entsprechend anzupassen sodaß
-    hinzukommende TK-Applikationen berücksichtigt werden.</para>
+    <para>Als typische Beispiele werden genannt:<itemizedlist>
+        <listitem>
+          <para><foreignphrase xml:lang="en">Unified Messaging</foreignphrase>
+          (<foreignphrase xml:lang="en">UM</foreignphrase>).</para>
+
+          <para>Die TLSTK spricht weit gefaßt von einem <quote>konsolidierten
+          Nachrichteneingang über verschiedene Kanäle</quote> (z.B. E-Mail,
+          Fax, SMS und Sprachnachrichten) und sagt richtig daß <quote>keine
+          allgemein akzeptierte Definition des funktionalen Umfangs von
+          Unified Messaging existiert</quote>. Sie geht von einem externen
+          (d.h. separaten) UM-Server aus und sagt dieser verhalte sich
+          <quote>aus Sicht der TK-Anlage <replaceable>[…]</replaceable> wie
+          ein Endgerät</quote>. Dies trifft auf Gemeinschaft4 so nicht
+          zu.</para>
+
+          <para>Folgende in der Leistungsbeschreibung genannte
+          Funktionalitäten lassen sich unter <foreignphrase
+          xml:lang="en">Unified Messaging</foreignphrase>
+          einordnen:<itemizedlist>
+              <listitem>
+                <para>SMS-Nachrichten zwischen VoIP-Endgeräten, bzw. als
+                E-Mail zu Arbeitsplatz-Computern (siehe AP 2.1).</para>
+
+                <para>SMS (<foreignphrase xml:lang="en">Short Message
+                Service</foreignphrase>) ist ein Begriff aus dem
+                GSM-Mobilfunk. Im Zusammenhang mit VoIP-Endgeräten hat der
+                Begriff keine Bedeutung.</para>
+
+                <para>Wenn man SMS weiter faßt und darunter einfach
+                Text-Nachrichten versteht, dann muß gesagt werden daß es in
+                der Praxis verschiedene nicht-standardisierte und
+                herstellerabhängige Varianten gibt um Text-Nachrichten per SIP
+                auszutauschen. Als Standard kommen u.a. folgende in Frage: RFC
+                3428 (SIP Extension for Instant Messaging) <footnote>
+                    <simpara><link
+                    xlink:href="http://tools.ietf.org/html/rfc3428">http://tools.ietf.org/html/rfc3428</link></simpara>
+                  </footnote> oder RFC 4975 (MSRP, Message Session Relay
+                Protocol) <footnote>
+                    <simpara><link
+                    xlink:href="http://tools.ietf.org/html/rfc4975">http://tools.ietf.org/html/rfc4975</link></simpara>
+                  </footnote>, das auch ein Teil von SIP SIMPLE ist. Hier
+                müßte ggf. untersucht werden welches Protokoll sich eignet und
+                wie die Verbreitung auf Endgeräten aussieht.</para>
+
+                <para>E-Mails von der TK-Anlage würden nie direkt an die
+                Arbeitsplatz-Computer selbst ausgeliefert sondern i.d.R per
+                SMTP an einen Mail-Server.</para>
+
+                <para>Die SMS-Funktionalität muß laut Leistungsbeschreibung
+                nicht implementiert sondern lediglich <quote>für über VPN, WAN
+                oder PSTN angebundene Filialen und Endgeräte vorbereitet
+                werden</quote>. Die Implementierung würde ggf. in einem
+                Anschluß-Projekt erfolgen, so wie auch die Anbindung von
+                Filialen oder an das PSTN per SIP-Trunks.</para>
+
+                <para>Generell ist zu sagen daß die Eingabe von
+                Text-Nachrichten an fast allen VoIP-Telefonen wenn überhaupt
+                dann nur sehr umständlich möglich ist, da meist keine
+                alphanumerische Tastatur vorhanden ist und auch keine
+                Eingabehilfe wie z.B. T9 das man von Mobiltelefonen kennt.
+                Nach unserer Ansicht wäre das eine extreme
+                Nischen-Funktionalität. Da die Anlage keine Verbindungen nach
+                <quote>außen</quote> hat und SIP-IM-Standards nur wenig
+                verbreitet sind wäre es fragwürdig eine Implementierung
+                &#8211; und damit weitere Gefährdungen &#8211; zu schaffen
+                durch die dann letztlich kaum mehr möglich ist als daß interne
+                Telefone mit umständlicher Eingabe Text-Nachrichten
+                austauschen können. Prinzipiell ist die Anlage dafür
+                vorbereitet, eine Implementierung erfolgt jedoch derzeit
+                nicht.</para>
+              </listitem>
+
+              <listitem>
+                <para><foreignphrase
+                xml:lang="en">Voicemail</foreignphrase>-System
+                (Anrufbeantworter), inklusive Weiterleitung per E-Mail.</para>
+              </listitem>
+            </itemizedlist></para>
+        </listitem>
+
+        <listitem>
+          <para><foreignphrase xml:lang="en">Computer Telephony
+          Integration</foreignphrase> (<foreignphrase
+          xml:lang="en">CTI</foreignphrase>).</para>
+
+          <para>Dies ist nicht Teil der Leistungsbeschreibung bzw. des
+          Projektes.</para>
+        </listitem>
+
+        <listitem>
+          <para><foreignphrase xml:lang="en">Interactive Voice
+          Response</foreignphrase> (<foreignphrase
+          xml:lang="en">IVR</foreignphrase>).</para>
+
+          <para>Dies ist nicht Teil der Leistungsbeschreibung bzw. des
+          Projektes.</para>
+        </listitem>
+
+        <listitem>
+          <para><foreignphrase xml:lang="en">Automatic Call
+          Distribution</foreignphrase> (<foreignphrase
+          xml:lang="en">ACD</foreignphrase>).</para>
+
+          <para>Die TLSTK spricht von Gefährdungen die aus Kopplungen eines
+          ACD-Systems mit Kunden- und Mitarbeiter-Datenbanken. Teil des
+          Projektes ist (siehe Leistungsbeschreibung AP 2.1) eine Verteilung
+          eingender Anrufe auf Mitarbeiter („Agenten“), also ein Sammelruf
+          oder eine Warteschlange („<foreignphrase
+          xml:lang="en">Queue</foreignphrase>“), jedoch nicht als
+          umfangreiches ACD-System und ohne Kopplung an weitere Datenbanken
+          oder Systeme.</para>
+        </listitem>
+
+        <listitem>
+          <para>Präsenzdienste.</para>
+
+          <para>Die TLSTK spricht von Gefährdungen aus der Kopplung mit einem
+          externen Präsenzsystem &#8211; mit <foreignphrase
+          xml:lang="en">Chat</foreignphrase> bzw. <foreignphrase
+          xml:lang="en">Instant Messaging</foreignphrase> (<foreignphrase
+          xml:lang="en">IM</foreignphrase>), CTI und Kalender-Anbindung
+          &#8211; über die Protokolle SIP SIMPLE und/oder XMPP und zugehörigen
+          Clients. Derartige Kopplungen finden in Gemeinschaft4 nicht
+          statt.</para>
+        </listitem>
+
+        <listitem>
+          <para>Konferenzsysteme.</para>
+
+          <para>Anders als an dieser Stelle in der TLSTK beschrieben handelt
+          es sich bei den in Gemeinschaft integrierten Audio-Konferenzräumen
+          nicht um ein Endgerät der TK-Anlage, somit ist die Schnittstelle
+          „zwischen“ TK-Anlage und Konferenzsystem nicht gefährdet wie zu
+          einem Endgerät. (Die Gefährdungssituation der Schnittstellen von der
+          TK-Anlage zu Endgeräten wird an separater Stelle besprochen.)</para>
+        </listitem>
+
+        <listitem>
+          <para>Alarmserver.</para>
+
+          <para>Gemeinschaft stellt keine spezielle Schnittstelle zur
+          Gebäudeleittechnik o.ä. bereit, sondern eine allgemeine
+          SNMP-Schnittstelle (deren Gefährdungen und Absicherungen an
+          separater Stelle besprochen werden.)</para>
+        </listitem>
+
+        <listitem>
+          <para>Gegensprechanlagen und Türöffnungssysteme.</para>
+
+          <para>Nicht Bestandteil von Gemeinschaft4.</para>
+        </listitem>
+
+        <listitem>
+          <para>Anwendungsintegration.</para>
+
+          <para>Sämtliche über die (an anderer Stelle besprochenen)
+          Schnittstellen von Gemeinschaft angebundenen TK-Applikationen
+          unterliegen den <quote>Sicherheitsbetrachtungen für diese
+          Systeme</quote>. Sie sind nicht Bestandteil von Gemeinschaft.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Die Analyse der Gefährdungen ist ggf. bei neu hinzukommenden
+    TK-Applikationen anzupassen sodaß diese berücksichtigt werden.</para>
   </section>
 
   <section xml:id="tlstk-g-ip-anlagenanschluss">
@@ -1067,6 +1233,12 @@
 
     <para>(d.h. IP-basierte Anbindung der TK-Anlage an das öffentliche
     Telefonnetz über einen externen Carrier/Provider/ITSP)</para>
+
+    <para>Laut Leistungsbeschreibung AP 2.2 ist die Konzeptionierung der
+    notwendigen Schnittstellen für SIP-Trunks (Anbindung von Filialen,
+    Anbindung ans PSTN per SIP-Trunk) Teil des Auftrags, jedoch nicht deren
+    Implementierung. Diese kann ggf. in optionalen Arbeitspaketen als
+    Anschlußprojekt umgesetzt werden.</para>
 
     <section xml:id="tlstk-g-ip-anlagenanschluss-hoehere-gewalt">
       <title>Höhere Gewalt</title>
