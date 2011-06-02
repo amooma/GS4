@@ -41,21 +41,21 @@
   <orderedlist>
     <listitem>
       <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;SWITCH oder die Datenbank zugreifen.
+      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
       Sämtliche Kommunikation geschieht über einen RESTful
       HTTP(S)-Aufruf.</para>
     </listitem>
 
     <listitem>
       <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;SWITCH oder die Datenbank zugreifen.
+      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
       Sämtliche Kommunikation geschieht über einen RESTful
       HTTP(S)-Aufruf.</para>
     </listitem>
 
     <listitem>
       <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;SWITCH oder die Datenbank zugreifen.
+      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
       Sämtliche Kommunikation geschieht über einen RESTful
       HTTP(S)-Aufruf.</para>
     </listitem>
@@ -69,19 +69,19 @@
     </listitem>
 
     <listitem>
-      <para>Die Kommunikation zwischen Free&#8203;SWITCH und dem Kern von
+      <para>Die Kommunikation zwischen Free&#8203;Switch und dem Kern von
       Gemeinschaft 4.0 erfolgt über eine REST&#8203;ful
       HTTP(S)-Schnittstelle.</para>
     </listitem>
 
     <listitem>
-      <para>Die Kommunikation zwischen Free&#8203;SWITCH und jedem
+      <para>Die Kommunikation zwischen Free&#8203;Switch und jedem
       vorgeschalteten VoIP-Proxy erfolgt über das entsprechende
       Protokoll.</para>
     </listitem>
 
     <listitem>
-      <para>Die Kommunikation zwischen Free&#8203;SWITCH und dem Kamailio
+      <para>Die Kommunikation zwischen Free&#8203;Switch und dem Kamailio
       SIP-Proxy erfolgt per SIP:</para>
     </listitem>
 
