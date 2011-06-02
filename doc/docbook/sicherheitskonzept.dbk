@@ -17,6 +17,13 @@
         <uri><link
         xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
       </author>
+
+      <author>
+        <personname><firstname>Ralf</firstname><surname>Spenneberg</surname></personname>
+
+        <uri><link
+        xlink:href="http://www.os-t.de/">http://www.os-t.de</link></uri>
+      </author>
     </authorgroup>
   </info>
 
@@ -52,6 +59,15 @@
 
             <revremark>mit Vergleich der TLSTK</revremark>
           </revision>
+
+          <revision>
+            <revnumber>Revision 0.3</revnumber>
+
+            <date>2011-06</date>
+
+            <revremark>(in Arbeit) Anmerkungen zum Zwischenstand Revision
+            0.2-beta umgesetzt</revremark>
+          </revision>
         </revhistory></para>
     </formalpara>
   </sidebar>
@@ -70,8 +86,9 @@
 
         <simpara><link
         xlink:href="http://en.wikipedia.org/wiki/DocBook">http://en.wikipedia.org/wiki/DocBook</link></simpara>
-      </footnote> ist ein offener Standard und eine semantische Markup-Sprache
-    der OASIS <footnote>
+      </footnote> ist ein offener Standard und eine semantische
+    Auszeichnungssprache (<foreignphrase xml:lang="en">markup
+    language</foreignphrase>) der OASIS <footnote>
         <simpara><link
         xlink:href="http://de.wikipedia.org/wiki/Organization_for_the_Advancement_of_Structured_Information_Standards">http://de.wikipedia.org/wiki/Organization_for_the_Advancement_of_Structured_Information_Standards</link></simpara>
 
@@ -79,8 +96,26 @@
         xlink:href="http://en.wikipedia.org/wiki/OASIS_%28organization%29">http://en.wikipedia.org/wiki/OASIS_(organization)</link></simpara>
       </footnote>.</para>
 
-    <para>Dadurch daß es reines XML ist eignet es sich zur Verwaltung in einem
-    <foreignphrase xml:lang="en">Version Control System</foreignphrase>
+    <para>Semantisch bedeutet dabei daß der Inhalt und die Bedeutung einzelner
+    Teile unabhängig ist von einer bestimmten, konkreten
+    Darstellungsform.</para>
+
+    <blockquote>
+      <para>In <emphasis>Descriptive markup</emphasis>, the markup is used to
+      label parts of the document rather than to provide specific instructions
+      as to how they should be processed. The objective is to decouple the
+      inherent structure of the document from any particular treatment or
+      rendition of it. Such markup is often described as "semantic". An
+      example of descriptive markup would be HTML's <tag
+      class="starttag">cite</tag> tag, which is used to label a
+      citation.</para>
+
+      <para>— <link
+      xlink:href="http://en.wikipedia.org/wiki/Markup_language">http://en.wikipedia.org/wiki/Markup_language</link></para>
+    </blockquote>
+
+    <para>Dadurch daß DocBook reines XML ist eignet es sich zur Verwaltung in
+    einem <foreignphrase xml:lang="en">Version Control System</foreignphrase>
     (<foreignphrase xml:lang="en">VCS</foreignphrase>) / <foreignphrase
     xml:lang="en">Source Code Management System</foreignphrase>
     (<foreignphrase xml:lang="en">SCM</foreignphrase>) <footnote>
@@ -89,9 +124,11 @@
 
         <simpara><link
         xlink:href="http://en.wikipedia.org/wiki/Revision_control">http://en.wikipedia.org/wiki/Revision_control</link></simpara>
-      </footnote> &#8211; anders als z.B. das <foreignphrase
-    xml:lang="en">Open Document Format</foreignphrase> (ODF) das eine
-    komprimierte Zip-Datei und somit binär ist.</para>
+      </footnote>da sich z.B. Änderungen in Form von <foreignphrase
+    xml:lang="en">Diffs</foreignphrase> nachvollziehen lassen &#8211; anders
+    als z.B. das <foreignphrase xml:lang="en">Open Document
+    Format</foreignphrase> (ODF) das eine komprimierte Zip-Datei und somit
+    binär ist.</para>
 
     <para>Als <foreignphrase xml:lang="en">VCS</foreignphrase> kommt derzeit
     das populäre „<foreignphrase xml:lang="en">Git</foreignphrase>“ zum
@@ -121,9 +158,11 @@
     Editor</foreignphrase> <footnote>
         <simpara><link
         xlink:href="http://www.xmlmind.com/xmleditor/">http://www.xmlmind.com/xmleditor/</link></simpara>
-      </footnote>) vertraut ist. Die für ein breiteres Publikum freizugebenden
-    Revisionen werden daher (per XSL-Transformation) in ein „massentaugliches“
-    Format wie HTML oder PDF umgewandelt.</para>
+      </footnote>) vertraut ist. Die für ein breiteres Publikum freizugebende
+    endgültige Revision wird daher per XSL-Transformation in ein
+    „massentaugliches“ Format wie HTML oder PDF umgewandelt. Durch die
+    XSL-Stylesheets können beispielsweise auch ein Inhaltsverzeichnis und ein
+    Stichwortverzeichnis generiert werden.</para>
   </note>
 
   <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über die
