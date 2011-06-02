@@ -120,7 +120,7 @@
 
             <entry>normal</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
 
             <entry>hoch</entry>
           </row>
@@ -134,7 +134,7 @@
 
             <entry>hoch</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
           </row>
 
           <row>
@@ -144,9 +144,9 @@
 
             <entry>hoch</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
           </row>
 
           <row>
@@ -158,7 +158,7 @@
 
             <entry>hoch</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
           </row>
 
           <row>
@@ -168,9 +168,9 @@
 
             <entry>normal</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
 
-            <entry>normal</entry>
+            <entry>hoch</entry>
           </row>
 
           <row>
@@ -232,17 +232,18 @@
       personenbezogene Daten (Namen, Anruflisten). Ohne sie wäre keine
       Provisionierung der Endgeräte mehr möglich, jedoch noch eine
       eingeschränkte Telefonie im Notbetrieb. Den Schutzbedarf der Integrität
-      der Datenbank erachten wir als hoch. Die Liste der Personen und die
-      Liste der Endgeräte sind üblicherweise recht leicht wiederherzustellen
-      (aus LDAP oder einer anderen Datenbank der Organisation). Ein Ausfall
-      der Anruflisten, der von Benutzern definierte Tastenfunktionen auf den
+      und Vertraulichkeit der Datenbank erachten wir als hoch. Die Liste der
+      Personen und die Liste der Endgeräte sind üblicherweise recht leicht
+      wiederherzustellen (aus LDAP oder einer anderen Datenbank der jeweiligen
+      Organisation, deren Schutz der Organisation obliegt). Ein Ausfall der
+      Anruflisten, der von Benutzern definierte Tastenfunktionen auf den
       Telefonen, der gesetzte Rufumleitungen sind typischerweise nicht
       kritisch, können aber von einigen Organisationen bzw. je nach
       Einsatz-Szenario als relevant bewertet werden. Hier wäre dann
       entsprechend vom Administrator ein ein- oder besser mehrstufiges
       Backup-Konzept anzuwenden. Die Backups sollten verschlüsselt sein, denn
-      beispielsweise die Anruflisten können sensible Informationen
-      enthalten.</para>
+      beispielsweise die Anruflisten können sensible Informationen enthalten.
+      Als DBMS kommt SQLite3 zum Einsatz.</para>
     </section>
 
     <section xml:id="schutzbedarf-gemeinschaft4">
@@ -255,12 +256,13 @@
       öffentlichen Quellen wiederherstellbar. Da über die Schnittstellen von
       Gemeinschaft4 (HTTPS) potenziell sensible Daten übertragen werden
       sollten diese Schnittstellen bzw. die Übertragungstrecke nach dem
-      derzeitigen Stand der Technik geschützt werden. Ohne Gemeinschaft4 wäre
-      eine Benutzeradministration über das Web-Interface bzw. die XML-API
-      nicht mehr möglich. Nach unserer Erwartung stellt der Umstand daß
-      während eines angenommenen Ausfalls des Benutzer-Managements keine neuen
-      Benutzer angelegt/geändert werden können jedoch eher eine untergeordnete
-      Rolle.</para>
+      derzeitigen Stand der Technik geschützt werden. Die erforderliche
+      Vertraulichkeit und Integrität der Schnittstellen ist als hoch zu
+      bewerten. Ohne Gemeinschaft4 wäre eine Benutzeradministration über das
+      Web-Interface bzw. die XML-API nicht mehr möglich. Nach unserer
+      Erwartung stellt der Umstand daß während eines angenommenen Ausfalls des
+      Benutzer-Managements keine neuen Benutzer angelegt/geändert werden
+      können jedoch eher eine untergeordnete Rolle.</para>
 
       <para>Die einzelnen Schnittstellen werden in <xref
       linkend="beschreibung" /> genannt.</para>
@@ -276,8 +278,9 @@
       vorübergehender Ausfall in den meisten Fällen kein Problem darstellen,
       da mit den Geräten in ihrer derzeitigen Konfiguration weiterhin
       telefoniert werden kann. Die Software ist aus öffentlichen Quellen
-      wiederherstellbar. Im weiteren Projekt sind hier noch Anpassungen der
-      Betrachtung der Schutzwürdigkeit erforderlich.</para>
+      wiederherstellbar. Die erforderliche Vertraulichkeit und Integrität der
+      HTTPS-Schnittstelle ist ebenso wie beim Kern von Gemeinschaft4 als hoch
+      anzusehen.</para>
     </section>
 
     <section xml:id="schutzbedarf-sip-proxy">
@@ -291,14 +294,20 @@
       SIP-Proxy ist in aller Regel keine Telefonie mehr möglich. Der SIP-Proxy
       sieht (zwecks Routing) als potenziell sensibel einzustufende
       Informationen über die SIP-Topologie. Die Software ist aus öffentlichen
-      Quellen wiederherstellbar.</para>
+      Quellen wiederherstellbar. Da der Betrieb der TK-Anlage durch
+      Manipulation gestört werden kann und auch Daten manipuliert werden
+      können ist die erforderliche Integrität und Vertraulichkeit als hoch
+      einzuschätzen.</para>
     </section>
 
     <section xml:id="schutzbedarf-freeswitch">
       <title>FreeSwitch</title>
 
       <para>FreeSwitch kommt als B2BUA für TK-Anlagen-Funktionen zum Einsatz.
-      Die Software ist aus öffentlichen Quellen wiederherstellbar.</para>
+      Die Software ist aus öffentlichen Quellen wiederherstellbar. Da der
+      Betrieb der TK-Anlage durch Manipulation gestört werden kann und auch
+      Daten manipuliert werden können ist die erforderliche Integrität und
+      Vertraulichkeit als hoch einzuschätzen.</para>
     </section>
 
     <section xml:id="schutzbedarf-verbindung-telefone">
