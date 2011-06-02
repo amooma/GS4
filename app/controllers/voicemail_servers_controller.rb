@@ -30,6 +30,8 @@ class VoicemailServersController < ApplicationController
     @voicemail_server = VoicemailServer.new
     if VoicemailServer.count == 0
       @voicemail_server.host = request.env['SERVER_NAME']
+      @voicemail_server.is_local = true
+      @voicemail_server.port = "5060"
     end
     respond_to do |format|
       format.html # new.html.erb
