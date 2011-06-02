@@ -32,6 +32,8 @@ class SipServersController < ApplicationController
     @sip_server = SipServer.new
     if SipServer.count == 0
       @sip_server.host = request.env['SERVER_NAME']
+      @sip_server.is_local= true
+      @sip_server.port = "5060"
     end
     respond_to do |format|
       format.html # new.html.erb

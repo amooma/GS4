@@ -32,6 +32,8 @@ class SipProxiesController < ApplicationController
     @sip_proxy = SipProxy.new
     if SipProxy.count == 0
       @sip_proxy.host = request.env['SERVER_NAME']
+      @sip_proxy.is_local = true
+      @sip_proxy.port = "5060"
     end
     respond_to do |format|
       format.html # new.html.erb
