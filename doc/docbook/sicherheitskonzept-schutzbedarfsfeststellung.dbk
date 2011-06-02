@@ -22,13 +22,13 @@
 
   <para>Ziel der Schutzbedarfsfeststellung ist es, den Schutzbedarf für alle
   Komponenten des Informationsverbundes, hier Gemeinschaft 4.0, zu bestimmen.
-  Da eine Quantifizierung des exakten Schutzbedarfs nicht möglich ist, wird
-  lediglich, wie allgemein üblich, eine qualitative Aussage getroffen und der
-  Schutzbedarf in die drei Kategorien normal, mittel und hoch
+  Dabei wird, wie allgemein üblich, eine qualitative Aussage getroffen und der
+  Schutzbedarf in die drei Kategorien „normal“, „hoch“ und „sehr hoch“
   unterschieden.</para>
 
   <para>Diese Schutzbedarfskategorien werden in Anlehnung an die Dokumenation
-  des BSI wie folgt definiert: <itemizedlist>
+  des BSI (Standard 100-1 in Verbindung mit 100-2) wie folgt definiert:
+  <itemizedlist>
       <listitem>
         <para>normal: Die Schadensauswirkungen sind begrenzt und
         überschaubar.</para>
@@ -43,6 +43,9 @@
         bedrohliches, katastrophales Ausmaß erreichen.</para>
       </listitem>
     </itemizedlist></para>
+
+  <para>Jede Institution muß individuell festlegen wie diese
+  Schutzbedarfskategorien jeweils zu interpretieren sind.</para>
 
   <para>Um die Einordnung der Schutzbedarfskategorien zu erleichtern, werden
   im folgenden mehrere typische Schadenszenarien (nach BSI) vorgestellt, die
@@ -212,6 +215,15 @@
     <para>Nachfolgend wird erläutert wie die Abschätzung des Schutzbedarfs der
     einzelnen Kompontenten zustandekommt.</para>
 
+    <sidebar>
+      <para>Erläuterung: Im Folgenden bezieht sich die Formulierung „aus
+      öffentlichen Quellen wiederherstellbar“ auf die Wiederherstellung der
+      Software nach BSI-Standard 100-2 (IT-Grundschutz-Vorgehensweise).</para>
+
+      <para>Eingeschränkte Telefone im Notbetrieb bedeutet im momentanen Stand
+      der Notbetriebs-Implementierung: interne Telefonate sind möglich.</para>
+    </sidebar>
+
     <section xml:id="schutzbedarf-datenbank">
       <title>Datenbank</title>
 
@@ -249,6 +261,9 @@
       während eines angenommenen Ausfalls des Benutzer-Managements keine neuen
       Benutzer angelegt/geändert werden können jedoch eher eine untergeordnete
       Rolle.</para>
+
+      <para>Die einzelnen Schnittstellen werden in <xref
+      linkend="beschreibung" /> genannt.</para>
     </section>
 
     <section xml:id="schutzbedarf-provisioning-server">
