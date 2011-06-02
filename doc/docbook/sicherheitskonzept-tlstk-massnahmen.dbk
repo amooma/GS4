@@ -662,12 +662,13 @@
 
         <para>Ein Berechtigungssystem für die Web-Schnittstellen von
         Gemeinschaft mit Benutzern, Gruppen und Rollen ist im weiteren Verlauf
-        des Projektes noch zu entwickeln.</para>
+        des Projektes noch zu entwickeln (Meilenstein 6).</para>
 
         <para>Technische oder personalisierte Unix-Benutzer mit
         Administrationsrechten können soweit erforderlich vom IT-Administrator
         angelegt werden. Die Rechte sind dabei möglichst restriktiv zu
-        vergeben.</para>
+        vergeben. Dies liegt im Verantwortungsbereich des
+        IT-Administrators.</para>
 
         <para>Je nach Schutzbedarf sollte es vermieden werden externen
         Wartungs-Dienstleistern Shell-Zugriff auf das System zu geben.</para>
@@ -713,7 +714,21 @@
         Firewall (IPtables per Shorewall) und ein Host-basiertes
         IDS-/IPS-System (<foreignphrase xml:lang="en">intrusion
         detection/prevention system</foreignphrase>) sind auf dem System
-        vorhanden.</para>
+        vorhanden. Dazu wird <quote>Snort</quote> eingesetzt.</para>
+
+        <para>Die TLSTK spricht auch von einem Virenschutz-Programm auf dem
+        TK-Server zum Schutz gegen Viren, Würmer und Trojaner. Nach unserer
+        Ansich ist es ebenso wichtig unerfahrenen oder risikofreudigen
+        Administratoren hiermit im Klartext zu sagen daß ein Server kein
+        <quote>Spielsystem</quote> ist wie es in vielen Privathaushalten
+        steht. Wer auf einem Server irgendwelche Software aus dubiosen Quellen
+        aus dem Internet startet hat ein ernsthaftes Sicherheitsproblem. (Das
+        gilt auch für private Computer, aber die haben hier keine
+        Relevanz.)</para>
+
+        <para>Schadcode der sich durch Protokoll-Implementierungsfehler per
+        HTTPS oder SIP verbreiten kann fällt im Vergleich des Volumens dazu
+        kaum ins Gewicht.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-148">

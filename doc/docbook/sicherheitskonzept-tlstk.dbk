@@ -86,6 +86,15 @@
   sind. In diesem Kapitel werden vorrangig die speziellen Gefährdungen bei
   VoIP-TK-Systemen anhand der TLSTK betrachtet.</para>
 
+  <note>
+    <para>Evtl. könnte im Verlauf der Entwicklung noch ein Abschnitt mit
+    Gefährdungen (und Maßnahmen) hinzugefügt werden die nicht in der TLSTK
+    genannt werden. (Beispiel: Gefährdung: überfülltes Dateisystem -&gt;
+    Maßnahme: Partitionierung.) Dieses Dokument jedoch bezieht sich &#8211;
+    wie besprochen &#8211; explizit auf die TLSTK. Ggf. müßte also die
+    Struktur geändert werden.</para>
+  </note>
+
   <para>Dabei werden auch diejenigen Punkte genannt die
   <emphasis>nicht</emphasis> Bestandteile der vorgenommenen Analyse sind, da
   sie außerhalb des vorgesehenen, bestimmungsgemäßen Einsatzes der Anlage
