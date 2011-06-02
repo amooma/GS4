@@ -74,8 +74,9 @@
 
   <note>
     <para>Dieses Kapitel ist ein Teil der gesamten Dokumentation, bezieht sich
-    an einigen Stellen auf diese und muß daher im Kontext derselben gelesen
-    werden.</para>
+    an einigen Stellen auf diese und muß daher im Kontext derselben verstanden
+    werden. Beispielsweise sollte zuerst <xref linkend="beschreibung" /> als
+    Überblick gelesen werden.</para>
   </note>
 
   <note>
@@ -152,17 +153,24 @@
   </note>
 
   <note>
-    <para>Wie auch andere Open-Source-Projekte setzen wir nicht voraus daß der
-    Leser (außer intern und bei internen Zwischenständen) mit einem
-    DocBook-Editor (wie z.B. dem <foreignphrase xml:lang="en">XMLmind XML
-    Editor</foreignphrase> <footnote>
+    <para>Wie auch andere Open-Source-Projekte unterscheiden wir zwischen
+    Entwicklern und Anwendern (d.h. Administratoren und Endbenutzern). Bei
+    Entwicklern (intern und bei internen Zwischenständen) wird vorausgesetzt
+    daß diese einen DocBook-Editor (wie z.B. dem <foreignphrase
+    xml:lang="en">XMLmind XML Editor</foreignphrase> <footnote>
         <simpara><link
         xlink:href="http://www.xmlmind.com/xmleditor/">http://www.xmlmind.com/xmleditor/</link></simpara>
-      </footnote>) vertraut ist. Die für ein breiteres Publikum freizugebende
-    endgültige Revision wird daher per XSL-Transformation in ein
-    „massentaugliches“ Format wie HTML oder PDF umgewandelt. Durch die
-    XSL-Stylesheets können beispielsweise auch ein Inhaltsverzeichnis und ein
-    Stichwortverzeichnis generiert werden.</para>
+      </footnote>) verwenden. Bei Anwendern können wir davon nicht ausgehen.
+    Die für ein breiteres Publikum freizugebende endgültige Revision wird
+    daher per XSL-Transformation in ein „massentaugliches“ Format wie HTML
+    oder PDF umgewandelt. Durch die XSL-Stylesheets können beispielsweise auch
+    ein Inhaltsverzeichnis und ein Stichwortverzeichnis generiert
+    werden.</para>
+
+    <para>Für eine XSL-Transformation kann im Dokumentations-Verzeichnis (in
+    dem das <filename>Makefile</filename> liegt) der Befehl <emphasis
+    role="bold"><command>make</command></emphasis> aufgerufen werden der eine
+    Hilfe ausgibt.</para>
   </note>
 
   <para>In <xref linkend="beschreibung" /> finden Sie eine Übersicht über die
