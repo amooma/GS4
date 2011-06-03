@@ -520,6 +520,13 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.param( :name => 'interval', :value => '20' )
 				xml.param( :name => 'timer-name', :value => 'soft' )
 			}
+			xml.directory( :name => 'moh', :path => "#{@sounds_dir}/music/8000" ) {
+				xml.param( :name => 'rate', :value => '8000' )
+				xml.param( :name => 'shuffle', :value => 'true' )
+				xml.param( :name => 'channels', :value => '1' )
+				xml.param( :name => 'interval', :value => '20' )
+				xml.param( :name => 'timer-name', :value => 'soft' )
+			}
 		}
 		
 		xml.configuration( :name => 'logfile.conf', :description => 'File Logging' ) {
