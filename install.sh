@@ -75,10 +75,10 @@ echo -e "Stopping services for configuration\n"
 echo -e "Getting GS4\n"
 
 cd /opt
-git clone -b master https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git
+git clone -b master https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git gemeinschaft
 
 echo -e "Installing ruby\n"
-cd /opt/Gemeinschaft4/misc/ruby-sane
+cd /opt/gemeinschaft/misc/ruby-sane
 make deb-install
 gem install rails
 gem install rake -v 0.8.7
@@ -93,47 +93,57 @@ Driver=SQLite3
 Database=/opt/gemeinschaft/db/production.sqlite3
 Timeout=2000" >> /etc/odbc.ini
 
-
-ln -s /opt/Gemeinschaft4 /opt/gemeinschaft
+ln -s /opt/gemeinschaft /opt/Gemeinschaft4
 
 echo -e "Configuring freeswitch and kamailio\n"
 
 mv /etc/kamailio/ /etc/kamailio.dist
-ln -s /opt/Gemeinschaft4/misc/kamailio/etc /etc/kamailio
+ln -s /opt/gemeinschaft/misc/kamailio/etc /etc/kamailio
 sed -i 's/RUN_KAMAILIO=no/RUN_KAMAILIO=yes/' /etc/default/kamailio
 
-cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/
+cp /opt/gemeinschaft/misc/lighttpd.conf /etc/lighttpd/
 
 mv /opt/freeswitch/conf /opt/freeswitch/conf.dist
-ln -s /opt/Gemeinschaft4/misc/freeswitch/fs-conf /opt/freeswitch/conf
-ln -s /opt/Gemeinschaft4/misc/freeswitch/fs-scripts/ /opt/freeswitch/scripts
+ln -s /opt/gemeinschaft/misc/freeswitch/fs-conf /opt/freeswitch/conf
+ln -s /opt/gemeinschaft/misc/freeswitch/fs-scripts/ /opt/freeswitch/scripts
 sed -i 's/FREESWITCH_ENABLED="false"/FREESWITCH_ENABLED="true"/' /etc/default/freeswitch
 
 echo -e "Setting up database\n"
 
-cd /opt/Gemeinschaft4
+cd /opt/gemeinschaft
 bundle install
 bundle exec rake db:migrate RAILS_ENV=production
 bundle exec rake db:seed RAILS_ENV=production
 
-cd /opt/Gemeinschaft4/public
+cd /opt/gemeinschaft/public
 bundle install --path .
-chown -R www-data /opt/Gemeinschaft4
+
+echo -e "Creating and populating group \"gemeinschaft\"\n"
+addgroup gemeinschaft || true
+adduser www-data gemeinschaft --quiet
+adduser kamailio gemeinschaft --quiet
+adduser freeswitch gemeinschaft --quiet
+
+chown -R www-data:gemeinschaft /opt/gemeinschaft
+chmod g+w /opt/gemeinschaft/db/
+chmod g+w /opt/gemeinschaft/db/production.sqlite3
 
 echo -e "Starting services\n"
 
 /etc/init.d/lighttpd start
 /etc/init.d/kamailio start
 
-echo -e "Downloading FreeSWITCH sound files\n"
-
-/opt/Gemeinschaft4/misc/freeswitch/download-freeswitch-sounds
-
 echo -e "Retrieving FreeSWITCH configuration\n"
 
 /opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh >>/dev/null
-chown freeswitch:daemon /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+chmod g+w /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+
+echo -e "Starting FreeSWITCH\n"
 /etc/init.d/freeswitch start
+
+echo -e "Downloading FreeSWITCH sound files\n"
+
+/opt/gemeinschaft/misc/freeswitch/download-freeswitch-sounds
 
 echo -e "\n\n"
 echo -e "We are done\n\n"
