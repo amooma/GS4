@@ -61,12 +61,12 @@
           </revision>
 
           <revision>
-            <revnumber>Revision 0.3</revnumber>
+            <revnumber>Revision 0.3-beta</revnumber>
 
             <date>2011-06</date>
 
-            <revremark>(in Arbeit) Anmerkungen zum Zwischenstand Revision
-            0.2-beta umgesetzt</revremark>
+            <revremark>Anmerkungen zum Zwischenstand Revision 0.2-beta
+            umgesetzt</revremark>
           </revision>
         </revhistory></para>
     </formalpara>
