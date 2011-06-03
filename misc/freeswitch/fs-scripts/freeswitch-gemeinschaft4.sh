@@ -12,4 +12,3 @@ wget \
         --waitretry=10 \
         http://127.0.0.1/freeswitch-configuration/freeswitch.xml \
         1>>/dev/null 2>>/dev/null || true
-cat freeswitch-gemeinschaft4.xml
