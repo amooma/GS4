@@ -20,6 +20,7 @@
     </authorgroup>
   </info>
 
+  <note>
   <para>Für eine bessere Übersicht führen wir zu jeder Sicherheitsmaßnahme auf
   in welcher Verantwortung deren Umsetzung primär liegt. Dies können sein:
   „<emphasis>Software</emphasis>“ &#8211; also die TK-Anlage selbst &#8211;
@@ -34,7 +35,6 @@
   hier meist gestrichen, außer wenn in dem Punkt auch Informationen über die
   Software oder Anweisungen an die Institution enthalten sind.</para>
 
-  <note>
     <para>Diese Unterscheidung wurde eingeführt da Maßnahmen die nicht im
     Einflußbereich der Software liegen vom BSI nicht nochmal geprüft werden
     müssen, denn diese sind ohnehin in der <citation><biblioref
