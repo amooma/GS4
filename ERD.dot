@@ -12,12 +12,62 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="uid">uid <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
+  m_CallForward [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">CallForward</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="active">active <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="call_timeout">call_timeout <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="destination">destination <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="source">source <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
+  m_CallForwardReason [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">CallForwardReason</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="value">value <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
+  m_CallQueue [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">CallQueue</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="uuid">uuid <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_CallQueueToExtension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">CallQueueToExtension</font></td></tr>
+</table>
+>];
   m_Codec [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Codec</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_Conference [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Conference</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="pin">pin <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="uuid">uuid <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+  m_ConferenceToExtension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ConferenceToExtension</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
   m_Extension [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -209,7 +259,7 @@ digraph Gemeinschaft4 {
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="auth_name">auth_name <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="caller_name">caller_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="caller_name">caller_name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
   <tr><td align="left" width="130" port="password">password <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="realm">realm <font face="Arial Italic" color="grey60">string</font></td></tr>
@@ -321,10 +371,18 @@ digraph Gemeinschaft4 {
   m_SipProxy -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_VoicemailServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_CallForwardReason -> m_CallForward [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_SipAccount -> m_CallForward [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_CallQueue -> m_CallQueueToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_CallQueue -> m_Extension [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
+  m_Extension -> m_CallQueueToExtension [arrowhead = "normal", arrowtail = "none", weight = "1"]
   m_Codec -> m_SipAccountCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Codec -> m_SipAccount [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
   m_Codec -> m_PhoneModelCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Codec -> m_PhoneModel [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
+  m_Conference -> m_ConferenceToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_Conference -> m_Extension [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
+  m_Extension -> m_ConferenceToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Extension -> m_SipAccountToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_Extension -> m_SipAccount [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"]
   m_Manufacturer -> m_PhoneModel [arrowhead = "normal", arrowtail = "none", weight = "2"]
