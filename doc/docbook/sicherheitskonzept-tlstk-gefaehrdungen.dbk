@@ -20,7 +20,8 @@
     </authorgroup>
   </info>
 
-  <para>Hier werden die Gefährdungen aus der <citation><biblioref linkend="biblio-tlstk" /></citation> genannt und jeweils zu den
+  <para>Hier werden die Gefährdungen aus der <citation><biblioref
+  linkend="biblio-tlstk" /></citation> genannt und jeweils zu den
   entsprechenden in der TK-Anlage „Gemeinschaft“ umgesetzten
   Sicherheitsmaßnahmen verlinkt.</para>
 
@@ -209,9 +210,10 @@
         <title><literal>G-TK-22</literal> Unzureichende Regelungen für den
         Einsatz von VoIP</title>
 
-        <para>Die in der <citation><biblioref linkend="biblio-tlstk" /></citation> genannten Beispiele sind: Unsichere Kopien von
-        Sprachmailbox-Nachrichten sowie das Abhören von Gesprächen durch
-        Netzwerk-Analyse-Software (Paket-Sniffer).</para>
+        <para>Die in der <citation><biblioref
+        linkend="biblio-tlstk" /></citation> genannten Beispiele sind:
+        Unsichere Kopien von Sprachmailbox-Nachrichten sowie das Abhören von
+        Gesprächen durch Netzwerk-Analyse-Software (Paket-Sniffer).</para>
 
         <para>Maßnahmen:<simplelist>
             <member><xref linkend="tlstk-m-tk-44" /></member>
@@ -1056,18 +1058,20 @@
   <section xml:id="tlstk-g-tk-applikationen-und-mehrwertdienste">
     <title>TK-Applikationen und Mehrwertdienste</title>
 
-    <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation> beschreibt <quote>TK-Applikationen und
-    Mehrwertdienste</quote> als <quote>Applikationen und Dienste
-    <replaceable>[…]</replaceable> im Umfeld von TK-Anlagen</quote> und als
-    &#8211; meist separate &#8211; <quote>Systeme, die ein Bindeglied zwischen
-    Tele- und Daten-Kommunikation darstellen</quote>.</para>
+    <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
+    beschreibt <quote>TK-Applikationen und Mehrwertdienste</quote> als
+    <quote>Applikationen und Dienste <replaceable>[…]</replaceable> im Umfeld
+    von TK-Anlagen</quote> und als &#8211; meist separate &#8211;
+    <quote>Systeme, die ein Bindeglied zwischen Tele- und Daten-Kommunikation
+    darstellen</quote>.</para>
 
     <para>Als typische Beispiele werden genannt:<itemizedlist>
         <listitem>
           <para><foreignphrase xml:lang="en">Unified Messaging</foreignphrase>
           (<foreignphrase xml:lang="en">UM</foreignphrase>).</para>
 
-          <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation> spricht weit gefaßt von einem <quote>konsolidierten
+          <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
+          spricht weit gefaßt von einem <quote>konsolidierten
           Nachrichteneingang über verschiedene Kanäle</quote> (z.B. E-Mail,
           Fax, SMS und Sprachnachrichten) und sagt richtig daß <quote>keine
           allgemein akzeptierte Definition des funktionalen Umfangs von
@@ -1165,21 +1169,22 @@
           Distribution</foreignphrase> (<foreignphrase
           xml:lang="en">ACD</foreignphrase>).</para>
 
-          <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation> spricht von Gefährdungen die aus Kopplungen eines
-          ACD-Systems mit Kunden- und Mitarbeiter-Datenbanken. Teil des
-          Projektes ist (siehe Leistungsbeschreibung AP 2.1) eine Verteilung
-          eingender Anrufe auf Mitarbeiter („Agenten“), also ein Sammelruf
-          oder eine Warteschlange („<foreignphrase
-          xml:lang="en">Queue</foreignphrase>“), jedoch nicht als
-          umfangreiches ACD-System und ohne Kopplung an weitere Datenbanken
-          oder Systeme.</para>
+          <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
+          spricht von Gefährdungen die aus Kopplungen eines ACD-Systems mit
+          Kunden- und Mitarbeiter-Datenbanken. Teil des Projektes ist (siehe
+          Leistungsbeschreibung AP 2.1) eine Verteilung eingender Anrufe auf
+          Mitarbeiter („Agenten“), also ein Sammelruf oder eine Warteschlange
+          („<foreignphrase xml:lang="en">Queue</foreignphrase>“), jedoch nicht
+          als umfangreiches ACD-System und ohne Kopplung an weitere
+          Datenbanken oder Systeme.</para>
         </listitem>
 
         <listitem>
           <para>Präsenzdienste.</para>
 
-          <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation> spricht von Gefährdungen aus der Kopplung mit einem
-          externen Präsenzsystem &#8211; mit <foreignphrase
+          <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
+          spricht von Gefährdungen aus der Kopplung mit einem externen
+          Präsenzsystem &#8211; mit <foreignphrase
           xml:lang="en">Chat</foreignphrase> bzw. <foreignphrase
           xml:lang="en">Instant Messaging</foreignphrase> (<foreignphrase
           xml:lang="en">IM</foreignphrase>), CTI und Kalender-Anbindung
@@ -1191,12 +1196,13 @@
         <listitem>
           <para>Konferenzsysteme.</para>
 
-          <para>Anders als an dieser Stelle in der <citation><biblioref linkend="biblio-tlstk" /></citation> beschrieben handelt
-          es sich bei den in Gemeinschaft integrierten Audio-Konferenzräumen
-          nicht um ein Endgerät der TK-Anlage, somit ist die Schnittstelle
-          „zwischen“ TK-Anlage und Konferenzsystem nicht gefährdet wie zu
-          einem Endgerät. (Die Gefährdungssituation der Schnittstellen von der
-          TK-Anlage zu Endgeräten wird an separater Stelle besprochen.)</para>
+          <para>Anders als an dieser Stelle in der <citation><biblioref
+          linkend="biblio-tlstk" /></citation> beschrieben handelt es sich bei
+          den in Gemeinschaft integrierten Audio-Konferenzräumen nicht um ein
+          Endgerät der TK-Anlage, somit ist die Schnittstelle „zwischen“
+          TK-Anlage und Konferenzsystem nicht gefährdet wie zu einem Endgerät.
+          (Die Gefährdungssituation der Schnittstellen von der TK-Anlage zu
+          Endgeräten wird an separater Stelle besprochen.)</para>
         </listitem>
 
         <listitem>
