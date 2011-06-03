@@ -21,19 +21,20 @@
   </info>
 
   <note>
-  <para>Für eine bessere Übersicht führen wir zu jeder Sicherheitsmaßnahme auf
-  in welcher Verantwortung deren Umsetzung primär liegt. Dies können sein:
-  „<emphasis>Software</emphasis>“ &#8211; also die TK-Anlage selbst &#8211;
-  und/oder „<emphasis>Administrator</emphasis>“ &#8211; also die zuständigen
-  Administratoren in der jeweiligen einsetzenden
-  Institution/Organisation/Behörde/Firma. Die Angaben beziehen sich immer auf
-  eine Standard-Installation und können in anderen Installationen abweichen.
-  Sicherheitsmaßnahmen ohne die Kennzeichnung „<emphasis>Software</emphasis>“
-  liegen außerhalb des Einflußbereiches der Software.</para>
+    <para>Für eine bessere Übersicht führen wir zu jeder Sicherheitsmaßnahme
+    auf in welcher Verantwortung deren Umsetzung primär liegt. Dies können
+    sein: „<emphasis>Software</emphasis>“ &#8211; also die TK-Anlage selbst
+    &#8211; und/oder „<emphasis>Administrator</emphasis>“ &#8211; also die
+    zuständigen Administratoren in der jeweiligen einsetzenden
+    Institution/Organisation/Behörde/Firma. Die Angaben beziehen sich immer
+    auf eine Standard-Installation und können in anderen Installationen
+    abweichen. Sicherheitsmaßnahmen ohne die Kennzeichnung
+    „<emphasis>Software</emphasis>“ liegen außerhalb des Einflußbereiches der
+    Software.</para>
 
-  <para>Maßnahmen die in der Verantwortung des Administrators liegen wurden
-  hier meist gestrichen, außer wenn in dem Punkt auch Informationen über die
-  Software oder Anweisungen an die Institution enthalten sind.</para>
+    <para>Maßnahmen die in der Verantwortung des Administrators liegen wurden
+    hier meist gestrichen, außer wenn in dem Punkt auch Informationen über die
+    Software oder Anweisungen an die Institution enthalten sind.</para>
 
     <para>Diese Unterscheidung wurde eingeführt da Maßnahmen die nicht im
     Einflußbereich der Software liegen vom BSI nicht nochmal geprüft werden
