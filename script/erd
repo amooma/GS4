@@ -1,6 +1,8 @@
 #! /bin/sh
 
-rake erd polymorphism=true filetype=dot
-rake erd polymorphism=true filetype=pdf
+bundle exec \
+  rake erd polymorphism=true filetype=dot
+bundle exec \
+  rake erd polymorphism=true filetype=pdf
 
 
