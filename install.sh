@@ -107,6 +107,7 @@ mv /opt/freeswitch/conf /opt/freeswitch/conf.dist
 ln -s /opt/gemeinschaft/misc/freeswitch/fs-conf /opt/freeswitch/conf
 ln -s /opt/gemeinschaft/misc/freeswitch/fs-scripts/ /opt/freeswitch/scripts
 sed -i 's/FREESWITCH_ENABLED="false"/FREESWITCH_ENABLED="true"/' /etc/default/freeswitch
+sed -i 's/^FREESWITCH_PARAMS.*/FREESWITCH_PARAMS="-nc -nonat"/' /etc/default/freeswitch
 
 echo -e "Setting up database\n"
 
