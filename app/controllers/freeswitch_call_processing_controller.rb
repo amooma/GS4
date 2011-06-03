@@ -455,7 +455,7 @@ class FreeswitchCallProcessingController < ApplicationController
 	
 	
 	def check_valid_voicemail_box_destination( destination )
-		if destination.to_s.match( /^-vbox-/, '' )
+		if destination.to_s.match( /^-vbox-/ )
 			vbox_sip_user = destination.to_s.gsub( /^-vbox-/, '' )  # this is a SIP account's auth_name
 			#OPTIMIZE Where's the destination's domain?
 			
