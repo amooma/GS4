@@ -37,7 +37,7 @@
   <note>
     <para>Diese Unterscheidung wurde eingeführt da Maßnahmen die nicht im
     Einflußbereich der Software liegen vom BSI nicht nochmal geprüft werden
-    müssen, denn diese sind ohnehin in der TLSTK genannt.</para>
+    müssen, denn diese sind ohnehin in der <citation><biblioref linkend="biblio-tlstk" /></citation> genannt.</para>
   </note>
 
   <section xml:id="tlstk-m-voip-systeme">
@@ -585,7 +585,7 @@
         <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die LAN-Infrastruktur ist vom Netzwerk-Administrator nach
-        Möglichkeit hochverfügbar auszulegen. Die in der TLSTK genannten
+        Möglichkeit hochverfügbar auszulegen. Die in der <citation><biblioref linkend="biblio-tlstk" /></citation> genannten
         Punkte sind: Vermeidung von Single Points of Failure, strukturierte
         Kabelführung, Wege-Redundanz, Modul-Redundanz, permanente
         Überwachung.</para>
@@ -920,7 +920,7 @@
         detection/prevention system</foreignphrase>) sind auf dem System
         vorhanden. Dazu wird <quote>Snort</quote> eingesetzt.</para>
 
-        <para>Die TLSTK spricht auch von einem Virenschutz-Programm auf dem
+        <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation> spricht auch von einem Virenschutz-Programm auf dem
         TK-Server zum Schutz gegen Viren, Würmer und Trojaner. Nach unserer
         Ansich ist es ebenso wichtig unerfahrenen oder risikofreudigen
         Administratoren hiermit im Klartext zu sagen daß ein Server kein
