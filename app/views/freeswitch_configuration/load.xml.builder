@@ -11,12 +11,6 @@ xml.document( :type => 'freeswitch/xml' ) {
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'sound_prefix=$${sounds_dir}/en/us/callie' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'hold_music=local_stream://moh' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'use_profile=internal' )
-	
-	xml.section( :name => 'phrases', :description => 'Speech Phrase Management' ) {
-		xml.tag!( 'macros' ) {
-			xml.tag!( 'X-PRE-PROCESS', :cmd => 'include', :data => 'lang/*/*.xml' )
-		}
-	}
 
 	xml.section( :name => 'languages', :description => 'Language Management' ) {
 		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie') {
