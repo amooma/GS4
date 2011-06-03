@@ -20,6 +20,26 @@
     </authorgroup>
   </info>
 
+  <para>Für eine bessere Übersicht führen wir zu jeder Sicherheitsmaßnahme auf
+  in welcher Verantwortung deren Umsetzung primär liegt. Dies können sein:
+  „<emphasis>Software</emphasis>“ &#8211; also die TK-Anlage selbst &#8211;
+  und/oder „<emphasis>Administrator</emphasis>“ &#8211; also die zuständigen
+  Administratoren in der jeweiligen einsetzenden
+  Institution/Organisation/Behörde/Firma. Die Angaben beziehen sich immer auf
+  eine Standard-Installation und können in anderen Installationen abweichen.
+  Sicherheitsmaßnahmen ohne die Kennzeichnung „<emphasis>Software</emphasis>“
+  liegen außerhalb des Einflußbereiches der Software.</para>
+
+  <para>Maßnahmen die in der Verantwortung des Administrators liegen wurden
+  hier meist gestrichen, außer wenn in dem Punkt auch Informationen über die
+  Software oder Anweisungen an die Institution enthalten sind.</para>
+
+  <note>
+    <para>Diese Unterscheidung wurde eingeführt da Maßnahmen die nicht im
+    Einflußbereich der Software liegen vom BSI nicht nochmal geprüft werden
+    müssen, denn diese sind ohnehin in der TLSTK genannt.</para>
+  </note>
+
   <section xml:id="tlstk-m-voip-systeme">
     <title>VoIP-Systeme</title>
 
@@ -29,6 +49,8 @@
       <section xml:id="tlstk-m-tk-30">
         <title><literal>M-TK-30</literal> Ende-zu-Ende-Verschlüsselung des
         Medienstroms</title>
+
+        <para><emphasis>Verantwortung: Software</emphasis></para>
 
         <para>Aufgrund des erhöhten Schutzbedarfs kommt SRTP bzw. ZRTP als
         Verschlüsselung des RTP-Medien-Stroms zum Einsatz. Die Schlüssellänge
@@ -44,15 +66,21 @@
         <title><literal>M-TK-31</literal> Verschlüsselung der
         Signalisierung</title>
 
+        <para><emphasis>Verantwortung: Software</emphasis></para>
+
         <para>Bei erhöhtem Schutzbedarf wird die SIP-Signalisierung zwischen
-        Endgerät und Telefonie-Server verschlüsselt. Dabei kommt TLS zum
-        Einsatz oder alternativ eine auf IPsec- oder anderen VPN-Techniken
-        basierende Verschlüsselungstechnik.</para>
+        Endgerät und Telefonie-Server verschlüsselt. Dabei kommt TLS als
+        Verschlüsselungstechnik zum Einsatz.</para>
+
+        <para>Alternativ kann der Administrator eine auf IPsec- oder anderen
+        VPN-Techniken basierende Verschlüsselungstechnik einsetzen.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-32">
         <title><literal>M-TK-32</literal> Authentisierung zwischen Endgeräten
         und Servern des VoIP-Systems</title>
+
+        <para><emphasis>Verantwortung: Software</emphasis></para>
 
         <para>Zwischen den Endgeräten und dem VoIP-Server (Kamailio) findet
         &#8211; entsprechende Endgeräte vorausgesetzt &#8211; eine
@@ -62,6 +90,8 @@
       <section xml:id="tlstk-m-tk-33">
         <title><literal>M-TK-33</literal> Authentisierung zwischen
         Servern</title>
+
+        <para><emphasis>Verantwortung: Software</emphasis></para>
 
         <para>In der Standard-Installation befinden sich alle VoIP-Dienste von
         Gemeinschaft auf einem einzigen (aktiven) Server, die Kommunikation
@@ -80,18 +110,24 @@
         <title><literal>M-TK-34</literal> Redundanz der
         Telefonie-Server</title>
 
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
+
         <para>Gemeinschaft ist ein „Knoten“. Je nach Größe der Institution und
         Anforderungen an die Redundanz können auch mehrere solcher Knoten
         betrieben werden. Das genaue Vorgehen (Cold-/Hot-Standby,
         Active&#8211;Active, Virtualisierungsumgebung, ...) hängt von den
         jeweiligen Erfordernissen ab. Ein Setup bei dem keine Gespräche
-        unterbrochen werden ist möglich.</para>
+        unterbrochen werden ist möglich. Die Installation redundanter
+        TK-Server liegt außerhalb des Einflußbereiches der Software und somit
+        in der Verantwortung des Administrators.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-35">
         <title><literal>M-TK-35</literal> Redundanz der Server und Gateways,
         von denen die Funktion des Telefonie-Servers und des Telefonie-Diensts
         unmittelbar abhängt</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Server wie PSTN-Gateways (sofern in der jeweiligen Installation
         vorhanden) müssen bei Bedarf redundant ausgelegt werden. Gleiches gilt
@@ -107,9 +143,12 @@
         Fallback festgelegt werden.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-36">
         <title><literal>M-TK-36</literal> Schaffung eines zusätzlichen
         PSTN-Ersatzanschlusses für Notrufe</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
         damit in der Verwantwortung des Netzwerk-Administrators (bzw. der in
@@ -122,10 +161,14 @@
         (Switches) und Endgeräte (ggf. per PoE) an eine USV
         anzuschließen.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-37">
         <title><literal>M-TK-37</literal> Automatische PSTN-Umschaltung für
         Filialen</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Es liegt außerhalb des Einflußbereichs von Gemeinschaft und
         damit in der Verwantwortung des Netzwerk-Administrators per WAN/VPN an
@@ -139,10 +182,14 @@
         entsprechende ausgehende Routen als lokale Fallbacks zu
         definieren.</para>
       </section>
+      -->
 
       <section xml:id="tlstk-m-tk-38">
         <title><literal>M-TK-38</literal> Absicherung von Telefonie-Daten im
         Verzeichnisdienst</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Sofern die Institution einen Verzeichnisdienst wie LDAP betreibt
         und befüllt liegt es außerhalb des Einflußbereichs der TK-Anlage diese
@@ -171,13 +218,15 @@
         <title><literal>M-TK-39</literal> Verfügbarkeit kritischer
         Telefonie-Daten</title>
 
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
+
         <para>Teilnehmer-Profile und -Einstellungen (wie z.B. Rufumleitungen)
         müssen dem Schutzbedarf in der jeweiligen Institution angemessen
-        angemessen verfügbar gemacht werden. Dies ist durch Software auf der
-        TK-Anlage möglich (Backups, Hot-Standby) und/oder durch Hardware
-        (RAID, …). Entsprechende Maßnahmen sind nicht durch die TK-Anlage
-        allein zu garantieren sondern liegen immer auch in der Verantwortung
-        des IT-Administrators.</para>
+        angemessen verfügbar gemacht werden. Dies ist zu einem gewissen Grad
+        durch Software auf der TK-Anlage möglich (Backups, Hot-Standby)
+        und/oder durch Hardware (RAID, …). Entsprechende Maßnahmen sind nicht
+        durch die TK-Anlage allein zu garantieren sondern liegen in der
+        Verantwortung des IT-Administrators.</para>
 
         <para>#OPTIMIZE An separater Stelle Backup-Empfehlungen nennen
         (Meilenstein 7).</para>
@@ -186,6 +235,8 @@
       <section xml:id="tlstk-m-tk-40">
         <title><literal>M-TK-40</literal> Einschränkungen von DNS für
         VoIP</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>In der TK-Anlage und über das Provisioning damit auch in den
         Endgeräten können sowohl Host-Namen als auch IP-Adressen verwendet
@@ -199,6 +250,9 @@
       <section xml:id="tlstk-m-tk-41">
         <title><literal>M-TK-41</literal> Einschränkung von ENUM</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>ENUM kommt derzeit nicht zum Einsatz, somit besteht hier keine
         Gefährdung.</para>
       </section>
@@ -210,6 +264,9 @@
       <section xml:id="tlstk-m-tk-42">
         <title><literal>M-TK-42</literal> Sicherung von IP-Telefonen in
         unübersichtlichen Umgebungen</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>In unübersichtlichen Umgebungen (Lobbys, Besprechungsräume etc.)
         werden laut Empfehlung von Gemeinschaft nur Endgeräte mit
@@ -234,6 +291,9 @@
         <title><literal>M-TK-43</literal> Warnung bei unsicheren
         Einstellungen</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Für den erhöhten Schutzbedarf werden die Geräte von Gemeinschaft
         durch die Provisionierung so konfiguriert daß unsichere Merkmale
         &#8211; insbesondere eine deaktivierte Ende-zu-Ende-Verschlüsselung
@@ -250,6 +310,9 @@
       <section xml:id="tlstk-m-tk-44">
         <title><literal>M-TK-44</literal> Prozess zur Behandlung des Verlusts
         eines VoIP-Endgeräts</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Auf VoIP-Endgeräten ist Sorgfalt geboten bei der Speicherung
         vertrauenswürdiger Daten. Generell sollen beispielsweise Paßwörter
@@ -268,18 +331,24 @@
       <section xml:id="tlstk-m-tk-45">
         <title><literal>M-TK-45</literal> Absicherung der Firmware</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Die Integrität und Authentizität von Firmware-Dateien muß
         überprüft werden. Voraussetzung hierfür ist daß der Hersteller seine
         Firmware digital signiert und eine Prüfsumme bereitstellt.</para>
 
         <para>Die Firmware-Dateien werden entweder direkt im Image
-        („Appliance“) des Gemeinschaft-Systems mitgeliefert oder müssen vom
-        IT-Administrator geprüft werden.</para>
+        („<foreignphrase xml:lang="en">Appliance</foreignphrase>“) des
+        Gemeinschaft-Systems mitgeliefert oder müssen vom IT-Administrator
+        geprüft werden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-46">
         <title><literal>M-TK-46</literal> Absicherung von
         Konfigurationsdateien</title>
+
+        <para><emphasis>Verantwortung: Software</emphasis></para>
 
         <para>Die Übertragung der Konfigurationsparameter vom
         Provisioning-Dienst in Gemeinschaft zu den Telefonen erfolgt
@@ -290,6 +359,9 @@
       <section xml:id="tlstk-m-tk-47">
         <title><literal>M-TK-47</literal> Sicherheit von Softphones</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Softphones kommen derzeit nicht zum Einsatz, somit sind
         Sicherheitsschwachstellen auf PCs hier nicht relevant.</para>
       </section>
@@ -297,6 +369,8 @@
       <section xml:id="tlstk-m-tk-48">
         <title><literal>M-TK-48</literal> Sichere Konfiguration von PC-Ports
         an IP-Telefonen</title>
+
+        <para><emphasis>Verantwortung: Software</emphasis></para>
 
         <para>Sofern vorhanden werden PC-Ports an IP-Telefonen
         deaktiviert.</para>
@@ -306,11 +380,14 @@
         <title><literal>M-TK-49</literal> Sichere Konfiguration von IP und von
         IP-basierten Diensten</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Sofern das eingesetzte IP-Telefon entsprechende Einstellungen
-        bietet werden das Versenden und die Reaktion auf Gratuitous ARP
-        deaktivert. Sofern der Administrator andere Firmware-Versionen
-        einsetzt muß er das Verhalten der Endgeräte entsprechend
-        testen.</para>
+        bietet werden das Versenden und die Reaktion auf <foreignphrase
+        xml:lang="en">Gratuitous ARP</foreignphrase> deaktivert. Sofern der
+        Administrator andere Firmware-Versionen einsetzt muß er das Verhalten
+        der Endgeräte entsprechend testen.</para>
 
         <para>Viele IP-Telefone bieten einen auf dem Gerät integrierten
         Web-Server zur Konfiguration und zum Auslesen von Log-Daten. Dieser
@@ -320,6 +397,8 @@
       <section xml:id="tlstk-m-tk-50">
         <title><literal>M-TK-50</literal> Einschränkung des lokalen Zugriffs
         auf die Konfiguration des IP-Telefons</title>
+
+        <para><emphasis>Verantwortung: Software</emphasis></para>
 
         <para>Auf IP-Telefonen können über Tasten und Menüs lokal am Gerät
         Einstellungen verändert werden. Dabei ist zu unterscheiden zwischen
@@ -340,12 +419,17 @@
         <title><literal>M-TK-51</literal> Benutzerabhängige
         Berechtigungen</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Die TK-Anlage Gemeinschaft unterstützt das An- und Abmelden von
-        Benutzern an Telefonen („Hot-Desking“ / „Mobility“) mittels
-        PIN-Nummern. Gemeinschaft verlangt PIN-Nummern mit einer einstellbaren
-        Mindestlänge. Dabei gibt es generell ein menschliches Problem:
-        PIN-Nummern die länger als 4 bis 6 Ziffern sind werden häufig per
-        Post-It-Zetteln an das Endgerät geklebt.</para>
+        Benutzern an Telefonen („<foreignphrase xml:lang="en">Hot
+        Desking</foreignphrase>“ / „<foreignphrase xml:lang="en">Corporate
+        Mobility</foreignphrase>“) mittels PIN-Nummern. Gemeinschaft verlangt
+        PIN-Nummern mit einer einstellbaren Mindestlänge. Dabei gibt es
+        generell ein menschliches Problem: PIN-Nummern die länger als 4 bis 6
+        Ziffern sind werden häufig per Post-It-Zetteln an das Endgerät
+        geklebt.</para>
 
         <para>Aus Sicherheitsgründen gibt es &#8211; zusätzlich zu der
         Absicherung durch die PIN-Nummer &#8211; ein Berechtigungssystem.
@@ -360,6 +444,8 @@
         <title><literal>M-TK-52</literal> Schutz von Teilnehmer-spezifischen
         Daten auf einem IP-Telefon</title>
 
+        <para><emphasis>Verantwortung: Software</emphasis></para>
+
         <para>Mit der TK-Anlage Gemeinschaft wird in der Standard-Installation
         die Speicherung der folgenden Teilnehmer-spezifischen Daten auf den
         Telefonen deaktiviert: Anruflisten, persönliche Kontakte,
@@ -371,18 +457,30 @@
     <section xml:id="tlstk-m-voip-systeme-netzwerk">
       <title>Netzwerk</title>
 
+      <note>
+        <para>Gestrichen, da der Aufbau und Betrieb der Netzwerk-Infrastruktur
+        nicht im Einflußbereich der Software liegt.</para>
+      </note>
+
+      <!--
       <section xml:id="tlstk-m-tk-53">
         <title><literal>M-TK-53</literal> Sichere Konfiguration der
         Netzwerk-Komponenten</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die sichere Konfiguration der zur VoIP-Infrastuktur gehörenden
         Switche und Router liegt außerhalb des Einflußbereichs der TK-Anlage
         Gemeinschaft und damit im Verantwortungsbereich des
         Netzwerk-Administrators.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-54">
         <title><literal>M-TK-54</literal> Sicheres Routing</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die sichere Konfiguration der zur VoIP-Infrastuktur gehörenden
         Switche und Router im Hinblick auf Routing-Tabellen und den sicheren
@@ -390,26 +488,38 @@
         Einflußbereichs der TK-Anlage Gemeinschaft und damit im
         Verantwortungsbereich des Netzwerk-Administrators.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-55">
         <title><literal>M-TK-55</literal> Absicherung von Switch-Ports</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die sichere Konfiguration von Access-Ports an Switchen &#8211;
         beispielsweise im Bezug auf verschiedene Spoofing-Attacken &#8211;
         liegt außerhalb des Einflußbereichs der TK-Anlage Gemeinschaft und
         damit im Verantwortungsbereich des Netzwerk-Administrators.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-56">
         <title><literal>M-TK-56</literal> Absicherung der DHCP-Nutzung</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Der Netzwerk-Administrator ist angehalten auf den Switches die
         Mechanismen zur Blockierung von DHCP-Snooping zu aktivieren.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-57">
         <title><literal>M-TK-57</literal> Quality of Service im
         Netzwerk</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Es obliegt dem Netzwerk-Administrator die Netzwerk-Infrastruktur
         ausreichend zu dimensionieren. Bei Anbindung per WAN soll darauf
@@ -417,19 +527,27 @@
         die Übertragung von Sprachdaten in nahezu der höchsten Klasse
         stattfindet.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-58">
         <title><literal>M-TK-58</literal> Zugangskontrolle zum
         Netzwerk</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Bei erhöhtem Schutzbedarf soll der Netzwerk-Administrator die
         LAN-Zugänge der VoIP-Endgeräte durch IEEE 802.1X mit EAP-TLS
         absichern. EAP-MD5 ist zu vermeiden.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-59">
         <title><literal>M-TK-59</literal> MAC Security im Anschlussbereich für
         Endgeräte</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Mit der TK-Anlage Gemeinschaft kommt
         Ende-zu-Ende-Verschlüsselung zum Einsatz.</para>
@@ -437,9 +555,13 @@
         <para>Zusätzlich obliegt es dem Netzwerk-Administrator die LAN-Zugänge
         per IEEE 802.1AE abzusichern.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-60">
         <title><literal>M-TK-60</literal> Netztrennung für VoIP</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Der Netzwerk-Administrator ist angehalten für die
         VoIP-Kommunikation ein separates VLAN zu verwenden zu dem per
@@ -453,10 +575,14 @@
         Endgeräte oder nur für Notruf-Telefone und Geräte in besonders
         kritischen Bereichen.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-61">
         <title><literal>M-TK-61</literal> Angemessene Verfügbarkeit des LAN
         für die Verwendung von VoIP</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die LAN-Infrastruktur ist vom Netzwerk-Administrator nach
         Möglichkeit hochverfügbar auszulegen. Die in der TLSTK genannten
@@ -464,25 +590,34 @@
         Kabelführung, Wege-Redundanz, Modul-Redundanz, permanente
         Überwachung.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-62">
         <title><literal>M-TK-62</literal> Angemessene Verfügbarkeit der vom
         VoIP-System genutzten Netzdienste</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Von der VoIP-Telefonie mitgenutze Dienste wie z.B. DHCP, DNS,
         Verzeichnisdienste sind vom IT-Administrator redundant und verfügbar
         auszulegen.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-63">
         <title><literal>M-TK-63</literal> Angemessene Verfügbarkeit der
         Stromversorgung für IP-Telefone</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Der IT-Administrator hat dafür Sorge zu tragen daß für die
         IP-Telefone eine angemessene Stromversorgung per USV verfügbar ist,
         sowohl bei der Versorgung per PoE (Power over Ethernet) als auch
         herkömmlich.</para>
       </section>
+      -->
     </section>
 
     <section xml:id="tlstk-m-voip-systeme-netz-und-systemmanagement">
@@ -491,6 +626,9 @@
       <section xml:id="tlstk-m-tk-64">
         <title><literal>M-TK-64</literal> Sichere Administration des
         Telefonie-Servers</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Der TK-Server wird (neben reinen Paketen auch als) komplettes
         Image bereitgestellt und basiert dann auf einem bereits gehärteten
@@ -503,62 +641,86 @@
         Institution.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-65">
         <title><literal>M-TK-65</literal> Sichere Administration von
         PSTN-Gateways</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Die Administration von PSTN-Gateways liegt außerhalb des
         Einflußbereichs von Gemeinschaft und damit in der Verantwortung des
         IT-Administrators.</para>
       </section>
+      -->
 
       <section xml:id="tlstk-m-tk-66">
         <title><literal>M-TK-66</literal> Sichere Administration von
         Anwendungs- und Management-Servern</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>TK-Anwendungen wie der Voicemail-Dienst befinden sich bei
-        Gemeinschaft in der Standart-Installation auf dem Telefonie-Server,
+        Gemeinschaft in der Standard-Installation auf dem Telefonie-Server,
         daher gilt hier <xref linkend="tlstk-m-tk-46" />.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-67">
         <title><literal>M-TK-67</literal> Sichere Administration von
         Abrechnungs- und Gebührenerfassungssystemen</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Soweit die Institution zusätzliche Abrechnungssysteme einsetzt
         hat sie dafür Sorge zu tragen diese Systeme und den Transport der
         Daten zu diesen abzusichern.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-68">
         <title><literal>M-TK-68</literal> Sichere Verwaltung von
         Teilnehmerprofilen</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Angefertigte Backups der Konfigurations- und Log-Daten müssen
         auf dem Transportweg und bei der Speicherung abgesichert sein. Dazu
         sollten verschlüsselte Backups zum Einsatz kommen.</para>
       </section>
+      -->
 
       <section xml:id="tlstk-m-tk-69">
         <title><literal>M-TK-69</literal> Sichere Administration von
         Endgeräten</title>
 
+        <para><emphasis>Verantwortung: Software</emphasis></para>
+
         <para>Nach der Provisionierung der Endgeräte per HTTPS findet auf
         diese kein weiterer administrativer Zugriff statt.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-70">
         <title><literal>M-TK-70</literal> Sichere Administration von
         Netzkomponenten</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die Administration der Netzwerk-Infrastruktur (Switches, Router)
         liegt außerhalb des Einflußbereichs von Gemeinschaft und somit in der
         Verantwortung des Netzwerk-Administrators.</para>
       </section>
+      -->
 
       <section xml:id="tlstk-m-tk-71">
         <title><literal>M-TK-71</literal> Überwachung der Komponenten des
         VoIP-Systems</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die Überwachung der Telefonie-Server ist Aufgabe des
         IT-Administrators. Gemeinschaft stellt als Schnittstelle optional
@@ -581,22 +743,32 @@
         <title><literal>M-TK-72</literal> Produktauswahl von VoIP-Lösungen
         unter Sicherheitsgesichtspunkten</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>In der Standard-Installation wird die TK-Anlage Gemeinschaft
         bereits als ein komplettes Image bereitgestellt das auf einem
         minimalen und gehärteten System basiert.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-73">
         <title><literal>M-TK-73</literal> Datensicherung für die Elemente des
         VoIP-Systems</title>
 
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
+
         <para>Backup-Mechanismen sind von den IT-Administratoren in den
         zentralen Datensicherungsplan der Institution zu integrieren.</para>
       </section>
+      -->
 
       <section xml:id="tlstk-m-tk-74">
         <title><literal>M-TK-74</literal> Notfallvorsorge für das
         VoIP-System</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Da ein kompletter Ausfall der Telefonie nach aller Möglichkeit
         zu vermeiden ist bietet Gemeinschaft einen automatischen
@@ -628,19 +800,32 @@
       <title>Auslegung der passiven Netzinfrastruktur bei erhöhtem
       Schutzbedarf</title>
 
+      <note>
+        <para>Gestrichen, da der Aufbau und Betrieb der Netzwerk-Infrastruktur
+        nicht im Einflußbereich der Software liegt.</para>
+      </note>
+
+      <!--
       <section xml:id="tlstk-m-tk-140">
         <title><literal>M-TK-140</literal> Sichere Kabelführung</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Sichere Kabelführung ist grundsätzlich (d.h. nicht
         TK-spezifisch) Aufgabe der jeweiligen Institution.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-141">
         <title><literal>M-TK-141</literal> Redundante Kabelführung</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Redundante Kabelführung ist grundsätzlich (d.h. nicht
         TK-spezifisch) Aufgabe der jeweiligen Institution.</para>
       </section>
+      -->
     </section>
 
     <section xml:id="tlstk-m-systemuebergreifende-aspekte-absicherung-von-servern">
@@ -649,6 +834,9 @@
       <section xml:id="tlstk-m-tk-142">
         <title><literal>M-TK-142</literal> Härtung von Servern des
         Telekommunikationssystems</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>In der Standard-Installation wird die TK-Anlage Gemeinschaft
         bereits als ein komplettes Image bereitgestellt das auf einem
@@ -659,6 +847,9 @@
         <title><literal>M-TK-143</literal> Einschränkung und Kontrolle von
         Berechtigungen für die Administration eines Servers des
         Telekommunikationssystems</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Ein Berechtigungssystem für die Web-Schnittstellen von
         Gemeinschaft mit Benutzern, Gruppen und Rollen ist im weiteren Verlauf
@@ -674,18 +865,25 @@
         Wartungs-Dienstleistern Shell-Zugriff auf das System zu geben.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-144">
         <title><literal>M-TK-144</literal> Einschränkung und Kontrolle des
         Zugangs zu einem Server des Telekommunikationssystems</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Sofern der TK-Server in die Authentisierungsmechanismen der
         Institution eingebunden werden sollen ist diese für die konkrete
         Umsetzung (Verzeichnisdienst, Smart-Cards) verantwortlich.</para>
       </section>
+      -->
 
+      <!--
       <section xml:id="tlstk-m-tk-145">
         <title><literal>M-TK-145</literal> Physikalische Sicherheit der
         Server</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die TK-Server sind durch verschlossene Server-Räume und
         -Schränke vor physischem Zugriff durch Unberechtigte zu schützen, bei
@@ -694,9 +892,12 @@
         Umwelteinflüssen (Feuer, Wasser, Blitzschlag etc.) erforderlich. Die
         physische Absicherung obliegt der jeweiligen Institution.</para>
       </section>
+      -->
 
       <section xml:id="tlstk-m-tk-146">
         <title><literal>M-TK-146</literal> Mehrstufiges Backup-Konzept</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die konkrete Umsetzung von Backup-Mechanismen ist Aufgabe der
         IT-Administratoren.</para>
@@ -708,6 +909,9 @@
       <section xml:id="tlstk-m-tk-147">
         <title><literal>M-TK-147</literal> Schutz vor schadenstiftender
         Software</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Die TK-Anlage Gemeinschaft wird in der Standard-Installation als
         Image bereitgestellt das auf einem gehärteten System basiert. Eine
@@ -726,20 +930,23 @@
         gilt auch für private Computer, aber die haben hier keine
         Relevanz.)</para>
 
-        <para>Schadcode der sich durch Protokoll-Implementierungsfehler per
-        HTTPS oder SIP verbreiten kann fällt im Vergleich des Volumens dazu
-        kaum ins Gewicht.</para>
+        <para>Schad-Code der sich durch Protokoll-Implementierungsfehler in
+        SIP- oder HTTPS-Stacks verbreiten kann fällt im Vergleich des Volumens
+        dazu kaum ins Gewicht.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-148">
         <title><literal>M-TK-148</literal> Software-Sicherheit inkl.
         Patch-Management</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Gemeinschaft wird in der Standard-Installation als Image
         bereitgestellt das auf einem gehärteten System basiert. Als
         Betriebssystem kommt dabei Debian Linux in der stabilen Version
         („stable“) zum Einsatz. Sicherheitsrelevante Änderungen werden daher
-        über das Palet-Management-System der Linux-Distribution
+        über das Paket-Management-System der Linux-Distribution
         bereitgestellt.</para>
 
         <para>TK-Installationen mit ihren jeweiligen Endgeräten und
@@ -760,6 +967,9 @@
         <title><literal>M-TK-149</literal> Sichere Konfiguration des
         Netzwerkmanagement-Protokolls</title>
 
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
+
         <para>Die TK-Anlage Gemeinschaft stellt optional eine
         SNMPv3-Schnittstelle bereit. Aus Sicherheitsgründen ist der Zugriff
         per SNMPv1 oder SNMPv2 nicht erlaubt.</para>
@@ -774,14 +984,18 @@
         auch dies deaktiviert.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-150">
         <title><literal>M-TK-150</literal> Überwachung der Komponenten des
         Telekommunikationssystems</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die IT-Administratoren haben die TK-Anlage der erforderlichen
         Verfügbarkeit entsprechend mit einem zentralen System per SNMP und
         Syslog zu überwachen.</para>
       </section>
+      -->
     </section>
 
     <section xml:id="tlstk-m-systemuebergreifende-aspekte-datenschutz">
@@ -789,6 +1003,9 @@
 
       <section xml:id="tlstk-m-tk-151">
         <title><literal>M-TK-151</literal> Schutz von Verbindungsdaten</title>
+
+        <para><emphasis>Verantwortung: Software,
+        Administrator</emphasis></para>
 
         <para>Auf der TK-Anlage Gemeinschaft fallen CDRs (Call Detail Records,
         also Verbindungsdaten) an und werden gespeichert. Die CDRs enthalten
@@ -805,9 +1022,12 @@
         Anschluß-Projekt implementiert.</para>
       </section>
 
+      <!--
       <section xml:id="tlstk-m-tk-152">
         <title><literal>M-TK-152</literal> Sichere Außerbetriebnahme von
         Komponenten des Telekommunikationssystems</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Auf Datenträgern der TK-Anlage werden schutzbedürftige und
         personenbezogene Daten gespeichert. Es obliegt der jeweiligen
@@ -816,19 +1036,29 @@
         ggf. auch physisch zu zerstören. Die konkrete Vorgehensweise hängt
         dabei von den jeweiligen Datenträgern ab.</para>
       </section>
+      -->
     </section>
 
     <section xml:id="tlstk-m-systemuebergreifende-aspekte-auswahl-von-diensteanbietern">
       <title>Auswahl von Diensteanbietern</title>
 
+      <note>
+        <para>Gestrichen, da die Auswahl von Diensteanbietern (z.B. Providern)
+        nicht im Einflußbereich der Software liegt.</para>
+      </note>
+
+      <!--
       <section xml:id="tlstk-m-tk-153">
         <title><literal>M-TK-153</literal> Nachweis der Vertrauenswürdigkeit
         des Diensteanbieters</title>
+
+        <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Die Auswahl von Diensteanbietern (beispielsweise Providern) in
         Bezug auf deren Vertrauenswürdigkeit obliegt der jeweiligen
         Institution.</para>
       </section>
+      -->
     </section>
   </section>
 </section>
