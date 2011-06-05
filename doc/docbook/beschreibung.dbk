@@ -30,7 +30,7 @@
   <para>Die folgende Skizze zeigt ein Single-Server-SiVoIP-System auf Basis
   von Gemeinschaft 4.0:<mediaobject>
       <imageobject>
-        <imagedata align="center" fileref="sivoip_single_server.png"
+        <imagedata align="center" fileref="sivoip-single-server.png"
                    format="PNG" width="99%"></imagedata>
       </imageobject>
     </mediaobject></para>
