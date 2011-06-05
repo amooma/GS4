@@ -30,7 +30,7 @@
   <para>Die folgende Skizze zeigt ein Single-Server-SiVoIP-System auf Basis
   von Gemeinschaft 4.0:<mediaobject>
       <imageobject>
-        <imagedata align="center" fileref="sivoip_single_server.png"
+        <imagedata align="center" fileref="sivoip-single-server.png"
                    format="PNG" width="99%"></imagedata>
       </imageobject>
     </mediaobject></para>
@@ -40,38 +40,38 @@
 
   <orderedlist>
     <listitem>
-      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
-      Sämtliche Kommunikation geschieht über einen RESTful
-      HTTP(S)-Aufruf.</para>
+      <para>Kommunikation über ein Interface im REST-Stil („<foreignphrase
+      xml:lang="en">REST&#8203;ful</foreignphrase>“). Die Web-GUI kann nicht
+      direkt auf Free&#8203;Switch oder die Datenbank zugreifen. Sämtliche
+      Kommunikation geschieht über HTTP(S)-Aufrufe.</para>
     </listitem>
 
     <listitem>
-      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
-      Sämtliche Kommunikation geschieht über einen RESTful
-      HTTP(S)-Aufruf.</para>
+      <para>Kommunikation über ein Interface im REST-Stil („<foreignphrase
+      xml:lang="en">REST&#8203;ful</foreignphrase>“). Die Web-GUI kann nicht
+      direkt auf Free&#8203;Switch oder die Datenbank zugreifen. Sämtliche
+      Kommunikation geschieht über HTTP(S)-Aufrufe.</para>
     </listitem>
 
     <listitem>
-      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
-      Sämtliche Kommunikation geschieht über einen RESTful
-      HTTP(S)-Aufruf.</para>
+      <para>Kommunikation über ein Interface im REST-Stil („<foreignphrase
+      xml:lang="en">REST&#8203;ful</foreignphrase>“). Die Web-GUI kann nicht
+      direkt auf Free&#8203;Switch oder die Datenbank zugreifen. Sämtliche
+      Kommunikation geschieht über HTTP(S)-Aufrufe.</para>
     </listitem>
 
     <listitem>
       <para>Die Kommunikation zwischen dem Kern von Gemeinschafts und der
-      Datenbank erfolgt per SQL. Durch die Verwendung von Active-Record als
-      Bibliothek wird sichergestellt, dass nur valides SQL benutzt wird und
-      die Datenbank bei Bedarf gegen eine andere SQL-Datenbank ausgetauscht
-      werden kann.</para>
+      Datenbank erfolgt per SQL. Durch die Verwendung von
+      <literal>ActiveRecord</literal> als Bibliothek wird sichergestellt, dass
+      nur valides SQL benutzt wird und die Datenbank bei Bedarf gegen eine
+      andere SQL-Datenbank ausgetauscht werden kann.</para>
     </listitem>
 
     <listitem>
       <para>Die Kommunikation zwischen Free&#8203;Switch und dem Kern von
-      Gemeinschaft 4.0 erfolgt über eine REST&#8203;ful
-      HTTP(S)-Schnittstelle.</para>
+      Gemeinschaft 4.0 erfolgt über eine HTTP(S)-Schnittstelle im REST-Stil
+      („<foreignphrase xml:lang="en">REST&#8203;ful</foreignphrase>“).</para>
     </listitem>
 
     <listitem>
@@ -96,14 +96,16 @@
     </listitem>
 
     <listitem>
-      <para>Die Kommunikation vom xyz-Proxy mit dem PSTN-Netz oder
-      xyz-Telefonen erfolgt über das xyz-Protokoll. xyz steht hier
-      exemplarisch für alle zukünfigten VoIP-Protokolle.</para>
+      <para>Die Kommunikation vom <replaceable>xyz</replaceable>-Proxy mit
+      einem Media-Gateway oder <replaceable>xyz</replaceable>-Telefonen
+      erfolgt über das <replaceable>xyz</replaceable>-Protokoll.
+      <replaceable>xyz</replaceable> steht hier exemplarisch für alle
+      zukünfigten VoIP-Protokolle.</para>
     </listitem>
 
     <listitem>
-      <para>Der SIP-Proxy (Kamailio) spricht per SIP mit dem PSTN (dem
-      Festnetz).</para>
+      <para>Der SIP-Proxy (Kamailio) spricht per SIP mit einem Media-Gateway,
+      z.B. zum PSTN (dem Festnetz).</para>
     </listitem>
 
     <listitem>
