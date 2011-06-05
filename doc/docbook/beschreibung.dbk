@@ -40,24 +40,24 @@
 
   <orderedlist>
     <listitem>
-      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
-      Sämtliche Kommunikation geschieht über einen RESTful
-      HTTP(S)-Aufruf.</para>
+      <para>Kommunikation über ein Interface im REST-Stil („<foreignphrase
+      xml:lang="en">REST&#8203;ful</foreignphrase>“). Die Web-GUI kann nicht
+      direkt auf Free&#8203;Switch oder die Datenbank zugreifen. Sämtliche
+      Kommunikation geschieht über HTTP(S)-Aufrufe.</para>
     </listitem>
 
     <listitem>
-      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
-      Sämtliche Kommunikation geschieht über einen RESTful
-      HTTP(S)-Aufruf.</para>
+      <para>Kommunikation über ein Interface im REST-Stil („<foreignphrase
+      xml:lang="en">REST&#8203;ful</foreignphrase>“). Die Web-GUI kann nicht
+      direkt auf Free&#8203;Switch oder die Datenbank zugreifen. Sämtliche
+      Kommunikation geschieht über HTTP(S)-Aufrufe.</para>
     </listitem>
 
     <listitem>
-      <para>Kommunikation über ein REST&#8203;ful Interface. Die Web-GUI kann
-      nicht direkt auf Free&#8203;Switch oder die Datenbank zugreifen.
-      Sämtliche Kommunikation geschieht über einen RESTful
-      HTTP(S)-Aufruf.</para>
+      <para>Kommunikation über ein Interface im REST-Stil („<foreignphrase
+      xml:lang="en">REST&#8203;ful</foreignphrase>“). Die Web-GUI kann nicht
+      direkt auf Free&#8203;Switch oder die Datenbank zugreifen. Sämtliche
+      Kommunikation geschieht über HTTP(S)-Aufrufe.</para>
     </listitem>
 
     <listitem>
@@ -70,8 +70,8 @@
 
     <listitem>
       <para>Die Kommunikation zwischen Free&#8203;Switch und dem Kern von
-      Gemeinschaft 4.0 erfolgt über eine REST&#8203;ful
-      HTTP(S)-Schnittstelle.</para>
+      Gemeinschaft 4.0 erfolgt über eine HTTP(S)-Schnittstelle im REST-Stil
+      („<foreignphrase xml:lang="en">REST&#8203;ful</foreignphrase>“).</para>
     </listitem>
 
     <listitem>
