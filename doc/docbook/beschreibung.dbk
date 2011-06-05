@@ -96,14 +96,16 @@
     </listitem>
 
     <listitem>
-      <para>Die Kommunikation vom xyz-Proxy mit dem PSTN-Netz oder
-      xyz-Telefonen erfolgt über das xyz-Protokoll. xyz steht hier
-      exemplarisch für alle zukünfigten VoIP-Protokolle.</para>
+      <para>Die Kommunikation vom <replaceable>xyz</replaceable>-Proxy mit
+      einem Media-Gateway oder <replaceable>xyz</replaceable>-Telefonen
+      erfolgt über das <replaceable>xyz</replaceable>-Protokoll.
+      <replaceable>xyz</replaceable> steht hier exemplarisch für alle
+      zukünfigten VoIP-Protokolle.</para>
     </listitem>
 
     <listitem>
-      <para>Der SIP-Proxy (Kamailio) spricht per SIP mit dem PSTN (dem
-      Festnetz).</para>
+      <para>Der SIP-Proxy (Kamailio) spricht per SIP mit einem Media-Gateway,
+      z.B. zum PSTN (dem Festnetz).</para>
     </listitem>
 
     <listitem>
