@@ -62,10 +62,10 @@
 
     <listitem>
       <para>Die Kommunikation zwischen dem Kern von Gemeinschafts und der
-      Datenbank erfolgt per SQL. Durch die Verwendung von Active-Record als
-      Bibliothek wird sichergestellt, dass nur valides SQL benutzt wird und
-      die Datenbank bei Bedarf gegen eine andere SQL-Datenbank ausgetauscht
-      werden kann.</para>
+      Datenbank erfolgt per SQL. Durch die Verwendung von
+      <literal>ActiveRecord</literal> als Bibliothek wird sichergestellt, dass
+      nur valides SQL benutzt wird und die Datenbank bei Bedarf gegen eine
+      andere SQL-Datenbank ausgetauscht werden kann.</para>
     </listitem>
 
     <listitem>
