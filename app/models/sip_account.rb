@@ -37,16 +37,16 @@ class SipAccount < ActiveRecord::Base
     :message => "must not be set if the SIP account does not have a voicemail server."
   
   after_validation( :on => :create ) {
-    if (! self.sip_server_id.nil?) \
-    && (! self.sip_proxy_id.nil?) \
+    if ( self.sip_server ) \
+    && ( self.sip_proxy ) \
     && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
       create_subscriber()
     end
   }
   
   after_validation( :on => :update ) {
-    if (! self.sip_server_id.nil?) \
-    && (! self.sip_proxy_id.nil?) \
+    if ( self.sip_server ) \
+    && ( self.sip_proxy ) \
     && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
       update_subscriber()
     else
