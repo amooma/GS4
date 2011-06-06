@@ -860,6 +860,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-vmenu-$' ) {
 					xml.action( :application => 'log', :data => 'INFO [GS] User ${sip_from_user}@${domain_name} is checking the voicemail ...' )
 					xml.action( :application => 'set', :data => 'voicemail_authorized=true' )
+					xml.action( :application => 'answer')
 					xml.action( :application => 'voicemail', :data => 'check default ${domain_name} ${sip_from_user}' )
 				}
 			}
