@@ -871,9 +871,9 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )
 				}
 			}
-			xml.extension( :name => 'catch-all') {
-				xml.condition( :field => 'destination_number', :expression => '^(.+)$') {
-					xml.action( :application => 'bridge', :data => 'sofia/internal/$1@$${domain};fs_path=sip:127.0.0.1:5060')
+			xml.extension( :name => 'catch-all' ) {
+				xml.condition( :field => 'destination_number', :expression => '^(.+)$' ) {
+					xml.action( :application => 'bridge', :data => 'sofia/internal/$1@$${domain};fs_path=sip:127.0.0.1:5060' )
 				}
 			}
 			
