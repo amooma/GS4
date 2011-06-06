@@ -666,6 +666,18 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 		}
 
+		xml.configuration( :name => 'fax.conf', :description => 'FAX application configuration' ) {
+			xml.settings {
+				xml.param( :name => 'use-ecm', :value => 'true' )
+				xml.param( :name => 'verbose', :value => 'true' )
+				xml.param( :name => 'disable-v17', :value => 'false' )
+				xml.param( :name => 'ident', :value => 'Gemeinschaft4 FAX Ident' )
+				xml.param( :name => 'header', :value => 'Gemeinschaft4 FAX Header' )
+				xml.param( :name => 'spool-dir', :value => '/tmp' )
+				xml.param( :name => 'file-prefix', :value => 'fax' )
+			}
+		}
+
 		xml.configuration( :name => 'modules.conf', :description => 'Modules' ) {
 			xml.modules {
 				xml.tag!( 'load', :module => 'mod_console' )
@@ -687,7 +699,6 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.tag!( 'load', :module => 'mod_valet_parking' )
 				xml.tag!( 'load', :module => 'mod_curl' )
 				xml.tag!( 'load', :module => 'mod_dialplan_xml' )
-				xml.tag!( 'load', :module => 'mod_voipcodecs' )
 				xml.tag!( 'load', :module => 'mod_sndfile' )
 				xml.tag!( 'load', :module => 'mod_native_file' )
 				xml.tag!( 'load', :module => 'mod_local_stream' )
