@@ -3,14 +3,12 @@ class SipAccountsController < ApplicationController
   before_filter :authenticate_user!
   
   before_filter { |controller|
-    @sip_phones   = SipPhone  .order([ :node_id, :phone_id ])
     @sip_servers  = SipServer .order([ :host ])
     @sip_proxies  = SipProxy  .order([ :host ])
     @voicemail_servers = VoicemailServer .order([ :host ])
     @users        = User      .order([ :sn, :gn, :username ])
     
     @num_users       = User      .count
-    @num_sip_phones  = SipPhone  .count
   }
   
   # GET /sip_accounts
