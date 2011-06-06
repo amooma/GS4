@@ -59,6 +59,8 @@
 
   <xi:include href="frontend.xml" />
 
+  <xi:include href="gui-admin.dbk" />
+
   <xi:include href="integration.xml" />
 
   <xi:include href="architektur.dbk" />
