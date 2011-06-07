@@ -54,7 +54,7 @@
     <xi:include href="installation-gs4-debian-6-skript.dbk" />
   </chapter>
 
-  <xi:include href="frontend.xml" />
+  <xi:include href="gui-admin-erste-schritte.dbk" />
 
   <xi:include href="gui-admin.dbk" />
 
