@@ -68,6 +68,8 @@ class Phone < ActiveRecord::Base
 					self.http_password = self.phone_model.default_http_password
 				end
 				
+				#OPTIMIZE @pko: Add timeouts to the requests? Or make them background jobs?
+				
 				if self.phone_model.manufacturer.ieee_name == "DeTeWe-Deutsche Telephonwerke" \
 				&& self.phone_model.reboot_request_path == 'logout.html'
 					
@@ -109,14 +111,14 @@ class Phone < ActiveRecord::Base
 				return success
 			)end
 			#OPTIMIZE Return something here.
-		#)
-		#rescue => error
-		#(
-		#	reboot_request.update_attributes({
-		#		:end        => Time.now,
-		#		:successful => false,
-		#	})
-		#	return 'error'  #OPTIMIZE return false?
+		)
+		rescue => error
+		(
+			reboot_request.update_attributes({
+				:end        => Time.now,
+				:successful => false,
+			})
+			return 'error'  #OPTIMIZE @pko: return false? Try again later?
 		)end
 	)end
 	
