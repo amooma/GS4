@@ -58,8 +58,6 @@
 
   <xi:include href="gui-admin.dbk" />
 
-  <xi:include href="integration.xml" />
-
   <xi:include href="architektur.dbk" />
 
   <xi:include href="sicherheitskonzept.dbk" />
