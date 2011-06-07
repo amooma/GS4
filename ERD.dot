@@ -282,14 +282,6 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="position">position <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 >];
-  m_SipPhone [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
-  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipPhone</font></td></tr>
-</table>
-|
-<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="phone_id">phone_id <font face="Arial Italic" color="grey60">integer</font></td></tr>
-</table>
->];
   m_SipProxy [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SipProxy</font></td></tr>
 </table>
@@ -404,6 +396,4 @@ digraph Gemeinschaft4 {
   m_PhoneModel -> m_PhoneModelCodec [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipAccount -> m_SipAccountToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipAccount -> m_SipAccountCodec [arrowhead = "normal", arrowtail = "none", weight = "1"]
-  m_SipPhone -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "1"]
-  m_Node -> m_SipPhone [arrowhead = "normal", arrowtail = "none", weight = "1"]
 }
