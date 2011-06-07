@@ -75,6 +75,10 @@
 					
 					<li><a href="#method-i-edit">#edit</a></li>
 					
+					<li><a href="#method-i-find_call_queue">#find_call_queue</a></li>
+					
+					<li><a href="#method-i-find_conference">#find_conference</a></li>
+					
 					<li><a href="#method-i-find_sip_account">#find_sip_account</a></li>
 					
 					<li><a href="#method-i-index">#index</a></li>
@@ -147,7 +151,31 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
+					<li><a href="./CallForward.html">CallForward</a></li>
+				
+					<li><a href="./CallForwardReason.html">CallForwardReason</a></li>
+				
+					<li><a href="./CallForwardsController.html">CallForwardsController</a></li>
+				
+					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
+				
+					<li><a href="./CallQueue.html">CallQueue</a></li>
+				
+					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
+				
+					<li><a href="./CallQueuesController.html">CallQueuesController</a></li>
+				
+					<li><a href="./CallQueuesHelper.html">CallQueuesHelper</a></li>
+				
 					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./Conference.html">Conference</a></li>
+				
+					<li><a href="./ConferenceToExtension.html">ConferenceToExtension</a></li>
+				
+					<li><a href="./ConferencesController.html">ConferencesController</a></li>
+				
+					<li><a href="./ConferencesHelper.html">ConferencesHelper</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
 				
@@ -158,6 +186,8 @@
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
 					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchConfigurationController.html">FreeswitchConfigurationController</a></li>
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
@@ -180,6 +210,8 @@
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
 				
 					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneBookInternalUsersController.html">PhoneBookInternalUsersController</a></li>
 				
 					<li><a href="./PhoneKey.html">PhoneKey</a></li>
 				
@@ -214,12 +246,6 @@
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
 					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
-				
-					<li><a href="./SipPhone.html">SipPhone</a></li>
-				
-					<li><a href="./SipPhonesController.html">SipPhonesController</a></li>
-				
-					<li><a href="./SipPhonesHelper.html">SipPhonesHelper</a></li>
 				
 					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
 				
@@ -302,34 +328,58 @@ POST /extensions POST /extensions.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 69</span>
-69:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-70:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
-71:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>])
-72:       
-73:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-74:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">save</span>
-75:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@extension</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully created.'</span> )}
-76:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
-77:         <span class="ruby-keyword kw">else</span>
-78:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-79:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-80:         <span class="ruby-keyword kw">end</span>
-81:       <span class="ruby-keyword kw">end</span>
-82:     <span class="ruby-keyword kw">else</span>
-83:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>])
-84:       
-85:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-86:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">save</span>
-87:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully created.'</span> )}
-88:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
-89:         <span class="ruby-keyword kw">else</span>
-90:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-91:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-92:         <span class="ruby-keyword kw">end</span>
-93:       <span class="ruby-keyword kw">end</span>
-94:     <span class="ruby-keyword kw">end</span>
-95:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 84</span>
+ 84:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+ 85:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
+ 86:      <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>])
+ 87:       
+ 88:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 89:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">save</span>
+ 90:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully created.'</span> )}
+ 91:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+ 92:         <span class="ruby-keyword kw">else</span>
+ 93:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+ 94:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+ 95:         <span class="ruby-keyword kw">end</span>
+ 96:       <span class="ruby-keyword kw">end</span>
+ 97:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@conference</span>.<span class="ruby-identifier">nil?</span>
+ 98:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@conference</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>])
+ 99:       
+100:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+101:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@conference</span>.<span class="ruby-identifier">save</span>
+102:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@conference</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully created.'</span> )}
+103:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@conference</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+104:         <span class="ruby-keyword kw">else</span>
+105:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+106:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+107:         <span class="ruby-keyword kw">end</span>
+108:       <span class="ruby-keyword kw">end</span>
+109:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@call_queue</span>.<span class="ruby-identifier">nil?</span>
+110:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@call_queue</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>])
+111:       
+112:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+113:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@call_queue</span>.<span class="ruby-identifier">save</span>
+114:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@call_queue</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully created.'</span> )}
+115:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@call_queue</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+116:         <span class="ruby-keyword kw">else</span>
+117:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+118:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+119:         <span class="ruby-keyword kw">end</span>
+120:       <span class="ruby-keyword kw">end</span>
+121:     <span class="ruby-keyword kw">else</span>
+122:      <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>])
+123:       
+124:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+125:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">save</span>
+126:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@extension</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully created.'</span> )}
+127:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+128:         <span class="ruby-keyword kw">else</span>
+129:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+130:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+131:         <span class="ruby-keyword kw">end</span>
+132:       <span class="ruby-keyword kw">end</span>
+133:     <span class="ruby-keyword kw">end</span>
+134:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -362,16 +412,16 @@ DELETE /extensions/1 DELETE /extensions/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 115</span>
-115:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-116:     <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>] )
-117:     <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">destroy</span>
-118:     
-119:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-120:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">extensions_url</span>) }
-121:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-122:     <span class="ruby-keyword kw">end</span>
-123:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 154</span>
+154:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+155:     <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>] )
+156:     <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">destroy</span>
+157:     
+158:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+159:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">extensions_url</span>) }
+160:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+161:     <span class="ruby-keyword kw">end</span>
+162:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -404,14 +454,14 @@ GET /extensions/1/edit
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 59</span>
-59:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-60:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
-61:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-62:     <span class="ruby-keyword kw">else</span>
-63:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-64:     <span class="ruby-keyword kw">end</span>
-65:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 74</span>
+74:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+75:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
+76:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+77:     <span class="ruby-keyword kw">else</span>
+78:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+79:     <span class="ruby-keyword kw">end</span>
+80:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -444,19 +494,19 @@ GET /extensions GET /extensions.xml
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 12</span>
-12:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-13:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
-14:       <span class="ruby-ivar">@extensions</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">all</span>
-15:     <span class="ruby-keyword kw">else</span>
-16:       <span class="ruby-ivar">@extensions</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>
-17:     <span class="ruby-keyword kw">end</span>
-18:     
-19:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-20:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
-21:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extensions</span> }
+    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 17</span>
+17:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+18:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
+19:       <span class="ruby-ivar">@extensions</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">all</span>
+20:     <span class="ruby-keyword kw">else</span>
+21:       <span class="ruby-ivar">@extensions</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>
 22:     <span class="ruby-keyword kw">end</span>
-23:   <span class="ruby-keyword kw">end</span></pre>
+23:     
+24:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+25:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
+26:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extensions</span> }
+27:     <span class="ruby-keyword kw">end</span>
+28:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -489,22 +539,32 @@ GET /extensions/new GET /extensions/new.xml
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 42</span>
-42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
-43:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
-44:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">new</span>
-45:     <span class="ruby-keyword kw">else</span>
-46:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>({
-47:         <span class="ruby-value">:active</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
-48:         <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:destination</span>],
-49:       })
-50:     <span class="ruby-keyword kw">end</span>
-51:     
-52:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-53:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-54:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
-55:     <span class="ruby-keyword kw">end</span>
-56:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+48:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
+49:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>({
+50:       <span class="ruby-value">:active</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+51:       <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:destination</span>],
+52:       })
+53:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@conference</span>.<span class="ruby-identifier">nil?</span>
+54:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@conference</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>({
+55:       <span class="ruby-value">:active</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+56:       <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:destination</span>],
+57:       })
+58:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@call_queue</span>.<span class="ruby-identifier">nil?</span>
+59:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@call_queue</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">build</span>({
+60:       <span class="ruby-value">:active</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+61:       <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:destination</span>],
+62:       })
+63:     <span class="ruby-keyword kw">else</span>
+64:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">new</span>
+65:     <span class="ruby-keyword kw">end</span>
+66:     
+67:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+68:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+69:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+70:     <span class="ruby-keyword kw">end</span>
+71:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -537,19 +597,19 @@ GET /extensions/1 GET /extensions/1.xml
 					<div class="method-source-code"
 						id="show-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 27</span>
-27:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
-28:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
-29:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-30:     <span class="ruby-keyword kw">else</span>
-31:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-32:     <span class="ruby-keyword kw">end</span>
-33:     
-34:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-35:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
-36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+    <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+33:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">nil?</span>
+34:       <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+35:     <span class="ruby-keyword kw">else</span>
+36:       <span class="ruby-ivar">@extension</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 37:     <span class="ruby-keyword kw">end</span>
-38:   <span class="ruby-keyword kw">end</span></pre>
+38:     
+39:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+40:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
+41:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span> }
+42:     <span class="ruby-keyword kw">end</span>
+43:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -582,20 +642,20 @@ PUT /extensions/1 PUT /extensions/1.xml
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 99</span>
- 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-100:     <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-101:     
-102:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-103:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>] )
-104:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@extension</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully updated.'</span> )}
-105:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-106:       <span class="ruby-keyword kw">else</span>
-107:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-108:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-109:       <span class="ruby-keyword kw">end</span>
-110:     <span class="ruby-keyword kw">end</span>
-111:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 138</span>
+138:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+139:     <span class="ruby-ivar">@extension</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+140:     
+141:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+142:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:extension</span>] )
+143:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>( <span class="ruby-ivar">@extension</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Extension was successfully updated.'</span> )}
+144:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+145:       <span class="ruby-keyword kw">else</span>
+146:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+147:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+148:       <span class="ruby-keyword kw">end</span>
+149:     <span class="ruby-keyword kw">end</span>
+150:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -610,6 +670,78 @@ PUT /extensions/1 PUT /extensions/1.xml
 	
 		<div id="private-instance-method-details" class="method-section section">
 			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="find-call-queue-method" class="method-detail ">
+				<a name="method-i-find_call_queue"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">find_call_queue</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="find-call-queue-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 176</span>
+176:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_call_queue</span>
+177:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:call_queue_id</span>].<span class="ruby-identifier">nil?</span>
+178:       <span class="ruby-ivar">@call_queue</span> = <span class="ruby-constant">CallQueue</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:call_queue_id</span>] )
+179:     <span class="ruby-keyword kw">end</span>
+180:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="find-conference-method" class="method-detail ">
+				<a name="method-i-find_conference"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">find_conference</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="find-conference-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 171</span>
+171:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_conference</span>
+172:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:conference_id</span>].<span class="ruby-identifier">nil?</span>
+173:       <span class="ruby-ivar">@conference</span> = <span class="ruby-constant">Conference</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:conference_id</span>] )
+174:     <span class="ruby-keyword kw">end</span>
+175:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
 
 		
 			<div id="find-sip-account-method" class="method-detail ">
@@ -632,12 +764,12 @@ PUT /extensions/1 PUT /extensions/1.xml
 					<div class="method-source-code"
 						id="find-sip-account-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 127</span>
-127:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_sip_account</span>
-128:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>].<span class="ruby-identifier">nil?</span>
-129:       <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>] )
-130:     <span class="ruby-keyword kw">end</span>
-131:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/extensions_controller.rb, line 166</span>
+166:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_sip_account</span>
+167:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>].<span class="ruby-identifier">nil?</span>
+168:       <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>] )
+169:     <span class="ruby-keyword kw">end</span>
+170:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
