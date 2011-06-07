@@ -199,10 +199,12 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			if call_disposition.blank?; (
 				# We didn't try to call the SIP account yet.
+				
 				# Check unconditional call-forwarding ("always"):
 				#
-				call_forward_always = find_call_forward( dst_sip_account, :always, src_cid_sip_user )
-				call_forward_assistant = find_call_forward( dst_sip_account, :assistant, src_cid_sip_user )
+				call_forward_always    = find_call_forward( dst_sip_account, :always    , src_cid_sip_user )
+				call_forward_assistant = find_call_forward( dst_sip_account, :assistant , src_cid_sip_user )
+				
 				if call_forward_always; (
 					# We have an unconditional call-forward.
 					
@@ -215,13 +217,15 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 				)
 				elsif call_forward_assistant; (
+					
 					assistant_sip_user = Extension.where( :extension => "#{call_forward_assistant.destination}" ).first
 					if assistant_sip_user
 						action :export, "alert_info=http://www.notused.com;info=#{dst_sip_user_real};x-line-id=0"
+						#OPTIMIZE If it's ignored then don't use a registered DNS name but something like "localhost".
 						action :bridge, "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060,sofia/internal/#{sip_user_encode( assistant_sip_user.destination )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 					end
-				)
 					
+				)
 				else (
 					# Call the SIP account.
 					
