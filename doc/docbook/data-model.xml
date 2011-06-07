@@ -40,6 +40,8 @@
     </authorgroup>
   </info>
 
+  <remark>Diese Datei ist aktuell nicht eingebunden.</remark>
+
   <para>Wie bei jedem Ruby-on-Rails-Projekt befinden sich die
   Datenbank-<quote><foreignphrase xml:lang="en">Models</foreignphrase></quote>
   im Unterverzeichnis <filename>app/models/</filename>. In jeder Datei wird
