@@ -2,6 +2,7 @@
 
 bundle exec \
   rake erd polymorphism=true filetype=dot
+#OPTIMIZE "bundle exec ..." seems to actually exec() the command, i.e. replaces this process by the new one, i.e. terminated this script.
 bundle exec \
   rake erd polymorphism=true filetype=pdf
 
