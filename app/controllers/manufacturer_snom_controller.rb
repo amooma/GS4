@@ -51,7 +51,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def xml_menu
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil.
+		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=> pko)
 		@sip_account_name = get_sip_account_name()
 		@sip_accounts_count = sip_accounts.count
 		@sip_account_url = "/#{@sip_account_name}"
@@ -101,7 +101,7 @@ class ManufacturerSnomController < ApplicationController
 		@busy_destination = destination_s( call_forward_busy )
 
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account}"
-		#FIXME Typo? Should @sip_account be @sip_account_name ?
+		#FIXME Typo? Should @sip_account be @sip_account_name ? (=> pko)
 	end
 	
 	def call_forwarding_offline
@@ -174,7 +174,7 @@ class ManufacturerSnomController < ApplicationController
 	def sip_accounts
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
-		@sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts.all  #FIXME Phone.find_by_mac_address( mac_address ) can be nil.
+		@sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts.all  #FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=> pko)
 	end
 	
 	def index
@@ -189,7 +189,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	private
 	
-	#FIXME Are these meant to be IDs? Don't store them as magic numbers here. IDs may change in the DB.
+	#TODO Are these meant to be IDs? Don't store them as magic numbers here. IDs may change in the DB. (=> pko)
 	GS_CALLFORWARD_BUSY     = 1
 	GS_CALLFORWARD_NOANSWER = 2
 	GS_CALLFORWARD_OFFLINE  = 3
@@ -198,7 +198,7 @@ class ManufacturerSnomController < ApplicationController
 	def get_sip_account_name()
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		sip_account_name = params[:sip_account]
-		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil.
+		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=> pko)
 		if (sip_account_name.blank?)
 			sip_account = sip_accounts.first
 			if (! sip_account.blank?)
@@ -229,7 +229,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	#OPTIMIZE What is destination_s() supposed to do?
 	def destination_s( call_forward )
-		#FIXME Are you sure that "active?" is a valid method? Shouldn't it be "active" ?
+		#FIXME Are you sure that "active?" is a valid method? Shouldn't it be "active" ? (=> pko)
 		if (! call_forward.nil? && call_forward.active?)   #OPTIMIZE Simply write: if (call_forward && ...)
 			return call_forward.destination.to_s
 		end

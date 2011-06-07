@@ -1,6 +1,6 @@
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
-#FIXME Isn't this the same thing as app/views/phone_book_internal_users/index.xml.builder ? Import fixes from there!
+#FIXME Isn't this the same thing as app/views/phone_book_internal_users/index.xml.builder ? Import fixes from there! (=> pko)
 
 xml.SnomIPPhoneDirectory {
 	xml.Title('Phone Book')
