@@ -275,9 +275,8 @@
     <para>Mit den hier gezeigten Schritten sind Sie in der Lage eine beliebige
     Anzahl von Telefonen anzulegen.</para>
 
-    <para>Der Menüpunkt „Extensions“ hat im Moment noch keine Funktion. An
-    dieser Stelle können in der Zukunft einem SIP-Account eine beliebige
-    Anzahl von weiteren Durchwahlen zugeordnet werden.</para>
+    <para>Im Menüpunkt „Extensions“ können einem SIP-Account Durchwahlen
+    zugeordnet werden.</para>
 
     <para>Die Dokumentation zu „Cantina“ finden Sie im Verzeichnis
     <filename>doc</filename> des Projektes.</para>
