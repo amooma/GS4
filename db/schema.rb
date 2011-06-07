@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607130648) do
+ActiveRecord::Schema.define(:version => 20110607200000) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(:version => 20110607130648) do
   end
 
   create_table "extensions", :force => true do |t|
-    t.integer  "extension"
+    t.string   "extension"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "destination"
