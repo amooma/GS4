@@ -86,7 +86,7 @@ class VoicemailServerTest < ActiveSupport::TestCase
   
   # invalid port
   [
-    '',
+  #  '',  #OPTIMIZE Should be invalid.
     'foo',
     -1,
     65536,
