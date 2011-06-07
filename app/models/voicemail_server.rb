@@ -2,7 +2,7 @@ class VoicemailServer < AServer
   
   has_many :sip_accounts, :dependent => :nullify
     
-  # TODO implement last_voicemail_server_id, see SipServer / SipProxy
+  #OPTIMIZE implement last_voicemail_server_id ? see SipServer / SipProxy
   # attr_accessor :last_voicemail_server_id
   # Needed when voicemail_server is feeded by GS4
   #after_create {
@@ -14,6 +14,6 @@ class VoicemailServer < AServer
   #  end
   #}
   #
-  ## TODO tests for last_voicemail_server_id (once it's implemented)
+  ## OPTIMIZE tests for last_voicemail_server_id (once it's implemented)
   
 end

@@ -1,8 +1,8 @@
 xml.instruct!
 
-#TODO Add comments (descriptions etc.) from the original configuration (misc/freeswitch/fs-conf/).
-# As this file has probably been generated in a (semi-)automatic way it should be a piece of cake.
-#TODO If you decide to go this route then import changes in misc/freeswitch/fs-conf/ into this file and delete misc/freeswitch/fs-conf/**.xml
+#TODO Add comments (descriptions etc.) from the original configuration (misc/freeswitch/fs-conf/). (=> pko)
+# As this file has probably been generated in a (semi-)automatic way it should be easy.
+#TODO If you decide to go this route then import changes in misc/freeswitch/fs-conf/ into this file and delete misc/freeswitch/fs-conf/**.xml (=> pko)
 
 xml.document( :type => 'freeswitch/xml' ) {
 	
@@ -814,9 +814,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'deflect', :data => '${destination_number}' )
 				}
 			}
-			
-			#TODO Add comments from the original configuration (misc/freeswitch/fs-conf/).
-			
+						
 			xml.extension( :name => 'kam-park-in' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-park-in-$' ) {
 					xml.action( :application => 'valet_park', :data => 'valet_lot auto in 8000 8999' )
