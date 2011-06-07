@@ -74,6 +74,7 @@ class SipServerTest < ActiveSupport::TestCase
   [
     1,
     65535,
+    nil,
   ].each { |port|
     should "be valid with port #{port.inspect}" do
       assert Factory.build( :sip_server, :port => port ).valid?
@@ -83,7 +84,6 @@ class SipServerTest < ActiveSupport::TestCase
   # invalid port
   [
     '',
-    nil,
     'foo',
     -1,
     65536,

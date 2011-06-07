@@ -78,7 +78,6 @@ class VoicemailServerTest < ActiveSupport::TestCase
     1,
     65535,
     nil,
-    '',
   ].each { |port|
     should "be valid with port #{port.inspect}" do
       assert Factory.build( :voicemail_server, :port => port ).valid?
@@ -87,6 +86,7 @@ class VoicemailServerTest < ActiveSupport::TestCase
   
   # invalid port
   [
+    '',
     'foo',
     -1,
     65536,
