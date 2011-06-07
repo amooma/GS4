@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SipProxyTest < ActiveSupport::TestCase
   
-  should "be valid build" do
+  should "have a valid factory" do
     assert Factory.build(:sip_proxy).valid?
   end
   

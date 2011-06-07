@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SipServerTest < ActiveSupport::TestCase
   
-  should "be valid build" do
+  should "have a valid factory" do
     assert Factory.build(:sip_server).valid?
   end
   
