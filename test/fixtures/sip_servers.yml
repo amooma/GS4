@@ -2,7 +2,7 @@
 
 one:
   host: sip1.server.de
-  is_local: true
+  is_local: false
 
 two:
   host: sip2.server.de

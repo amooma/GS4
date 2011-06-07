@@ -103,7 +103,12 @@ class VoicemailServerTest < ActiveSupport::TestCase
     false,
   ].each { |is_local|
     should "be valid with is_local #{is_local.inspect}" do
-      assert Factory.build( :voicemail_server, :is_local => is_local ).valid?
+      server = Factory.build( :voicemail_server, :is_local => is_local )
+      server_valid = server.valid?
+      server_errors = server.errors
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert server_valid, "  Errors: " + server_errors.inspect.tr("\n"," ")
     end
   }
   
@@ -115,7 +120,11 @@ class VoicemailServerTest < ActiveSupport::TestCase
   #  1,
   ].each { |is_local|
     should "not be valid with is_local #{is_local.inspect}" do
-      assert ! Factory.build( :voicemail_server, :is_local => is_local ).valid?
+      server = Factory.build( :voicemail_server, :is_local => is_local )
+      server_valid = server.valid?
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert ! server_valid
     end
   }
   

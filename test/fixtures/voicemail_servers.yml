@@ -3,7 +3,7 @@
 one:
   host: my-vm-server-1.localdomain
   port: 1
-  is_local: true
+  is_local: false
 
 two:
   host: my-vm-server-2.localdomain
