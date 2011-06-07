@@ -39,7 +39,7 @@ class SipAccount < ActiveRecord::Base
   after_validation( :on => :create ) {
     if (self.sip_server) \
     && (self.sip_proxy) \
-    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
+    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil - #OPTIMIZE @sd: Has this been resolved by 0cb666c2d61092e92a7b79e3a6e3fb148308dccc? See Message-ID: <4DED6A74.1070002@amooma.de>, Date: Tue, 07 Jun 2011 02:01:56 +0200
       create_subscriber()
     end
   }
@@ -47,7 +47,7 @@ class SipAccount < ActiveRecord::Base
   after_validation( :on => :update ) {
     if (self.sip_server) \
     && (self.sip_proxy) \
-    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
+    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil - #OPTIMIZE @sd: Has this been resolved by 0cb666c2d61092e92a7b79e3a6e3fb148308dccc? See Message-ID: <4DED6A74.1070002@amooma.de>, Date: Tue, 07 Jun 2011 02:01:56 +0200
       update_subscriber()
     else
       delete_subscriber()
