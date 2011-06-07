@@ -20,6 +20,9 @@
     </authorgroup>
   </info>
 
+  <remark>Diese Datei ist aktuell nicht eingebunden da die Installation per
+  Skript durchgeführt wird (installation-gs4-debian-6-skript.dbk).</remark>
+
   <para>Gemeinschaft4 ist verfügbar auf <uri
   xlink:href="https://github.com/amooma/Cantina">https://github.com/amooma/Gemeinschaft4</uri>
   und kann von dort wie folgt per Git installiert werden:<screen>debian:~# <emphasis
