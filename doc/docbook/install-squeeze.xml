@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section version="5.0" xml:id="installation-gs4-debian-squeeze" xml:lang="de"
+<section version="5.0" xml:id="installation-gs4-debian-6-skript" xml:lang="de"
          xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -7,7 +7,7 @@
          xmlns:m="http://www.w3.org/1998/Math/MathML"
          xmlns:html="http://www.w3.org/1999/xhtml"
          xmlns:db="http://docbook.org/ns/docbook">
-  <title>Installation unter Debian Squeeze</title>
+  <title>Installation von Gemeinschaft auf Debian 6 Squeeze</title>
 
   <info>
     <authorgroup>
@@ -19,7 +19,27 @@
       </author>
 
       <author>
+        <personname><firstname>Stefan</firstname><surname>Wintermeyer</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+
+      <author>
         <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+
+      <author>
+        <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
 
         <affiliation>
           <org>
@@ -30,143 +50,67 @@
     </authorgroup>
   </info>
 
-  <section>
-    <title>Installation des Basis Systems</title>
+  <indexterm>
+    <primary>Installation</primary>
 
-    <para>Als Basis-System kommt eine Minimal-Installation von Debian 6
-    („Squeeze“) zum Einsatz.</para>
+    <secondary>von Gemeinschaft</secondary>
 
-    <para>Bitte wählen Sie bei der Paketauswahl alle Pakete außer „ssh“ ab.
-    Das Paket erleichtert vor allem in einer virtuellen Installation die
-    weiteren Schritte.</para>
-  </section>
+    <tertiary>auf Debian 6 Squeeze</tertiary>
+  </indexterm>
 
-  <section>
-    <title>Installation von Gemeinschaft4</title>
+  <indexterm>
+    <primary>Debian 6</primary>
 
-    <para>Alle für Gemeinschaft4 benötigten komponenten können über das im
-    github.com-Repository vorhandene Installationsskript installiert
-    werden.</para>
+    <secondary>Installation von Gemeinschaft</secondary>
+  </indexterm>
 
-    <para>Für die Installation des Demo-Systems werden alle drei
-    Ruby-Applikationen in einem Web-Server gestartet. Hierfür wird Lighttpd
-    verwendet. Die einzelnen Applikationen sind weiterhin über die bekannte
-    Ports erreichbar:</para>
+  <important>
+    <para>Diese Beschreibung setzt ein frisch installiertes Debian GNU/Linux 6
+    (<quote>Squeeze</quote>) voraus. Ein ISO-Image für die Installation finden
+    Sie auf <link
+    xlink:href="http://www.debian.org/releases/squeeze/debian-installer/">http://www.debian.org/releases/squeeze/debian-installer/</link>.
+    Wir empfehlen das etwa 180 MB große Netzinstallations-CD-Image. Eine
+    Debian-GNU/Linux-Installationsanleitung findet sich unter <link
+    xlink:href="http://www.debian.org/releases/squeeze/">http://www.debian.org/releases/squeeze/</link>,
+    ein allgemeines Anwenderhandbuch unter <link
+    xlink:href="http://debiananwenderhandbuch.de/">http://debiananwenderhandbuch.de</link>.</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>Gemeinschaft4: 3000</para>
-      </listitem>
+    <para>Bitte installieren Sie ein minimales Debian, d.h. wählen Sie in den
+    Installations-Dialogen bei der Paketauswahl alle Paketgruppen ab, außer
+    „ssh“. Ein SSH-Server erleichtert vor allem in einer virtuellen
+    Installation die weiteren Schritte.</para>
+  </important>
 
-      <listitem>
-        <para>Cantina: 3001</para>
-      </listitem>
+  <para>Alle für Gemeinschaft4 benötigten Komponenten können über das im
+  Git-Repository (auf <link
+  xlink:href="https://github.com/amooma/Gemeinschaft4">https://github.com/amooma/Gemeinschaft4</link>)
+  vorhandene Installationsskript installiert werden.</para>
 
-      <listitem>
-        <para>SipProxy: 3002</para>
-      </listitem>
-    </itemizedlist>
+  <para>Bitte laden Sie die Datei <filename>install.sh</filename> herunter.
+  Achten Sie dabei darauf die Datei aus dem richtigen <foreignphrase
+  xml:lang="en">Branch</foreignphrase> zu verwenden. Der derzeit aktuelle
+  Release-Branch heißt „1.1“. Hier der direkte Link zu der Datei:</para>
 
-    <para>Als erstes laden Sie sich bitte die Datei
-    <filename>install.sh</filename> von <link
-    xlink:href="https://github.com/amooma/Gemeinschaft4">https://github.com/amooma/Gemeinschaft4</link>
-    herunter und transferieren Sie die Datei auf den Server (z.B. per
-    scp).</para>
+  <para><link
+  xlink:href="https://github.com/amooma/Gemeinschaft4/raw/1.1/install.sh">https://github.com/amooma/Gemeinschaft4/raw/1.1/install.sh</link></para>
 
-    <para>Bitte achten Sie darauf die Datei aus dem richtigen Branch
-    (<emphasis>nicht</emphasis> <literal>master</literal>) zu laden. Bitte
-    verwenden Sie immer die aktuellste Version (zum jetzigen Zeitpunkt 1.0).
-    Nachdem Sie <filename>install.sh</filename> heruntergeladen haben, gehen
-    Sie bitte wie folgt vor:</para>
+  <para>Die Datei können Sie z.B. auf einem Arbeitsplatz-Rechner herunterladen
+  und per <command>scp</command> auf den Server übertragen.<screen>scp install.sh root@<replaceable>GEMEINSCHAFT</replaceable>:/tmp/</screen></para>
 
-    <para><screen>scp install.sh root@<replaceable>GEMEINSCHAFT</replaceable>:/tmp/
-ssh root@<replaceable>GEMEINSCHAFT</replaceable>
-cd /tmp
+  <para>Dann verbinden Sie sich mit dem Gemeinschaft-Server:<screen>ssh root@<replaceable>GEMEINSCHAFT</replaceable></screen></para>
+
+  <important>
+    <para>Das Installationsskript <filename>install.sh</filename> muß als
+    Benutzer „root“ ausgeführt werden!</para>
+  </important>
+
+  <para>Das Skript ausführbar machen und starten:<screen>cd /tmp/
 chmod +x install.sh
-./install.sh
-</screen>Bitte führen Sie <filename>install.sh</filename> unbedingt als
-    Benutzer „root“ aus, da sonst die globalen Ruby-Gems nicht installiert
-    werden können.</para>
+./install.sh</screen></para>
 
-    <para>Das Skript zum Zeitpunkt der Dokumentation. Bitte verwenden Sie
-    immer die aktuelle Version.</para>
-
-    <para><screen>#!/bin/bash
-
-echo -e "Please enter your github.com username\n"
-read USER
-
-echo -e "Please enter your github.com password\n"
-read PASS
-
-aptitude update
-aptitude -y install curl git-core patch file \
-  build-essential bison \
-  openssl zlib1g-dev libssl-dev libreadline5-dev libxml2-dev \
-  libreadline5-dev libxml2-dev sqlite3 libsqlite3-dev libxslt-dev \
-  libfcgi-ruby1.9.1 libfcgi-dev lighttpd libpcre3-dev libyaml-dev \
-  nmap
-
-cd /usr/local/src
-wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p180.tar.bz2
-tar -xvjf ruby-1.9.2-p180.tar.bz2
-cd ruby-1.9.2-p180
-./configure
-make
-make install
-
-gem update
-gem install rake
-gem install bundler
-
-cd /opt
-PROJECTS="Gemeinschaft4
-Cantina
-sipproxy";
-for i in $PROJECTS
-do
-  cd /opt
-  
-  git clone https://$USER:$PASS@github.com/amooma/$i.git
-  cd /opt/$i
-  
-  bundle install
-  
-  rake db:migrate RAILS_ENV=production
-  rake db:seed RAILS_ENV=production
-  
-  cd /opt/$i/public
-  bundle install --path .
-  chown -R www-data /opt/$i
-done
-
-aptitude -y install gcc flex bison libmysqlclient-dev make \
-  libcurl4-openssl-dev libpcre3-dev libpcre++-dev
-
-cd /usr/local/src
-git clone git://git.sip-router.org/sip-router kamailio
-cd kamailio
-git checkout -b 3.1 origin/3.1
-make FLAVOUR=kamailio include_modules="dbtext dialplan" cfg
-make PREFIX="/opt/kamailio-3.1" FLAVOUR=kamailio include_modules="db_text dialplan" cfg
-make all
-make install
-
-cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.DIST
-cp /opt/Gemeinschaft4/misc/lighttpd.conf /etc/lighttpd/lighttpd.conf
-/etc/init.d/lighttpd restart
-cp -r /opt/Gemeinschaft4/misc/kamailio/etc/* /opt/kamailio-3.1/etc/kamailio/
-chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
-chgrp www-data /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
-chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/subscriber
-chmod g+rw /opt/kamailio-3.1/etc/kamailio/db_text/dbaliases
-cp /opt/Gemeinschaft4/misc/etc/init.d/kamailio /etc/init.d/
-update-rc.d kamailio defaults
-/etc/init.d/kamailio start
-
-</screen>Sobald das Skript erfolgreich abgearbeitet wurde, können Sie auf das
-    Web-Interface von Gemeinschaft4 über
-    <uri>http://<replaceable>IP_ADRESSE</replaceable>:3000</uri>
-    zugreifen.</para>
-  </section>
+  <para>Das Skript fragt Sie nach Ihrem Benutzernamen und Paßwort für
+  github.com, installiert die für Gemeinschaft erforderlichen Abhängigkeiten
+  (FreeSwitch, Kamailio etc.) als Pakete, läd dann Gemeinschaft aus dem
+  Git-Repository herunter, installiert Ruby, konfiguriert Gemeinschaft und
+  startet die Dienste.</para>
 </section>

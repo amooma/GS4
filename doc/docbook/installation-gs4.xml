@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section version="5.0" xml:id="installation-gs4" xml:lang="de"
-         xmlns="http://docbook.org/ns/docbook"
+<section version="5.0" xml:id="installation-gs4-debian-6-manuell"
+         xml:lang="de" xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:xi="http://www.w3.org/2001/XInclude"
          xmlns:svg="http://www.w3.org/2000/svg"
@@ -19,33 +19,6 @@
       </author>
     </authorgroup>
   </info>
-
-  <important>
-    <para>Voraussetzung: Installation von Ruby on Rails 3 auf Debian 5 (siehe
-    <xref linkend="rails3-install-debian" />).</para>
-  </important>
-
-  <important>
-    <para>In Kombination mit dem Cantina-Provisioning-Dienst als
-    Single-Server-System (beides auf einem Server) ist auch die Installation
-    von Cantina Voraussetzung. Die Installationsanleitung dazu finden Sie in
-    der Dokumentation zu Cantina. Bitte beachten Sie daß der Cantina-Dienst
-    und der Gemeinschaft4-Dienst dann <emphasis>nicht</emphasis> auf dem
-    gleichen Port gestartet werden können und dürfen!</para>
-  </important>
-
-  <note>
-    <para>Beim normalen Betrieb als Single-Server-System (d.h. alles auf einem
-    Server) ist natürlich nur einmal die Installation von Ruby
-    erforderlich.</para>
-  </note>
-
-  <note>
-    <para>Informationen zur Installation bzw. Konfiguration des SIP-Proxy
-    (Kamailio) werden von der SIP-Proxy-Steuerungsapplikation („sipproxy“)
-    bereitgestellt. Die Applikation „sipproxy“ ist zuständig für die Steuerung
-    des SIP-Proxy-Dienstes.</para>
-  </note>
 
   <para>Gemeinschaft4 ist verfügbar auf <uri
   xlink:href="https://github.com/amooma/Cantina">https://github.com/amooma/Gemeinschaft4</uri>

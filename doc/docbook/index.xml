@@ -48,9 +48,7 @@
     wird und dann das eigentliche Gemeinschaft4-System. Die folgende
     Beschreibung bezieht sich auf die Installation auf einem Debian-5-System.
     Für ein Debian-6-System steht ein Skript zur Verfügung. Eine genaue
-    Anleitung finden Sie im Kapitel „Installation auf Debian 6“.</para>
-
-    <xi:include href="installation-ror-debian-5.xml" />
+    Anleitung finden Sie im Kapitel „Installation auf Debian 6“. #FIXME</para>
 
     <xi:include href="installation-gs4.xml" />
 
