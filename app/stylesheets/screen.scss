@@ -1,53 +1,151 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import "compass";
+
+// Put your own sass mixins and functions in here.
 
 /*
-@import "compass/reset";
+Compass doesn't know about this property yet, but it has a base
+mixin called experimental that makes it trivial to add support for it:
+There's a bug about this: https://github.com/chriseppstein/compass/issues/334
 */
+@mixin column-fill($fill) {
+	@include experimental(column-fill, $fill, -moz, -webkit, -o, not -ms, not -khtml, official);
+}
 
 
+
+// This file resets and then applies a typographic base
+// See http://beta.compass-style.org/reference/compass/typography/vertical_rhythm/
+
+@import "compass/reset";
+
+/*
+Chris Eppstein says: It's kind of strange to use pt for your fonts
+with compass, but we supports it with a little setup, I think
+you'll find it easier to use pixels so I have changed things to
+use that. The compass typography system will convert px to ems
+for you.
+If you want to go back to pt then just change the px-based measures
+you see below.
+Philipp Kempgen says: I didn't use pt with Compass but in pure CSS.
+Also there is no way to convert px to em. pt is an absolute unit.
+px depends on the screen's resolution.
+*/
+$base-font-size: 13px;
+$base-line-height: 18px;
+@import "compass/typography";
+$ie-font-ratio: $base-font-size / 100%;
+
+@include establish-baseline;
+
+body {
+	font-family: "Arial", "Helvetica", sans-serif;
+}
+
+// Establish Header styles
+h1,h2,h3,h4,h5,h6 {
+	font-weight: bold;
+	@include leader( 0.5 );
+}
+
+h1 { @include adjust-font-size-to( 26px ); @include trailer( 0.5  ); }
+h2 { @include adjust-font-size-to( 22px ); @include trailer( 0.6  ); }
+h3 { @include adjust-font-size-to( 18px ); @include trailer( 0.75 ); }
+h4 { @include adjust-font-size-to( 16px ); }
+h5 { @include adjust-font-size-to( 14px ); }
+h6 { @include adjust-font-size-to( 13px ); }
+
+// Establish styles for text blocks
+p,
+blockquote,
+li {
+	@extend .text-block;
+}
+// Style blocks of text with a consistent style
+// use the @extend directive to apply this class to your elements/classes/etc.
+.text-block {
+	@include trailer(1);
+	a         { }
+	strong    { font-weight: bold; }
+	em        { font-style: italic; }
+}
+
+// Establish list styles
+ol,
+ul {
+	list-style-position: inside;
+	@include leader(  1 );
+	@include trailer( 1 );
+	padding-left: 1em;
+	
+	li {
+		@include trailer( 0 );
+	}
+}
+
+ol {
+	list-style-type: decimal;
+}
+ul {
+	list-style-type: disc;        
+	ul {
+		list-style-type: circle;      
+		ul {
+			list-style-type: square;
+		}
+	}
+}
+
+// Debugging background, can be applied to other places if you need to check vertical alignment.
+body#styles_typography {
+	#content {
+	background: image-url( "underline.png" );
+	}
+}
+
+// Chris Eppstein says: Other basic styling from your original css
 body {
 	background-color: #fff;
 	color: #000;
+	@include padding-leader(  1 );
+	@include padding-trailer( 1 );
 	padding: 0.8em 1.5em;
 	max-width: 75em;
 	margin: auto;
 }
 
-body, p, ol, ul, td {
-	font-family: "Arial", "Helvetica", sans-serif;
-	font-size: 10pt;
-	line-height: 1.35em;
-}
 
 pre {
 	background-color: #eee;
-	padding: 10px;
-	font-size: 11px;
+	@include leader(1);
+	@include trailer(1);
+	padding: {
+		left:  1em;
+		right: 1em;
+	}
+	@include adjust-font-size-to(11px);
 }
 
 a {
 	color: #00c;
-}
-a:visited {
-	color: #609;
-}
-a:hover,
-a:focus,
-a:active {
-	text-shadow: 1px 2px 3px #aaa;
+	&:visited {
+		color: #609;
+	}
+	&:hover,
+	&:focus,
+	&:active {
+		@include text-shadow( 1px 2px 3px #aaa );
+	}
 }
 
 div {
-	padding: 0;
-	margin: 0;
+	@include reset-box-model;
+	
+	&.field,
+	&.actions {
+		@include trailer( 1 );
+	}
 }
 
-div.field, div.actions {
-	margin-bottom: 10px;
-}
 
 
 #notice, .app_notice {
@@ -75,9 +173,8 @@ div.field, div.actions {
 	padding-bottom: 0;
 	margin-bottom: 20px;
 	background-color: #f0f0f0;
-}
 
-#error_explanation h2 {
+h2 {
 	text-align: left;
 	font-weight: bold;
 	padding: 5px 5px 5px 15px;
@@ -87,15 +184,16 @@ div.field, div.actions {
 	background-color: #c00;
 	color: #fff;
 }
-
-#error_explanation ul li {
+ul li {
 	font-size: 12px;
 	list-style: square;
 }
+}
 
 
-table th,
-table td {
+table {
+th,
+td {
 	border-width: 1px;
 	border-style: solid;
 	border-color: rgba(0,0,0,0.05);
@@ -104,17 +202,19 @@ table td {
 	vertical-align: top;
 	background-color: #f3f3f3;
 }
-table th {
+th {
 	background-color: #bbf;
 }
-
-table tr:nth-child(even) > td,
-table tr.even            > td {
+tr {
+&:nth-child(even) > td,
+&.even            > td {
 	background-color: #f0f0f0;
 }
-table tr:nth-child(odd)  > td,
-table tr.odd             > td {
+&:nth-child(odd)  > td,
+&.odd             > td {
 	background-color: #dddddd;
+}
+}
 }
 
 
@@ -139,15 +239,13 @@ table tr.odd             > td {
 }
 
 #content {
-	background-image: -moz-linear-gradient( top, #eee, #fff 20pt );
-	background-image: -o-linear-gradient( top, #eee, #fff 20pt );
-	background-image: -webkit-gradient( linear, 0 top, 0 15%, from(#eee), to(#fff) );
-	
-	border-radius:         4pt;
-	-moz-border-radius:    4pt;
-	-webkit-border-radius: 4pt;
-	-khtml-border-radius:  4pt;
-	-o-border-radius:      4pt;
+	//background-image: -moz-linear-gradient( top, #eee, #fff 20pt );
+	//background-image: -o-linear-gradient( top, #eee, #fff 20pt );
+	//background-image: -webkit-gradient( linear, 0 top, 0 15%, from(#eee), to(#fff) );
+	@include
+	background-image(   linear-gradient( top, #eeeeee, white 20pt ) );
+	@include
+	border-radius( 4pt );
 	margin:    0  0   0  0  ;
 	padding: 2px  8px 0  8px;
 }
@@ -206,27 +304,16 @@ table tr.odd             > td {
 
 .index_overview {
 	height: auto;
-	column-width:         23em;
-	-moz-column-width:    23em;
-	-webkit-column-width: 23em;
-	-khtml-column-width:  23em;
-	-o-column-width:      23em;
-	column-gap:         1em;
-	-moz-column-gap:    1em;
-	-webkit-column-gap: 1em;
-	-khtml-column-gap:  1em;
-	-o-column-gap:      1em;
-	column-fill:         balance;
-	-moz-column-fill:    balance;
-	-webkit-column-fill: balance;
-	-khtml-column-fill:  balance;
-	-o-column-fill:      balance;
+	@include column-width( 23em );
+	@include column-gap( 1em );
+	@include column-fill( balance );
 	widows: 5;
 	orphans: 5;
-}
 
-.index_overview section {
+
+section {
 	display: table;
+}
 }
 
 
@@ -235,19 +322,11 @@ table tr.odd             > td {
 	padding: 5px;
 	min-width: 10em;
 	text-align: center;
-	border-radius:         5px;
-	-moz-border-radius:    5px;
-	-webkit-border-radius: 5px;
-	-khtml-border-radius:  5px;
-	-o-border-radius:      5px;
+	@include border-radius( 5px );
 	border: 2px solid #dd3;
 	background-color: #ffb;
 	color: #550;
-	box-shadow:         2px 2px 8px #bbb;
-	-moz-box-shadow:    2px 2px 8px #bbb;
-	-webkit-box-shadow: 2px 2px 8px #bbb;
-	-khtml-box-shadow:  2px 2px 8px #bbb;
-	-o-box-shadow:      2px 2px 8px #bbb;
+	@include box-shadow( 2px 2px 8px #bbb );
 }
 
 
@@ -274,11 +353,12 @@ table tr.odd             > td {
 		padding: 7pt 4pt;
 		background: #def;
 		min-width: 15em;
-	}
-	nav.hnav ul {
+		
+	ul {
 		margin: 0;
 		padding: 0 0 0 2em;
 	}
+}
 }
 
 @media all and (min-width: 800px) {
@@ -289,138 +369,106 @@ table tr.odd             > td {
 		margin: 5pt 0 10pt 0;
 		padding: 0;
 		border: 1px solid #222;
-		border: 1px solid hsla( 0, 0%, 0%, 0.8 );
+		border: 1px solid hsla(0, 0%, 0%, 0.8);
 		position: relative;
-		border-radius:         4pt;
-		-moz-border-radius:    4pt;
-		-webkit-border-radius: 4pt;
-		-khtml-border-radius:  4pt;
-		-o-border-radius:      4pt;
-		box-shadow:         1px 1pt 3px #aaa;
+		@include border-radius( 4pt );
+		@include box-shadow( 1px 1pt 3px #aaa );
 		-moz-box-shadow:    1px 1pt 3px hsla( 0, 0%, 0%, 0.35 );
-		-webkit-box-shadow: 1px 1pt 3px #aaa;
-		-khtml-box-shadow:  1px 1pt 3px #aaa;
-		-o-box-shadow:      1px 1pt 3px #aaa;
-		
+		// Chris Eppstein says: Why is this a different color for mozilla?
+		// Philipp Kempgen says: Firefox knows hsla(). Other browsers don't (or have not been tested).
 		background-color: #03c;
-		background-image: -moz-linear-gradient( top,
+		@include
+		background-image( linear-gradient( top,
 			hsla( 0, 0%, 100%, 0.5  ),
 			hsla( 0, 0%, 100%, 0.05 ) 50%,
 			hsla( 0, 0%,   0%, 0.15 ) 50%,
 			hsla( 0, 0%, 100%, 0.2  )
-			);
-		background-image: -o-linear-gradient( top,
-			hsla( 0, 0%, 100%, 0.5  ),
-			hsla( 0, 0%, 100%, 0.05 ) 50%,
-			hsla( 0, 0%,   0%, 0.15 ) 50%,
-			hsla( 0, 0%, 100%, 0.2  )
-			);
-		background-image: -webkit-gradient( linear, 0 top, 0 bottom,
-			from(            hsla( 0, 0%, 100%, 0.5  )),
-			color-stop( 50%, hsla( 0, 0%, 100%, 0.05 )),
-			color-stop( 50%, hsla( 0, 0%,   0%, 0.15 )),
-			to(              hsla( 0, 0%, 100%, 0.2  ))
-			);
-	}
-	nav.hnav ul {
+			));
+	ul {
 		padding: 0;
 		margin: 0;
+		@include pie-clearfix;
 	}
-	nav.hnav ul:after {
-		content: ".";
+	li {
+	&:hover ul,
+	&:active ul,
+	&:focus ul {
 		display: block;
-		height: 0;
-		clear: both;
-		visibility: hidden;
-	}
-	nav.hnav li:hover ul,
-	nav.hnav li:active ul,
-	nav.hnav li:focus ul {
-		display: block;
-		box-shadow:         1px 2pt 4pt #aaa;
-		-moz-box-shadow:    1px 3pt 15pt hsla( 0, 0%, 0%, 0.3 );
-		-webkit-box-shadow: 1px 2pt 4pt #aaa;
-		-khtml-box-shadow:  1px 2pt 4pt #aaa;
-		-o-box-shadow:      1px 2pt 4pt #aaa;
+		@include box-shadow( 1px 2pt 4pt #aaa );
+		-moz-box-shadow: 1px 3pt 15pt hsla(0, 0%, 0%, 0.3);
+		// Chris Eppstein says: Why is moz special?
+		// Philipp Kempgen says: I have explained this above already.
 		padding: 3pt 0 4pt 0;
+		
+		////border-radius:         0 0 4pt 4pt;
+		//// Chris Eppstein says: You had: border-radius:  0 0 4pt 4pt
+		//// But there is not good browser support for this shorthand.
+		//// Instead set these
+		//@include border-top-radius(0);
+		//@include border-bottom-radius(4pt);
+		// Philipp Kempgen says: That isn't the same. Find a better solution.
 		border-radius:         0 0 4pt 4pt;
-		-moz-border-radius:    0 0 4pt 4pt;
-		-webkit-border-radius: 0 0 4pt 4pt;
-		-khtml-border-radius:  0 0 4pt 4pt;
-		-o-border-radius:      0 0 4pt 4pt;
+		
 		border-width: 1px;
 		border-style: solid;
 		border-color: #222;
-		border-color: hsla( 0, 0%, 0%, 0.6 );
+		border-color: hsla(0, 0%, 0%, 0.6);
 		border-top: 1px solid #000;
 	}
-	nav.hnav li {
+	//######### Huh?
 		font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
 		font-size: 11pt;
 		font-weight: normal;
 		line-height: 1.2em;
 		text-shadow: 1px 2px 4px #112;
-	}
-	nav.hnav li a {
+	a {
 		display: block;
 		padding: 5pt 12pt 6pt 12pt;
 		min-width: 4em;
 		text-align: center;
-		border-left:  1px solid hsla( 0, 0%, 100%, 0.2 );
-		border-right: 1px solid hsla( 0, 0%,   0%, 0.2 );
+		border-left: 1px solid hsla(0, 0%, 100%, 0.2);
+		border-right: 1px solid hsla(0, 0%, 0%, 0.2);
 		color: #fff;
 		text-decoration: none;
 	}
-	nav.hnav li li a {
+	li a {
 		text-align: left;
 	}
-	nav.hnav li a:hover,
-	nav.hnav li a:active,
-	nav.hnav li a:focus,
-	nav.hnav li a.current_page_navigation {
+	a {
+	&:hover,
+	&:active,
+	&:focus,
+	&.current_page_navigation {
 		color: #fff;
 		background-color: #029;
-		background-image: -moz-linear-gradient( top,
-			hsla( 0, 0%, 100%, 0.5  ),
-			hsla( 0, 0%, 100%, 0.05 ) 50%,
-			hsla( 0, 0%,   0%, 0.15 ) 50%,
-			hsla( 0, 0%, 100%, 0.2  )
-			);
-		background-image: -o-linear-gradient( top,
-			hsla( 0, 0%, 100%, 0.5  ),
-			hsla( 0, 0%, 100%, 0.05 ) 50%,
-			hsla( 0, 0%,   0%, 0.15 ) 50%,
-			hsla( 0, 0%, 100%, 0.2  )
-			);
-		background-image: -webkit-gradient( linear, 0 top, 0 bottom,
-			from(            hsla( 0, 0%, 100%, 0.5  )),
-			color-stop( 50%, hsla( 0, 0%, 100%, 0.05 )),
-			color-stop( 50%, hsla( 0, 0%,   0%, 0.15 )),
-			to(              hsla( 0, 0%, 100%, 0.2  ))
-			);
+		@include background-image(linear-gradient(top, hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0.05) 50%, hsla(0, 0%, 0%, 0.15) 50%, hsla(0, 0%, 100%, 0.2)));
 	}
-	nav.hnav li a:focus {
+	&:focus {
 		outline: none;
 		/*text-decoration: underline;*/
 	}
-	nav.hnav a:hover,
-	nav.hnav a:focus ,
-	nav.hnav a:active {
+	}
+	}
+	a {
+	&:hover,
+	&:focus,
+	&:active {
 		text-shadow: 1px 2px 4px #112;
 		text-shadow: 1px 2px 4px #112;
 	}
-	nav.hnav li:first-child a {
+	}
+	li {
+	&:first-child a {
 		border-left: none;
 	}
-	nav.hnav li:last-child  a {
+	&:last-child a {
 		border-right: none;
 	}
-	nav.hnav li {
 		position: relative;
 		float: left;
 		list-style-type: none;
 	}
-	nav.hnav ul ul {
+	ul ul {
 		display: none;
 		width: 100%;
 		width: auto;
@@ -429,8 +477,7 @@ table tr.odd             > td {
 		left: 0;
 		background-color: #fff;
 		/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
-	}
-	nav.hnav ul ul a {
+	a {
 		padding: 5px 10px;
 		border-left: none;
 		border-right: none;
@@ -438,20 +485,20 @@ table tr.odd             > td {
 		color: #000;
 		text-shadow: 1px 1px 4px #aaa;
 	}
-	nav.hnav ul ul li {
+	li {
 		float: none;
 	}
-	nav.hnav ul ul a:hover,
-	nav.hnav ul ul a:active,
-	nav.hnav ul ul a:focus {
+	a {
+	&:hover,
+	&:active,
+	&:focus {
 		background-color: #03c;
-		box-shadow:         inset 0px 1px 3pt #33a;
-		-moz-box-shadow:    inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 );
-		-webkit-box-shadow: inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 );
-		-khtml-box-shadow:  inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 );
-		-o-box-shadow:      inset 0px 1px 3pt #33a;
+		@include
+		box-shadow(         inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 ));
 	}
-	
+}
+}
+}
 }
 
 
