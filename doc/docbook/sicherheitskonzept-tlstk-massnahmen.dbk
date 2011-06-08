@@ -214,7 +214,7 @@
         geschützt wird.</para>
 
         <para>Der IT-Administrator ist angehalten, bei Verwendung eines
-        LDAP-Verzeichnisdienst, dessen Daten ebenfalls nicht im
+        LDAP-Verzeichnisdienstes, dessen Daten ebenfalls nicht im
 	Klartext zu hinterlegen.</para> 
       </section>
 
@@ -287,7 +287,7 @@
         IT-Infrastruktur den VoIP-Geräten keine IP-Kommunikation in das
         Datennetz zu ermöglichen (auf den Switches).</para>
 
-        <para>Der physikalische Schutz vor Diebstahl der Geräte muss
+        <para>Der physische Schutz vor Diebstahl der Geräte muss
 	durch organisatorische Maßnahmen und kann nicht durch
 	Gemeinschaft gewährleistet werden.</para>
       </section>
@@ -306,7 +306,7 @@
         gemacht werden.</para>
 
         <para>Da die konkrete Umsetzung des Hinweises nicht von Gemeinschaft
-        beeinflußbar, sondern abhängig vom Endgerät und der jeweiligen Firmware,
+        beeinflußbar, sondern abhängig vom Endgerät und der jeweiligen Firmware
         ist (entsprechende Endgeräte sind derzeit noch nicht verbreitet),
         dürfen bei erhöhtem Schutzbedarf nur entsprechend ausgestattete und
         getestete Endgeräte eingesetzt werden.</para>
@@ -930,9 +930,9 @@
         <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
         spricht auch von einem Virenschutz-Programm auf dem TK-Server zum
         Schutz gegen Viren, Würmer und Trojaner. Nach unserer Ansicht ist es
-        wichtiger unerfahrenen oder risikofreudigen Administratoren
+        wichtiger, unerfahrenen oder risikofreudigen Administratoren
         die Installation zusätzlicher Software aus nicht verifizierten
-	Quellen zu untersagen. </para>
+	Quellen zu untersagen.</para>
 
         <para>Schad-Code der sich durch Protokoll-Implementierungsfehler in
         SIP- oder HTTPS-Stacks verbreiten kann fällt im Vergleich des Volumens

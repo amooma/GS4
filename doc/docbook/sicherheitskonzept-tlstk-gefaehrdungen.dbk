@@ -1130,7 +1130,7 @@
                 Nach unserer Ansicht ist das eine extreme
                 Nischen-Funktionalität. Da die Anlage keine Verbindungen nach
                 <quote>außen</quote> hat und SIP-IM-Standards nur eine
-		geringe Verbreitung auweisen, wäre es fragwürdig eine
+		geringe Verbreitung aufweisen, wäre es fragwürdig eine
 		Implementierung 
                 &#8211; und damit weitere Gefährdungen &#8211; zu schaffen.
                 Eine derartige Implementierung erlaubt letztlich nur
@@ -1228,8 +1228,8 @@
         <listitem>
           <para>Anwendungsintegration.</para>
 
-          <para>Sämtliche, über die (an anderer Stelle besprochenen)
-          Schnittstellen von Gemeinschaft angebundenen, TK-Applikationen
+          <para>Sämtliche – über die (an anderer Stelle besprochenen)
+          Schnittstellen von Gemeinschaft angebundenen – TK-Applikationen
           unterliegen den <quote>Sicherheitsbetrachtungen für diese
           Systeme</quote>. Sie sind nicht Bestandteil von Gemeinschaft.</para>
         </listitem>
@@ -1318,8 +1318,8 @@
         SIP angebunden. Durch den kombinierten, für alle Installationen
         verpflichtenden Einsatz eines SIP-Proxies ist die Funktionalität eines
         Session Border Controllers (SBC) enthalten. Im SIP-Proxy
-	müssen durch geeignete Maßnahmen Denial-of-Service Angriffe
-	(DoS) abgewehrt un der Protokollstack gehärtet werden.</para>
+	müssen durch geeignete Maßnahmen Denial-of-Service-Angriffe
+	(DoS) abgewehrt und der Protokollstack gehärtet werden.</para>
 
 <!--    <note><para>Dies ist zu detailliert unter Angabe des Produktes. Allgemeine Maßnahmen beschreiben!: Im SIP-Proxy werden
      durch geeignete Maßnahmen
