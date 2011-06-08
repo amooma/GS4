@@ -5,7 +5,8 @@
 	<section>
 		<h2>Call Forwards</h2>
 		<p><em>How do I configure a call forward for a SIP account?</em></p>
-		<p>Go to the <%= link_to( "Call Forwards",
+		<p>
+			Go to the <%= link_to( "Call Forwards",
 			url_for(:controller => '/call_forwards', :action => 'index')) %>
 			and click <q>New</q> or <q>Edit</q>.
 			Select a SIP account, a case (always / busy / noanswer /
@@ -19,7 +20,12 @@
 	<section>
 		<h2>Queue Login/Logout</h2>
 		<p><em>How do I log in to a queue?</em></p>
-		<p>#TODO Enter description.</p>
+		<p>
+			To log in to a queue dial <code>*50*</code> and the extension
+			of the queue.
+			To log out dial <code>#50#</code> and the extension
+			of the queue.
+		</p>
 	</section>
 
 </div>
