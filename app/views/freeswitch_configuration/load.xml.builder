@@ -601,6 +601,83 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 		}
 		
+		xml.configuration( :name => 'spandsp.conf', :description => 'Tone detector descriptors' ) {
+			xml.descriptors {
+				xml.descriptor( :name  => '1' ) {
+					xml.tone( :name => 'CED_TONE' ) {
+						xml.element( :freq1 => '2100', :freq2 => '0', :min => '500', :max => '0' )
+					}
+					xml.tone( :name => 'SIT' ) {
+						xml.element( :freq1 => '950', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1400', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1800', :freq2 => '0', :min => '256', :max => '400' )
+					}
+					xml.tone( :name => 'REORDER_TONE' ) {
+						xml.element( :freq1 => '480', :freq2 => '620', :min => '224', :max => '272' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '224', :max => '272' )
+					}
+					xml.tone( :name => 'BUSY_TONE' ) {
+						xml.element( :freq1 => '480', :freq2 => '620', :min => '464', :max => '516' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '464', :max => '516' )
+					}
+				}
+
+				xml.descriptor( :name  => '44' ) {
+					xml.tone( :name => 'CED_TONE' ) {
+						xml.element( :freq1 => '2100', :freq2 => '0', :min => '500', :max => '0' )
+					}
+					xml.tone( :name => 'SIT' ) {
+						xml.element( :freq1 => '950', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1400', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1800', :freq2 => '0', :min => '256', :max => '400' )
+					}
+					xml.tone( :name => 'REORDER_TONE' ) {
+						xml.element( :freq1 => '400', :freq2 => '0', :min => '368', :max => '416' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '336', :max => '368' )
+						xml.element( :freq1 => '400', :freq2 => '0', :min => '256', :max => '288' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '512', :max => '544' )
+					}
+					xml.tone( :name => 'BUSY_TONE' ) {
+						xml.element( :freq1 => '400', :freq2 => '0', :min => '352', :max => '384' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '352', :max => '384' )
+						xml.element( :freq1 => '400', :freq2 => '0', :min => '352', :max => '384' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '352', :max => '384' )
+					}
+				}
+
+				xml.descriptor( :name  => '49' ) {
+					xml.tone( :name => 'CED_TONE' ) {
+						xml.element( :freq1 => '2100', :freq2 => '0', :min => '500', :max => '0' )
+					}
+					xml.tone( :name => 'SIT' ) {
+						xml.element( :freq1 => '900', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1400', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1800', :freq2 => '0', :min => '256', :max => '400' )
+					}
+					xml.tone( :name => 'REORDER_TONE' ) {
+						xml.element( :freq1 => '425', :freq2 => '0', :min => '224', :max => '272' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '224', :max => '272' )
+					}
+					xml.tone( :name => 'BUSY_TONE' ) {
+						xml.element( :freq1 => '425', :freq2 => '0', :min => '464', :max => '516' )
+						xml.element( :freq1 => '0', :freq2 => '0', :min => '464', :max => '516' )
+					}
+				}
+			}
+		}
+
+		xml.configuration( :name => 'fax.conf', :description => 'FAX application configuration' ) {
+			xml.settings {
+				xml.param( :name => 'use-ecm', :value => 'true' )
+				xml.param( :name => 'verbose', :value => 'true' )
+				xml.param( :name => 'disable-v17', :value => 'false' )
+				xml.param( :name => 'ident', :value => 'Gemeinschaft4 FAX Ident' )
+				xml.param( :name => 'header', :value => 'Gemeinschaft4 FAX Header' )
+				xml.param( :name => 'spool-dir', :value => '/tmp' )
+				xml.param( :name => 'file-prefix', :value => 'fax' )
+			}
+		}
+
 		xml.configuration( :name => 'modules.conf', :description => 'Modules' ) {
 			xml.modules {
 				xml.tag!( 'load', :module => 'mod_console' )
@@ -622,13 +699,13 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.tag!( 'load', :module => 'mod_valet_parking' )
 				xml.tag!( 'load', :module => 'mod_curl' )
 				xml.tag!( 'load', :module => 'mod_dialplan_xml' )
-				xml.tag!( 'load', :module => 'mod_voipcodecs' )
 				xml.tag!( 'load', :module => 'mod_sndfile' )
 				xml.tag!( 'load', :module => 'mod_native_file' )
 				xml.tag!( 'load', :module => 'mod_local_stream' )
 				xml.tag!( 'load', :module => 'mod_tone_stream' )
 				xml.tag!( 'load', :module => 'mod_spidermonkey' )
 				xml.tag!( 'load', :module => 'mod_say_en' )
+				xml.tag!( 'load', :module => 'mod_spandsp' )
 			}
 		}
 		
@@ -862,6 +939,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'voicemail', :data => 'check default ${domain_name} ${sip_from_user}' )
 				}
 			}
+
 			xml.extension( :name => 'gs-main' ) {
 				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {
