@@ -939,7 +939,16 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'voicemail', :data => 'check default ${domain_name} ${sip_from_user}' )
 				}
 			}
-			
+
+			xml.extension(:name => 'kam-fax-receive' ) {
+				xml.condition( :field => 'destination_number', :expression => '^-kambridge--fax-receive-$' ) {
+					xml.action( :application => 'answer')
+					xml.action( :application => 'rxfax', :data => '/tmp/FAX-${uuid}.tif' )
+#					xml.action( :application => 'javascript', :data => 'fax_upload.js' )
+					xml.action( :application => 'hangup')
+				}
+			}
+
 			xml.extension( :name => 'gs-main' ) {
 				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {
@@ -947,6 +956,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )
 				}
 			}
+
 			xml.extension( :name => 'catch-all' ) {
 				xml.condition( :field => 'destination_number', :expression => '^(.+)$' ) {
 					xml.action( :application => 'bridge', :data => 'sofia/internal/$1@$${domain};fs_path=sip:127.0.0.1:5060' )
