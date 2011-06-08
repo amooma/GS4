@@ -1,0 +1,31 @@
+<%= form_for(@fax_document, :html => { :multipart => true }) do |f| %>
+  <% if @fax_document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fax_document.errors.count, "error") %> prohibited this fax_document from being saved:</h2>
+
+      <ul>
+      <% @fax_document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+	<%= f.label :file %><br />
+	<% if @fax_document.file.nil? %>
+		<%= f.file_field :file %>
+	<% else %>
+		<%= @fax_document.file %>
+	<% end %>
+  </p>
+  </div>
+  <div class="field">
+    <%= f.label :destination %><br />
+    <%= f.text_field :destination %>
+  </div>
+
+  <div class="actions">
+	<%= f.submit('Send') %>
+  </div>
+<% end %>

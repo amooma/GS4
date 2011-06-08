@@ -1,0 +1,27 @@
+<h1>FAX Documents</h1>
+
+<table>
+  <tr>
+    <th>Document</th>
+    <th>Fax</th>
+    <th>Destination</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fax_documents.each do |fax_document| %>
+  <tr>
+    <td><%= fax_document.file %></td>
+    <td><%= link_to File.basename(fax_document.file, File.extname(fax_document.file)) + '.tif', fax_document_path(fax_document) + '/download' %></td>
+    <td><%= fax_document.destination %></td>
+    <td><%= link_to 'Show', fax_document %></td>
+    <td><%= link_to 'Edit', edit_fax_document_path(fax_document) %></td>
+    <td><%= button_to 'Destroy', fax_document, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fax document', new_fax_document_path %>

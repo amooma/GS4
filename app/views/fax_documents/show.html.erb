@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Destination:</b>
+  <%= @fax_document.destination %>
+</p>
+
+<p>
+  <b>Document:</b>
+  <%= @fax_document.file %>
+</p>
+<p>
+  <img src="<%= fax_document_path(@fax_document) + '/thumbnail' %>" />
+</p>
+
+<%= link_to 'Download', fax_document_path(@fax_document) + '/download' %> |
+<%= link_to 'Edit', edit_fax_document_path(@fax_document) %> |
+<%= link_to 'Back', fax_documents_path %>
