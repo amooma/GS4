@@ -78,7 +78,10 @@ class FreeswitchCallProcessingController < ApplicationController
 		src_cid_sip_domain    = _arg( 'var_sip_from_host' )
 		#src_sip_user          = _arg( 'Caller-Username' )
 		src_cid_sip_user      = _arg( 'Caller-Caller-ID-Number' )
-		src_cid_sip_display   = _arg( 'var_sip_from_display' )  # Caller-Caller-ID-Name is not always present
+		src_cid_sip_display   = _arg( 'Caller-Caller-ID-Name' )  # Caller-Caller-ID-Name is not always present
+		if src_cid_sip_display == ''
+					src_cid_sip_display   = _arg( 'var_sip_from_display' )  
+		end
 		
 		dst_sip_user          = _arg( 'Caller-Destination-Number' )  # / var_sip_req_user
 		#dst_sip_domain        = _arg( 'var_sip_req_host' )
@@ -203,8 +206,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				# RFC 2543:
 				action :set, "effective_caller_id_number=#{ sip_user_encode( src_cid_sip_user )}"
 				action :set, "effective_caller_id_name=#{ sip_displayname_encode( src_cid_sip_display )}"
-				# RFC 3325:
-				action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( src_cid_sip_display )} <sip:#{ sip_user_encode( src_cid_sip_user )}@#{ src_cid_sip_domain	 }>"
+
 				# Check unconditional call-forwarding ("always"):
 				#
 				call_forward_always    = find_call_forward( dst_sip_account, :always    , src_cid_sip_user )
@@ -234,7 +236,8 @@ class FreeswitchCallProcessingController < ApplicationController
 					assistant_sip_user = Extension.where( :extension => "#{call_forward_assistant.destination}" ).first
 					if assistant_sip_user
 						action :export, "alert_info=http://www.notused.com;info=#{dst_sip_user_real};x-line-id=0"
-						#OPTIMIZE If it's ignored then don't use a registered DNS name but something like "localhost".
+						#OPTIMIZE? If it's ignored then don't use a registered DNS name but something like "localhost".
+						# localhost does NOT work!
 						action :bridge, "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060,sofia/internal/#{sip_user_encode( assistant_sip_user.destination )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 					end
 					
