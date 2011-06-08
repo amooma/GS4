@@ -4,3 +4,7 @@
 /docbook-xsl-*
 /docbook-xsl
 
+
+# Ignore PDFs that someone might put here.
+# (Generated binary files do not belong in a VCS.)
+/*.pdf
