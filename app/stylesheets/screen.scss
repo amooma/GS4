@@ -430,9 +430,9 @@ table {
 		}
 		
 		li {
-			&:hover ul,
+			&:hover  ul,
 			&:active ul,
-			&:focus ul {
+			&:focus  ul {
 				display: block;
 				@include box-shadow( 1px 2pt 4pt #aaa );
 				-moz-box-shadow: 1px 3pt 15pt hsla(0, 0%, 0%, 0.3);
@@ -450,8 +450,14 @@ table {
 				@include border-top-radius(0);
 				@include border-bottom-radius(4pt);
 				Philipp Kempgen says: That isn't the same. Find a better solution.
+				Also it's not true. The styles I used here have been
+				tested in all recent, popular browsers and work perfectly.
 				*/
 				border-radius:         0 0 4pt 4pt;
+				-moz-border-radius:    0 0 4pt 4pt;
+				-webkit-border-radius: 0 0 4pt 4pt;
+				-khtml-border-radius:  0 0 4pt 4pt;
+				-o-border-radius:      0 0 4pt 4pt;
 				
 				border-width: 1px;
 				border-style: solid;
@@ -553,6 +559,7 @@ table {
 				&:active,
 				&:focus {
 					background-color: #03c;
+					box-shadow: inset 0px 1px 3pt #33a;
 					@include
 					box-shadow( inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 ));
 				}
