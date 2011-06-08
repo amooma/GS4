@@ -1,6 +1,6 @@
 @import "compass";
 
-// Put your own sass mixins and functions in here.
+/* Put your own sass mixins and functions in here. */
 
 /*
 Compass doesn't know about this property yet, but it has a base
@@ -8,13 +8,15 @@ mixin called experimental that makes it trivial to add support for it:
 There's a bug about this: https://github.com/chriseppstein/compass/issues/334
 */
 @mixin column-fill($fill) {
-	@include experimental(column-fill, $fill, -moz, -webkit, -o, not -ms, not -khtml, official);
+	@include experimental( column-fill, $fill, -moz, -webkit, -o, not -ms, not -khtml, official );
 }
 
 
 
-// This file resets and then applies a typographic base
-// See http://beta.compass-style.org/reference/compass/typography/vertical_rhythm/
+/*
+This file resets and then applies a typographic base
+See http://beta.compass-style.org/reference/compass/typography/vertical_rhythm/
+*/
 
 @import "compass/reset";
 
@@ -41,7 +43,7 @@ body {
 	font-family: "Arial", "Helvetica", sans-serif;
 }
 
-// Establish Header styles
+/* Establish Header styles */
 h1,h2,h3,h4,h5,h6 {
 	font-weight: bold;
 	@include leader( 0.5 );
@@ -54,14 +56,17 @@ h4 { @include adjust-font-size-to( 16px ); }
 h5 { @include adjust-font-size-to( 14px ); }
 h6 { @include adjust-font-size-to( 13px ); }
 
-// Establish styles for text blocks
+/* Establish styles for text blocks */
 p,
 blockquote,
 li {
 	@extend .text-block;
 }
-// Style blocks of text with a consistent style
-// use the @extend directive to apply this class to your elements/classes/etc.
+
+/*
+Style blocks of text with a consistent style
+use the @extend directive to apply this class to your elements/classes/etc.
+*/
 .text-block {
 	@include trailer(1);
 	a         { }
@@ -69,12 +74,12 @@ li {
 	em        { font-style: italic; }
 }
 
-// Establish list styles
+/* Establish list styles */
 ol,
 ul {
 	list-style-position: inside;
-	@include leader(  1 );
-	@include trailer( 1 );
+	@include leader(1);
+	@include trailer(1);
 	padding-left: 1em;
 	
 	li {
@@ -95,19 +100,19 @@ ul {
 	}
 }
 
-// Debugging background, can be applied to other places if you need to check vertical alignment.
+/* Debugging background, can be applied to other places if you need to check vertical alignment. */
 body#styles_typography {
 	#content {
-	background: image-url( "underline.png" );
+		background: image-url( "underline.png" );
 	}
 }
 
-// Chris Eppstein says: Other basic styling from your original css
+/* Chris Eppstein says: Other basic styling from your original css */
 body {
 	background-color: #fff;
 	color: #000;
-	@include padding-leader(  1 );
-	@include padding-trailer( 1 );
+	@include padding-leader(1);
+	@include padding-trailer(1);
 	padding: 0.8em 1.5em;
 	max-width: 75em;
 	margin: auto;
@@ -173,48 +178,49 @@ div {
 	padding-bottom: 0;
 	margin-bottom: 20px;
 	background-color: #f0f0f0;
-
-h2 {
-	text-align: left;
-	font-weight: bold;
-	padding: 5px 5px 5px 15px;
-	font-size: 12px;
-	margin: -7px;
-	margin-bottom: 0px;
-	background-color: #c00;
-	color: #fff;
-}
-ul li {
-	font-size: 12px;
-	list-style: square;
-}
+	
+	h2 {
+		text-align: left;
+		font-weight: bold;
+		padding: 5px 5px 5px 15px;
+		font-size: 12px;
+		margin: -7px;
+		margin-bottom: 0px;
+		background-color: #c00;
+		color: #fff;
+	}
+	
+	ul li {
+		font-size: 12px;
+		list-style: square;
+	}
 }
 
 
 table {
-th,
-td {
-	border-width: 1px;
-	border-style: solid;
-	border-color: rgba(0,0,0,0.05);
-	padding: 0.15em 0.4em;
-	text-align: left;
-	vertical-align: top;
-	background-color: #f3f3f3;
-}
-th {
-	background-color: #bbf;
-}
-tr {
-&:nth-child(even) > td,
-&.even            > td {
-	background-color: #f0f0f0;
-}
-&:nth-child(odd)  > td,
-&.odd             > td {
-	background-color: #dddddd;
-}
-}
+	th,
+	td {
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgba(0,0,0,0.05);
+		padding: 0.15em 0.4em;
+		text-align: left;
+		vertical-align: top;
+		background-color: #f3f3f3;
+	}
+	th {
+		background-color: #bbf;
+	}
+	tr {
+		&:nth-child(even) > td,
+		&.even            > td {
+			background-color: #f0f0f0;
+		}
+		&:nth-child(odd)  > td,
+		&.odd             > td {
+			background-color: #dddddd;
+		}
+	}
 }
 
 
@@ -239,9 +245,11 @@ tr {
 }
 
 #content {
-	//background-image: -moz-linear-gradient( top, #eee, #fff 20pt );
-	//background-image: -o-linear-gradient( top, #eee, #fff 20pt );
-	//background-image: -webkit-gradient( linear, 0 top, 0 15%, from(#eee), to(#fff) );
+	/*
+	background-image: -moz-linear-gradient( top, #eee, #fff 20pt );
+	background-image: -o-linear-gradient( top, #eee, #fff 20pt );
+	background-image: -webkit-gradient( linear, 0 top, 0 15%, from(#eee), to(#fff) );
+	*/
 	@include
 	background-image(   linear-gradient( top, #eeeeee, white 20pt ) );
 	@include
@@ -309,11 +317,10 @@ tr {
 	@include column-fill( balance );
 	widows: 5;
 	orphans: 5;
-
-
-section {
-	display: table;
-}
+	
+	section {
+		display: table;
+	}
 }
 
 
@@ -354,11 +361,11 @@ section {
 		background: #def;
 		min-width: 15em;
 		
-	ul {
-		margin: 0;
-		padding: 0 0 0 2em;
+		ul {
+			margin: 0;
+			padding: 0 0 0 2em;
+		}
 	}
-}
 }
 
 @media all and (min-width: 800px) {
@@ -374,8 +381,10 @@ section {
 		@include border-radius( 4pt );
 		@include box-shadow( 1px 1pt 3px #aaa );
 		-moz-box-shadow:    1px 1pt 3px hsla( 0, 0%, 0%, 0.35 );
-		// Chris Eppstein says: Why is this a different color for mozilla?
-		// Philipp Kempgen says: Firefox knows hsla(). Other browsers don't (or have not been tested).
+		/*
+		Chris Eppstein says: Why is this a different color for mozilla?
+		Philipp Kempgen says: Firefox knows hsla(). Other browsers don't (or have not been tested).
+		*/
 		background-color: #03c;
 		@include
 		background-image( linear-gradient( top,
@@ -384,121 +393,143 @@ section {
 			hsla( 0, 0%,   0%, 0.15 ) 50%,
 			hsla( 0, 0%, 100%, 0.2  )
 			));
-	ul {
-		padding: 0;
-		margin: 0;
-		@include pie-clearfix;
-	}
-	li {
-	&:hover ul,
-	&:active ul,
-	&:focus ul {
-		display: block;
-		@include box-shadow( 1px 2pt 4pt #aaa );
-		-moz-box-shadow: 1px 3pt 15pt hsla(0, 0%, 0%, 0.3);
-		// Chris Eppstein says: Why is moz special?
-		// Philipp Kempgen says: I have explained this above already.
-		padding: 3pt 0 4pt 0;
 		
-		////border-radius:         0 0 4pt 4pt;
-		//// Chris Eppstein says: You had: border-radius:  0 0 4pt 4pt
-		//// But there is not good browser support for this shorthand.
-		//// Instead set these
-		//@include border-top-radius(0);
-		//@include border-bottom-radius(4pt);
-		// Philipp Kempgen says: That isn't the same. Find a better solution.
-		border-radius:         0 0 4pt 4pt;
+		ul {
+			padding: 0;
+			margin: 0;
+			@include pie-clearfix;
+		}
 		
-		border-width: 1px;
-		border-style: solid;
-		border-color: #222;
-		border-color: hsla(0, 0%, 0%, 0.6);
-		border-top: 1px solid #000;
+		li {
+			&:hover ul,
+			&:active ul,
+			&:focus ul {
+				display: block;
+				@include box-shadow( 1px 2pt 4pt #aaa );
+				-moz-box-shadow: 1px 3pt 15pt hsla(0, 0%, 0%, 0.3);
+				/*
+				Chris Eppstein says: Why is moz special?
+				Philipp Kempgen says: See my explanation above.
+				*/
+				padding: 3pt 0 4pt 0;
+				
+				/*
+				//border-radius:         0 0 4pt 4pt;
+				// Chris Eppstein says: You had: border-radius:  0 0 4pt 4pt
+				// But there is not good browser support for this shorthand.
+				// Instead set these
+				@include border-top-radius(0);
+				@include border-bottom-radius(4pt);
+				Philipp Kempgen says: That isn't the same. Find a better solution.
+				*/
+				border-radius:         0 0 4pt 4pt;
+				
+				border-width: 1px;
+				border-style: solid;
+				border-color: #222;
+				border-color: hsla(0, 0%, 0%, 0.6);
+				border-top: 1px solid #000;
+			}
+			/* ######### Huh? */
+				font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
+				font-size: 11pt;
+				font-weight: normal;
+				line-height: 1.2em;
+				text-shadow: 1px 2px 4px #112;
+			
+			a {
+				display: block;
+				padding: 5pt 12pt 6pt 12pt;
+				min-width: 4em;
+				text-align: center;
+				border-left: 1px solid hsla(0, 0%, 100%, 0.2);
+				border-right: 1px solid hsla(0, 0%, 0%, 0.2);
+				color: #fff;
+				text-decoration: none;
+			}
+			
+			li a {
+				text-align: left;
+			}
+			
+			a {
+				&:hover,
+				&:active,
+				&:focus,
+				&.current_page_navigation {
+					color: #fff;
+					background-color: #029;
+					@include
+					background-image( linear-gradient( top,
+						hsla( 0, 0%, 100%, 0.5  ),
+						hsla( 0, 0%, 100%, 0.05 ) 50%,
+						hsla( 0, 0%,   0%, 0.15 ) 50%,
+						hsla( 0, 0%, 100%, 0.2  )
+						));
+				}
+				&:focus {
+					outline: none;
+					/*text-decoration: underline;*/
+				}
+			}
+		}
+		
+		a {
+			&:hover,
+			&:focus,
+			&:active {
+				text-shadow: 1px 2px 4px #112;
+				text-shadow: 1px 2px 4px #112;
+			}
+		}
+		
+		li {
+			&:first-child a {
+				border-left: none;
+			}
+			&:last-child a {
+				border-right: none;
+			}
+			
+			position: relative;
+			float: left;
+			list-style-type: none;
+		}
+		
+		ul ul {
+			display: none;
+			width: 100%;
+			width: auto;
+			white-space: nowrap;
+			position: absolute;
+			left: 0;
+			background-color: #fff;
+			/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
+			
+			a {
+				padding: 5px 10px;
+				border-left: none;
+				border-right: none;
+				font-size: 90%;
+				color: #000;
+				text-shadow: 1px 1px 4px #aaa;
+			}
+			
+			li {
+				float: none;
+			}
+			
+			a {
+				&:hover,
+				&:active,
+				&:focus {
+					background-color: #03c;
+					@include
+					box-shadow( inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 ));
+				}
+			}
+		}
 	}
-	//######### Huh?
-		font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
-		font-size: 11pt;
-		font-weight: normal;
-		line-height: 1.2em;
-		text-shadow: 1px 2px 4px #112;
-	a {
-		display: block;
-		padding: 5pt 12pt 6pt 12pt;
-		min-width: 4em;
-		text-align: center;
-		border-left: 1px solid hsla(0, 0%, 100%, 0.2);
-		border-right: 1px solid hsla(0, 0%, 0%, 0.2);
-		color: #fff;
-		text-decoration: none;
-	}
-	li a {
-		text-align: left;
-	}
-	a {
-	&:hover,
-	&:active,
-	&:focus,
-	&.current_page_navigation {
-		color: #fff;
-		background-color: #029;
-		@include background-image(linear-gradient(top, hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0.05) 50%, hsla(0, 0%, 0%, 0.15) 50%, hsla(0, 0%, 100%, 0.2)));
-	}
-	&:focus {
-		outline: none;
-		/*text-decoration: underline;*/
-	}
-	}
-	}
-	a {
-	&:hover,
-	&:focus,
-	&:active {
-		text-shadow: 1px 2px 4px #112;
-		text-shadow: 1px 2px 4px #112;
-	}
-	}
-	li {
-	&:first-child a {
-		border-left: none;
-	}
-	&:last-child a {
-		border-right: none;
-	}
-		position: relative;
-		float: left;
-		list-style-type: none;
-	}
-	ul ul {
-		display: none;
-		width: 100%;
-		width: auto;
-		white-space: nowrap;
-		position: absolute;
-		left: 0;
-		background-color: #fff;
-		/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
-	a {
-		padding: 5px 10px;
-		border-left: none;
-		border-right: none;
-		font-size: 90%;
-		color: #000;
-		text-shadow: 1px 1px 4px #aaa;
-	}
-	li {
-		float: none;
-	}
-	a {
-	&:hover,
-	&:active,
-	&:focus {
-		background-color: #03c;
-		@include
-		box-shadow(         inset 0px 1px 3pt hsla( 0, 0%, 0%, 0.2 ));
-	}
-}
-}
-}
 }
 
 
