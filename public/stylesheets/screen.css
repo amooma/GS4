@@ -160,23 +160,18 @@ pre {
 a {
 	color: #00c;
 }
-
 a:visited {
 	color: #609;
 }
-
-a:hover,
-a:focus,
-a:active {
-	text-shadow: 1px 2px 3px #aaa;
+a:hover, a:focus, a:active {
+	text-shadow: 1px 2px 3px #aaaaaa;
 }
 
 div {
-	padding: 0;
 	margin: 0;
+	padding: 0;
 	border: 0;
 }
-
 div.field, div.actions {
 	margin-bottom: 1.354em;
 }
@@ -207,7 +202,6 @@ div.field, div.actions {
 	margin-bottom: 20px;
 	background-color: #f0f0f0;
 }
-
 #error_explanation h2 {
 	text-align: left;
 	font-weight: bold;
@@ -218,7 +212,6 @@ div.field, div.actions {
 	background-color: #c00;
 	color: #fff;
 }
-
 #error_explanation ul li {
 	font-size: 12px;
 	list-style: square;
@@ -234,18 +227,13 @@ table td {
 	vertical-align: top;
 	background-color: #f3f3f3;
 }
-
 table th {
 	background-color: #bbf;
 }
-
-table tr:nth-child(even) > td,
-table tr.even > td {
+table tr:nth-child(even) > td, table tr.even > td {
 	background-color: #f0f0f0;
 }
-
-table tr:nth-child(odd) > td,
-table tr.odd > td {
+table tr:nth-child(odd) > td, table tr.odd > td {
 	background-color: #dddddd;
 }
 
@@ -271,21 +259,21 @@ table tr.odd > td {
 
 #content {
 	/*
-	background-image: -moz-linear-gradient( top, #eee, white 20pt );
-	background-image: -o-linear-gradient( top, #eee, white 20pt );
-	background-image: -webkit-gradient( linear, 0 top, 0 15%, from(#eee), to(white) );
+	background-image: -moz-linear-gradient( top, #eee, #fff 20pt );
+	background-image: -o-linear-gradient( top, #eee, #fff 20pt );
+	background-image: -webkit-gradient( linear, 0 top, 0 15%, from(#eee), to(#fff) );
 	*/
-	background-image: -moz-linear-gradient( top, #eee, white 20pt );
-	background-image: -o-linear-gradient( top, #eee, white 20pt );
-	background-image: -webkit-gradient( linear, 50% 0%, 50% 100%, color-stop(0%, #eee), color-stop(100%, white) );
-	background-image: -webkit-linear-gradient( top, #eee, white 20pt);
-	background-image: linear-gradient( top, #eee, white 20pt );
-	border-radius: 4pt;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #ffffff));
+	background-image: -webkit-linear-gradient(top, #eeeeee, #ffffff 20pt);
+	background-image: -moz-linear-gradient(top, #eeeeee, #ffffff 20pt);
+	background-image: -o-linear-gradient(top, #eeeeee, #ffffff 20pt);
+	background-image: linear-gradient(top, #eeeeee, #ffffff 20pt);
 	-moz-border-radius: 4pt;
 	-webkit-border-radius: 4pt;
-	-khtml-border-radius: 4pt;
 	-o-border-radius: 4pt;
 	-ms-border-radius: 4pt;
+	-khtml-border-radius: 4pt;
+	border-radius: 4pt;
 	margin: 0  0   0  0;
 	padding: 2px  8px 0  8px;
 }
@@ -342,46 +330,44 @@ table tr.odd > td {
 
 .index_overview {
 	height: auto;
-	column-width: 23em;
 	-moz-column-width: 23em;
 	-webkit-column-width: 23em;
 	-o-column-width: 23em;
-	column-gap: 1em;
+	column-width: 23em;
 	-moz-column-gap: 1em;
 	-webkit-column-gap: 1em;
 	-o-column-gap: 1em;
-	column-fill: balance;
+	column-gap: 1em;
 	-moz-column-fill: balance;
 	-webkit-column-fill: balance;
 	-o-column-fill: balance;
+	column-fill: balance;
 	widows: 5;
 	orphans: 5;
 }
-
 .index_overview section {
 	display: table;
 }
 
 .help_overview {
 	height: auto;
-	column-width: 26em;
 	-moz-column-width: 26em;
 	-webkit-column-width: 26em;
 	-o-column-width: 26em;
-	column-gap: 2em;
+	column-width: 26em;
 	-moz-column-gap: 2em;
 	-webkit-column-gap: 2em;
 	-o-column-gap: 2em;
-	column-fill: balance;
+	column-gap: 2em;
 	-moz-column-fill: balance;
 	-webkit-column-fill: balance;
 	-o-column-fill: balance;
+	column-fill: balance;
 	widows: 5;
 	orphans: 5;
 	font-size: 0.95em;
 	line-height: 1.25em;
 }
-
 .help_overview section {
 	display: table;
 }
@@ -391,19 +377,19 @@ table tr.odd > td {
 	padding: 5px;
 	min-width: 10em;
 	text-align: center;
-	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	-khtml-border-radius: 5px;
 	-o-border-radius: 5px;
 	-ms-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
 	border: 2px solid #dd3;
 	background-color: #ffb;
 	color: #550;
-	box-shadow: 2px 2px 8px #bbb;
-	-moz-box-shadow: 2px 2px 8px #bbb;
-	-webkit-box-shadow: 2px 2px 8px #bbb;
-	-o-box-shadow: 2px 2px 8px #bbb;
+	-moz-box-shadow: 2px 2px 8px #bbbbbb;
+	-webkit-box-shadow: 2px 2px 8px #bbbbbb;
+	-o-box-shadow: 2px 2px 8px #bbbbbb;
+	box-shadow: 2px 2px 8px #bbbbbb;
 }
 
 @media screen, projection, tv, print, handheld, embossed {
@@ -425,7 +411,6 @@ table tr.odd > td {
 		background: #def;
 		min-width: 15em;
 	}
-
 	nav.hnav ul {
 		margin: 0;
 		padding: 0 0 0 2em;
@@ -440,26 +425,26 @@ table tr.odd > td {
 		border: 1px solid #222;
 		border: 1px solid rgba(0, 0, 0, 0.8);
 		position: relative;
-		border-radius: 4pt;
 		-moz-border-radius: 4pt;
 		-webkit-border-radius: 4pt;
-		-khtml-border-radius: 4pt;
 		-o-border-radius: 4pt;
 		-ms-border-radius: 4pt;
-		box-shadow: 1px 1pt 3px #aaa;
-		-moz-box-shadow: 1px 1pt 3px #aaa;
+		-khtml-border-radius: 4pt;
+		border-radius: 4pt;
+		-moz-box-shadow: 1px 1pt 3px #aaaaaa;
+		-webkit-box-shadow: 1px 1pt 3px #aaaaaa;
+		-o-box-shadow: 1px 1pt 3px #aaaaaa;
+		box-shadow: 1px 1pt 3px #aaaaaa;
 		-moz-box-shadow: 1px 1pt 3px rgba(0, 0, 0, 0.35);
-		-webkit-box-shadow: 1px 1pt 3px #aaa;
-		-o-box-shadow: 1px 1pt 3px #aaa;
 		/*
 		Chris Eppstein says: Why is this a different color for mozilla?
 		Philipp Kempgen says: Firefox knows hsla(). Other browsers don't (or have not been tested).
 		*/
 		background-color: #03c;
-		background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
-		background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
 		background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(50%, rgba(255, 255, 255, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(255, 255, 255, 0.2)));
 		background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
+		background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
+		background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
 		background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
 	}
 	nav.hnav ul {
@@ -476,14 +461,20 @@ table tr.odd > td {
 		overflow: hidden;
 		visibility: hidden;
 	}
-
+	nav.hnav li {
+		font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
+		font-size: 11pt;
+		font-weight: normal;
+		line-height: 1.2em;
+		text-shadow: 1px 2px 4px #112;
+	}
 	nav.hnav li:hover ul, nav.hnav li:active ul, nav.hnav li:focus ul {
 		display: block;
-		box-shadow: 1px 2pt 4pt #aaa;
-		-moz-box-shadow: 1px 2pt 4pt #aaa;
+		-moz-box-shadow: 1px 2pt 4pt #aaaaaa;
+		-webkit-box-shadow: 1px 2pt 4pt #aaaaaa;
+		-o-box-shadow: 1px 2pt 4pt #aaaaaa;
+		box-shadow: 1px 2pt 4pt #aaaaaa;
 		-moz-box-shadow: 1px 3pt 15pt rgba(0, 0, 0, 0.3);
-		-webkit-box-shadow: 1px 2pt 4pt #aaa;
-		-o-box-shadow: 1px 2pt 4pt #aaa;
 		/*
 		Chris Eppstein says: Why is moz special?
 		Philipp Kempgen says: See my explanation above.
@@ -497,27 +488,20 @@ table tr.odd > td {
 		@include border-top-radius(0);
 		@include border-bottom-radius(4pt);
 		Philipp Kempgen says: That isn't the same. Find a better solution.
+		Also it's not true. The styles I used here have been
+		tested in all recent, popular browsers and work perfectly.
 		*/
-		border-radius:         0 0 4pt 4pt;
-		-moz-border-radius:    0 0 4pt 4pt;
+		border-radius: 0 0 4pt 4pt;
+		-moz-border-radius: 0 0 4pt 4pt;
 		-webkit-border-radius: 0 0 4pt 4pt;
-		-khtml-border-radius:  0 0 4pt 4pt;
-		-o-border-radius:      0 0 4pt 4pt;
+		-khtml-border-radius: 0 0 4pt 4pt;
+		-o-border-radius: 0 0 4pt 4pt;
 		border-width: 1px;
 		border-style: solid;
 		border-color: #222;
 		border-color: rgba(0, 0, 0, 0.6);
 		border-top: 1px solid #000;
 	}
-
-	nav.hnav li {
-		font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
-		font-size: 11pt;
-		font-weight: normal;
-		line-height: 1.2em;
-		text-shadow: 1px 2px 4px #112;
-	}
-
 	nav.hnav li a {
 		display: block;
 		padding: 5pt 12pt 6pt 12pt;
@@ -528,50 +512,37 @@ table tr.odd > td {
 		color: #fff;
 		text-decoration: none;
 	}
-
 	nav.hnav li li a {
 		text-align: left;
 	}
-
-	nav.hnav li a:hover,
-	nav.hnav li a:active,
-	nav.hnav li a:focus,
-	nav.hnav li a.current_page_navigation {
+	nav.hnav li a:hover, nav.hnav li a:active, nav.hnav li a:focus, nav.hnav li a.current_page_navigation {
 		color: #fff;
 		background-color: #029;
-		background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
-		background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
 		background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(50%, rgba(255, 255, 255, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(255, 255, 255, 0.2)));
 		background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
+		background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
+		background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
 		background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
 	}
-
 	nav.hnav li a:focus {
 		outline: none;
 		/*text-decoration: underline;*/
 	}
-
-	nav.hnav a:hover,
-	nav.hnav a:focus,
-	nav.hnav a:active {
+	nav.hnav a:hover, nav.hnav a:focus, nav.hnav a:active {
 		text-shadow: 1px 2px 4px #112;
 		text-shadow: 1px 2px 4px #112;
 	}
-
-	nav.hnav li:first-child a {
-		border-left: none;
-	}
-
-	nav.hnav li:last-child a {
-		border-right: none;
-	}
-
 	nav.hnav li {
 		position: relative;
 		float: left;
 		list-style-type: none;
 	}
-
+	nav.hnav li:first-child a {
+		border-left: none;
+	}
+	nav.hnav li:last-child a {
+		border-right: none;
+	}
 	nav.hnav ul ul {
 		display: none;
 		width: 100%;
@@ -582,7 +553,6 @@ table tr.odd > td {
 		background-color: #fff;
 		/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
 	}
-
 	nav.hnav ul ul a {
 		padding: 5px 10px;
 		border-left: none;
@@ -591,20 +561,16 @@ table tr.odd > td {
 		color: #000;
 		text-shadow: 1px 1px 4px #aaa;
 	}
-
 	nav.hnav ul ul li {
 		float: none;
 	}
-
-	nav.hnav ul ul a:hover,
-	nav.hnav ul ul a:active,
-	nav.hnav ul ul a:focus {
+	nav.hnav ul ul a:hover, nav.hnav ul ul a:active, nav.hnav ul ul a:focus {
 		background-color: #03c;
 		box-shadow: inset 0px 1px 3pt #33a;
-		box-shadow: inset 0px 1px 3pt rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: inset 0px 1px 3pt rgba(0, 0, 0, 0.2);
 		-webkit-box-shadow: inset 0px 1px 3pt rgba(0, 0, 0, 0.2);
 		-o-box-shadow: inset 0px 1px 3pt rgba(0, 0, 0, 0.2);
+		box-shadow: inset 0px 1px 3pt rgba(0, 0, 0, 0.2);
 	}
 }
 /*
