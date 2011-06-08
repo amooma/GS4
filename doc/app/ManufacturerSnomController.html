@@ -313,8 +313,8 @@
 				<dt><a name="GS_CALLFORWARD_BUSY">GS_CALLFORWARD_BUSY</a></dt>
 				
 				<dd class="description"><p>
-FIXME Are these meant to be IDs? Don&#8217;t store them as magic numbers
-here. IDs may change in the DB.
+TODO Are these meant to be IDs? Don&#8217;t store them as magic numbers
+here. IDs may change in the DB. (=> pko)
 </p></dd>
 				
 			
@@ -465,7 +465,7 @@ call_forwarding_{always|busy|offline|noanswer}
 101:                 <span class="ruby-ivar">@busy_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_busy</span> )
 102: 
 103:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account}&quot;</span>
-104:                 <span class="ruby-comment cmt">#FIXME Typo? Should @sip_account be @sip_account_name ?</span>
+104:                 <span class="ruby-comment cmt">#FIXME Typo? Should @sip_account be @sip_account_name ? (=&gt; pko)</span>
 105:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
@@ -820,7 +820,7 @@ before_filter { |controller|
 174:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_accounts</span>
 175:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
 176:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}&quot;</span>
-177:                 <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">all</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil.</span>
+177:                 <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">all</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=&gt; pko)</span>
 178:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
@@ -855,7 +855,7 @@ before_filter { |controller|
     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 52</span>
 52:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xml_menu</span>
 53:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-54:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil.</span>
+54:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=&gt; pko)</span>
 55:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
 56:                 <span class="ruby-ivar">@sip_accounts_count</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">count</span>
 57:                 <span class="ruby-ivar">@sip_account_url</span> = <span class="ruby-node">&quot;/#{@sip_account_name}&quot;</span>
@@ -903,7 +903,7 @@ supposed to do?
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 231</span>
 231:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward</span> )
-232:                 <span class="ruby-comment cmt">#FIXME Are you sure that &quot;active?&quot; is a valid method? Shouldn't it be &quot;active&quot; ?</span>
+232:                 <span class="ruby-comment cmt">#FIXME Are you sure that &quot;active?&quot; is a valid method? Shouldn't it be &quot;active&quot; ? (=&gt; pko)</span>
 233:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">active?</span>)   <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (call_forward &amp;&amp; ...)</span>
 234:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">to_s</span>
 235:                 <span class="ruby-keyword kw">end</span>
@@ -985,7 +985,7 @@ supposed to do?
 198:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_sip_account_name</span>()
 199:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
 200:                 <span class="ruby-identifier">sip_account_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account</span>]
-201:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil.</span>
+201:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=&gt; pko)</span>
 202:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">sip_account_name</span>.<span class="ruby-identifier">blank?</span>)
 203:                         <span class="ruby-identifier">sip_account</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">first</span>
 204:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">blank?</span>)

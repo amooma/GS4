@@ -38,11 +38,11 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./app/controllers/phone_book_internal_users_controller_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="app/controllers/phone_book_internal_users_controller.rb">app/controllers/phone_book_internal_users_controller.rb</a></li>
-					
 						<li><a href="./app/controllers/phone_book_internal_user_controllers_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
 							class="thickbox" title="app/controllers/phone_book_internal_user_controllers.rb">app/controllers/phone_book_internal_user_controllers.rb</a></li>
+					
+						<li><a href="./app/controllers/phone_book_internal_users_controller_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/controllers/phone_book_internal_users_controller.rb">app/controllers/phone_book_internal_users_controller.rb</a></li>
 					
 					</ul>
 				</div>
@@ -308,7 +308,7 @@
 					
 					<p>
 OPTIMIZE Is this controller actually used for anything? TODO <a
-href="Authentication.html">Authentication</a> and authorization.
+href="Authentication.html">Authentication</a> and authorization. (=> pko)
 </p>
 					
 
@@ -316,12 +316,12 @@ href="Authentication.html">Authentication</a> and authorization.
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_book_internal_users_controller.rb, line 6</span>
+    <span class="ruby-comment cmt"># File app/controllers/phone_book_internal_user_controllers.rb, line 6</span>
  6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
  7:     <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">all</span>
  8:     <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 9:      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>
-10:         }
+ 9:      <span class="ruby-identifier">ormat</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_accounts</span> }
+10:         } 
 11:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
@@ -348,7 +348,7 @@ href="Authentication.html">Authentication</a> and authorization.
 					
 					<p>
 OPTIMIZE Is this controller actually used for anything? TODO <a
-href="Authentication.html">Authentication</a> and authorization.
+href="Authentication.html">Authentication</a> and authorization. (=> pko)
 </p>
 					
 
@@ -356,12 +356,12 @@ href="Authentication.html">Authentication</a> and authorization.
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_book_internal_user_controllers.rb, line 6</span>
+    <span class="ruby-comment cmt"># File app/controllers/phone_book_internal_users_controller.rb, line 6</span>
  6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
  7:     <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">all</span>
  8:     <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 9:      <span class="ruby-identifier">ormat</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_accounts</span> }
-10:         } 
+ 9:      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>
+10:         }
 11:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					

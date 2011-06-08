@@ -303,10 +303,10 @@
 					<div class="method-source-code"
 						id="page-title-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 42</span>
-42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">page_title</span>( <span class="ruby-identifier">page_title</span> )
-43:                 <span class="ruby-identifier">content_for</span>(<span class="ruby-value">:page_title</span>) { <span class="ruby-identifier">page_title</span> }
-44:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 44</span>
+44:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">page_title</span>( <span class="ruby-identifier">page_title</span> )
+45:                 <span class="ruby-identifier">content_for</span>(<span class="ruby-value">:page_title</span>) { <span class="ruby-identifier">page_title</span> }
+46:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -368,14 +368,16 @@ Define the top navigation menu items
 30:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Nodes&quot;</span>             , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">nodes_path</span> },
 31:                                 ]},
 32:                                 
-33:                         ]
-34:                 <span class="ruby-keyword kw">else</span>
-35:                         <span class="ruby-identifier">menu_items</span> = [
-36:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Sign in&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_user_session_path</span> }
-37:                         ]
-38:                 <span class="ruby-keyword kw">end</span>
-39:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">menu_items</span>
-40:         <span class="ruby-keyword kw">end</span></pre>
+33:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Help&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_help_path</span> }
+34:                                 
+35:                         ]
+36:                 <span class="ruby-keyword kw">else</span>
+37:                         <span class="ruby-identifier">menu_items</span> = [
+38:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Sign in&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_user_session_path</span> }
+39:                         ]
+40:                 <span class="ruby-keyword kw">end</span>
+41:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">menu_items</span>
+42:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

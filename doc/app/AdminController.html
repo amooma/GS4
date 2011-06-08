@@ -71,6 +71,8 @@
 					
 					<li><a href="#method-i-check_if_admin_account_exists">#check_if_admin_account_exists</a></li>
 					
+					<li><a href="#method-i-help">#help</a></li>
+					
 					<li><a href="#method-i-index">#index</a></li>
 					
 					<li><a href="#method-i-rescue_missing">#rescue_missing</a></li>
@@ -292,6 +294,42 @@
 			<h3 class="section-header">Public Instance Methods</h3>
 
 		
+			<div id="help-method" class="method-detail ">
+				<a name="method-i-help"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">help</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="help-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">help</span>
+32:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+33:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+34:     <span class="ruby-keyword kw">end</span>
+35:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
 			<div id="index-method" class="method-detail ">
 				<a name="method-i-index"></a>
 
@@ -368,12 +406,12 @@
 					<div class="method-source-code"
 						id="check-if-admin-account-exists-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 37</span>
-37:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_admin_account_exists</span>
-38:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-39:       <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_admin_setup_path</span>)
-40:     <span class="ruby-keyword kw">end</span>
-41:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 43</span>
+43:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_admin_account_exists</span>
+44:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+45:       <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">new_admin_setup_path</span>)
+46:     <span class="ruby-keyword kw">end</span>
+47:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -404,10 +442,10 @@
 					<div class="method-source-code"
 						id="rescue-missing-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 33</span>
-33:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
-34:     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-value str">'/db_migrate_missing.html'</span> )
-35:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 39</span>
+39:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_missing</span>
+40:     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-value str">'/db_migrate_missing.html'</span> )
+41:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
