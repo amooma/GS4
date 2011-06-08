@@ -20,7 +20,7 @@ See http://beta.compass-style.org/reference/compass/typography/vertical_rhythm/
 
 /*
 @import "compass/reset";
-#OPTIMIZE Add this. The Compass stuff resets too much tough. It needs to be added here.
+#OPTIMIZE Add this. The Compass stuff resets too much though (e.g. removes quotes for <q>). It needs to be added here.
 */
 
 /*
@@ -35,8 +35,9 @@ Philipp Kempgen says: I didn't use pt with Compass but in pure CSS.
 Also there is no way to convert px to em. pt is an absolute unit.
 px depends on the screen's resolution.
 */
-$base-font-size: 13px;
-$base-line-height: 18px;
+$base-font-size:   13px;    /* font-size was 10pt */
+$base-line-height: 17.6px;  /* line-height was 1.35em */
+
 @import "compass/typography";
 $ie-font-ratio: $base-font-size / 100%;
 
@@ -110,7 +111,14 @@ body#styles_typography {
 	}
 }
 
+
+
+
 /* Chris Eppstein says: Other basic styling from your original css */
+/* ######## End of Sass stuff. ######## */
+
+
+
 body {
 	background-color: #fff;
 	color: #000;
@@ -121,6 +129,9 @@ body {
 	margin: auto;
 }
 
+body, p, ol, ul, td {
+	font-family: "Arial", "Helvetica", sans-serif;
+}
 
 pre {
 	background-color: #eee;
@@ -415,7 +426,7 @@ table {
 		ul {
 			padding: 0;
 			margin: 0;
-			@include pie-clearfix;
+			@include pie-clearfix; /* It generates "*zoom: 1;". Huh? Wasn't required in the original CSS. */
 		}
 		
 		li {
@@ -448,12 +459,12 @@ table {
 				border-color: hsla(0, 0%, 0%, 0.6);
 				border-top: 1px solid #000;
 			}
-			/* ######### Huh? */
-				font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
-				font-size: 11pt;
-				font-weight: normal;
-				line-height: 1.2em;
-				text-shadow: 1px 2px 4px #112;
+			
+			font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Arial", sans-serif;
+			font-size: 11pt;
+			font-weight: normal;
+			line-height: 1.2em;
+			text-shadow: 1px 2px 4px #112;
 			
 			a {
 				display: block;
