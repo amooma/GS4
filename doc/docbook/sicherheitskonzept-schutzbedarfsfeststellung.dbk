@@ -85,7 +85,7 @@
     gesetzlichen Bestimmungen und aus betrieblichen Vereinbarungen. So können
     beispielsweise die mögliche Beinträchtigung in der Aufgabenerfüllung, die
     finanziellen Auswirkungen, die negative Außenwirkung oder andere
-    Auswirkungen stark variieren. Es ist daher schwierig eine pausche und
+    Auswirkungen stark variieren. Es ist daher schwierig eine pauschale und
     allgemeingültige Analyse durchzuführen.</para>
 
     <para>Siehe auch: <xref linkend="leitlinie-sichere-tk-anlagen" />.</para>
@@ -94,7 +94,14 @@
   <section xml:id="schutzbedarf-komponenten">
     <title>Schutzbedarf der einzelnen Komponenten</title>
 
-    <para>Übersicht:</para>
+    <para>Die nachfolgende Tabelle bewertet exemplarisch den
+    Schutzbedarf der einzelnen Komponenten in einem typischen
+    Einsatzszenario. Natürlich muss durch den Anwender der Sicheren
+    Voice-Over-IP-Telefonanlage (SiVoIP) in Abhängigkeit seines spezifischen
+    Einsatzszenarios eine angepasste Schutzbedarfsfeststellung
+    vorgenommen werden. Die hier vorgestellten Annahmen dienen jedoch
+    für die weitere Bewertung der Gefährdungen und der empfohlenen
+    Maßnahmen und damit für die weitere Gestaltung des Sicherheitskonzeptes.  </para>
 
     <table>
       <title>Schutzbedarf</title>
@@ -215,7 +222,9 @@
     </table>
 
     <para>Nachfolgend wird erläutert wie die Abschätzung des Schutzbedarfs der
-    einzelnen Kompontenten zustandekommt.</para>
+    einzelnen Kompontenten zustandekommt. Hierbei wird, wie oben
+    erläutert, exemplarisch von einem typischen Einsatzszenario der
+    SiVoIP ausgegangen. </para>
 
     <sidebar>
       <para>Erläuterung: Im Folgenden bezieht sich die Formulierung „aus
@@ -327,12 +336,12 @@
       die Integrität sichergestellt sein. Es ist entscheidend ein Endgerät
       bzw. einen SIP-Account eindeutig identifizieren zu können, damit
       beispielsweise bei der Provisionierung sensible Daten nicht an ein
-      anderes Gerät gesendet werden. Die Sicherstellung der Verfügbarkeit der
+      falsches Gerät gesendet werden. Die Sicherstellung der Verfügbarkeit der
       Netzwerk-Infrastruktur liegt in der Verantwortung des
       Administrators.</para>
 
-      <para>Möglichkeiten wie vor einem Angreifer der auf dem Ethernet-Kabel
-      „lauscht“ verborgen werden kann daß überhaupt verschlüsselte Gespräche
+      <para>Möglichkeiten wie vor einem Angreifer, der auf dem Ethernet-Kabel
+      „lauscht“, verborgen werden kann, dass überhaupt verschlüsselte Gespräche
       stattfinden werden hier nicht betrachtet.</para>
     </section>
 

@@ -22,14 +22,14 @@
 
   <para>Hier werden die Gefährdungen aus der <citation><biblioref
   linkend="biblio-tlstk" /></citation> genannt und jeweils zu den
-  entsprechenden in der TK-Anlage „Gemeinschaft“ umgesetzten
+  entsprechenden in der TK-Anlage „Gemeinschaft4“ umgesetzten
   Sicherheitsmaßnahmen verlinkt.</para>
 
   <section xml:id="tlstk-g-systemuebergreifende-aspekte">
     <title>Systemübergreifende Aspekte</title>
 
-    <para>Auf VoIP-TK-Anlagen treffen wie auf alle Computersysteme die
-    Gefährdungen zu die in den IT-Grundschutz-Katalogen des BSI genannt
+    <para>Auf VoIP-TK-Anlagen treffen, wie auf alle Computersysteme, die
+    Gefährdungen zu, die in den IT-Grundschutz-Katalogen des BSI genannt
     sind.</para>
   </section>
 
@@ -37,12 +37,12 @@
     <title>ISDN-TK-Anlagen</title>
 
     <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine
-    ISDN-TK-Anlage. „Gemeinschaft“ ist eine VoIP-TK-Anlage (SIP), die &#8211;
+    ISDN-TK-Anlage. „Gemeinschaft4“ ist eine VoIP-TK-Anlage (SIP), die &#8211;
     falls vom Administrator gewünscht &#8211; über ein Media-Gateway mit dem
     ISDN-Netz verbunden werden kann. Das Media-Gateway ist eine eigenständige
     Komponente (es sind diverse Lösungen erhältlich), die separat zu
-    betrachten ist. Für „Gemeinschaft“ ist die Grenze der Betrachtung und des
-    „Gefahrenübergangs“ die VoIP-Anbindung.</para>
+    betrachten ist. Für „Gemeinschaft4“ ist die Grenze der Betrachtung und des
+    „Gefahrenübergangs“ die VoIP-Anbindung des Media-Gateways.</para>
   </section>
 
   <section xml:id="tlstk-g-voip-systeme">
@@ -1046,13 +1046,13 @@
     <title>Hybrid-Systeme</title>
 
     <para>Bei der betrachteten TK-Anlage handelt es sich nicht um eine ISDN-
-    und somit auch nicht um eine Hybrid-TK-Anlage. „Gemeinschaft“ ist eine
+    und somit auch nicht um eine Hybrid-TK-Anlage. „Gemeinschaft4“ ist eine
     VoIP-TK-Anlage (SIP), die &#8211; falls vom Administrator gewünscht
     &#8211; über ein Media-Gateway mit dem ISDN-Netz verbunden werden kann.
     Das Media-Gateway ist eine eigenständige Komponente (es sind diverse
     Lösungen erhältlich), die separat zu betrachten ist. Für „Gemeinschaft“
     ist die Grenze der Betrachtung und des „Gefahrenübergangs“ die
-    VoIP-Anbindung.</para>
+    VoIP-Anbindung an das Media-Gateway.</para>
   </section>
 
   <section xml:id="tlstk-g-tk-applikationen-und-mehrwertdienste">
@@ -1073,10 +1073,10 @@
           <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
           spricht weit gefaßt von einem <quote>konsolidierten
           Nachrichteneingang über verschiedene Kanäle</quote> (z.B. E-Mail,
-          Fax, SMS und Sprachnachrichten) und sagt richtig daß <quote>keine
+          Fax, SMS und Sprachnachrichten) und sagt richtig, dass <quote>keine
           allgemein akzeptierte Definition des funktionalen Umfangs von
           Unified Messaging existiert</quote>. Sie geht von einem externen
-          (d.h. separaten) UM-Server aus und sagt dieser verhalte sich
+          (d.h. separaten) UM-Server aus und sagt, dieser verhalte sich
           <quote>aus Sicht der TK-Anlage <replaceable>[…]</replaceable> wie
           ein Endgerät</quote>. Dies trifft auf Gemeinschaft4 so nicht
           zu.</para>
@@ -1094,7 +1094,7 @@
                 GSM-Mobilfunk. Im Zusammenhang mit VoIP-Endgeräten hat der
                 Begriff keine Bedeutung.</para>
 
-                <para>Wenn man SMS weiter faßt und darunter einfach
+                <para>Wenn man SMS weiter fasst und darunter einfach
                 Text-Nachrichten versteht, dann muß gesagt werden daß es in
                 der Praxis verschiedene nicht-standardisierte und
                 herstellerabhängige Varianten gibt um Text-Nachrichten per SIP
@@ -1125,17 +1125,20 @@
                 Text-Nachrichten an fast allen VoIP-Telefonen wenn überhaupt
                 dann nur sehr umständlich möglich ist, da meist keine
                 alphanumerische Tastatur vorhanden ist und auch keine
-                Eingabehilfe wie z.B. T9 das man von Mobiltelefonen kennt.
-                Nach unserer Ansicht wäre das eine extreme
+                Eingabehilfe wie z.B. das von Mobiltelefonen bekannte
+		T9 unterstützt wird.
+                Nach unserer Ansicht ist das eine extreme
                 Nischen-Funktionalität. Da die Anlage keine Verbindungen nach
-                <quote>außen</quote> hat und SIP-IM-Standards nur wenig
-                verbreitet sind wäre es fragwürdig eine Implementierung
-                &#8211; und damit weitere Gefährdungen &#8211; zu schaffen
-                durch die dann letztlich kaum mehr möglich ist als daß interne
-                Telefone mit umständlicher Eingabe Text-Nachrichten
-                austauschen können. Prinzipiell ist die Anlage dafür
-                vorbereitet, eine Implementierung erfolgt jedoch derzeit
-                nicht.</para>
+                <quote>außen</quote> hat und SIP-IM-Standards nur eine
+		geringe Verbreitung auweisen, wäre es fragwürdig eine
+		Implementierung 
+                &#8211; und damit weitere Gefährdungen &#8211; zu schaffen.
+                Eine derartige Implementierung erlaubt letztlich nur
+		den umständlichen Austausch von Text-Nachrichten durch
+		die internen Telefone. 
+                Prinzipiell ist die Anlage dafür
+                vorbereitet, eine Implementierung ist
+                nicht geplant.</para>
               </listitem>
 
               <listitem>
@@ -1172,7 +1175,8 @@
           <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
           spricht von Gefährdungen die aus Kopplungen eines ACD-Systems mit
           Kunden- und Mitarbeiter-Datenbanken. Teil des Projektes ist (siehe
-          Leistungsbeschreibung AP 2.1) eine Verteilung eingender Anrufe auf
+          Leistungsbeschreibung AP 2.1) eine Verteilung eingehender
+	  Anrufe auf verschiedene
           Mitarbeiter („Agenten“), also ein Sammelruf oder eine Warteschlange
           („<foreignphrase xml:lang="en">Queue</foreignphrase>“), jedoch nicht
           als umfangreiches ACD-System und ohne Kopplung an weitere
@@ -1198,9 +1202,10 @@
 
           <para>Anders als an dieser Stelle in der <citation><biblioref
           linkend="biblio-tlstk" /></citation> beschrieben handelt es sich bei
-          den in Gemeinschaft integrierten Audio-Konferenzräumen nicht um ein
+          den in Gemeinschaft4 integrierten Audio-Konferenzräumen nicht um ein
           Endgerät der TK-Anlage, somit ist die Schnittstelle „zwischen“
-          TK-Anlage und Konferenzsystem nicht gefährdet wie zu einem Endgerät.
+          TK-Anlage und Konferenzsystem nicht in dem Maße gefährdet
+	  wie bei einem Endgerät. 
           (Die Gefährdungssituation der Schnittstellen von der TK-Anlage zu
           Endgeräten wird an separater Stelle besprochen.)</para>
         </listitem>
@@ -1223,15 +1228,15 @@
         <listitem>
           <para>Anwendungsintegration.</para>
 
-          <para>Sämtliche über die (an anderer Stelle besprochenen)
-          Schnittstellen von Gemeinschaft angebundenen TK-Applikationen
+          <para>Sämtliche, über die (an anderer Stelle besprochenen)
+          Schnittstellen von Gemeinschaft angebundenen, TK-Applikationen
           unterliegen den <quote>Sicherheitsbetrachtungen für diese
           Systeme</quote>. Sie sind nicht Bestandteil von Gemeinschaft.</para>
         </listitem>
       </itemizedlist></para>
 
-    <para>Die Analyse der Gefährdungen ist ggf. bei neu hinzukommenden
-    TK-Applikationen anzupassen sodaß diese berücksichtigt werden.</para>
+    <para>Die Analyse der Gefährdungen ist ggf. bei zusätzlichen
+    TK-Applikationen so anzupassen, dass diese berücksichtigt werden.</para>
   </section>
 
   <section xml:id="tlstk-g-ip-anlagenanschluss">
@@ -1312,11 +1317,16 @@
         mehrere Protokoll-Stacks zu minimieren. „Gemeinschaft“ wird ggf. per
         SIP angebunden. Durch den kombinierten, für alle Installationen
         verpflichtenden Einsatz eines SIP-Proxies ist die Funktionalität eines
-        Session Border Controllers (SBC) enthalten. Im SIP-Proxy werden durch
-        <literal>mod-ratelimit</literal> Denial-of-Service-Angriffe (DoS)
+        Session Border Controllers (SBC) enthalten. Im SIP-Proxy
+	müssen durch geeignete Maßnahmen Denial-of-Service Angriffe
+	(DoS) abgewehrt un der Protokollstack gehärtet werden.</para>
+
+<!--    <note><para>Dies ist zu detailliert unter Angabe des Produktes. Allgemeine Maßnahmen beschreiben!: Im SIP-Proxy werden
+     durch geeignete Maßnahmen
+       <literal>mod-ratelimit</literal> Denial-of-Service-Angriffe (DoS)
         abgewehrt, sowie Format-String-Fehler durch
         <literal>mod-sanity</literal>. Beides sollte zusätzlich auch beim ITSP
-        durchgeführt werden.</para>
+        durchgeführt werden.</para></note>-->
       </section>
     </section>
   </section>

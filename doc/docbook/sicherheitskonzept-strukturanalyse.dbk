@@ -100,7 +100,7 @@
       </listitem>
     </itemizedlist></para>
 
-  <para>Grundlage des Design, ist die Abgrenzung der einzelnen Komponenten
+  <para>Grundlage des Design ist die Abgrenzung der einzelnen Komponenten
   untereinander. Für die Kommunikation wird eine einheitliche API angeboten
   und genutzt. Dies erlaubt die Erzeugung automatischer Tests für die
   Funktionsprüfung der einzelnen Module. Dies garantiert Zukunftsicherheit und
