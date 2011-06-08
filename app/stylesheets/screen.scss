@@ -443,10 +443,10 @@ table {
 				padding: 3pt 0 4pt 0;
 				
 				/*
-				//border-radius:         0 0 4pt 4pt;
-				// Chris Eppstein says: You had: border-radius:  0 0 4pt 4pt
-				// But there is not good browser support for this shorthand.
-				// Instead set these
+				border-radius:         0 0 4pt 4pt;
+				Chris Eppstein says: You had: border-radius:  0 0 4pt 4pt
+				But there is not good browser support for this shorthand.
+				Instead set these
 				@include border-top-radius(0);
 				@include border-bottom-radius(4pt);
 				Philipp Kempgen says: That isn't the same. Find a better solution.
