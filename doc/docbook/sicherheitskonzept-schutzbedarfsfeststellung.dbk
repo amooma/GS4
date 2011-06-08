@@ -85,7 +85,7 @@
     gesetzlichen Bestimmungen und aus betrieblichen Vereinbarungen. So können
     beispielsweise die mögliche Beinträchtigung in der Aufgabenerfüllung, die
     finanziellen Auswirkungen, die negative Außenwirkung oder andere
-    Auswirkungen stark variieren. Es ist daher schwierig eine pausche und
+    Auswirkungen stark variieren. Es ist daher schwierig eine pauschale und
     allgemeingültige Analyse durchzuführen.</para>
 
     <para>Siehe auch: <xref linkend="leitlinie-sichere-tk-anlagen" />.</para>
@@ -327,12 +327,12 @@
       die Integrität sichergestellt sein. Es ist entscheidend ein Endgerät
       bzw. einen SIP-Account eindeutig identifizieren zu können, damit
       beispielsweise bei der Provisionierung sensible Daten nicht an ein
-      anderes Gerät gesendet werden. Die Sicherstellung der Verfügbarkeit der
+      falsches Gerät gesendet werden. Die Sicherstellung der Verfügbarkeit der
       Netzwerk-Infrastruktur liegt in der Verantwortung des
       Administrators.</para>
 
-      <para>Möglichkeiten wie vor einem Angreifer der auf dem Ethernet-Kabel
-      „lauscht“ verborgen werden kann daß überhaupt verschlüsselte Gespräche
+      <para>Möglichkeiten wie vor einem Angreifer, der auf dem Ethernet-Kabel
+      „lauscht“, verborgen werden kann, dass überhaupt verschlüsselte Gespräche
       stattfinden werden hier nicht betrachtet.</para>
     </section>
 

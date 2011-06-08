@@ -81,8 +81,8 @@
   im weiteren Projektverlauf relevant werden (siehe <xref
   linkend="tlstk-g-tk-applikationen-und-mehrwertdienste" />).</para>
 
-  <para>Grundsätzlich treffen auf VoIP-TK-Anlagen wie auf alle Computersysteme
-  die Gefährdungen zu die in den IT-Grundschutz-Katalogen des BSI genannt
+  <para>Grundsätzlich treffen auf VoIP-TK-Anlagen, wie auf alle Computersysteme,
+  die Gefährdungen zu, die in den IT-Grundschutz-Katalogen des BSI genannt
   sind. In diesem Kapitel werden vorrangig die speziellen Gefährdungen bei
   VoIP-TK-Systemen anhand der TLSTK betrachtet.</para>
 
@@ -102,7 +102,7 @@
   Einsatzszenarien gleichermaßen zutrifft muß sie zwangsläufig generalisieren
   bzw. von typischen Standard-Szenarien ausgehen. Bei besonderen Szenarien
   oder erhöhtem Schutzbedarf kann hier lediglich eine Hilfestellung geboten
-  werden, ggf. ist jedoch eine bedarfgerechte Analyse der betreffenden Punkte
+  werden, ggf. ist jedoch eine bedarfsgerechte Analyse der betreffenden Punkte
   vorzunehmen. Je nach Institution haben die aufgeführten Punkte
   unterschiedliche Gewichtungen. Beispielsweise hätte eine Live-Übertragung
   aus einem Wetter-Studio zu einem Radio-Sender meist geringere Anforderungen
