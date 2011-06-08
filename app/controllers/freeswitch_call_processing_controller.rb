@@ -200,6 +200,11 @@ class FreeswitchCallProcessingController < ApplicationController
 			if call_disposition.blank?; (
 				# We didn't try to call the SIP account yet.
 				
+				# RFC 2543:
+				action :set, "effective_caller_id_number=#{ sip_user_encode( cid_user )}"
+				action :set, "effective_caller_id_name=#{ sip_displayname_encode( cid_display )}"
+				# RFC 3325:
+				action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} <sip:#{ sip_user_encode( cid_user )}@#{ cid_host }>"
 				# Check unconditional call-forwarding ("always"):
 				#
 				call_forward_always    = find_call_forward( dst_sip_account, :always    , src_cid_sip_user )
@@ -260,11 +265,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						cid_host    = "anonymous.invalid"  # or "127.0.0.1"
 					end
 					
-					# RFC 2543:
-					action :set, "effective_caller_id_number=#{ sip_user_encode( cid_user )}"
-					action :set, "effective_caller_id_name=#{ sip_displayname_encode( cid_display )}"
-					# RFC 3325:
-					action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} <sip:#{ sip_user_encode( cid_user )}@#{ cid_host }>"
+					
 					# RFC 3325, RFC 3323:
 					action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
 					
