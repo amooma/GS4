@@ -40,6 +40,10 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :subscribers          , :only => [ :index, :show ]
 	
+	match '/admin/help',
+		:via        => [ :get ],
+		:controller => :admin,
+		:action     => 'help'
 	
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],

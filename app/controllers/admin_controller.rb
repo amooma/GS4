@@ -28,6 +28,12 @@ class AdminController < ApplicationController
     end
   end
   
+  def help
+    respond_to do |format|
+      format.html
+    end
+  end
+  
   private
   
   def rescue_missing

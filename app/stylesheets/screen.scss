@@ -18,7 +18,10 @@ This file resets and then applies a typographic base
 See http://beta.compass-style.org/reference/compass/typography/vertical_rhythm/
 */
 
+/*
 @import "compass/reset";
+#OPTIMIZE Add this. The Compass stuff resets too much tough. It needs to be added here.
+*/
 
 /*
 Chris Eppstein says: It's kind of strange to use pt for your fonts
@@ -317,6 +320,21 @@ table {
 	@include column-fill( balance );
 	widows: 5;
 	orphans: 5;
+	
+	section {
+		display: table;
+	}
+}
+
+.help_overview {
+	height: auto;
+	@include column-width( 26em );
+	@include column-gap( 2em );
+	@include column-fill( balance );
+	widows: 5;
+	orphans: 5;
+	font-size: 0.95em;
+	line-height: 1.25em;
 	
 	section {
 		display: table;

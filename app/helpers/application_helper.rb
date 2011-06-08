@@ -30,6 +30,8 @@ module ApplicationHelper
 					{ :text => "Nodes"             , :url => nodes_path },
 				]},
 				
+				{ :text => "Help"          , :url => admin_help_path }
+				
 			]
 		else
 			menu_items = [
