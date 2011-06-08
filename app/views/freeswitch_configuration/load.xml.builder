@@ -548,10 +548,10 @@ xml.document( :type => 'freeswitch/xml' ) {
 		
 		xml.configuration( :name => 'xml_rpc.conf', :description => 'XML RPC' ) {
 			xml.settings {
-				xml.param( :name => 'http-port', :value => '8080' )
+				xml.param( :name => 'http-port', :value => XML_RPC_PORT )
 				xml.param( :name => 'auth-realm', :value => 'freeswitch' )
-				xml.param( :name => 'auth-user', :value => 'freeswitch' )
-				xml.param( :name => 'auth-pass', :value => 'works' )
+				xml.param( :name => 'auth-user', :value => XML_RPC_USER)
+				xml.param( :name => 'auth-pass', :value => XML_RPC_PASSWORD )
 			}
 		}
 		
