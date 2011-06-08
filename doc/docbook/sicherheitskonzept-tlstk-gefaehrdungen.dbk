@@ -1125,20 +1125,16 @@
                 Text-Nachrichten an fast allen VoIP-Telefonen wenn überhaupt
                 dann nur sehr umständlich möglich ist, da meist keine
                 alphanumerische Tastatur vorhanden ist und auch keine
-                Eingabehilfe wie z.B. das von Mobiltelefonen bekannte
-		T9 unterstützt wird.
-                Nach unserer Ansicht ist das eine extreme
+                Eingabehilfe wie z.B. das von Mobiltelefonen bekannte T9
+                unterstützt wird. Nach unserer Ansicht ist das eine extreme
                 Nischen-Funktionalität. Da die Anlage keine Verbindungen nach
-                <quote>außen</quote> hat und SIP-IM-Standards nur eine
-		geringe Verbreitung aufweisen, wäre es fragwürdig eine
-		Implementierung 
+                <quote>außen</quote> hat und SIP-IM-Standards nur eine geringe
+                Verbreitung aufweisen, wäre es fragwürdig eine Implementierung
                 &#8211; und damit weitere Gefährdungen &#8211; zu schaffen.
-                Eine derartige Implementierung erlaubt letztlich nur
-		den umständlichen Austausch von Text-Nachrichten durch
-		die internen Telefone. 
-                Prinzipiell ist die Anlage dafür
-                vorbereitet, eine Implementierung ist
-                nicht geplant.</para>
+                Eine derartige Implementierung erlaubt letztlich nur den
+                umständlichen Austausch von Text-Nachrichten durch die
+                internen Telefone. Prinzipiell ist die Anlage dafür
+                vorbereitet, eine Implementierung ist nicht geplant.</para>
               </listitem>
 
               <listitem>
@@ -1175,12 +1171,12 @@
           <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
           spricht von Gefährdungen die aus Kopplungen eines ACD-Systems mit
           Kunden- und Mitarbeiter-Datenbanken. Teil des Projektes ist (siehe
-          Leistungsbeschreibung AP 2.1) eine Verteilung eingehender
-	  Anrufe auf verschiedene
-          Mitarbeiter („Agenten“), also ein Sammelruf oder eine Warteschlange
-          („<foreignphrase xml:lang="en">Queue</foreignphrase>“), jedoch nicht
-          als umfangreiches ACD-System und ohne Kopplung an weitere
-          Datenbanken oder Systeme.</para>
+          Leistungsbeschreibung AP 2.1) eine Verteilung eingehender Anrufe auf
+          verschiedene Mitarbeiter („Agenten“), also ein Sammelruf oder eine
+          Warteschlange („<foreignphrase
+          xml:lang="en">Queue</foreignphrase>“), jedoch nicht als
+          umfangreiches ACD-System und ohne Kopplung an weitere Datenbanken
+          oder Systeme.</para>
         </listitem>
 
         <listitem>
@@ -1204,10 +1200,9 @@
           linkend="biblio-tlstk" /></citation> beschrieben handelt es sich bei
           den in Gemeinschaft4 integrierten Audio-Konferenzräumen nicht um ein
           Endgerät der TK-Anlage, somit ist die Schnittstelle „zwischen“
-          TK-Anlage und Konferenzsystem nicht in dem Maße gefährdet
-	  wie bei einem Endgerät. 
-          (Die Gefährdungssituation der Schnittstellen von der TK-Anlage zu
-          Endgeräten wird an separater Stelle besprochen.)</para>
+          TK-Anlage und Konferenzsystem nicht in dem Maße gefährdet wie bei
+          einem Endgerät. (Die Gefährdungssituation der Schnittstellen von der
+          TK-Anlage zu Endgeräten wird an separater Stelle besprochen.)</para>
         </listitem>
 
         <listitem>
@@ -1228,10 +1223,11 @@
         <listitem>
           <para>Anwendungsintegration.</para>
 
-          <para>Sämtliche – über die (an anderer Stelle besprochenen)
-          Schnittstellen von Gemeinschaft angebundenen – TK-Applikationen
-          unterliegen den <quote>Sicherheitsbetrachtungen für diese
-          Systeme</quote>. Sie sind nicht Bestandteil von Gemeinschaft.</para>
+          <para>Sämtliche &#8211; über die (an anderer Stelle besprochenen)
+          Schnittstellen von Gemeinschaft angebundenen &#8211;
+          TK-Applikationen unterliegen den <quote>Sicherheitsbetrachtungen für
+          diese Systeme</quote>. Sie sind nicht Bestandteil von
+          Gemeinschaft.</para>
         </listitem>
       </itemizedlist></para>
 
@@ -1317,16 +1313,15 @@
         mehrere Protokoll-Stacks zu minimieren. „Gemeinschaft“ wird ggf. per
         SIP angebunden. Durch den kombinierten, für alle Installationen
         verpflichtenden Einsatz eines SIP-Proxies ist die Funktionalität eines
-        Session Border Controllers (SBC) enthalten. Im SIP-Proxy
-	müssen durch geeignete Maßnahmen Denial-of-Service-Angriffe
-	(DoS) abgewehrt und der Protokollstack gehärtet werden.</para>
+        Session Border Controllers (SBC) enthalten. Im SIP-Proxy müssen durch
+        geeignete Maßnahmen Denial-of-Service-Angriffe (DoS) abgewehrt und der
+        Protokollstack gehärtet werden.</para>
 
-<!--    <note><para>Dies ist zu detailliert unter Angabe des Produktes. Allgemeine Maßnahmen beschreiben!: Im SIP-Proxy werden
-     durch geeignete Maßnahmen
-       <literal>mod-ratelimit</literal> Denial-of-Service-Angriffe (DoS)
+        <!--    (...
+        <literal>mod-ratelimit</literal> Denial-of-Service-Angriffe (DoS)
         abgewehrt, sowie Format-String-Fehler durch
         <literal>mod-sanity</literal>. Beides sollte zusätzlich auch beim ITSP
-        durchgeführt werden.</para></note>-->
+        durchgeführt werden.)-->
       </section>
     </section>
   </section>

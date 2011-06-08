@@ -36,9 +36,9 @@
     hier meist gestrichen, außer wenn in dem Punkt auch Informationen über die
     Software oder Anweisungen an die Institution enthalten sind.</para>
 
-    <para>Diese Unterscheidung wurde eingeführt, da diejenigen Maßnahmen, die nicht im
-    Einflußbereich der Software liegen, vom BSI nicht nochmal geprüft werden
-    müssen, denn diese sind ohnehin in der <citation><biblioref
+    <para>Diese Unterscheidung wurde eingeführt, da diejenigen Maßnahmen, die
+    nicht im Einflußbereich der Software liegen, vom BSI nicht nochmal geprüft
+    werden müssen, denn diese sind ohnehin in der <citation><biblioref
     linkend="biblio-tlstk" /></citation> genannt.</para>
   </note>
 
@@ -137,10 +137,9 @@
         Einflußbereichs der VoIP-TK-Anlage „Gemeinschaft“ und ist Aufgabe des
         Netzwerk-Administrators.</para>
 
-        <para>Um die Telefonie unabhängig von der Verfügbarkeit des
-	DNS-Server zu machen, 
-        können in Gemeinschaft IP-Adressen statt Host-Namen verwendet
-        werden.</para>
+        <para>Um die Telefonie unabhängig von der Verfügbarkeit des DNS-Server
+        zu machen, können in Gemeinschaft IP-Adressen statt Host-Namen
+        verwendet werden.</para>
 
         <para>Ebenso können in Gemeinschaft mehrere ausgehende Routen als
         Fallback festgelegt werden.</para>
@@ -214,8 +213,8 @@
         geschützt wird.</para>
 
         <para>Der IT-Administrator ist angehalten, bei Verwendung eines
-        LDAP-Verzeichnisdienstes, dessen Daten ebenfalls nicht im
-	Klartext zu hinterlegen.</para> 
+        LDAP-Verzeichnisdienstes, dessen Daten ebenfalls nicht im Klartext zu
+        hinterlegen.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-39">
@@ -225,12 +224,12 @@
         <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
         <para>Teilnehmer-Profile und -Einstellungen (wie z.B. Rufumleitungen)
-        müssen, dem Schutzbedarf in der jeweiligen Institution 
-        angemessen, verfügbar gemacht werden. Dies ist zu einem gewissen Grad
-        durch Software auf der TK-Anlage möglich (Backups, Hot-Standby)
-        und/oder durch Hardware (RAID, …). Entsprechende Maßnahmen sind nicht
-        durch die TK-Anlage allein zu garantieren sondern liegen in der
-        Verantwortung des IT-Administrators.</para>
+        müssen, dem Schutzbedarf in der jeweiligen Institution angemessen,
+        verfügbar gemacht werden. Dies ist zu einem gewissen Grad durch
+        Software auf der TK-Anlage möglich (Backups, Hot-Standby) und/oder
+        durch Hardware (RAID, …). Entsprechende Maßnahmen sind nicht durch die
+        TK-Anlage allein zu garantieren sondern liegen in der Verantwortung
+        des IT-Administrators.</para>
 
         <para>#OPTIMIZE An separater Stelle Backup-Empfehlungen nennen
         (Meilenstein 7).</para>
@@ -242,12 +241,12 @@
 
         <para><emphasis>Verantwortung: Administrator</emphasis></para>
 
-        <para>In der TK-Anlage und über das Provisioning in den
-        Endgeräten können sowohl Host-Namen als auch IP-Adressen verwendet
-        werden. Der Administrator ist angehalten entweder einen gesicherten,
-        separaten, internen DNS-Server in statischer Konfiguration für
-        Anfragen von VoIP-Geräten zu verwenden, oder bei erhöhtem Schutzbedarf
-        ggf. gänzlich auf Host-Namen zu verzichten und direkt IP-Adressen
+        <para>In der TK-Anlage und über das Provisioning in den Endgeräten
+        können sowohl Host-Namen als auch IP-Adressen verwendet werden. Der
+        Administrator ist angehalten entweder einen gesicherten, separaten,
+        internen DNS-Server in statischer Konfiguration für Anfragen von
+        VoIP-Geräten zu verwenden, oder bei erhöhtem Schutzbedarf ggf.
+        gänzlich auf Host-Namen zu verzichten und direkt IP-Adressen
         einzugeben.</para>
       </section>
 
@@ -287,9 +286,9 @@
         IT-Infrastruktur den VoIP-Geräten keine IP-Kommunikation in das
         Datennetz zu ermöglichen (auf den Switches).</para>
 
-        <para>Der physische Schutz vor Diebstahl der Geräte muss
-	durch organisatorische Maßnahmen und kann nicht durch
-	Gemeinschaft gewährleistet werden.</para>
+        <para>Der physische Schutz vor Diebstahl der Geräte muss durch
+        organisatorische Maßnahmen und kann nicht durch Gemeinschaft
+        gewährleistet werden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-43">
@@ -306,10 +305,10 @@
         gemacht werden.</para>
 
         <para>Da die konkrete Umsetzung des Hinweises nicht von Gemeinschaft
-        beeinflußbar, sondern abhängig vom Endgerät und der jeweiligen Firmware
-        ist (entsprechende Endgeräte sind derzeit noch nicht verbreitet),
-        dürfen bei erhöhtem Schutzbedarf nur entsprechend ausgestattete und
-        getestete Endgeräte eingesetzt werden.</para>
+        beeinflußbar, sondern abhängig vom Endgerät und der jeweiligen
+        Firmware ist (entsprechende Endgeräte sind derzeit noch nicht
+        verbreitet), dürfen bei erhöhtem Schutzbedarf nur entsprechend
+        ausgestattete und getestete Endgeräte eingesetzt werden.</para>
       </section>
 
       <section xml:id="tlstk-m-tk-44">
@@ -635,8 +634,8 @@
         <para><emphasis>Verantwortung: Software,
         Administrator</emphasis></para>
 
-        <para>Der TK-Server wird (neben reinen Paketen) als komplettes
-        Image bereitgestellt und basiert dann auf einem bereits gehärteten
+        <para>Der TK-Server wird (neben reinen Paketen) als komplettes Image
+        bereitgestellt und basiert dann auf einem bereits gehärteten
         Betriebssystem. Dadurch ist auch eine möglichst sichere
         Grundkonfiguration mit einem verschlüsselten Dateisystem
         vorhanden.</para>
@@ -861,9 +860,9 @@
         des Projektes noch zu entwickeln (Meilenstein 6).</para>
 
         <para>Technische oder personalisierte Unix-Benutzer mit
-        Administrationsrechten können, soweit erforderlich, vom IT-Administrator
-        angelegt werden. Die Rechte sind dabei möglichst restriktiv zu
-        vergeben. Dies liegt im Verantwortungsbereich des
+        Administrationsrechten können, soweit erforderlich, vom
+        IT-Administrator angelegt werden. Die Rechte sind dabei möglichst
+        restriktiv zu vergeben. Dies liegt im Verantwortungsbereich des
         IT-Administrators.</para>
 
         <para>Je nach Schutzbedarf sollte es vermieden werden, externen
@@ -923,16 +922,14 @@
         Firewall <!--(IPtables per Shorewall)--> und ein Host-basiertes
         IDS-/IPS-System (<foreignphrase xml:lang="en">intrusion
         detection/prevention system</foreignphrase>) sind auf dem System
-        vorhanden. <!--Dazu wird <quote>Snort</quote>
-	eingesetzt. Snort ist kein HIDS. Vielleicht SELinux oder
-	AppArmor. Hier aber eh egal.--></para>
+        vorhanden.<!--(SELinux oder AppArmor. Ist hier aber nicht gefragt.)--></para>
 
         <para>Die <citation><biblioref linkend="biblio-tlstk" /></citation>
         spricht auch von einem Virenschutz-Programm auf dem TK-Server zum
         Schutz gegen Viren, Würmer und Trojaner. Nach unserer Ansicht ist es
-        wichtiger, unerfahrenen oder risikofreudigen Administratoren
-        die Installation zusätzlicher Software aus nicht verifizierten
-	Quellen zu untersagen.</para>
+        wichtiger, unerfahrenen oder risikofreudigen Administratoren die
+        Installation zusätzlicher Software aus nicht verifizierten Quellen zu
+        untersagen.</para>
 
         <para>Schad-Code der sich durch Protokoll-Implementierungsfehler in
         SIP- oder HTTPS-Stacks verbreiten kann fällt im Vergleich des Volumens
@@ -952,7 +949,7 @@
         („stable“) zum Einsatz. Sicherheitsrelevante Änderungen werden daher
         über das Paket-Management-System der Linux-Distribution
         bereitgestellt. Diese müssen zeitnah durch die Administratoren
-	eingespielt werden.</para>
+        eingespielt werden.</para>
 
         <para>TK-Installationen mit ihren jeweiligen Endgeräten und
         Komponenten wie Gateways können z.T. heterogene Umgebungen bilden. Es
