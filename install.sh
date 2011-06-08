@@ -39,7 +39,8 @@ freeswitch \
 freeswitch-lua  \
 freeswitch-perl freeswitch-spidermonkey \
 freeswitch-lang-de  \
-freeswitch-lang-en
+freeswitch-lang-en  \
+ghostscript
 
 
 echo -e "Adding testing and setting APT Pin-Priority\n"
