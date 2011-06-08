@@ -94,7 +94,14 @@
   <section xml:id="schutzbedarf-komponenten">
     <title>Schutzbedarf der einzelnen Komponenten</title>
 
-    <para>Übersicht:</para>
+    <para>Die nachfolgende Tabelle bewertet exemplarisch den
+    Schutzbedarf der einzelnen Komponenten in einem typischen
+    Einsatzszenario. Natürlich muss durch den Anwender der Sicheren
+    Voice-Over-IP-Telefonanlage (SiVoIP) in Abhängigkeit seines spezifischen
+    Einsatzszenarios eine angepasste Schutzbedarfsfeststellung
+    vorgenommen werden. Die hier vorgestellten Annahmen dienen jedoch
+    für die weitere Bewertung der Gefährdungen und der empfohlenen
+    Maßnahmen und damit für die weitere Gestaltung des Sicherheitskonzeptes.  </para>
 
     <table>
       <title>Schutzbedarf</title>
@@ -215,7 +222,9 @@
     </table>
 
     <para>Nachfolgend wird erläutert wie die Abschätzung des Schutzbedarfs der
-    einzelnen Kompontenten zustandekommt.</para>
+    einzelnen Kompontenten zustandekommt. Hierbei wird, wie oben
+    erläutert, exemplarisch von einem typischen Einsatzszenario der
+    SiVoIP ausgegangen. </para>
 
     <sidebar>
       <para>Erläuterung: Im Folgenden bezieht sich die Formulierung „aus
