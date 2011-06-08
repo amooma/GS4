@@ -145,7 +145,31 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
+					<li><a href="./CallForward.html">CallForward</a></li>
+				
+					<li><a href="./CallForwardReason.html">CallForwardReason</a></li>
+				
+					<li><a href="./CallForwardsController.html">CallForwardsController</a></li>
+				
+					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
+				
+					<li><a href="./CallQueue.html">CallQueue</a></li>
+				
+					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
+				
+					<li><a href="./CallQueuesController.html">CallQueuesController</a></li>
+				
+					<li><a href="./CallQueuesHelper.html">CallQueuesHelper</a></li>
+				
 					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./Conference.html">Conference</a></li>
+				
+					<li><a href="./ConferenceToExtension.html">ConferenceToExtension</a></li>
+				
+					<li><a href="./ConferencesController.html">ConferencesController</a></li>
+				
+					<li><a href="./ConferencesHelper.html">ConferencesHelper</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
 				
@@ -156,6 +180,8 @@
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
 					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchConfigurationController.html">FreeswitchConfigurationController</a></li>
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
@@ -178,6 +204,8 @@
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
 				
 					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneBookInternalUsersController.html">PhoneBookInternalUsersController</a></li>
 				
 					<li><a href="./PhoneKey.html">PhoneKey</a></li>
 				
@@ -212,12 +240,6 @@
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
 					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
-				
-					<li><a href="./SipPhone.html">SipPhone</a></li>
-				
-					<li><a href="./SipPhonesController.html">SipPhonesController</a></li>
-				
-					<li><a href="./SipPhonesHelper.html">SipPhonesHelper</a></li>
 				
 					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
 				
@@ -300,20 +322,20 @@ POST /voicemail_servers POST /voicemail_servers.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 47</span>
-47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-48:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:voicemail_server</span>])
-49: 
-50:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-51:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">save</span>
-52:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@voicemail_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Voicemail server was successfully created.'</span>) }
-53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span> }
-54:       <span class="ruby-keyword kw">else</span>
-55:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-56:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-57:       <span class="ruby-keyword kw">end</span>
-58:     <span class="ruby-keyword kw">end</span>
-59:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 49</span>
+49:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+50:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:voicemail_server</span>])
+51: 
+52:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+53:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">save</span>
+54:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@voicemail_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Voicemail server was successfully created.'</span>) }
+55:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span> }
+56:       <span class="ruby-keyword kw">else</span>
+57:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+58:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+59:       <span class="ruby-keyword kw">end</span>
+60:     <span class="ruby-keyword kw">end</span>
+61:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -346,16 +368,16 @@ DELETE /voicemail_servers/1 DELETE /voicemail_servers/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 79</span>
-79:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-80:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-81:     <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">destroy</span>
-82: 
-83:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-84:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">voicemail_servers_url</span>) }
-85:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-86:     <span class="ruby-keyword kw">end</span>
-87:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 81</span>
+81:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+82:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+83:     <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">destroy</span>
+84: 
+85:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+86:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">voicemail_servers_url</span>) }
+87:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+88:     <span class="ruby-keyword kw">end</span>
+89:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -388,10 +410,10 @@ GET /voicemail_servers/1/edit
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 41</span>
-41:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-42:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-43:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 43</span>
+43:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+44:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+45:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -469,13 +491,15 @@ GET /voicemail_servers/new GET /voicemail_servers/new.xml
 29:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
 30:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">new</span>
 31:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-32:       <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">host</span> = <span class="ruby-identifier">local_ip</span>
-33:     <span class="ruby-keyword kw">end</span>
-34:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-35:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span> }
-37:     <span class="ruby-keyword kw">end</span>
-38:   <span class="ruby-keyword kw">end</span></pre>
+32:       <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">host</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">'SERVER_NAME'</span>]
+33:       <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">is_local</span> = <span class="ruby-keyword kw">true</span>
+34:       <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">port</span> = <span class="ruby-value str">&quot;5060&quot;</span>
+35:     <span class="ruby-keyword kw">end</span>
+36:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+38:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span> }
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -549,20 +573,20 @@ PUT /voicemail_servers/1 PUT /voicemail_servers/1.xml
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 63</span>
-63:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-64:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-65: 
-66:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-67:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:voicemail_server</span>])
-68:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@voicemail_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Voicemail server was successfully updated.'</span>) }
-69:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-70:       <span class="ruby-keyword kw">else</span>
-71:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-72:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-73:       <span class="ruby-keyword kw">end</span>
-74:     <span class="ruby-keyword kw">end</span>
-75:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/voicemail_servers_controller.rb, line 65</span>
+65:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+66:     <span class="ruby-ivar">@voicemail_server</span> = <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+67: 
+68:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+69:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:voicemail_server</span>])
+70:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@voicemail_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Voicemail server was successfully updated.'</span>) }
+71:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+72:       <span class="ruby-keyword kw">else</span>
+73:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+74:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@voicemail_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+75:       <span class="ruby-keyword kw">end</span>
+76:     <span class="ruby-keyword kw">end</span>
+77:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

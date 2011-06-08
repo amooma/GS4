@@ -19,7 +19,7 @@ class AServer < ActiveRecord::Base
   validates_uniqueness_of   :port, :scope => :host
   
   validates_inclusion_of    :is_local, :in => [ true, false ], :allow_nil => false
-  validates_uniqueness_of   :is_local, :if => Proc.new { |me| me.is_local }  #OPTIMIZE Edit once domains are implemented.
+  validates_uniqueness_of   :is_local, :if => Proc.new { |me| me.is_local }  #OPTIMIZE Allow multiple local domains once domains are implemented.
   
   def hostinfo
     return self.host.to_s + (self.port ? ':' + self.port.to_s : '')

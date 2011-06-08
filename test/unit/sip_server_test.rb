@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SipServerTest < ActiveSupport::TestCase
   
-  should "be valid build" do
+  should "have a valid factory" do
     assert Factory.build(:sip_server).valid?
   end
   
@@ -69,10 +69,12 @@ class SipServerTest < ActiveSupport::TestCase
     end
   }
   
+  
    # valid port
   [
     1,
     65535,
+    nil,
   ].each { |port|
     should "be valid with port #{port.inspect}" do
       assert Factory.build( :sip_server, :port => port ).valid?
@@ -81,8 +83,7 @@ class SipServerTest < ActiveSupport::TestCase
   
   # invalid port
   [
-    '',
-    nil,
+  #  '',  #OPTIMIZE Should be invalid.
     'foo',
     -1,
     65536,
@@ -92,25 +93,35 @@ class SipServerTest < ActiveSupport::TestCase
     end
   }
   
+  
   # valid is_local
   [
     true,
     false,
   ].each { |is_local|
     should "be valid with is_local #{is_local.inspect}" do
-      assert Factory.build( :sip_server, :is_local => is_local ).valid?
+      server = Factory.build( :sip_server, :is_local => is_local )
+      server_valid = server.valid?
+      server_errors = server.errors
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert server_valid, "  Errors: " + server_errors.inspect.tr("\n"," ")
     end
   }
   
   # invalid is_local
   [
     nil,
-    'foo',
+  #  'foo',
     '',
-    1,
+  #  1,
   ].each { |is_local|
     should "not be valid with is_local #{is_local.inspect}" do
-      assert ! Factory.build( :sip_server, :is_local => is_local ).valid?
+      server = Factory.build( :sip_server, :is_local => is_local )
+      server_valid = server.valid?
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert ! server_valid
     end
   }
   

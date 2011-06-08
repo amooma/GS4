@@ -137,7 +137,31 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
+					<li><a href="./CallForward.html">CallForward</a></li>
+				
+					<li><a href="./CallForwardReason.html">CallForwardReason</a></li>
+				
+					<li><a href="./CallForwardsController.html">CallForwardsController</a></li>
+				
+					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
+				
+					<li><a href="./CallQueue.html">CallQueue</a></li>
+				
+					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
+				
+					<li><a href="./CallQueuesController.html">CallQueuesController</a></li>
+				
+					<li><a href="./CallQueuesHelper.html">CallQueuesHelper</a></li>
+				
 					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./Conference.html">Conference</a></li>
+				
+					<li><a href="./ConferenceToExtension.html">ConferenceToExtension</a></li>
+				
+					<li><a href="./ConferencesController.html">ConferencesController</a></li>
+				
+					<li><a href="./ConferencesHelper.html">ConferencesHelper</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
 				
@@ -148,6 +172,8 @@
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
 					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchConfigurationController.html">FreeswitchConfigurationController</a></li>
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
@@ -170,6 +196,8 @@
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
 				
 					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneBookInternalUsersController.html">PhoneBookInternalUsersController</a></li>
 				
 					<li><a href="./PhoneKey.html">PhoneKey</a></li>
 				
@@ -204,12 +232,6 @@
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
 					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
-				
-					<li><a href="./SipPhone.html">SipPhone</a></li>
-				
-					<li><a href="./SipPhonesController.html">SipPhonesController</a></li>
-				
-					<li><a href="./SipPhonesHelper.html">SipPhonesHelper</a></li>
 				
 					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
 				
@@ -292,7 +314,7 @@
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/admin_controller.rb, line 11</span>
 11:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-12:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+12:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-constant">VoicemailServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
 13:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 14:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">admin_setup_index_path</span>) }
 15:       <span class="ruby-keyword kw">end</span>

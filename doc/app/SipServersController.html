@@ -141,7 +141,31 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
+					<li><a href="./CallForward.html">CallForward</a></li>
+				
+					<li><a href="./CallForwardReason.html">CallForwardReason</a></li>
+				
+					<li><a href="./CallForwardsController.html">CallForwardsController</a></li>
+				
+					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
+				
+					<li><a href="./CallQueue.html">CallQueue</a></li>
+				
+					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
+				
+					<li><a href="./CallQueuesController.html">CallQueuesController</a></li>
+				
+					<li><a href="./CallQueuesHelper.html">CallQueuesHelper</a></li>
+				
 					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./Conference.html">Conference</a></li>
+				
+					<li><a href="./ConferenceToExtension.html">ConferenceToExtension</a></li>
+				
+					<li><a href="./ConferencesController.html">ConferencesController</a></li>
+				
+					<li><a href="./ConferencesHelper.html">ConferencesHelper</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
 				
@@ -152,6 +176,8 @@
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
 					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchConfigurationController.html">FreeswitchConfigurationController</a></li>
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
@@ -174,6 +200,8 @@
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
 				
 					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneBookInternalUsersController.html">PhoneBookInternalUsersController</a></li>
 				
 					<li><a href="./PhoneKey.html">PhoneKey</a></li>
 				
@@ -208,12 +236,6 @@
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
 					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
-				
-					<li><a href="./SipPhone.html">SipPhone</a></li>
-				
-					<li><a href="./SipPhonesController.html">SipPhonesController</a></li>
-				
-					<li><a href="./SipPhonesHelper.html">SipPhonesHelper</a></li>
 				
 					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
 				
@@ -296,20 +318,20 @@ POST /sip_servers POST /sip_servers.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_servers_controller.rb, line 45</span>
-45:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-46:     <span class="ruby-ivar">@sip_server</span> = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_server</span>])
-47:     
-48:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-49:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">save</span>
-50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip server was successfully created.'</span>) }
-51:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span> }
-52:       <span class="ruby-keyword kw">else</span>
-53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-54:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-55:       <span class="ruby-keyword kw">end</span>
-56:     <span class="ruby-keyword kw">end</span>
-57:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_servers_controller.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+48:     <span class="ruby-ivar">@sip_server</span> = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_server</span>])
+49:     
+50:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+51:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">save</span>
+52:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_server</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Sip server was successfully created.'</span>) }
+53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span> }
+54:       <span class="ruby-keyword kw">else</span>
+55:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+56:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+57:       <span class="ruby-keyword kw">end</span>
+58:     <span class="ruby-keyword kw">end</span>
+59:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -342,16 +364,16 @@ DELETE /sip_servers/1 DELETE /sip_servers/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/sip_servers_controller.rb, line 61</span>
-61:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-62:     <span class="ruby-ivar">@sip_server</span> = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-63:     <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">destroy</span>
-64:     
-65:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-66:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">sip_servers_url</span>) }
-67:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-68:     <span class="ruby-keyword kw">end</span>
-69:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/sip_servers_controller.rb, line 63</span>
+63:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+64:     <span class="ruby-ivar">@sip_server</span> = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+65:     <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">destroy</span>
+66:     
+67:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+68:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">sip_servers_url</span>) }
+69:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+70:     <span class="ruby-keyword kw">end</span>
+71:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -427,13 +449,15 @@ GET /sip_servers/new GET /sip_servers/new.xml
 31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
 32:     <span class="ruby-ivar">@sip_server</span> = <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">new</span>
 33:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SipServer</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-34:       <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">host</span> = <span class="ruby-identifier">local_ip</span>
-35:     <span class="ruby-keyword kw">end</span>
-36:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-38:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span> }
-39:     <span class="ruby-keyword kw">end</span>
-40:   <span class="ruby-keyword kw">end</span></pre>
+34:       <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">host</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">'SERVER_NAME'</span>]
+35:       <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">is_local</span>= <span class="ruby-keyword kw">true</span>
+36:       <span class="ruby-ivar">@sip_server</span>.<span class="ruby-identifier">port</span> = <span class="ruby-value str">&quot;5060&quot;</span>
+37:     <span class="ruby-keyword kw">end</span>
+38:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+39:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+40:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_server</span> }
+41:     <span class="ruby-keyword kw">end</span>
+42:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

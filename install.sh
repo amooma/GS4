@@ -42,7 +42,7 @@ freeswitch-lang-de  \
 freeswitch-lang-en
 
 
-echo -e "Adding testing and setting pin-priotity\n"
+echo -e "Adding testing and setting APT Pin-Priority\n"
 (
 echo 'deb     http://ftp.debian.org/debian/ testing main'
 echo 'deb-src http://ftp.debian.org/debian/ testing main'

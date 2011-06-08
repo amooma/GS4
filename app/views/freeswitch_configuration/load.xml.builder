@@ -1,8 +1,8 @@
 xml.instruct!
 
-#TODO Add comments (descriptions etc.) from the original configuration (misc/freeswitch/fs-conf/).
-# As this file has probably been generated in a (semi-)automatic way it should be a piece of cake.
-#TODO If you decide to go this route then import changes in misc/freeswitch/fs-conf/ into this file and delete misc/freeswitch/fs-conf/**.xml
+#TODO Add comments (descriptions etc.) from the original configuration (misc/freeswitch/fs-conf/). (=> pko)
+# As this file has probably been generated in a (semi-)automatic way it should be easy.
+#TODO If you decide to go this route then import changes in misc/freeswitch/fs-conf/ into this file and delete misc/freeswitch/fs-conf/**.xml (=> pko)
 
 xml.document( :type => 'freeswitch/xml' ) {
 	
@@ -11,404 +11,404 @@ xml.document( :type => 'freeswitch/xml' ) {
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'sound_prefix=$${sounds_dir}/en/us/callie' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'hold_music=local_stream://moh' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'use_profile=internal' )
-
+	
 	xml.section( :name => 'languages', :description => 'Language Management' ) {
-		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie') {
+		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie' ) {
 			xml.phrases {
 				xml.macros {
-					xml.macro( :name => 'voicemail_hello') {
-						xml.input( :pattern => '(.*)') {
+					xml.macro( :name => 'voicemail_hello' ) {
+						xml.input( :pattern => '(.*)' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-hello.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-hello.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_enter_id') {
-						xml.input( :pattern => '(.*)') {
+					
+					xml.macro( :name => 'voicemail_enter_id' ) {
+						xml.input( :pattern => '(.*)' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-enter_id.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-enter_id.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_enter_pass') {
-						xml.input( :pattern => '(.*)') {
+					
+					xml.macro( :name => 'voicemail_enter_pass' ) {
+						xml.input( :pattern => '(.*)' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-enter_pass.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-enter_pass.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_fail_auth') {
-						xml.input( :pattern => '(.*)') {
+					
+					xml.macro( :name => 'voicemail_fail_auth' ) {
+						xml.input( :pattern => '(.*)' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-fail_auth.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-fail_auth.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_goodbye') {
-						xml.input( :pattern => '(.*)') {
+					
+					xml.macro( :name => 'voicemail_goodbye' ) {
+						xml.input( :pattern => '(.*)' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-goodbye.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-goodbye.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_abort') {
-						xml.input( :pattern => '(.*)') {
+					
+					xml.macro( :name => 'voicemail_abort' ) {
+						xml.input( :pattern => '(.*)' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-abort.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-abort.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_message_count') {
-						xml.input( :pattern => '^(1):(.*)$', :break_on_match => 'true') {
+					
+					xml.macro( :name => 'voicemail_message_count' ) {
+						xml.input( :pattern => '^(1):(.*)$', :break_on_match => 'true' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-you_have.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$2.wav') 
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-you_have.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$2.wav' ) 
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav' )
 							}
 						}
-						xml.input( :pattern => '^(\d+):(.*)$') {
+						xml.input( :pattern => '^(\d+):(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-you_have.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$2.wav') 
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-messages.wav')
-							}
-						}
-					}
-
-					xml.macro( :name => 'voicemail_menu') {
-						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*])$') {
-							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_new.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_saved.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-advanced.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_exit.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$4', :method => 'pronounced', :type => 'name_phonetic')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-you_have.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$2.wav' ) 
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-messages.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_config_menu') {
-						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*])$') {
+					
+					xml.macro( :name => 'voicemail_menu' ) {
+						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*])$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_record_greeting.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-choose_greeting.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_name2.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-change_password.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$4', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'execute', :data => 'sleep(100)')
-
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-main_menu.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$5', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_new.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_saved.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-advanced.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_exit.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$4', :method => 'pronounced', :type => 'name_phonetic' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_record_name') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_config_menu' ) {
+						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*])$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_name1.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_record_greeting.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-choose_greeting.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_name2.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-change_password.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$4', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'execute', :data => 'sleep(100)' )
+								
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-main_menu.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$5', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_record_file_check') {
-						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*])$') {
+					
+					xml.macro( :name => 'voicemail_record_name' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_to_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-save_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-rerecord.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_name1.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_record_urgent_check') {
-						xml.input( :pattern => '^([0-9#*]):([0-9#*])$') {
+					
+					xml.macro( :name => 'voicemail_record_file_check' ) {
+						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*])$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-mark-urgent.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-continue.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_to_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-save_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-rerecord.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_forward_prepend') {
-						xml.input( :pattern => '^([0-9#*]):([0-9#*])$') {
+					
+					xml.macro( :name => 'voicemail_record_urgent_check' ) {
+						xml.input( :pattern => '^([0-9#*]):([0-9#*])$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-forward_add_intro.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-send_message_now.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-mark-urgent.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-continue.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_forward_message_enter_extension') {
-						xml.input( :pattern => '^([0-9#*])$') {
+					
+					xml.macro( :name => 'voicemail_forward_prepend' ) {
+						xml.input( :pattern => '^([0-9#*]):([0-9#*])$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-forward_enter_ext.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-followed_by.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-forward_add_intro.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-send_message_now.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_invalid_extension') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_forward_message_enter_extension' ) {
+						xml.input( :pattern => '^([0-9#*])$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-that_was_an_invalid_ext.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-forward_enter_ext.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-followed_by.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_listen_file_check') {
-						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):(.*)$') {
+					
+					xml.macro( :name => 'voicemail_invalid_extension' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_to_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-save_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-delete_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-forward_to_email.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$4', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-return_call.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$5', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_forward.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$6', :method => 'pronounced', :type => 'name_spelled')
-							}
-						}
-						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*])$') {
-							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_to_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-save_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-delete_recording.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-return_call.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$5', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_forward.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav')
-								xml.action( :function => 'say', :data => '$6', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-that_was_an_invalid_ext.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_choose_greeting') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_listen_file_check' ) {
+						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-choose_greeting_choose.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_to_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-save_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-delete_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-forward_to_email.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$4', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-return_call.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$5', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_forward.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$6', :method => 'pronounced', :type => 'name_spelled' )
+							}
+						}
+						xml.input( :pattern => '^([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*]):([0-9#*])$' ) {
+							xml.match {
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-listen_to_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-save_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-delete_recording.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$3', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-return_call.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$5', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-to_forward.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-press.wav' )
+								xml.action( :function => 'say', :data => '$6', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_choose_greeting_fail') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_choose_greeting' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-choose_greeting_fail.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-choose_greeting_choose.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_record_greeting') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_choose_greeting_fail' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_greeting.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-choose_greeting_fail.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_record_message') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_record_greeting' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_message.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_greeting.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_greeting_selected') {
-						xml.input( :pattern => '^(\d+)$') {
+					
+					xml.macro( :name => 'voicemail_record_message' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-greeting.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-selected.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-record_message.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_play_greeting') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_greeting_selected' ) {
+						xml.input( :pattern => '^(\d+)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-person.wav')
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-not_available.wav')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-greeting.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-selected.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_say_number') {
-						xml.input( :pattern => '^(\d+)$') {
+					
+					xml.macro( :name => 'voicemail_play_greeting' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-person.wav' )
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-not_available.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_say_message_number') {
-						xml.input( :pattern => '^([a-z]+):(\d+)$') {
+					
+					xml.macro( :name => 'voicemail_say_number' ) {
+						xml.input( :pattern => '^(\d+)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav') 
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-message_number.wav')
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'items') 
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'items' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_say_phone_number') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_say_message_number' ) {
+						xml.input( :pattern => '^([a-z]+):(\d+)$' ) {
 							xml.match {
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav' ) 
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-message_number.wav' )
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'items' ) 
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_say_name') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_say_phone_number' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled')
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-					xml.macro( :name => 'voicemail_ack')  {
-						xml.input( :pattern => '^(too-small)$') {
+					
+					xml.macro( :name => 'voicemail_say_name' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-too-small.wav')
-							}
-						}
-						xml.input( :pattern => '^(deleted)$') {
-							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav')
-							}
-						}
-						xml.input( :pattern => '^(saved)$') {
-							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav')
-							}
-						}
-						xml.input( :pattern => '^(emailed)$') {
-							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav')
-							}
-						}
-						xml.input( :pattern => '^(marked-urgent)$') {
-							xml.match {
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav')
-								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav')
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_say_date') {
-						xml.input( :pattern => '^(.*)$') {
+					xml.macro( :name => 'voicemail_ack' ) {
+						xml.input( :pattern => '^(too-small)$' ) {
 							xml.match {
-								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'current_date_time')
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-too-small.wav' )
+							}
+						}
+						xml.input( :pattern => '^(deleted)$' ) {
+							xml.match {
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav' )
+							}
+						}
+						xml.input( :pattern => '^(saved)$' ) {
+							xml.match {
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav' )
+							}
+						}
+						xml.input( :pattern => '^(emailed)$' ) {
+							xml.match {
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav' )
+							}
+						}
+						xml.input( :pattern => '^(marked-urgent)$' ) {
+							xml.match {
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-message.wav' )
+								xml.action( :function => 'play-file', :data => 'voicemail/vm-$1.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'voicemail_disk_quota_exceeded') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'voicemail_say_date' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-									xml.action( :function => 'play-file', :data => 'voicemail/vm-mailbox_full.wav')
+								xml.action( :function => 'say', :data => '$1', :method => 'pronounced', :type => 'current_date_time' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'valet_announce_ext') {
-						xml.input( :pattern => '^([^\:]+):(.*)$') {
+					
+					xml.macro( :name => 'voicemail_disk_quota_exceeded' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled')
+									xml.action( :function => 'play-file', :data => 'voicemail/vm-mailbox_full.wav' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'valet_lot_full') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'valet_announce_ext' ) {
+						xml.input( :pattern => '^([^\:]+):(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'tone_stream://%(275,10,600);%(275,100,300)')
+								xml.action( :function => 'say', :data => '$2', :method => 'pronounced', :type => 'name_spelled' )
 							}
 						}
 					}
-
-					xml.macro( :name => 'valet_lot_empty') {
-						xml.input( :pattern => '^(.*)$') {
+					
+					xml.macro( :name => 'valet_lot_full' ) {
+						xml.input( :pattern => '^(.*)$' ) {
 							xml.match {
-								xml.action( :function => 'play-file', :data => 'tone_stream://%(275,10,600);%(275,100,300)')
+								xml.action( :function => 'play-file', :data => 'tone_stream://%(275,10,600);%(275,100,300)' )
 							}
 						}
 					}
-
+					
+					xml.macro( :name => 'valet_lot_empty' ) {
+						xml.input( :pattern => '^(.*)$' ) {
+							xml.match {
+								xml.action( :function => 'play-file', :data => 'tone_stream://%(275,10,600);%(275,100,300)' )
+							}
+						}
+					}
+					
 				}
 			}
 		}
@@ -891,9 +891,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'deflect', :data => '${destination_number}' )
 				}
 			}
-			
-			#TODO Add comments from the original configuration (misc/freeswitch/fs-conf/).
-			
+						
 			xml.extension( :name => 'kam-park-in' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-park-in-$' ) {
 					xml.action( :application => 'valet_park', :data => 'valet_lot auto in 8000 8999' )
@@ -937,7 +935,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-vmenu-$' ) {
 					xml.action( :application => 'log', :data => 'INFO [GS] User ${sip_from_user}@${domain_name} is checking the voicemail ...' )
 					xml.action( :application => 'set', :data => 'voicemail_authorized=true' )
-					xml.action( :application => 'answer')
+					xml.action( :application => 'answer' )
 					xml.action( :application => 'voicemail', :data => 'check default ${domain_name} ${sip_from_user}' )
 				}
 			}
@@ -949,11 +947,15 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )
 				}
 			}
+			xml.extension( :name => 'catch-all' ) {
+				xml.condition( :field => 'destination_number', :expression => '^(.+)$' ) {
+					xml.action( :application => 'bridge', :data => 'sofia/internal/$1@$${domain};fs_path=sip:127.0.0.1:5060' )
+				}
+			}
 			
 		}
 		
 	}
-	
 }
 
 

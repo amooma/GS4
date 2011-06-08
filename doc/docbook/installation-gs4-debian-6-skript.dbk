@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section version="5.0" xml:id="installation-gs4-debian-6-skript" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Installation von Gemeinschaft auf Debian 6 Squeeze</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Stefan</firstname><surname>Wintermeyer</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+
+      <author>
+        <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+
+      <author>
+        <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </info>
+
+  <indexterm>
+    <primary>Installation</primary>
+
+    <secondary>von Gemeinschaft</secondary>
+
+    <tertiary>auf Debian 6 Squeeze</tertiary>
+  </indexterm>
+
+  <indexterm>
+    <primary>Debian 6</primary>
+
+    <secondary>Installation von Gemeinschaft</secondary>
+  </indexterm>
+
+  <important>
+    <para>Diese Beschreibung setzt ein frisch installiertes Debian GNU/Linux 6
+    (<quote>Squeeze</quote>) voraus. Ein ISO-Image für die Installation finden
+    Sie auf <link
+    xlink:href="http://www.debian.org/releases/squeeze/debian-installer/">http://www.debian.org/releases/squeeze/debian-installer/</link>.
+    Wir empfehlen das etwa 180 MB große Netzinstallations-CD-Image. Eine
+    Debian-GNU/Linux-Installationsanleitung findet sich unter <link
+    xlink:href="http://www.debian.org/releases/squeeze/">http://www.debian.org/releases/squeeze/</link>,
+    ein allgemeines Anwenderhandbuch unter <link
+    xlink:href="http://debiananwenderhandbuch.de/">http://debiananwenderhandbuch.de</link>.</para>
+
+    <para>Bitte installieren Sie ein minimales Debian, d.h. wählen Sie in den
+    Installations-Dialogen bei der Paketauswahl alle Paketgruppen ab, außer
+    „ssh“. Ein SSH-Server erleichtert vor allem in einer virtuellen
+    Installation die weiteren Schritte.</para>
+  </important>
+
+  <para>Alle für Gemeinschaft4 benötigten Komponenten können über das im
+  Git-Repository (auf <link
+  xlink:href="https://github.com/amooma/Gemeinschaft4">https://github.com/amooma/Gemeinschaft4</link>)
+  vorhandene Installationsskript installiert werden.</para>
+
+  <para>Bitte laden Sie die Datei <filename>install.sh</filename> herunter.
+  Achten Sie dabei darauf die Datei aus dem richtigen <foreignphrase
+  xml:lang="en">Branch</foreignphrase> zu verwenden. Der derzeit aktuelle
+  Release-Branch heißt „1.1“. Hier der direkte Link zu der Datei:</para>
+
+  <para><link
+  xlink:href="https://github.com/amooma/Gemeinschaft4/raw/1.1/install.sh">https://github.com/amooma/Gemeinschaft4/raw/1.1/install.sh</link></para>
+
+  <para>Die Datei können Sie z.B. auf einem Arbeitsplatz-Rechner herunterladen
+  und per <command>scp</command> auf den Server übertragen.<screen>scp install.sh root@<replaceable>GEMEINSCHAFT</replaceable>:/tmp/</screen></para>
+
+  <para>Dann verbinden Sie sich mit dem Gemeinschaft-Server:<screen>ssh root@<replaceable>GEMEINSCHAFT</replaceable></screen></para>
+
+  <important>
+    <para>Das Installationsskript <filename>install.sh</filename> muß als
+    Benutzer „root“ ausgeführt werden!</para>
+  </important>
+
+  <para>Das Skript ausführbar machen und starten:<screen>cd /tmp/
+chmod +x install.sh
+./install.sh</screen></para>
+
+  <para>Das Skript fragt Sie nach Ihrem Benutzernamen und Paßwort für
+  github.com, installiert die für Gemeinschaft erforderlichen Abhängigkeiten
+  (FreeSwitch, Kamailio etc.) als Pakete, läd dann Gemeinschaft aus dem
+  Git-Repository herunter, installiert Ruby, konfiguriert Gemeinschaft und
+  startet die Dienste.</para>
+</section>

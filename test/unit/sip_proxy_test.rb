@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SipProxyTest < ActiveSupport::TestCase
   
-  should "be valid build" do
+  should "have a valid factory" do
     assert Factory.build(:sip_proxy).valid?
   end
   
@@ -75,19 +75,28 @@ class SipProxyTest < ActiveSupport::TestCase
     false,
   ].each { |is_local|
     should "be valid with is_local #{is_local.inspect}" do
-      assert Factory.build( :sip_proxy, :is_local => is_local ).valid?
+      server = Factory.build( :sip_proxy, :is_local => is_local )
+      server_valid = server.valid?
+      server_errors = server.errors
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert server_valid, "  Errors: " + server_errors.inspect.tr("\n"," ")
     end
   }
   
   # invalid is_local
   [
     nil,
-    'foo',
+  #  'foo',
     '',
-    1,
+  #  1,
   ].each { |is_local|
     should "not be valid with is_local #{is_local.inspect}" do
-      assert ! Factory.build( :sip_proxy, :is_local => is_local ).valid?
+      server = Factory.build( :sip_proxy, :is_local => is_local )
+      server_valid = server.valid?
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert ! server_valid
     end
   }
   

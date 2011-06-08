@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: FreeswitchConfigurationController</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./app/controllers/freeswitch_configuration_controller_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/controllers/freeswitch_configuration_controller.rb">app/controllers/freeswitch_configuration_controller.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link"><a href="ApplicationController.html">ApplicationController</a></p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-load">#load</a></li>
+					
+					<li><a href="#method-i-timezones">#timezones</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Admin.html">Admin</a></li>
+				
+					<li><a href="./Admin/SetupController.html">Admin::SetupController</a></li>
+				
+					<li><a href="./Admin/SetupHelper.html">Admin::SetupHelper</a></li>
+				
+					<li><a href="./Admin/UserHelper.html">Admin::UserHelper</a></li>
+				
+					<li><a href="./Admin/UsersController.html">Admin::UsersController</a></li>
+				
+					<li><a href="./AServer.html">AServer</a></li>
+				
+					<li><a href="./AdminController.html">AdminController</a></li>
+				
+					<li><a href="./AdminHelper.html">AdminHelper</a></li>
+				
+					<li><a href="./ApplicationController.html">ApplicationController</a></li>
+				
+					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
+				
+					<li><a href="./Authentication.html">Authentication</a></li>
+				
+					<li><a href="./AuthenticationsController.html">AuthenticationsController</a></li>
+				
+					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
+				
+					<li><a href="./CallForward.html">CallForward</a></li>
+				
+					<li><a href="./CallForwardReason.html">CallForwardReason</a></li>
+				
+					<li><a href="./CallForwardsController.html">CallForwardsController</a></li>
+				
+					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
+				
+					<li><a href="./CallQueue.html">CallQueue</a></li>
+				
+					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
+				
+					<li><a href="./CallQueuesController.html">CallQueuesController</a></li>
+				
+					<li><a href="./CallQueuesHelper.html">CallQueuesHelper</a></li>
+				
+					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./Conference.html">Conference</a></li>
+				
+					<li><a href="./ConferenceToExtension.html">ConferenceToExtension</a></li>
+				
+					<li><a href="./ConferencesController.html">ConferencesController</a></li>
+				
+					<li><a href="./ConferencesHelper.html">ConferencesHelper</a></li>
+				
+					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
+				
+					<li><a href="./Extension.html">Extension</a></li>
+				
+					<li><a href="./ExtensionsController.html">ExtensionsController</a></li>
+				
+					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
+				
+					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchConfigurationController.html">FreeswitchConfigurationController</a></li>
+				
+					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
+				
+					<li><a href="./Location.html">Location</a></li>
+				
+					<li><a href="./Manufacturer.html">Manufacturer</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
+				
+					<li><a href="./Node.html">Node</a></li>
+				
+					<li><a href="./NodesController.html">NodesController</a></li>
+				
+					<li><a href="./NodesHelper.html">NodesHelper</a></li>
+				
+					<li><a href="./Oui.html">Oui</a></li>
+				
+					<li><a href="./PagesHelper.html">PagesHelper</a></li>
+				
+					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneBookInternalUsersController.html">PhoneBookInternalUsersController</a></li>
+				
+					<li><a href="./PhoneKey.html">PhoneKey</a></li>
+				
+					<li><a href="./PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a></li>
+				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
+					<li><a href="./PhoneModel.html">PhoneModel</a></li>
+				
+					<li><a href="./PhoneModelCodec.html">PhoneModelCodec</a></li>
+				
+					<li><a href="./PhoneModelKey.html">PhoneModelKey</a></li>
+				
+					<li><a href="./PhoneModelMacAddress.html">PhoneModelMacAddress</a></li>
+				
+					<li><a href="./PhoneModelsController.html">PhoneModelsController</a></li>
+				
+					<li><a href="./PhonesController.html">PhonesController</a></li>
+				
+					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
+				
+					<li><a href="./Pua.html">Pua</a></li>
+				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
+					<li><a href="./SipAccount.html">SipAccount</a></li>
+				
+					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
+				
+					<li><a href="./SipAccountToExtension.html">SipAccountToExtension</a></li>
+				
+					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
+				
+					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
+				
+					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
+				
+					<li><a href="./SipProxiesHelper.html">SipProxiesHelper</a></li>
+				
+					<li><a href="./SipProxy.html">SipProxy</a></li>
+				
+					<li><a href="./SipServer.html">SipServer</a></li>
+				
+					<li><a href="./SipServersController.html">SipServersController</a></li>
+				
+					<li><a href="./SipServersHelper.html">SipServersHelper</a></li>
+				
+					<li><a href="./SipproxyDbalias.html">SipproxyDbalias</a></li>
+				
+					<li><a href="./SipproxySubscriber.html">SipproxySubscriber</a></li>
+				
+					<li><a href="./Subscriber.html">Subscriber</a></li>
+				
+					<li><a href="./SubscribersController.html">SubscribersController</a></li>
+				
+					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserHelper.html">UserHelper</a></li>
+				
+					<li><a href="./Version.html">Version</a></li>
+				
+					<li><a href="./VoicemailServer.html">VoicemailServer</a></li>
+				
+					<li><a href="./VoicemailServersController.html">VoicemailServersController</a></li>
+				
+					<li><a href="./VoicemailServersHelper.html">VoicemailServersHelper</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">FreeswitchConfigurationController</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="load-method" class="method-detail ">
+				<a name="method-i-load"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">load</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+TODO <a href="Authentication.html">Authentication</a>. see <a
+href="FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a>
+/ <a
+href="FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a>.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="load-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/freeswitch_configuration_controller.rb, line 5</span>
+ 5:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load</span>()
+ 6:                 <span class="ruby-ivar">@local_ip</span> = <span class="ruby-identifier">local_ip</span>
+ 7:                 <span class="ruby-ivar">@domain</span> = <span class="ruby-identifier">local_ip</span>
+ 8:                 <span class="ruby-ivar">@sounds_dir</span> = <span class="ruby-value str">'$${sounds_dir}'</span>
+ 9:                 <span class="ruby-ivar">@hold_music</span> = <span class="ruby-value str">'$${hold_music}'</span>
+10:                 <span class="ruby-ivar">@internal_sip_port</span> = <span class="ruby-value">15060</span>
+11:                 <span class="ruby-ivar">@external_sip_port</span> = <span class="ruby-value">15080</span>
+12:                 <span class="ruby-ivar">@timezones</span> = <span class="ruby-identifier">timezones</span>()
+13:                 
+14:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+15:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> 
+16:                 }
+17:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="timezones-method" class="method-detail ">
+				<a name="method-i-timezones"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">timezones</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="timezones-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_configuration_controller.rb, line 21</span>
+ 21:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timezones</span>()
+ 22:                 <span class="ruby-keyword kw">return</span> {
+ 23:                         <span class="ruby-value str">&quot;Africa/Abidjan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 24:                         <span class="ruby-value str">&quot;Africa/Accra&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 25:                         <span class="ruby-value str">&quot;Africa/Addis_Ababa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 26:                         <span class="ruby-value str">&quot;Africa/Algiers&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1&quot;</span>,
+ 27:                         <span class="ruby-value str">&quot;Africa/Asmara&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 28:                         <span class="ruby-value str">&quot;Africa/Asmera&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 29:                         <span class="ruby-value str">&quot;Africa/Bamako&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 30:                         <span class="ruby-value str">&quot;Africa/Bangui&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 31:                         <span class="ruby-value str">&quot;Africa/Banjul&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 32:                         <span class="ruby-value str">&quot;Africa/Bissau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 33:                         <span class="ruby-value str">&quot;Africa/Blantyre&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 34:                         <span class="ruby-value str">&quot;Africa/Brazzaville&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 35:                         <span class="ruby-value str">&quot;Africa/Bujumbura&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 36:                         <span class="ruby-value str">&quot;Africa/Cairo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EEST&quot;</span>,
+ 37:                         <span class="ruby-value str">&quot;Africa/Casablanca&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0&quot;</span>,
+ 38:                         <span class="ruby-value str">&quot;Africa/Ceuta&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+ 39:                         <span class="ruby-value str">&quot;Africa/Conakry&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 40:                         <span class="ruby-value str">&quot;Africa/Dakar&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 41:                         <span class="ruby-value str">&quot;Africa/Dar_es_Salaam&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 42:                         <span class="ruby-value str">&quot;Africa/Djibouti&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 43:                         <span class="ruby-value str">&quot;Africa/Douala&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 44:                         <span class="ruby-value str">&quot;Africa/El_Aaiun&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0&quot;</span>,
+ 45:                         <span class="ruby-value str">&quot;Africa/Freetown&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 46:                         <span class="ruby-value str">&quot;Africa/Gaborone&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 47:                         <span class="ruby-value str">&quot;Africa/Harare&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 48:                         <span class="ruby-value str">&quot;Africa/Johannesburg&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SAST-2&quot;</span>,
+ 49:                         <span class="ruby-value str">&quot;Africa/Kampala&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 50:                         <span class="ruby-value str">&quot;Africa/Khartoum&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 51:                         <span class="ruby-value str">&quot;Africa/Kigali&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 52:                         <span class="ruby-value str">&quot;Africa/Kinshasa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 53:                         <span class="ruby-value str">&quot;Africa/Lagos&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 54:                         <span class="ruby-value str">&quot;Africa/Libreville&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 55:                         <span class="ruby-value str">&quot;Africa/Lome&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 56:                         <span class="ruby-value str">&quot;Africa/Luanda&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 57:                         <span class="ruby-value str">&quot;Africa/Lubumbashi&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 58:                         <span class="ruby-value str">&quot;Africa/Lusaka&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 59:                         <span class="ruby-value str">&quot;Africa/Malabo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 60:                         <span class="ruby-value str">&quot;Africa/Maputo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CAT-2&quot;</span>,
+ 61:                         <span class="ruby-value str">&quot;Africa/Maseru&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SAST-2&quot;</span>,
+ 62:                         <span class="ruby-value str">&quot;Africa/Mbabane&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SAST-2&quot;</span>,
+ 63:                         <span class="ruby-value str">&quot;Africa/Mogadishu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 64:                         <span class="ruby-value str">&quot;Africa/Monrovia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 65:                         <span class="ruby-value str">&quot;Africa/Nairobi&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+ 66:                         <span class="ruby-value str">&quot;Africa/Ndjamena&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 67:                         <span class="ruby-value str">&quot;Africa/Niamey&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 68:                         <span class="ruby-value str">&quot;Africa/Nouakchott&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 69:                         <span class="ruby-value str">&quot;Africa/Ouagadougou&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 70:                         <span class="ruby-value str">&quot;Africa/Porto-Novo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1&quot;</span>,
+ 71:                         <span class="ruby-value str">&quot;Africa/Sao_Tome&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 72:                         <span class="ruby-value str">&quot;Africa/Timbuktu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+ 73:                         <span class="ruby-value str">&quot;Africa/Tripoli&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2&quot;</span>,
+ 74:                         <span class="ruby-value str">&quot;Africa/Tunis&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+ 75:                         <span class="ruby-value str">&quot;Africa/Windhoek&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAT-1WAST,M9.1.0,M4.1.0&quot;</span>,
+ 76:                         <span class="ruby-value str">&quot;America/Adak&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HAST10HADT,M3.2.0,M11.1.0&quot;</span>,
+ 77:                         <span class="ruby-value str">&quot;America/Anchorage&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AKST9AKDT,M3.2.0,M11.1.0&quot;</span>,
+ 78:                         <span class="ruby-value str">&quot;America/Anguilla&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+ 79:                         <span class="ruby-value str">&quot;America/Antigua&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+ 80:                         <span class="ruby-value str">&quot;America/Araguaina&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3&quot;</span>,
+ 81:                         <span class="ruby-value str">&quot;America/Argentina/Buenos_Aires&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 82:                         <span class="ruby-value str">&quot;America/Argentina/Catamarca&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 83:                         <span class="ruby-value str">&quot;America/Argentina/ComodRivadavia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 84:                         <span class="ruby-value str">&quot;America/Argentina/Cordoba&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 85:                         <span class="ruby-value str">&quot;America/Argentina/Jujuy&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 86:                         <span class="ruby-value str">&quot;America/Argentina/La_Rioja&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 87:                         <span class="ruby-value str">&quot;America/Argentina/Mendoza&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 88:                         <span class="ruby-value str">&quot;America/Argentina/Rio_Gallegos&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 89:                         <span class="ruby-value str">&quot;America/Argentina/San_Juan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 90:                         <span class="ruby-value str">&quot;America/Argentina/San_Luis&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3&quot;</span>,
+ 91:                         <span class="ruby-value str">&quot;America/Argentina/Tucuman&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 92:                         <span class="ruby-value str">&quot;America/Argentina/Ushuaia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+ 93:                         <span class="ruby-value str">&quot;America/Aruba&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+ 94:                         <span class="ruby-value str">&quot;America/Asuncion&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PYT4PYST,M10.3.0/0,M3.2.0/0&quot;</span>,
+ 95:                         <span class="ruby-value str">&quot;America/Atikokan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+ 96:                         <span class="ruby-value str">&quot;America/Atka&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HAST10HADT,M3.2.0,M11.1.0&quot;</span>,
+ 97:                         <span class="ruby-value str">&quot;America/Bahia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3&quot;</span>,
+ 98:                         <span class="ruby-value str">&quot;America/Barbados&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+ 99:                         <span class="ruby-value str">&quot;America/Belem&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3&quot;</span>,
+100:                         <span class="ruby-value str">&quot;America/Belize&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+101:                         <span class="ruby-value str">&quot;America/Blanc-Sablon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+102:                         <span class="ruby-value str">&quot;America/Boa_Vista&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT4&quot;</span>,
+103:                         <span class="ruby-value str">&quot;America/Bogota&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;COT5&quot;</span>,
+104:                         <span class="ruby-value str">&quot;America/Boise&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+105:                         <span class="ruby-value str">&quot;America/Buenos_Aires&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+106:                         <span class="ruby-value str">&quot;America/Cambridge_Bay&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+107:                         <span class="ruby-value str">&quot;America/Campo_Grande&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT4AMST,M10.2.0/0,M2.3.0/0&quot;</span>,
+108:                         <span class="ruby-value str">&quot;America/Cancun&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M4.1.0,M10.5.0&quot;</span>,
+109:                         <span class="ruby-value str">&quot;America/Caracas&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;VET4:30&quot;</span>,
+110:                         <span class="ruby-value str">&quot;America/Catamarca&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+111:                         <span class="ruby-value str">&quot;America/Cayenne&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GFT3&quot;</span>,
+112:                         <span class="ruby-value str">&quot;America/Cayman&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+113:                         <span class="ruby-value str">&quot;America/Chicago&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+114:                         <span class="ruby-value str">&quot;America/Chihuahua&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M4.1.0,M10.5.0&quot;</span>,
+115:                         <span class="ruby-value str">&quot;America/Coral_Harbour&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+116:                         <span class="ruby-value str">&quot;America/Cordoba&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+117:                         <span class="ruby-value str">&quot;America/Costa_Rica&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+118:                         <span class="ruby-value str">&quot;America/Cuiaba&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT4AMST,M10.2.0/0,M2.3.0/0&quot;</span>,
+119:                         <span class="ruby-value str">&quot;America/Curacao&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+120:                         <span class="ruby-value str">&quot;America/Danmarkshavn&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+121:                         <span class="ruby-value str">&quot;America/Dawson&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+122:                         <span class="ruby-value str">&quot;America/Dawson_Creek&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7&quot;</span>,
+123:                         <span class="ruby-value str">&quot;America/Denver&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+124:                         <span class="ruby-value str">&quot;America/Detroit&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+125:                         <span class="ruby-value str">&quot;America/Dominica&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+126:                         <span class="ruby-value str">&quot;America/Edmonton&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+127:                         <span class="ruby-value str">&quot;America/Eirunepe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ACT5&quot;</span>,
+128:                         <span class="ruby-value str">&quot;America/El_Salvador&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+129:                         <span class="ruby-value str">&quot;America/Ensenada&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M4.1.0,M10.5.0&quot;</span>,
+130:                         <span class="ruby-value str">&quot;America/Fortaleza&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3&quot;</span>,
+131:                         <span class="ruby-value str">&quot;America/Fort_Wayne&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+132:                         <span class="ruby-value str">&quot;America/Glace_Bay&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+133:                         <span class="ruby-value str">&quot;America/Godthab&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WGST&quot;</span>,
+134:                         <span class="ruby-value str">&quot;America/Goose_Bay&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0/0:01,M11.1.0/0:01&quot;</span>,
+135:                         <span class="ruby-value str">&quot;America/Grand_Turk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+136:                         <span class="ruby-value str">&quot;America/Grenada&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+137:                         <span class="ruby-value str">&quot;America/Guadeloupe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+138:                         <span class="ruby-value str">&quot;America/Guatemala&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+139:                         <span class="ruby-value str">&quot;America/Guayaquil&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ECT5&quot;</span>,
+140:                         <span class="ruby-value str">&quot;America/Guyana&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GYT4&quot;</span>,
+141:                         <span class="ruby-value str">&quot;America/Halifax&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+142:                         <span class="ruby-value str">&quot;America/Havana&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST5CDT,M3.3.0/0,M10.5.0/1&quot;</span>,
+143:                         <span class="ruby-value str">&quot;America/Hermosillo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7&quot;</span>,
+144:                         <span class="ruby-value str">&quot;America/Indiana/Indianapolis&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+145:                         <span class="ruby-value str">&quot;America/Indiana/Knox&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+146:                         <span class="ruby-value str">&quot;America/Indiana/Marengo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+147:                         <span class="ruby-value str">&quot;America/Indiana/Petersburg&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+148:                         <span class="ruby-value str">&quot;America/Indianapolis&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+149:                         <span class="ruby-value str">&quot;America/Indiana/Tell_City&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+150:                         <span class="ruby-value str">&quot;America/Indiana/Vevay&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+151:                         <span class="ruby-value str">&quot;America/Indiana/Vincennes&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+152:                         <span class="ruby-value str">&quot;America/Indiana/Winamac&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+153:                         <span class="ruby-value str">&quot;America/Inuvik&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+154:                         <span class="ruby-value str">&quot;America/Iqaluit&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+155:                         <span class="ruby-value str">&quot;America/Jamaica&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+156:                         <span class="ruby-value str">&quot;America/Jujuy&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+157:                         <span class="ruby-value str">&quot;America/Juneau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AKST9AKDT,M3.2.0,M11.1.0&quot;</span>,
+158:                         <span class="ruby-value str">&quot;America/Kentucky/Louisville&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+159:                         <span class="ruby-value str">&quot;America/Kentucky/Monticello&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+160:                         <span class="ruby-value str">&quot;America/Knox_IN&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+161:                         <span class="ruby-value str">&quot;America/La_Paz&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BOT4&quot;</span>,
+162:                         <span class="ruby-value str">&quot;America/Lima&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PET5&quot;</span>,
+163:                         <span class="ruby-value str">&quot;America/Los_Angeles&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+164:                         <span class="ruby-value str">&quot;America/Louisville&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+165:                         <span class="ruby-value str">&quot;America/Maceio&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3&quot;</span>,
+166:                         <span class="ruby-value str">&quot;America/Managua&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+167:                         <span class="ruby-value str">&quot;America/Manaus&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT4&quot;</span>,
+168:                         <span class="ruby-value str">&quot;America/Marigot&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+169:                         <span class="ruby-value str">&quot;America/Martinique&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+170:                         <span class="ruby-value str">&quot;America/Mazatlan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M4.1.0,M10.5.0&quot;</span>,
+171:                         <span class="ruby-value str">&quot;America/Mendoza&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+172:                         <span class="ruby-value str">&quot;America/Menominee&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+173:                         <span class="ruby-value str">&quot;America/Merida&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M4.1.0,M10.5.0&quot;</span>,
+174:                         <span class="ruby-value str">&quot;America/Mexico_City&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M4.1.0,M10.5.0&quot;</span>,
+175:                         <span class="ruby-value str">&quot;America/Miquelon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PMST3PMDT,M3.2.0,M11.1.0&quot;</span>,
+176:                         <span class="ruby-value str">&quot;America/Moncton&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+177:                         <span class="ruby-value str">&quot;America/Monterrey&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M4.1.0,M10.5.0&quot;</span>,
+178:                         <span class="ruby-value str">&quot;America/Montevideo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UYT3UYST,M10.1.0,M3.2.0&quot;</span>,
+179:                         <span class="ruby-value str">&quot;America/Montreal&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+180:                         <span class="ruby-value str">&quot;America/Montserrat&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+181:                         <span class="ruby-value str">&quot;America/Nassau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+182:                         <span class="ruby-value str">&quot;America/New_York&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+183:                         <span class="ruby-value str">&quot;America/Nipigon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+184:                         <span class="ruby-value str">&quot;America/Nome&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AKST9AKDT,M3.2.0,M11.1.0&quot;</span>,
+185:                         <span class="ruby-value str">&quot;America/Noronha&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;FNT2&quot;</span>,
+186:                         <span class="ruby-value str">&quot;America/North_Dakota/Center&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+187:                         <span class="ruby-value str">&quot;America/North_Dakota/New_Salem&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+188:                         <span class="ruby-value str">&quot;America/Panama&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+189:                         <span class="ruby-value str">&quot;America/Pangnirtung&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+190:                         <span class="ruby-value str">&quot;America/Paramaribo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SRT3&quot;</span>,
+191:                         <span class="ruby-value str">&quot;America/Phoenix&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7&quot;</span>,
+192:                         <span class="ruby-value str">&quot;America/Port-au-Prince&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+193:                         <span class="ruby-value str">&quot;America/Porto_Acre&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ACT5&quot;</span>,
+194:                         <span class="ruby-value str">&quot;America/Port_of_Spain&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+195:                         <span class="ruby-value str">&quot;America/Porto_Velho&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT4&quot;</span>,
+196:                         <span class="ruby-value str">&quot;America/Puerto_Rico&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+197:                         <span class="ruby-value str">&quot;America/Rainy_River&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+198:                         <span class="ruby-value str">&quot;America/Rankin_Inlet&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+199:                         <span class="ruby-value str">&quot;America/Recife&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3&quot;</span>,
+200:                         <span class="ruby-value str">&quot;America/Regina&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+201:                         <span class="ruby-value str">&quot;America/Resolute&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+202:                         <span class="ruby-value str">&quot;America/Rio_Branco&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ACT5&quot;</span>,
+203:                         <span class="ruby-value str">&quot;America/Rosario&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ART3ARST,M10.1.0/0,M3.3.0/0&quot;</span>,
+204:                         <span class="ruby-value str">&quot;America/Santiago&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CLST&quot;</span>,
+205:                         <span class="ruby-value str">&quot;America/Santo_Domingo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+206:                         <span class="ruby-value str">&quot;America/Sao_Paulo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3BRST,M10.2.0/0,M2.3.0/0&quot;</span>,
+207:                         <span class="ruby-value str">&quot;America/Scoresbysund&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EGT1EGST,M3.5.0/0,M10.5.0/1&quot;</span>,
+208:                         <span class="ruby-value str">&quot;America/Shiprock&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+209:                         <span class="ruby-value str">&quot;America/St_Barthelemy&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+210:                         <span class="ruby-value str">&quot;America/St_Johns&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NST3:30NDT,M3.2.0/0:01,M11.1.0/0:01&quot;</span>,
+211:                         <span class="ruby-value str">&quot;America/St_Kitts&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+212:                         <span class="ruby-value str">&quot;America/St_Lucia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+213:                         <span class="ruby-value str">&quot;America/St_Thomas&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+214:                         <span class="ruby-value str">&quot;America/St_Vincent&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+215:                         <span class="ruby-value str">&quot;America/Swift_Current&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+216:                         <span class="ruby-value str">&quot;America/Tegucigalpa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+217:                         <span class="ruby-value str">&quot;America/Thule&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+218:                         <span class="ruby-value str">&quot;America/Thunder_Bay&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+219:                         <span class="ruby-value str">&quot;America/Tijuana&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M4.1.0,M10.5.0&quot;</span>,
+220:                         <span class="ruby-value str">&quot;America/Toronto&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+221:                         <span class="ruby-value str">&quot;America/Tortola&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+222:                         <span class="ruby-value str">&quot;America/Vancouver&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+223:                         <span class="ruby-value str">&quot;America/Virgin&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+224:                         <span class="ruby-value str">&quot;America/Whitehorse&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+225:                         <span class="ruby-value str">&quot;America/Winnipeg&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+226:                         <span class="ruby-value str">&quot;America/Yakutat&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AKST9AKDT,M3.2.0,M11.1.0&quot;</span>,
+227:                         <span class="ruby-value str">&quot;America/Yellowknife&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+228:                         <span class="ruby-value str">&quot;Antarctica/Casey&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WST-8&quot;</span>,
+229:                         <span class="ruby-value str">&quot;Antarctica/Davis&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;DAVT-7&quot;</span>,
+230:                         <span class="ruby-value str">&quot;Antarctica/DumontDUrville&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;DDUT-10&quot;</span>,
+231:                         <span class="ruby-value str">&quot;Antarctica/Mawson&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MAWT-6&quot;</span>,
+232:                         <span class="ruby-value str">&quot;Antarctica/McMurdo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NZST-12NZDT,M9.5.0,M4.1.0/3&quot;</span>,
+233:                         <span class="ruby-value str">&quot;Antarctica/Palmer&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CLST&quot;</span>,
+234:                         <span class="ruby-value str">&quot;Antarctica/Rothera&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ROTT3&quot;</span>,
+235:                         <span class="ruby-value str">&quot;Antarctica/South_Pole&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NZST-12NZDT,M9.5.0,M4.1.0/3&quot;</span>,
+236:                         <span class="ruby-value str">&quot;Antarctica/Syowa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SYOT-3&quot;</span>,
+237:                         <span class="ruby-value str">&quot;Antarctica/Vostok&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;VOST-6&quot;</span>,
+238:                         <span class="ruby-value str">&quot;Arctic/Longyearbyen&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+239:                         <span class="ruby-value str">&quot;Asia/Aden&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST-3&quot;</span>,
+240:                         <span class="ruby-value str">&quot;Asia/Almaty&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ALMT-6&quot;</span>,
+241:                         <span class="ruby-value str">&quot;Asia/Amman&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.4/0,M10.5.5/1&quot;</span>,
+242:                         <span class="ruby-value str">&quot;Asia/Anadyr&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ANAT-12ANAST,M3.5.0,M10.5.0/3&quot;</span>,
+243:                         <span class="ruby-value str">&quot;Asia/Aqtau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AQTT-5&quot;</span>,
+244:                         <span class="ruby-value str">&quot;Asia/Aqtobe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AQTT-5&quot;</span>,
+245:                         <span class="ruby-value str">&quot;Asia/Ashgabat&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TMT-5&quot;</span>,
+246:                         <span class="ruby-value str">&quot;Asia/Ashkhabad&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TMT-5&quot;</span>,
+247:                         <span class="ruby-value str">&quot;Asia/Baghdad&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST-3&quot;</span>,
+248:                         <span class="ruby-value str">&quot;Asia/Bahrain&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST-3&quot;</span>,
+249:                         <span class="ruby-value str">&quot;Asia/Baku&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AZT-4AZST,M3.5.0/4,M10.5.0/5&quot;</span>,
+250:                         <span class="ruby-value str">&quot;Asia/Bangkok&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ICT-7&quot;</span>,
+251:                         <span class="ruby-value str">&quot;Asia/Beirut&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/0,M10.5.0/0&quot;</span>,
+252:                         <span class="ruby-value str">&quot;Asia/Bishkek&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;KGT-6&quot;</span>,
+253:                         <span class="ruby-value str">&quot;Asia/Brunei&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BNT-8&quot;</span>,
+254:                         <span class="ruby-value str">&quot;Asia/Calcutta&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IST-5:30&quot;</span>,
+255:                         <span class="ruby-value str">&quot;Asia/Choibalsan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CHOT-9&quot;</span>,
+256:                         <span class="ruby-value str">&quot;Asia/Chongqing&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+257:                         <span class="ruby-value str">&quot;Asia/Chungking&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+258:                         <span class="ruby-value str">&quot;Asia/Colombo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IST-5:30&quot;</span>,
+259:                         <span class="ruby-value str">&quot;Asia/Dacca&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BDT-6&quot;</span>,
+260:                         <span class="ruby-value str">&quot;Asia/Damascus&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M4.1.5/0,J274/0&quot;</span>,
+261:                         <span class="ruby-value str">&quot;Asia/Dhaka&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BDT-6&quot;</span>,
+262:                         <span class="ruby-value str">&quot;Asia/Dili&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TLT-9&quot;</span>,
+263:                         <span class="ruby-value str">&quot;Asia/Dubai&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GST-4&quot;</span>,
+264:                         <span class="ruby-value str">&quot;Asia/Dushanbe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TJT-5&quot;</span>,
+265:                         <span class="ruby-value str">&quot;Asia/Gaza&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,J91/0,M9.2.4&quot;</span>,
+266:                         <span class="ruby-value str">&quot;Asia/Harbin&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+267:                         <span class="ruby-value str">&quot;Asia/Ho_Chi_Minh&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ICT-7&quot;</span>,
+268:                         <span class="ruby-value str">&quot;Asia/Hong_Kong&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HKT-8&quot;</span>,
+269:                         <span class="ruby-value str">&quot;Asia/Hovd&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HOVT-7&quot;</span>,
+270:                         <span class="ruby-value str">&quot;Asia/Irkutsk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IRKT-8IRKST,M3.5.0,M10.5.0/3&quot;</span>,
+271:                         <span class="ruby-value str">&quot;Asia/Istanbul&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+272:                         <span class="ruby-value str">&quot;Asia/Jakarta&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WIT-7&quot;</span>,
+273:                         <span class="ruby-value str">&quot;Asia/Jayapura&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EIT-9&quot;</span>,
+274:                         <span class="ruby-value str">&quot;Asia/Jerusalem&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IDDT&quot;</span>,
+275:                         <span class="ruby-value str">&quot;Asia/Kabul&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AFT-4:30&quot;</span>,
+276:                         <span class="ruby-value str">&quot;Asia/Kamchatka&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PETT-12PETST,M3.5.0,M10.5.0/3&quot;</span>,
+277:                         <span class="ruby-value str">&quot;Asia/Karachi&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PKT-5&quot;</span>,
+278:                         <span class="ruby-value str">&quot;Asia/Kashgar&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+279:                         <span class="ruby-value str">&quot;Asia/Katmandu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NPT-5:45&quot;</span>,
+280:                         <span class="ruby-value str">&quot;Asia/Kolkata&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IST-5:30&quot;</span>,
+281:                         <span class="ruby-value str">&quot;Asia/Krasnoyarsk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;KRAT-7KRAST,M3.5.0,M10.5.0/3&quot;</span>,
+282:                         <span class="ruby-value str">&quot;Asia/Kuala_Lumpur&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MYT-8&quot;</span>,
+283:                         <span class="ruby-value str">&quot;Asia/Kuching&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MYT-8&quot;</span>,
+284:                         <span class="ruby-value str">&quot;Asia/Kuwait&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST-3&quot;</span>,
+285:                         <span class="ruby-value str">&quot;Asia/Macao&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+286:                         <span class="ruby-value str">&quot;Asia/Macau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+287:                         <span class="ruby-value str">&quot;Asia/Magadan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MAGT-11MAGST,M3.5.0,M10.5.0/3&quot;</span>,
+288:                         <span class="ruby-value str">&quot;Asia/Makassar&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CIT-8&quot;</span>,
+289:                         <span class="ruby-value str">&quot;Asia/Manila&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PHT-8&quot;</span>,
+290:                         <span class="ruby-value str">&quot;Asia/Muscat&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GST-4&quot;</span>,
+291:                         <span class="ruby-value str">&quot;Asia/Nicosia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+292:                         <span class="ruby-value str">&quot;Asia/Novosibirsk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NOVT-6NOVST,M3.5.0,M10.5.0/3&quot;</span>,
+293:                         <span class="ruby-value str">&quot;Asia/Omsk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;OMST-6OMSST,M3.5.0,M10.5.0/3&quot;</span>,
+294:                         <span class="ruby-value str">&quot;Asia/Oral&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ORAT-5&quot;</span>,
+295:                         <span class="ruby-value str">&quot;Asia/Phnom_Penh&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ICT-7&quot;</span>,
+296:                         <span class="ruby-value str">&quot;Asia/Pontianak&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WIT-7&quot;</span>,
+297:                         <span class="ruby-value str">&quot;Asia/Pyongyang&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;KST-9&quot;</span>,
+298:                         <span class="ruby-value str">&quot;Asia/Qatar&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST-3&quot;</span>,
+299:                         <span class="ruby-value str">&quot;Asia/Qyzylorda&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;QYZT-6&quot;</span>,
+300:                         <span class="ruby-value str">&quot;Asia/Rangoon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MMT-6:30&quot;</span>,
+301:                         <span class="ruby-value str">&quot;Asia/Riyadh&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST-3&quot;</span>,
+302:                         <span class="ruby-value str">&quot;Asia/Riyadh87&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;zzz-3:07:04&quot;</span>,
+303:                         <span class="ruby-value str">&quot;Asia/Riyadh88&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;zzz-3:07:04&quot;</span>,
+304:                         <span class="ruby-value str">&quot;Asia/Riyadh89&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;zzz-3:07:04&quot;</span>,
+305:                         <span class="ruby-value str">&quot;Asia/Saigon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ICT-7&quot;</span>,
+306:                         <span class="ruby-value str">&quot;Asia/Sakhalin&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SAKT-10SAKST,M3.5.0,M10.5.0/3&quot;</span>,
+307:                         <span class="ruby-value str">&quot;Asia/Samarkand&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UZT-5&quot;</span>,
+308:                         <span class="ruby-value str">&quot;Asia/Seoul&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;KST-9&quot;</span>,
+309:                         <span class="ruby-value str">&quot;Asia/Shanghai&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+310:                         <span class="ruby-value str">&quot;Asia/Singapore&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SGT-8&quot;</span>,
+311:                         <span class="ruby-value str">&quot;Asia/Taipei&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+312:                         <span class="ruby-value str">&quot;Asia/Tashkent&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UZT-5&quot;</span>,
+313:                         <span class="ruby-value str">&quot;Asia/Tbilisi&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GET-4&quot;</span>,
+314:                         <span class="ruby-value str">&quot;Asia/Tehran&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IRDT&quot;</span>,
+315:                         <span class="ruby-value str">&quot;Asia/Tel_Aviv&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IDDT&quot;</span>,
+316:                         <span class="ruby-value str">&quot;Asia/Thimbu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BTT-6&quot;</span>,
+317:                         <span class="ruby-value str">&quot;Asia/Thimphu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BTT-6&quot;</span>,
+318:                         <span class="ruby-value str">&quot;Asia/Tokyo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;JST-9&quot;</span>,
+319:                         <span class="ruby-value str">&quot;Asia/Ujung_Pandang&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CIT-8&quot;</span>,
+320:                         <span class="ruby-value str">&quot;Asia/Ulaanbaatar&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ULAT-8&quot;</span>,
+321:                         <span class="ruby-value str">&quot;Asia/Ulan_Bator&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ULAT-8&quot;</span>,
+322:                         <span class="ruby-value str">&quot;Asia/Urumqi&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-8&quot;</span>,
+323:                         <span class="ruby-value str">&quot;Asia/Vientiane&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ICT-7&quot;</span>,
+324:                         <span class="ruby-value str">&quot;Asia/Vladivostok&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;VLAT-10VLAST,M3.5.0,M10.5.0/3&quot;</span>,
+325:                         <span class="ruby-value str">&quot;Asia/Yakutsk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;YAKT-9YAKST,M3.5.0,M10.5.0/3&quot;</span>,
+326:                         <span class="ruby-value str">&quot;Asia/Yekaterinburg&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;YEKT-5YEKST,M3.5.0,M10.5.0/3&quot;</span>,
+327:                         <span class="ruby-value str">&quot;Asia/Yerevan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT-4AMST,M3.5.0,M10.5.0/3&quot;</span>,
+328:                         <span class="ruby-value str">&quot;Atlantic/Azores&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AZOT1AZOST,M3.5.0/0,M10.5.0/1&quot;</span>,
+329:                         <span class="ruby-value str">&quot;Atlantic/Bermuda&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+330:                         <span class="ruby-value str">&quot;Atlantic/Canary&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0WEST,M3.5.0/1,M10.5.0&quot;</span>,
+331:                         <span class="ruby-value str">&quot;Atlantic/Cape_Verde&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CVT1&quot;</span>,
+332:                         <span class="ruby-value str">&quot;Atlantic/Faeroe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0WEST,M3.5.0/1,M10.5.0&quot;</span>,
+333:                         <span class="ruby-value str">&quot;Atlantic/Faroe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0WEST,M3.5.0/1,M10.5.0&quot;</span>,
+334:                         <span class="ruby-value str">&quot;Atlantic/Jan_Mayen&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+335:                         <span class="ruby-value str">&quot;Atlantic/Madeira&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0WEST,M3.5.0/1,M10.5.0&quot;</span>,
+336:                         <span class="ruby-value str">&quot;Atlantic/Reykjavik&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+337:                         <span class="ruby-value str">&quot;Atlantic/South_Georgia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GST2&quot;</span>,
+338:                         <span class="ruby-value str">&quot;Atlantic/Stanley&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;FKT4FKST,M9.1.0,M4.3.0&quot;</span>,
+339:                         <span class="ruby-value str">&quot;Atlantic/St_Helena&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+340:                         <span class="ruby-value str">&quot;Australia/ACT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+341:                         <span class="ruby-value str">&quot;Australia/Adelaide&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-9:30CST,M10.1.0,M4.1.0/3&quot;</span>,
+342:                         <span class="ruby-value str">&quot;Australia/Brisbane&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10&quot;</span>,
+343:                         <span class="ruby-value str">&quot;Australia/Broken_Hill&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-9:30CST,M10.1.0,M4.1.0/3&quot;</span>,
+344:                         <span class="ruby-value str">&quot;Australia/Canberra&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+345:                         <span class="ruby-value str">&quot;Australia/Currie&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+346:                         <span class="ruby-value str">&quot;Australia/Darwin&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-9:30&quot;</span>,
+347:                         <span class="ruby-value str">&quot;Australia/Eucla&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CWST-8:45&quot;</span>,
+348:                         <span class="ruby-value str">&quot;Australia/Hobart&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+349:                         <span class="ruby-value str">&quot;Australia/LHI&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;LHST-10:30LHST-11,M10.1.0,M4.1.0&quot;</span>,
+350:                         <span class="ruby-value str">&quot;Australia/Lindeman&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10&quot;</span>,
+351:                         <span class="ruby-value str">&quot;Australia/Lord_Howe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;LHST-10:30LHST-11,M10.1.0,M4.1.0&quot;</span>,
+352:                         <span class="ruby-value str">&quot;Australia/Melbourne&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+353:                         <span class="ruby-value str">&quot;Australia/North&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-9:30&quot;</span>,
+354:                         <span class="ruby-value str">&quot;Australia/NSW&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+355:                         <span class="ruby-value str">&quot;Australia/Perth&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WST-8&quot;</span>,
+356:                         <span class="ruby-value str">&quot;Australia/Queensland&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10&quot;</span>,
+357:                         <span class="ruby-value str">&quot;Australia/South&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-9:30CST,M10.1.0,M4.1.0/3&quot;</span>,
+358:                         <span class="ruby-value str">&quot;Australia/Sydney&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+359:                         <span class="ruby-value str">&quot;Australia/Tasmania&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+360:                         <span class="ruby-value str">&quot;Australia/Victoria&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST-10EST,M10.1.0,M4.1.0/3&quot;</span>,
+361:                         <span class="ruby-value str">&quot;Australia/West&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WST-8&quot;</span>,
+362:                         <span class="ruby-value str">&quot;Australia/Yancowinna&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST-9:30CST,M10.1.0,M4.1.0/3&quot;</span>,
+363:                         <span class="ruby-value str">&quot;Brazil/Acre&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ACT5&quot;</span>,
+364:                         <span class="ruby-value str">&quot;Brazil/DeNoronha&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;FNT2&quot;</span>,
+365:                         <span class="ruby-value str">&quot;Brazil/East&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;BRT3BRST,M10.2.0/0,M2.3.0/0&quot;</span>,
+366:                         <span class="ruby-value str">&quot;Brazil/West&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AMT4&quot;</span>,
+367:                         <span class="ruby-value str">&quot;Canada/Atlantic&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+368:                         <span class="ruby-value str">&quot;Canada/Central&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+369:                         <span class="ruby-value str">&quot;Canada/Eastern&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+370:                         <span class="ruby-value str">&quot;Canada/East-Saskatchewan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+371:                         <span class="ruby-value str">&quot;Canada/Mountain&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+372:                         <span class="ruby-value str">&quot;Canada/Newfoundland&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NST3:30NDT,M3.2.0/0:01,M11.1.0/0:01&quot;</span>,
+373:                         <span class="ruby-value str">&quot;Canada/Pacific&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+374:                         <span class="ruby-value str">&quot;Canada/Saskatchewan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+375:                         <span class="ruby-value str">&quot;Canada/Yukon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+376:                         <span class="ruby-value str">&quot;Chile/Continental&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CLST&quot;</span>,
+377:                         <span class="ruby-value str">&quot;Chile/EasterIsland&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EASST&quot;</span>,
+378:                         <span class="ruby-value str">&quot;Etc/GMT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+379:                         <span class="ruby-value str">&quot;Etc/GMT0&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+380:                         <span class="ruby-value str">&quot;Etc/GMT-0&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+381:                         <span class="ruby-value str">&quot;Etc/GMT+0&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+382:                         <span class="ruby-value str">&quot;Etc/GMT-1&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-1&quot;</span>,
+383:                         <span class="ruby-value str">&quot;Etc/GMT+1&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+1&quot;</span>,
+384:                         <span class="ruby-value str">&quot;Etc/GMT-10&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-10&quot;</span>,
+385:                         <span class="ruby-value str">&quot;Etc/GMT+10&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+10&quot;</span>,
+386:                         <span class="ruby-value str">&quot;Etc/GMT-11&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-11&quot;</span>,
+387:                         <span class="ruby-value str">&quot;Etc/GMT+11&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+11&quot;</span>,
+388:                         <span class="ruby-value str">&quot;Etc/GMT-12&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-12&quot;</span>,
+389:                         <span class="ruby-value str">&quot;Etc/GMT+12&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+12&quot;</span>,
+390:                         <span class="ruby-value str">&quot;Etc/GMT-13&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-13&quot;</span>,
+391:                         <span class="ruby-value str">&quot;Etc/GMT-14&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-14&quot;</span>,
+392:                         <span class="ruby-value str">&quot;Etc/GMT-2&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-2&quot;</span>,
+393:                         <span class="ruby-value str">&quot;Etc/GMT+2&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+2&quot;</span>,
+394:                         <span class="ruby-value str">&quot;Etc/GMT-3&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-3&quot;</span>,
+395:                         <span class="ruby-value str">&quot;Etc/GMT+3&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+3&quot;</span>,
+396:                         <span class="ruby-value str">&quot;Etc/GMT-4&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-4&quot;</span>,
+397:                         <span class="ruby-value str">&quot;Etc/GMT+4&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+4&quot;</span>,
+398:                         <span class="ruby-value str">&quot;Etc/GMT-5&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-5&quot;</span>,
+399:                         <span class="ruby-value str">&quot;Etc/GMT+5&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+5&quot;</span>,
+400:                         <span class="ruby-value str">&quot;Etc/GMT-6&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-6&quot;</span>,
+401:                         <span class="ruby-value str">&quot;Etc/GMT+6&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+6&quot;</span>,
+402:                         <span class="ruby-value str">&quot;Etc/GMT-7&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-7&quot;</span>,
+403:                         <span class="ruby-value str">&quot;Etc/GMT+7&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+7&quot;</span>,
+404:                         <span class="ruby-value str">&quot;Etc/GMT-8&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-8&quot;</span>,
+405:                         <span class="ruby-value str">&quot;Etc/GMT+8&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+8&quot;</span>,
+406:                         <span class="ruby-value str">&quot;Etc/GMT-9&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT-9&quot;</span>,
+407:                         <span class="ruby-value str">&quot;Etc/GMT+9&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT+9&quot;</span>,
+408:                         <span class="ruby-value str">&quot;Etc/Greenwich&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0&quot;</span>,
+409:                         <span class="ruby-value str">&quot;Etc/UCT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UCT0&quot;</span>,
+410:                         <span class="ruby-value str">&quot;Etc/Universal&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UTC0&quot;</span>,
+411:                         <span class="ruby-value str">&quot;Etc/UTC&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UTC0&quot;</span>,
+412:                         <span class="ruby-value str">&quot;Etc/Zulu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UTC0&quot;</span>,
+413:                         <span class="ruby-value str">&quot;Europe/Amsterdam&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+414:                         <span class="ruby-value str">&quot;Europe/Andorra&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+415:                         <span class="ruby-value str">&quot;Europe/Athens&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+416:                         <span class="ruby-value str">&quot;Europe/Belfast&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0BST,M3.5.0/1,M10.5.0&quot;</span>,
+417:                         <span class="ruby-value str">&quot;Europe/Belgrade&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+418:                         <span class="ruby-value str">&quot;Europe/Berlin&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+419:                         <span class="ruby-value str">&quot;Europe/Bratislava&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+420:                         <span class="ruby-value str">&quot;Europe/Brussels&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+421:                         <span class="ruby-value str">&quot;Europe/Bucharest&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+422:                         <span class="ruby-value str">&quot;Europe/Budapest&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+423:                         <span class="ruby-value str">&quot;Europe/Chisinau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+424:                         <span class="ruby-value str">&quot;Europe/Copenhagen&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+425:                         <span class="ruby-value str">&quot;Europe/Dublin&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0IST,M3.5.0/1,M10.5.0&quot;</span>,
+426:                         <span class="ruby-value str">&quot;Europe/Gibraltar&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+427:                         <span class="ruby-value str">&quot;Europe/Guernsey&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0BST,M3.5.0/1,M10.5.0&quot;</span>,
+428:                         <span class="ruby-value str">&quot;Europe/Helsinki&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+429:                         <span class="ruby-value str">&quot;Europe/Isle_of_Man&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0BST,M3.5.0/1,M10.5.0&quot;</span>,
+430:                         <span class="ruby-value str">&quot;Europe/Istanbul&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+431:                         <span class="ruby-value str">&quot;Europe/Jersey&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0BST,M3.5.0/1,M10.5.0&quot;</span>,
+432:                         <span class="ruby-value str">&quot;Europe/Kaliningrad&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0,M10.5.0/3&quot;</span>,
+433:                         <span class="ruby-value str">&quot;Europe/Kiev&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+434:                         <span class="ruby-value str">&quot;Europe/Lisbon&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WET0WEST,M3.5.0/1,M10.5.0&quot;</span>,
+435:                         <span class="ruby-value str">&quot;Europe/Ljubljana&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+436:                         <span class="ruby-value str">&quot;Europe/London&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GMT0BST,M3.5.0/1,M10.5.0&quot;</span>,
+437:                         <span class="ruby-value str">&quot;Europe/Luxembourg&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+438:                         <span class="ruby-value str">&quot;Europe/Madrid&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+439:                         <span class="ruby-value str">&quot;Europe/Malta&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+440:                         <span class="ruby-value str">&quot;Europe/Mariehamn&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+441:                         <span class="ruby-value str">&quot;Europe/Minsk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0,M10.5.0/3&quot;</span>,
+442:                         <span class="ruby-value str">&quot;Europe/Monaco&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+443:                         <span class="ruby-value str">&quot;Europe/Moscow&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MSK-3MSD,M3.5.0,M10.5.0/3&quot;</span>,
+444:                         <span class="ruby-value str">&quot;Europe/Nicosia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+445:                         <span class="ruby-value str">&quot;Europe/Oslo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+446:                         <span class="ruby-value str">&quot;Europe/Paris&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+447:                         <span class="ruby-value str">&quot;Europe/Podgorica&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+448:                         <span class="ruby-value str">&quot;Europe/Prague&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+449:                         <span class="ruby-value str">&quot;Europe/Riga&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+450:                         <span class="ruby-value str">&quot;Europe/Rome&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+451:                         <span class="ruby-value str">&quot;Europe/Samara&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SAMT-4SAMST,M3.5.0,M10.5.0/3&quot;</span>,
+452:                         <span class="ruby-value str">&quot;Europe/San_Marino&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+453:                         <span class="ruby-value str">&quot;Europe/Sarajevo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+454:                         <span class="ruby-value str">&quot;Europe/Simferopol&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+455:                         <span class="ruby-value str">&quot;Europe/Skopje&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+456:                         <span class="ruby-value str">&quot;Europe/Sofia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+457:                         <span class="ruby-value str">&quot;Europe/Stockholm&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+458:                         <span class="ruby-value str">&quot;Europe/Tallinn&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+459:                         <span class="ruby-value str">&quot;Europe/Tirane&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+460:                         <span class="ruby-value str">&quot;Europe/Tiraspol&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+461:                         <span class="ruby-value str">&quot;Europe/Uzhgorod&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+462:                         <span class="ruby-value str">&quot;Europe/Vaduz&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+463:                         <span class="ruby-value str">&quot;Europe/Vatican&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+464:                         <span class="ruby-value str">&quot;Europe/Vienna&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+465:                         <span class="ruby-value str">&quot;Europe/Vilnius&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+466:                         <span class="ruby-value str">&quot;Europe/Volgograd&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;VOLT-3VOLST,M3.5.0,M10.5.0/3&quot;</span>,
+467:                         <span class="ruby-value str">&quot;Europe/Warsaw&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+468:                         <span class="ruby-value str">&quot;Europe/Zagreb&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+469:                         <span class="ruby-value str">&quot;Europe/Zaporozhye&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EET-2EEST,M3.5.0/3,M10.5.0/4&quot;</span>,
+470:                         <span class="ruby-value str">&quot;Europe/Zurich&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>,
+471:                         <span class="ruby-value str">&quot;Indian/Antananarivo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+472:                         <span class="ruby-value str">&quot;Indian/Chagos&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;IOT-6&quot;</span>,
+473:                         <span class="ruby-value str">&quot;Indian/Christmas&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CXT-7&quot;</span>,
+474:                         <span class="ruby-value str">&quot;Indian/Cocos&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CCT-6:30&quot;</span>,
+475:                         <span class="ruby-value str">&quot;Indian/Comoro&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+476:                         <span class="ruby-value str">&quot;Indian/Kerguelen&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TFT-5&quot;</span>,
+477:                         <span class="ruby-value str">&quot;Indian/Mahe&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SCT-4&quot;</span>,
+478:                         <span class="ruby-value str">&quot;Indian/Maldives&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MVT-5&quot;</span>,
+479:                         <span class="ruby-value str">&quot;Indian/Mauritius&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MUT-4&quot;</span>,
+480:                         <span class="ruby-value str">&quot;Indian/Mayotte&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EAT-3&quot;</span>,
+481:                         <span class="ruby-value str">&quot;Indian/Reunion&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;RET-4&quot;</span>,
+482:                         <span class="ruby-value str">&quot;Mexico/BajaNorte&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M4.1.0,M10.5.0&quot;</span>,
+483:                         <span class="ruby-value str">&quot;Mexico/BajaSur&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M4.1.0,M10.5.0&quot;</span>,
+484:                         <span class="ruby-value str">&quot;Mexico/General&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M4.1.0,M10.5.0&quot;</span>,
+485:                         <span class="ruby-value str">&quot;Mideast/Riyadh87&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;zzz-3:07:04&quot;</span>,
+486:                         <span class="ruby-value str">&quot;Mideast/Riyadh88&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;zzz-3:07:04&quot;</span>,
+487:                         <span class="ruby-value str">&quot;Mideast/Riyadh89&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;zzz-3:07:04&quot;</span>,
+488:                         <span class="ruby-value str">&quot;Pacific/Apia&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WST11&quot;</span>,
+489:                         <span class="ruby-value str">&quot;Pacific/Auckland&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NZST-12NZDT,M9.5.0,M4.1.0/3&quot;</span>,
+490:                         <span class="ruby-value str">&quot;Pacific/Chatham&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CHAST-12:45CHADT,M9.5.0/2:45,M4.1.0/3:45&quot;</span>,
+491:                         <span class="ruby-value str">&quot;Pacific/Easter&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EASST&quot;</span>,
+492:                         <span class="ruby-value str">&quot;Pacific/Efate&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;VUT-11&quot;</span>,
+493:                         <span class="ruby-value str">&quot;Pacific/Enderbury&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PHOT-13&quot;</span>,
+494:                         <span class="ruby-value str">&quot;Pacific/Fakaofo&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TKT10&quot;</span>,
+495:                         <span class="ruby-value str">&quot;Pacific/Fiji&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;FJT-12&quot;</span>,
+496:                         <span class="ruby-value str">&quot;Pacific/Funafuti&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TVT-12&quot;</span>,
+497:                         <span class="ruby-value str">&quot;Pacific/Galapagos&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GALT6&quot;</span>,
+498:                         <span class="ruby-value str">&quot;Pacific/Gambier&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GAMT9&quot;</span>,
+499:                         <span class="ruby-value str">&quot;Pacific/Guadalcanal&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SBT-11&quot;</span>,
+500:                         <span class="ruby-value str">&quot;Pacific/Guam&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ChST-10&quot;</span>,
+501:                         <span class="ruby-value str">&quot;Pacific/Honolulu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HST10&quot;</span>,
+502:                         <span class="ruby-value str">&quot;Pacific/Johnston&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HST10&quot;</span>,
+503:                         <span class="ruby-value str">&quot;Pacific/Kiritimati&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;LINT-14&quot;</span>,
+504:                         <span class="ruby-value str">&quot;Pacific/Kosrae&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;KOST-11&quot;</span>,
+505:                         <span class="ruby-value str">&quot;Pacific/Kwajalein&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MHT-12&quot;</span>,
+506:                         <span class="ruby-value str">&quot;Pacific/Majuro&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MHT-12&quot;</span>,
+507:                         <span class="ruby-value str">&quot;Pacific/Marquesas&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MART9:30&quot;</span>,
+508:                         <span class="ruby-value str">&quot;Pacific/Midway&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SST11&quot;</span>,
+509:                         <span class="ruby-value str">&quot;Pacific/Nauru&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NRT-12&quot;</span>,
+510:                         <span class="ruby-value str">&quot;Pacific/Niue&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NUT11&quot;</span>,
+511:                         <span class="ruby-value str">&quot;Pacific/Norfolk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NFT-11:30&quot;</span>,
+512:                         <span class="ruby-value str">&quot;Pacific/Noumea&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;NCT-11&quot;</span>,
+513:                         <span class="ruby-value str">&quot;Pacific/Pago_Pago&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SST11&quot;</span>,
+514:                         <span class="ruby-value str">&quot;Pacific/Palau&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PWT-9&quot;</span>,
+515:                         <span class="ruby-value str">&quot;Pacific/Pitcairn&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8&quot;</span>,
+516:                         <span class="ruby-value str">&quot;Pacific/Ponape&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PONT-11&quot;</span>,
+517:                         <span class="ruby-value str">&quot;Pacific/Port_Moresby&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PGT-10&quot;</span>,
+518:                         <span class="ruby-value str">&quot;Pacific/Rarotonga&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CKT10&quot;</span>,
+519:                         <span class="ruby-value str">&quot;Pacific/Saipan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;ChST-10&quot;</span>,
+520:                         <span class="ruby-value str">&quot;Pacific/Samoa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SST11&quot;</span>,
+521:                         <span class="ruby-value str">&quot;Pacific/Tahiti&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TAHT10&quot;</span>,
+522:                         <span class="ruby-value str">&quot;Pacific/Tarawa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GILT-12&quot;</span>,
+523:                         <span class="ruby-value str">&quot;Pacific/Tongatapu&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TOT-13&quot;</span>,
+524:                         <span class="ruby-value str">&quot;Pacific/Truk&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TRUT-10&quot;</span>,
+525:                         <span class="ruby-value str">&quot;Pacific/Wake&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WAKT-12&quot;</span>,
+526:                         <span class="ruby-value str">&quot;Pacific/Wallis&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;WFT-12&quot;</span>,
+527:                         <span class="ruby-value str">&quot;Pacific/Yap&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;TRUT-10&quot;</span>,
+528:                         <span class="ruby-value str">&quot;SystemV/AST4&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4&quot;</span>,
+529:                         <span class="ruby-value str">&quot;SystemV/AST4ADT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AST4ADT,M3.2.0,M11.1.0&quot;</span>,
+530:                         <span class="ruby-value str">&quot;SystemV/CST6&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6&quot;</span>,
+531:                         <span class="ruby-value str">&quot;SystemV/CST6CDT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+532:                         <span class="ruby-value str">&quot;SystemV/EST5&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5&quot;</span>,
+533:                         <span class="ruby-value str">&quot;SystemV/EST5EDT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+534:                         <span class="ruby-value str">&quot;SystemV/HST10&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HST10&quot;</span>,
+535:                         <span class="ruby-value str">&quot;SystemV/MST7&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7&quot;</span>,
+536:                         <span class="ruby-value str">&quot;SystemV/MST7MDT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+537:                         <span class="ruby-value str">&quot;SystemV/PST8&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8&quot;</span>,
+538:                         <span class="ruby-value str">&quot;SystemV/PST8PDT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+539:                         <span class="ruby-value str">&quot;SystemV/YST9&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;GAMT9&quot;</span>,
+540:                         <span class="ruby-value str">&quot;SystemV/YST9YDT&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AKST9AKDT,M3.2.0,M11.1.0&quot;</span>,
+541:                         <span class="ruby-value str">&quot;US/Alaska&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;AKST9AKDT,M3.2.0,M11.1.0&quot;</span>,
+542:                         <span class="ruby-value str">&quot;US/Aleutian&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HAST10HADT,M3.2.0,M11.1.0&quot;</span>,
+543:                         <span class="ruby-value str">&quot;US/Arizona&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7&quot;</span>,
+544:                         <span class="ruby-value str">&quot;US/Central&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+545:                         <span class="ruby-value str">&quot;US/Eastern&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+546:                         <span class="ruby-value str">&quot;US/East-Indiana&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+547:                         <span class="ruby-value str">&quot;US/Hawaii&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;HST10&quot;</span>,
+548:                         <span class="ruby-value str">&quot;US/Indiana-Starke&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CST6CDT,M3.2.0,M11.1.0&quot;</span>,
+549:                         <span class="ruby-value str">&quot;US/Michigan&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;EST5EDT,M3.2.0,M11.1.0&quot;</span>,
+550:                         <span class="ruby-value str">&quot;US/Mountain&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;MST7MDT,M3.2.0,M11.1.0&quot;</span>,
+551:                         <span class="ruby-value str">&quot;US/Pacific&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;PST8PDT,M3.2.0,M11.1.0&quot;</span>,
+552:                         <span class="ruby-value str">&quot;US/Samoa&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SST11&quot;</span>,
+553:                 }
+554:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

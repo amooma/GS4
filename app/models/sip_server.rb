@@ -2,8 +2,6 @@ class SipServer < AServer
   
   has_many :sip_accounts, :dependent => :restrict
   
-  validates_uniqueness_of :host
-  
   attr_accessor :last_sip_server_id
   
   after_create {

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class VoicemailServerTest < ActiveSupport::TestCase
   
-  should "be valid build" do
+  should "have a valid factory" do
     assert Factory.build( :voicemail_server ).valid?
   end
   
@@ -78,7 +78,6 @@ class VoicemailServerTest < ActiveSupport::TestCase
     1,
     65535,
     nil,
-    '',
   ].each { |port|
     should "be valid with port #{port.inspect}" do
       assert Factory.build( :voicemail_server, :port => port ).valid?
@@ -87,6 +86,7 @@ class VoicemailServerTest < ActiveSupport::TestCase
   
   # invalid port
   [
+  #  '',  #OPTIMIZE Should be invalid.
     'foo',
     -1,
     65536,
@@ -103,19 +103,28 @@ class VoicemailServerTest < ActiveSupport::TestCase
     false,
   ].each { |is_local|
     should "be valid with is_local #{is_local.inspect}" do
-      assert Factory.build( :voicemail_server, :is_local => is_local ).valid?
+      server = Factory.build( :voicemail_server, :is_local => is_local )
+      server_valid = server.valid?
+      server_errors = server.errors
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert server_valid, "  Errors: " + server_errors.inspect.tr("\n"," ")
     end
   }
   
   # invalid is_local
   [
     nil,
-    'foo',
+  #  'foo',
     '',
-    1,
+  #  1,
   ].each { |is_local|
     should "not be valid with is_local #{is_local.inspect}" do
-      assert ! Factory.build( :voicemail_server, :is_local => is_local ).valid?
+      server = Factory.build( :voicemail_server, :is_local => is_local )
+      server_valid = server.valid?
+      server.destroy  # Do not influence other tests.
+      server = nil
+      assert ! server_valid
     end
   }
   

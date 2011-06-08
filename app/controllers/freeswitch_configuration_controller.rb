@@ -1,6 +1,6 @@
 class FreeswitchConfigurationController < ApplicationController
 	
-	#TODO Authentication. see FreeswitchDirectoryEntriesController / FreeswitchCallProcessingController.
+	#TODO Authentication. see FreeswitchDirectoryEntriesController / FreeswitchCallProcessingController. (=> pko)
 	
 	def load()
 		@local_ip = local_ip

@@ -37,17 +37,17 @@ class SipAccount < ActiveRecord::Base
     :message => "must not be set if the SIP account does not have a voicemail server."
   
   after_validation( :on => :create ) {
-    if (! self.sip_server_id.nil?) \
-    && (! self.sip_proxy_id.nil?) \
-    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
+    if (self.sip_server) \
+    && (self.sip_proxy) \
+    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil (=> pko) - #OPTIMIZE @sd: Has this been resolved by 0cb666c2d61092e92a7b79e3a6e3fb148308dccc? See Message-ID: <4DED6A74.1070002@amooma.de>, Date: Tue, 07 Jun 2011 02:01:56 +0200
       create_subscriber()
     end
   }
   
   after_validation( :on => :update ) {
-    if (! self.sip_server_id.nil?) \
-    && (! self.sip_proxy_id.nil?) \
-    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil
+    if (self.sip_server) \
+    && (self.sip_proxy) \
+    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil (=> pko) - #OPTIMIZE @sd: Has this been resolved by 0cb666c2d61092e92a7b79e3a6e3fb148308dccc? See Message-ID: <4DED6A74.1070002@amooma.de>, Date: Tue, 07 Jun 2011 02:01:56 +0200
       update_subscriber()
     else
       delete_subscriber()
@@ -89,7 +89,7 @@ class SipAccount < ActiveRecord::Base
   
   def delete_subscriber()
     if (! self.sip_proxy_id_was.nil?) \
-    && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local)  #FIXME self.sip_proxy can be nil
+    && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local)  #FIXME self.sip_proxy can be nil (=> pko)
       subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
       if subscriber_delete
         if ! subscriber_delete.destroy

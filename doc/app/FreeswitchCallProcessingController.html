@@ -81,6 +81,10 @@
 					
 					<li><a href="#method-i-actions">#actions</a></li>
 					
+					<li><a href="#method-i-check_valid_voicemail_box_destination">#check_valid_voicemail_box_destination</a></li>
+					
+					<li><a href="#method-i-find_call_forward">#find_call_forward</a></li>
+					
 					<li><a href="#method-i-percent_encode_re">#percent_encode_re</a></li>
 					
 					<li><a href="#method-i-sip_displayname_encode">#sip_displayname_encode</a></li>
@@ -151,7 +155,31 @@
 				
 					<li><a href="./AuthenticationsHelper.html">AuthenticationsHelper</a></li>
 				
+					<li><a href="./CallForward.html">CallForward</a></li>
+				
+					<li><a href="./CallForwardReason.html">CallForwardReason</a></li>
+				
+					<li><a href="./CallForwardsController.html">CallForwardsController</a></li>
+				
+					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
+				
+					<li><a href="./CallQueue.html">CallQueue</a></li>
+				
+					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
+				
+					<li><a href="./CallQueuesController.html">CallQueuesController</a></li>
+				
+					<li><a href="./CallQueuesHelper.html">CallQueuesHelper</a></li>
+				
 					<li><a href="./Codec.html">Codec</a></li>
+				
+					<li><a href="./Conference.html">Conference</a></li>
+				
+					<li><a href="./ConferenceToExtension.html">ConferenceToExtension</a></li>
+				
+					<li><a href="./ConferencesController.html">ConferencesController</a></li>
+				
+					<li><a href="./ConferencesHelper.html">ConferencesHelper</a></li>
 				
 					<li><a href="./ConnectionChecks.html">ConnectionChecks</a></li>
 				
@@ -162,6 +190,8 @@
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
 				
 					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
+				
+					<li><a href="./FreeswitchConfigurationController.html">FreeswitchConfigurationController</a></li>
 				
 					<li><a href="./FreeswitchDirectoryEntriesController.html">FreeswitchDirectoryEntriesController</a></li>
 				
@@ -184,6 +214,8 @@
 					<li><a href="./PagesHelper.html">PagesHelper</a></li>
 				
 					<li><a href="./Phone.html">Phone</a></li>
+				
+					<li><a href="./PhoneBookInternalUsersController.html">PhoneBookInternalUsersController</a></li>
 				
 					<li><a href="./PhoneKey.html">PhoneKey</a></li>
 				
@@ -218,12 +250,6 @@
 					<li><a href="./SipAccountsController.html">SipAccountsController</a></li>
 				
 					<li><a href="./SipAccountsHelper.html">SipAccountsHelper</a></li>
-				
-					<li><a href="./SipPhone.html">SipPhone</a></li>
-				
-					<li><a href="./SipPhonesController.html">SipPhonesController</a></li>
-				
-					<li><a href="./SipPhonesHelper.html">SipPhonesHelper</a></li>
 				
 					<li><a href="./SipProxiesController.html">SipProxiesController</a></li>
 				
@@ -324,6 +350,11 @@ href="http://wiki.freeswitch.org/wiki/Mod_logfile#Log_Levels">wiki.freeswitch.or
 				<dd class="description"></dd>
 				
 			
+				<dt><a name="CALL_FORWARD_REASONS_MAP">CALL_FORWARD_REASONS_MAP</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
 			</dl>
 		</div>
 		
@@ -362,11 +393,11 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="-arg-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 258</span>
-258:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_arg</span>( <span class="ruby-identifier">name</span> )
-259:                 <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
-260:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">query_parameters</span>[<span class="ruby-identifier">name</span>]
-261:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 334</span>
+334:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_arg</span>( <span class="ruby-identifier">name</span> )
+335:                 <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
+336:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">query_parameters</span>[<span class="ruby-identifier">name</span>]
+337:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -397,10 +428,10 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="-args-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 263</span>
-263:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_args</span>()
-264:                 <span class="ruby-keyword kw">return</span> (<span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)                          <span class="ruby-operator">?</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>                          <span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">query_parameters</span>
-265:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 339</span>
+339:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_args</span>()
+340:                 <span class="ruby-keyword kw">return</span> (<span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)                          <span class="ruby-operator">?</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_parameters</span>                          <span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">query_parameters</span>
+341:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -431,10 +462,10 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="-bold-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 269</span>
-269:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_bold</span>( <span class="ruby-identifier">str</span> )
-270:                 <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;\e[0;32;1m#{str} \e[0m &quot;</span>
-271:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 346</span>
+346:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_bold</span>( <span class="ruby-identifier">str</span> )
+347:                 <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;\e[0;32;1m#{str} \e[0m &quot;</span>
+348:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -465,11 +496,11 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="action-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 48</span>
-48:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action</span>( <span class="ruby-identifier">app</span>, <span class="ruby-identifier">data</span> = <span class="ruby-keyword kw">nil</span> )
-49:                 <span class="ruby-ivar">@dp_actions</span> = [] <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@dp_actions</span>  <span class="ruby-comment cmt"># the FreeSwitch dialplan actions</span>
-50:                 <span class="ruby-ivar">@dp_actions</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">app</span>, <span class="ruby-identifier">data</span> ]
-51:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 50</span>
+50:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action</span>( <span class="ruby-identifier">app</span>, <span class="ruby-identifier">data</span> = <span class="ruby-keyword kw">nil</span> )
+51:                 <span class="ruby-ivar">@dp_actions</span> = [] <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@dp_actions</span>  <span class="ruby-comment cmt"># the FreeSwitch dialplan actions</span>
+52:                 <span class="ruby-ivar">@dp_actions</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">app</span>, <span class="ruby-identifier">data</span> ]
+53:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -500,21 +531,21 @@ params array as it overrides the &#8220;action&#8221; arg.!
 					<div class="method-source-code"
 						id="action-log-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 33</span>
-33:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action_log</span>( <span class="ruby-identifier">level</span>, <span class="ruby-identifier">message</span> )
-34:                 <span class="ruby-identifier">log_level_fs</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">level</span>
-35:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_DEBUG</span>   ; <span class="ruby-value str">'DEBUG'</span>
-36:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_INFO</span>    ; <span class="ruby-value str">'INFO'</span>
-37:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_NOTICE</span>  ; <span class="ruby-value str">'NOTICE'</span>
-38:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_WARNING</span> ; <span class="ruby-value str">'WARNING'</span>
-39:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_ERROR</span>   ; <span class="ruby-value str">'ERR'</span>
-40:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_CRIT</span>    ; <span class="ruby-value str">'CRIT'</span>
-41:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_ALERT</span>   ; <span class="ruby-value str">'ALERT'</span>
-42:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_CONSOLE</span> ; <span class="ruby-value str">'CONSOLE'</span>
-43:                         <span class="ruby-keyword kw">else</span>                ; <span class="ruby-value str">'CONSOLE'</span>
-44:                 <span class="ruby-keyword kw">end</span>
-45:                 <span class="ruby-identifier">action</span> <span class="ruby-value">:log</span>, <span class="ruby-node">&quot;#{log_level_fs} ### [GS] #{message}&quot;</span>
-46:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 34</span>
+34:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action_log</span>( <span class="ruby-identifier">level</span>, <span class="ruby-identifier">message</span> )
+35:                 <span class="ruby-identifier">log_level_fs</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">level</span>
+36:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_DEBUG</span>   ; <span class="ruby-value str">'DEBUG'</span>
+37:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_INFO</span>    ; <span class="ruby-value str">'INFO'</span>
+38:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_NOTICE</span>  ; <span class="ruby-value str">'NOTICE'</span>
+39:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_WARNING</span> ; <span class="ruby-value str">'WARNING'</span>
+40:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_ERROR</span>   ; <span class="ruby-value str">'ERR'</span>
+41:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_CRIT</span>    ; <span class="ruby-value str">'CRIT'</span>
+42:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_ALERT</span>   ; <span class="ruby-value str">'ALERT'</span>
+43:                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FS_LOG_CONSOLE</span> ; <span class="ruby-value str">'CONSOLE'</span>
+44:                         <span class="ruby-keyword kw">else</span>                ; <span class="ruby-value str">'CONSOLE'</span>
+45:                 <span class="ruby-keyword kw">end</span>
+46:                 <span class="ruby-identifier">action</span> <span class="ruby-value">:log</span>, <span class="ruby-node">&quot;#{log_level_fs} ### [GS] #{message}&quot;</span>
+47:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -548,195 +579,374 @@ GET  /freeswitch-call-processing/actions.xml POST
 					<div class="method-source-code"
 						id="actions-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 55</span>
- 55:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">actions</span>()
- 56:         (
- 57:                 <span class="ruby-identifier">sip_call_id</span>           = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_call_id'</span> )
- 58:                 
- 59:                 <span class="ruby-identifier">src_sip_user</span>          = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_from_user'</span> )  <span class="ruby-comment cmt"># / var_sip_from_user_stripped ?</span>
- 60:                 
- 61:                 <span class="ruby-identifier">src_cid_sip_domain</span>    = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_from_host'</span> )
- 62:                 <span class="ruby-comment cmt">#src_sip_user          = _arg( 'Caller-Username' )</span>
- 63:                 <span class="ruby-identifier">src_cid_sip_user</span>      = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'Caller-Caller-ID-Number'</span> )
- 64:                 <span class="ruby-identifier">src_cid_sip_display</span>   = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_from_display'</span> )  <span class="ruby-comment cmt"># Caller-Caller-ID-Name is not always present</span>
- 65:                 
- 66:                 <span class="ruby-identifier">dst_sip_user</span>          = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'Caller-Destination-Number'</span> )  <span class="ruby-comment cmt"># / var_sip_req_user</span>
- 67:                 <span class="ruby-comment cmt">#dst_sip_domain        = _arg( 'var_sip_req_host' )</span>
- 68:                 <span class="ruby-identifier">dst_sip_domain</span>        = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_to_host'</span> )
- 69:                 
- 70:                 <span class="ruby-identifier">dst_sip_dnis_user</span>     = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_to_user'</span> )
- 71:                 <span class="ruby-comment cmt"># This is the number as dialed by the caller (before unaliasing in Kamailio).</span>
- 72:                 
- 73:                 <span class="ruby-comment cmt"># Strip &quot;-kambridge-&quot; prefix added in kamailio.cfg:</span>
- 74:                 <span class="ruby-identifier">dst_sip_user</span> = <span class="ruby-identifier">dst_sip_user</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/^-kambridge-/</span>, <span class="ruby-value str">''</span> )
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 72</span>
+ 72:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">actions</span>()
+ 73:         (
+ 74:                 <span class="ruby-identifier">sip_call_id</span>           = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_call_id'</span> )
  75:                 
- 76:                 <span class="ruby-identifier">dst_sip_user_real</span> = <span class="ruby-identifier">dst_sip_user</span>  <span class="ruby-comment cmt"># un-alias</span>
- 77:                 <span class="ruby-comment cmt"># (Alias lookup has already been done in kamailio.cfg.)</span>
- 78:                 
- 79:                 <span class="ruby-identifier">src_sip_account</span> = (
- 80:                         <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
- 81:                                 <span class="ruby-value">:auth_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src_sip_user</span>
- 82:                         })
- 83:                         .<span class="ruby-identifier">joins</span>( <span class="ruby-value">:sip_server</span> )
- 84:                         .<span class="ruby-identifier">where</span>( <span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
- 85:                                 <span class="ruby-value">:host</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src_cid_sip_domain</span>
- 86:                         })
- 87:                         .<span class="ruby-identifier">first</span> )
- 88:                 
- 89:                 <span class="ruby-identifier">dst_sip_account</span> = (
- 90:                         <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
- 91:                                 <span class="ruby-value">:auth_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dst_sip_user_real</span>
- 92:                         })
- 93:                         .<span class="ruby-identifier">joins</span>( <span class="ruby-value">:sip_server</span> )
- 94:                         .<span class="ruby-identifier">where</span>( <span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
- 95:                                 <span class="ruby-value">:host</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dst_sip_domain</span>
- 96:                         })
- 97:                         .<span class="ruby-identifier">first</span> )
+ 76:                 <span class="ruby-identifier">src_sip_user</span>          = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_from_user'</span> )  <span class="ruby-comment cmt"># / var_sip_from_user_stripped ?</span>
+ 77:                 
+ 78:                 <span class="ruby-identifier">src_cid_sip_domain</span>    = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_from_host'</span> )
+ 79:                 <span class="ruby-comment cmt">#src_sip_user          = _arg( 'Caller-Username' )</span>
+ 80:                 <span class="ruby-identifier">src_cid_sip_user</span>      = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'Caller-Caller-ID-Number'</span> )
+ 81:                 <span class="ruby-identifier">src_cid_sip_display</span>   = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_from_display'</span> )  <span class="ruby-comment cmt"># Caller-Caller-ID-Name is not always present</span>
+ 82:                 
+ 83:                 <span class="ruby-identifier">dst_sip_user</span>          = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'Caller-Destination-Number'</span> )  <span class="ruby-comment cmt"># / var_sip_req_user</span>
+ 84:                 <span class="ruby-comment cmt">#dst_sip_domain        = _arg( 'var_sip_req_host' )</span>
+ 85:                 <span class="ruby-identifier">dst_sip_domain</span>        = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_to_host'</span> )
+ 86:                 
+ 87:                 <span class="ruby-identifier">dst_sip_dnis_user</span>     = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_sip_to_user'</span> )
+ 88:                 <span class="ruby-comment cmt"># This is the number as dialed by the caller (before unaliasing in Kamailio).</span>
+ 89:                 
+ 90:                 <span class="ruby-comment cmt"># Strip &quot;-kambridge-&quot; prefix added in kamailio.cfg:</span>
+ 91:                 <span class="ruby-identifier">dst_sip_user</span> = <span class="ruby-identifier">dst_sip_user</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/^-kambridge-/</span>, <span class="ruby-value str">''</span> )
+ 92:                 
+ 93:                 <span class="ruby-identifier">dst_sip_user_real</span> = <span class="ruby-identifier">dst_sip_user</span>  <span class="ruby-comment cmt"># un-alias</span>
+ 94:                 <span class="ruby-comment cmt"># (Alias lookup has already been done in kamailio.cfg.)</span>
+ 95:                 
+ 96:                 <span class="ruby-identifier">call_disposition</span>      = <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'var_originate_disposition'</span> )
+ 97:                 
  98:                 
- 99:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] SIP Call-ID: #{sip_call_id}&quot;</span> ))
-100:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Call&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; from #{ sip_displayname_quote( src_cid_sip_display )}&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; &lt;#{ sip_user_encode( src_cid_sip_user )}@#{ src_cid_sip_domain }&gt;&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; (SIP acct. &quot;</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">src_sip_account</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;##{ src_sip_account.id }&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;unknown&quot;</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;)&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; to&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; alias &lt;#{ sip_user_encode( dst_sip_dnis_user )}&gt; -&gt;&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; &lt;#{ sip_user_encode( dst_sip_user )}@#{ dst_sip_domain }&gt;&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; (SIP acct. &quot;</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">dst_sip_account</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;##{ dst_sip_account.id }&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;unknown&quot;</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;)&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; ...&quot;</span>
-101:                 ))
-102:                 
-103:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">src_sip_account</span>
-104:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] Source account is #{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }&quot;</span> ))
-105:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set_user</span>, <span class="ruby-node">&quot;#{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }&quot;</span>
-106:                 <span class="ruby-keyword kw">end</span>
-107:                 
-108:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span>  <span class="ruby-comment cmt"># you may want to enable this during debugging</span>
-109:                         <span class="ruby-identifier">_args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-110:                                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">v</span>
-111:                                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>
-112:                                                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>( <span class="ruby-node">&quot;   #{k.ljust(36)} = #{v.inspect}&quot;</span> )
-113:                                         <span class="ruby-comment cmt">#when Hash  # not used (yet?)</span>
-114:                                         <span class="ruby-comment cmt">#  v.each { |k1,v1|</span>
-115:                                         <span class="ruby-comment cmt">#          logger.debug( &quot;   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}&quot; )</span>
-116:                                         <span class="ruby-comment cmt">#  }</span>
-117:                                 <span class="ruby-keyword kw">end</span>
-118:                         }
-119:                 <span class="ruby-keyword kw">end</span>
-120:                 
-121:                 
-122:                 <span class="ruby-comment cmt"># For FreeSwitch dialplan applications see</span>
-123:                 <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_dptools</span>
-124:                 <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Category:Dptools</span>
-125:                 
-126:                 <span class="ruby-comment cmt"># Note: If you want to do multiple iterations (requests) you</span>
-127:                 <span class="ruby-comment cmt"># have to set channel variables to keep track of &quot;where you</span>
-128:                 <span class="ruby-comment cmt"># are&quot; i.e. what you have done already.</span>
-129:                 <span class="ruby-comment cmt"># And you have to explicitly send &quot;_continue&quot; as the last</span>
-130:                 <span class="ruby-comment cmt"># application.</span>
-131:                                 
-132:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_user</span>.<span class="ruby-identifier">blank?</span>
-133:                         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'Answer-State'</span> )
-134:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'ringing'</span>
-135:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:respond</span>   , <span class="ruby-value str">'404 Not Found'</span>  <span class="ruby-comment cmt"># or '400 Bad Request'? or '484 Address Incomplete'?</span>
-136:                                 <span class="ruby-keyword kw">else</span>
-137:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:hangup</span>    , <span class="ruby-value str">''</span>
-138:                         <span class="ruby-keyword kw">end</span>
-139:                 <span class="ruby-keyword kw">else</span> (
-140:                         <span class="ruby-comment cmt"># Here's an example: {</span>
-141:                         <span class="ruby-comment cmt">#action :set       , 'effective_caller_id_number=1234567'</span>
-142:                         <span class="ruby-comment cmt">#action :bridge    , &quot;sofia/internal/#{dst_sip_user_real}&quot;</span>
-143:                         <span class="ruby-comment cmt">#action :answer</span>
-144:                         <span class="ruby-comment cmt">#action :sleep     , 1000</span>
-145:                         <span class="ruby-comment cmt">#action :playback  , 'tone_stream://%(500, 0, 640)'</span>
-146:                         <span class="ruby-comment cmt">#action :set       , 'voicemail_authorized=${sip_authorized}'</span>
-147:                         <span class="ruby-comment cmt">#action :voicemail , &quot;default $${domain} #{dst_sip_user_real}&quot;</span>
-148:                         <span class="ruby-comment cmt">#action :hangup</span>
-149:                         <span class="ruby-comment cmt">#action :_continue</span>
-150:                         <span class="ruby-comment cmt"># end of example }</span>
-151:                         
-152:                         
-153:                         
-154:                         <span class="ruby-comment cmt"># Caller-ID:</span>
-155:                         <span class="ruby-comment cmt"># Note: P-Asserted-Identity is set in Kamailio.</span>
-156:                         <span class="ruby-comment cmt">#</span>
-157:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-value str">&quot;sip_cid_type=none&quot;</span>  <span class="ruby-comment cmt"># do not send P-Asserted-Identity</span>
-158:                         
-159:                         <span class="ruby-identifier">clir</span> = <span class="ruby-keyword kw">false</span>  <span class="ruby-comment cmt">#OPTIMIZE Read from SIP account.</span>
-160:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">clir</span>
-161:                                 <span class="ruby-identifier">cid_display</span> = <span class="ruby-identifier">src_sip_account</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">src_sip_account</span>.<span class="ruby-identifier">caller_name</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;[?] #{src_cid_sip_display}&quot;</span>
-162:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">src_sip_account</span>
-163:                                         <span class="ruby-identifier">extensions</span> = <span class="ruby-identifier">src_sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> )
-164:                                         <span class="ruby-identifier">preferred_extension</span> = <span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">first</span>  <span class="ruby-comment cmt">#OPTIMIZE Depends on the gateway.</span>
-165:                                         <span class="ruby-identifier">cid_user</span> = <span class="ruby-identifier">preferred_extension</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{preferred_extension.extension}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'anonymous'</span>
-166:                                 <span class="ruby-keyword kw">else</span>
-167:                                         <span class="ruby-identifier">cid_user</span> = <span class="ruby-node">&quot;#{src_sip_user}&quot;</span>
-168:                                 <span class="ruby-keyword kw">end</span>
-169:                                 <span class="ruby-identifier">cid_host</span>    = <span class="ruby-node">&quot;#{dst_sip_domain}&quot;</span>  <span class="ruby-comment cmt">#OPTIMIZE</span>
-170:                         <span class="ruby-keyword kw">else</span>
-171:                                 <span class="ruby-identifier">cid_display</span> = <span class="ruby-value str">&quot;Anonymous&quot;</span>  <span class="ruby-comment cmt"># RFC 2543, RFC 3325</span>
-172:                                 <span class="ruby-identifier">cid_user</span>    = <span class="ruby-value str">'anonymous'</span>  <span class="ruby-comment cmt"># RFC 2543, RFC 3325</span>
-173:                                 <span class="ruby-identifier">cid_host</span>    = <span class="ruby-value str">&quot;anonymous.invalid&quot;</span>  <span class="ruby-comment cmt"># or &quot;127.0.0.1&quot;</span>
-174:                         <span class="ruby-keyword kw">end</span>
-175:                         
-176:                         <span class="ruby-comment cmt"># RFC 2543:</span>
-177:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;effective_caller_id_number=#{ sip_user_encode( cid_user )}&quot;</span>
-178:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;effective_caller_id_name=#{ sip_displayname_encode( cid_display )}&quot;</span>
-179:                         <span class="ruby-comment cmt"># RFC 3325:</span>
-180:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} &lt;sip:#{ sip_user_encode( cid_user )}@#{ cid_host }&gt;&quot;</span>
-181:                         <span class="ruby-comment cmt"># RFC 3325, RFC 3323:</span>
-182:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-value str">&quot;sip_h_Privacy=&quot;</span> <span class="ruby-operator">&lt;&lt;</span> ((<span class="ruby-operator">!</span><span class="ruby-identifier">clir</span>) <span class="ruby-operator">?</span> <span class="ruby-value str">'none'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'id;header'</span>)
-183:                         
-184:                         
-185:                         <span class="ruby-comment cmt"># Call-forwardings:</span>
-186:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_account</span>
-187:                                 <span class="ruby-comment cmt">#OPTIMIZE Implement call-forwardings here ...</span>
-188:                         <span class="ruby-keyword kw">end</span>
+ 99:                 <span class="ruby-identifier">src_sip_account</span> = <span class="ruby-keyword kw">nil</span>
+100:                 <span class="ruby-identifier">dst_sip_account</span> = <span class="ruby-keyword kw">nil</span>
+101:                 <span class="ruby-identifier">dst_conference</span>  = <span class="ruby-keyword kw">nil</span>
+102:                 <span class="ruby-identifier">dst_queue</span>       = <span class="ruby-keyword kw">nil</span>
+103:                 
+104:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">src_sip_user</span>.<span class="ruby-identifier">blank?</span>
+105:                         <span class="ruby-identifier">src_sip_account</span> = (
+106:                                 <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
+107:                                         <span class="ruby-value">:auth_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src_sip_user</span>
+108:                                 })
+109:                                 .<span class="ruby-identifier">joins</span>( <span class="ruby-value">:sip_server</span> )
+110:                                 .<span class="ruby-identifier">where</span>( <span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
+111:                                         <span class="ruby-value">:host</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src_cid_sip_domain</span>
+112:                                 })
+113:                                 .<span class="ruby-identifier">first</span> )
+114:                 <span class="ruby-keyword kw">end</span>
+115:                 
+116:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dst_sip_user_real</span>.<span class="ruby-identifier">blank?</span>
+117:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_user_real</span>.<span class="ruby-identifier">match</span>( <span class="ruby-regexp re">/^-conference-.*/</span> )
+118:                                 <span class="ruby-identifier">dst_conference</span> = (
+119:                                         <span class="ruby-constant">Conference</span>.<span class="ruby-identifier">where</span>({
+120:                                                 <span class="ruby-value">:uuid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dst_sip_user_real</span>
+121:                                         })
+122:                                         .<span class="ruby-identifier">first</span> )
+123:                         <span class="ruby-keyword kw">else</span>
+124:                                 <span class="ruby-identifier">dst_sip_account</span> = (
+125:                                         <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">where</span>({
+126:                                                 <span class="ruby-value">:auth_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dst_sip_user_real</span>
+127:                                         })
+128:                                         .<span class="ruby-identifier">joins</span>( <span class="ruby-value">:sip_server</span> )
+129:                                         .<span class="ruby-identifier">where</span>( <span class="ruby-value">:sip_servers</span> =<span class="ruby-operator">&gt;</span> {
+130:                                                 <span class="ruby-value">:host</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dst_sip_domain</span>
+131:                                         })
+132:                                         .<span class="ruby-identifier">first</span> )
+133:                         <span class="ruby-keyword kw">end</span>
+134:                 <span class="ruby-keyword kw">end</span>
+135:                 
+136:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] SIP Call-ID: #{sip_call_id}&quot;</span> ))
+137:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-value str">&quot;[FS] Call&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; from #{ sip_displayname_quote( src_cid_sip_display )}&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; &lt;#{ sip_user_encode( src_cid_sip_user )}@#{ src_cid_sip_domain }&gt;&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; (SIP acct. &quot;</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">src_sip_account</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;##{ src_sip_account.id }&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;unknown&quot;</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;)&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; to&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; alias &lt;#{ sip_user_encode( dst_sip_dnis_user )}&gt; -&gt;&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; &lt;#{ sip_user_encode( dst_sip_user )}@#{ dst_sip_domain }&gt;&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; (SIP acct. &quot;</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">dst_sip_account</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;##{ dst_sip_account.id }&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;unknown&quot;</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;)&quot;</span>                          <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; ...&quot;</span>
+138:                 ))
+139:                 
+140:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">src_sip_account</span>
+141:                         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] Source account is #{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }&quot;</span> ))
+142:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set_user</span>, <span class="ruby-node">&quot;#{ sip_user_encode( src_sip_user )}@#{ src_cid_sip_domain }&quot;</span>
+143:                 <span class="ruby-keyword kw">end</span>
+144:                 
+145:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span>  <span class="ruby-comment cmt"># you may want to enable this during debugging</span>
+146:                         <span class="ruby-identifier">_args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+147:                                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">v</span>
+148:                                         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>
+149:                                                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>( <span class="ruby-node">&quot;   #{k.ljust(36)} = #{v.inspect}&quot;</span> )
+150:                                         <span class="ruby-comment cmt">#when Hash  # not used (yet?)</span>
+151:                                         <span class="ruby-comment cmt">#  v.each { |k1,v1|</span>
+152:                                         <span class="ruby-comment cmt">#          logger.debug( &quot;   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}&quot; )</span>
+153:                                         <span class="ruby-comment cmt">#  }</span>
+154:                                 <span class="ruby-keyword kw">end</span>
+155:                         }
+156:                 <span class="ruby-keyword kw">end</span>
+157:                 
+158:                 
+159:                 <span class="ruby-comment cmt"># For FreeSwitch dialplan applications see</span>
+160:                 <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Mod_dptools</span>
+161:                 <span class="ruby-comment cmt"># http://wiki.freeswitch.org/wiki/Category:Dptools</span>
+162:                 
+163:                 <span class="ruby-comment cmt"># Note: If you want to do multiple iterations (requests) you</span>
+164:                 <span class="ruby-comment cmt"># have to set channel variables to keep track of &quot;where you</span>
+165:                 <span class="ruby-comment cmt"># are&quot; i.e. what you have done already.</span>
+166:                 <span class="ruby-comment cmt"># And you have to explicitly send &quot;_continue&quot; as the last</span>
+167:                 <span class="ruby-comment cmt"># application.</span>
+168:                 
+169:                 
+170:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_user</span>   .<span class="ruby-identifier">blank?</span>                  <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">dst_conference</span> .<span class="ruby-identifier">blank?</span>
+171:                         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">_arg</span>( <span class="ruby-value str">'Answer-State'</span> )
+172:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'ringing'</span>
+173:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:respond</span>   , <span class="ruby-value str">'404 Not Found'</span>  <span class="ruby-comment cmt"># or '400 Bad Request'? or '484 Address Incomplete'?</span>
+174:                                 <span class="ruby-keyword kw">else</span>
+175:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:hangup</span>    , <span class="ruby-value str">''</span>
+176:                         <span class="ruby-keyword kw">end</span>
+177:                 <span class="ruby-keyword kw">else</span> (
+178:                         <span class="ruby-comment cmt"># Here's an example: {</span>
+179:                         <span class="ruby-comment cmt">#action :set       , 'effective_caller_id_number=1234567'</span>
+180:                         <span class="ruby-comment cmt">#action :bridge    , &quot;sofia/internal/#{dst_sip_user_real}&quot;</span>
+181:                         <span class="ruby-comment cmt">#action :answer</span>
+182:                         <span class="ruby-comment cmt">#action :sleep     , 1000</span>
+183:                         <span class="ruby-comment cmt">#action :playback  , 'tone_stream://%(500, 0, 640)'</span>
+184:                         <span class="ruby-comment cmt">#action :set       , 'voicemail_authorized=${sip_authorized}'</span>
+185:                         <span class="ruby-comment cmt">#action :voicemail , &quot;default $${domain} #{dst_sip_user_real}&quot;</span>
+186:                         <span class="ruby-comment cmt">#action :hangup</span>
+187:                         <span class="ruby-comment cmt">#action :_continue</span>
+188:                         <span class="ruby-comment cmt"># end of example }</span>
 189:                         
-190:                         <span class="ruby-comment cmt"># Ring the SIP user via Kamailio for 30 seconds:</span>
-191:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_account</span>
-192:                                 <span class="ruby-identifier">action_log</span>( <span class="ruby-constant">FS_LOG_INFO</span>, <span class="ruby-node">&quot;Calling #{dst_sip_user_real} ...&quot;</span> )
-193:                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>       , <span class="ruby-value str">&quot;call_timeout=30&quot;</span>  <span class="ruby-comment cmt">#OPTIMIZE Read from CF-after-timeout</span>
-194:                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:export</span>    , <span class="ruby-value str">&quot;sip_contact_user=ufs&quot;</span>
-195:                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:bridge</span>    , <span class="ruby-node">&quot;sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060&quot;</span>
-196:                         <span class="ruby-keyword kw">end</span>
-197:                         
-198:                         <span class="ruby-comment cmt"># Call-forwardings:</span>
-199:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_account</span>
-200:                                 <span class="ruby-comment cmt">#OPTIMIZE Implement call-forward on busy/unavailable here ...</span>
-201:                         <span class="ruby-keyword kw">end</span>
-202:                         
-203:                         <span class="ruby-comment cmt"># Go to voicemail:</span>
-204:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_account</span>
-205:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dst_sip_account</span>.<span class="ruby-identifier">voicemail_server</span>
-206:                                         <span class="ruby-identifier">action_log</span>( <span class="ruby-constant">FS_LOG_INFO</span>, <span class="ruby-node">&quot;SIP account #{dst_sip_user_real} doesn't have a voicemail server.&quot;</span> )
-207:                                 <span class="ruby-keyword kw">else</span>
-208:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dst_sip_account</span>.<span class="ruby-identifier">voicemail_server</span>.<span class="ruby-identifier">is_local</span>
-209:                                                 <span class="ruby-identifier">action_log</span>( <span class="ruby-constant">FS_LOG_INFO</span>, <span class="ruby-node">&quot;Voicemail server of SIP account #{dst_sip_user_real} isn't local.&quot;</span> )
-210:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:respond</span>, <span class="ruby-value str">&quot;480 No voicemail here&quot;</span>  <span class="ruby-comment cmt">#OPTIMIZE</span>
-211:                                         <span class="ruby-keyword kw">else</span>
-212:                                                 <span class="ruby-comment cmt">#if dst_sip_account.voicemail_server.host != dst_sip_domain</span>
-213:                                                 <span class="ruby-comment cmt"># action_log( FS_LOG_INFO, &quot;Voicemail server of SIP account #{dst_sip_user_real} is local but #{dst_sip_account.voicemail_server.host.inspect} != #{dst_sip_domain.inspect}.&quot; )</span>
-214:                                                 <span class="ruby-comment cmt"># action :respond, &quot;480 No voicemail here&quot;  #OPTIMIZE</span>
-215:                                                 <span class="ruby-comment cmt">#else</span>
-216:                                                         <span class="ruby-identifier">action_log</span>( <span class="ruby-constant">FS_LOG_INFO</span>, <span class="ruby-node">&quot;Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ...&quot;</span> )
-217:                                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:answer</span>
-218:                                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:sleep</span>, <span class="ruby-value">250</span>
-219:                                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;voicemail_alternate_greet_id=#{ sip_user_encode( dst_sip_dnis_user )}&quot;</span>
-220:                                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:voicemail</span>, <span class="ruby-node">&quot;default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}&quot;</span>
-221:                                                 <span class="ruby-comment cmt">#end</span>
-222:                                         <span class="ruby-keyword kw">end</span>
-223:                                 <span class="ruby-keyword kw">end</span>
-224:                         <span class="ruby-keyword kw">end</span>
-225:                         
-226:                         
-227:                         <span class="ruby-identifier">action</span> <span class="ruby-value">:hangup</span>
-228:                         
-229:                 )<span class="ruby-keyword kw">end</span>
-230:                 
-231:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-232:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
-233:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:actions</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
-234:                         }
-235:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
-236:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
-237:                                         <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
-238:                                         <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
-239:                         }
-240:                 }
-241:                 <span class="ruby-keyword kw">return</span>
-242:         )<span class="ruby-keyword kw">end</span></pre>
+190:                         
+191:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_disposition</span>.<span class="ruby-identifier">blank?</span>; (
+192:                                 <span class="ruby-comment cmt"># We didn't try to call the SIP account yet.</span>
+193:                                 
+194:                                 <span class="ruby-comment cmt"># Check unconditional call-forwarding (&quot;always&quot;):</span>
+195:                                 <span class="ruby-comment cmt">#</span>
+196:                                 <span class="ruby-identifier">call_forward_always</span>    = <span class="ruby-identifier">find_call_forward</span>( <span class="ruby-identifier">dst_sip_account</span>, <span class="ruby-value">:always</span>    , <span class="ruby-identifier">src_cid_sip_user</span> )
+197:                                 <span class="ruby-identifier">call_forward_assistant</span> = <span class="ruby-identifier">find_call_forward</span>( <span class="ruby-identifier">dst_sip_account</span>, <span class="ruby-value">:assistant</span> , <span class="ruby-identifier">src_cid_sip_user</span> )
+198:                                 
+199:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward_always</span>; (
+200:                                         <span class="ruby-comment cmt"># We have an unconditional call-forward.</span>
+201:                                         
+202:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward_always</span>.<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>
+203:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:respond</span>, <span class="ruby-value str">&quot;480 Blacklisted&quot;</span>
+204:                                         <span class="ruby-keyword kw">else</span>
+205:                                                 <span class="ruby-identifier">check_valid_voicemail_box_destination</span>( <span class="ruby-identifier">call_forward_always</span>.<span class="ruby-identifier">destination</span> )
+206:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:transfer</span>, <span class="ruby-node">&quot;#{sip_user_encode( call_forward_always.destination )} XML default&quot;</span>
+207:                                         <span class="ruby-keyword kw">end</span>
+208:                                         
+209:                                 )
+210:                                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">call_forward_assistant</span>; (
+211:                                         
+212:                                         <span class="ruby-identifier">assistant_sip_user</span> = <span class="ruby-constant">Extension</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:extension</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{call_forward_assistant.destination}&quot;</span> ).<span class="ruby-identifier">first</span>
+213:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">assistant_sip_user</span>
+214:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:export</span>, <span class="ruby-node">&quot;alert_info=http://www.notused.com;info=#{dst_sip_user_real};x-line-id=0&quot;</span>
+215:                                                 <span class="ruby-comment cmt">#OPTIMIZE If it's ignored then don't use a registered DNS name but something like &quot;localhost&quot;.</span>
+216:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:bridge</span>, <span class="ruby-node">&quot;sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060,sofia/internal/#{sip_user_encode( assistant_sip_user.destination )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060&quot;</span>
+217:                                         <span class="ruby-keyword kw">end</span>
+218:                                         
+219:                                 )
+220:                                 <span class="ruby-keyword kw">else</span> (
+221:                                         <span class="ruby-comment cmt"># Call the SIP account.</span>
+222:                                         
+223:                                         <span class="ruby-comment cmt"># Caller-ID:</span>
+224:                                         <span class="ruby-comment cmt"># Note: P-Asserted-Identity is set in Kamailio.</span>
+225:                                         <span class="ruby-comment cmt">#</span>
+226:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-value str">&quot;sip_cid_type=none&quot;</span>  <span class="ruby-comment cmt"># do not send P-Asserted-Identity</span>
+227:                                         
+228:                                         <span class="ruby-identifier">clir</span> = <span class="ruby-keyword kw">false</span>  <span class="ruby-comment cmt">#OPTIMIZE Read from SIP account.</span>
+229:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">clir</span>
+230:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">src_sip_account</span>
+231:                                                         <span class="ruby-identifier">cid_display</span> = <span class="ruby-identifier">src_sip_account</span>.<span class="ruby-identifier">caller_name</span>
+232:                                                         <span class="ruby-identifier">extensions</span>  = <span class="ruby-identifier">src_sip_account</span>.<span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> )
+233:                                                         <span class="ruby-identifier">preferred_extension</span> = <span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">first</span>  <span class="ruby-comment cmt">#OPTIMIZE Depends on the gateway.</span>
+234:                                                         <span class="ruby-identifier">cid_user</span>    = <span class="ruby-identifier">preferred_extension</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{preferred_extension.extension}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'anonymous'</span>
+235:                                                 <span class="ruby-keyword kw">else</span>
+236:                                                         <span class="ruby-identifier">cid_display</span> = <span class="ruby-node">&quot;[?] #{src_cid_sip_display}&quot;</span>
+237:                                                         <span class="ruby-identifier">cid_user</span>    = <span class="ruby-node">&quot;#{src_sip_user}&quot;</span>
+238:                                                 <span class="ruby-keyword kw">end</span>
+239:                                                 <span class="ruby-identifier">cid_host</span>    = <span class="ruby-node">&quot;#{dst_sip_domain}&quot;</span>  <span class="ruby-comment cmt">#OPTIMIZE</span>
+240:                                         <span class="ruby-keyword kw">else</span>
+241:                                                 <span class="ruby-identifier">cid_display</span> = <span class="ruby-value str">&quot;Anonymous&quot;</span>  <span class="ruby-comment cmt"># RFC 2543, RFC 3325</span>
+242:                                                 <span class="ruby-identifier">cid_user</span>    = <span class="ruby-value str">'anonymous'</span>  <span class="ruby-comment cmt"># RFC 2543, RFC 3325</span>
+243:                                                 <span class="ruby-identifier">cid_host</span>    = <span class="ruby-value str">&quot;anonymous.invalid&quot;</span>  <span class="ruby-comment cmt"># or &quot;127.0.0.1&quot;</span>
+244:                                         <span class="ruby-keyword kw">end</span>
+245:                                         
+246:                                         <span class="ruby-comment cmt"># RFC 2543:</span>
+247:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;effective_caller_id_number=#{ sip_user_encode( cid_user )}&quot;</span>
+248:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;effective_caller_id_name=#{ sip_displayname_encode( cid_display )}&quot;</span>
+249:                                         <span class="ruby-comment cmt"># RFC 3325:</span>
+250:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-node">&quot;sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} &lt;sip:#{ sip_user_encode( cid_user )}@#{ cid_host }&gt;&quot;</span>
+251:                                         <span class="ruby-comment cmt"># RFC 3325, RFC 3323:</span>
+252:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>, <span class="ruby-value str">&quot;sip_h_Privacy=&quot;</span> <span class="ruby-operator">&lt;&lt;</span> ((<span class="ruby-operator">!</span><span class="ruby-identifier">clir</span>) <span class="ruby-operator">?</span> <span class="ruby-value str">'none'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'id;header'</span>)
+253:                                         
+254:                                         
+255:                                         <span class="ruby-comment cmt"># Get timeout from call-forward on timeout (&quot;noanswer&quot;):</span>
+256:                                         <span class="ruby-comment cmt">#</span>
+257:                                         <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">find_call_forward</span>( <span class="ruby-identifier">dst_sip_account</span>, <span class="ruby-value">:noanswer</span>, <span class="ruby-identifier">src_cid_sip_user</span> )
+258:                                         <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">call_forward</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">call_timeout</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">30</span>
+259:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>; <span class="ruby-identifier">timeout</span> = <span class="ruby-value">1</span>; <span class="ruby-keyword kw">end</span>
+260:                                         
+261:                                         <span class="ruby-comment cmt"># Ring the SIP user via Kamailio:</span>
+262:                                         <span class="ruby-comment cmt">#</span>
+263:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dst_sip_account</span> 
+264:                                                 <span class="ruby-identifier">action_log</span>( <span class="ruby-constant">FS_LOG_INFO</span>, <span class="ruby-node">&quot;Calling SIP account #{dst_sip_user_real} ...&quot;</span> )
+265:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:set</span>       , <span class="ruby-node">&quot;call_timeout=#{timeout}&quot;</span>
+266:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:export</span>    , <span class="ruby-value str">&quot;sip_contact_user=ufs&quot;</span>
+267:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:bridge</span>    , <span class="ruby-node">&quot;sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060&quot;</span>
+268:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:_continue</span>
+269:                                         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">dst_conference</span>
+270:                                                 <span class="ruby-identifier">action_log</span>( <span class="ruby-constant">FS_LOG_INFO</span>, <span class="ruby-node">&quot;Calling conference #{dst_sip_user_real} ...&quot;</span> )
+271:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:conference</span>        , <span class="ruby-node">&quot;#{sip_user_encode( dst_conference.uuid )}@default+#{sip_user_encode( dst_conference.pin )}&quot;</span>
+272:                                         <span class="ruby-keyword kw">end</span>
+273:                                                                                 
+274:                                 )<span class="ruby-keyword kw">end</span>
+275:                                 
+276:                         ) <span class="ruby-keyword kw">else</span> (
+277:                                 <span class="ruby-comment cmt"># We have already tried to call the SIP account but it failed.</span>
+278:                                 
+279:                                 <span class="ruby-identifier">call_forward_reason</span> = <span class="ruby-constant">CALL_FORWARD_REASONS_MAP</span>[ <span class="ruby-identifier">call_disposition</span> ]
+280:                                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">_bold</span>( <span class="ruby-node">&quot;[FS] Bridge disposition: #{call_disposition.inspect} =&gt; #{call_forward_reason.inspect}&quot;</span> ))
+281:                                 
+282:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward_reason</span>
+283:                                         
+284:                                         <span class="ruby-comment cmt"># Check call-forwards on busy (&quot;busy&quot;) / unavailable (&quot;noanswer&quot;) / offline (&quot;offline&quot;):</span>
+285:                                         <span class="ruby-comment cmt">#</span>
+286:                                         <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">find_call_forward</span>( <span class="ruby-identifier">dst_sip_account</span>, <span class="ruby-identifier">call_forward_reason</span>, <span class="ruby-identifier">src_cid_sip_user</span> )
+287:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward</span>
+288:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>
+289:                                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:respond</span>, <span class="ruby-value str">&quot;480 Blacklisted&quot;</span>
+290:                                                 <span class="ruby-keyword kw">else</span>
+291:                                                         <span class="ruby-identifier">check_valid_voicemail_box_destination</span>( <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span> )
+292:                                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:transfer</span>, <span class="ruby-node">&quot;#{sip_user_encode( call_forward.destination )} XML default&quot;</span>
+293:                                                 <span class="ruby-keyword kw">end</span>
+294:                                         <span class="ruby-keyword kw">else</span>
+295:                                                 <span class="ruby-identifier">action</span> <span class="ruby-value">:hangup</span>
+296:                                         <span class="ruby-keyword kw">end</span>
+297:                                 <span class="ruby-keyword kw">else</span>
+298:                                         <span class="ruby-identifier">action</span> <span class="ruby-value">:hangup</span>
+299:                                 <span class="ruby-keyword kw">end</span>
+300:                                 
+301:                         )<span class="ruby-keyword kw">end</span>
+302:                         
+303:                 )<span class="ruby-keyword kw">end</span>
+304:                 
+305:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+306:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> {
+307:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:actions</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+308:                         }
+309:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">all</span> {
+310:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'406 Not Acceptable'</span>,
+311:                                         <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+312:                                         <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&lt;!-- Only XML format is supported. --&gt;&quot;</span>
+313:                         }
+314:                 }
+315:                 <span class="ruby-keyword kw">return</span>
+316:         )<span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="check-valid-voicemail-box-destination-method" class="method-detail ">
+				<a name="method-i-check_valid_voicemail_box_destination"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check_valid_voicemail_box_destination</span><span
+						class="method-args">( destination )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="check-valid-voicemail-box-destination-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 469</span>
+469:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_valid_voicemail_box_destination</span>( <span class="ruby-identifier">destination</span> )
+470:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">match</span>( <span class="ruby-regexp re">/^-vbox-/</span> )
+471:                         <span class="ruby-identifier">vbox_sip_user</span> = <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/^-vbox-/</span>, <span class="ruby-value str">''</span> )  <span class="ruby-comment cmt"># this is a SIP account's auth_name</span>
+472:                         <span class="ruby-comment cmt">#OPTIMIZE Where's the destination's domain?</span>
+473:                         
+474:                         <span class="ruby-comment cmt">#TODO Check that the SIP account referenced by &quot;-vbox-...&quot; actually</span>
+475:                         <span class="ruby-comment cmt"># has a voicemail_server etc.</span>
+476:                         
+477:                         <span class="ruby-comment cmt">#if dst_sip_account</span>
+478:                         <span class="ruby-comment cmt">#    if ! dst_sip_account.voicemail_server</span>
+479:                         <span class="ruby-comment cmt">#            action_log( FS_LOG_INFO, &quot;SIP account #{dst_sip_user_real} doesn't have a voicemail server.&quot; )</span>
+480:                         <span class="ruby-comment cmt">#    else</span>
+481:                         <span class="ruby-comment cmt">#            if ! dst_sip_account.voicemail_server.is_local</span>
+482:                         <span class="ruby-comment cmt">#                    action_log( FS_LOG_INFO, &quot;Voicemail server of SIP account #{dst_sip_user_real} isn't local.&quot; )</span>
+483:                         <span class="ruby-comment cmt">#                    action :respond, &quot;480 No voicemail here&quot;  #OPTIMIZE</span>
+484:                         <span class="ruby-comment cmt">#            else</span>
+485:                         <span class="ruby-comment cmt">#                    #if dst_sip_account.voicemail_server.host != dst_sip_domain</span>
+486:                         <span class="ruby-comment cmt">#                    #        action_log( FS_LOG_INFO, &quot;Voicemail server of SIP account #{dst_sip_user_real} is local but #{dst_sip_account.voicemail_server.host.inspect} != #{dst_sip_domain.inspect}.&quot; )</span>
+487:                         <span class="ruby-comment cmt">#                    #        action :respond, &quot;480 No voicemail here&quot;  #OPTIMIZE</span>
+488:                         <span class="ruby-comment cmt">#                    #else</span>
+489:                         <span class="ruby-comment cmt">#                            action_log( FS_LOG_INFO, &quot;Going to voicemail for #{dst_sip_user_real}@#{dst_sip_domain} ...&quot; )</span>
+490:                         <span class="ruby-comment cmt">#                            action :answer</span>
+491:                         <span class="ruby-comment cmt">#                            action :sleep, 250</span>
+492:                         <span class="ruby-comment cmt">#                            action :set, &quot;voicemail_alternate_greet_id=#{ sip_user_encode( dst_sip_dnis_user )}&quot;</span>
+493:                         <span class="ruby-comment cmt">#                            action :voicemail, &quot;default #{dst_sip_domain} #{sip_user_encode( dst_sip_user_real )}&quot;</span>
+494:                         <span class="ruby-comment cmt">#                    #end</span>
+495:                         <span class="ruby-comment cmt">#            end</span>
+496:                         <span class="ruby-comment cmt">#    end</span>
+497:                         <span class="ruby-comment cmt">#end</span>
+498:                         
+499:                 <span class="ruby-keyword kw">end</span>
+500:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="find-call-forward-method" class="method-detail ">
+				<a name="method-i-find_call_forward"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">find_call_forward</span><span
+						class="method-args">( sip_account, reason, source )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Finds a call forwarding rule of a SIP account by reason and source.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="find-call-forward-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 441</span>
+441:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_call_forward</span>( <span class="ruby-identifier">sip_account</span>, <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">source</span> )
+442:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">sip_account</span>
+443:                 
+444:                 [ <span class="ruby-identifier">source</span>, <span class="ruby-value str">''</span> ].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">the_source</span><span class="ruby-operator">|</span>
+445:                         <span class="ruby-identifier">call_forward</span> = (
+446:                                 <span class="ruby-constant">CallForward</span>.<span class="ruby-identifier">where</span>({
+447:                                         <span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">id</span>,
+448:                                         <span class="ruby-value">:active</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+449:                                         <span class="ruby-value">:source</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">the_source</span>.<span class="ruby-identifier">to_s</span>,
+450:                                 })
+451:                                 .<span class="ruby-identifier">joins</span>( <span class="ruby-value">:call_forward_reason</span> )
+452:                                 .<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reasons</span> =<span class="ruby-operator">&gt;</span> {
+453:                                         <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>.<span class="ruby-identifier">to_s</span>,
+454:                                 })
+455:                                 .<span class="ruby-identifier">first</span> )
+456:                         
+457:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward</span>
+458:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;voicemail&quot;</span>
+459:                                         <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span> = <span class="ruby-node">&quot;-vbox-#{sip_account.auth_name}&quot;</span>
+460:                                 <span class="ruby-keyword kw">end</span>
+461:                                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward</span>
+462:                         <span class="ruby-keyword kw">end</span>
+463:                 }
+464:                 
+465:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+466:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -767,17 +977,17 @@ GET  /freeswitch-call-processing/actions.xml POST
 					<div class="method-source-code"
 						id="percent-encode-re-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 346</span>
-346:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">percent_encode_re</span>( <span class="ruby-identifier">str</span>, <span class="ruby-identifier">re_unsafe</span> )
-347:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-identifier">re_unsafe</span> ) {
-348:                         <span class="ruby-identifier">unsafe_char</span> = <span class="ruby-node">$&amp;</span>
-349:                         <span class="ruby-identifier">esc</span> = <span class="ruby-value str">''</span>
-350:                         <span class="ruby-identifier">unsafe_char</span>.<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ub</span><span class="ruby-operator">|</span>
-351:                                 <span class="ruby-identifier">esc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">'%%%02X'</span>, <span class="ruby-identifier">ub</span>)  <span class="ruby-comment cmt"># must be uppercase!</span>
-352:                         }
-353:                         <span class="ruby-identifier">esc</span>
-354:                 }.<span class="ruby-identifier">force_encoding</span>( <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">US_ASCII</span> )
-355:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 427</span>
+427:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">percent_encode_re</span>( <span class="ruby-identifier">str</span>, <span class="ruby-identifier">re_unsafe</span> )
+428:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-identifier">re_unsafe</span> ) {
+429:                         <span class="ruby-identifier">unsafe_char</span> = <span class="ruby-node">$&amp;</span>
+430:                         <span class="ruby-identifier">esc</span> = <span class="ruby-value str">''</span>
+431:                         <span class="ruby-identifier">unsafe_char</span>.<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ub</span><span class="ruby-operator">|</span>
+432:                                 <span class="ruby-identifier">esc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">'%%%02X'</span>, <span class="ruby-identifier">ub</span>)  <span class="ruby-comment cmt"># must be uppercase!</span>
+433:                         }
+434:                         <span class="ruby-identifier">esc</span>
+435:                 }.<span class="ruby-identifier">force_encoding</span>( <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">US_ASCII</span> )
+436:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -813,45 +1023,45 @@ href="http://tools.ietf.org/html/rfc3261">tools.ietf.org/html/rfc3261</a> .
 					<div class="method-source-code"
 						id="sip-displayname-encode-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 299</span>
-299:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_displayname_encode</span>( <span class="ruby-identifier">str</span> )
-300:                 <span class="ruby-comment cmt">#orig_str = str</span>
-301:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">force_encoding</span>( <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">ASCII_8BIT</span> )
-302:                 
-303:                 <span class="ruby-comment cmt"># Sanitize control characters. They could be encoded but cause</span>
-304:                 <span class="ruby-comment cmt"># problems for many implementations:</span>
-305:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[\x00-\x1F]+/</span>, <span class="ruby-value str">' '</span> )
-306:                 
-307:                 <span class="ruby-comment cmt"># FreeSwitch doesn't handle &quot;&lt;&quot;, &quot;&gt;&quot; even in its encoded forms:</span>
-308:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[&lt;&gt;]+/</span>, <span class="ruby-value str">' '</span> )
-309:                 
-310:                 <span class="ruby-comment cmt"># without &quot;/&quot;, &quot;:&quot;, &quot;&lt;&quot;, &quot;&gt;&quot; (which are special for FreeSwitch)</span>
-311:                 <span class="ruby-identifier">safe</span> = <span class="ruby-regexp re">/(?:
-312:                           [ !\#\$\%&amp;'()*+,\-.0-9;=?@A-Z\[\]^_`a-z{|}~]
-313:                         | [\xC0-\xDF][\x80-\xBF]{1}
-314:                         | [\xE0-\xEF][\x80-\xBF]{2}
-315:                         | [\xF0-\xF7][\x80-\xBF]{3}
-316:                         | [\xF8-\xFB][\x80-\xBF]{4}
-317:                         | [\xFC-\xFD][\x80-\xBF]{5}
-318:                 )+/</span><span class="ruby-identifier">n</span>
-319:                 <span class="ruby-identifier">ret</span> = []
-320:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'a'</span>  <span class="ruby-comment cmt"># add a safe char at the end so we get a match</span>
-321:                 <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
-322:                 <span class="ruby-keyword kw">while</span> ((<span class="ruby-identifier">safe_part</span> = <span class="ruby-identifier">safe</span>.<span class="ruby-identifier">match</span>( <span class="ruby-identifier">str</span>, <span class="ruby-identifier">pos</span> )) <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>)
-323:                         <span class="ruby-comment cmt"># add the unsafe part before the current match:</span>
-324:                         <span class="ruby-comment cmt">#ret &lt;&lt; &quot;-&quot; + &quot;{&quot; + str[ pos, safe_part.begin(0)-pos ] + &quot;}&quot;</span>
-325:                         <span class="ruby-identifier">ret</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">percent_encode_re</span>( <span class="ruby-identifier">str</span>[ <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">safe_part</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>)<span class="ruby-operator">-</span><span class="ruby-identifier">pos</span> ], <span class="ruby-regexp re">/./</span> )
-326:                         
-327:                         <span class="ruby-comment cmt"># add the safe part:</span>
-328:                         <span class="ruby-identifier">ret</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">safe_part</span>.<span class="ruby-identifier">to_s</span>
-329:                         
-330:                         <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">safe_part</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>)
-331:                 <span class="ruby-keyword kw">end</span>
-332:                 <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>)
-333:                 <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">ret</span>[ <span class="ruby-value">0</span>, <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">bytesize</span><span class="ruby-operator">-</span><span class="ruby-value">1</span> ].<span class="ruby-identifier">force_encoding</span>( <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span> )
-334:                 <span class="ruby-comment cmt">#logger.info( &quot;##############     #{orig_str}  =&gt;  #{ret}    &quot; )</span>
-335:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ret</span>
-336:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 378</span>
+378:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_displayname_encode</span>( <span class="ruby-identifier">str</span> )
+379:                 <span class="ruby-comment cmt">#orig_str = str</span>
+380:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">force_encoding</span>( <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">ASCII_8BIT</span> )
+381:                 
+382:                 <span class="ruby-comment cmt"># Sanitize control characters. They could be encoded but cause</span>
+383:                 <span class="ruby-comment cmt"># problems for many implementations:</span>
+384:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[\x00-\x1F]+/</span>, <span class="ruby-value str">' '</span> )
+385:                 
+386:                 <span class="ruby-comment cmt"># FreeSwitch doesn't handle &quot;&lt;&quot;, &quot;&gt;&quot; even in its encoded forms:</span>
+387:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[&lt;&gt;]+/</span>, <span class="ruby-value str">' '</span> )
+388:                 
+389:                 <span class="ruby-comment cmt"># without &quot;/&quot;, &quot;:&quot;, &quot;&lt;&quot;, &quot;&gt;&quot; (which are special for FreeSwitch)</span>
+390:                 <span class="ruby-identifier">safe</span> = <span class="ruby-regexp re">/(?:
+391:                           [ !\#\$\%&amp;'()*+,\-.0-9;=?@A-Z\[\]^_`a-z{|}~]
+392:                         | [\xC0-\xDF][\x80-\xBF]{1}
+393:                         | [\xE0-\xEF][\x80-\xBF]{2}
+394:                         | [\xF0-\xF7][\x80-\xBF]{3}
+395:                         | [\xF8-\xFB][\x80-\xBF]{4}
+396:                         | [\xFC-\xFD][\x80-\xBF]{5}
+397:                 )+/</span><span class="ruby-identifier">n</span>
+398:                 <span class="ruby-identifier">ret</span> = []
+399:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'a'</span>  <span class="ruby-comment cmt"># add a safe char at the end so we get a match</span>
+400:                 <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
+401:                 <span class="ruby-keyword kw">while</span> ((<span class="ruby-identifier">safe_part</span> = <span class="ruby-identifier">safe</span>.<span class="ruby-identifier">match</span>( <span class="ruby-identifier">str</span>, <span class="ruby-identifier">pos</span> )) <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>)
+402:                         <span class="ruby-comment cmt"># add the unsafe part before the current match:</span>
+403:                         <span class="ruby-comment cmt">#ret &lt;&lt; &quot;-&quot; + &quot;{&quot; + str[ pos, safe_part.begin(0)-pos ] + &quot;}&quot;</span>
+404:                         <span class="ruby-identifier">ret</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">percent_encode_re</span>( <span class="ruby-identifier">str</span>[ <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">safe_part</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>)<span class="ruby-operator">-</span><span class="ruby-identifier">pos</span> ], <span class="ruby-regexp re">/./</span> )
+405:                         
+406:                         <span class="ruby-comment cmt"># add the safe part:</span>
+407:                         <span class="ruby-identifier">ret</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">safe_part</span>.<span class="ruby-identifier">to_s</span>
+408:                         
+409:                         <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">safe_part</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>)
+410:                 <span class="ruby-keyword kw">end</span>
+411:                 <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>)
+412:                 <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">ret</span>[ <span class="ruby-value">0</span>, <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">bytesize</span><span class="ruby-operator">-</span><span class="ruby-value">1</span> ].<span class="ruby-identifier">force_encoding</span>( <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span> )
+413:                 <span class="ruby-comment cmt">#logger.debug( &quot;sip_displayname_encode( #{orig_str.inspect} )  =&gt;  #{ret.inspect}&quot; )</span>
+414:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ret</span>
+415:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -887,11 +1097,11 @@ but enclosed in double quotes. Returns an empty string (no quotes) for
 					<div class="method-source-code"
 						id="sip-displayname-quote-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 341</span>
-341:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_displayname_quote</span>( <span class="ruby-identifier">str</span> )
-342:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value str">''</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">blank?</span>
-343:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'&quot;'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sip_displayname_encode</span>( <span class="ruby-identifier">str</span> ).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&quot;'</span>
-344:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 421</span>
+421:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_displayname_quote</span>( <span class="ruby-identifier">str</span> )
+422:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value str">''</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">blank?</span>
+423:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'&quot;'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sip_displayname_encode</span>( <span class="ruby-identifier">str</span> ).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&quot;'</span>
+424:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -926,21 +1136,21 @@ href="http://tools.ietf.org/html/rfc3261">tools.ietf.org/html/rfc3261</a> .
 					<div class="method-source-code"
 						id="sip-user-encode-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 276</span>
-276:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_user_encode</span>( <span class="ruby-identifier">str</span> )  <span class="ruby-comment cmt">#OPTIMIZE</span>
-277:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
-278:                 
-279:                 <span class="ruby-comment cmt"># Sanitize control characters. They could be encoded but cause</span>
-280:                 <span class="ruby-comment cmt"># problems for many implementations:</span>
-281:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[\x00-\x1F]+/</span>, <span class="ruby-value str">' '</span> )
-282:                 
-283:                 <span class="ruby-comment cmt"># FreeSwitch doesn't handle &quot; &quot; even in its encoded form:</span>
-284:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/ +/</span>, <span class="ruby-value str">''</span> )
-285:                 
-286:                 <span class="ruby-comment cmt">#unsafe = /[^a-zA-Z0-9\-_.!~*'()&amp;=+$,;?\/]/</span>
-287:                 <span class="ruby-identifier">unsafe</span> = <span class="ruby-regexp re">/[^a-zA-Z0-9\-_.!~*'()&amp;=+$,;?]/</span>  <span class="ruby-comment cmt"># without &quot;/&quot; (which are special for FreeSwitch)</span>
-288:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">percent_encode_re</span>( <span class="ruby-identifier">str</span>, <span class="ruby-identifier">unsafe</span> )
-289:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/freeswitch_call_processing_controller.rb, line 354</span>
+354:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_user_encode</span>( <span class="ruby-identifier">str</span> )  <span class="ruby-comment cmt">#OPTIMIZE</span>
+355:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
+356:                 
+357:                 <span class="ruby-comment cmt"># Sanitize control characters. They could be encoded but cause</span>
+358:                 <span class="ruby-comment cmt"># problems for many implementations:</span>
+359:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/[\x00-\x1F]+/</span>, <span class="ruby-value str">' '</span> )
+360:                 
+361:                 <span class="ruby-comment cmt"># FreeSwitch doesn't handle &quot; &quot; even in its encoded form:</span>
+362:                 <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp re">/ +/</span>, <span class="ruby-value str">''</span> )
+363:                 
+364:                 <span class="ruby-comment cmt">#unsafe = /[^a-zA-Z0-9\-_.!~*'()&amp;=+$,;?\/]/</span>
+365:                 <span class="ruby-identifier">unsafe</span> = <span class="ruby-regexp re">/[^a-zA-Z0-9\-_.!~*'()&amp;=+$,;?]/</span>  <span class="ruby-comment cmt"># without &quot;/&quot; (which are special for FreeSwitch)</span>
+366:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">percent_encode_re</span>( <span class="ruby-identifier">str</span>, <span class="ruby-identifier">unsafe</span> )
+367:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

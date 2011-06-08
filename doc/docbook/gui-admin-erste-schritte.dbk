@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="gui-admin-erste-schritte" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Admin-GUI: Erste Schritte</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </info>
+
+  <section>
+    <title>Erste Schritte nach der Installation</title>
+
+    <para>Die initiale Setup-Routine leitet Sie automatisch zu den notwendigen
+    Einstellungen. Wir werden in diesem Kapitel die Ersteinrichtung Schrit für
+    Schrit durchgehen.</para>
+
+    <para>Beim ersten Aufruf des Gemeinschaft4-Web-Interfaces werden Sie
+    automatisch zum Setup weitergeleitet.</para>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup1.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Automatische Weiterleitung zum Setup</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup2.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Anlegen des ersten Administrators</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup3.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Anmeldung mit dem gerade angelegten Account</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup4.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Anlegen des ersten SIP-Servers</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup5.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Geben Sie die IP-Adresse des Rechners an auf dem Gemeinschaft4
+          installiert ist (<emphasis>nicht</emphasis> 127.0.0.1!). Der
+          Konfigurations-Port ist der Port auf dem der Rails-Server für die
+          Kamailio-Konfiguration läuft.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup6.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Der Server wurde ohne Fehler in der Datenbank angelegt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup7.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Im nächsten Schritt muss der erste Provisioning-Server
+          (Cantina) angelegt werden.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup8.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Bitte geben Sie die IP-Adresse des Cantina-Servers an. Der
+          Port ist wieder der Port auf dem der Rails-Server von Cantina
+          läuft.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup9.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Der Provisionig-Server wurde fehlerfrei angelegt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup10.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Zuletzt muss noch ein SIP-Proxy angelegt werden.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup11.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Es wird wieder die IP des Servers benötigt. Ein Port für den
+          Konfigurationsserver wird nicht benötigt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup12.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Der SIP-Proxy wurde fehlerfrei angelegt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup13.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Um einen SIP-Account auf ein Telefon provisionieren zu können,
+          muss zuerst ein auf „Cantina“ angelegtes Telefon in Geminschaft4
+          angelegt werden.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup14.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Das Telefon kann über die MAC-Adresse identifiziert
+          werden.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup15.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Das Telefon wurde erfolgreich angelegt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup16.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Jetzt kann der erste SIP-Account angelegt werden.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup17.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Das Feld „User“ wird noch nicht benötigt. Das Feld „Realm“
+          muss im Moment noch leer bleiben. Ein „SIP phone“ muss nur
+          ausgewählt werden, wenn der Account auf ein Telefon provisioniert
+          werden soll. Für ein Softphone z.B. wird das Feld nicht
+          benötigt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="setup18.png"></imagedata>
+        </imageobject>
+
+        <caption>
+          <para>Der SIP-Account wurde erfolgreich angelegt. Das Telefon wurde
+          auf „Cantina“ übertragen und der Account wurde auf „sipproxy“
+          angelegt.</para>
+        </caption>
+      </mediaobject>
+    </screenshot>
+
+    <para>Mit den hier gezeigten Schritten sind Sie in der Lage eine beliebige
+    Anzahl von Telefonen anzulegen.</para>
+
+    <para>Im Menüpunkt „Extensions“ können einem SIP-Account Durchwahlen
+    zugeordnet werden.</para>
+
+    <para>Die Dokumentation zu „Cantina“ finden Sie im Verzeichnis
+    <filename>doc</filename> des Projektes.</para>
+  </section>
+</chapter>
