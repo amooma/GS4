@@ -202,20 +202,27 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			if call_disposition.blank?; (
 				# We didn't try to call the SIP account yet.
-				# Setting CallerID for call_forward
+				
+				# Set Caller-ID for call forward:
+				#OPTIMIZE Shouldn't all of the caller-ID stuff (see further below) be handled here then?
 				# RFC 2543:
 				action :set, "effective_caller_id_number=#{ sip_user_encode( src_cid_sip_user )}"
 				action :set, "effective_caller_id_name=#{ sip_displayname_encode( src_cid_sip_display )}"
-
+				action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( src_cid_sip_display )} <sip:#{ sip_user_encode( src_cid_sip_user )}@#{ src_cid_sip_domain }>"
+				
 				# Check unconditional call-forwarding ("always"):
 				#
 				call_forward_always    = find_call_forward( dst_sip_account, :always    , src_cid_sip_user )
 				call_forward_assistant = find_call_forward( dst_sip_account, :assistant , src_cid_sip_user )
-				is_assistant = CallForward.where( :call_forward_reason_id => CallForwardReason.where(:value => "assistant").first.id,
-								 :sip_account_id => SipAccount.where(:auth_name => "#{dst_sip_user_real}").first.id,
-								 :destination => "#{src_cid_sip_user}",
-								 :active => true
-								 ).first
+				
+				is_assistant = CallForward.where({
+						:call_forward_reason_id => CallForwardReason.where(:value => "assistant").first.id,
+						:sip_account_id => SipAccount.where(:auth_name => "#{dst_sip_user_real}").first.id,  #OPTIMIZE Can this be nil if the dst is not a SIP acct.?
+						:destination => "#{src_cid_sip_user}",
+						:active => true
+					}).first
+				#OPTIMIZE Rename is_assistant. It doesn't seem to be a boolean.
+				
 				if call_forward_always; (
 					# We have an unconditional call-forward.
 					
@@ -228,9 +235,10 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 				)
 				elsif ! is_assistant.nil? && call_forward_assistant; (
-					action :bridge, "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
-				)
 					
+					action :bridge, "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
+					
+				)
 				elsif call_forward_assistant; (
 					
 					assistant_sip_user = Extension.where( :extension => "#{call_forward_assistant.destination}" ).first
@@ -245,7 +253,8 @@ class FreeswitchCallProcessingController < ApplicationController
 				else (
 					# Call the SIP account.
 					
-					# Caller-ID:
+					
+					### Caller-ID ############################# {
 					# Note: P-Asserted-Identity is set in Kamailio.
 					#
 					action :set, "sip_cid_type=none"  # do not send P-Asserted-Identity
@@ -268,9 +277,14 @@ class FreeswitchCallProcessingController < ApplicationController
 						cid_host    = "anonymous.invalid"  # or "127.0.0.1"
 					end
 					
-					
+					## RFC 2543:
+					#action :set, "effective_caller_id_number=#{ sip_user_encode( cid_user )}"
+					#action :set, "effective_caller_id_name=#{ sip_displayname_encode( cid_display )}"
+					## RFC 3325:
+					#action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( cid_display )} <sip:#{ sip_user_encode( cid_user )}@#{ cid_host }>"
 					# RFC 3325, RFC 3323:
 					action :set, "sip_h_Privacy=" << ((!clir) ? 'none' : 'id;header')
+					### Caller-ID ############################# }
 					
 					
 					# Get timeout from call-forward on timeout ("noanswer"):
