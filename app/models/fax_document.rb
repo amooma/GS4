@@ -1,14 +1,20 @@
 class FaxDocument < ActiveRecord::Base
 	
+	validates_presence_of     :raw_file
+	validates_presence_of     :file
 	
 	after_validation( :on => :create ) {
-		if outgoing
-			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
-			if (! self.raw_file)
-				errors.add( :base, "No document found")
-			elsif (! File.exists?(raw_file))
-				errors.add( :base, "Failed convert document")
-			elsif (! self.destination.blank?)
+		raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+		if (! self.raw_file)
+			errors.add( :base, "No document found")
+		elsif (! File.exists?(raw_file))
+			errors.add( :base, "Failed convert document")
+		else
+			thumbnail = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.png"
+			if (! File.exists?(thumbnail))
+				create_thumbnail_from_fax( self.raw_file )
+			end
+			if (! self.destination.blank?)
 				originate_call(self.destination, raw_file)
 			end
 		end
@@ -38,7 +44,7 @@ class FaxDocument < ActiveRecord::Base
 	}
 	
 	def save_file( upload )
-		if (upload.nil? || ! upload['file'])
+		if (upload.nil? || ! upload['file'] || ! upload['raw_file'].blank?)
 			return false
 		end
 		self.file = upload['file'].original_filename
@@ -55,6 +61,11 @@ class FaxDocument < ActiveRecord::Base
 		ghostscript_command = "gs -q -r21x31 -g210x310 -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}"
 		system  ghostscript_command
 		self.raw_file = output_file
+	end
+	
+	def create_thumbnail_from_fax( raw_file )
+		convert_command = "convert -resize 210x310\! #{FAX_FILES_DIRECTORY}/#{raw_file}.tif #{FAX_FILES_DIRECTORY}/#{raw_file}.png"
+		return system convert_command
 	end
 	
 	def originate_call( destination, raw_file )

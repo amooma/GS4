@@ -951,8 +951,8 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'set', :data => 'inherit_codec=true' )
 					xml.action( :application => 'set', :data => 'fax_enable_t38_request=true' )
 					xml.action( :application => 'set', :data => 'fax_enable_t38=true' )
-					xml.action( :application => 'rxfax', :data => '/tmp/FAX-${uuid}.tif' )
-				#	xml.action( :application => 'javascript', :data => 'fax_upload.js' )
+					xml.action( :application => 'rxfax', :data => "#{FAX_FILES_DIRECTORY}/FAX-IN-${uuid}.tif" )
+					
 					xml.action( :application => 'hangup' )
 				}
 			}
