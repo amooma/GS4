@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  file: MyString
-  title: MyString
+  file: MyFaxFileName1
+  title: MyFaxFileTitle1
 
 two:
-  file: MyString
-  title: MyString
+  file: MyFaxFileName2
+  title: MyFaxFileTitle2
