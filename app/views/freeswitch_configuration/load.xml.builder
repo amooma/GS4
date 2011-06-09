@@ -547,6 +547,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 		}
 		
 		xml.configuration( :name => 'xml_rpc.conf', :description => 'XML RPC' ) {
+			#OPTIMIZE Make sure this listens on localhost only or accepts connections from localhost only.
 			xml.settings {
 				xml.param( :name => 'http-port', :value => XML_RPC_PORT )
 				xml.param( :name => 'auth-realm', :value => 'freeswitch' )
