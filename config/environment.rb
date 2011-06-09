@@ -22,4 +22,5 @@ XML_RPC_USER = 'freeswitch'
 XML_RPC_PASSWORD = 'works'
 
 FAX_FILES_DIRECTORY = '/opt/gemeinschaft/misc/fax/'
+#TODO Check that this directory is actually created somewhere?
 
