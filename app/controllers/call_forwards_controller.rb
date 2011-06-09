@@ -1,7 +1,7 @@
 class CallForwardsController < ApplicationController
   
-  #TODO before_filter :authenticate_user!
-  
+  before_filter :authenticate_user!
+
   # GET /call_forwards
   # GET /call_forwards.xml
   def index

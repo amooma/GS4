@@ -1,7 +1,7 @@
 class CallQueuesController < ApplicationController
   
-  #TODO before_filter :authenticate_user!
-  
+  before_filter :authenticate_user!
+
   # GET /call_queues
   # GET /call_queues.xml
   def index

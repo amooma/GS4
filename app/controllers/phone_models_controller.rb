@@ -1,7 +1,7 @@
 class PhoneModelsController < ApplicationController
   
-  #TODO before_filter :authenticate_user!
-  
+  before_filter :authenticate_user!
+
   # GET /phone_models
   # GET /phone_models.xml
   def index
