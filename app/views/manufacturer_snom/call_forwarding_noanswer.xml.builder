@@ -5,7 +5,7 @@ if (@query_timeout && @destination.blank?)
 	xml.Title('Call Forwarding on No Answer')
 	xml.Text('Disable Call Forwarding')
 	xml.fetch("#{@provisioning_server_url}/call_forwarding/save.xml?noanswer_destination=", :mil => '1')
-
+	
 	xml.SoftKeyItem {
 		xml.Label('Exit')
 		xml.Name('F2')

@@ -153,7 +153,7 @@ Gemeinschaft4::Application.routes.draw do
 	end
 	
 	resources :fax_documents
-	match 'fax_documents/:id/download' => 'fax_documents#download'
+	match 'fax_documents/:id/download'  => 'fax_documents#download'
 	match 'fax_documents/:id/thumbnail' => 'fax_documents#thumbnail'
 	
 	# The priority is based upon order of creation:

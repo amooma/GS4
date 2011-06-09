@@ -10,7 +10,7 @@ xml.SnomIPPhoneInput {
 		xml.DefaultValue("#{@always_destination}")
 		xml.InputFlags('t')
 	}
-
+	
 	xml.SoftKeyItem {
 		xml.Label('Exit')
 		xml.Name('F2')

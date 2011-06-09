@@ -28,16 +28,16 @@ class FaxDocument < ActiveRecord::Base
 	before_destroy {
 		raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}"
 		begin
-			File.unlink(raw_file + '.tif')
+			File.unlink( raw_file + '.tif' )
 		rescue
 		end
 		begin
-			File.unlink(raw_file + '.png')
+			File.unlink( raw_file + '.png' )
 		rescue
 		end
 	}
 	
-	def save_file(upload)
+	def save_file( upload )
 		if (upload.nil? || ! upload['file'])
 			return false
 		end
@@ -57,11 +57,11 @@ class FaxDocument < ActiveRecord::Base
 		self.raw_file = output_file
 	end
 	
-	def originate_call(destination, raw_file)
+	def originate_call( destination, raw_file )
 		require 'net/http'
 		
 		request_path = "/webapi/originate?sofia/internal/#{destination}@#{DOMAIN};fs_path=sip:127.0.0.1:5060%20&txfax(#{raw_file})"
-			
+		
 		http = Net::HTTP.new(XML_RPC_HOST, XML_RPC_PORT)
 		request = Net::HTTP::Get.new(request_path, nil )
 		request.basic_auth(XML_RPC_USER , XML_RPC_PASSWORD)

@@ -1,4 +1,7 @@
 class FaxDocumentsController < ApplicationController
+  
+  #TODO before_filter :authenticate_user!
+  
   # GET /fax_documents
   # GET /fax_documents.xml
   def index

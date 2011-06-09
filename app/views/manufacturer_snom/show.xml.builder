@@ -26,14 +26,15 @@ xml.settings {
 		
 		sip_account =  @phone.sip_accounts.first
 		if (! sip_account.nil?)
-			xml.alert_group_ring_text(@phone.sip_accounts.first.auth_name, :perm => 'RW')
+			xml.alert_group_ring_text( @phone.sip_accounts.first.auth_name, :perm => 'RW' )
 		else
-			xml.alert_group_ring_text('alert-group', :perm => 'RW')
+			xml.alert_group_ring_text( 'alert-group', :perm => 'RW' )
 		end
-		xml.alert_group_ring_sound('Silent', :perm => 'RW')
-
-		xml.dkey_directory( "url #{@provisioning_server_url}/phone_book_internal.xml", :perm => 'RW' )	
+		xml.alert_group_ring_sound( 'Silent', :perm => 'RW' )
+		
+		xml.dkey_directory( "url #{@provisioning_server_url}/phone_book_internal.xml", :perm => 'RW' )
 		xml.dkey_menu( "url #{@provisioning_server_url}/xml_menu.xml", :perm => 'RW' )
+		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
 		@phone.sip_accounts.each { |sip_account|

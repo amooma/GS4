@@ -12,6 +12,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'hold_music=local_stream://moh' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'use_profile=internal' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'send_silence_when_idle=400' )
+	
 	xml.section( :name => 'languages', :description => 'Language Management' ) {
 		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie' ) {
 			xml.phrases {
@@ -547,6 +548,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 		}
 		
 		xml.configuration( :name => 'xml_rpc.conf', :description => 'XML RPC' ) {
+			#OPTIMIZE Make sure this listens on localhost only or accepts connections from localhost only.
 			xml.settings {
 				xml.param( :name => 'http-port', :value => XML_RPC_PORT )
 				xml.param( :name => 'auth-realm', :value => 'freeswitch' )
@@ -605,67 +607,67 @@ xml.document( :type => 'freeswitch/xml' ) {
 			xml.descriptors {
 				xml.descriptor( :name  => '1' ) {
 					xml.tone( :name => 'CED_TONE' ) {
-						xml.element( :freq1 => '2100', :freq2 => '0', :min => '500', :max => '0' )
+						xml.element( :freq1 => '2100', :freq2 =>   '0', :min => '500', :max =>   '0' )
 					}
 					xml.tone( :name => 'SIT' ) {
-						xml.element( :freq1 => '950', :freq2 => '0', :min => '256', :max => '400' )
-						xml.element( :freq1 => '1400', :freq2 => '0', :min => '256', :max => '400' )
-						xml.element( :freq1 => '1800', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 =>  '950', :freq2 =>   '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1400', :freq2 =>   '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1800', :freq2 =>   '0', :min => '256', :max => '400' )
 					}
 					xml.tone( :name => 'REORDER_TONE' ) {
-						xml.element( :freq1 => '480', :freq2 => '620', :min => '224', :max => '272' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '224', :max => '272' )
+						xml.element( :freq1 =>  '480', :freq2 => '620', :min => '224', :max => '272' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '224', :max => '272' )
 					}
 					xml.tone( :name => 'BUSY_TONE' ) {
-						xml.element( :freq1 => '480', :freq2 => '620', :min => '464', :max => '516' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '464', :max => '516' )
+						xml.element( :freq1 =>  '480', :freq2 => '620', :min => '464', :max => '516' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '464', :max => '516' )
 					}
 				}
-
+				
 				xml.descriptor( :name  => '44' ) {
 					xml.tone( :name => 'CED_TONE' ) {
-						xml.element( :freq1 => '2100', :freq2 => '0', :min => '500', :max => '0' )
+						xml.element( :freq1 => '2100', :freq2 =>   '0', :min => '500', :max =>   '0' )
 					}
 					xml.tone( :name => 'SIT' ) {
-						xml.element( :freq1 => '950', :freq2 => '0', :min => '256', :max => '400' )
-						xml.element( :freq1 => '1400', :freq2 => '0', :min => '256', :max => '400' )
-						xml.element( :freq1 => '1800', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 =>  '950', :freq2 =>   '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1400', :freq2 =>   '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1800', :freq2 =>   '0', :min => '256', :max => '400' )
 					}
 					xml.tone( :name => 'REORDER_TONE' ) {
-						xml.element( :freq1 => '400', :freq2 => '0', :min => '368', :max => '416' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '336', :max => '368' )
-						xml.element( :freq1 => '400', :freq2 => '0', :min => '256', :max => '288' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '512', :max => '544' )
+						xml.element( :freq1 =>  '400', :freq2 =>   '0', :min => '368', :max => '416' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '336', :max => '368' )
+						xml.element( :freq1 =>  '400', :freq2 =>   '0', :min => '256', :max => '288' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '512', :max => '544' )
 					}
 					xml.tone( :name => 'BUSY_TONE' ) {
-						xml.element( :freq1 => '400', :freq2 => '0', :min => '352', :max => '384' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '352', :max => '384' )
-						xml.element( :freq1 => '400', :freq2 => '0', :min => '352', :max => '384' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '352', :max => '384' )
+						xml.element( :freq1 =>  '400', :freq2 =>   '0', :min => '352', :max => '384' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '352', :max => '384' )
+						xml.element( :freq1 =>  '400', :freq2 =>   '0', :min => '352', :max => '384' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '352', :max => '384' )
 					}
 				}
-
+				
 				xml.descriptor( :name  => '49' ) {
 					xml.tone( :name => 'CED_TONE' ) {
-						xml.element( :freq1 => '2100', :freq2 => '0', :min => '500', :max => '0' )
+						xml.element( :freq1 => '2100', :freq2 =>   '0', :min => '500', :max =>   '0' )
 					}
 					xml.tone( :name => 'SIT' ) {
-						xml.element( :freq1 => '900', :freq2 => '0', :min => '256', :max => '400' )
-						xml.element( :freq1 => '1400', :freq2 => '0', :min => '256', :max => '400' )
-						xml.element( :freq1 => '1800', :freq2 => '0', :min => '256', :max => '400' )
+						xml.element( :freq1 =>  '900', :freq2 =>   '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1400', :freq2 =>   '0', :min => '256', :max => '400' )
+						xml.element( :freq1 => '1800', :freq2 =>   '0', :min => '256', :max => '400' )
 					}
 					xml.tone( :name => 'REORDER_TONE' ) {
-						xml.element( :freq1 => '425', :freq2 => '0', :min => '224', :max => '272' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '224', :max => '272' )
+						xml.element( :freq1 =>  '425', :freq2 =>   '0', :min => '224', :max => '272' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '224', :max => '272' )
 					}
 					xml.tone( :name => 'BUSY_TONE' ) {
-						xml.element( :freq1 => '425', :freq2 => '0', :min => '464', :max => '516' )
-						xml.element( :freq1 => '0', :freq2 => '0', :min => '464', :max => '516' )
+						xml.element( :freq1 =>  '425', :freq2 =>   '0', :min => '464', :max => '516' )
+						xml.element( :freq1 =>    '0', :freq2 =>   '0', :min => '464', :max => '516' )
 					}
 				}
 			}
 		}
-
+		
 		xml.configuration( :name => 'fax.conf', :description => 'FAX application configuration' ) {
 			xml.settings {
 				xml.param( :name => 'use-ecm', :value => 'true' )
@@ -677,7 +679,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.param( :name => 'file-prefix', :value => 'fax' )
 			}
 		}
-
+		
 		xml.configuration( :name => 'modules.conf', :description => 'Modules' ) {
 			xml.modules {
 				xml.tag!( 'load', :module => 'mod_console' )
@@ -828,7 +830,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'rtp-hold-timeout-sec', :value => '1800' )
 						xml.param( :name => 'force-subscription-expires', :value => '120' )
 						xml.param( :name => 'challenge-realm', :value => 'auto_from' )
-						xml.param( :name => 'inbound-late-negotiation', :value => 'true')
+						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
 						xml.param( :name => 'rtp-rewrite-timestamps', :value => 'true' )
 					}
 				}
@@ -941,20 +943,20 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'voicemail', :data => 'check default ${domain_name} ${sip_from_user}' )
 				}
 			}
-
+			
 			xml.extension(:name => 'kam-fax-receive' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge--fax-receive-$' ) {
 					xml.action( :application => 'set', :data => 'proxy_media=true' )
 					xml.action( :application => 'set', :data => 'bypass_media=false' )
 					xml.action( :application => 'set', :data => 'inherit_codec=true' )
-					xml.action( :application => 'set', :data => 'fax_enable_t38_request=true')
-					xml.action( :application => 'set', :data => 'fax_enable_t38=true')
+					xml.action( :application => 'set', :data => 'fax_enable_t38_request=true' )
+					xml.action( :application => 'set', :data => 'fax_enable_t38=true' )
 					xml.action( :application => 'rxfax', :data => '/tmp/FAX-${uuid}.tif' )
-#					xml.action( :application => 'javascript', :data => 'fax_upload.js' )
-					xml.action( :application => 'hangup')
+				#	xml.action( :application => 'javascript', :data => 'fax_upload.js' )
+					xml.action( :application => 'hangup' )
 				}
 			}
-
+			
 			xml.extension( :name => 'gs-main' ) {
 				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {
@@ -962,7 +964,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )
 				}
 			}
-
+			
 			xml.extension( :name => 'catch-all' ) {
 				xml.condition( :field => 'destination_number', :expression => '^(.+)$' ) {
 					xml.action( :application => 'bridge', :data => 'sofia/internal/$1@$${domain};fs_path=sip:127.0.0.1:5060' )

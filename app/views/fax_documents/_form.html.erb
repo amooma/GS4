@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-	<%= f.label :file %><br />
-	<% if @fax_document.file.nil? %>
-		<%= f.file_field :file %>
-	<% else %>
-		<%= @fax_document.file %>
-	<% end %>
-  </p>
+    <%= f.label :file %><br />
+    <% if @fax_document.file.nil? %>
+      <%= f.file_field :file %>
+    <% else %>
+      <%= @fax_document.file %>
+    <% end %>
   </div>
+  
   <div class="field">
     <%= f.label :destination %><br />
     <%= f.text_field :destination %>
   </div>
 
   <div class="actions">
-	<%= f.submit('Send') %>
+    <%= f.submit('Send') %>
   </div>
   <%= f.hidden_field :outgoing, :value => true %>
 <% end %>
