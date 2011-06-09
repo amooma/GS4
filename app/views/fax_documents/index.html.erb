@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+	<th></th>
     <th>Document</th>
     <th>Fax</th>
     <th>Destination</th>
@@ -12,6 +13,13 @@
 
 <% @fax_documents.each do |fax_document| %>
   <tr>
+    <td>
+    <% if fax_document.outgoing %>
+      OUT
+    <% else %>
+      IN
+    <% end %>
+    </td>
     <td><%= fax_document.file %></td>
     <td>
     <% if ! fax_document.file.blank? %>
