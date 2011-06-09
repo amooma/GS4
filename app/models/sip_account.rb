@@ -36,6 +36,12 @@ class SipAccount < ActiveRecord::Base
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
   
+  
+  before_validation( :on => :update ) {
+    if self.auth_name            != self.auth_name_was
+          errors.add( :base , "auth_name cannot be changed." )
+    end
+  }
   after_validation( :on => :create ) {
     if (self.sip_server) \
     && (self.sip_proxy) \
