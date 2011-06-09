@@ -8,6 +8,8 @@ class ManufacturerSnomController < ApplicationController
 	#	@provisioning_server_url = "..."
 	#}
 	
+	#OPTIMIZE Use https for @provisioning_server_url
+	
 	def show
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		@phone = Phone.where(:mac_address => mac_address).first
