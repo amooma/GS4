@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607200000) do
+ActiveRecord::Schema.define(:version => 20110608160045) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -79,6 +79,17 @@ ActiveRecord::Schema.define(:version => 20110607200000) do
     t.datetime "updated_at"
     t.string   "destination"
     t.boolean  "active"
+  end
+
+  create_table "fax_documents", :force => true do |t|
+    t.string   "file"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "raw_file"
+    t.string   "destination"
+    t.datetime "received"
+    t.datetime "sent"
   end
 
   create_table "location", :force => true do |t|
