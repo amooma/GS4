@@ -9,11 +9,16 @@
 			Go to the <%= link_to( "Call Forwards",
 			url_for(:controller => '/call_forwards', :action => 'index')) %>
 			and click <q>New</q> or <q>Edit</q>.
-			Select a SIP account, a case (always / busy / noanswer /
-			offline) enter a destination, and make it active.
-			Leave the source blank for calls from any number
+			<ul>
+			<li>Select a SIP account, a case (always / busy / noanswer /
+			offline / assistant) enter a destination, and make it active.
+			<li>Leave the source blank for calls from any number
 			or fill out the source if you want a call forward
 			that is valid for calls from a specific source only.
+			<li>Leave the destination blank, if you want to "blacklist" a source.
+			<li>Timeout must be set if case is "noanswer".
+			<li>For your voicemail box set "voicemail" as destination.
+			</ul>
 		</p>
 	</section>
 	
@@ -21,11 +26,26 @@
 		<h2>Queue Login/Logout</h2>
 		<p><em>How do I log in to a queue?</em></p>
 		<p>
-			To log in to a queue dial <code>*50*</code> and the extension
+			<ul>
+			<li>To log in to a queue dial <code>*50*</code> and the extension
 			of the queue.
-			To log out dial <code>#50#</code> and the extension
+			<li>To log out dial <code>#50#</code> and the extension
 			of the queue.
+			</ul>
 		</p>
 	</section>
 
+	<section>
+		<h2>How can I define a number to reveive a fax?</h2>
+		Go to the <%= link_to( "Extensions",
+			url_for(:controller => '/extensions', :action => 'index')) %>
+			and click <q>New</q> or <q>Edit</q>.
+			<ul>
+			<li>Fill out "Extension" with the number of your choice.
+			<li>Use "-fax-receive-" as target.
+			</ul>
+			
+	
+	</section>
+	
 </div>
