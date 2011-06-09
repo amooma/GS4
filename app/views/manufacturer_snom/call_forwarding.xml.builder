@@ -7,6 +7,10 @@ xml.SnomIPPhoneMenu {
 		xml.URL("#{@provisioning_server_url}/call_forwarding/always.xml")
 	}
 	xml.MenuItem {
+		xml.Name("Assistant - #{@assistant_destination}")
+		xml.URL("#{@provisioning_server_url}/call_forwarding/assistant.xml")
+	}
+	xml.MenuItem {
 		xml.Name("If busy - #{@busy_destination}")
 		xml.URL("#{@provisioning_server_url}/call_forwarding/busy.xml")
 	}

@@ -72,12 +72,14 @@ class ManufacturerSnomController < ApplicationController
 		call_forward_noanswer  = get_call_forward( @sip_account_name, GS_CALLFORWARD_NOANSWER )
 		call_forward_busy      = get_call_forward( @sip_account_name, GS_CALLFORWARD_BUSY )
 		call_forward_offline   = get_call_forward( @sip_account_name, GS_CALLFORWARD_OFFLINE )
-		
+		call_forward_assistant = get_call_forward( @sip_account_name, GS_CALLFORWARD_ASSISTANT )
+
 		@always_destination    = destination_s( call_forward_always )
 		@noanswer_destination  = destination_s( call_forward_noanswer )
 		@busy_destination      = destination_s( call_forward_busy )
 		@offline_destination   = destination_s( call_forward_offline )
-		
+		@assistant_destination = destination_s( call_forward_assistant )
+
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
@@ -92,6 +94,15 @@ class ManufacturerSnomController < ApplicationController
 
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
+	def call_forwarding_assistant
+		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+		@sip_account_name = get_sip_account_name()
+		
+		call_forward_assistant = get_call_forward( @sip_account_name, GS_CALLFORWARD_ASSISTANT )
+		@always_destination = destination_s( call_forward_assistant )
+
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
+	end
 	
 	def call_forwarding_busy
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
@@ -100,7 +111,7 @@ class ManufacturerSnomController < ApplicationController
 		call_forward_busy = get_call_forward( @sip_account_name, GS_CALLFORWARD_BUSY )
 		@busy_destination = destination_s( call_forward_busy )
 
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account}"
+		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 		#FIXME Typo? Should @sip_account be @sip_account_name ? (=> pko)
 	end
 	
@@ -155,6 +166,11 @@ class ManufacturerSnomController < ApplicationController
 			reason = GS_CALLFORWARD_NOANSWER
 			destination = params[:noanswer_destination].to_s.gsub(/[^0-9\*\#]/,'')
 			timeout = params[:noanswer_timeout].to_s.gsub(/[^0-9]/,'')
+		elsif (! params[:assistant_destination].nil?)    #OPTIMIZE Simply write: if (params[:noanswer_destination])
+			@title = "Call Forwarding to assistant"
+			reason = GS_CALLFORWARD_ASSISTANT
+			destination = params[:assistant_destination].to_s.gsub(/[^0-9\*\#]/,'')
+			timeout = params[:assistant_timeout].to_s.gsub(/[^0-9]/,'')
 		end
 		
 		if (reason.nil?)
@@ -189,12 +205,12 @@ class ManufacturerSnomController < ApplicationController
 	
 	private
 	
-	#TODO Are these meant to be IDs? Don't store them as magic numbers here. IDs may change in the DB. (=> pko)
-	GS_CALLFORWARD_BUSY     = 1
-	GS_CALLFORWARD_NOANSWER = 2
-	GS_CALLFORWARD_OFFLINE  = 3
-	GS_CALLFORWARD_ALWAYS   = 4
-	
+	GS_CALLFORWARD_BUSY     = CallForwardReason.where( :value => "busy").first.id
+	GS_CALLFORWARD_NOANSWER = CallForwardReason.where( :value => "noanswer").first.id
+	GS_CALLFORWARD_OFFLINE  = CallForwardReason.where( :value => "offline").first.id
+	GS_CALLFORWARD_ALWAYS   = CallForwardReason.where( :value => "always").first.id
+	GS_CALLFORWARD_ASSISTANT = CallForwardReason.where( :value => "assistant").first.id
+
 	def get_sip_account_name()
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		sip_account_name = params[:sip_account]
