@@ -205,12 +205,12 @@ class ManufacturerSnomController < ApplicationController
 	
 	private
 	
-	GS_CALLFORWARD_BUSY     = CallForwardReason.where( :value => "busy").first.id
-	GS_CALLFORWARD_NOANSWER = CallForwardReason.where( :value => "noanswer").first.id
-	GS_CALLFORWARD_OFFLINE  = CallForwardReason.where( :value => "offline").first.id
-	GS_CALLFORWARD_ALWAYS   = CallForwardReason.where( :value => "always").first.id
-	GS_CALLFORWARD_ASSISTANT = CallForwardReason.where( :value => "assistant").first.id
-
+	GS_CALLFORWARD_BUSY      = CallForwardReason.where( :value => "busy"      ).first.id
+	GS_CALLFORWARD_NOANSWER  = CallForwardReason.where( :value => "noanswer"  ).first.id
+	GS_CALLFORWARD_OFFLINE   = CallForwardReason.where( :value => "offline"   ).first.id
+	GS_CALLFORWARD_ALWAYS    = CallForwardReason.where( :value => "always"    ).first.id
+	GS_CALLFORWARD_ASSISTANT = CallForwardReason.where( :value => "assistant" ).first.id
+	
 	def get_sip_account_name()
 		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 		sip_account_name = params[:sip_account]
