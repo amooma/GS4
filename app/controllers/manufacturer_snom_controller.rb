@@ -73,13 +73,13 @@ class ManufacturerSnomController < ApplicationController
 		call_forward_busy      = get_call_forward( @sip_account_name, GS_CALLFORWARD_BUSY )
 		call_forward_offline   = get_call_forward( @sip_account_name, GS_CALLFORWARD_OFFLINE )
 		call_forward_assistant = get_call_forward( @sip_account_name, GS_CALLFORWARD_ASSISTANT )
-
+		
 		@always_destination    = destination_s( call_forward_always )
 		@noanswer_destination  = destination_s( call_forward_noanswer )
 		@busy_destination      = destination_s( call_forward_busy )
 		@offline_destination   = destination_s( call_forward_offline )
 		@assistant_destination = destination_s( call_forward_assistant )
-
+		
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
