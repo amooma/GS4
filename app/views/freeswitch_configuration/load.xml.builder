@@ -12,6 +12,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'hold_music=local_stream://moh' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'use_profile=internal' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'send_silence_when_idle=400' )
+	
 	xml.section( :name => 'languages', :description => 'Language Management' ) {
 		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie' ) {
 			xml.phrases {
@@ -829,7 +830,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'rtp-hold-timeout-sec', :value => '1800' )
 						xml.param( :name => 'force-subscription-expires', :value => '120' )
 						xml.param( :name => 'challenge-realm', :value => 'auto_from' )
-						xml.param( :name => 'inbound-late-negotiation', :value => 'true')
+						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
 						xml.param( :name => 'rtp-rewrite-timestamps', :value => 'true' )
 					}
 				}
@@ -948,10 +949,10 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'set', :data => 'proxy_media=true' )
 					xml.action( :application => 'set', :data => 'bypass_media=false' )
 					xml.action( :application => 'set', :data => 'inherit_codec=true' )
-					xml.action( :application => 'set', :data => 'fax_enable_t38_request=true')
-					xml.action( :application => 'set', :data => 'fax_enable_t38=true')
+					xml.action( :application => 'set', :data => 'fax_enable_t38_request=true' )
+					xml.action( :application => 'set', :data => 'fax_enable_t38=true' )
 					xml.action( :application => 'rxfax', :data => '/tmp/FAX-${uuid}.tif' )
-#					xml.action( :application => 'javascript', :data => 'fax_upload.js' )
+				#	xml.action( :application => 'javascript', :data => 'fax_upload.js' )
 					xml.action( :application => 'hangup' )
 				}
 			}
