@@ -1,22 +1,27 @@
 class FaxDocument < ActiveRecord::Base
 	
+	
 	after_validation( :on => :create ) {
-		raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
-		if (! self.raw_file)
-			errors.add( :base, "No document found")
-		elsif (! File.exists?(raw_file))
-			errors.add( :base, "Failed convert document")
-		elsif (! self.destination.blank?)
-			originate_call(self.destination, raw_file)
+		if outgoing
+			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+			if (! self.raw_file)
+				errors.add( :base, "No document found")
+			elsif (! File.exists?(raw_file))
+				errors.add( :base, "Failed convert document")
+			elsif (! self.destination.blank?)
+				originate_call(self.destination, raw_file)
+			end
 		end
 	}
 	
 	after_validation( :on => :update ) {
-		raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
-		if (! self.raw_file || ! File.exists?(raw_file))
-			errors.add( :base, "Fax document not found")
-		elsif (! self.destination.blank?)
-			originate_call(self.destination, raw_file)
+		if outgoing
+			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+			if (! self.raw_file || ! File.exists?(raw_file))
+				errors.add( :base, "Fax document not found")
+			elsif (! self.destination.blank?)
+				originate_call(self.destination, raw_file)
+			end
 		end
 	}
 	
@@ -40,7 +45,7 @@ class FaxDocument < ActiveRecord::Base
 		resolution = '204x98'
 		page_size = '1728x1078'
 		input_file = upload['file'].tempfile.path()
-		output_file = SecureRandom.hex(10)
+		output_file = "FAX-OUT-#{SecureRandom.hex(10)}"
 		output_path = "#{FAX_FILES_DIRECTORY}/#{output_file}"
 		if (File.exist?(output_path+'.tif'))
 			return false
@@ -62,4 +67,6 @@ class FaxDocument < ActiveRecord::Base
 		request.basic_auth(XML_RPC_USER , XML_RPC_PASSWORD)
 		response = http.request( request )
 	end
+
+		
 end

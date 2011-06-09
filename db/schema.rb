@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110608160045) do
+ActiveRecord::Schema.define(:version => 20110609132440) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20110608160045) do
     t.string   "destination"
     t.datetime "received"
     t.datetime "sent"
+    t.boolean  "outgoing"
   end
 
   create_table "location", :force => true do |t|
