@@ -106,6 +106,11 @@ Gemeinschaft4::Application.routes.draw do
 		:controller => :manufacturer_snom,
 		:action     => 'call_forwarding_offline',
 		:format     => :'xml'
+	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/assistant',
+		:via        => [ :get, :post ],
+		:controller => :manufacturer_snom,
+		:action     => 'call_forwarding_assistant',
+		:format     => :'xml'
 	match '/manufacturer_snom/:mac_address/:sip_account/call_forwarding/save',
 		:via        => [ :get, :post ],
 		:controller => :manufacturer_snom,
