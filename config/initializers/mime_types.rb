@@ -4,3 +4,5 @@
 # Mime::Type.register "text/richtext", :rtf
 # Mime::Type.register_alias "text/html", :iphone
 Mime::Type.register "text/plain", :txt, ['cfg']
+Mime::Type.register "image/tiff", :tif
+Mime::Type.register "image/png", :png

@@ -21,6 +21,14 @@ class FaxDocumentsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @fax_document }
+	  format.tif { 
+        send_file "#{FAX_FILES_DIRECTORY}/#{@fax_document.raw_file}.tif", :type => "image/tiff", 
+		  :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.tif'
+	  }
+	  format.png {
+        send_file "#{FAX_FILES_DIRECTORY}/#{@fax_document.raw_file}.png", :type => "image/png", :disposition => 'inline', 
+		  :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.png'
+      }
     end
   end
 
@@ -83,15 +91,5 @@ class FaxDocumentsController < ApplicationController
       format.html { redirect_to(fax_documents_url) }
       format.xml  { head :ok }
     end
-  end
-  
-  def download
-    @fax_document = FaxDocument.find(params[:id])
-    send_file "#{FAX_FILES_DIRECTORY}/#{@fax_document.raw_file}.tif", :type => "image/tiff", :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.tif'
-  end
-  
-  def thumbnail
-    @fax_document = FaxDocument.find(params[:id])
-    send_file "#{FAX_FILES_DIRECTORY}/#{@fax_document.raw_file}.png", :type => "image/png", :disposition => 'inline'
   end
 end
