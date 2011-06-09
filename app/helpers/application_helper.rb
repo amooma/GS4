@@ -20,7 +20,7 @@ module ApplicationHelper
 				
 				{ :text => "Media services", :sub => [
 					{ :text => "Queues"        , :url => call_queues_path },
-					{ :text => "Conferences"   , :url => conferences_path},
+					{ :text => "Conferences"   , :url => conferences_path },
 				]},
 				
 				{ :text => "Servers", :sub => [
