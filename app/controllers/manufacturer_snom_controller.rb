@@ -113,7 +113,6 @@ class ManufacturerSnomController < ApplicationController
 		@busy_destination = destination_s( call_forward_busy )
 		
 		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
-		#FIXME Typo? Should @sip_account be @sip_account_name ? (=> pko)
 	end
 	
 	def call_forwarding_offline
