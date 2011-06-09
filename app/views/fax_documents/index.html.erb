@@ -13,7 +13,7 @@
 <% @fax_documents.each do |fax_document| %>
   <tr>
     <td><%= fax_document.file %></td>
-    <td><%= link_to File.basename(fax_document.file, File.extname(fax_document.file)) + '.tif', fax_document_path(fax_document) + '/download' %></td>
+    <td><%= link_to File.basename(fax_document.file, File.extname(fax_document.file)) + '.tif', fax_document_path(fax_document, :format => 'tif') %></td>
     <td><%= fax_document.destination %></td>
     <td><%= link_to 'Show', fax_document %></td>
     <td><%= link_to 'Edit', edit_fax_document_path(fax_document) %></td>
