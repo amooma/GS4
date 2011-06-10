@@ -40,8 +40,9 @@ freeswitch-lua  \
 freeswitch-perl freeswitch-spidermonkey \
 freeswitch-lang-de  \
 freeswitch-lang-en  \
-ghostscript
-
+ghostscript  \
+imagemagick  \
+curl 
 
 echo -e "Adding testing and setting APT Pin-Priority\n"
 (
