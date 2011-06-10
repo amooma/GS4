@@ -1,6 +1,6 @@
 class FaxDocumentsController < ApplicationController
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :unless => Proc.new { |r| r.request.remote_ip   == '127.0.0.1' }
 
   # GET /fax_documents
   # GET /fax_documents.xml
