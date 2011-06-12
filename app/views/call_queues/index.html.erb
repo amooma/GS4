@@ -23,7 +23,7 @@
     </td>
     <td><%= link_to 'Show', call_queue %></td>
     <td><%= link_to 'Edit', edit_call_queue_path(call_queue) %></td>
-    <td><%= link_to 'Destroy', call_queue, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', call_queue, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
