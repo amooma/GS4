@@ -8,7 +8,7 @@ class FaxDocument < ActiveRecord::Base
 		if (! self.raw_file)
 			errors.add( :base, "No document found")
 		elsif (! File.exists?(raw_file))
-			errors.add( :base, "Failed convert document")
+			errors.add( :base, "Failed to convert document")
 		else
 			thumbnail = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.png"
 			if (! File.exists?(thumbnail))
