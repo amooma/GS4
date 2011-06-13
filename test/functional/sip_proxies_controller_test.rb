@@ -121,6 +121,8 @@ class SipProxiesControllerTest < ActionController::TestCase
     assert_response( @expected_http_status_if_not_allowed )
   end
   
+  
+  
   test "should move accounts to new sip_proxy" do
     sign_in :user, @admin_user
     sip_proxy = Factory.create(:sip_proxy)

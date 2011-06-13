@@ -110,7 +110,7 @@ class VoicemailServersControllerTest < ActionController::TestCase
   end
   
   test "should not destroy voicemail_server (not an admin)" do
-    assert_no_difference('SipServer.count') {
+    assert_no_difference('VoicemailServer.count') {
       delete :destroy, :id => @voicemail_server.to_param
     }
     assert_response( @expected_http_status_if_not_allowed )
