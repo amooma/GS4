@@ -247,8 +247,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	#OPTIMIZE What is destination_s() supposed to do?
 	def destination_s( call_forward )
-		#FIXME Are you sure that "active?" is a valid method? Shouldn't it be "active" ? (=> pko)
-		if (! call_forward.nil? && call_forward.active?)   #OPTIMIZE Simply write: if (call_forward && ...)
+		if (! call_forward.nil? && call_forward.active)   #OPTIMIZE Simply write: if (call_forward && ...)
 			return call_forward.destination.to_s
 		end
 		return ''
