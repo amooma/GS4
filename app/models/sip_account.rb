@@ -8,7 +8,7 @@ class SipAccount < ActiveRecord::Base
   has_many :call_forwards, :dependent => :destroy
   has_many :sip_account_to_extensions, :dependent => :destroy   #OPTIMIZE :order => 'position' ?
   has_many :extensions, :through => :sip_account_to_extensions  #OPTIMIZE :order => 'position' ?
-  
+  has_many :call_forwards, :dependent => :destroy
   acts_as_list :scope => :user
   
   validate_username         :auth_name

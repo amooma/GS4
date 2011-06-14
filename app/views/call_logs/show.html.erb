@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sip account:</b>
+  <%= @call_log.sip_account_id %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @call_log.source %>
+</p>
+
+<p>
+  <b>Destination:</b>
+  <%= @call_log.destination %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @call_log.type %>
+</p>
+
+<p>
+  <b>Disposition:</b>
+  <%= @call_log.disposition %>
+</p>
+
+<p>
+  <b>Forwarded to:</b>
+  <%= @call_log.forwarded_to %>
+</p>
+
+
+<%= link_to 'Edit', edit_call_log_path(@call_log) %> |
+<%= link_to 'Back', call_logs_path %>

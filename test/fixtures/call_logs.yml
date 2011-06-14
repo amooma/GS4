@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sip_account_id: 1
+  source: MyString
+  destination: MyString
+  type: MyString
+  disposition: MyString
+  forwarded_to: MyString
+
+two:
+  sip_account_id: 1
+  source: MyString
+  destination: MyString
+  type: MyString
+  disposition: MyString
+  forwarded_to: MyString
