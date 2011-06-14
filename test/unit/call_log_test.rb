@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class CallLogTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+	
+	should "have a valid factory" do
+		assert Factory.build(:call_log).valid?
+	end
+	
 end

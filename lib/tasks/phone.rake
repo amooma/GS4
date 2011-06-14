@@ -37,3 +37,9 @@ namespace :phone do
   end
 
 end
+
+
+# Local Variables:
+# mode: ruby
+# End:
+

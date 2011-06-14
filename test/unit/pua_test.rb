@@ -1,8 +1,5 @@
 require 'test_helper'
 
 class PuaTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  # This is a table for Kamailio, not one of "our" models.
 end

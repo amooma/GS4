@@ -136,6 +136,12 @@
 				
 					<li><a href="./CallForwardsHelper.html">CallForwardsHelper</a></li>
 				
+					<li><a href="./CallLog.html">CallLog</a></li>
+				
+					<li><a href="./CallLogsController.html">CallLogsController</a></li>
+				
+					<li><a href="./CallLogsHelper.html">CallLogsHelper</a></li>
+				
 					<li><a href="./CallQueue.html">CallQueue</a></li>
 				
 					<li><a href="./CallQueueToExtension.html">CallQueueToExtension</a></li>
@@ -161,6 +167,10 @@
 					<li><a href="./ExtensionsController.html">ExtensionsController</a></li>
 				
 					<li><a href="./ExtensionsHelper.html">ExtensionsHelper</a></li>
+				
+					<li><a href="./FaxDocument.html">FaxDocument</a></li>
+				
+					<li><a href="./FaxDocumentsController.html">FaxDocumentsController</a></li>
 				
 					<li><a href="./FreeswitchCallProcessingController.html">FreeswitchCallProcessingController</a></li>
 				
@@ -303,10 +313,10 @@
 					<div class="method-source-code"
 						id="page-title-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 44</span>
-44:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">page_title</span>( <span class="ruby-identifier">page_title</span> )
-45:                 <span class="ruby-identifier">content_for</span>(<span class="ruby-value">:page_title</span>) { <span class="ruby-identifier">page_title</span> }
-46:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 45</span>
+45:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">page_title</span>( <span class="ruby-identifier">page_title</span> )
+46:                 <span class="ruby-identifier">content_for</span>(<span class="ruby-value">:page_title</span>) { <span class="ruby-identifier">page_title</span> }
+47:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -358,26 +368,27 @@ Define the top navigation menu items
 20:                                 
 21:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Media services&quot;</span>, <span class="ruby-value">:sub</span> =<span class="ruby-operator">&gt;</span> [
 22:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Queues&quot;</span>        , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">call_queues_path</span> },
-23:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Conferences&quot;</span>   , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conferences_path</span>},
-24:                                 ]},
-25:                                 
-26:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Servers&quot;</span>, <span class="ruby-value">:sub</span> =<span class="ruby-operator">&gt;</span> [
-27:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Domains&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_servers_path</span> },
-28:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Proxies&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_proxies_path</span> },
-29:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Voicemail Servers&quot;</span> , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">voicemail_servers_path</span> },
-30:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Nodes&quot;</span>             , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">nodes_path</span> },
-31:                                 ]},
-32:                                 
-33:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Help&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_help_path</span> }
-34:                                 
-35:                         ]
-36:                 <span class="ruby-keyword kw">else</span>
-37:                         <span class="ruby-identifier">menu_items</span> = [
-38:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Sign in&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_user_session_path</span> }
-39:                         ]
-40:                 <span class="ruby-keyword kw">end</span>
-41:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">menu_items</span>
-42:         <span class="ruby-keyword kw">end</span></pre>
+23:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Conferences&quot;</span>   , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conferences_path</span> },
+24:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Fax documents&quot;</span> , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">fax_documents_path</span> },
+25:                                 ]},
+26:                                 
+27:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Servers&quot;</span>, <span class="ruby-value">:sub</span> =<span class="ruby-operator">&gt;</span> [
+28:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Domains&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_servers_path</span> },
+29:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SIP Proxies&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sip_proxies_path</span> },
+30:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Voicemail Servers&quot;</span> , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">voicemail_servers_path</span> },
+31:                                         { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Nodes&quot;</span>             , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">nodes_path</span> },
+32:                                 ]},
+33:                                 
+34:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Help&quot;</span>          , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_help_path</span> }
+35:                                 
+36:                         ]
+37:                 <span class="ruby-keyword kw">else</span>
+38:                         <span class="ruby-identifier">menu_items</span> = [
+39:                                 { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Sign in&quot;</span>       , <span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_user_session_path</span> }
+40:                         ]
+41:                 <span class="ruby-keyword kw">end</span>
+42:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">menu_items</span>
+43:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

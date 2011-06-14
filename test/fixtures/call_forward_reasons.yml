@@ -1,7 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  value: MyString
+always:
+  value: always
 
-two:
-  value: MyString
+busy:
+  value: busy
+
+offline:
+  value: offline
+
+
