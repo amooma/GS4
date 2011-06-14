@@ -46,8 +46,9 @@ class CallForwardsControllerTest < ActionController::TestCase
   
   test "should create call_forward" do
     sign_in :user, @admin_user
+    call_forward = Factory.build(:call_forward)
     assert_difference('CallForward.count') {
-      post :create, :call_forward => Factory.attributes_for(:call_forward)
+      post :create, :call_forward => call_forward.attributes
     }
     assert_redirected_to( call_forward_path( assigns(:call_forward)))
     sign_out @admin_user
