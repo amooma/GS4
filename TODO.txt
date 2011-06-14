@@ -1,5 +1,5 @@
 #OPTIMIZE doc/docbook von Cantina einbauen
-#OPTIMIZE SipProxy einbauen (mit Doku, ggf. rake tasks etc.)
+#OPTIMIZE SipProxy einbauen (mit Doku etc.)
 
 #OPTIMIZE ./script/erd says: Warning: Ignoring invalid association :phone_keys on Phone (Could not find the source association(s) :phone_key or :phone_keys in model SipAccount.  Try 'has_many :phone_keys, :through => :sip_accounts, :source => <name>'.  Is it one of :sip_server, :sip_proxy, :voicemail_server, :phone, :user, :call_forwards, :sip_account_to_extensions, or :extensions?)
 
