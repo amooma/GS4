@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Class: PhoneKeyFunctionDefinition</title>
+	<title>Module: CallLogsHelper</title>
 
 	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
@@ -19,7 +19,7 @@
 		charset="utf-8"></script>
 
 </head>
-<body class="class">
+<body class="module">
 
 	<div id="metadata">
 		<div id="home-metadata">
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./app/models/phone_key_function_definition_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="app/models/phone_key_function_definition.rb">app/models/phone_key_function_definition.rb</a></li>
+						<li><a href="./app/helpers/call_logs_helper_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/helpers/call_logs_helper.rb">app/helpers/call_logs_helper.rb</a></li>
 					
 					</ul>
 				</div>
@@ -52,27 +52,11 @@
 
 			<!-- Parent Class -->
 			
-			<div id="parent-class-section" class="section">
-				<h3 class="section-header">Parent</h3>
-				
-				<p class="link">ActiveRecord::Base</p>
-				
-			</div>
-			
 
 			<!-- Namespace Contents -->
 			
 
 			<!-- Method Quickref -->
-			
-			<div id="method-list-section" class="section">
-				<h3 class="section-header">Methods</h3>
-				<ul class="link-list">
-					
-					<li><a href="#method-i-validate_regex_validation">#validate_regex_validation</a></li>
-					
-				</ul>
-			</div>
 			
 
 			<!-- Included Modules -->
@@ -280,7 +264,7 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="class">PhoneKeyFunctionDefinition</h1>
+		<h1 class="module">CallLogsHelper</h1>
 
 		<div id="description">
 			
@@ -294,55 +278,6 @@
 
 		<!-- Methods -->
 		
-		<div id="private-instance-method-details" class="method-section section">
-			<h3 class="section-header">Private Instance Methods</h3>
-
-		
-			<div id="validate-regex-validation-method" class="method-detail ">
-				<a name="method-i-validate_regex_validation"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">validate_regex_validation</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					<p>
-Validates the regex_validation of the <a
-href="PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a>.
-</p>
-					
-
-					
-					<div class="method-source-code"
-						id="validate-regex-validation-source">
-<pre>
-    <span class="ruby-comment cmt"># File app/models/phone_key_function_definition.rb, line 23</span>
-23:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_regex_validation</span>()
-24:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
-25:       <span class="ruby-keyword kw">begin</span>
-26:         <span class="ruby-identifier">re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> )
-27:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">RegexpError</span>
-28:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:regex_validation</span>, <span class="ruby-value str">&quot;is invalid.&quot;</span> )
-29:       <span class="ruby-keyword kw">end</span>
-30:     <span class="ruby-keyword kw">end</span>
-31:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-		</div>
-	
 
 	</div>
 

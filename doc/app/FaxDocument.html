@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Class: PhoneKeyFunctionDefinition</title>
+	<title>Class: FaxDocument</title>
 
 	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./app/models/phone_key_function_definition_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="app/models/phone_key_function_definition.rb">app/models/phone_key_function_definition.rb</a></li>
+						<li><a href="./app/models/fax_document_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/models/fax_document.rb">app/models/fax_document.rb</a></li>
 					
 					</ul>
 				</div>
@@ -69,7 +69,11 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-i-validate_regex_validation">#validate_regex_validation</a></li>
+					<li><a href="#method-i-create_thumbnail_from_fax">#create_thumbnail_from_fax</a></li>
+					
+					<li><a href="#method-i-originate_call">#originate_call</a></li>
+					
+					<li><a href="#method-i-save_file">#save_file</a></li>
 					
 				</ul>
 			</div>
@@ -280,7 +284,7 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="class">PhoneKeyFunctionDefinition</h1>
+		<h1 class="class">FaxDocument</h1>
 
 		<div id="description">
 			
@@ -294,43 +298,126 @@
 
 		<!-- Methods -->
 		
-		<div id="private-instance-method-details" class="method-section section">
-			<h3 class="section-header">Private Instance Methods</h3>
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
 
 		
-			<div id="validate-regex-validation-method" class="method-detail ">
-				<a name="method-i-validate_regex_validation"></a>
+			<div id="create-thumbnail-from-fax-method" class="method-detail ">
+				<a name="method-i-create_thumbnail_from_fax"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">validate_regex_validation</span><span
-						class="method-args">()</span>
+					<span class="method-name">create_thumbnail_from_fax</span><span
+						class="method-args">( raw_file )</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
 
 				<div class="method-description">
 					
-					<p>
-Validates the regex_validation of the <a
-href="PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a>.
-</p>
+					
 					
 
 					
 					<div class="method-source-code"
-						id="validate-regex-validation-source">
+						id="create-thumbnail-from-fax-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone_key_function_definition.rb, line 23</span>
-23:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_regex_validation</span>()
-24:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
-25:       <span class="ruby-keyword kw">begin</span>
-26:         <span class="ruby-identifier">re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> )
-27:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">RegexpError</span>
-28:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:regex_validation</span>, <span class="ruby-value str">&quot;is invalid.&quot;</span> )
-29:       <span class="ruby-keyword kw">end</span>
-30:     <span class="ruby-keyword kw">end</span>
-31:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/fax_document.rb, line 66</span>
+66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_thumbnail_from_fax</span>( <span class="ruby-identifier">raw_file</span> )
+67:                 <span class="ruby-identifier">convert_command</span> = <span class="ruby-node">&quot;convert -resize 210x310\! #{FAX_FILES_DIRECTORY}/#{raw_file}.tif #{FAX_FILES_DIRECTORY}/#{raw_file}.png&quot;</span>
+68:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">system</span> <span class="ruby-identifier">convert_command</span>
+69:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="originate-call-method" class="method-detail ">
+				<a name="method-i-originate_call"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">originate_call</span><span
+						class="method-args">( destination, raw_file )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="originate-call-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/fax_document.rb, line 71</span>
+71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">originate_call</span>( <span class="ruby-identifier">destination</span>, <span class="ruby-identifier">raw_file</span> )
+72:                 <span class="ruby-identifier">require</span> <span class="ruby-value str">'net/http'</span>
+73:                 
+74:                 <span class="ruby-identifier">request_path</span> = <span class="ruby-node">&quot;/webapi/originate?sofia/internal/#{destination}@#{DOMAIN};fs_path=sip:127.0.0.1:5060%20&amp;txfax(#{raw_file})&quot;</span>
+75:                 
+76:                 <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">XML_RPC_HOST</span>, <span class="ruby-constant">XML_RPC_PORT</span>)
+77:                 <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_path</span>, <span class="ruby-keyword kw">nil</span> )
+78:                 <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-constant">XML_RPC_USER</span> , <span class="ruby-constant">XML_RPC_PASSWORD</span>)
+79:                 <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>( <span class="ruby-identifier">request</span> )
+80:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="save-file-method" class="method-detail ">
+				<a name="method-i-save_file"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">save_file</span><span
+						class="method-args">( upload )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="save-file-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/fax_document.rb, line 46</span>
+46:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_file</span>( <span class="ruby-identifier">upload</span> )
+47:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">upload</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">upload</span>[<span class="ruby-value str">'file'</span>] <span class="ruby-operator">||</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">upload</span>[<span class="ruby-value str">'raw_file'</span>].<span class="ruby-identifier">blank?</span>)
+48:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+49:                 <span class="ruby-keyword kw">end</span>
+50:                 <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">upload</span>[<span class="ruby-value str">'file'</span>].<span class="ruby-identifier">original_filename</span>
+51:                 <span class="ruby-identifier">resolution</span> = <span class="ruby-value str">'204x98'</span>
+52:                 <span class="ruby-identifier">page_size</span> = <span class="ruby-value str">'1728x1078'</span>
+53:                 <span class="ruby-identifier">input_file</span> = <span class="ruby-identifier">upload</span>[<span class="ruby-value str">'file'</span>].<span class="ruby-identifier">tempfile</span>.<span class="ruby-identifier">path</span>()
+54:                 <span class="ruby-identifier">output_file</span> = <span class="ruby-node">&quot;FAX-OUT-#{SecureRandom.hex(10)}&quot;</span>
+55:                 <span class="ruby-identifier">output_path</span> = <span class="ruby-node">&quot;#{FAX_FILES_DIRECTORY}/#{output_file}&quot;</span>
+56:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">output_path</span><span class="ruby-operator">+</span><span class="ruby-value str">'.tif'</span>))
+57:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+58:                 <span class="ruby-keyword kw">end</span>
+59:                 <span class="ruby-identifier">ghostscript_command</span> = <span class="ruby-node">&quot;gs -q -r#{resolution} -g#{page_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=#{output_path}.tif -- #{input_file}&quot;</span>
+60:                 <span class="ruby-identifier">system</span>  <span class="ruby-identifier">ghostscript_command</span>
+61:                 <span class="ruby-identifier">ghostscript_command</span> = <span class="ruby-node">&quot;gs -q -r21x31 -g210x310 -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}&quot;</span>
+62:                 <span class="ruby-identifier">system</span>  <span class="ruby-identifier">ghostscript_command</span>
+63:                 <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">raw_file</span> = <span class="ruby-identifier">output_file</span>
+64:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
