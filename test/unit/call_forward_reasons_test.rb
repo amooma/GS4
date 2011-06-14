@@ -1,8 +1,20 @@
 require 'test_helper'
 
 class CallForwardReasonsTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+	
+	should "have a valid factory" do
+		assert Factory.build(:call_forward_reason).valid?
+	end
+	
+	[
+		'busy',
+		'noanswer',
+		'offline',
+		'always',
+		'assistant'
+	].each { |value|
+		should "be possible to use #{value.inspect} as value" do
+		assert Factory.build( :call_forward_reason, :value => value ).valid?
+		end
+	}
 end
