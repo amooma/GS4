@@ -4,7 +4,7 @@ one:
   sip_account_id: 1
   source: MyString
   destination: MyString
-  type: MyString
+  call_type: MyString
   disposition: MyString
   forwarded_to: MyString
 
@@ -12,6 +12,6 @@ two:
   sip_account_id: 1
   source: MyString
   destination: MyString
-  type: MyString
+  call_type: MyString
   disposition: MyString
   forwarded_to: MyString

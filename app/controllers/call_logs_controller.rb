@@ -1,4 +1,7 @@
 class CallLogsController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
   # GET /call_logs
   # GET /call_logs.xml
   def index
