@@ -40,7 +40,7 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :kamailio             , :only => [ :index ], :format => 'txt'
 	
-	resources :subscribers          , :only => [ :index, :show ]  #TODO Why do we need a route for subscribers?
+	resources :subscribers          , :only => [ :index, :show ]  #OPTIMIZE Do we need a route for subscribers?
 	
 	match '/admin/help',
 		:via        => [ :get ],
