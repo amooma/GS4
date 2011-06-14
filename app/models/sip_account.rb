@@ -23,9 +23,6 @@ class SipAccount < ActiveRecord::Base
   
   validate_password         :password
   
-  after_validation :phone_reboot
-  before_destroy   :phone_reboot
- 
   validates_numericality_of :voicemail_pin,
     :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
     :only_integer => true,
@@ -36,12 +33,15 @@ class SipAccount < ActiveRecord::Base
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
     :message => "must not be set if the SIP account does not have a voicemail server."
   
+  after_validation :phone_reboot
+  before_destroy   :phone_reboot
   
   before_validation( :on => :update ) {
-    if self.auth_name            != self.auth_name_was
-          errors.add( :base , "auth_name cannot be changed." )
+    if self.auth_name != self.auth_name_was
+      errors.add( :base , "auth_name cannot be changed." )
     end
   }
+  
   after_validation( :on => :create ) {
     if (self.sip_server) \
     && (self.sip_proxy) \
@@ -63,6 +63,8 @@ class SipAccount < ActiveRecord::Base
   before_destroy {
     delete_subscriber()
   }
+  
+  #OPTIMIZE private ?
   
   def create_subscriber()
     subscriber = Subscriber.create(
