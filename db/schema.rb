@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609132440) do
+ActiveRecord::Schema.define(:version => 20110614091546) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(:version => 20110609132440) do
     t.datetime "updated_at"
     t.string   "source"
     t.boolean  "active"
+  end
+
+  create_table "call_logs", :force => true do |t|
+    t.integer  "sip_account_id"
+    t.string   "source"
+    t.string   "destination"
+    t.string   "type"
+    t.string   "disposition"
+    t.string   "forwarded_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "call_queue_to_extensions", :force => true do |t|

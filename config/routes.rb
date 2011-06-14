@@ -1,5 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  resources :call_logs
+
 	resources :call_queues
 	
 	resources :call_forwards  #OPTIMIZE Nest this inside sip_accounts and adjust the views accordingly.
