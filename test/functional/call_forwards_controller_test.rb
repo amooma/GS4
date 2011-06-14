@@ -55,8 +55,9 @@ class CallForwardsControllerTest < ActionController::TestCase
   end
   
   test "should not create call_forward (not an admin)" do
+    call_forward = Factory.build(:call_forward)
     assert_no_difference('CallForward.count') {
-      post :create, :call_forward => Factory.attributes_for(:call_forward)
+      post :create, :call_forward => call_forward.attributes
     }
     assert_response( @expected_http_status_if_not_allowed )
   end
