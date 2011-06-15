@@ -4,12 +4,12 @@ xml.SnomIPPhoneText {
 	xml.Title("#{@title}")
 	xml.Text("#{@message}")
 	
-	xml.fetch("#{@provisioning_server_url}/call_forwarding.xml", :mil => '3000') 
+	xml.fetch("#{@xml_menu_url}/call_forwarding.xml", :mil => '3000') 
 	
 	xml.SoftKeyItem {
 		xml.Label('Exit')
 		xml.Name('F2')
-		xml.URL("#{@provisioning_server_url}/xml_menu.xml")
+		xml.URL("#{@xml_menu_url}/xml_menu.xml")
 	}
 }
 
