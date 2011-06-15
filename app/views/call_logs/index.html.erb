@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+	<th>Date</th>
     <th>Sip account</th>
     <th>Source</th>
     <th>Source name</th>
@@ -17,6 +18,7 @@
 
 <% @call_logs.each do |call_log| %>
   <tr>
+	<td><%= call_log.created_at.localtime.strftime("%m/%d/%y %H:%M") %></td>
     <td><%= call_log.sip_account_id %></td>
     <td><%= call_log.source %></td>
     <td><%= call_log.source_name %></td>

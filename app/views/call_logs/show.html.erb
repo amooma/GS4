@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Date:</b>
+  <%= @call_log.created_at.localtime %>
+</p>
+
+<p>
   <b>Sip account:</b>
   <%= @call_log.sip_account_id %>
 </p>
