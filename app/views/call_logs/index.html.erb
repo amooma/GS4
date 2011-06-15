@@ -29,7 +29,7 @@
     <td><%= call_log.forwarded_to %></td>
     <td><%= link_to 'Show', call_log %></td>
     <td><%= link_to 'Edit', edit_call_log_path(call_log) %></td>
-    <td><%= link_to 'Destroy', call_log, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', call_log, :method => :delete %></td>
   </tr>
 <% end %>
 </table>
