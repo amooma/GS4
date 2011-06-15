@@ -32,8 +32,8 @@ xml.settings {
 		end
 		xml.alert_group_ring_sound( 'Silent', :perm => 'RW' )
 		
-		xml.dkey_directory( "url #{@provisioning_server_url}/phone_book_internal.xml", :perm => 'RW' )
-		xml.dkey_menu( "url #{@provisioning_server_url}/xml_menu.xml", :perm => 'RW' )
+		xml.dkey_directory( "url #{@xml_menu_url}/phone_book_internal.xml", :perm => 'RW' )
+		xml.dkey_menu( "url #{@xml_menu_url}/xml_menu.xml", :perm => 'RW' )
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
