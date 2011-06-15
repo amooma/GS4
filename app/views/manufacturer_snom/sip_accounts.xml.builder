@@ -4,13 +4,13 @@ xml.SnomIPPhoneMenu {
 	xml.Title('Select SIP Account')
 	@sip_accounts.each { |sip_account|
 		xml.MenuItem {
-			xml.Name("#{sip_account.auth_name} - #{sip_account.caller_name}")
-			xml.URL("#{@provisioning_server_url}/#{sip_account.auth_name}/xml_menu.xml")
+			xml.Name("#{sip_account.caller_name} (#{sip_account.auth_name})")
+			xml.URL("#{@xml_menu_url}/#{sip_account.id}/xml_menu.xml")
 		}
 	}
 	xml.SoftKeyItem {
 		xml.Name('*')
-		xml.URL("#{@provisioning_server_url}/xml_menu.xml")
+		xml.URL("#{@xml_menu_url}/xml_menu.xml")
 	}
 }
 
