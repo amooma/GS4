@@ -23,3 +23,9 @@ xml.SnomIPPhoneDirectory {
 		xml.URL("#{@xml_menu_url}/xml_menu.xml")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
