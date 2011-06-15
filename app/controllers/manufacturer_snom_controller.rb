@@ -1,14 +1,7 @@
 class ManufacturerSnomController < ApplicationController
 	
-	#TODO Authentication
-	
-	#OPTIMIZE Do not set @provisioning_server_url a dozen times. Use a before_filter!
-	# Same goes for mac_address and @sip_account_name.
-	#before_filter { |controller|
-	#	@provisioning_server_url = "..."
-	#}
-	
-	#OPTIMIZE Use https for @provisioning_server_url
+	#TODO Authentication	
+	#OPTIMIZE Use https for @xml_menu_url
 	
 	before_filter { |controller|
 		@cfwd_case_busy_id      = CallForwardReason.where( :value => "busy"      ).first.try(:id)
@@ -16,11 +9,30 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
+	    @mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+	    if (@mac_address && @phone = Phone.where(:mac_address => @mac_address).first)
+			@sip_account = get_sip_account(@phone, params[:sip_account])
+			if (@sip_account)
+				@sip_account_id = @sip_account.id
+				@sip_account_name = @sip_account.caller_name
+				@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
+			else
+				@sip_account_id = nil
+				@sip_account_name = ''
+				@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+			end
+		else
+			render(
+				:status => 404,
+				:layout => false,
+				:content_type => 'text/plain',
+				:text => "<!-- Phone #{@mac_address.inspect} not found. -->",
+			)
+		end
 	}
 	
 	def show
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@phone = Phone.where(:mac_address => mac_address).first
+		
 		@my_local_ip = local_ip
 		
 		##### Codec mapping {
@@ -37,170 +49,137 @@ class ManufacturerSnomController < ApplicationController
 		}
 		##### Codec mapping }
 		
-		if (! @phone.nil?)  #OPTIMIZE Simply write: if (@phone)
-			if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
-				@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
-				@phone.update_attributes(:ip_address => request.remote_ip)
-			end
-			@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
-			respond_to { |format|
-				format.xml
-			}
-		else
-			#respond_to { |format|
-			#	format.html
-			#}
-			render(
-				:status => 404,
-				:layout => false,
-				:content_type => 'text/plain',
-				:text => "<!-- Phone #{mac_address.inspect} not found. -->",
-			)
+		if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
+			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
+			@phone.update_attributes(:ip_address => request.remote_ip)
 		end
+		respond_to { |format|
+			format.xml
+		}
 	end
 	
 	def xml_menu
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=> pko)
-		@sip_account_name = get_sip_account_name()
-		@sip_accounts_count = sip_accounts.count
-		@sip_account_url = "/#{@sip_account_name}"
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
+		if (@sip_account)
+			@sip_accounts_count = Phone.find_by_mac_address( @mac_address ).sip_accounts.count
+		else
+			@sip_accounts_count = 0
+		end
 	end
 	
 	def phone_book_internal
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
 		@sip_accounts = SipAccount.all
 	end
 	
-	def call_forwarding
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@sip_account_name = get_sip_account_name()
-		
-		call_forward_always    = get_call_forward( @sip_account_name, @cfwd_case_always_id )
-		call_forward_noanswer  = get_call_forward( @sip_account_name, @cfwd_case_noanswer_id )
-		call_forward_busy      = get_call_forward( @sip_account_name, @cfwd_case_busy_id )
-		call_forward_offline   = get_call_forward( @sip_account_name, @cfwd_case_offline_id )
-		call_forward_assistant = get_call_forward( @sip_account_name, @cfwd_case_assistant_id )
-		
-		@always_destination    = destination_s( call_forward_always )
-		@noanswer_destination  = destination_s( call_forward_noanswer )
-		@busy_destination      = destination_s( call_forward_busy )
-		@offline_destination   = destination_s( call_forward_offline )
-		@assistant_destination = destination_s( call_forward_assistant )
-		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
+	
+	def call_log
+		if (@sip_account)
+			@call_logs_in = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
+			@call_logs_out = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
+			@call_logs_missed = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
+		end
 	end
 	
-	#OPTIMIZE Code smell: Duplicated code in call_forwarding_{always|busy|offline|noanswer}
+	def call_log_in
+		if (@sip_account)
+			@call_logs_in = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all
+		end
+	end
+	
+	def call_log_missed
+		if (@sip_account)
+			@call_logs_missed = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all
+		end
+	end
+	
+	def call_log_out
+		if (@sip_account)
+			@call_logs_out = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all
+		end
+	end
+	
+	def call_forwarding
+		if (@sip_account)
+			@always_destination    = get_call_forward( @sip_account, @cfwd_case_always_id )
+			@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
+			@busy_destination      = get_call_forward( @sip_account, @cfwd_case_busy_id )
+			@offline_destination   = get_call_forward( @sip_account, @cfwd_case_offline_id )
+			@assistant_destination = get_call_forward( @sip_account, @cfwd_case_assistant_id )
+		end
+	end
 	
 	def call_forwarding_always
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@sip_account_name = get_sip_account_name()
-		
-		call_forward_always = get_call_forward( @sip_account_name, @cfwd_case_always_id )
-		@always_destination = destination_s( call_forward_always )
-		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
+		@always_destination    = get_call_forward( @sip_account, @cfwd_case_always_id )
 	end
 	
 	def call_forwarding_assistant
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@sip_account_name = get_sip_account_name()
-		
-		call_forward_assistant = get_call_forward( @sip_account_name, @cfwd_case_assistant_id )
-		@always_destination = destination_s( call_forward_assistant )
-		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
+		@assistant_destination = get_call_forward( @sip_account, @cfwd_case_assistant_id )
 	end
 	
 	def call_forwarding_busy
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@sip_account_name = get_sip_account_name()
-		
-		call_forward_busy = get_call_forward( @sip_account_name, @cfwd_case_busy_id )
-		@busy_destination = destination_s( call_forward_busy )
-		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
+		@busy_destination      = get_call_forward( @sip_account, @cfwd_case_busy_id )
 	end
 	
 	def call_forwarding_offline
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@sip_account_name = get_sip_account_name()
-		
-		call_forward_offline = get_call_forward( @sip_account_name, @cfwd_case_offline_id )
-		@offline_destination = destination_s( call_forward_offline )
-		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
+		@offline_destination   = get_call_forward( @sip_account, @cfwd_case_offline_id )
 	end
 	
 	def call_forwarding_noanswer
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		if (params[:query_timeout] == '1')
-			@query_timeout = true
-		else
-			@query_timeout = false
+		if (@sip_account)
+			@query_timeout = params[:query_timeout]
+			@cfwd_destination = params[:destination]
+			if (@query_timeout && @cfwd_destination.blank?)
+				call_forwarding_save
+				render :action => 'call_forwarding_save'  
+			end
+			@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
+			if (call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => true, :source => '' ).first || 
+				call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => false, :source => '' ).first)
+				@noanswer_timeout = call_forward.call_timeout
+			else
+				@noanswer_timeout = 20
+			end
 		end
-		@sip_account_name = get_sip_account_name()
-		@destination = params[:noanswer_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		
-		call_forward_noanswer = get_call_forward( @sip_account_name, @cfwd_case_noanswer_id )
-		@noanswer_destination = destination_s( call_forward_noanswer )
-		@noanswer_timeout = 20
-		
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
 	def call_forwarding_save
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@sip_account_name = get_sip_account_name()
 		reason = nil
-		timeout = nil
+
+		cfwd_case = params[:case]
+		cfwd_destination = params[:destination]
+		cfwd_timeout = params[:timeout]
 		
-		#OPTIMIZE Remove the "{always|busy|offline|noanswer}_destination" params. Use a "case" param and a "destination" param.
-		if (! params[:always_destination].nil?)         #OPTIMIZE Simply write: if (params[:always_destination])
+		case cfwd_case
+		when 'always'
 			@title = "Unconditional Call Forwarding"
 			reason = @cfwd_case_always_id
-			destination = params[:always_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		elsif (! params[:busy_destination].nil?)        #OPTIMIZE Simply write: if (params[:busy_destination])
+		when 'busy'
 			@title = "Call Forwarding on Busy"
 			reason = @cfwd_case_busy_id
-			destination = params[:busy_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		elsif (! params[:offline_destination].nil?)     #OPTIMIZE Simply write: if (params[:offline_destination])
+		when 'offline'
 			@title = "Call Forwarding on Offline"
 			reason = @cfwd_case_offline_id
-			destination = params[:offline_destination].to_s.gsub(/[^0-9\*\#]/,'')
-		elsif (! params[:noanswer_destination].nil?)    #OPTIMIZE Simply write: if (params[:noanswer_destination])
+		when 'noanswer'
 			@title = "Call Forwarding on No Answer"
 			reason = @cfwd_case_noanswer_id
-			destination = params[:noanswer_destination].to_s.gsub(/[^0-9\*\#]/,'')
-			timeout = params[:noanswer_timeout].to_s.gsub(/[^0-9]/,'')
-		elsif (! params[:assistant_destination].nil?)   #OPTIMIZE Simply write: if (params[:assistant_destination])
+		when 'assistant'
 			@title = "Call Forwarding to assistant"
 			reason = @cfwd_case_assistant_id
-			destination = params[:assistant_destination].to_s.gsub(/[^0-9\*\#]/,'')
-			timeout = params[:assistant_timeout].to_s.gsub(/[^0-9]/,'')
-		end
-		
-		if (reason.nil?)
-			@message = "NOT SAVED"
+		else
+			@message = "NO CASE"
 			return false
 		end
 		
-		call_forward = save_call_forward( @sip_account_name, reason, destination, timeout )
+		call_forward = save_call_forward( @sip_account, reason, cfwd_destination, cfwd_timeout )
 		if (call_forward)
 			@message = "SAVED"
 		else
-			@message = "NOT SAVED"
+			@message = "NOT SAVED #{@returnval}"
 		end
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}"
 	end
 	
 	def sip_accounts
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		@provisioning_server_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}"
-		@sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts.all  #FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=> pko)
+		@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+		@sip_accounts = @phone.sip_accounts.all
 	end
 	
 	def index
@@ -213,64 +192,47 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
-	def get_sip_account_name()
-		mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		sip_account_name = params[:sip_account]
-		sip_accounts = Phone.find_by_mac_address( mac_address ).sip_accounts  #FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=> pko)
-		if (sip_account_name.blank?)
-			sip_account = sip_accounts.first
-			if (! sip_account.blank?)
-				sip_account_name = sip_account.auth_name
-			end
-		else
-			sip_account = sip_accounts.find_by_auth_name( sip_account_name )
-			if (! sip_account.blank?)
-				sip_account_name = sip_account.auth_name
-			else
-				sip_account_name = nil
-			end
-		end
-		return sip_account_name
-	end
-	
-	def get_call_forward( auth_name, reason )
-		sip_account = SipAccount.find_by_auth_name( auth_name )
-		if (sip_account.nil?)
+    def get_sip_account(phone, sip_account_id = nil)
+		sip_accounts = phone.sip_accounts
+		
+		if (! sip_accounts) 
 			return nil
 		end
-		call_forward = sip_account.call_forwards.where( :call_forward_reason_id => reason, :active => true, :source => '' ).first
-		if (call_forward.nil?)
-			call_forward = SipAccount.find_by_auth_name( auth_name ).call_forwards.where( :call_forward_reason_id => reason, :active => false, :source => '' ).first
+		
+		if (sip_account_id.blank?)
+			return sip_accounts.first
 		end
-		return call_forward
+		
+		return sip_account = sip_accounts.find_by_id( sip_account_id )
 	end
 	
-	#OPTIMIZE What is destination_s() supposed to do?
-	def destination_s( call_forward )
-		if (! call_forward.nil? && call_forward.active)   #OPTIMIZE Simply write: if (call_forward && ...)
+	def get_call_forward( sip_account, reason )
+		if (sip_account.nil?)
+			return ''
+		end
+		if (call_forward = sip_account.call_forwards.where( :call_forward_reason_id => reason, :active => true, :source => '' ).first)
 			return call_forward.destination.to_s
 		end
 		return ''
 	end
 	
-	def save_call_forward( auth_name, reason, destination, timeout = nil )
+	def save_call_forward( sip_account, reason, destination, timeout = nil )
 		if (reason == @cfwd_case_noanswer_id && (! destination.blank?))
 			timeout = timeout.to_i
-			if (timeout < 1 || timeout > 360)
+			if (timeout < 1 || timeout > 120)
 				timeout = 20
 			end
 		else
 			timeout = nil
 		end
 		
-		call_forward = get_call_forward( auth_name, reason )
+		call_forward = sip_account.call_forwards.where( :call_forward_reason_id => reason, :active => true, :source => '' ).first
+		if (call_forward.nil?)
+			call_forward = sip_account.call_forwards.where( :call_forward_reason_id => reason, :active => false, :source => '' ).first
+		end
 		
 		if (call_forward.nil?)
 			if (! destination.blank?)
-				sip_account = SipAccount.find_by_auth_name( auth_name )
-				if (sip_account.nil?)
-					return false
-				end
 				call_forward = sip_account.call_forwards.create(
 					:active => true,
 					:source => '',
@@ -295,7 +257,13 @@ class ManufacturerSnomController < ApplicationController
 				)
 			end
 		end
+		
 		return call_forward_update
 	end
 	
+	private
+	DISPOSITION_NOANSWER = 'noanswer'
+	DISPOSITION_ANSWERED = 'answered'
+	CALL_INBOUND = 'in'
+	CALL_OUTBOUND = 'out'
 end
