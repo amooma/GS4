@@ -29,7 +29,6 @@ xml.SnomIPPhoneInput {
 }
 
 
-
 # Local Variables:
 # mode: ruby
 # End:
