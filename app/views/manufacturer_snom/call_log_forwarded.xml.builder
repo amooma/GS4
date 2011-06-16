@@ -1,8 +1,14 @@
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.SnomIPPhoneDirectory {
-	xml.Title("Answered Calls")
-	@call_logs_in.each { |call_entry|
+	xml.Title("Forwarded Calls")
+	@call_logs_forwarded.each_with_index { |call_entry, index|
+		if (call_entry.forwarded_to.blank?)
+			next
+		end
+		if (index > @max_entries)
+			break
+		end
 		if (call_entry.created_at < Time.now.advance(:hours => -12))
 			date_formatted = call_entry.created_at.localtime.strftime("%m/%d/%y")
 		else
@@ -14,7 +20,7 @@ xml.SnomIPPhoneDirectory {
 			source_name = 'anonymous'
 		end
 		xml.tag!( 'DirectoryEntry' ) {
-			xml.Name("#{date_formatted} #{source_name}:#{source_number}")
+			xml.Name("#{date_formatted} #{source_name}:#{source_number} > #{call_entry.forwarded_to}")
 			xml.Telephone( call_entry.source )
 		}
 	}
@@ -28,4 +34,3 @@ xml.SnomIPPhoneDirectory {
 # Local Variables:
 # mode: ruby
 # End:
-

@@ -38,10 +38,11 @@ digraph Gemeinschaft4 {
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="call_type">call_type <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="destination">destination <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="destination_name">destination_name <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="disposition">disposition <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="forwarded_to">forwarded_to <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="remote_name">remote_name <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="source">source <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="source_name">source_name <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 >];
   m_CallQueue [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">

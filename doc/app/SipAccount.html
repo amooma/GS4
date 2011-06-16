@@ -317,25 +317,27 @@
 
 				<div class="method-description">
 					
-					
+					<p>
+OPTIMIZE private ?
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="create-subscriber-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 67</span>
-67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_subscriber</span>()
-68:     <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">create</span>(
-69:       <span class="ruby-value">:username</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name</span>,
-70:       <span class="ruby-value">:domain</span>     =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_server</span>.<span class="ruby-identifier">host</span>,
-71:       <span class="ruby-value">:password</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">password</span>,
-72:       <span class="ruby-value">:ha1</span>        =<span class="ruby-operator">&gt;</span>  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-node">&quot;#{self.auth_name}:#{self.sip_server.host}:#{self.password}&quot;</span> )
-73:     )
-74:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber</span>.<span class="ruby-identifier">valid?</span>
-75:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to create subscriber&quot;</span>)
-76:     <span class="ruby-keyword kw">end</span>
-77:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 69</span>
+69:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_subscriber</span>()
+70:     <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">create</span>(
+71:       <span class="ruby-value">:username</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name</span>,
+72:       <span class="ruby-value">:domain</span>     =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_server</span>.<span class="ruby-identifier">host</span>,
+73:       <span class="ruby-value">:password</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">password</span>,
+74:       <span class="ruby-value">:ha1</span>        =<span class="ruby-operator">&gt;</span>  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-node">&quot;#{self.auth_name}:#{self.sip_server.host}:#{self.password}&quot;</span> )
+75:     )
+76:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber</span>.<span class="ruby-identifier">valid?</span>
+77:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to create subscriber&quot;</span>)
+78:     <span class="ruby-keyword kw">end</span>
+79:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -366,17 +368,17 @@
 					<div class="method-source-code"
 						id="delete-subscriber-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 96</span>
- 96:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_subscriber</span>()
- 97:     <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_proxy_id_was</span>.<span class="ruby-identifier">nil?</span>)      <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_proxy_id_was</span>).<span class="ruby-identifier">is_local</span>)  <span class="ruby-comment cmt">#FIXME self.sip_proxy can be nil (=&gt; pko)</span>
- 98:       <span class="ruby-identifier">subscriber_delete</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">find_by_username</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name_was</span> )
- 99:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subscriber_delete</span>
-100:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber_delete</span>.<span class="ruby-identifier">destroy</span>
-101:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to delete subscriber&quot;</span>)
-102:         <span class="ruby-keyword kw">end</span>
-103:       <span class="ruby-keyword kw">end</span>
-104:     <span class="ruby-keyword kw">end</span>
-105:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 98</span>
+ 98:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_subscriber</span>()
+ 99:     <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_proxy_id_was</span>.<span class="ruby-identifier">nil?</span>)      <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-constant">SipProxy</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_proxy_id_was</span>).<span class="ruby-identifier">is_local</span>)  <span class="ruby-comment cmt">#FIXME self.sip_proxy can be nil (=&gt; pko)</span>
+100:       <span class="ruby-identifier">subscriber_delete</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">find_by_username</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name_was</span> )
+101:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subscriber_delete</span>
+102:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber_delete</span>.<span class="ruby-identifier">destroy</span>
+103:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to delete subscriber&quot;</span>)
+104:         <span class="ruby-keyword kw">end</span>
+105:       <span class="ruby-keyword kw">end</span>
+106:     <span class="ruby-keyword kw">end</span>
+107:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -407,10 +409,10 @@
 					<div class="method-source-code"
 						id="phone-reboot-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 108</span>
-108:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_reboot</span>
-109:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">reboot</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>
-110:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 110</span>
+110:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_reboot</span>
+111:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">reboot</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>
+112:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -441,23 +443,23 @@
 					<div class="method-source-code"
 						id="update-subscriber-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 79</span>
-79:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_subscriber</span>()
-80:     <span class="ruby-identifier">subscriber_update</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">find_by_username</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name_was</span> )
-81:     <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber_update</span>.<span class="ruby-identifier">nil?</span>)
-82:       <span class="ruby-identifier">subscriber</span> = <span class="ruby-identifier">subscriber_update</span>.<span class="ruby-identifier">update_attributes</span>(
-83:         <span class="ruby-value">:username</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name</span>,
-84:         <span class="ruby-value">:domain</span>     =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_server</span>.<span class="ruby-identifier">host</span>,
-85:         <span class="ruby-value">:password</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">password</span>,
-86:         <span class="ruby-value">:ha1</span>        =<span class="ruby-operator">&gt;</span>  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-node">&quot;#{self.auth_name}:#{self.sip_server.host}:#{self.password}&quot;</span> )
-87:       )
-88:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber</span>
-89:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to update subscriber&quot;</span>)
-90:       <span class="ruby-keyword kw">end</span>
-91:     <span class="ruby-keyword kw">else</span>
-92:       <span class="ruby-identifier">create_subscriber</span>()
-93:     <span class="ruby-keyword kw">end</span>
-94:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 81</span>
+81:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_subscriber</span>()
+82:     <span class="ruby-identifier">subscriber_update</span> = <span class="ruby-constant">Subscriber</span>.<span class="ruby-identifier">find_by_username</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name_was</span> )
+83:     <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber_update</span>.<span class="ruby-identifier">nil?</span>)
+84:       <span class="ruby-identifier">subscriber</span> = <span class="ruby-identifier">subscriber_update</span>.<span class="ruby-identifier">update_attributes</span>(
+85:         <span class="ruby-value">:username</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auth_name</span>,
+86:         <span class="ruby-value">:domain</span>     =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_server</span>.<span class="ruby-identifier">host</span>,
+87:         <span class="ruby-value">:password</span>   =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">password</span>,
+88:         <span class="ruby-value">:ha1</span>        =<span class="ruby-operator">&gt;</span>  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-node">&quot;#{self.auth_name}:#{self.sip_server.host}:#{self.password}&quot;</span> )
+89:       )
+90:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">subscriber</span>
+91:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-value str">&quot;Failed to update subscriber&quot;</span>)
+92:       <span class="ruby-keyword kw">end</span>
+93:     <span class="ruby-keyword kw">else</span>
+94:       <span class="ruby-identifier">create_subscriber</span>()
+95:     <span class="ruby-keyword kw">end</span>
+96:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

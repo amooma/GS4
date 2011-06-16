@@ -83,11 +83,19 @@
 					
 					<li><a href="#method-i-call_forwarding_save">#call_forwarding_save</a></li>
 					
-					<li><a href="#method-i-destination_s">#destination_s</a></li>
+					<li><a href="#method-i-call_log">#call_log</a></li>
+					
+					<li><a href="#method-i-call_log_forwarded">#call_log_forwarded</a></li>
+					
+					<li><a href="#method-i-call_log_in">#call_log_in</a></li>
+					
+					<li><a href="#method-i-call_log_missed">#call_log_missed</a></li>
+					
+					<li><a href="#method-i-call_log_out">#call_log_out</a></li>
 					
 					<li><a href="#method-i-get_call_forward">#get_call_forward</a></li>
 					
-					<li><a href="#method-i-get_sip_account_name">#get_sip_account_name</a></li>
+					<li><a href="#method-i-get_sip_account">#get_sip_account</a></li>
 					
 					<li><a href="#method-i-index">#index</a></li>
 					
@@ -318,6 +326,38 @@
 
 		<!-- Constants -->
 		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="DISPOSITION_NOANSWER">DISPOSITION_NOANSWER</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="DISPOSITION_ANSWERED">DISPOSITION_ANSWERED</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="CALL_INBOUND">CALL_INBOUND</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="CALL_OUTBOUND">CALL_OUTBOUND</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="DISPLAY_MAX_ENTRIES">DISPLAY_MAX_ENTRIES</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+			</dl>
+		</div>
+		
 
 		<!-- Attributes -->
 		
@@ -348,25 +388,16 @@
 					<div class="method-source-code"
 						id="call-forwarding-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 77</span>
-77:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding</span>
-78:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-79:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-80:                 
-81:                 <span class="ruby-identifier">call_forward_always</span>    = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_always_id</span> )
-82:                 <span class="ruby-identifier">call_forward_noanswer</span>  = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_noanswer_id</span> )
-83:                 <span class="ruby-identifier">call_forward_busy</span>      = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_busy_id</span> )
-84:                 <span class="ruby-identifier">call_forward_offline</span>   = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_offline_id</span> )
-85:                 <span class="ruby-identifier">call_forward_assistant</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_assistant_id</span> )
-86:                 
-87:                 <span class="ruby-ivar">@always_destination</span>    = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_always</span> )
-88:                 <span class="ruby-ivar">@noanswer_destination</span>  = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_noanswer</span> )
-89:                 <span class="ruby-ivar">@busy_destination</span>      = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_busy</span> )
-90:                 <span class="ruby-ivar">@offline_destination</span>   = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_offline</span> )
-91:                 <span class="ruby-ivar">@assistant_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_assistant</span> )
-92:                 
-93:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-94:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 124</span>
+124:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding</span>
+125:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+126:                         <span class="ruby-ivar">@always_destination</span>    = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_always_id</span> )
+127:                         <span class="ruby-ivar">@noanswer_destination</span>  = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_noanswer_id</span> )
+128:                         <span class="ruby-ivar">@busy_destination</span>      = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_busy_id</span> )
+129:                         <span class="ruby-ivar">@offline_destination</span>   = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_offline_id</span> )
+130:                         <span class="ruby-ivar">@assistant_destination</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_assistant_id</span> )
+131:                 <span class="ruby-keyword kw">end</span>
+132:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -390,26 +421,17 @@
 
 				<div class="method-description">
 					
-					<p>
-OPTIMIZE Code smell: Duplicated code in
-call_forwarding_{always|busy|offline|noanswer}
-</p>
+					
 					
 
 					
 					<div class="method-source-code"
 						id="call-forwarding-always-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 98</span>
- 98:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_always</span>
- 99:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-100:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-101:                 
-102:                 <span class="ruby-identifier">call_forward_always</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_always_id</span> )
-103:                 <span class="ruby-ivar">@always_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_always</span> )
-104:                 
-105:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-106:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 134</span>
+134:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_always</span>
+135:                 <span class="ruby-ivar">@always_destination</span>    = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_always_id</span> )
+136:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -440,16 +462,10 @@ call_forwarding_{always|busy|offline|noanswer}
 					<div class="method-source-code"
 						id="call-forwarding-assistant-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 108</span>
-108:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_assistant</span>
-109:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-110:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-111:                 
-112:                 <span class="ruby-identifier">call_forward_assistant</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_assistant_id</span> )
-113:                 <span class="ruby-ivar">@always_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_assistant</span> )
-114:                 
-115:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-116:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 138</span>
+138:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_assistant</span>
+139:                 <span class="ruby-ivar">@assistant_destination</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_assistant_id</span> )
+140:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -480,16 +496,10 @@ call_forwarding_{always|busy|offline|noanswer}
 					<div class="method-source-code"
 						id="call-forwarding-busy-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 118</span>
-118:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_busy</span>
-119:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-120:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-121:                 
-122:                 <span class="ruby-identifier">call_forward_busy</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_busy_id</span> )
-123:                 <span class="ruby-ivar">@busy_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_busy</span> )
-124:                 
-125:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-126:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 142</span>
+142:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_busy</span>
+143:                 <span class="ruby-ivar">@busy_destination</span>      = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_busy_id</span> )
+144:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -520,23 +530,24 @@ call_forwarding_{always|busy|offline|noanswer}
 					<div class="method-source-code"
 						id="call-forwarding-noanswer-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 138</span>
-138:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_noanswer</span>
-139:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-140:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">params</span>[<span class="ruby-value">:query_timeout</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'1'</span>)
-141:                         <span class="ruby-ivar">@query_timeout</span> = <span class="ruby-keyword kw">true</span>
-142:                 <span class="ruby-keyword kw">else</span>
-143:                         <span class="ruby-ivar">@query_timeout</span> = <span class="ruby-keyword kw">false</span>
-144:                 <span class="ruby-keyword kw">end</span>
-145:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-146:                 <span class="ruby-ivar">@destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:noanswer_destination</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9\*\#]/</span>,<span class="ruby-value str">''</span>)
-147:                 
-148:                 <span class="ruby-identifier">call_forward_noanswer</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_noanswer_id</span> )
-149:                 <span class="ruby-ivar">@noanswer_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_noanswer</span> )
-150:                 <span class="ruby-ivar">@noanswer_timeout</span> = <span class="ruby-value">20</span>
-151:                 
-152:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-153:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 150</span>
+150:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_noanswer</span>
+151:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+152:                         <span class="ruby-ivar">@query_timeout</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:query_timeout</span>]
+153:                         <span class="ruby-ivar">@cfwd_destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:destination</span>]
+154:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@query_timeout</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@cfwd_destination</span>.<span class="ruby-identifier">blank?</span>)
+155:                                 <span class="ruby-identifier">call_forwarding_save</span>
+156:                                 <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'call_forwarding_save'</span>  
+157:                         <span class="ruby-keyword kw">end</span>
+158:                         <span class="ruby-ivar">@noanswer_destination</span>  = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_noanswer_id</span> )
+159:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@cfwd_case_noanswer_id</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> 
+160:                                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@cfwd_case_noanswer_id</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span>)
+161:                                 <span class="ruby-ivar">@noanswer_timeout</span> = <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">call_timeout</span>
+162:                         <span class="ruby-keyword kw">else</span>
+163:                                 <span class="ruby-ivar">@noanswer_timeout</span> = <span class="ruby-value">20</span>
+164:                         <span class="ruby-keyword kw">end</span>
+165:                 <span class="ruby-keyword kw">end</span>
+166:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -567,16 +578,10 @@ call_forwarding_{always|busy|offline|noanswer}
 					<div class="method-source-code"
 						id="call-forwarding-offline-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 128</span>
-128:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_offline</span>
-129:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-130:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-131:                 
-132:                 <span class="ruby-identifier">call_forward_offline</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-ivar">@cfwd_case_offline_id</span> )
-133:                 <span class="ruby-ivar">@offline_destination</span> = <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward_offline</span> )
-134:                 
-135:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-136:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 146</span>
+146:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_offline</span>
+147:                 <span class="ruby-ivar">@offline_destination</span>   = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-ivar">@cfwd_case_offline_id</span> )
+148:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -607,51 +612,42 @@ call_forwarding_{always|busy|offline|noanswer}
 					<div class="method-source-code"
 						id="call-forwarding-save-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 155</span>
-155:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_save</span>
-156:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-157:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-158:                 <span class="ruby-identifier">reason</span> = <span class="ruby-keyword kw">nil</span>
-159:                 <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword kw">nil</span>
-160:                 
-161:                 <span class="ruby-comment cmt">#OPTIMIZE Remove the &quot;{always|busy|offline|noanswer}_destination&quot; params. Use a &quot;case&quot; param and a &quot;destination&quot; param.</span>
-162:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:always_destination</span>].<span class="ruby-identifier">nil?</span>)         <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (params[:always_destination])</span>
-163:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Unconditional Call Forwarding&quot;</span>
-164:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_always_id</span>
-165:                         <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:always_destination</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9\*\#]/</span>,<span class="ruby-value str">''</span>)
-166:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:busy_destination</span>].<span class="ruby-identifier">nil?</span>)        <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (params[:busy_destination])</span>
-167:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding on Busy&quot;</span>
-168:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_busy_id</span>
-169:                         <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:busy_destination</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9\*\#]/</span>,<span class="ruby-value str">''</span>)
-170:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:offline_destination</span>].<span class="ruby-identifier">nil?</span>)     <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (params[:offline_destination])</span>
-171:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding on Offline&quot;</span>
-172:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_offline_id</span>
-173:                         <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:offline_destination</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9\*\#]/</span>,<span class="ruby-value str">''</span>)
-174:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:noanswer_destination</span>].<span class="ruby-identifier">nil?</span>)    <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (params[:noanswer_destination])</span>
-175:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding on No Answer&quot;</span>
-176:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_noanswer_id</span>
-177:                         <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:noanswer_destination</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9\*\#]/</span>,<span class="ruby-value str">''</span>)
-178:                         <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:noanswer_timeout</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9]/</span>,<span class="ruby-value str">''</span>)
-179:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:assistant_destination</span>].<span class="ruby-identifier">nil?</span>)   <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (params[:assistant_destination])</span>
-180:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding to assistant&quot;</span>
-181:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_assistant_id</span>
-182:                         <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:assistant_destination</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9\*\#]/</span>,<span class="ruby-value str">''</span>)
-183:                         <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:assistant_timeout</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^0-9]/</span>,<span class="ruby-value str">''</span>)
-184:                 <span class="ruby-keyword kw">end</span>
-185:                 
-186:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">reason</span>.<span class="ruby-identifier">nil?</span>)
-187:                         <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;NOT SAVED&quot;</span>
-188:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-189:                 <span class="ruby-keyword kw">end</span>
-190:                 
-191:                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">save_call_forward</span>( <span class="ruby-ivar">@sip_account_name</span>, <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">destination</span>, <span class="ruby-identifier">timeout</span> )
-192:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>)
-193:                         <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;SAVED&quot;</span>
-194:                 <span class="ruby-keyword kw">else</span>
-195:                         <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;NOT SAVED&quot;</span>
-196:                 <span class="ruby-keyword kw">end</span>
-197:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}/#{@sip_account_name}&quot;</span>
-198:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 168</span>
+168:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_forwarding_save</span>
+169:                 <span class="ruby-identifier">reason</span> = <span class="ruby-keyword kw">nil</span>
+170: 
+171:                 <span class="ruby-identifier">cfwd_case</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:case</span>]
+172:                 <span class="ruby-identifier">cfwd_destination</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:destination</span>]
+173:                 <span class="ruby-identifier">cfwd_timeout</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:timeout</span>]
+174:                 
+175:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">cfwd_case</span>
+176:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'always'</span>
+177:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Unconditional Call Forwarding&quot;</span>
+178:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_always_id</span>
+179:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'busy'</span>
+180:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding on Busy&quot;</span>
+181:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_busy_id</span>
+182:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'offline'</span>
+183:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding on Offline&quot;</span>
+184:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_offline_id</span>
+185:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'noanswer'</span>
+186:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding on No Answer&quot;</span>
+187:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_noanswer_id</span>
+188:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'assistant'</span>
+189:                         <span class="ruby-ivar">@title</span> = <span class="ruby-value str">&quot;Call Forwarding to assistant&quot;</span>
+190:                         <span class="ruby-identifier">reason</span> = <span class="ruby-ivar">@cfwd_case_assistant_id</span>
+191:                 <span class="ruby-keyword kw">else</span>
+192:                         <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;NO CASE&quot;</span>
+193:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+194:                 <span class="ruby-keyword kw">end</span>
+195:                 
+196:                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">save_call_forward</span>( <span class="ruby-ivar">@sip_account</span>, <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">cfwd_destination</span>, <span class="ruby-identifier">cfwd_timeout</span> )
+197:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>)
+198:                         <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;SAVED&quot;</span>
+199:                 <span class="ruby-keyword kw">else</span>
+200:                         <span class="ruby-ivar">@message</span> = <span class="ruby-node">&quot;NOT SAVED #{@returnval}&quot;</span>
+201:                 <span class="ruby-keyword kw">end</span>
+202:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -662,37 +658,195 @@ call_forwarding_{always|busy|offline|noanswer}
 			</div>
 
 		
-			<div id="destination-s-method" class="method-detail ">
-				<a name="method-i-destination_s"></a>
+			<div id="call-log-method" class="method-detail ">
+				<a name="method-i-call_log"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">destination_s</span><span
-						class="method-args">( call_forward )</span>
+					<span class="method-name">call_log</span><span
+						class="method-args">()</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
 
 				<div class="method-description">
 					
-					<p>
-OPTIMIZE What is <a
-href="ManufacturerSnomController.html#method-i-destination_s">destination_s</a>()
-supposed to do?
-</p>
+					
 					
 
 					
 					<div class="method-source-code"
-						id="destination-s-source">
+						id="call-log-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 249</span>
-249:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination_s</span>( <span class="ruby-identifier">call_forward</span> )
-250:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">active</span>)   <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (call_forward &amp;&amp; ...)</span>
-251:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">to_s</span>
-252:                 <span class="ruby-keyword kw">end</span>
-253:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value str">''</span>
-254:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 75</span>
+75:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_log</span>
+76:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+77:                         <span class="ruby-ivar">@call_logs_in</span>        = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">DISPOSITION_ANSWERED</span>, <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span> ).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">count</span>
+78:                         <span class="ruby-ivar">@call_logs_out</span>       = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_OUTBOUND</span> ).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">count</span>
+79:                         <span class="ruby-ivar">@call_logs_missed</span>    = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">DISPOSITION_NOANSWER</span>, <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span> ).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">count</span>
+80:                         <span class="ruby-identifier">call_logs_all_in</span>     = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span> ).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment cmt">#OPTIMIZE user appropriate query </span>
+81:                         <span class="ruby-ivar">@call_logs_forwarded</span> = <span class="ruby-identifier">call_logs_all_in</span> <span class="ruby-operator">-</span> <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span>, <span class="ruby-value">:forwarded_to</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">count</span> 
+82:                 <span class="ruby-keyword kw">end</span>
+83:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="call-log-forwarded-method" class="method-detail ">
+				<a name="method-i-call_log_forwarded"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">call_log_forwarded</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="call-log-forwarded-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 114</span>
+114:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_log_forwarded</span>
+115:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+116:                         <span class="ruby-ivar">@call_logs_forwarded</span> = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(
+117:                                 <span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>,
+118:                                 <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span>,
+119:                                 ).<span class="ruby-identifier">order</span>(<span class="ruby-value str">'created_at DESC'</span>)
+120:                 <span class="ruby-keyword kw">end</span>
+121:                 <span class="ruby-ivar">@max_entries</span> = <span class="ruby-constant">DISPLAY_MAX_ENTRIES</span>
+122:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="call-log-in-method" class="method-detail ">
+				<a name="method-i-call_log_in"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">call_log_in</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="call-log-in-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 85</span>
+85:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_log_in</span>
+86:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+87:                         <span class="ruby-ivar">@call_logs_in</span> = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(
+88:                                 <span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>,
+89:                                 <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">DISPOSITION_ANSWERED</span>,
+90:                                 <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span> 
+91:                         ).<span class="ruby-identifier">limit</span>(<span class="ruby-constant">DISPLAY_MAX_ENTRIES</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value str">'created_at DESC'</span>)
+92:                 <span class="ruby-keyword kw">end</span>
+93:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="call-log-missed-method" class="method-detail ">
+				<a name="method-i-call_log_missed"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">call_log_missed</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="call-log-missed-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 95</span>
+ 95:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_log_missed</span>
+ 96:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+ 97:                         <span class="ruby-ivar">@call_logs_missed</span> = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(
+ 98:                                 <span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>,
+ 99:                                 <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">DISPOSITION_NOANSWER</span>,
+100:                                 <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_INBOUND</span>
+101:                         ).<span class="ruby-identifier">limit</span>(<span class="ruby-constant">DISPLAY_MAX_ENTRIES</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value str">'created_at DESC'</span>)
+102:                 <span class="ruby-keyword kw">end</span>
+103:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="call-log-out-method" class="method-detail ">
+				<a name="method-i-call_log_out"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">call_log_out</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="call-log-out-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 105</span>
+105:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_log_out</span>
+106:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+107:                         <span class="ruby-ivar">@call_logs_out</span> = <span class="ruby-constant">CallLog</span>.<span class="ruby-identifier">where</span>(
+108:                                 <span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">id</span>, 
+109:                                 <span class="ruby-value">:call_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">CALL_OUTBOUND</span>
+110:                         ).<span class="ruby-identifier">limit</span>(<span class="ruby-constant">DISPLAY_MAX_ENTRIES</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value str">'created_at DESC'</span>)
+111:                 <span class="ruby-keyword kw">end</span>
+112:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -709,7 +863,7 @@ supposed to do?
 				<div class="method-heading">
 				
 					<span class="method-name">get_call_forward</span><span
-						class="method-args">( auth_name, reason )</span>
+						class="method-args">( sip_account, reason )</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -723,18 +877,16 @@ supposed to do?
 					<div class="method-source-code"
 						id="get-call-forward-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 236</span>
-236:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-identifier">auth_name</span>, <span class="ruby-identifier">reason</span> )
-237:                 <span class="ruby-identifier">sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find_by_auth_name</span>( <span class="ruby-identifier">auth_name</span> )
-238:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">nil?</span>)
-239:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-240:                 <span class="ruby-keyword kw">end</span>
-241:                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span>
-242:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">nil?</span>)
-243:                         <span class="ruby-identifier">call_forward</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find_by_auth_name</span>( <span class="ruby-identifier">auth_name</span> ).<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span>
-244:                 <span class="ruby-keyword kw">end</span>
-245:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward</span>
-246:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 233</span>
+233:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-identifier">sip_account</span>, <span class="ruby-identifier">reason</span> )
+234:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">nil?</span>)
+235:                         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">''</span>
+236:                 <span class="ruby-keyword kw">end</span>
+237:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span>)
+238:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">to_s</span>
+239:                 <span class="ruby-keyword kw">end</span>
+240:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value str">''</span>
+241:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -745,13 +897,13 @@ supposed to do?
 			</div>
 
 		
-			<div id="get-sip-account-name-method" class="method-detail ">
-				<a name="method-i-get_sip_account_name"></a>
+			<div id="get-sip-account-method" class="method-detail ">
+				<a name="method-i-get_sip_account"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">get_sip_account_name</span><span
-						class="method-args">()</span>
+					<span class="method-name">get_sip_account</span><span
+						class="method-args">(phone, sip_account_id = nil)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -763,28 +915,22 @@ supposed to do?
 
 					
 					<div class="method-source-code"
-						id="get-sip-account-name-source">
+						id="get-sip-account-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 216</span>
-216:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_sip_account_name</span>()
-217:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-218:                 <span class="ruby-identifier">sip_account_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account</span>]
-219:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=&gt; pko)</span>
-220:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">sip_account_name</span>.<span class="ruby-identifier">blank?</span>)
-221:                         <span class="ruby-identifier">sip_account</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">first</span>
-222:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">blank?</span>)
-223:                                 <span class="ruby-identifier">sip_account_name</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">auth_name</span>
-224:                         <span class="ruby-keyword kw">end</span>
-225:                 <span class="ruby-keyword kw">else</span>
-226:                         <span class="ruby-identifier">sip_account</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">find_by_auth_name</span>( <span class="ruby-identifier">sip_account_name</span> )
-227:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">blank?</span>)
-228:                                 <span class="ruby-identifier">sip_account_name</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">auth_name</span>
-229:                         <span class="ruby-keyword kw">else</span>
-230:                                 <span class="ruby-identifier">sip_account_name</span> = <span class="ruby-keyword kw">nil</span>
-231:                         <span class="ruby-keyword kw">end</span>
-232:                 <span class="ruby-keyword kw">end</span>
-233:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">sip_account_name</span>
-234:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 219</span>
+219:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_sip_account</span>(<span class="ruby-identifier">phone</span>, <span class="ruby-identifier">sip_account_id</span> = <span class="ruby-keyword kw">nil</span>)
+220:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>
+221:                 
+222:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">sip_accounts</span>) 
+223:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+224:                 <span class="ruby-keyword kw">end</span>
+225:                 
+226:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">sip_account_id</span>.<span class="ruby-identifier">blank?</span>)
+227:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">first</span>
+228:                 <span class="ruby-keyword kw">end</span>
+229:                 
+230:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">sip_account</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-identifier">sip_account_id</span> )
+231:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -815,16 +961,16 @@ supposed to do?
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 206</span>
-206:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-207:                 <span class="ruby-identifier">mfc</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SNOM Technology AG&quot;</span>).<span class="ruby-identifier">first</span>
-208:                 <span class="ruby-ivar">@phones</span> = <span class="ruby-identifier">mfc</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mfc</span>.<span class="ruby-identifier">phones</span> <span class="ruby-operator">:</span> []
-209:                 
-210:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-211:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
-212:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phones</span> }
-213:                 }
-214:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 209</span>
+209:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+210:                 <span class="ruby-identifier">mfc</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SNOM Technology AG&quot;</span>).<span class="ruby-identifier">first</span>
+211:                 <span class="ruby-ivar">@phones</span> = <span class="ruby-identifier">mfc</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mfc</span>.<span class="ruby-identifier">phones</span> <span class="ruby-operator">:</span> []
+212:                 
+213:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+214:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
+215:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phones</span> }
+216:                 }
+217:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -855,12 +1001,10 @@ supposed to do?
 					<div class="method-source-code"
 						id="phone-book-internal-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 71</span>
-71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_book_internal</span>
-72:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-73:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}&quot;</span>
-74:                 <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">all</span>
-75:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 70</span>
+70:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_book_internal</span>
+71:                 <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">all</span>
+72:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -877,7 +1021,7 @@ supposed to do?
 				<div class="method-heading">
 				
 					<span class="method-name">save_call_forward</span><span
-						class="method-args">( auth_name, reason, destination, timeout = nil )</span>
+						class="method-args">( sip_account, reason, destination, timeout = nil )</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -891,51 +1035,51 @@ supposed to do?
 					<div class="method-source-code"
 						id="save-call-forward-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 256</span>
-256:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_call_forward</span>( <span class="ruby-identifier">auth_name</span>, <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">destination</span>, <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword kw">nil</span> )
-257:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">reason</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@cfwd_case_noanswer_id</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>))
-258:                         <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">timeout</span>.<span class="ruby-identifier">to_i</span>
-259:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timeout</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">360</span>)
-260:                                 <span class="ruby-identifier">timeout</span> = <span class="ruby-value">20</span>
-261:                         <span class="ruby-keyword kw">end</span>
-262:                 <span class="ruby-keyword kw">else</span>
-263:                         <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword kw">nil</span>
-264:                 <span class="ruby-keyword kw">end</span>
-265:                 
-266:                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">get_call_forward</span>( <span class="ruby-identifier">auth_name</span>, <span class="ruby-identifier">reason</span> )
-267:                 
-268:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">nil?</span>)
-269:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>)
-270:                                 <span class="ruby-identifier">sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find_by_auth_name</span>( <span class="ruby-identifier">auth_name</span> )
-271:                                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">nil?</span>)
-272:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-273:                                 <span class="ruby-keyword kw">end</span>
-274:                                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">create</span>(
-275:                                         <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
-276:                                         <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span>,
-277:                                         <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>,
-278:                                         <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">destination</span>,
-279:                                         <span class="ruby-value">:call_timeout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">timeout</span>
-280:                                 )
-281:                                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">save</span>)
-282:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
-283:                                 <span class="ruby-keyword kw">end</span>
-284:                         <span class="ruby-keyword kw">end</span>
-285:                 <span class="ruby-keyword kw">else</span>
-286:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>)
-287:                                 <span class="ruby-identifier">call_forward_update</span> = <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">update_attributes</span>(
-288:                                         <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
-289:                                         <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">destination</span>,
-290:                                         <span class="ruby-value">:call_timeout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">timeout</span>
-291:                                 )
-292:                         <span class="ruby-keyword kw">else</span>
-293:                                 <span class="ruby-identifier">call_forward_update</span> = <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">update_attributes</span>(
-294:                                         <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
-295:                                 )
-296:                         <span class="ruby-keyword kw">end</span>
-297:                 <span class="ruby-keyword kw">end</span>
-298:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward_update</span>
-299:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 243</span>
+243:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_call_forward</span>( <span class="ruby-identifier">sip_account</span>, <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">destination</span>, <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword kw">nil</span> )
+244:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">reason</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@cfwd_case_noanswer_id</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>))
+245:                         <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">timeout</span>.<span class="ruby-identifier">to_i</span>
+246:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timeout</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">120</span>)
+247:                                 <span class="ruby-identifier">timeout</span> = <span class="ruby-value">20</span>
+248:                         <span class="ruby-keyword kw">end</span>
+249:                 <span class="ruby-keyword kw">else</span>
+250:                         <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword kw">nil</span>
+251:                 <span class="ruby-keyword kw">end</span>
+252:                 
+253:                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span>
+254:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">nil?</span>)
+255:                         <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>, <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span> ).<span class="ruby-identifier">first</span>
+256:                 <span class="ruby-keyword kw">end</span>
+257:                 
+258:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">nil?</span>)
+259:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>)
+260:                                 <span class="ruby-identifier">call_forward</span> = <span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">call_forwards</span>.<span class="ruby-identifier">create</span>(
+261:                                         <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+262:                                         <span class="ruby-value">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span>,
+263:                                         <span class="ruby-value">:call_forward_reason_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>,
+264:                                         <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">destination</span>,
+265:                                         <span class="ruby-value">:call_timeout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">timeout</span>
+266:                                 )
+267:                                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">save</span>)
+268:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+269:                                 <span class="ruby-keyword kw">end</span>
+270:                         <span class="ruby-keyword kw">end</span>
+271:                 <span class="ruby-keyword kw">else</span>
+272:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">blank?</span>)
+273:                                 <span class="ruby-identifier">call_forward_update</span> = <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">update_attributes</span>(
+274:                                         <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+275:                                         <span class="ruby-value">:destination</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">destination</span>,
+276:                                         <span class="ruby-value">:call_timeout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">timeout</span>
+277:                                 )
+278:                         <span class="ruby-keyword kw">else</span>
+279:                                 <span class="ruby-identifier">call_forward_update</span> = <span class="ruby-identifier">call_forward</span>.<span class="ruby-identifier">update_attributes</span>(
+280:                                         <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+281:                                 )
+282:                         <span class="ruby-keyword kw">end</span>
+283:                 <span class="ruby-keyword kw">end</span>
+284:                 
+285:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">call_forward_update</span>
+286:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -966,46 +1110,32 @@ supposed to do?
 					<div class="method-source-code"
 						id="show-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 21</span>
-21:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
-22:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-23:                 <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:mac_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>).<span class="ruby-identifier">first</span>
-24:                 <span class="ruby-ivar">@my_local_ip</span> = <span class="ruby-identifier">local_ip</span>
-25:                 
-26:                 <span class="ruby-comment cmt">##### Codec mapping {</span>
-27:                 <span class="ruby-comment cmt"># map from Codec names as in seeds.rb to their respective name</span>
-28:                 <span class="ruby-comment cmt"># (or rather: number) on Snom:</span>
-29:                 <span class="ruby-ivar">@codec_mapping_snom</span> = {
-30:                         <span class="ruby-value str">'ulaw'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">0</span>,  <span class="ruby-comment cmt"># G.711 u-law</span>
-31:                         <span class="ruby-value str">'alaw'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">8</span>,  <span class="ruby-comment cmt"># G.711 a-law</span>
-32:                         <span class="ruby-value str">'gsm'</span>  =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">3</span>,  <span class="ruby-comment cmt"># GSM</span>
-33:                         <span class="ruby-value str">'g722'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">9</span>,  <span class="ruby-comment cmt"># G.722</span>
-34:                         <span class="ruby-value str">'g726'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">2</span>,  <span class="ruby-comment cmt"># G.726-32  Assume that &quot;g726&quot; in the codecs table means G.726-32.</span>
-35:                         <span class="ruby-value str">'g729'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">18</span>,  <span class="ruby-comment cmt"># G.729a</span>
-36:                         <span class="ruby-value str">'g723'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">4</span>,  <span class="ruby-comment cmt"># G.723.1  Assume that &quot;g723&quot; in the codecs table does not mean G.723 but G.723.1.</span>
-37:                 }
-38:                 <span class="ruby-comment cmt">##### Codec mapping }</span>
-39:                 
-40:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">nil?</span>)  <span class="ruby-comment cmt">#OPTIMIZE Simply write: if (@phone)</span>
-41:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">'HTTP_USER_AGENT'</span>].<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;snom&quot;</span>).<span class="ruby-identifier">nil?</span>)
-42:                                 <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">provisioning_log_entries</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:succeeded</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:memo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Phone got config&quot;</span>)
-43:                                 <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:ip_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_ip</span>)
-44:                         <span class="ruby-keyword kw">end</span>
-45:                         <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}&quot;</span>
-46:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-47:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>
-48:                         }
-49:                 <span class="ruby-keyword kw">else</span>
-50:                         <span class="ruby-comment cmt">#respond_to { |format|</span>
-51:                         <span class="ruby-comment cmt">#    format.html</span>
-52:                         <span class="ruby-comment cmt">#}</span>
-53:                         <span class="ruby-identifier">render</span>(
-54:                                 <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">404</span>,
-55:                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
-56:                                 <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
-57:                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;&lt;!-- Phone #{mac_address.inspect} not found. --&gt;&quot;</span>,
-58:                         )
-59:                 <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 35</span>
+35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+36:                 
+37:                 <span class="ruby-ivar">@my_local_ip</span> = <span class="ruby-identifier">local_ip</span>
+38:                 
+39:                 <span class="ruby-comment cmt">##### Codec mapping {</span>
+40:                 <span class="ruby-comment cmt"># map from Codec names as in seeds.rb to their respective name</span>
+41:                 <span class="ruby-comment cmt"># (or rather: number) on Snom:</span>
+42:                 <span class="ruby-ivar">@codec_mapping_snom</span> = {
+43:                         <span class="ruby-value str">'ulaw'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">0</span>,  <span class="ruby-comment cmt"># G.711 u-law</span>
+44:                         <span class="ruby-value str">'alaw'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">8</span>,  <span class="ruby-comment cmt"># G.711 a-law</span>
+45:                         <span class="ruby-value str">'gsm'</span>  =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">3</span>,  <span class="ruby-comment cmt"># GSM</span>
+46:                         <span class="ruby-value str">'g722'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">9</span>,  <span class="ruby-comment cmt"># G.722</span>
+47:                         <span class="ruby-value str">'g726'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">2</span>,  <span class="ruby-comment cmt"># G.726-32  Assume that &quot;g726&quot; in the codecs table means G.726-32.</span>
+48:                         <span class="ruby-value str">'g729'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">18</span>,  <span class="ruby-comment cmt"># G.729a</span>
+49:                         <span class="ruby-value str">'g723'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">4</span>,  <span class="ruby-comment cmt"># G.723.1  Assume that &quot;g723&quot; in the codecs table does not mean G.723 but G.723.1.</span>
+50:                 }
+51:                 <span class="ruby-comment cmt">##### Codec mapping }</span>
+52:                 
+53:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">'HTTP_USER_AGENT'</span>].<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;snom&quot;</span>).<span class="ruby-identifier">nil?</span>)
+54:                         <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">provisioning_log_entries</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:succeeded</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:memo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Phone got config&quot;</span>)
+55:                         <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:ip_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_ip</span>)
+56:                 <span class="ruby-keyword kw">end</span>
+57:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+58:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>
+59:                 }
 60:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
@@ -1037,12 +1167,11 @@ supposed to do?
 					<div class="method-source-code"
 						id="sip-accounts-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 200</span>
-200:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_accounts</span>
-201:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-202:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}&quot;</span>
-203:                 <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">all</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=&gt; pko)</span>
-204:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 204</span>
+204:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sip_accounts</span>
+205:                 <span class="ruby-ivar">@xml_menu_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}&quot;</span>
+206:                 <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">all</span>
+207:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -1075,13 +1204,12 @@ supposed to do?
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 62</span>
 62:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xml_menu</span>
-63:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-64:                 <span class="ruby-identifier">sip_accounts</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-identifier">mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>  <span class="ruby-comment cmt">#FIXME Phone.find_by_mac_address( mac_address ) can be nil. (=&gt; pko)</span>
-65:                 <span class="ruby-ivar">@sip_account_name</span> = <span class="ruby-identifier">get_sip_account_name</span>()
-66:                 <span class="ruby-ivar">@sip_accounts_count</span> = <span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">count</span>
-67:                 <span class="ruby-ivar">@sip_account_url</span> = <span class="ruby-node">&quot;/#{@sip_account_name}&quot;</span>
-68:                 <span class="ruby-ivar">@provisioning_server_url</span> = <span class="ruby-node">&quot;http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{mac_address}&quot;</span>
-69:         <span class="ruby-keyword kw">end</span></pre>
+63:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sip_account</span>)
+64:                         <span class="ruby-ivar">@sip_accounts_count</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find_by_mac_address</span>( <span class="ruby-ivar">@mac_address</span> ).<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">count</span>
+65:                 <span class="ruby-keyword kw">else</span>
+66:                         <span class="ruby-ivar">@sip_accounts_count</span> = <span class="ruby-value">0</span>
+67:                 <span class="ruby-keyword kw">end</span>
+68:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
