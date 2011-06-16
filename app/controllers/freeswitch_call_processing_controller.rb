@@ -231,6 +231,14 @@ class FreeswitchCallProcessingController < ApplicationController
 						action :respond, "480 Blacklisted"
 					else
 						check_valid_voicemail_box_destination( call_forward_always.destination )
+						CallLog.create({
+							:sip_account_id => dst_sip_account.id,
+							:source         => src_cid_sip_user,
+							:source_name    => src_cid_sip_display,
+							:destination    => dst_sip_dnis_user,
+							:forwarded_to   => call_forward_always.destination,
+							:call_type      => 'in',
+						})
 						action :transfer, "#{sip_user_encode( call_forward_always.destination )} XML default"
 					end
 					
@@ -325,9 +333,33 @@ class FreeswitchCallProcessingController < ApplicationController
 							action :respond, "480 Blacklisted"
 						else
 							check_valid_voicemail_box_destination( call_forward.destination )
+							CallLog.create({
+								:sip_account_id => dst_sip_account.id,
+								:source         => src_cid_sip_user,
+								:source_name    =>  src_cid_sip_display,
+								:destination    => dst_sip_dnis_user,
+								:forwarded_to   => call_forward.destination,
+								:call_type      => 'in',
+							})
 							action :transfer, "#{sip_user_encode( call_forward.destination )} XML default"
 						end
 					else
+						#CallLog.create({
+						#	:sip_account_id => dst_sip_account.id,
+						#	:source         => src_cid_sip_user,
+						#	:source_name    => src_cid_sip_display,
+						#	:destination    => dst_sip_dnis_user,
+						#	:disposition    => 'noanswer',
+						#	:call_type      => 'in',
+						#})
+						#CallLog.create({
+						#	:sip_account_id => src_sip_account.id,
+						#	:source         => src_cid_sip_user,
+						#	:source_name    => src_cid_sip_display,
+						#	:destination    => dst_sip_dnis_user,
+						#	:disposition    => 'noanswer',
+						#	:call_type      => 'out',
+						#})
 						action :hangup
 					end
 				else

@@ -2,7 +2,7 @@ xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.SnomIPPhoneDirectory {
 	xml.Title("Answered Calls")
-	@call_logs_in.reverse_each { |call_entry|
+	@call_logs_in.each { |call_entry|
 		if (call_entry.created_at < Time.now.advance(:hours => -12))
 			date_formatted = call_entry.created_at.localtime.strftime("%m/%d/%y")
 		else

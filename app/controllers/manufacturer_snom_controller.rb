@@ -9,6 +9,7 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
+	    
 	    @mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 	    if (@mac_address && @phone = Phone.where(:mac_address => @mac_address).first)
 			@sip_account = get_sip_account(@phone, params[:sip_account])
@@ -73,28 +74,51 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log
 		if (@sip_account)
-			@call_logs_in = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
-			@call_logs_out = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
-			@call_logs_missed = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
+			@call_logs_in        = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
+			@call_logs_out       = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
+			@call_logs_missed    = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
+			call_logs_all_in     = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND ).all.count #OPTIMIZE user appropriate query 
+			@call_logs_forwarded = call_logs_all_in - CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND, :forwarded_to => '' ).all.count 
 		end
 	end
 	
 	def call_log_in
 		if (@sip_account)
-			@call_logs_in = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all
+			@call_logs_in = CallLog.where(
+				:sip_account_id => @sip_account.id,
+				:disposition => DISPOSITION_ANSWERED,
+				:call_type => CALL_INBOUND 
+			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
 		end
 	end
 	
 	def call_log_missed
 		if (@sip_account)
-			@call_logs_missed = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all
+			@call_logs_missed = CallLog.where(
+				:sip_account_id => @sip_account.id,
+				:disposition => DISPOSITION_NOANSWER,
+				:call_type => CALL_INBOUND
+			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
 		end
 	end
 	
 	def call_log_out
 		if (@sip_account)
-			@call_logs_out = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all
+			@call_logs_out = CallLog.where(
+				:sip_account_id => @sip_account.id, 
+				:call_type => CALL_OUTBOUND
+			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
 		end
+	end
+	
+	def call_log_forwarded
+		if (@sip_account)
+			@call_logs_forwarded = CallLog.where(
+				:sip_account_id => @sip_account.id,
+				:call_type => CALL_INBOUND,
+				).order('created_at DESC')
+		end
+		@max_entries = DISPLAY_MAX_ENTRIES
 	end
 	
 	def call_forwarding
@@ -266,4 +290,5 @@ class ManufacturerSnomController < ApplicationController
 	DISPOSITION_ANSWERED = 'answered'
 	CALL_INBOUND = 'in'
 	CALL_OUTBOUND = 'out'
+	DISPLAY_MAX_ENTRIES = 20
 end

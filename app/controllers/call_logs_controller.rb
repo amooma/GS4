@@ -1,6 +1,22 @@
 class CallLogsController < ApplicationController
   
-  before_filter :authenticate_user!
+  # Allow access from 127.0.0.1 and [::1] only.
+	prepend_before_filter { |controller|
+		if ! request.local?
+			if user_signed_in?  #OPTIMIZE && is admin
+				# For debugging purposes.
+				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
+			else
+				logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
+				render :status => '403 None of your business',
+					:layout => false, :content_type => 'text/plain',
+					:text => "<!-- This is none of your business. -->"
+				# Maybe allow access in "development" mode?
+			end
+		end
+	}
+	#before_filter :authenticate_user!
+	#OPTIMIZE Implement SSL with client certificates. :authenticate_user!
   
   # GET /call_logs
   # GET /call_logs.xml
@@ -82,5 +98,9 @@ class CallLogsController < ApplicationController
       format.html { redirect_to(call_logs_url) }
       format.xml  { head :ok }
     end
+  end
+ 
+  def _bold( str )
+      return "\e[0;32;1m#{str} \e[0m "
   end
 end
