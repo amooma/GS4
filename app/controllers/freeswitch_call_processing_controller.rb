@@ -224,7 +224,9 @@ class FreeswitchCallProcessingController < ApplicationController
 											   :source_name =>  src_cid_sip_display,
 											   :destination => dst_sip_dnis_user,
 											   :uuid => call_uuid,
-											   :call_type => 'out')
+											   :call_type => 'out',
+											   :disposition => 'answered'
+											   )
 				end
 				# Set Caller-ID for call forward:
 				#OPTIMIZE Shouldn't all of the caller-ID stuff (see further below) be handled here then?
@@ -270,9 +272,9 @@ class FreeswitchCallProcessingController < ApplicationController
 										   :source => src_cid_sip_user,
 										   :source_name =>  src_cid_sip_display,
 										   :destination => dst_sip_dnis_user,
-										   :forwarded_to => call_forward_always.destination,
 										   :call_type => 'in',
-										   :uuid => call_uuid
+										   :uuid => call_uuid,
+										   :disposition => 'answered'
 										   )
 					action :bridge, "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 					
@@ -283,7 +285,8 @@ class FreeswitchCallProcessingController < ApplicationController
 										   :source_name =>  src_cid_sip_display,
 										   :destination => dst_sip_dnis_user,
 										   :call_type => 'in',
-										   :uuid => call_uuid
+										   :uuid => call_uuid,
+										   :disposition => 'answered'
 										   )
 					assistant_sip_user = Extension.where( :extension => "#{call_forward_assistant.destination}" ).first
 					if assistant_sip_user
@@ -292,7 +295,8 @@ class FreeswitchCallProcessingController < ApplicationController
 										   :source_name =>  src_cid_sip_display,
 										   :destination => dst_sip_dnis_user,
 										   :call_type => 'in',
-										   :uuid => call_uuid
+										   :uuid => call_uuid,
+										   :disposition => 'answered'
 										   )
 						action :export, "alert_info=http://www.notused.com;info=#{dst_sip_user_real};x-line-id=0"
 						#OPTIMIZE? If it's ignored then don't use a registered DNS name but something like "localhost".
@@ -355,7 +359,8 @@ class FreeswitchCallProcessingController < ApplicationController
 										   :source_name =>  src_cid_sip_display,
 										   :destination => dst_sip_dnis_user,
 										   :call_type => 'in',
-										   :uuid => call_uuid
+										   :uuid => call_uuid,
+										   :disposition => 'answered'
 										   )
 						action_log( FS_LOG_INFO, "Calling SIP account #{dst_sip_user_real} ..." )
 						action :set       , "call_timeout=#{timeout}"
