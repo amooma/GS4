@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110614194248) do
+ActiveRecord::Schema.define(:version => 20110616140627) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20110614194248) do
     t.string   "call_type"
     t.string   "source_name"
     t.string   "destination_name"
+    t.string   "uuid"
   end
 
   create_table "call_queue_to_extensions", :force => true do |t|
