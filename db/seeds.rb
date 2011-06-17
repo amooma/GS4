@@ -266,38 +266,6 @@ end
 
 
 
-################################################################
-# Sample phones (test phones)
-################################################################
-
-
-PhoneModel.where(
-  :name => 'IP 284' 
-).first.phones.create([
-  { :mac_address => '00156513EC2F' } 
-])
-
-
-Phone.create(
-  :mac_address    => '00-04-13-29-68-87',
-  :phone_model_id => PhoneModel.where( :name => 'Snom 360' ).first.id
-)
-
-PhoneModel.where(
-  :name => '57i' 
-).first.phones.create([
-  { :mac_address => '00085D24387A' } 
-])
-PhoneModel.where(
-  :name => 'Snom 320' 
-).first.phones.create([
-  { :mac_address => '000413271FDB' } 
-])
-PhoneModel.where(
-  :name => 'Snom 320' 
-).first.phones.create([
-  { :mac_address => '000413271FD8' } 
-])
 
 
 Version.create(:table_name => "acc", :table_version => "4")
