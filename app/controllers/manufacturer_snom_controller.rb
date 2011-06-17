@@ -51,6 +51,7 @@ class ManufacturerSnomController < ApplicationController
 		##### Codec mapping }
 		
 		if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
+				call_forwarding_save
 			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 			@phone.update_attributes(:ip_address => request.remote_ip)
 		end
@@ -78,7 +79,7 @@ class ManufacturerSnomController < ApplicationController
 			@call_logs_out       = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
 			@call_logs_missed    = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
 			call_logs_all_in     = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND ).all.count #OPTIMIZE user appropriate query 
-			@call_logs_forwarded = call_logs_all_in - CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND, :forwarded_to => '' ).all.count 
+			@call_logs_forwarded = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND,  :disposition => DISPOSITION_FORWARDED ).all.count 
 		end
 	end
 	
@@ -116,7 +117,7 @@ class ManufacturerSnomController < ApplicationController
 			@call_logs_forwarded = CallLog.where(
 				:sip_account_id => @sip_account.id,
 				:call_type => CALL_INBOUND,
-				:disposition => CALL_FORWARDED
+				:disposition => DISPOSITION_FORWARDED
 				).order('created_at DESC')
 		end
 		@max_entries = DISPLAY_MAX_ENTRIES
@@ -153,7 +154,6 @@ class ManufacturerSnomController < ApplicationController
 			@query_timeout = params[:query_timeout]
 			@cfwd_destination = params[:destination]
 			if (@query_timeout && @cfwd_destination.blank?)
-				call_forwarding_save
 				render :action => 'call_forwarding_save'  
 			end
 			@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
