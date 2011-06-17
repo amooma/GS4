@@ -19,11 +19,12 @@ xml.settings {
 		xml.https_port( '443', :perm => 'R' )
 		xml.http_user( @phone.http_user.to_s, :perm => 'R' )
 		xml.http_pass( @phone.http_password.to_s, :perm => 'R' )
-		
+		xml.tone_scheme( 'GER', :perm => 'RW')
+		xml.disable_redirection_menu( 'on', :perm => 'R')
 		xml.retry_after_failed_register( '70', :perm => 'RW' )
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
-		
+		xml.ignore_security_warning( 'on', :perm => 'R')
 		sip_account =  @phone.sip_accounts.first
 		if (! sip_account.nil?)
 			xml.alert_group_ring_text( @phone.sip_accounts.first.auth_name, :perm => 'RW' )
@@ -31,6 +32,10 @@ xml.settings {
 			xml.alert_group_ring_text( 'alert-group', :perm => 'RW' )
 		end
 		xml.alert_group_ring_sound( 'Silent', :perm => 'RW' )
+		xml.gui_fkey1( 'none', :perm => 'R')
+		xml.gui_fkey2( 'none', :perm => 'R')
+		xml.gui_fkey3( 'none', :perm => 'R')
+		xml.gui_fkey4( 'none', :perm => 'R')
 		
 		xml.dkey_directory( "url #{@xml_menu_url}/phone_book_internal.xml", :perm => 'RW' )
 		xml.dkey_menu( "url #{@xml_menu_url}/xml_menu.xml", :perm => 'RW' )
