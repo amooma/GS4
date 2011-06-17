@@ -130,7 +130,7 @@ adduser freeswitch gemeinschaft --quiet
 chown -R www-data:gemeinschaft /opt/gemeinschaft
 chmod g+w /opt/gemeinschaft/db/
 chmod g+w /opt/gemeinschaft/db/production.sqlite3
-
+chmod 777 /opt/gemeinschaft/misc/fax/
 echo -e "Starting services\n"
 
 /etc/init.d/lighttpd start
