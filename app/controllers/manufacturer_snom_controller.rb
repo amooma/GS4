@@ -115,7 +115,7 @@ class ManufacturerSnomController < ApplicationController
 		if (@sip_account)
 			@call_logs_forwarded = CallLog.where(
 				:sip_account_id => @sip_account.id,
-				:call_type => CALL_INBOUND,
+				:call_type => CALL_FORWARDED,
 				).order('created_at DESC')
 		end
 		@max_entries = DISPLAY_MAX_ENTRIES
@@ -216,7 +216,7 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
-    def get_sip_account(phone, sip_account_id = nil)
+	def get_sip_account(phone, sip_account_id = nil)
 		sip_accounts = phone.sip_accounts
 		
 		if (! sip_accounts) 
@@ -288,6 +288,7 @@ class ManufacturerSnomController < ApplicationController
 	private
 	DISPOSITION_NOANSWER = 'noanswer'
 	DISPOSITION_ANSWERED = 'answered'
+	DISPOSITION_FORWARDED = 'forwarded'
 	CALL_INBOUND = 'in'
 	CALL_OUTBOUND = 'out'
 	DISPLAY_MAX_ENTRIES = 20

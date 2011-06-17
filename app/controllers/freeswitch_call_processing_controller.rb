@@ -261,6 +261,7 @@ class FreeswitchCallProcessingController < ApplicationController
 										   :destination => dst_sip_dnis_user,
 										   :forwarded_to => call_forward_always.destination,
 										   :call_type => 'in',
+										   :disposition => 'forwarded',
 										   :uuid => call_uuid
 										   )
 						action :transfer, "#{sip_user_encode( call_forward_always.destination )} XML default"
@@ -399,6 +400,7 @@ class FreeswitchCallProcessingController < ApplicationController
 										   :destination => dst_sip_dnis_user,
 										   :forwarded_to => call_forward.destination,
 										   :call_type => 'in',
+										   :disposition => 'forwarded',
 										   :uuid => call_uuid
 										   )
 							action :transfer, "#{sip_user_encode( call_forward.destination )} XML default"
