@@ -115,7 +115,8 @@ class ManufacturerSnomController < ApplicationController
 		if (@sip_account)
 			@call_logs_forwarded = CallLog.where(
 				:sip_account_id => @sip_account.id,
-				:call_type => CALL_FORWARDED,
+				:call_type => CALL_INBOUND,
+				:disposition => CALL_FORWARDED
 				).order('created_at DESC')
 		end
 		@max_entries = DISPLAY_MAX_ENTRIES
