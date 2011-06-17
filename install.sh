@@ -77,7 +77,7 @@ echo -e "Stopping services for configuration\n"
 echo -e "Getting GS4\n"
 
 cd /opt
-git clone -b master https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git gemeinschaft
+git clone -b 1.2 https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git gemeinschaft
 
 echo -e "Installing ruby\n"
 cd /opt/gemeinschaft/misc/ruby-sane
