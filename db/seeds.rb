@@ -315,6 +315,8 @@ Version.create(:table_name => "uacreg", :table_version => "1")
 Extension.create(:extension => "80", :destination => "-vmenu-", :active => true)
 Extension.create(:extension => "90", :destination => "-park-in-", :active => true)
 Extension.create(:extension => "99", :destination => "-park-out-", :active => true)
+Extension.create(:extension => "9999", :destination => "-fax-receive-", :active => true)
+
 
 call_forward_reasons = ['busy', 'noanswer', 'offline', 'always', 'assistant']
 
