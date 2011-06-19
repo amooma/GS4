@@ -327,6 +327,7 @@ table {
 .index_overview {
 	height: auto;
 	@include column-width( 23em );
+	-webkit-column-width: auto; /* Google Chrome (12) has rendering problems. Unfortunately this disables it for Safari as well. */
 	@include column-gap( 1em );
 	@include column-fill( balance );
 	widows: 5;
@@ -340,6 +341,7 @@ table {
 .help_overview {
 	height: auto;
 	@include column-width( 26em );
+	-webkit-column-width: auto; /* Google Chrome (12) has rendering problems. Unfortunately this disables it for Safari as well. */
 	@include column-gap( 2em );
 	@include column-fill( balance );
 	widows: 5;
