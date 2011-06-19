@@ -145,8 +145,21 @@ echo -e "Starting FreeSWITCH\n"
 /etc/init.d/freeswitch start
 
 echo -e "Downloading FreeSWITCH sound files\n"
+cd /opt/freeswitch/sounds/              
+wget -c 'http://files.freeswitch.org/freeswitch-sounds-en-us-callie-8000-1.0.15.tar.gz' 2>&1 || true
+wget -c 'http://files.freeswitch.org/freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz' 2>&1 || true
+wget -c 'http://files.freeswitch.org/freeswitch-sounds-music-8000-1.0.8.tar.gz' 2>&1 || true
+wget -c 'http://files.freeswitch.org/freeswitch-sounds-music-16000-1.0.8.tar.gz' 2>&1 || true
 
-/opt/gemeinschaft/misc/freeswitch/download-freeswitch-sounds
+tar -xzf 'freeswitch-sounds-en-us-callie-8000-1.0.15.tar.gz' 2>&1 || true
+tar -xzf 'freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz' 2>&1 || true
+tar -xzf 'freeswitch-sounds-music-8000-1.0.8.tar.gz' 2>&1 || true
+tar -xzf 'freeswitch-sounds-music-16000-1.0.8.tar.gz' 2>&1 || true
+
+rm 'freeswitch-sounds-en-us-callie-8000-1.0.15.tar.gz' 2>&1 || true
+rm 'freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz' 2>&1 || true
+rm 'freeswitch-sounds-music-8000-1.0.8.tar.gz' 2>&1 || true
+rm 'freeswitch-sounds-music-16000-1.0.8.tar.gz' 2>&1 || true
 
 echo -e "\n\n"
 echo -e "We are done\n\n"
