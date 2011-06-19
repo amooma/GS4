@@ -334,6 +334,8 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 	-webkit-column-width: 23em;
 	-o-column-width: 23em;
 	column-width: 23em;
+	-webkit-column-width: auto;
+	/* Google Chrome (12) has rendering problems. Unfortunately this disables it for Safari as well. */
 	-moz-column-gap: 1em;
 	-webkit-column-gap: 1em;
 	-o-column-gap: 1em;
@@ -355,6 +357,8 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 	-webkit-column-width: 26em;
 	-o-column-width: 26em;
 	column-width: 26em;
+	-webkit-column-width: auto;
+	/* Google Chrome (12) has rendering problems. Unfortunately this disables it for Safari as well. */
 	-moz-column-gap: 2em;
 	-webkit-column-gap: 2em;
 	-o-column-gap: 2em;
