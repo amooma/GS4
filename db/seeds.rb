@@ -40,16 +40,16 @@ snom    = Manufacturer.find_or_create_by_ieee_name(
 		:name => "SNOM Technology AG",
 		:url  => 'http://www.snom.com/',
 })
-aastra  = Manufacturer.find_or_create_by_ieee_name(
-	'DeTeWe-Deutsche Telephonwerke', {
-		:name => "Aastra DeTeWe",
-		:url  => 'http://www.aastra.de/',
-})
-tiptel  = Manufacturer.find_or_create_by_ieee_name(
-	'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', {
-		:name => "Tiptel",
-		:url  => 'http://www.tiptel.de/'
-})
+#aastra  = Manufacturer.find_or_create_by_ieee_name(
+#	'DeTeWe-Deutsche Telephonwerke', {
+#		:name => "Aastra DeTeWe",
+#		:url  => 'http://www.aastra.de/',
+#})
+#tiptel  = Manufacturer.find_or_create_by_ieee_name(
+#	'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', {
+#		:name => "Tiptel",
+#		:url  => 'http://www.tiptel.de/'
+#})
 #OPTIMIZE Differentiate between manufacturer and vendor. Make this either Yealink or Tiptel.
 
 
@@ -60,13 +60,13 @@ tiptel  = Manufacturer.find_or_create_by_ieee_name(
 snom    .ouis.create([
 	{ :value => '000413'},
 ])
-aastra  .ouis.create([
-	{ :value => '003042' },
-	{ :value => '00085D' },
-])
-tiptel  .ouis.create([
-	{ :value => '001565' },
-])
+#aastra  .ouis.create([
+#	{ :value => '003042' },
+#	{ :value => '00085D' },
+#])
+#tiptel  .ouis.create([
+#	{ :value => '001565' },
+#])
 
 
 
@@ -191,78 +191,78 @@ snom.phone_models.each do |phone_model|
 end
 
 
-# Aastra
+## Aastra
+##
+#aastra.phone_models.create(:name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30,  :url => 'http://www.aastra.com/aastra-6757i.htm')
+#aastra.phone_models.create(:name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26,  :url => 'http://www.aastra.com/aastra-6753i.htm')
+#aastra.phone_models.create(:name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6,   :url => 'http://www.aastra.com/aastra-6753i.htm')
+#aastra.phone_models.create(:name => '51i',  :max_number_of_sip_accounts => 1, :number_of_keys =>  0,   :url => 'http://www.aastra.com/aastra-6751i.htm')
 #
-aastra.phone_models.create(:name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30,  :url => 'http://www.aastra.com/aastra-6757i.htm')
-aastra.phone_models.create(:name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26,  :url => 'http://www.aastra.com/aastra-6753i.htm')
-aastra.phone_models.create(:name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6,   :url => 'http://www.aastra.com/aastra-6753i.htm')
-aastra.phone_models.create(:name => '51i',  :max_number_of_sip_accounts => 1, :number_of_keys =>  0,   :url => 'http://www.aastra.com/aastra-6751i.htm')
-
-# Set http parameters
-aastra.phone_models.each do |phone_model|
-  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'logout.html', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => '22222', :random_password_consists_of => (0 ..9).to_a.join)
-end
-
-aastra.phone_models.each do |phone_model|
-  [ 'alaw', 'ulaw', 'g722', 'g726', 'g726-24', 'g726-32', 'g726-40', 'g729', 'bv16', 'bv32', 'ulaw-16k', 'alaw-16k', 'l16', 'l16-8k'
-  ].each do |codec_name|
-    phone_model.codecs << Codec.find_or_create_by_name(codec_name)
-  end
-end
-  
-# Set softkeys
-['55i', '57i'].each do |p_model|
- (1..20).each { |mem_num| 
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-      { :name => "softkey#{mem_num}", :position => "#{mem_num}" }
-    ])
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "softkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
-
-  } 
-end
-
-# Set topsoftkeys
-['57i'].each do |p_model|
- (1..10).each { |mem_num| 
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-      { :name => "topsoftkey#{mem_num}", :position => "#{mem_num+20}" }
-    ])
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "topsoftkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
-
-  } 
-end
-
-# Tiptel
+## Set http parameters
+#aastra.phone_models.each do |phone_model|
+#  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'logout.html', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => '22222', :random_password_consists_of => (0 ..9).to_a.join)
+#end
 #
-
-tiptel.phone_models.create(:name => 'IP 286', :max_number_of_sip_accounts => 16, :number_of_keys => 10,  :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-286-6/')
-tiptel.phone_models.create(:name => 'IP 280', :max_number_of_sip_accounts => 2, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-280-6/')
-tiptel.phone_models.create(:name => 'IP 284', :max_number_of_sip_accounts => 13, :number_of_keys => 10, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-284-6/')
-tiptel.phone_models.create(:name => 'VP 28', :url => 'http://www.tiptel.com/products/details/article/tiptel-vp-28-4/')
-tiptel.phone_models.create(:name => 'IP 28 XS', :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-28-xs-6/')
-
-# Set http parameters
-tiptel.phone_models.each do |phone_model|
-  phone_model.update_attributes(:http_port => 80, :reboot_request_path => '/cgi-bin/ConfigManApp.com', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => 'admin')
-end
-
-# Codecs for Tiptel
-tiptel.phone_models.each do |phone_model|
-  [ "ulaw", "alaw", "g722", "g723", "g726", "g729", "g726-16", "g726-24", "g726-40"
-  ].each do |codec_name|
-    phone_model.codecs << Codec.find_or_create_by_name(codec_name)
-  end
-end
-
-['IP 284', 'IP 286'].each do |p_model|
-  (1..10).each { |mem_num| 
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-      { :name => "memory#{mem_num}", :position => "#{mem_num}" }
-    ])
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "memory#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
-
-  }
-end
+#aastra.phone_models.each do |phone_model|
+#  [ 'alaw', 'ulaw', 'g722', 'g726', 'g726-24', 'g726-32', 'g726-40', 'g729', 'bv16', 'bv32', 'ulaw-16k', 'alaw-16k', 'l16', 'l16-8k'
+#  ].each do |codec_name|
+#    phone_model.codecs << Codec.find_or_create_by_name(codec_name)
+#  end
+#end
+#  
+## Set softkeys
+#['55i', '57i'].each do |p_model|
+# (1..20).each { |mem_num| 
+#    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+#      { :name => "softkey#{mem_num}", :position => "#{mem_num}" }
+#    ])
+#    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "softkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+#
+#  } 
+#end
+#
+## Set topsoftkeys
+#['57i'].each do |p_model|
+# (1..10).each { |mem_num| 
+#    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+#      { :name => "topsoftkey#{mem_num}", :position => "#{mem_num+20}" }
+#    ])
+#    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "topsoftkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+#
+#  } 
+#end
+#
+## Tiptel
+##
+#
+#tiptel.phone_models.create(:name => 'IP 286', :max_number_of_sip_accounts => 16, :number_of_keys => 10,  :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-286-6/')
+#tiptel.phone_models.create(:name => 'IP 280', :max_number_of_sip_accounts => 2, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-280-6/')
+#tiptel.phone_models.create(:name => 'IP 284', :max_number_of_sip_accounts => 13, :number_of_keys => 10, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-284-6/')
+#tiptel.phone_models.create(:name => 'VP 28', :url => 'http://www.tiptel.com/products/details/article/tiptel-vp-28-4/')
+#tiptel.phone_models.create(:name => 'IP 28 XS', :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-28-xs-6/')
+#
+## Set http parameters
+#tiptel.phone_models.each do |phone_model|
+#  phone_model.update_attributes(:http_port => 80, :reboot_request_path => '/cgi-bin/ConfigManApp.com', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => 'admin')
+#end
+#
+## Codecs for Tiptel
+#tiptel.phone_models.each do |phone_model|
+#  [ "ulaw", "alaw", "g722", "g723", "g726", "g729", "g726-16", "g726-24", "g726-40"
+#  ].each do |codec_name|
+#    phone_model.codecs << Codec.find_or_create_by_name(codec_name)
+#  end
+#end
+#
+#['IP 284', 'IP 286'].each do |p_model|
+#  (1..10).each { |mem_num| 
+#    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+#      { :name => "memory#{mem_num}", :position => "#{mem_num}" }
+#    ])
+#    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "memory#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+#
+#  }
+#end
 
 
 
