@@ -34,7 +34,6 @@ class ManufacturerSnomController < ApplicationController
 	
 	def show
 		
-		@my_local_ip = local_ip
 		
 		##### Codec mapping {
 		# map from Codec names as in seeds.rb to their respective name
