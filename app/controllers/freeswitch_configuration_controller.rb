@@ -5,8 +5,13 @@ class FreeswitchConfigurationController < ApplicationController
 	def load()
 		@local_ip = local_ip
 		@domain = local_ip
-		@sounds_dir = '$${sounds_dir}'
-		@hold_music = '$${hold_music}'
+		@domain_name = local_ip
+		if (! @domain) 
+			@domain = '$${local_ip_v4}'
+			@domain_name = '$${local_ip_v4}'
+		end
+		@sounds_dir = '/opt/freeswitch/sounds'
+		@hold_music = 'local_stream://moh'
 		@internal_sip_port = 15060
 		@external_sip_port = 15080
 		@timezones = timezones()
