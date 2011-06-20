@@ -142,10 +142,8 @@ echo -e "Retrieving FreeSWITCH configuration\n"
 chmod g+w /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 chown freeswitch:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 
-echo -e "Starting FreeSWITCH\n"
-/etc/init.d/freeswitch start
-
 echo -e "Downloading FreeSWITCH sound files\n"
+mkdir -p /opt/freeswitch/sounds/ 
 cd /opt/freeswitch/sounds/              
 wget -c 'http://files.freeswitch.org/freeswitch-sounds-en-us-callie-8000-1.0.15.tar.gz' 2>&1 || true
 wget -c 'http://files.freeswitch.org/freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz' 2>&1 || true
@@ -161,6 +159,9 @@ rm 'freeswitch-sounds-en-us-callie-8000-1.0.15.tar.gz' 2>&1 || true
 rm 'freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz' 2>&1 || true
 rm 'freeswitch-sounds-music-8000-1.0.8.tar.gz' 2>&1 || true
 rm 'freeswitch-sounds-music-16000-1.0.8.tar.gz' 2>&1 || true
+
+echo -e "Starting FreeSWITCH\n"
+/etc/init.d/freeswitch start
 
 echo -e "\n\n"
 echo -e "We are done\n\n"
