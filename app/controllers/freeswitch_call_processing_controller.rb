@@ -240,13 +240,16 @@ class FreeswitchCallProcessingController < ApplicationController
 				call_forward_always    = find_call_forward( dst_sip_account, :always    , src_cid_sip_user )
 				call_forward_assistant = find_call_forward( dst_sip_account, :assistant , src_cid_sip_user )
 				
-				is_assistant = CallForward.where({
-						:call_forward_reason_id => CallForwardReason.where(:value => "assistant").first.id,
-						:sip_account_id => SipAccount.where(:auth_name => "#{dst_sip_user_real}").first.id,  #OPTIMIZE Can this be nil if the dst is not a SIP acct.?
-						:destination => "#{src_cid_sip_user}",
-						:active => true
-					}).first
-				#OPTIMIZE Rename is_assistant. It doesn't seem to be a boolean.
+				if ( cfwd_reason_assistant = CallForwardReason.where(:value => "assistant").first)
+					if ( assistant_sip_account = SipAccount.where(:auth_name => "#{dst_sip_user_real}").first )
+						is_assistant = ! CallForward.where({
+								:call_forward_reason_id => cfwd_reason_assistant.id,
+								:sip_account_id => assistant_sip_account.id,
+								:destination => "#{src_cid_sip_user}",
+								:active => true
+							}).first.nil?
+					end
+				end
 				
 				if call_forward_always; (
 					# We have an unconditional call-forward.
