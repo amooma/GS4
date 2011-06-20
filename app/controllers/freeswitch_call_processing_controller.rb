@@ -242,7 +242,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				
 				is_assistant = CallForward.where({
 						:call_forward_reason_id => CallForwardReason.where(:value => "assistant").first.id,
-						:sip_account_id => SipAccount.where(:auth_name => "#{dst_sip_user_real}").first.id,  #OPTIMIZE Can this be nil if the dst is not a SIP acct.?
+						:sip_account_id => SipAccount.where(:auth_name => "#{dst_sip_user_real}").first.try(:id),
 						:destination => "#{src_cid_sip_user}",
 						:active => true
 					}).first
