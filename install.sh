@@ -140,6 +140,7 @@ echo -e "Retrieving FreeSWITCH configuration\n"
 
 /opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh >>/dev/null
 chmod g+w /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+chown freeswitch:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 
 echo -e "Starting FreeSWITCH\n"
 /etc/init.d/freeswitch start
