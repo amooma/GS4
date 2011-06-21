@@ -133,6 +133,10 @@ chmod g+w /opt/gemeinschaft/db/production.sqlite3
 chmod 777 /opt/gemeinschaft/misc/fax/
 echo -e "Starting services\n"
 
+echo -e "Downloading FreeSWITCH sound files\n"
+mkdir -p /opt/freeswitch/sounds
+/opt/gemeinschaft/misc/freeswitch/download-freeswitch-sounds
+
 /etc/init.d/lighttpd start
 /etc/init.d/kamailio start
 
@@ -140,6 +144,7 @@ echo -e "Retrieving FreeSWITCH configuration\n"
 
 /opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh >>/dev/null
 chmod g+w /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+<<<<<<< HEAD
 chown freeswitch:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 
 echo -e "Downloading FreeSWITCH sound files\n"
@@ -161,7 +166,10 @@ rm 'freeswitch-sounds-music-8000-1.0.8.tar.gz' 2>&1 || true
 rm 'freeswitch-sounds-music-16000-1.0.8.tar.gz' 2>&1 || true
 
 echo -e "Starting FreeSWITCH\n"
+chown www-data:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+echo -e "Starting FreeSWITCH\n"
 /etc/init.d/freeswitch start
+
 
 echo -e "\n\n"
 echo -e "We are done\n\n"
