@@ -1,6 +1,18 @@
 class FreeswitchConfigurationController < ApplicationController
 	
-	#TODO Authentication. see FreeswitchDirectoryEntriesController / FreeswitchCallProcessingController. (=> pko)
+	# Allow access from 127.0.0.1 and [::1] only.
+	prepend_before_filter { |controller|
+		if ! request.local?
+			if user_signed_in?  #OPTIMIZE && is admin
+				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
+			else
+				logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
+				render :status => '403 None of your business',
+					:layout => false, :content_type => 'text/plain',
+					:text => "<!-- This is none of your business. -->"
+			end
+		end
+	}
 	
 	def load()
 		if ( sip_server = SipServer.where(:is_local => true).first )
@@ -558,6 +570,10 @@ class FreeswitchConfigurationController < ApplicationController
 			"US/Pacific" => "PST8PDT,M3.2.0,M11.1.0",
 			"US/Samoa" => "SST11",
 		}
+	end
+	
+	def _bold( str )
+		return "\e[0;32;1m#{str} \e[0m "
 	end
 	
 end
