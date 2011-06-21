@@ -3,13 +3,15 @@ class FreeswitchConfigurationController < ApplicationController
 	#TODO Authentication. see FreeswitchDirectoryEntriesController / FreeswitchCallProcessingController. (=> pko)
 	
 	def load()
-		@local_ip = local_ip
-		@domain = local_ip
-		@domain_name = local_ip
-		if (! @domain) 
-			@domain = '$${local_ip_v4}'
-			@domain_name = '$${local_ip_v4}'
+		if ( sip_server = SipServer.where(:is_local => true).first )
+			@sip_server_ip = sip_server.host
+		else
+			@sip_server_ip = local_ip
 		end
+		
+		@domain = @sip_server_ip
+		@domain_name = @sip_server_ip
+		
 		@sounds_dir = '/opt/freeswitch/sounds'
 		@hold_music = 'local_stream://moh'
 		@internal_sip_port = 15060
