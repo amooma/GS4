@@ -1,18 +1,18 @@
  new debian package, version 2.0.
        0 bytes,     0 lines      conffiles            
      520 bytes,    14 lines      control              
-   27090 bytes,   295 lines      md5sums              
-    2150 bytes,    81 lines   *  postinst             #!/bin/sh
+   35682 bytes,   383 lines      md5sums              
+    2184 bytes,    82 lines   *  postinst             #!/bin/sh
     1109 bytes,    44 lines   *  postrm               #!/bin/sh
      663 bytes,    35 lines   *  preinst              #!/bin/sh
      850 bytes,    38 lines   *  prerm                #!/bin/sh
  Package: gemeinschaft-common
  Source: gemeinschaft
- Version: 4.0~beta2-1
+ Version: 4.0~beta3-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 1840
- Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= 4.0~beta2-1), adduser
+ Installed-Size: 2328
+ Depends: ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= 4.0~beta3-1), adduser
  Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
  Conflicts: gemeinschaft (<< 3.99)
  Section: comm

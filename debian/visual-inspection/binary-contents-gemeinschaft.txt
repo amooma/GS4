@@ -5,6 +5,6 @@ drwxr-xr-x root/root         0  ./usr/share/doc/
 drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft/
 -rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft/copyright
 -rw-r--r-- root/root      3743  ./usr/share/doc/gemeinschaft/README.gz
--rw-r--r-- root/root       153  ./usr/share/doc/gemeinschaft/TODO.txt
+-rw-r--r-- root/root       475  ./usr/share/doc/gemeinschaft/TODO.txt
 -rw-r--r-- root/root       175  ./usr/share/doc/gemeinschaft/README.Debian
--rw-r--r-- root/root       182  ./usr/share/doc/gemeinschaft/changelog.Debian.gz
+-rw-r--r-- root/root       210  ./usr/share/doc/gemeinschaft/changelog.Debian.gz

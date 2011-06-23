@@ -4,7 +4,7 @@ drwxr-xr-x root/root         0  ./usr/share/
 drwxr-xr-x root/root         0  ./usr/share/doc/
 drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-ruby-gems-native-target-compile/
 -rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft-ruby-gems-native-target-compile/copyright
--rw-r--r-- root/root       182  ./usr/share/doc/gemeinschaft-ruby-gems-native-target-compile/changelog.Debian.gz
+-rw-r--r-- root/root       210  ./usr/share/doc/gemeinschaft-ruby-gems-native-target-compile/changelog.Debian.gz
 drwxr-xr-x root/root         0  ./opt/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/vendor/
@@ -16,6 +16,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/vendor/cache/
 -rw-r--r-- root/root     88576  ./opt/gemeinschaft/vendor/cache/ruby-openid-apps-discovery-1.2.0.gem
 -rw-r--r-- root/root     22528  ./opt/gemeinschaft/vendor/cache/builder-2.1.2.gem
 -rw-r--r-- root/root      7680  ./opt/gemeinschaft/vendor/cache/sqlite3-ruby-1.3.3.gem
+-rw-r--r-- root/root    206848  ./opt/gemeinschaft/vendor/cache/sass-3.1.1.gem
 -rw-r--r-- root/root    198656  ./opt/gemeinschaft/vendor/cache/nokogiri-1.4.4.gem
 -rw-r--r-- root/root    344064  ./opt/gemeinschaft/vendor/cache/shoulda-2.11.3.gem
 -rw-r--r-- root/root     20992  ./opt/gemeinschaft/vendor/cache/rack-test-0.5.7.gem
@@ -23,11 +24,13 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/vendor/cache/
 -rw-r--r-- root/root     94208  ./opt/gemeinschaft/vendor/cache/addressable-2.2.4.gem
 -rw-r--r-- root/root     47104  ./opt/gemeinschaft/vendor/cache/mime-types-1.16.gem
 -rw-r--r-- root/root     29184  ./opt/gemeinschaft/vendor/cache/annotate-models-1.0.4.gem
+-rw-r--r-- root/root   1400320  ./opt/gemeinschaft/vendor/cache/compass-0.11.1.gem
 -rw-r--r-- root/root     55808  ./opt/gemeinschaft/vendor/cache/sqlite3-1.3.3.gem
 -rw-r--r-- root/root      7168  ./opt/gemeinschaft/vendor/cache/oa-openid-0.2.0.gem
 -rw-r--r-- root/root     37888  ./opt/gemeinschaft/vendor/cache/simple_form-1.3.1.gem
 -rw-r--r-- root/root    272384  ./opt/gemeinschaft/vendor/cache/ruby-openid-2.1.8.gem
 -rw-r--r-- root/root     27136  ./opt/gemeinschaft/vendor/cache/faker-0.9.5.gem
+-rw-r--r-- root/root     25088  ./opt/gemeinschaft/vendor/cache/fssm-0.2.7.gem
 -rw-r--r-- root/root    352256  ./opt/gemeinschaft/vendor/cache/actionpack-3.0.5.gem
 -rw-r--r-- root/root      8192  ./opt/gemeinschaft/vendor/cache/pyu-ruby-sasl-0.0.3.2.gem
 -rw-r--r-- root/root     24576  ./opt/gemeinschaft/vendor/cache/faraday-0.5.7.gem
@@ -58,6 +61,7 @@ drwxr-xr-x root/root         0  ./opt/gemeinschaft/vendor/cache/
 -rw-r--r-- root/root     48640  ./opt/gemeinschaft/vendor/cache/oauth-0.4.4.gem
 -rw-r--r-- root/root     55296  ./opt/gemeinschaft/vendor/cache/rest-client-1.6.1.gem
 -rw-r--r-- root/root    310272  ./opt/gemeinschaft/vendor/cache/tzinfo-0.3.25.gem
+-rw-r--r-- root/root    316928  ./opt/gemeinschaft/vendor/cache/chunky_png-1.2.0.gem
 -rw-r--r-- root/root      8192  ./opt/gemeinschaft/vendor/cache/multipart-post-1.1.0.gem
 -rw-r--r-- root/root     13312  ./opt/gemeinschaft/vendor/cache/fcgi-0.8.8.gem
 -rw-r--r-- root/root     11264  ./opt/gemeinschaft/vendor/cache/default_value_for-1.0.1.gem

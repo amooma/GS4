@@ -7,11 +7,11 @@
     1107 bytes,    52 lines   *  preinst              #!/bin/sh
  Package: gemeinschaft-sip-proxy
  Source: gemeinschaft
- Version: 4.0~beta2-1
+ Version: 4.0~beta3-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
- Installed-Size: 84
- Depends: gemeinschaft-common (= 4.0~beta2-1), adduser, gemeinschaft-odbc-sqlite3 (= 4.0~beta2-1), kamailio (>= 3.1.0), kamailio-unixodbc-modules, kamailio-presence-modules
+ Installed-Size: 88
+ Depends: gemeinschaft-common (= 4.0~beta3-1), adduser, gemeinschaft-odbc-sqlite3 (= 4.0~beta3-1), kamailio (>= 3.1.0), kamailio-unixodbc-modules, kamailio-presence-modules
  Recommends: gemeinschaft-sip-pbx
  Conflicts: kamailio (= 3.1.3+squeeze1), openser, opensips, ser
  Replaces: gemeinschaft-sip-proxy, kamailio

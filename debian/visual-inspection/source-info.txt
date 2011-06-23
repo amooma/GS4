@@ -2,14 +2,14 @@ Format: 3.0 (native)
 Source: gemeinschaft
 Binary: gemeinschaft, gemeinschaft-common, gemeinschaft-ruby-gems, gemeinschaft-ruby-gems-native, gemeinschaft-ruby-gems-native-target-compile, gemeinschaft-tests, gemeinschaft-sip-proxy, gemeinschaft-sip-pbx-freeswitch, gemeinschaft-web-service, gemeinschaft-odbc-sqlite3, gemeinschaft-doc
 Architecture: any
-Version: 4.0~beta2-1
+Version: 4.0~beta3-1
 Maintainer: Amooma GmbH <info@amooma.de>
 Homepage: http://www.amooma.de/
 Standards-Version: 3.8.4
 Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.15), sed, ruby-sane1.9.1 (>= 1.9.2), ruby-sane1.9.1-dev (>= 1.9.2), libsqlite3-dev (>= 3.7), libxml2-dev, libxslt1-dev, libfcgi-dev, libgraphviz-dev
 Checksums-Sha1: 
- db2ba8cd181c5de9ce165bf427cbdac331e4961e 12411792 gemeinschaft_4.0~beta2-1.tar.gz
+ 05d65147da2d105dbdec7a1a213cd772c1658bf3 12965222 gemeinschaft_4.0~beta3-1.tar.gz
 Checksums-Sha256: 
- 22e313466a182209eda070451fb08607897b0c7424af1ba5b93d406e8d6af2d7 12411792 gemeinschaft_4.0~beta2-1.tar.gz
+ 4a4233bd2bbf44eb7299a3ab4baa91ce370badba8787f52d0231b25b79ac1eb4 12965222 gemeinschaft_4.0~beta3-1.tar.gz
 Files: 
- 217e070a62af644a98039602c73fad5c 12411792 gemeinschaft_4.0~beta2-1.tar.gz
+ 3703c8ac865ba48b7bebef3271377da8 12965222 gemeinschaft_4.0~beta3-1.tar.gz

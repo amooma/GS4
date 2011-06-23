@@ -4,7 +4,7 @@ drwxr-xr-x root/root         0  ./usr/share/
 drwxr-xr-x root/root         0  ./usr/share/doc/
 drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-web-service/
 -rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft-web-service/copyright
--rw-r--r-- root/root       182  ./usr/share/doc/gemeinschaft-web-service/changelog.Debian.gz
+-rw-r--r-- root/root       210  ./usr/share/doc/gemeinschaft-web-service/changelog.Debian.gz
 drwxr-xr-x root/root         0  ./etc/
 drwxr-xr-x root/root         0  ./etc/lighttpd/
 -rw-r--r-- root/root      1910  ./etc/lighttpd/lighttpd.conf

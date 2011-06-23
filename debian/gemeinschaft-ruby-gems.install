@@ -24,6 +24,8 @@ vendor/bundle/ruby/1.9.1/gems/addressable-[0-9]*          opt/gemeinschaft/vendo
 vendor/bundle/ruby/1.9.1/gems/annotate-models-[0-9]*      opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/arel-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/builder-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/chunky_png-[0-9]*           opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/compass-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/default_value_for-[0-9]*    opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/devise-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/erubis-[0-9]*               opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
@@ -31,6 +33,7 @@ vendor/bundle/ruby/1.9.1/gems/factory_girl-[0-9]*         opt/gemeinschaft/vendo
 vendor/bundle/ruby/1.9.1/gems/factory_girl_rails-[0-9]*   opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/faker-[0-9]*                opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/faraday-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/fssm-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/hirb-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/i18n-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/mail-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
@@ -62,6 +65,7 @@ vendor/bundle/ruby/1.9.1/gems/rest-client-[0-9]*          opt/gemeinschaft/vendo
 vendor/bundle/ruby/1.9.1/gems/rubyntlm-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/ruby-openid-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/ruby-openid-apps-discovery-[0-9]*    opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
+vendor/bundle/ruby/1.9.1/gems/sass-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/shoulda-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/simple_form-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/sqlite3-ruby-[0-9]*         opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/

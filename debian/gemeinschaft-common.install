@@ -7,8 +7,14 @@ app/helpers/admin/*.rb      opt/gemeinschaft/app/helpers/admin/
 app/models/*.rb             opt/gemeinschaft/app/models/
 
 app/views/authentications/*.erb                 opt/gemeinschaft/app/views/authentications/
+app/views/call_forwards/*.erb                   opt/gemeinschaft/app/views/call_forwards/
+app/views/call_logs/*.erb                       opt/gemeinschaft/app/views/call_logs/
+app/views/call_queues/*.erb                     opt/gemeinschaft/app/views/call_queues/
+app/views/conferences/*.erb                     opt/gemeinschaft/app/views/conferences/
 app/views/extensions/*.erb                      opt/gemeinschaft/app/views/extensions/
+app/views/fax_documents/*.erb                   opt/gemeinschaft/app/views/fax_documents/
 app/views/freeswitch_call_processing/*.erb      opt/gemeinschaft/app/views/freeswitch_call_processing/
+app/views/freeswitch_configuration/*.builder    opt/gemeinschaft/app/views/freeswitch_configuration/
 app/views/freeswitch_directory_entries/*.erb    opt/gemeinschaft/app/views/freeswitch_directory_entries/
 app/views/layouts/*.erb                         opt/gemeinschaft/app/views/layouts/
 app/views/manufacturer_snom/*.erb               opt/gemeinschaft/app/views/manufacturer_snom/
@@ -18,7 +24,6 @@ app/views/nodes/*.erb                           opt/gemeinschaft/app/views/nodes
 app/views/phone_models/*.erb                    opt/gemeinschaft/app/views/phone_models/
 app/views/phones/*.erb                          opt/gemeinschaft/app/views/phones/
 app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
-app/views/sip_phones/*.erb                      opt/gemeinschaft/app/views/sip_phones/
 app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
 app/views/sip_servers/*.erb                     opt/gemeinschaft/app/views/sip_servers/
 app/views/subscribers/*.erb                     opt/gemeinschaft/app/views/subscribers/
@@ -54,7 +59,8 @@ Gemfile             opt/gemeinschaft/
 Gemfile.lock        opt/gemeinschaft/
 
 lib/*.rb            opt/gemeinschaft/lib/
-#lib/tasks/*.rb      opt/gemeinschaft/tasks/
+#lib/tasks/*.rb      opt/gemeinschaft/lib/tasks/
+lib/tasks/*.rake    opt/gemeinschaft/lib/tasks/
 
 db/schema.rb        opt/gemeinschaft/db/
 db/seeds.rb         opt/gemeinschaft/db/

@@ -6,11 +6,11 @@
     1136 bytes,    51 lines   *  preinst              #!/bin/sh
  Package: gemeinschaft-sip-pbx-freeswitch
  Source: gemeinschaft
- Version: 4.0~beta2-1
+ Version: 4.0~beta3-1
  Architecture: all
  Maintainer: Amooma GmbH <info@amooma.de>
  Installed-Size: 296
- Depends: gemeinschaft-common (= 4.0~beta2-1), freeswitch (>= 1.0.6), freeswitch-spidermonkey
+ Depends: gemeinschaft-common (= 4.0~beta3-1), freeswitch (>= 1.0.6), freeswitch-spidermonkey
  Recommends: gemeinschaft-sip-proxy, freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
  Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
  Replaces: freeswitch, freeswitch-spidermonkey, gemeinschaft-sip-pbx-freeswitch

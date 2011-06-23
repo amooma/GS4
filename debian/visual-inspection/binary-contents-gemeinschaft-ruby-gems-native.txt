@@ -4,7 +4,7 @@ drwxr-xr-x root/root         0  ./usr/share/
 drwxr-xr-x root/root         0  ./usr/share/doc/
 drwxr-xr-x root/root         0  ./usr/share/doc/gemeinschaft-ruby-gems-native/
 -rw-r--r-- root/root       926  ./usr/share/doc/gemeinschaft-ruby-gems-native/copyright
--rw-r--r-- root/root       182  ./usr/share/doc/gemeinschaft-ruby-gems-native/changelog.Debian.gz
+-rw-r--r-- root/root       210  ./usr/share/doc/gemeinschaft-ruby-gems-native/changelog.Debian.gz
 drwxr-xr-x root/root         0  ./opt/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/
 drwxr-xr-x root/root         0  ./opt/gemeinschaft/vendor/
