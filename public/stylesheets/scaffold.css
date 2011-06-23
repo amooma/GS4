@@ -54,3 +54,14 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+
+/*
+#OPTIMIZE scaffold.css wird zwar anscheinend von jedem Scaffold
+wieder angelegt wenn es noch nicht da ist, aber IMHO wird es
+jetzt nicht mehr gebraucht oder? Falls es nicht inzwischen doch
+wieder gebraucht wird sollten wir es löschen und es in .gitignore
+aufnehmen. Message-ID: <4DF74104.8000206@amooma.de>,
+<4DF74100.3090902@amooma.de>
+*/
+
