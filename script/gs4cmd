@@ -1,0 +1,202 @@
+#! /usr/bin/env ruby
+
+# print to standard error
+def error(error_text)
+	$stderr.puts error_text
+end
+
+def validation_error(errors)
+	errors.each do |attribute_name, error_messages|
+		error "\"#{attribute_name}\" #{error_messages}"
+	end
+end
+# ensure specified columns exist in model
+def check_columns(given_columns, object_columns)
+	if (object_columns.class != Array)
+		error "Object contains no columns"
+		return false
+	elsif (given_columns.class == Hash)
+		given_columns = given_columns.keys
+	elsif (given_columns.class != Array)
+		error "No columns specified"
+		return false
+	end
+	unknown_column = false
+	given_columns.each do |column_name|
+		if (! object_columns.include? column_name)
+			error "Column \"#{column_name}\" not found"
+			unknown_column = true
+		end
+	end
+	if (unknown_column)
+		return false
+	end
+	return true
+end
+
+# define default column order for frequently used models
+def default_column_order(object_name, columns)
+	default_columns = {
+		'User' => [
+			'id','username','sn','gn','email',
+		]
+	}
+	
+	if (default_columns.include? object_name)
+		return default_columns[object_name]
+	end
+	columns.delete('created_at')
+	columns.delete('updated_at')
+	return columns
+end
+
+APP_PATH = File.expand_path('../../config/application',  __FILE__)
+require File.expand_path('../../config/boot',  __FILE__)
+require APP_PATH
+
+Rails.application.require_environment!
+
+usage_banner = "Usage: #{$0} <command> <object-name> [options]"
+
+# first parameter ist always the command
+if (! ARGV[0]) 
+	error "No command specified"
+	error usage_banner
+	exit 1
+end
+command_name = ARGV[0].downcase
+
+# second parameter is the model name
+begin
+	object = ARGV[1].singularize.camelize.constantize
+rescue
+	error "Object not found"
+	error usage_banner
+	exit 1
+end
+
+# retrieve attribute names from model
+if (object.attr_accessible && object.attr_accessible.count > 0)
+	column_names = object.attr_accessible.to_a
+else
+	column_names = object.new.attributes.keys
+end
+
+options = Hash.new()
+columns = Hash.new()
+require 'optparse'
+optionparser = OptionParser.new do |option|
+	option.banner = usage_banner
+	option.on('-c <column1,column2,column3>', Array, 'Specify column order') do |value|
+		options[:column_order] = value
+	end
+	option.on('-s <separator>', String, 'Specify column separator e.g. ";"') do |value|
+		options[:column_separator] = value
+	end
+	option.on( '-h', 'Display this help screen' ) do
+		puts option
+		exit
+	end
+	column_names.each do |option_name|
+		option.on("--#{option_name} <value>", String, "Set \"#{option_name}\" attribute") do |value|
+			columns[option_name] = value
+		end
+	end
+end
+
+# parse options
+begin 
+	optionparser.parse! ARGV
+rescue OptionParser::InvalidOption => e
+	error e
+	error optionparser
+	exit 1
+rescue OptionParser::NeedlessArgument => e
+	error e
+	error optionparser
+	exit 1
+end
+
+# ensure given options represent model attributes
+if (options[:column_order])    
+    if (! check_columns(options[:column_order], column_names))
+		error "Some columns not found"
+		exit 1
+	else
+		column_order = options[:column_order]
+	end
+else
+	column_order = default_column_order(object.name, column_names)
+end
+
+if (columns.count > 0 && ! check_columns(columns, column_names))
+	error "Some columns not found"
+	exit 1
+end
+
+if (options[:column_separator])
+	column_separator = options[:column_separator]
+else
+	column_separator = '|'
+end
+
+# process comand
+case command_name
+when 'list'
+	begin
+		if (columns.count > 0)
+			entries = object.where(columns).all
+		else
+			entries = object.all
+		end
+	rescue => e
+		error "Could not find objects"
+		exit 1
+	end
+	if (entries)
+		puts column_order.join(column_separator)
+		entries.each do |entry|
+			values = Array.new()
+			column_order.each do |column|
+				values << entry[column]
+			end
+			puts values.join(column_separator)
+		end
+	end
+when 'add'
+	new_object = object.create(columns)
+	puts columns
+	if (new_object)
+		if (new_object.save)
+			puts "Object \"#{object.name}\" added"
+		else
+			validation_error new_object.errors
+			error "Object \"#{object.name}\" could not be added"
+			exit 1
+		end
+	else
+		error "Object \"#{object.name}\" not added"
+		exit 1
+	end
+when 'update'
+	if (columns['id'].blank?)
+		error "No object ID specified"
+		puts columns
+		exit 1
+	end
+	object_found = object.where(:id  => columns['id']).first
+	if (object_found)
+		object_updated = object_found.update_attributes(columns)
+	else
+		error "No object ID \"#{columns.id}\" found"
+	end
+	
+	if (object_updated)
+		puts "Object \"#{object.name}\" updated"
+	else
+		error "Object \"#{object.name}\" not updated"
+	end
+else
+	error "command \"#{command_name}\" not found"
+	exit 1
+end
