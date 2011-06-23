@@ -43,6 +43,7 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="forwarded_to">forwarded_to <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="source">source <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="source_name">source_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="uuid">uuid <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 >];
   m_CallQueue [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -393,7 +394,7 @@ digraph Gemeinschaft4 {
   m_VoicemailServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_CallForwardReason -> m_CallForward [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipAccount -> m_CallForward [arrowhead = "normal", arrowtail = "none", weight = "2"]
-  m_SipAccount -> m_CallLog [arrowhead = "normal", arrowtail = "none", weight = "1"]
+  m_SipAccount -> m_CallLog [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_CallQueue -> m_CallQueueToExtension [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_CallQueue -> m_Extension [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"]
   m_Extension -> m_CallQueueToExtension [arrowhead = "normal", arrowtail = "none", weight = "1"]
