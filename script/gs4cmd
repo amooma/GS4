@@ -34,6 +34,22 @@ def check_columns(given_columns, object_columns)
 	return true
 end
 
+# define allowed attributes
+def allowed_attributes(class_name, class_attributes)
+	attributes = {
+		'User' => [
+			'id','username','sn','gn','email','password'
+		]
+	}
+	
+	if (attributes.include? class_name)
+		return attributes[class_name]
+	end
+	class_attributes.delete('created_at')
+	class_attributes.delete('updated_at')
+	return class_attributes
+end
+
 # define default column order for frequently used models
 def default_column_order(object_name, columns)
 	default_columns = {
@@ -68,7 +84,7 @@ command_name = ARGV[0].downcase
 
 # second parameter is the model name
 begin
-	object = ARGV[1].singularize.camelize.constantize
+	model_class = ARGV[1].singularize.camelize.constantize
 rescue
 	error "Object not found"
 	error usage_banner
@@ -76,11 +92,8 @@ rescue
 end
 
 # retrieve attribute names from model
-if (object.attr_accessible && object.attr_accessible.count > 0)
-	column_names = object.attr_accessible.to_a
-else
-	column_names = object.new.attributes.keys
-end
+attribute_names = allowed_attributes(model_class.name, model_class.new.attributes.keys)
+column_order =  default_column_order(model_class.name, model_class.column_names)
 
 options = Hash.new()
 columns = Hash.new()
@@ -90,14 +103,14 @@ optionparser = OptionParser.new do |option|
 	option.on('-c <column1,column2,column3>', Array, 'Specify column order') do |value|
 		options[:column_order] = value
 	end
-	option.on('-s <separator>', String, 'Specify column separator e.g. ";"') do |value|
+	option.on('-s <separator>', String, 'Specify column separator','Default: "|"') do |value|
 		options[:column_separator] = value
 	end
 	option.on( '-h', 'Display this help screen' ) do
 		puts option
 		exit
 	end
-	column_names.each do |option_name|
+	attribute_names.each do |option_name|
 		option.on("--#{option_name} <value>", String, "Set \"#{option_name}\" attribute") do |value|
 			columns[option_name] = value
 		end
@@ -119,17 +132,15 @@ end
 
 # ensure given options represent model attributes
 if (options[:column_order])    
-    if (! check_columns(options[:column_order], column_names))
+    if (! check_columns(options[:column_order], attribute_names))
 		error "Some columns not found"
 		exit 1
 	else
 		column_order = options[:column_order]
 	end
-else
-	column_order = default_column_order(object.name, column_names)
 end
 
-if (columns.count > 0 && ! check_columns(columns, column_names))
+if (columns.count > 0 && ! check_columns(columns, attribute_names))
 	error "Some columns not found"
 	exit 1
 end
@@ -145,9 +156,9 @@ case command_name
 when 'list'
 	begin
 		if (columns.count > 0)
-			entries = object.where(columns).all
+			entries = model_class.where(columns).all
 		else
-			entries = object.all
+			entries = model_class.all
 		end
 	rescue => e
 		error "Could not find objects"
@@ -164,18 +175,17 @@ when 'list'
 		end
 	end
 when 'add'
-	new_object = object.create(columns)
-	puts columns
+	new_object = model_class.create(columns)
 	if (new_object)
 		if (new_object.save)
-			puts "Object \"#{object.name}\" added"
+			puts "Object \"#{model_class.name}\" added"
 		else
 			validation_error new_object.errors
-			error "Object \"#{object.name}\" could not be added"
+			error "Object \"#{model_class.name}\" could not be added"
 			exit 1
 		end
 	else
-		error "Object \"#{object.name}\" not added"
+		error "Object \"#{model_class.name}\" not added"
 		exit 1
 	end
 when 'update'
@@ -184,7 +194,7 @@ when 'update'
 		puts columns
 		exit 1
 	end
-	object_found = object.where(:id  => columns['id']).first
+	object_found = model_class.where(:id  => columns['id']).first
 	if (object_found)
 		object_updated = object_found.update_attributes(columns)
 	else
@@ -192,9 +202,9 @@ when 'update'
 	end
 	
 	if (object_updated)
-		puts "Object \"#{object.name}\" updated"
+		puts "Object \"#{model_class.name}\" updated"
 	else
-		error "Object \"#{object.name}\" not updated"
+		error "Object \"#{model_class.name}\" not updated"
 	end
 else
 	error "command \"#{command_name}\" not found"
