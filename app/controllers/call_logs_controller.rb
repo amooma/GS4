@@ -1,6 +1,6 @@
 class CallLogsController < ApplicationController
-  
-  # Allow access from 127.0.0.1 and [::1] only.
+	
+	# Allow access from 127.0.0.1 and [::1] only.
 	prepend_before_filter { |controller|
 		if ! request.local?
 			if user_signed_in?  #OPTIMIZE && is admin
@@ -17,6 +17,7 @@ class CallLogsController < ApplicationController
 	}
 	#before_filter :authenticate_user!
 	#OPTIMIZE Implement SSL with client certificates. :authenticate_user!
+	
   
   # GET /call_logs
   # GET /call_logs.xml
