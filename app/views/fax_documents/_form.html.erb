@@ -1,7 +1,7 @@
 <%= form_for(@fax_document, :html => { :multipart => true }) do |f| %>
   <% if @fax_document.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@fax_document.errors.count, "error"), :model_name => 'Fax') %></h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@fax_document.errors.count, "error"), :model_name => t(:fax)) %></h2>
 
       <ul>
       <% @fax_document.errors.full_messages.each do |msg| %>
