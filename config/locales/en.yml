@@ -1,5 +1,11 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# locale for GS4 in English 
 
 en:
-  hello: "Hello world"
+  show: "Show"
+  back: "Back"
+  edit: "Edit"
+  send: "Send"
+  file: "File"
+  upload: "Upload"
+  destination: "Destination"
+  errors_model_not_saved: "%{errors_count} prohibited this %{model_name} from being saved"
