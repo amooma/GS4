@@ -58,12 +58,10 @@ class FaxDocument < ActiveRecord::Base
 		if (@upload && ! @upload.tempfile.path.blank?)
 			input_file = @upload.tempfile.path()
 			original_filename = @upload.original_filename
-		else
+		elsif (! self.file.blank?)
 			input_file = self.file
 			original_filename = File.basename(self.file)
-		end
-		
-		if (input_file.blank?)
+		else
 			errors.add( :base, "Fax source document does not exist")
 			return false
 		end
