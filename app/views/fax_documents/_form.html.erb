@@ -12,9 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :file %><br />
+    <%= f.label :upload %><br />
     <% if @fax_document.file.nil? %>
-      <%= f.file_field :file %>
+      <%= f.file_field :upload %>
     <% else %>
       <%= @fax_document.file %>
     <% end %>

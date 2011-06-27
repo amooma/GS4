@@ -52,7 +52,7 @@ class FaxDocumentsController < ApplicationController
   # POST /fax_documents.xml
   def create
     @fax_document = FaxDocument.new(params[:fax_document])
-	@fax_document.save_file(params[:fax_document])
+	#@fax_document.save_file(params[:fax_document])
 	
     respond_to do |format|
       if  @fax_document.save

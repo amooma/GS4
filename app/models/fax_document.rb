@@ -3,20 +3,27 @@ class FaxDocument < ActiveRecord::Base
 	validates_presence_of     :raw_file
 	validates_presence_of     :file
 	
-	after_validation( :on => :create ) {
-		raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+	before_validation( :on => :create ) {
 		if (! self.raw_file)
-			errors.add( :base, "No document found")
-		elsif (! File.exists?(raw_file))
-			errors.add( :base, "Failed to convert document")
+			self.create_raw_file_from_document()
+		end
+		if (self.raw_file)
+			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+			if (! self.raw_file)
+				errors.add( :base, "No document found")
+			elsif (! File.exists?(raw_file))
+				errors.add( :base, "Failed to convert document")
+			else
+				thumbnail = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.png"
+				if (! File.exists?(thumbnail))
+					create_thumbnail_from_fax( self.raw_file )
+				end
+				if (! self.destination.blank?)
+					originate_call(self.destination, raw_file)
+				end
+			end
 		else
-			thumbnail = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.png"
-			if (! File.exists?(thumbnail))
-				create_thumbnail_from_fax( self.raw_file )
-			end
-			if (! self.destination.blank?)
-				originate_call(self.destination, raw_file)
-			end
+	       errors.add( :base, "Fax document could not be created")
 		end
 	}
 	
@@ -43,29 +50,59 @@ class FaxDocument < ActiveRecord::Base
 		end
 	}
 	
-	def save_file( upload )
-		if (upload.nil? || ! upload['file'] || ! upload['raw_file'].blank?)
+	def upload=(file_data)
+		@upload = file_data
+	end
+	
+	def create_raw_file_from_document()
+		if (@upload && ! @upload.tempfile.path.blank?)
+			input_file = @upload.tempfile.path()
+			original_filename = @upload.original_filename
+		else
+			input_file = self.file
+			original_filename = File.basename(self.file)
+		end
+		
+		if (input_file.blank?)
+			errors.add( :base, "Fax source document does not exist")
 			return false
 		end
-		self.file = upload['file'].original_filename
 		resolution = '204x98'
 		page_size = '1728x1078'
-		input_file = upload['file'].tempfile.path()
 		output_file = "FAX-OUT-#{SecureRandom.hex(10)}"
 		output_path = "#{FAX_FILES_DIRECTORY}/#{output_file}"
 		if (File.exist?(output_path+'.tif'))
+			errors.add( :base, "Fax file already exists")
 			return false
 		end
-		ghostscript_command = "gs -q -r#{resolution} -g#{page_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=#{output_path}.tif -- #{input_file}"
-		system  ghostscript_command
-		ghostscript_command = "gs -q -r21x31 -g210x310 -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}"
-		system  ghostscript_command
+		
+		#create fax g3 file
+		system "gs -q -r#{resolution} -g#{page_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=#{output_path}.tif -- #{input_file}"
+		if (! File.exist?(output_path+'.tif'))
+			system "convert -density 204x98 -resize 1728x1186\! -monochrome -compress Fax #{input_file} #{output_path}.tif"
+		end
+		
+		#create fax png thumbnail
+		system "gs -q -r21x31 -g210x310 -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}"
+		if (File.exist?(output_path+'.tif') && ! File.exist?(output_path+'.png'))
+			system "convert -resize 210x310\! #{output_path}.tif #{output_path}.png"
+		end
+		
+		#check if all fallbacks failed and the files are still not present
+		if (! File.exist?(output_path+'.tif'))
+			errors.add( :base, "Fax file could not be created #{@file_data}")
+		end
+		if (! File.exist?(output_path+'.png'))
+			errors.add( :base, "Fax thumbnail could not be created #{@file_data.class}")
+		end
+		
 		self.raw_file = output_file
+		self.file = original_filename
+		return true
 	end
 	
 	def create_thumbnail_from_fax( raw_file )
-		convert_command = "convert -resize 210x310\! #{FAX_FILES_DIRECTORY}/#{raw_file}.tif #{FAX_FILES_DIRECTORY}/#{raw_file}.png"
-		return system convert_command
+		return system "convert -resize 210x310\! #{FAX_FILES_DIRECTORY}/#{raw_file}.tif #{FAX_FILES_DIRECTORY}/#{raw_file}.png"
 	end
 	
 	def originate_call( destination, raw_file )
