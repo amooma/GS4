@@ -1,11 +1,11 @@
-<h1>FAX Documents</h1>
+<h1><%= t(:fax_documents) %></h1>
 
 <table>
   <tr>
 	<th></th>
-    <th>Document</th>
-    <th>Fax</th>
-    <th>Destination</th>
+    <th><%= t(:document) %></th>
+    <th><%= t(:fax) %></th>
+    <th><%= t(:destination) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -27,13 +27,13 @@
     <% end %>
     </td>
     <td><%= fax_document.destination %></td>
-    <td><%= link_to 'Show', fax_document %></td>
-    <td><%= link_to 'Edit', edit_fax_document_path(fax_document) %></td>
-    <td><%= button_to 'Destroy', fax_document, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:show), fax_document %></td>
+    <td><%= link_to t(:edit), edit_fax_document_path(fax_document) %></td>
+    <td><%= button_to t(:destroy), fax_document, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Fax document', new_fax_document_path %>
+<%= link_to t(:new_fax), new_fax_document_path %>
