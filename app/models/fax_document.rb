@@ -90,10 +90,10 @@ class FaxDocument < ActiveRecord::Base
 		
 		#check if all fallbacks failed and the files are still not present
 		if (! File.exist?(output_path+'.tif'))
-			errors.add( :base, "Fax file could not be created #{@file_data}")
+			errors.add( :base, "Fax file could not be created")
 		end
 		if (! File.exist?(output_path+'.png'))
-			errors.add( :base, "Fax thumbnail could not be created #{@file_data.class}")
+			errors.add( :base, "Fax thumbnail could not be created")
 		end
 		
 		self.raw_file = output_file
