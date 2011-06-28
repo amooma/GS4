@@ -113,3 +113,5 @@ en:
   phone_created: "Phone was successfully created"
   phone_updated: "Phone was successfully updated"
   phone_rebooting: "Phone is in the process of rebooting"
+  phone_model_no_id: "There is no phone model with the given ID %{model_id}"
+  mac_address_not_matching_oui: "doesn't match the OUIs of the manufacturer %{manufacturer}"
