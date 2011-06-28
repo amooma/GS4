@@ -47,7 +47,7 @@ class NodesController < ApplicationController
     
     respond_to do |format|
       if @node.save
-        format.html { redirect_to(@node, :notice => 'Node was successfully created.') }
+        format.html { redirect_to(@node, :notice => t(:node_created)) }
         format.xml  { render :xml => @node, :status => :created, :location => @node }
       else
         format.html { render :action => "new" }
@@ -63,7 +63,7 @@ class NodesController < ApplicationController
     
     respond_to do |format|
       if @node.update_attributes(params[:node])
-        format.html { redirect_to(@node, :notice => 'Node was successfully updated.') }
+        format.html { redirect_to(@node, :notice => t(:node_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

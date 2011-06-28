@@ -39,5 +39,6 @@ en:
   editing_node: "Editing node"
   listing_nodes: "Nodes"
   new_node: "New node"
-  
+  node_created: "Node was successfully created"
+  node_updated: "Node was successfully updated"
   
