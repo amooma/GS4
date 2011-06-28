@@ -110,3 +110,6 @@ en:
   ip_unknown_or_path_nil: "IP address unknown or reboot path not set"
   create_sip_account_for_phone: "Create a new sip account for this phone"
   phone_model_allows_number_accounts: "The phone model %{model_name} allows only %{number_sip_accounts} SIP accounts. To create one you have to delete one first"
+  phone_created: "Phone was successfully created"
+  phone_updated: "Phone was successfully updated"
+  phone_rebooting: "Phone is in the process of rebooting"
