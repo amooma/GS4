@@ -13,20 +13,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :extension %>
+    <%= f.label t(:extension) %>
     <%= f.text_field :extension %>
   </div>
   <div class="field">
-    <%= f.label :destination %>
+    <%= f.label t(:destination) %>
     <%= f.text_field :destination, :readonly => ! @extension.destination.nil? %>
     <%#OPTIMIZE If SIP account is set then set destination automatically or vice-versa. %>
   </div>
   <div class="field">
+    <%= f.label t(:active) %>
     <%= f.check_box :active %>
-    <%= f.label :active %>
   </div>
   <br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save_extension)) %>
   </div>
 <% end %>

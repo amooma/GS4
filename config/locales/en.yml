@@ -11,6 +11,7 @@ en:
   download: "Download"
   document: "Document"
   title: "Title"
+  active: "Active"
   are_you_sure: "Are you sure?"
   fax: "Fax"
   destination: "Destination"
@@ -25,4 +26,10 @@ en:
   fax_document_not_created: "Fax document could not be created"
   fax_document_not_found: "Fax document not found"
   fax_thumbnail_not_created: "Fax preview could not be created"
+  extension: "Extension"
+  editing_extension: "Editing extension"
+  new_extension: "New extension"
+  save_extension: "Save extension"
+  listing_extensions: "Extensions"
+  
   
