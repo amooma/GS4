@@ -19,6 +19,7 @@ en:
   fax: "Fax"
   destination: "Destination"
   errors_model_not_saved: "%{errors_count} prohibited this %{model_name} from being saved"
+  model_cannot_be_changed: "%{model_name} cannot be changed. Please create a new one"
   file_not_found: "File not found"
   file_exists: "File already exists"
   management_host: "Management host"
@@ -83,3 +84,4 @@ en:
   sip_proxies: "SIP proxies"
   new_sip_proxy: "New SIP proxy"
   sip_proxy_created: "Sip proxy was successfully created"
+  
