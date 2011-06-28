@@ -1,19 +1,19 @@
 
 <p>
-	<b>Management host:</b>
+	<b><%= t(:management_host) %>:</b>
 	<%= @node.management_host %>
 </p>
 
 <p>
-	<b>Management port:</b>
+	<b><%= t(:management_port) %>:</b>
 	<%= @node.management_port %>
 </p>
 
 <p>
-	<b>Title:</b>
+	<b><%= t(:title) %>:</b>
 	<%= @node.title %>
 </p>
 
 
-<%#= link_to 'Edit', edit_node_path(@node) %> |
-<%= link_to 'Back', nodes_path %>
+<%#= link_to t(:edit), edit_node_path(@node) %> |
+<%= link_to t(:back), nodes_path %>

@@ -11,18 +11,18 @@
 <% end %>
 
 <div class="field">
-	<%= f.label      :management_host %><br />
+	<%= f.label      t(:management_host) %><br />
 	<%= f.text_field :management_host %>
 </div>
 <div class="field">
-	<%= f.label      :management_port %><br />
+	<%= f.label      t(:management_port) %><br />
 	<%= f.text_field :management_port %>
 </div>
 <div class="field">
-	<%= f.label      :title %><br />
+	<%= f.label      t(:title) %><br />
 	<%= f.text_field :title %>
 </div>
 <div class="actions">
-	<%= f.submit %>
+	<%= f.submit(t(:save)) %>
 </div>
 <% end %>

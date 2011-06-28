@@ -1,10 +1,10 @@
-<h1>Nodes</h1>
+<h1><%= t(:listing_nodes) %></h1>
 
 <table>
 	<tr>
-		<th>Management host</th>
-		<th>Management port</th>
-		<th>Title</th>
+		<th><%= t(:management_host) %></th>
+		<th><%= t(:management_port) %></th>
+		<th><%= t(:title) %></th>
 		<th></th>
 		<th></th>
 		<th></th>
@@ -15,14 +15,14 @@
 		<td><%= node.management_host %></td>
 		<td><%= node.management_port %></td>
 		<td><%= node.title %></td>
-		<td><%= link_to 'Show', node %></td>
-		<td><%#= link_to 'Edit', edit_node_path(node) %></td>
-		<td><%#= button_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete %></td>
+		<td><%= link_to t(:show), node %></td>
+		<td><%#= link_to t(:edit), edit_node_path(node) %></td>
+		<td><%#= button_to t(:destroy), node, :confirm => t(:are_you_sure), :method => :delete %></td>
 	</tr>
 <% } %>
 </table>
 
 <br />
 
-<%#= link_to 'New node', new_node_path %>
+<%#= link_to t(:new_node), new_node_path %>
 

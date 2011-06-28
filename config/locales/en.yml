@@ -5,6 +5,7 @@ en:
   back: "Back"
   edit: "Edit"
   send: "Send"
+  save: "Save"
   destroy: "Destroy"
   file: "File"
   upload: "Upload"
@@ -18,6 +19,8 @@ en:
   errors_model_not_saved: "%{errors_count} prohibited this %{model_name} from being saved"
   file_not_found: "File not found"
   file_exists: "File already exists"
+  management_host: "Management host"
+  management_port: "Management port"
   editing_fax_document: "Editing Fax document"
   fax_documents: "Fax Documents"
   new_fax: "New Fax"
@@ -33,4 +36,8 @@ en:
   listing_extensions: "Extensions"
   extension_created: "Extension was successfully created"
   extension_updated: "Extension was successfully updated"
+  editing_node: "Editing node"
+  listing_nodes: "Nodes"
+  new_node: "New node"
+  
   
