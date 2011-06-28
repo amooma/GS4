@@ -56,7 +56,7 @@ class FaxDocumentsController < ApplicationController
 	
     respond_to do |format|
       if  @fax_document.save
-        format.html { redirect_to(@fax_document, :notice => 'Fax document was successfully created.') }
+        format.html { redirect_to(@fax_document, :notice => t(:fax_document_created)) }
         format.xml  { render :xml => @fax_document, :status => :created, :location => @fax_document }
       else
         format.html { render :action => "new" }
@@ -72,7 +72,7 @@ class FaxDocumentsController < ApplicationController
 
     respond_to do |format|
       if @fax_document.update_attributes(params[:fax_document])
-        format.html { redirect_to(@fax_document, :notice => 'Fax document was successfully updated.') }
+        format.html { redirect_to(@fax_document, :notice => t(:fax_document_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

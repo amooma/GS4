@@ -18,3 +18,5 @@ en:
   editing_fax_document: "Editing Fax document"
   fax_documents: "Fax Documents"
   new_fax: "New Fax"
+  fax_document_created: 'Fax document was successfully created'
+  fax_document_updated: 'Fax document was successfully updated'
