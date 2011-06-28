@@ -91,3 +91,5 @@ en:
   editing_voicemail_server: "Editing voicemail server"
   voicemail_servers: "Voicemail servers"
   new_voicemail_server: "New voicemail server"
+  voicemail_server_created: "Voicemail server was successfully created"
+  voicemail_server_updated: "Voicemail server was successfully updated"
