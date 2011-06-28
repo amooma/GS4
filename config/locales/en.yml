@@ -31,5 +31,6 @@ en:
   new_extension: "New extension"
   save_extension: "Save extension"
   listing_extensions: "Extensions"
-  
+  extension_created: "Extension was successfully created"
+  extension_updated: "Extension was successfully updated"
   
