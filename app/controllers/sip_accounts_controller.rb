@@ -69,7 +69,7 @@ class SipAccountsController < ApplicationController
     
     respond_to do |format|
       if @sip_account.save
-        format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully created.') }
+        format.html { redirect_to(@sip_account, :notice => t(:sip_account_created)) }
         format.xml  { render :xml => @sip_account, :status => :created, :location => @sip_account }
       else
         format.html { render :action => "new" }
@@ -85,7 +85,7 @@ class SipAccountsController < ApplicationController
     
     respond_to do |format|
       if @sip_account.update_attributes(params[:sip_account])
-        format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully updated.') }
+        format.html { redirect_to(@sip_account, :notice => t(:sip_account_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

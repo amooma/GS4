@@ -63,3 +63,5 @@ en:
   need_to_create_extension: "You need to create an extension to make phonecalls!"
   name: "Name"
   mac_address: "MAC address"
+  sip_account_created: "Sip account was successfully created"
+  sip_account_updated: "Sip account was successfully updated"
