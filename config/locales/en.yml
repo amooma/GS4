@@ -88,3 +88,6 @@ en:
   sip_servers: "SIP domains/servers"
   new_sip_server: "New SIP domain/server"
   sip_server_created: "Sip server was successfully created"
+  editing_voicemail_server: "Editing voicemail server"
+  voicemail_servers: "Voicemail servers"
+  new_voicemail_server: "New voicemail server"
