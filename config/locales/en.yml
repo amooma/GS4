@@ -87,3 +87,4 @@ en:
   editing_sip_server: "Editing SIP domain/server"
   sip_servers: "SIP domains/servers"
   new_sip_server: "New SIP domain/server"
+  sip_server_created: "Sip server was successfully created"
