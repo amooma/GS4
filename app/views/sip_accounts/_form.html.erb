@@ -1,7 +1,7 @@
 <%= simple_form_for( @sip_account ) { |f| %>
   <% if @sip_account.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@sip_account.errors.count, "error") %> prohibited this sip_account from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@sip_account.errors.count, "error"), :model_name => t(:sip_account)) %>:</h2>
 
       <ul>
       <% @sip_account.errors.full_messages.each do |msg| %>

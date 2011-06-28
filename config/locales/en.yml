@@ -71,3 +71,4 @@ en:
   subscriber_not_created: "Failed to create subscriber"
   subscriber_not_updated: "Failed to update subscriber"
   subscriber_not_deleted: "Failed to delete subscriber"
+  sip_account: "SIP account"
