@@ -12,51 +12,51 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id, "User" %>
+    <%= f.label :user_id, t(:user) %>
     <%= f.select( :user_id,
       @users.collect {|r| [ "#{r.sn}, #{r.gn} (#{r.username}, #{r.email})", r.id ] },
       { :include_blank => true, :selected => @sip_account.user_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :auth_name, "Auth. name" %>
+    <%= f.label :auth_name, t(:auth_name) %>
     <%= f.text_field :auth_name %>
   </div>
   <div class="field">
-    <%= f.label :caller_name %>
+    <%= f.label :caller_name, t(:caller_name) %>
     <%= f.text_field :caller_name %>
   </div>
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, t(:password)%>
     <%= f.text_field :password %>
   </div>
   <div class="field">
-    <%= f.label :realm %>
+    <%= f.label :realm, t(:realm) %>
     <%= f.text_field :realm %>
   </div>
   <div class="field">
-    <%= f.label :sip_server_id, "SIP server" %>
+    <%= f.label :sip_server_id, t(:sip_server) %>
     <%= f.select( :sip_server_id,
-      @sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
+      @sip_servers.collect {|r| [ "#{r.host}#{r.port ? (':' + r.port.to_s) : ''} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_server_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :sip_proxy_id, "SIP proxy" %>
+    <%= f.label :sip_proxy_id, t(:sip_proxy) %>
     <%= f.select( :sip_proxy_id,
-      @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
+      @sip_proxies.collect {|r| [ "#{r.host}#{r.port ? (':' + r.port.to_s) : ''} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.sip_proxy_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :voicemail_server_id, "Voicemail server" %>
+    <%= f.label :voicemail_server_id, t(:voicemail_server) %>
     <%= f.select( :voicemail_server_id,
-      @voicemail_servers.collect {|r| [ "#{r.host}#{r.port ? (':' + r.port.to_s) : ''}", r.id ] },
+      @voicemail_servers.collect {|r| [ "#{r.host}#{r.port ? (':' + r.port.to_s) : ''} (ID #{r.id})", r.id ] },
       { :include_blank => true, :selected => @sip_account.voicemail_server_id }
     ) %>
   </div>
   <div class="field">
-    <%= f.label :voicemail_pin, "Voicemail PIN" %>
+    <%= f.label :voicemail_pin, t(:voicemail_pin) %>
     <%= f.text_field :voicemail_pin %>
   </div>
   <div class="field">
