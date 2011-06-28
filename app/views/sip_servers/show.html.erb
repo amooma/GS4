@@ -1,18 +1,18 @@
 
 <p>
-  <b>SIP domain/host:</b>
+  <b><%= t(:sip_host)%>:</b>
   <%= @sip_server.host %>
 </p>
 
 <p>
-  <b>SIP port:</b>
+  <b><%= t(:sip_port)%>:</b>
   <%= @sip_server.port %>
 </p>
 
 <p>
-  <b>Is on this node?:</b>
-  <%= @sip_server.is_local ? "yes" : "no" %>
+  <b><%= t(:is_local)%>:</b>
+  <%= @sip_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
 
 
-<%= link_to 'Back', sip_servers_path %>
+<%= link_to t(:back), sip_servers_path %>

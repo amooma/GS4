@@ -1,10 +1,10 @@
-<h1>SIP domains/servers</h1>
+<h1><%= t(:sip_servers)%></h1>
 
 <table>
   <tr>
-    <th>SIP domain/host</th>
-    <th>SIP port</th>
-    <th>Is on this node?</th>
+    <th><%= t(:sip_host)%></th>
+    <th><%= t(:sip_port)%></th>
+    <th><%= t(:is_local)%></th>
     <th></th>
     <th></th>
   </tr>
@@ -13,13 +13,13 @@
   <tr>
     <td><%= sip_server.host %></td>
     <td><%= sip_server.port %></td>
-    <td><%= sip_server.is_local ? "yes" : "no" %></td>
-    <td><%= link_to 'Show', sip_server %></td>
-    <td><%= button_to 'Destroy', sip_server, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= sip_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %></td>
+    <td><%= link_to t(:show), sip_server %></td>
+    <td><%= button_to t(:destroy), sip_server, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New SIP domain/server', new_sip_server_path %>
+<%= link_to t(:new_sip_server), new_sip_server_path %>

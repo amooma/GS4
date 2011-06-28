@@ -84,4 +84,6 @@ en:
   sip_proxies: "SIP proxies"
   new_sip_proxy: "New SIP proxy"
   sip_proxy_created: "Sip proxy was successfully created"
-  
+  editing_sip_server: "Editing SIP domain/server"
+  sip_servers: "SIP domains/servers"
+  new_sip_server: "New SIP domain/server"
