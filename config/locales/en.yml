@@ -82,6 +82,7 @@ en:
   is_local: "Is on this node"
   take_over_accounts: "Take over accounts from"
   sip_proxies: "SIP proxies"
+  listing_sip_proxies: "SIP proxies"
   new_sip_proxy: "New SIP proxy"
   sip_proxy_created: "Sip proxy was successfully created"
   editing_sip_server: "Editing SIP domain/server"
