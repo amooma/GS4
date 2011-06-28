@@ -1,27 +1,27 @@
 
 <p>
-  <b>MAC address:</b>
+  <b><%= t(:mac_address) %>:</b>
   <%= @phone.mac_address %>
 </p>
 
 <p>
-  <b>Phone model:</b>
+  <b><%= t(:phone_model) %>:</b>
   <%= link_to @phone.phone_model.name, @phone.phone_model %>
 </p>
 
 <p>
-  <b>IP address:</b>
+  <b><%= t(:ip_address) %>:</b>
   <%= @phone.ip_address %>
 </p>
 
-<%= link_to 'Edit', edit_phone_path(@phone) %>
+<%= link_to t(:edit), edit_phone_path(@phone) %>
 
-<h2>SIP Accounts</h2>
+<h2><%= t(:sip_accounts) %></h2>
 <p>
 <% if @sip_accounts.count < @phone.phone_model.max_number_of_sip_accounts %>
-  <%= link_to 'Create a new sip account for this phone.', new_phone_sip_account_path(@phone) %>	
+  <%= link_to t(:create_sip_account_for_phone), new_phone_sip_account_path(@phone) %>	
 <% else %>
-  The phone model <%= @phone.phone_model.name %> allows only <%= @phone.phone_model.max_number_of_sip_accounts %> SIP accounts. To create one you have to delete one first.
+  <%= t(:phone_model_allows_number_accounts, :model_name => @phone.phone_model.name, :number_sip_accounts => @phone.phone_model.max_number_of_sip_accounts) %>
 <% end %>
 </p>
 

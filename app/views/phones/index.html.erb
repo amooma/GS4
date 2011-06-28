@@ -1,7 +1,7 @@
-<h1>Listing phones</h1>
+<h1><%= t(:listing_phones)%></h1>
 
 <p>
-<%= link_to 'Create a new phone', new_phone_path %>
+<%= link_to t(:new_phone), new_phone_path %>
 </p>
 <%= render :partial => 'table_of_phones', :locals => {:phones => @phones} %>
 
