@@ -41,6 +41,7 @@ en:
   new_node: "New node"
   node_created: "Node was successfully created"
   node_updated: "Node was successfully updated"
+  node: "Node"
   editing_sip_account: "Editing SIP account"
   user: "User"
   auth_name: "Auth. name"
