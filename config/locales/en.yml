@@ -15,8 +15,14 @@ en:
   fax: "Fax"
   destination: "Destination"
   errors_model_not_saved: "%{errors_count} prohibited this %{model_name} from being saved"
+  file_not_found: "File not found"
+  file_exists: "File already exists"
   editing_fax_document: "Editing Fax document"
   fax_documents: "Fax Documents"
   new_fax: "New Fax"
-  fax_document_created: 'Fax document was successfully created'
-  fax_document_updated: 'Fax document was successfully updated'
+  fax_document_created: "Fax document was successfully created"
+  fax_document_updated: "Fax document was successfully updated"
+  fax_document_not_created: "Fax document could not be created"
+  fax_document_not_found: "Fax document not found"
+  fax_thumbnail_not_created: "Fax preview could not be created"
+  
