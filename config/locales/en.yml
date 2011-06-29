@@ -155,6 +155,7 @@ en:
   uuid: "UUID"
   new_call_queue: "New queue"
   listing_call_queues: "Queues"
+  call_queue: "Queue"
   call_queue_need_to_create_extension: "You need to create an extension to call the queue!"
   call_queue_created: "Call queue was successfully created"
   call_queue_updated: "Call queue was successfully updated"
