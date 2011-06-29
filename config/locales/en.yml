@@ -127,4 +127,11 @@ en:
   number_of_phones: "Number of phones"
   phone_model_created: "Phone model was successfully created"
   phone_model_updated: "Phone model was successfully updated"
-  
+  no_maufacturer_with_id: "There is no manufacturer with the given ID %{id}."
+  invalid: "is invalid"
+  invalid_no_scheme: "is invalid (has to have a scheme)"
+  invalid_not_hierarchical: "is invalid (not hierarchical)"
+  invalid_no_http_scheme: "is invalid (must have http or https scheme)"
+  phones_with_more_sip_accounts_exist: "There are already phones with more than %{sip_accounts} SIP accounts in the database. Delete SIP accounts first before reducing max. number of SIP accounts"
+  phones_with_more_keys_exist: "There are already phones with more than %{keys} phone_keys in the database. Delete phone_keys first before reducing number_of_keys."
+  more_phone_model_keys_exist: "There are already more than %{keys} phone_model_keys in the database. Delete phone_model_keys first before reducing number_of_keys."
