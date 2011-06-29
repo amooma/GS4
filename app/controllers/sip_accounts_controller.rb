@@ -35,14 +35,14 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts/new
   # GET /sip_accounts/new.xml
   def new
-    @sip_account = SipAccount.new
-    @sip_account.phone_id = params[:phone_id]
-    @sip_account.user_id = params[:user_id]
-    @sip_account.sip_server_id = params[:sip_server_id]
-    @sip_account.sip_proxy_id = params[:sip_proxy_id]
-    @sip_account.voicemail_server_id = params[:voicemail_server_id]
-    @sip_account.auth_name = SecureRandom.hex(10)
-    @sip_account.password = SecureRandom.hex(15)
+    @sip_account                      = SipAccount.new
+    @sip_account.phone_id             = params[:phone_id]
+    @sip_account.user_id              = params[:user_id]
+    @sip_account.sip_server_id        = params[:sip_server_id]
+    @sip_account.sip_proxy_id         = params[:sip_proxy_id]
+    @sip_account.voicemail_server_id  = params[:voicemail_server_id]
+    @sip_account.auth_name            = SecureRandom.hex(10)
+    @sip_account.password             = SecureRandom.hex(15)
     
     if SipServer.count == 1
       @sip_account.sip_server = SipServer.first
