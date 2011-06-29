@@ -125,3 +125,6 @@ en:
   new_phone_model: "New phone model"
   new_phone_model_named: "New %{name} phone model"
   number_of_phones: "Number of phones"
+  phone_model_created: "Phone model was successfully created"
+  phone_model_updated: "Phone model was successfully updated"
+  
