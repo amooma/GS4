@@ -64,7 +64,7 @@ en:
   sip_phone: "Phone"
   registered: "Registered"
   new_sip_account: "New SIP account"
-  need_to_create_extension: "You need to create an extension to make phonecalls!"
+  sip_account_need_to_create_extension: "You need to create an extension to make phonecalls!"
   name: "Name"
   mac_address: "MAC address"
   sip_account_created: "Sip account was successfully created"
