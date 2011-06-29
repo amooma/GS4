@@ -47,7 +47,7 @@ class ManufacturersController < ApplicationController
 
     respond_to do |format|
       if @manufacturer.save
-        format.html { redirect_to(@manufacturer, :notice => 'Manufacturer was successfully created.') }
+        format.html { redirect_to(@manufacturer, :notice => t(:manufacturer_created)) }
         format.xml  { render :xml => @manufacturer, :status => :created, :location => @manufacturer }
       else
         format.html { render :action => "new" }
@@ -63,7 +63,7 @@ class ManufacturersController < ApplicationController
 
     respond_to do |format|
       if @manufacturer.update_attributes(params[:manufacturer])
-        format.html { redirect_to(@manufacturer, :notice => 'Manufacturer was successfully updated.') }
+        format.html { redirect_to(@manufacturer, :notice => t(:manufacturer_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -141,3 +141,5 @@ en:
   homepage: "Homepage"
   phone_models: "Phone models"
   new_manufacturer: "New manufacturer"
+  manufacturer_created: "Manufacturer was successfully created"
+  manufacturer_updated: "Manufacturer was successfully updated"
