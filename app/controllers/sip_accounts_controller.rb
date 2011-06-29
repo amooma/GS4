@@ -7,8 +7,7 @@ class SipAccountsController < ApplicationController
     @sip_proxies  = SipProxy  .order([ :host ])
     @voicemail_servers = VoicemailServer .order([ :host ])
     @users        = User      .order([ :sn, :gn, :username ])
-    
-    @num_users       = User      .count
+    @num_users    = User      .count
   }
   
   # GET /sip_accounts
@@ -44,6 +43,7 @@ class SipAccountsController < ApplicationController
     @sip_account.voicemail_server_id = params[:voicemail_server_id]
     @sip_account.auth_name = SecureRandom.hex(10)
     @sip_account.password = SecureRandom.hex(15)
+    
     if SipServer.count == 1
       @sip_account.sip_server = SipServer.first
     end
@@ -51,6 +51,7 @@ class SipAccountsController < ApplicationController
       @sip_account.sip_proxy = SipProxy.first
       @sip_account.realm = SipProxy.first.host
     end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account }
