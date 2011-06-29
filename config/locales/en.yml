@@ -170,3 +170,5 @@ en:
   forwarded_to: "Forwarded to"
   date_date: "Date"
   new_call_log: "New call log"
+  call_log_created: "Call log was successfully created"
+  call_log_updated: "Call log was successfully updated"

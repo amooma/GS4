@@ -63,7 +63,7 @@ class CallLogsController < ApplicationController
 
     respond_to do |format|
       if @call_log.save
-        format.html { redirect_to(@call_log, :notice => 'Call log was successfully created.') }
+        format.html { redirect_to(@call_log, :notice => t(:call_log_created)) }
         format.xml  { render :xml => @call_log, :status => :created, :location => @call_log }
       else
         format.html { render :action => "new" }
@@ -79,7 +79,7 @@ class CallLogsController < ApplicationController
 
     respond_to do |format|
       if @call_log.update_attributes(params[:call_log])
-        format.html { redirect_to(@call_log, :notice => 'Call log was successfully updated.') }
+        format.html { redirect_to(@call_log, :notice => t(:call_log_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
