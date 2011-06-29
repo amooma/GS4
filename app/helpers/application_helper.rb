@@ -11,7 +11,7 @@ module ApplicationHelper
 				{ :text => "Accounts", :sub => [
 					{ :text => "Users"         , :url => admin_users_path },
 					{ :text => "SIP Accounts"  , :url => sip_accounts_path },
-					{ :text => "Callforwards"  , :url => call_forwards_path },
+					{ :text => "Call Forwards" , :url => call_forwards_path },
 				]},
 				
 				{ :text => "Phones"        , :url => phones_path },
@@ -21,7 +21,7 @@ module ApplicationHelper
 				{ :text => "Media services", :sub => [
 					{ :text => "Queues"        , :url => call_queues_path },
 					{ :text => "Conferences"   , :url => conferences_path },
-					{ :text => "Fax documents" , :url => fax_documents_path },
+					{ :text => "Fax Documents" , :url => fax_documents_path },
 				]},
 				
 				{ :text => "Servers", :sub => [
