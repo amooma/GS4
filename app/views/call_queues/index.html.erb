@@ -1,9 +1,9 @@
-<h1>Listing call_queues</h1>
+<h1><%= t(:listing_call_queues) %></h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Extension</th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:extensions) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,13 +21,13 @@
       </ul>
     <% end %>
     </td>
-    <td><%= link_to 'Show', call_queue %></td>
-    <td><%= link_to 'Edit', edit_call_queue_path(call_queue) %></td>
-    <td><%= button_to 'Destroy', call_queue, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:show), call_queue %></td>
+    <td><%= link_to t(:edit), edit_call_queue_path(call_queue) %></td>
+    <td><%= button_to t(:destroy), call_queue, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Call queue', new_call_queue_path %>
+<%= link_to t(:new_call_queue), new_call_queue_path %>

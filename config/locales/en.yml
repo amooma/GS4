@@ -151,3 +151,8 @@ en:
   conference_need_to_create_extension: "You need to create an extension to be able to call the conference room!"
   conference_created: 'Conference was successfully created'
   conference_updated: 'Conference was successfully updated'
+  editing_call_queue: "Editing queue"
+  uuid: "UUID"
+  new_call_queue: "New queue"
+  listing_call_queues: "Queues"
+  call_queue_need_to_create_extension: "You need to create an extension to call the queue!"
