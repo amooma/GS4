@@ -1,7 +1,7 @@
 <%= form_for(@manufacturer) do |f| %>
   <% if @manufacturer.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@manufacturer.errors.count, "error") %> prohibited this manufacturer from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@manufacturer.errors.count, "error"), :model_name => t(:manufacturer)) %>:</h2>
 
       <ul>
       <% @manufacturer.errors.full_messages.each do |msg| %>
@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, t(:name) %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :ieee_name, 'IEEE name' %><br />
+    <%= f.label :ieee_name, t(:ieee_name) %><br />
     <%= f.text_field :ieee_name %>
   </div>
   <div class="field">
-    <%= f.label :url, 'URL' %><br />
+    <%= f.label :url, t(:url) %><br />
     <%= f.text_field :url %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>

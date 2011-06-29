@@ -1,15 +1,20 @@
 
 
 <p>
-  <b>Name:</b>
+  <b><%= t(:name) %>:</b>
   <%= @manufacturer.name %>
 </p>
 
-<%= link_to 'Edit', edit_manufacturer_path(@manufacturer) %>
-
-<h2>Phone models by this manufacturer</h2>
 <p>
-<%= link_to 'Create a new phone model', new_manufacturer_phone_model_path(@manufacturer) %>	
+  <b><%= t(:url) %>:</b>
+  <%= link_to @manufacturer.url %>
+</p>
+
+<%= link_to t(:edit), edit_manufacturer_path(@manufacturer) %>
+
+<h2><%= t(:listing_phone_models) %></h2>
+<p>
+<%= link_to t(:new_phone_model), new_manufacturer_phone_model_path(@manufacturer) %>	
 </p>
 
 <% if @manufacturer.phone_models.count > 0 %>
