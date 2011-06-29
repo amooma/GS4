@@ -1,7 +1,7 @@
 <%= form_for([@phone_model.manufacturer, @phone_model]) do |f| %>
   <% if @phone_model.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@phone_model.errors.count, "error") %> prohibited this phone_model from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@phone_model.errors.count, "error"), :model_name => t(:phone_model)) %>:</h2>
 
       <ul>
       <% @phone_model.errors.full_messages.each do |msg| %>
@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, t(:name) %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :url, 'URL' %><br />
+    <%= f.label :url, t(:url) %><br />
     <%= f.text_field :url, :size => 60 %>
   </div>
 
 <% if params[:manufacturer_id].nil? %>
   <div class="field">
-    <%= f.label :manufacturer_id %><br />
+    <%= f.label :manufacturer_id, t(:manufacturer) %><br />
     <%= f.select( :manufacturer_id,
       @manufacturers.collect {|r| [ r.name, r.id ] },
       { :include_blank => false, :selected => @phone_model.manufacturer_id }
@@ -33,22 +33,22 @@
 <% end %>
 
   <div class="field">
-    <%= f.label :default_http_user, 'Default HTTP user' %><br />
+    <%= f.label :default_http_user, t(:default_http_user) %><br />
     <%= f.text_field :default_http_user %>
   </div>
   <div class="field">
-    <%= f.label :default_http_password, 'Default HTTP password' %><br />
+    <%= f.label :default_http_password, t(:default_http_password) %><br />
     <%= f.text_field :default_http_password %>
   </div>
   <div class="field">
-    <%= f.label :max_number_of_sip_accounts, 'Max number of SIP accounts' %><br />
+    <%= f.label :max_number_of_sip_accounts, t(:max_number_of_sip_accounts) %><br />
     <%= f.text_field :max_number_of_sip_accounts %>
   </div>
   <div class="field">
-    <%= f.label :number_of_keys %><br />
+    <%= f.label :number_of_keys, t(:number_of_keys) %><br />
     <%= f.text_field :number_of_keys %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>

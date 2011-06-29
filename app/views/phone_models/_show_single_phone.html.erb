@@ -1,5 +1,5 @@
 <p>
-  <b>Name:</b>
+  <b><%= t(:name)%>:</b>
   <% if current_page?(:controller => 'phone_models', :action => 'show') %>
     <%= phone_model.name %>
   <% else %>
@@ -8,7 +8,7 @@
 </p>
 
 <p>
-  <b>Manufacturer:</b>
+  <b><%= t(:manufacturer)%>:</b>
   <% if current_page?(:controller => 'manufacturers', :action => 'show') %>
     <%= phone_model.manufacturer.name %>
   <% else %>
@@ -17,11 +17,11 @@
 </p>
 
 <p>
-  <b>Max number of SIP accounts:</b>
+  <b><%= t(:max_number_of_sip_accounts)%>:</b>
   <%= phone_model.max_number_of_sip_accounts %>
 </p>
 
 <p>
-  <b>Number of keys:</b>
+  <b><%= t(:number_of_keys)%>:</b>
   <%= phone_model.number_of_keys %>
 </p>
