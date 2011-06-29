@@ -48,7 +48,7 @@ class SipProxiesController < ApplicationController
     
     respond_to do |format|
       if @sip_proxy.save
-        format.html { redirect_to(@sip_proxy, :notice => 'Sip proxy was successfully created.') }
+        format.html { redirect_to(@sip_proxy, :notice => t(:sip_proxy_created)) }
         format.xml  { render :xml => @sip_proxy, :status => :created, :location => @sip_proxy }
       else
         format.html { render :action => "new" }

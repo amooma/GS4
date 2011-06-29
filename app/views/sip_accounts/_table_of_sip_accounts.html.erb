@@ -1,13 +1,13 @@
 <table>
   <tr>
-    <th>Name</th>
-    <th>Phone</th>
-    <th>MAC Address</th>
-    <th>Auth. user</th>
-    <th>Password</th>
-    <th>User ID</th>
-    <th>SIP server ID</th>
-    <th>SIP proxy ID</th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:sip_phone) %></th>
+    <th><%= t(:mac_address) %></th>
+    <th><%= t(:auth_name) %></th>
+    <th><%= t(:password) %></th>
+    <th><%= t(:user_id) %></th>
+    <th><%= t(:sip_server_id) %></th>
+    <th><%= t(:sip_proxy_id) %></th>
     <th></th>
     <th></th>
   </tr>
@@ -22,8 +22,8 @@
     <td><%= sip_account.user_id %></td>
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
-    <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
-    <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:edit), edit_sip_account_path(sip_account) %></td>
+    <td><%= button_to t(:destroy), sip_account, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

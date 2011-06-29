@@ -1,79 +1,74 @@
 
 <p>
   <b>User:</b>
-  <%= @sip_account.user_id ? "ID #{@sip_account.user_id}" : "-" %>
   <% if @sip_account.user %>
-    (<%= @sip_account.user.sn %>, <%= @sip_account.user.gn %>, <%= @sip_account.user.username %>, <%= @sip_account.user.email %>)
+    <%= @sip_account.user.sn %>, <%= @sip_account.user.gn %> (<%= @sip_account.user.username %>, <%= @sip_account.user.email %>) <%= "(ID #{@sip_account.user_id})" %>
   <% end %>
 </p>
 
 <p>
-  <b>Auth name:</b>
+  <b><%= t(:auth_name) %>:</b>
   <%= @sip_account.auth_name %>
 </p>
 
 <p>
-  <b>Password:</b>
+  <b><%= t(:password) %>:</b>
   <%= @sip_account.password %>
 </p>
 
 <p>
-  <b>Realm:</b>
+  <b><%= t(:realm) %>:</b>
   <%= @sip_account.realm %>
 </p>
 
 <p>
-  <b>Extensions:</b>
+  <b><%= t(:extensions) %>:</b>
   <% if @sip_account.extensions.count == 0 %>
     <div class="noticebox">
-      You need to create an extension to make phonecalls!
+      <%= t(:need_to_create_extension) %>
   </div>
   <% end %>
   <ul>
   <% @sip_account.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
   <% end %>
-    <li><%= link_to 'create extension', new_sip_account_extension_path(@sip_account, {:destination => @sip_account.auth_name}) %>
+    <li><%= link_to t(:new_extension), new_sip_account_extension_path(@sip_account, {:destination => @sip_account.auth_name}) %>
   </ul>
 </p>
 <p>
-  <b>Caller name:</b>
+  <b><%= t(:caller_name) %>:</b>
   <%= @sip_account.caller_name %>
 </p>
 <p>
-  <b>SIP server:</b>
-  <%= @sip_account.sip_server_id ? "ID #{@sip_account.sip_server_id}" : "-" %>
+  <b><%= t(:sip_server) %>:</b>
   <% if @sip_account.sip_server %>
-    (<%= @sip_account.sip_server.host %>)
+    <%= "#{@sip_account.sip_server.host}#{@sip_account.sip_server.port ? (':' + @sip_account.sip_server.port.to_s) : ''} (ID #{@sip_account.sip_server.id})" %>
   <% end %>
 </p>
 
 <p>
-  <b>SIP proxy:</b>
-  <%= @sip_account.sip_proxy_id ? "ID #{@sip_account.sip_proxy_id}" : "-" %>
+  <b><%= t(:sip_proxy) %>:</b>
   <% if @sip_account.sip_proxy %>
-    (<%= @sip_account.sip_proxy.host %>)
+    <%= "#{@sip_account.sip_proxy.host}#{@sip_account.sip_proxy.port ? (':' + @sip_account.sip_proxy.port.to_s) : ''} (ID #{@sip_account.sip_proxy.id})" %>
   <% end %>
 </p>
 
 <p>
-  <b>Voicemail server:</b>
-  <%= @sip_account.voicemail_server_id ? "ID #{@sip_account.voicemail_server_id}" : "-" %>
+  <b><%= t(:voicemail_server) %>:</b>
   <% if @sip_account.voicemail_server %>
-    (<%= @sip_account.voicemail_server.host %>)
+    <%= "#{@sip_account.voicemail_server.host}#{@sip_account.voicemail_server.port ? (':' + @sip_account.voicemail_server.port.to_s) : ''} (ID #{@sip_account.voicemail_server.id})" %>
   <% end %>
 </p>
 
 <p>
-  <b>SIP phone:</b>
-  <%= @sip_account.phone_id ? "ID #{@sip_account.phone_id}" : "-" %>
+  <b><%= t(:sip_phone) %>:</b>
   <% if @sip_account.phone %>
-    MAC: <%= @sip_account.phone.mac_address %> 
+    <%= "#{@sip_account.phone.mac_address} (ID #{@sip_account.phone.id})" %>
   <% end %>
 </p>
 
 <p>
-  <b>Registered:</b>
+  <b><%= t(:registered) %>:</b>
   <%= Location.where( :username => "#{@sip_account.auth_name}" ).blank? ? "no" : "yes" %>
 </p>
 
@@ -81,5 +76,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_sip_account_path(@sip_account) %> |
-<%= link_to 'Back', sip_accounts_path %>
+<%= link_to t(:edit), edit_sip_account_path(@sip_account) %> |
+<%= link_to t(:back), sip_accounts_path %>

@@ -28,18 +28,18 @@ class SipAccount < ActiveRecord::Base
     :if => Proc.new { |sip_account| ! sip_account.voicemail_server_id.blank? },
     :only_integer => true,
     :greater_than_or_equal_to => 1000,
-    :message => "must be all digits and greater than 1000"
+    :message => I18n.t(:numeric_greater_than, :value => 1000)
   validates_inclusion_of    :voicemail_pin,
     :in => [ nil ],
     :if => Proc.new { |sip_account| sip_account.voicemail_server_id.blank? },
-    :message => "must not be set if the SIP account does not have a voicemail server."
+    :message => I18n.t(:must_not_be_set_if_no_voicemail_server)
   
   after_validation :phone_reboot
   before_destroy   :phone_reboot
   
   before_validation( :on => :update ) {
     if self.auth_name != self.auth_name_was
-      errors.add( :base , "auth_name cannot be changed." )
+      errors.add( :base , I18n.t(:auth_name_cannot_be_changed) )
     end
   }
   
@@ -75,7 +75,7 @@ class SipAccount < ActiveRecord::Base
       :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
     )
     if ! subscriber.valid?
-      errors.add( :base, "Failed to create subscriber")
+      errors.add( :base,  I18n.t(:subscriber_not_created))
     end
   end
   
@@ -89,7 +89,7 @@ class SipAccount < ActiveRecord::Base
         :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
       )
       if ! subscriber
-        errors.add( :base, "Failed to update subscriber")
+        errors.add( :base, I18n.t(:subscriber_not_updated))
       end
     else
       create_subscriber()
@@ -102,7 +102,7 @@ class SipAccount < ActiveRecord::Base
       subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
       if subscriber_delete
         if ! subscriber_delete.destroy
-          errors.add( :base, "Failed to delete subscriber")
+          errors.add( :base, I18n.t(:subscriber_not_deleted))
         end
       end
     end

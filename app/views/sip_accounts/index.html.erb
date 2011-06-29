@@ -1,18 +1,18 @@
-<h1>Listing SIP accounts</h1>
+<h1><%= t(:listing_sip_accounts) %></h1>
 
 <table>
   <tr>
-    <th>User ID</th>
-    <th>Auth. name</th>
-    <th>Password</th>
-    <th>Realm</th>
-    <th>SIP server ID</th>
-    <th>SIP proxy ID</th>
-    <th>Voicemail server ID</th>
-    <th>Caller Name</th>
-    <th>Extensions</th>
-    <th>SIP phone</th>
-    <th>Registered</th>
+    <th><%= t(:user_id) %></th>
+    <th><%= t(:auth_name) %></th>
+    <th><%= t(:password) %></th>
+    <th><%= t(:realm) %></th>
+    <th><%= t(:sip_server_id) %></th>
+    <th><%= t(:sip_proxy_id) %></th>
+    <th><%= t(:voicemail_server_id) %></th>
+    <th><%= t(:caller_name) %></th>
+    <th><%= t(:extensions) %></th>
+    <th><%= t(:sip_phone) %></th>
+    <th><%= t(:registered) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -45,13 +45,13 @@
     <td>
     <%= Location.where( :username => "#{sip_account.auth_name}" ).blank? ? "no" : "yes" %>
     </td>
-    <td><%= link_to 'Show', sip_account %></td>
-    <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
-    <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:show), sip_account %></td>
+    <td><%= link_to t(:edit), edit_sip_account_path(sip_account) %></td>
+    <td><%= button_to t(:destroy), sip_account, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New SIP account', new_sip_account_path %>
+<%= link_to t(:new_sip_account), new_sip_account_path %>

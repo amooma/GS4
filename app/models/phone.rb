@@ -134,7 +134,7 @@ class Phone < ActiveRecord::Base
 	#
 	def validate_phone_model_exists
 		if ! PhoneModel.exists?( :id => self.phone_model_id )
-			errors.add( :phone_model_id, "There is no phone model with the given ID #{self.phone_model_id}." )
+			errors.add( :phone_model_id, I18n.t(:phone_model_no_id, :model_id => self.phone_model_id ))
 		end
 	end
 	
@@ -154,7 +154,7 @@ class Phone < ActiveRecord::Base
 		oui_obj = Oui.where( :value => oui )
 		if oui_obj.first == nil \
 		|| oui_obj.first.manufacturer != self.phone_model.manufacturer
-			errors.add( :mac_address, "The given MAC address doesn't match the OUIs of the manufacturer #{self.phone_model.manufacturer.name}." )
+			errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.manufacturer.name ))
 		end
 	end
 	

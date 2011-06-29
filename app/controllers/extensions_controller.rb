@@ -87,7 +87,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @sip_account.save
-          format.html { redirect_to( @sip_account, :notice => 'Extension was successfully created.' )}
+          format.html { redirect_to( @sip_account, :notice => t(:extension_created) )}
           format.xml  { render :xml => @sip_account, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -99,7 +99,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @conference.save
-          format.html { redirect_to( @conference, :notice => 'Extension was successfully created.' )}
+          format.html { redirect_to( @conference, :notice => t(:extension_created) )}
           format.xml  { render :xml => @conference, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -111,7 +111,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @call_queue.save
-          format.html { redirect_to( @call_queue, :notice => 'Extension was successfully created.' )}
+          format.html { redirect_to( @call_queue, :notice => t(:extension_created) )}
           format.xml  { render :xml => @call_queue, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -123,7 +123,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @extension.save
-          format.html { redirect_to( @extension, :notice => 'Extension was successfully created.' )}
+          format.html { redirect_to( @extension, :notice => t(:extension_created) )}
           format.xml  { render :xml => @extension, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -140,7 +140,7 @@ class ExtensionsController < ApplicationController
     
     respond_to do |format|
       if @extension.update_attributes( params[:extension] )
-        format.html { redirect_to( @extension, :notice => 'Extension was successfully updated.' )}
+        format.html { redirect_to( @extension, :notice => t(:extension_updated) )}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

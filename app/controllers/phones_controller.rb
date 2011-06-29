@@ -67,7 +67,7 @@ class PhonesController < ApplicationController
     
     respond_to do |format|
       if @phone.save
-        format.html { redirect_to(@phone, :notice => 'Phone was successfully created.') }
+        format.html { redirect_to(@phone, :notice => t(:phone_created)) }
         format.xml  { render :xml => @phone, :status => :created, :location => @phone }
       else
         format.html { render :action => "new" }
@@ -87,7 +87,7 @@ class PhonesController < ApplicationController
     end
     respond_to do |format|
       if @phone.update_attributes(params[:phone])
-        format.html { redirect_to(@phone, :notice => 'Phone was successfully updated.') }
+        format.html { redirect_to(@phone, :notice => t(:phone_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -112,7 +112,7 @@ class PhonesController < ApplicationController
   def reboot
     @phone = Phone.find(params[:id])
     @phone.reboot
-    redirect_to(@phone, :notice => 'Phone is in the process of rebooting.')
+    redirect_to(@phone, :notice => t(:phone_rebooting))
   end
   
 end

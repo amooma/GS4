@@ -1,7 +1,7 @@
 <%= form_for(@fax_document, :html => { :multipart => true }) do |f| %>
   <% if @fax_document.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@fax_document.errors.count, "error") %> prohibited this fax_document from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@fax_document.errors.count, "error"), :model_name => t(:fax)) %></h2>
 
       <ul>
       <% @fax_document.errors.full_messages.each do |msg| %>
@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :file %><br />
+    <%= f.label :file, t(:file) %><br />
     <% if @fax_document.file.nil? %>
-      <%= f.file_field :file %>
+      <%= f.file_field :upload %>
     <% else %>
       <%= @fax_document.file %>
     <% end %>
   </div>
   
   <div class="field">
-    <%= f.label :destination %><br />
+    <%= f.label :destination, t(:destination) %><br />
     <%= f.text_field :destination %>
   </div>
 
   <div class="actions">
-    <%= f.submit('Send') %>
+    <%= f.submit(t(:send)) %>
   </div>
   <%= f.hidden_field :outgoing, :value => true %>
 <% end %>

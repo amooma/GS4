@@ -1,10 +1,10 @@
-<h1>Listing extensions</h1>
+<h1><%= t(:listing_extensions) %></h1>
 
 <table>
   <tr>
-    <th>Extension</th>
-    <th>Destination</th>
-    <th>Active</th>
+    <th><%= t(:extension) %></th>
+    <th><%= t(:destination) %></th>
+    <th><%= t(:active) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,13 +15,13 @@
     <td><%= extension.extension %></td>
     <td><%= extension.destination %></td>
     <td><%= extension.active %></td>
-    <td><%= link_to 'Show', extension %></td>
-    <td><%= link_to 'Edit', edit_extension_path(extension) %></td>
-    <td><%= button_to 'Destroy', extension, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:show), extension %></td>
+    <td><%= link_to t(:edit), edit_extension_path(extension) %></td>
+    <td><%= button_to t(:destroy), extension, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New extension', new_extension_path %>
+<%= link_to t(:new_extension), new_extension_path %>

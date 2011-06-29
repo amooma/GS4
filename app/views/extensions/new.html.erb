@@ -1,4 +1,4 @@
-<h1>New extension</h1>
+<h1><%= t(:new_extension) %></h1>
 
 <% if ! @sip_account.nil? %>
   <%= render 'form_sip_account' %>
@@ -9,4 +9,4 @@
 <% else %>
     <%= render 'form' %>
 <% end %>
-<%= link_to 'Back', extensions_path %>
+<%= link_to t(:back), extensions_path %>
