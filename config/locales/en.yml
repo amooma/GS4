@@ -149,5 +149,5 @@ en:
   listing_conferences: "Conferences"
   pin: "PIN"
   conference_need_to_create_extension: "You need to create an extension to be able to call the conference room!"
-  conference_created: 'Conference was successfully created.'
-  conference_updated: 'Conference was successfully updated.'
+  conference_created: 'Conference was successfully created'
+  conference_updated: 'Conference was successfully updated'
