@@ -21,7 +21,7 @@ class FreeswitchConfigurationController < ApplicationController
 			@sip_server_ip = local_ip
 		end
 		
-		@domain = @sip_server_ip
+		@domain      = @sip_server_ip
 		@domain_name = @sip_server_ip
 		
 		@sounds_dir = '/opt/freeswitch/sounds'
