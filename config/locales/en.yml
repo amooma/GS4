@@ -203,6 +203,8 @@ en:
   new_user: "New user"
   already_taken: "already taken"
   needed: "needed"
+  user_created: "User was successfully created"
+  user_updated: "User was successfully updated" 
   setup_after_installation: "Setup after installation"
   create_first_sip_server: "Create first SIP server"
   create_first_sip_proxy: "Create first SIP proxy server"
