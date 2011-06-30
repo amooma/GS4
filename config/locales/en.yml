@@ -178,3 +178,5 @@ en:
   listing_call_forwards: "Call forwards"
   call_forward_reason: "Call forward reason"
   new_call_forward: "New call forward"
+  call_forward_created: "Call forward was successfully created"
+  call_forward_updated: "Call forward was successfully updated"
