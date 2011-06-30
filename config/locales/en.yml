@@ -210,7 +210,7 @@ en:
   first_sip_proxy_configured: "First SIP proxy server already configured"
   first_voicemail_server_configured: "First voicemail server already configured"
   setup_admin_account: "Setup an administrator account"
-  welcome_to_program_name: "Welcome to Gemeinschaft!"
+  welcome_to_application_name: "Welcome to Gemeinschaft!"
   first_admin_step: "The first step in administrating your new Gemeinschaft PBX is to create a new account with admin privileges. After creating it here you can use it to login on this web GUI."
   create_admin_account: "Create administrator account"
   admin: "Admin"
