@@ -1,11 +1,11 @@
-<h1>Listing users</h1>
+<h1><%= t(:listing_users) %></h1>
 
 <table>
   <tr>
-    <th>Username</th>
-    <th>E-mail address</th>
-    <th>Given name</th>
-    <th>Surname</th>
+    <th><%= t(:username) %></th>
+    <th><%= t(:email_address) %></th>
+    <th><%= t(:given_name) %></th>
+    <th><%= t(:surname) %></th>
     <th></th>
 	<th></th>
   </tr>
@@ -16,11 +16,11 @@
     <td><%= user.email %></td>
 	<td><%= user.gn %></td>
 	<td><%= user.sn%></td>
-    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+    <td><%= link_to t(:edit), edit_admin_user_path(user) %></td>
 	<% if user.id != current_user.id %>
-    <td><%= button_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to t(:destroy), admin_user_path(user), :confirm => t(:are_you_sure), :method => :delete %></td>
 	<% else %>
-	<td>(current user)</td>
+	<td><%= t(:current_user) %></td>
 	<% end %>
   </tr>
 <% end %>
@@ -28,5 +28,5 @@
 
 <br />
 
-<%= link_to 'New User', new_admin_user_path %>
+<%= link_to t(:new_user), new_admin_user_path %>
 

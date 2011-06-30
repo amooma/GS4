@@ -1,2 +1,22 @@
-<h1>Admin::User#show</h1>
-<p>Find me in app/views/admin/user/show.html.erb</p>
+<p>
+  <b><%= t(:username) %>:</b>
+  <%= @user.username %>
+</p>
+
+<p>
+  <b><%= t(:email_address) %>:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b><%= t(:given_name) %>:</b>
+  <%= @user.gn %>
+</p>
+
+<p>
+  <b><%= t(:surname) %>:</b>
+  <%= @user.sn %>
+</p>
+
+<%= link_to t(:edit), edit_admin_user_path(@user) %> |
+<%= link_to t(:back), admin_users_path %>
