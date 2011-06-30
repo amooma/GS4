@@ -363,6 +363,7 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="remember_created_at">remember_created_at <font face="Arial Italic" color="grey60">datetime</font></td></tr>
   <tr><td align="left" width="130" port="remember_token">remember_token <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="reset_password_token">reset_password_token <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="role">role <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
   <tr><td align="left" width="130" port="sign_in_count">sign_in_count <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="sn">sn <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="username">username <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
