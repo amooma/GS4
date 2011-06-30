@@ -1,10 +1,10 @@
-<h1>Listing authentications</h1>
+<h1><%= t(:listing_authentications) %></h1>
 
 <table>
   <tr>
-    <th>User</th>
-    <th>Provider</th>
-    <th>Uid</th>
+    <th><%= t(:user) %></th>
+    <th><%= t(:provider) %></th>
+    <th><%= t(:uid) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,7 +15,7 @@
     <td><%= authentication.user_id %></td>
     <td><%= authentication.provider %></td>
     <td><%= authentication.uid %></td>
-    <td><%= button_to 'Destroy', authentication, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to t(:destroy), authentication, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

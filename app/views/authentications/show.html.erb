@@ -1,19 +1,19 @@
 
 <p>
-  <b>User:</b>
+  <b><%= t(:user) %>:</b>
   <%= @authentication.user_id %>
 </p>
 
 <p>
-  <b>Provider:</b>
+  <b><%= t(:provider) %>:</b>
   <%= @authentication.provider %>
 </p>
 
 <p>
-  <b>Uid:</b>
+  <b><%= t(:uid) %>:</b>
   <%= @authentication.uid %>
 </p>
 
 
-<%= link_to 'Edit', edit_authentication_path(@authentication) %> |
-<%= link_to 'Back', authentications_path %>
+<%= link_to t(:edit), edit_authentication_path(@authentication) %> |
+<%= link_to t(:back), authentications_path %>
