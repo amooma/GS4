@@ -233,3 +233,5 @@ en:
   signed_in_as: "Signed in as"
   skip_navigation: "Skip navigation"
   navigation: "Navigation"
+  setup_disabled_done: "Setup disabled. Already done!"
+  user_name_created_login: "%{ user_name } created. You can log in now."
