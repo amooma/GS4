@@ -1,14 +1,14 @@
-<h1>Listing subscribers</h1>
+<h1><%= t(:listing_subscribers) %></h1>
 
 <table>
   <tr>
-    <th>Username</th>
-    <th>Domain</th>
-    <th>Password</th>
-    <th>Email address</th>
-    <th>Ha1</th>
-    <th>Ha1b</th>
-    <th>Rpid</th>
+    <th><%= t(:username) %></th>
+    <th><%= t(:domain) %></th>
+    <th><%= t(:password) %></th>
+    <th><%= t(:email_address) %></th>
+    <th><%= t(:ha1) %></th>
+    <th><%= t(:ha1b) %></th>
+    <th><%= t(:rpid) %></th>
     <th></th>
   </tr>
 
@@ -21,7 +21,7 @@
     <td><%= subscriber.ha1 %></td>
     <td><%= subscriber.ha1b %></td>
     <td><%= subscriber.rpid %></td>
-    <td><%= link_to 'Show', subscriber %></td>
+    <td><%= link_to t(:show), subscriber %></td>
   </tr>
 <% end %>
 </table>
