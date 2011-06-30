@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><%= yield (:page_title) || "Amooma Gemeinschaft4" %></title>
+	<title><%= yield (:page_title) || t(:application_name) %></title>
 	<link rel="icon shortcut" type="image/x-icon" sizes="16x16" href="/favicon.ico" />
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
 	<meta name="viewport" content="width=850, initial-scale=1.0" />
@@ -13,18 +13,18 @@
 </head>
 <body>
 	<header>
-		<a class="tty" href="#content">Skip navigation</a>
+		<a class="tty" href="#content"><%= t(:skip_navigation) %></a>
 		<div id="header">
 			<div id="application">
-				<a href="/">Gemeinschaft 4</a>
+				<a href="/"><%= t(:application_name) %></a>
 			</div>
 
 			<div id="user_nav">
 				<% if user_signed_in? %>
-				Signed in as <q><b><%= current_user.username %></b></q>.
-				<%= link_to "Sign out", destroy_user_session_path %>
+				<%= t(:signed_in_as) %> <q><b><%= current_user.username %></b></q>.
+				<%= link_to t(:sign_out), destroy_user_session_path %>
 				<% else %>
-				<%= link_to "Sign in", new_user_session_path %>
+				<%= link_to t(:sign_in), new_user_session_path %>
 				<% end %>
 			</div>
 

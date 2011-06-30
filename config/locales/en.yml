@@ -1,6 +1,7 @@
 # locale for GS4 in English 
 
 en:
+  application_name: "Gemeinschaft 4"
   show: "Show"
   back: "Back"
   edit: "Edit"
@@ -227,3 +228,6 @@ en:
   help: "Help"
   sign_in: "Sign in"
   sign_out: "Sign out"
+  signed_in_as: "Signed in as"
+  skip_navigation: "Skip navigation"
+  navigation: "Navigation"
