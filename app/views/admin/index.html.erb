@@ -1,77 +1,78 @@
-<h1>PBX User Manager</h1>
+<h1><%= t(:admin_page) %></h1>
 
-<p>This is a basic web interface to GS4.</p>
+<p><%= t(:admin_page_subtitle) %></p>
 
 <div class="index_overview">
 	
 	<section>
-		<h2>Users</h2>
+		<h2><%= t(:users) %></h2>
 		<ul>
-			<li><%= link_to( "List all users (#{@number_of_users})",
+			<li><%= link_to( "#{t(:list_all_users)} (#{@number_of_users})",
 				url_for(:controller => '/admin/users', :action => 'index')
 			) %></li>
-			<li><%= link_to( "Create a new user",
+			<li><%= link_to( t(:new_user),
 				url_for(:controller => '/admin/users', :action => 'new')
 			) %></li>
 		</ul>
 	</section>
 	
 	<section>
-		<h2>SIP accounts</h2>
+		<h2><%= t(:sip_accounts) %></h2>
 		<ul>
-			<li><%= link_to( "List all SIP accounts (#{@number_of_sip_accounts})",
+			<li><%= link_to( "#{t(:list_all_sip_accounts)} (#{@number_of_sip_accounts})",
 				url_for(:controller => '/sip_accounts', :action => 'index')
 			) %></li>
-			<li><%= link_to( "Create a new SIP account",
+			<li><%= link_to( t(:new_sip_account),
 				url_for(:controller => '/sip_accounts', :action => 'new')
 			) %></li>
 		</ul>
 	</section>
-	
+
 	<section>
-		<h2>SIP phones</h2>
+		<h2><%= t(:phones) %></h2>
 		<ul>
-			<li><%= link_to( "List all SIP phones (#{@number_of_phones})",
+			<li><%= link_to( "#{t(:list_all_phones)} (#{@number_of_phones})",
 				url_for(:controller => '/phones', :action => 'index')
 			) %></li>
-			<li><%= link_to( "Create a new SIP phone",
+			<li><%= link_to( t(:new_phone),
 				url_for(:controller => '/phones', :action => 'new')
 			) %></li>
 		</ul>
 	</section>
-	
+
 	<section>
-		<h2>SIP proxies</h2>
+		<h2><%= t(:sip_servers) %></h2>
 		<ul>
-			<li><%= link_to( "List all SIP proxies (#{@number_of_sip_proxies})",
-				url_for(:controller => '/sip_proxies', :action => 'index')
-			) %></li>
-			<li><%= link_to( "Create a new SIP proxy",
-				url_for(:controller => '/sip_proxies', :action => 'new')
-			) %></li>
-		</ul>
-	</section>
-	
-	<section>
-		<h2>SIP servers</h2>
-		<ul>
-			<li><%= link_to( "List all SIP servers (#{@number_of_sip_servers})",
+			<li><%= link_to( "#{t(:list_all_sip_servers)} (#{@number_of_sip_servers})",
 				url_for(:controller => '/sip_servers', :action => 'index')
 			) %></li>
-			<li><%= link_to( "Create a new SIP server",
+			<li><%= link_to( t(:new_sip_server),
 				url_for(:controller => '/sip_servers', :action => 'new')
 			) %></li>
 		</ul>
 	</section>
 	
-
 	<section>
-		<h2>Extensions</h2>
+		<h2><%= t(:sip_proxies) %></h2>
 		<ul>
-			<li><%= link_to( "List all extensions (#{@number_of_extensions})",
+			<li><%= link_to( "#{t(:list_all_sip_proxies)} (#{@number_of_sip_proxies})",
+				url_for(:controller => '/sip_proxies', :action => 'index')
+			) %></li>
+			<li><%= link_to( t(:new_sip_proxy),
+				url_for(:controller => '/sip_proxies', :action => 'new')
+			) %></li>
+		</ul>
+	</section>
+	
+
+	
+	<section>
+		<h2><%= t(:extensions) %></h2>
+		<ul>
+			<li><%= link_to( "#{t(:list_all_extensions)} (#{@number_of_extensions})",
 				url_for(:controller => '/extensions', :action => 'index')
 			) %></li>
-			<li><%= link_to( "Create a new extension",
+			<li><%= link_to( t(:new_extension),
 				url_for(:controller => '/extensions', :action => 'new')
 			) %></li>
 		</ul>
