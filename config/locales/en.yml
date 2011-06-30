@@ -200,3 +200,5 @@ en:
   listing_users: "Users"
   current_user: "Current user"
   new_user: "New user"
+  already_taken: "already taken"
+  needed: "needed"
