@@ -2,10 +2,14 @@ class VoicemailServersController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /voicemail_servers
   # GET /voicemail_servers.xml
   def index
-    @voicemail_servers = VoicemailServer.all
+    @voicemail_servers = VoicemailServer.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,11 +32,13 @@ class VoicemailServersController < ApplicationController
   # GET /voicemail_servers/new.xml
   def new
     @voicemail_server = VoicemailServer.new
+    
     if VoicemailServer.count == 0
       @voicemail_server.host = request.env['SERVER_NAME']
       @voicemail_server.is_local = true
       @voicemail_server.port = "5060"
     end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @voicemail_server }

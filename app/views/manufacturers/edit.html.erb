@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @manufacturer %> |
-<%= link_to 'Back', manufacturers_path %>
+<%= link_to 'Show', @manufacturer if can?( :show, @manufacturer ) %> |
+<%= link_to 'Back', manufacturers_path if can?( :index, Manufacturer ) %>

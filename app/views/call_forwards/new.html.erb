@@ -2,4 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', call_forwards_path %>
+<%= link_to 'Back', call_forwards_path if can?( :index, CallForward ) %>

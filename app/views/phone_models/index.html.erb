@@ -1,6 +1,6 @@
 <h1>Listing phone models</h1>
 
-<%= link_to 'Create new Phone model', new_phone_model_path %>
+<%= link_to 'Create new Phone model', new_phone_model_path if can?( :new, PhoneModel ) %>
 <br />
 <br />
 

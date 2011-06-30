@@ -2,10 +2,11 @@
 
 class FreeswitchCallProcessingController < ApplicationController
 (
+	skip_authorization_check
 	# Allow access from 127.0.0.1 and [::1] only.
 	prepend_before_filter { |controller|
 		if ! request.local?
-			if user_signed_in?  #OPTIMIZE && is admin
+			if user_signed_in? && current_user.role == "admin"
 				# For debugging purposes.
 				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
 			else
@@ -17,8 +18,6 @@ class FreeswitchCallProcessingController < ApplicationController
 			end
 		end
 	}
-	#before_filter :authenticate_user!
-	#OPTIMIZE Implement SSL with client certificates.
 	
 	
 	# http://wiki.freeswitch.org/wiki/Mod_logfile#Log_Levels

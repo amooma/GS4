@@ -24,24 +24,33 @@
   <%= f.password_field :password %>
 </div>
 <div class="field">
-  <%= f.label :password_confirmation, 'Password confirmation' %>  <br />
+  <%= f.label :password_confirmation, 'Password confirmation' %><br />
   <%= f.password_field :password_confirmation %>
 </div>
 <div class="field">
-  <%= f.label :gn, 'Given name' %>  <br />
+  <%= f.label :gn, 'Given name' %><br />
   <%= f.text_field :gn %>
 </div>
 <div class="field">
-  <%= f.label :sn, 'Surname' %>  <br />
+  <%= f.label :sn, 'Surname' %><br />
   <%= f.text_field :sn %>
 </div>
 <div class="field">
-  <%= f.label :email, "E-mail address" %><br/>
+  <%= f.label :email, "E-mail address" %><br />
   <%= f.text_field :email %>
 </div>
+<div class="field">
+  <%= f.label :role, "Role" %><br />
+  <%= f.hidden_field :role %>
+  <%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
+    {}, { :disabled => true, :id => nil, :name => '' }
+  %>
+</div>
+
 <div class="actions">
   <%= f.submit %>
 </div>
+
 <%= link_to 'Back', admin_users_path %>
 
 <% end %>

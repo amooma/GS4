@@ -14,12 +14,12 @@
     <td><%= link_to manufacturer.name, manufacturer %></td>
     <td><%= link_to manufacturer.url, manufacturer.url, :target => '_blank' %></td>
     <td><%= manufacturer.phone_models.count %></td>
-    <td><%= link_to 'Edit', edit_manufacturer_path(manufacturer) %></td>
-    <td><%= button_to 'Destroy', manufacturer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_manufacturer_path(manufacturer) if can?( :edit, manufacturer ) %></td>
+    <td><%= button_to 'Destroy', manufacturer, :confirm => 'Are you sure?', :method => :delete if can?( :destroy, manufacturer ) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Manufacturer', new_manufacturer_path %>
+<%= link_to 'New Manufacturer', new_manufacturer_path if can?( :new, Manufacturer ) %>

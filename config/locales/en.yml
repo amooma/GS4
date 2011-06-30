@@ -9,3 +9,9 @@ en:
   upload: "Upload"
   destination: "Destination"
   errors_model_not_saved: "%{errors_count} prohibited this %{model_name} from being saved"
+  
+  !ruby/symbol role_user: "user"
+  !ruby/symbol role_admin: "admin"
+  !ruby/symbol role_cdr: "CDR admin"
+  
+  

@@ -6,7 +6,12 @@ class AdminController < ApplicationController
   # The first time you have to setup an admin account.
   before_filter :check_if_admin_account_exists
   
+  
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
   
   def index
     if SipServer.count == 0 || SipProxy.count == 0 || VoicemailServer.count == 0

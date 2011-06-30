@@ -1,6 +1,11 @@
 class ExtensionsController < ApplicationController
   
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   before_filter :find_sip_account
   before_filter :find_conference
   before_filter :find_call_queue
@@ -12,13 +17,14 @@ class ExtensionsController < ApplicationController
     @call_queues = CallQueue.order([ :uuid ])
   }
   
+  
   # GET /extensions
   # GET /extensions.xml
   def index
     if @sip_account.nil?
-      @extensions = Extension.all
+      @extensions = Extension.accessible_by( current_ability, :index ).all
     else
-      @extensions = @sip_account.extensions
+      @extensions = @sip_account.extensions.accessible_by( current_ability, :index )
     end
     
     respond_to do |format|
@@ -83,7 +89,7 @@ class ExtensionsController < ApplicationController
   # POST /extensions.xml
   def create
     if ! @sip_account.nil?
-     @extension = @sip_account.extensions.build(params[:extension])
+      @extension = @sip_account.extensions.build(params[:extension])
       
       respond_to do |format|
         if @sip_account.save
@@ -119,7 +125,7 @@ class ExtensionsController < ApplicationController
         end
       end
     else
-     @extension = Extension.new(params[:extension])
+      @extension = Extension.new(params[:extension])
       
       respond_to do |format|
         if @extension.save

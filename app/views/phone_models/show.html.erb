@@ -2,11 +2,11 @@
 
 <%= render :partial => 'show_single_phone', :locals => {:phone_model => @phone_model} %>
 
-<%= link_to 'Edit', edit_phone_model_path(@phone_model) %>
+<%= link_to 'Edit', edit_phone_model_path(@phone_model) if can?( :edit, @phone_model ) %>
 
 <h2>Phones</h2>
 <p>
-<%= link_to 'Create a new phone', new_phone_model_phone_path(@phone_model) %>	
+<%= link_to 'Create a new phone', new_phone_model_phone_path(@phone_model) if can?( :create, Phone ) %>	
 </p>
 
 <% if @phone_model.phones.count > 0 %>

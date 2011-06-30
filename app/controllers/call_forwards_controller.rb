@@ -1,11 +1,15 @@
 class CallForwardsController < ApplicationController
   
   before_filter :authenticate_user!
-
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /call_forwards
   # GET /call_forwards.xml
   def index
-    @call_forwards = CallForward.all
+    @call_forwards = CallForward.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb

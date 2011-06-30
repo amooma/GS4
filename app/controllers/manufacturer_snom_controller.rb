@@ -1,6 +1,13 @@
 class ManufacturerSnomController < ApplicationController
 	
-	#TODO Authentication	
+	#TODO Authentication (=> pko) See freeswitch_*_controller.rb
+	# No development access for admins though as this contains personal data.
+	
+	# We can't use load_and_authorize_resource here because
+	# ManufacturerSnom isn't a resource.
+	skip_authorization_check
+	
+	
 	#OPTIMIZE Use https for @xml_menu_url
 	
 	before_filter { |controller|
@@ -10,7 +17,11 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
 	    
-	    @mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+	    if ! params[:mac_address].blank?
+	    	@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+	    else
+	    	@mac_address = nil
+	    end
 	    if (@mac_address && @phone = Phone.where(:mac_address => @mac_address).first)
 			@sip_account = get_sip_account(@phone, params[:sip_account])
 			if (@sip_account)
@@ -49,11 +60,13 @@ class ManufacturerSnomController < ApplicationController
 		}
 		##### Codec mapping }
 		
+		
 		if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
-				call_forwarding_save
+			call_forwarding_save
 			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 			@phone.update_attributes(:ip_address => request.remote_ip)
 		end
+		
 		respond_to { |format|
 			format.xml
 		}
@@ -61,30 +74,35 @@ class ManufacturerSnomController < ApplicationController
 	
 	def xml_menu
 		if (@sip_account)
-			@sip_accounts_count = Phone.find_by_mac_address( @mac_address ).sip_accounts.count
+			phone = Phone.find_by_mac_address( @mac_address )
+			if phone
+				@sip_accounts_count = phone.sip_accounts.accessible_by( current_ability, :index ).count
+			else
+				@sip_accounts_count = 0
+			end
 		else
 			@sip_accounts_count = 0
 		end
 	end
 	
 	def phone_book_internal
-		@sip_accounts = SipAccount.all
+		@sip_accounts = SipAccount.accessible_by( current_ability, :read ).all
 	end
 	
 	
 	def call_log
 		if (@sip_account)
-			@call_logs_in        = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
-			@call_logs_out       = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
-			@call_logs_missed    = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
-			call_logs_all_in     = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND ).all.count #OPTIMIZE user appropriate query 
-			@call_logs_forwarded = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND,  :disposition => DISPOSITION_FORWARDED ).all.count 
+			@call_logs_in        = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
+			@call_logs_out       = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
+			@call_logs_missed    = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
+			call_logs_all_in     = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND ).all.count #OPTIMIZE user appropriate query  -- Huh?
+			@call_logs_forwarded = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND,  :disposition => DISPOSITION_FORWARDED ).all.count 
 		end
 	end
 	
 	def call_log_in
 		if (@sip_account)
-			@call_logs_in = CallLog.where(
+			@call_logs_in = CallLog.accessible_by( current_ability, :index ).where(
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_ANSWERED,
 				:call_type => CALL_INBOUND 
@@ -94,7 +112,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log_missed
 		if (@sip_account)
-			@call_logs_missed = CallLog.where(
+			@call_logs_missed = CallLog.accessible_by( current_ability, :index ).where(
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_NOANSWER,
 				:call_type => CALL_INBOUND
@@ -104,7 +122,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log_out
 		if (@sip_account)
-			@call_logs_out = CallLog.where(
+			@call_logs_out = CallLog.accessible_by( current_ability, :index ).where(
 				:sip_account_id => @sip_account.id, 
 				:call_type => CALL_OUTBOUND
 			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
@@ -113,7 +131,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log_forwarded
 		if (@sip_account)
-			@call_logs_forwarded = CallLog.where(
+			@call_logs_forwarded = CallLog.accessible_by( current_ability, :index ).where(
 				:sip_account_id => @sip_account.id,
 				:call_type => CALL_INBOUND,
 				:disposition => DISPOSITION_FORWARDED
@@ -156,8 +174,9 @@ class ManufacturerSnomController < ApplicationController
 				render :action => 'call_forwarding_save'  
 			end
 			@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
-			if (call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => true, :source => '' ).first || 
-				call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => false, :source => '' ).first)
+			if (call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => true  , :source => '' ).first \
+			||  call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => false , :source => '' ).first
+			)
 				@noanswer_timeout = call_forward.call_timeout
 			else
 				@noanswer_timeout = 20
@@ -208,7 +227,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def index
 		mfc = Manufacturer.where(:ieee_name => "SNOM Technology AG").first
-		@phones = mfc ? mfc.phones : []
+		@phones = mfc ? mfc.phones.accessible_by( current_ability, :index ) : []
 		
 		respond_to { |format|
 			format.html # index.html.erb
@@ -217,7 +236,7 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def get_sip_account(phone, sip_account_id = nil)
-		sip_accounts = phone.sip_accounts
+		sip_accounts = phone.sip_accounts.accessible_by( current_ability, :index )
 		
 		if (! sip_accounts) 
 			return nil

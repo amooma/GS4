@@ -6,36 +6,59 @@ The first step in administrating your new Gemeinschaft PBX is to create a new ac
 </p>
 
 <%= form_for :user,  :url => { :action => "create" } do |f| %>
+
+  <% if @user && @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <div class="field">
     <%= f.label :username %>
-    <br/>
+    <br />
     <%= f.text_field :username %>
 </div>
 <div class="field">
     <%= f.label :password %>
-    <br/>
+    <br />
     <%= f.password_field :password %>
 </div>
 <div class="field">
     <%= f.label :password_confirmation, 'Password confirmation' %>
-    <br/>
+    <br />
     <%= f.password_field :password_confirmation %>
 </div>
 <div class="field">
-    <%= f.label :gn, 'First name' %>
-    <br/>
+    <%= f.label :gn, 'Given name' %>
+    <br />
     <%= f.text_field :gn %>
 </div>
 <div class="field">
-    <%= f.label :sn, 'Last name' %>
-    <br/>
+    <%= f.label :sn, 'Surname' %>
+    <br />
     <%= f.text_field :sn %>
 </div>
 <div class="field">
-    <%= f.label :email %>
-	<br/>
+    <%= f.label :email, "E-mail address" %>
+	<br />
     <%= f.text_field :email %>
 </div>
+<div class="field">
+	<%= f.label :role, "Role" %>
+	<br />
+	<%= f.hidden_field :role, :value => "admin" %>
+	<%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
+		{ :selected => "admin" },
+		{ :disabled => true, :id => nil, :name => '' }
+	%>
+</div>
+
 <div class="actions">
     <%= f.submit %>
 </div>

@@ -1,11 +1,15 @@
 class ConferencesController < ApplicationController
   
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
 
   # GET /conferences
   # GET /conferences.xml
   def index
-    @conferences = Conference.all
+    @conferences = Conference.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb

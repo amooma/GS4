@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @call_log %> |
-<%= link_to 'Back', call_logs_path %>
+<%= link_to 'Show', @call_log if can?( :show, @call_log ) %> |
+<%= link_to 'Back', call_logs_path if can?( :index, CallLog ) %>

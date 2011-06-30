@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Username</th>
+    <th>Role</th>
     <th>E-mail address</th>
     <th>Given name</th>
     <th>Surname</th>
@@ -13,12 +14,13 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.username %></td>
+    <td><%= User::ROLES[ user.role ].to_s.sub(/^(\w)/) {|s| s.capitalize} %></td>
     <td><%= user.email %></td>
 	<td><%= user.gn %></td>
 	<td><%= user.sn%></td>
     <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
 	<% if user.id != current_user.id %>
-    <td><%= button_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete if can?( :destroy, user ) %></td>
 	<% else %>
 	<td>(current user)</td>
 	<% end %>

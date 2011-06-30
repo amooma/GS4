@@ -21,7 +21,8 @@
 
 			<div id="user_nav">
 				<% if user_signed_in? %>
-				Signed in as <q><b><%= current_user.username %></b></q>.
+				Signed in as <q><b><%= current_user.username %></b></q>
+				(role: <%= User::ROLES[ current_user.role ] %>) &nbsp;
 				<%= link_to "Sign out", destroy_user_session_path %>
 				<% else %>
 				<%= link_to "Sign in", new_user_session_path %>

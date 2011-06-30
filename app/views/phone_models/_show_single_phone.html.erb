@@ -3,7 +3,7 @@
   <% if current_page?(:controller => 'phone_models', :action => 'show') %>
     <%= phone_model.name %>
   <% else %>
-    <%= link_to phone_model.name, phone_model_path(phone_model) %>
+    <%= link_to phone_model.name, phone_model_path(phone_model) if can?( :show, phone_model ) %>
   <% end %>
 </p>
 
@@ -12,7 +12,7 @@
   <% if current_page?(:controller => 'manufacturers', :action => 'show') %>
     <%= phone_model.manufacturer.name %>
   <% else %>
-    <%= link_to phone_model.manufacturer.name, manufacturer_path(phone_model.manufacturer) %>
+    <%= link_to phone_model.manufacturer.name, manufacturer_path(phone_model.manufacturer) if can?( :show, phone_model.manufacturer ) %>
   <% end %>
 </p>
 

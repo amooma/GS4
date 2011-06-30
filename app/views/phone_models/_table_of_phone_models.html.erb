@@ -16,8 +16,8 @@
     <td><%= phone_model.phones.count %></td>
     <td><%= phone_model.max_number_of_sip_accounts %></td>
     <td><%= phone_model.number_of_keys %></td>
-    <td><%= link_to 'Edit', edit_phone_model_path(phone_model) %></td>
-    <td><%= button_to 'Destroy', phone_model, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_phone_model_path(phone_model) if can?( :edit, phone_model ) %></td>
+    <td><%= button_to 'Destroy', phone_model, :confirm => 'Are you sure?', :method => :delete if can?( :destroy, phone_model ) %></td>
   </tr>
 <% end %>
 </table>

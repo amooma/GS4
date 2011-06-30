@@ -2,18 +2,22 @@ class SipAccountsController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   before_filter { |controller|
-    @sip_servers  = SipServer .order([ :host ])
-    @sip_proxies  = SipProxy  .order([ :host ])
-    @voicemail_servers = VoicemailServer .order([ :host ])
-    @users        = User      .order([ :sn, :gn, :username ])
-    @num_users    = User      .count
+    @sip_servers  = SipServer .accessible_by( current_ability, :index ).order([ :host ])
+    @sip_proxies  = SipProxy  .accessible_by( current_ability, :index ).order([ :host ])
+    @voicemail_servers = VoicemailServer .accessible_by( current_ability, :index ).order([ :host ])
+    @users        = User      .accessible_by( current_ability, :index ).order([ :sn, :gn, :username ])
+    @num_users    = User      .accessible_by( current_ability, :index ).count
   }
   
   # GET /sip_accounts
   # GET /sip_accounts.xml
   def index
-    @sip_accounts = SipAccount.all
+    @sip_accounts = SipAccount.accessible_by( current_ability, :index ).all
     
     respond_to do |format|
       format.html # index.html.erb
@@ -45,11 +49,11 @@ class SipAccountsController < ApplicationController
     @sip_account.password             = SecureRandom.hex(15)
     
     if SipServer.count == 1
-      @sip_account.sip_server = SipServer.first
+      @sip_account.sip_server = SipServer.accessible_by( current_ability, :index ).first
     end
     if SipProxy.count == 1
-      @sip_account.sip_proxy = SipProxy.first
-      @sip_account.realm = SipProxy.first.host
+      @sip_account.sip_proxy  = SipProxy.accessible_by( current_ability, :index ).first
+      @sip_account.realm      = SipProxy.accessible_by( current_ability, :index ).first.try(:host)
     end
     
     respond_to do |format|

@@ -36,12 +36,18 @@
   <%= f.text_field :sn %>
 </div>
 <div class="field">
-  <%= f.label :email, "E-mail address" %><br/>
+  <%= f.label :email, "E-mail address" %><br />
   <%= f.text_field :email %>
 </div>
+<div class="field">
+  <%= f.label :role, "Role" %><br />
+  <%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] } %>
+</div>
+
 <div class="actions">
   <%= f.submit %>
 </div>
+
 <%= link_to 'Back', admin_users_path %>
 
 <% end %>

@@ -1,11 +1,15 @@
 class PhoneModelsController < ApplicationController
   
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
 
   # GET /phone_models
   # GET /phone_models.xml
   def index
-    @phone_models = PhoneModel.order(:manufacturer_id, :name).all
+    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:manufacturer_id, :name).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,7 +33,7 @@ class PhoneModelsController < ApplicationController
   def new
     @phone_model = PhoneModel.new
     
-    @manufacturers = Manufacturer.order(:name)
+    @manufacturers = Manufacturer.accessible_by( current_ability, :index ).order(:name)
 
     if params[:manufacturer_id].nil?
       @phone_model.manufacturer_id = PhoneModel.last.manufacturer.id
@@ -47,7 +51,7 @@ class PhoneModelsController < ApplicationController
   def edit
     @phone_model = PhoneModel.find(params[:id])
     
-    @manufacturers = Manufacturer.order(:name)
+    @manufacturers = Manufacturer.accessible_by( current_ability, :index ).order(:name)
   end
 
   # POST /phone_models
@@ -73,7 +77,7 @@ class PhoneModelsController < ApplicationController
   def update
     @phone_model = PhoneModel.find(params[:id])
     
-    @manufacturers = Manufacturer.order(:name)
+    @manufacturers = Manufacturer.accessible_by( current_ability, :index ).order(:name)
 
     respond_to do |format|
       if @phone_model.update_attributes(params[:phone_model])

@@ -28,23 +28,32 @@
     <td><%= sip_account.sip_proxy_id %></td>
     <td><%= sip_account.voicemail_server_id %></td>
     <td><%= sip_account.caller_name %></td>
-    <td>
-    <% if !sip_account.extensions.nil? %>
+    <td><%
+      sip_account_extensions = sip_account.extensions.accessible_by( current_ability, :show )
+    %>
+    <% if sip_account_extensions %>
       <ul>
-      <% sip_account.extensions.each do |extension| %>
+      <% sip_account_extensions.each do |extension| %>
         <li><%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %></li>
       <% end %>
       </ul>
     <% end %>
     </td>
     <td>
-      <% if ! sip_account.phone.nil? %>
+      <% if sip_account.try(:phone) %>
         <%= sip_account.phone.mac_address %>
       <% end %>
     </td>
-    <td>
-    <%= Location.where( :username => "#{sip_account.auth_name}" ).blank? ? "no" : "yes" %>
-    </td>
+    <td><%
+      num_locations = Location.where({
+        :username => "#{sip_account.auth_name}",
+        #:domain   => "...",  #OPTIMIZE Check domain.
+      }).where(
+        Location.arel_table[:contact].not_in([ nil, '' ])
+      ).count
+    %><%=
+      num_locations > 0 ? "yes" : "no"
+    %></td>
     <td><%= link_to 'Show', sip_account %></td>
     <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
     <td><%= button_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>

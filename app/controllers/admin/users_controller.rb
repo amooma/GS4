@@ -2,8 +2,13 @@ class Admin::UsersController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   def index
-    @users = User.all
+    @users = User.accessible_by( current_ability, :index ).all
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @users }
@@ -12,6 +17,7 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -41,8 +47,10 @@ class Admin::UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
+    
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
+    
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to( admin_users_path, :notice => "#{ @user.username } updated." ) }
@@ -54,18 +62,21 @@ class Admin::UsersController < ApplicationController
     end
   end
   
+  #OPTIMIZE What is Admin::UsersController.delete used for?
   def delete
   end
   
   def destroy
     @user = User.find(params[:id])
+    
     if params[:cancel]
       redirect_to( admin_users_path )
       return
     end
+    
     if @user.destroy
       respond_to do |format|
-        format.html { redirect_to( admin_user_path ) }
+        format.html { redirect_to( admin_users_path ) }
         format.xml  { head :ok }
       end
     end

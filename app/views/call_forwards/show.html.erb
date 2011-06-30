@@ -29,5 +29,6 @@
   <b>Active:</b>
   <%= @call_forward.active %>
 </p>
-<%= link_to 'Edit', edit_call_forward_path(@call_forward) %> |
-<%= link_to 'Back', call_forwards_path %>
+
+<%= link_to 'Edit', edit_call_forward_path(@call_forward) if can?( :edit, @call_forward ) %> |
+<%= link_to 'Back', call_forwards_path if can?( :index, CallForward ) %>

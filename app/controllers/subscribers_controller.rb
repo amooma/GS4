@@ -1,16 +1,19 @@
 class SubscribersController < ApplicationController
   
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
 
   # GET /subscribers
   # GET /subscribers.xml
   def index
     if params[:username]
-      @subscribers = Subscriber.find :all, :conditions => ['username = ?', params[:username]] 
+      @subscribers = Subscriber.accessible_by( current_ability, :index ).find :all, :conditions => ['username = ?', params[:username]] 
     else
-      @subscribers = Subscriber.find(:all)
+      @subscribers = Subscriber.accessible_by( current_ability, :index ).find(:all)
     end
-
 
     respond_to do |format|
       format.html # index.html.erb

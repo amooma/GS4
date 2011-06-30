@@ -45,5 +45,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_call_log_path(@call_log) %> |
-<%= link_to 'Back', call_logs_path %>
+<%= link_to 'Edit', edit_call_log_path(@call_log) if can?( :edit, @call_log ) %> |
+<%= link_to 'Back', call_logs_path if can?( :index, CallLog ) %>

@@ -3,3 +3,5 @@
 
 #OPTIMIZE ./script/erd says: Warning: Ignoring invalid association :phone_keys on Phone (Could not find the source association(s) :phone_key or :phone_keys in model SipAccount.  Try 'has_many :phone_keys, :through => :sip_accounts, :source => <name>'.  Is it one of :sip_server, :sip_proxy, :voicemail_server, :phone, :user, :call_forwards, :sip_account_to_extensions, or :extensions?)
 
+#OPTIMIZE Make resources either nested or not nested, then implement https://github.com/ryanb/cancan/wiki/Nested-Resources accordingly.
+

@@ -1,7 +1,7 @@
 class Admin::SetupController < ApplicationController
   
   def index
-    #@User = User.count
+    #@User = User.accessible_by( current_ability, :index ).count
   end
   
   def create

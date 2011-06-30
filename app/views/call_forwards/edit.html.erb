@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @call_forward %> |
-<%= link_to 'Back', call_forwards_path %>
+<%= link_to 'Show', @call_forward if can?( :show, @call_forward ) %> |
+<%= link_to 'Back', call_forwards_path if can?( :index, CallForward ) %>

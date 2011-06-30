@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @phone_model %> |
-<%= link_to 'Back', phone_models_path %>
+<%= link_to 'Show', @phone_model if can?( :show, @phone_model ) %> |
+<%= link_to 'Back', phone_models_path if can?( :index, PhoneModel ) %>

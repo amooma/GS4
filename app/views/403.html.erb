@@ -1,0 +1,22 @@
+
+<h1>Forbidden</h1>
+<p>
+	<%= "#{exception.try(:message)}" %>
+</p>
+
+<% if Rails.env.to_s == 'development' %>
+<p>
+	(Action: <tt><%= "#{exception.try(:action)}" %></tt>,
+	Resource: <%
+		if exception.try(:subject).respond_to?(:id)
+			%><tt><%= "#{exception.try(:subject).try(:class)}" %></tt> <%= "#{exception.try(:subject).id.inspect}" %><%
+		else
+			%><tt><%= "#{exception.try(:subject)}" %></tt><%
+		end
+	%>)
+</p>
+<p>
+	Developers see <tt>app/models/ability.rb</tt>
+</p>
+<% end %>
+

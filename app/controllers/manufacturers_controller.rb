@@ -2,10 +2,14 @@ class ManufacturersController < ApplicationController
   
   #TODO before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /manufacturers
   # GET /manufacturers.xml
   def index
-    @manufacturers = Manufacturer.all
+    @manufacturers = Manufacturer.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -5,11 +5,11 @@
   <%= @manufacturer.name %>
 </p>
 
-<%= link_to 'Edit', edit_manufacturer_path(@manufacturer) %>
+<%= link_to 'Edit', edit_manufacturer_path(@manufacturer) if can?( :edit, @manufacturer ) %>
 
 <h2>Phone models by this manufacturer</h2>
 <p>
-<%= link_to 'Create a new phone model', new_manufacturer_phone_model_path(@manufacturer) %>	
+<%= link_to 'Create a new phone model', new_manufacturer_phone_model_path(@manufacturer) if can?( :create, PhoneModel ) %>	
 </p>
 
 <% if @manufacturer.phone_models.count > 0 %>

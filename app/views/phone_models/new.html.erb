@@ -6,4 +6,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', phone_models_path %>
+<%= link_to 'Back', phone_models_path if can?( :index, PhoneModel ) %>
