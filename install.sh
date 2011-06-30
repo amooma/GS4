@@ -144,7 +144,6 @@ echo -e "Retrieving FreeSWITCH configuration\n"
 
 /opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh >>/dev/null
 chmod g+w /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
-<<<<<<< HEAD
 chown freeswitch:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 
 echo -e "Downloading FreeSWITCH sound files\n"
