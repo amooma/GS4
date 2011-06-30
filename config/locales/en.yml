@@ -202,3 +202,16 @@ en:
   new_user: "New user"
   already_taken: "already taken"
   needed: "needed"
+  setup_after_installation: "Setup after installation"
+  create_first_sip_server: "Create first SIP server"
+  create_first_sip_proxy: "Create first SIP proxy server"
+  create_first_voicemail_server: "Create first voicemail server"
+  first_sip_server_configured: "First SIP server already configured"
+  first_sip_proxy_configured: "First SIP proxy server already configured"
+  first_voicemail_server_configured: "First voicemail server already configured"
+  setup_admin_account: "Setup an administrator account"
+  welcome_to_program_name: "Welcome to Gemeinschaft!"
+  first_admin_step: "The first step in administrating your new Gemeinschaft PBX is to create a new account with admin privileges. After creating it here you can use it to login on this web GUI."
+  create_admin_account: "Create administrator account"
+
+  
