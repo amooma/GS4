@@ -55,7 +55,7 @@ class SipServersController < ApplicationController
     
     respond_to do |format|
       if @sip_server.save
-        format.html { redirect_to(@sip_server, :notice => 'Sip server was successfully created.') }
+        format.html { redirect_to(@sip_server, :notice => t(:sip_server_created)) }
         format.xml  { render :xml => @sip_server, :status => :created, :location => @sip_server }
       else
         format.html { render :action => "new" }

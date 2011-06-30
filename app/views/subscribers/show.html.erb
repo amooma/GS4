@@ -1,38 +1,38 @@
 
 
 <p>
-  <b>Username:</b>
+  <b><%= t(:username) %>:</b>
   <%= @subscriber.username %>
 </p>
 
 <p>
-  <b>Domain:</b>
+  <b><%= t(:domain) %>:</b>
   <%= @subscriber.domain %>
 </p>
 
 <p>
-  <b>Password:</b>
+  <b><%= t(:password) %>:</b>
   <%= @subscriber.password %>
 </p>
 
 <p>
-  <b>Email address:</b>
+  <b><%= t(:email_address) %>:</b>
   <%= @subscriber.email_address %>
 </p>
 
 <p>
-  <b>Ha1:</b>
+  <b><%= t(:ha1) %>:</b>
   <%= @subscriber.ha1 %>
 </p>
 
 <p>
-  <b>Ha1b:</b>
+  <b><%= t(:ha1b) %>:</b>
   <%= @subscriber.ha1b %>
 </p>
 
 <p>
-  <b>Rpid:</b>
+  <b><%= t(:rpid) %>:</b>
   <%= @subscriber.rpid %>
 </p>
 
-<%= link_to 'Back', subscribers_path %>
+<%= link_to t(:back), subscribers_path %>

@@ -57,7 +57,7 @@ class VoicemailServersController < ApplicationController
 
     respond_to do |format|
       if @voicemail_server.save
-        format.html { redirect_to(@voicemail_server, :notice => 'Voicemail server was successfully created.') }
+        format.html { redirect_to(@voicemail_server, :notice => t(:voicemail_server_created)) }
         format.xml  { render :xml => @voicemail_server, :status => :created, :location => @voicemail_server }
       else
         format.html { render :action => "new" }
@@ -73,7 +73,7 @@ class VoicemailServersController < ApplicationController
 
     respond_to do |format|
       if @voicemail_server.update_attributes(params[:voicemail_server])
-        format.html { redirect_to(@voicemail_server, :notice => 'Voicemail server was successfully updated.') }
+        format.html { redirect_to(@voicemail_server, :notice => t(:voicemail_server_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

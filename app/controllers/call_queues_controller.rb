@@ -52,7 +52,7 @@ class CallQueuesController < ApplicationController
 
     respond_to do |format|
       if @call_queue.save
-        format.html { redirect_to(@call_queue, :notice => 'Call queue was successfully created.') }
+        format.html { redirect_to(@call_queue, :notice => t(:call_queue_created)) }
         format.xml  { render :xml => @call_queue, :status => :created, :location => @call_queue }
       else
         format.html { render :action => "new" }
@@ -68,7 +68,7 @@ class CallQueuesController < ApplicationController
 
     respond_to do |format|
       if @call_queue.update_attributes(params[:call_queue])
-        format.html { redirect_to(@call_queue, :notice => 'Call queue was successfully updated.') }
+        format.html { redirect_to(@call_queue, :notice => t(:call_queue_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

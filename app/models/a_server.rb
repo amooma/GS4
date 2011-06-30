@@ -7,7 +7,7 @@ class AServer < ActiveRecord::Base
   before_validation( :on => :update ) {
     if self.host            != self.host_was \
     || self.port            != self.port_was
-      errors.add( :base , "#{self.class.to_s} cannot be changed. Please create a new one." )
+      errors.add( :base , I18n.t(:model_cannot_be_changed, :model_name => self.class.to_s ))
     end
   }
   

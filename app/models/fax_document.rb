@@ -11,10 +11,8 @@ class FaxDocument < ActiveRecord::Base
 		end
 		if (self.raw_file)
 			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
-			if (! self.raw_file)
-				errors.add( :base, "No document found")
-			elsif (! File.exists?(raw_file))
-				errors.add( :base, "Failed to convert document")
+			if (! self.raw_file || ! File.exists?(raw_file))
+				errors.add( :base, I18n.t(:fax_document_not_found))
 			else
 				thumbnail = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.png"
 				if (! File.exists?(thumbnail))
@@ -25,7 +23,7 @@ class FaxDocument < ActiveRecord::Base
 				end
 			end
 		else
-	       errors.add( :base, "Fax document could not be created")
+	       errors.add( :base, I18n.t(:fax_document_not_created))
 		end
 	}
 	
@@ -33,7 +31,7 @@ class FaxDocument < ActiveRecord::Base
 		if outgoing
 			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
 			if (! self.raw_file || ! File.exists?(raw_file))
-				errors.add( :base, "Fax document not found")
+				errors.add( :base, I18n.t(:fax_document_not_found))
 			elsif (! self.destination.blank?)
 				originate_call(self.destination, raw_file)
 			end
@@ -64,7 +62,7 @@ class FaxDocument < ActiveRecord::Base
 			input_file = self.file
 			original_filename = File.basename(self.file)
 		else
-			errors.add( :base, "Fax source document does not exist")
+			errors.add( :base, I18n.t(:fax_document_not_found))
 			return false
 		end
 		resolution = '204x98'
@@ -72,7 +70,7 @@ class FaxDocument < ActiveRecord::Base
 		output_file = "FAX-OUT-#{SecureRandom.hex(10)}"
 		output_path = "#{FAX_FILES_DIRECTORY}/#{output_file}"
 		if (File.exist?(output_path+'.tif'))
-			errors.add( :base, "Fax file already exists")
+			errors.add( :base, I18n.t(:file_exists))
 			return false
 		end
 		
@@ -90,10 +88,10 @@ class FaxDocument < ActiveRecord::Base
 		
 		#check if all fallbacks failed and the files are still not present
 		if (! File.exist?(output_path+'.tif'))
-			errors.add( :base, "Fax file could not be created")
+			errors.add( :base, I18n.t(:fax_document_not_created))
 		end
 		if (! File.exist?(output_path+'.png'))
-			errors.add( :base, "Fax thumbnail could not be created")
+			errors.add( :base, I18n.t(:fax_thumbnail_not_created))
 		end
 		
 		self.raw_file = output_file

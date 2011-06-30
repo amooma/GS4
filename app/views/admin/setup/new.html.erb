@@ -1,8 +1,8 @@
-<% page_title "Setup of an administrator account." %>
-<h1>Welcome to Gemeinschaft!</h1>
+<% page_title t(:setup_admin_account) %>
+<h1><%= t(:welcome_to_application_name) %></h1>
 
 <p>
-The first step in administrating your new Gemeinschaft PBX is to create a new account with admin privileges. After creating it here you can use it to login on this web GUI.	
+<%= t(:first_admin_step) %>
 </p>
 
 <%= form_for :user,  :url => { :action => "create" } do |f| %>
@@ -20,37 +20,37 @@ The first step in administrating your new Gemeinschaft PBX is to create a new ac
   <% end %>
 
 <div class="field">
-    <%= f.label :username %>
+    <%= f.label :username, t(:username) %>
     <br />
     <%= f.text_field :username %>
 </div>
 <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, t(:password) %>
     <br />
     <%= f.password_field :password %>
 </div>
 <div class="field">
-    <%= f.label :password_confirmation, 'Password confirmation' %>
+    <%= f.label :password_confirmation, t(:password_confirmation) %>
     <br />
     <%= f.password_field :password_confirmation %>
 </div>
 <div class="field">
-    <%= f.label :gn, 'Given name' %>
+    <%= f.label :gn, t(:given_name) %>
     <br />
     <%= f.text_field :gn %>
 </div>
 <div class="field">
-    <%= f.label :sn, 'Surname' %>
+    <%= f.label :sn, t(:surname) %>
     <br />
     <%= f.text_field :sn %>
 </div>
 <div class="field">
-    <%= f.label :email, "E-mail address" %>
+    <%= f.label :email, t(:email_address) %>
 	<br />
     <%= f.text_field :email %>
 </div>
 <div class="field">
-	<%= f.label :role, "Role" %>
+	<%= f.label :role, t("role").to_s.sub(/^(\w)/) {|s| s.capitalize} %>
 	<br />
 	<%= f.hidden_field :role, :value => "admin" %>
 	<%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
@@ -60,7 +60,7 @@ The first step in administrating your new Gemeinschaft PBX is to create a new ac
 </div>
 
 <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:create_admin_account)) %>
 </div>
 
 <% end %>

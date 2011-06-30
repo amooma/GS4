@@ -1,7 +1,7 @@
 <%= form_for(@voicemail_server) do |f| %>
   <% if @voicemail_server.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@voicemail_server.errors.count, "error") %> prohibited this voicemail_server from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@voicemail_server.errors.count, "error"), :model_name => t(:voicemail_server)) %>:</h2>
       <ul>
       <% @voicemail_server.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,18 +11,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :host, "SIP host" %><br />
+    <%= f.label :host, t(:sip_host) %><br />
     <%= f.text_field :host %>
   </div>
   <div class="field">
-    <%= f.label :port, "SIP port" %><br />
+    <%= f.label :port, t(:sip_port) %><br />
     <%= f.text_field :port %>
   </div>
   <div class="field">
     <%= f.check_box :is_local %>
-    <%= f.label :is_local, "Is on this node" %>
+    <%= f.label :is_local, t(:is_local) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>

@@ -1,29 +1,29 @@
-<h1>Setup after installation</h1>
+<h1><%= t(:setup_after_installation) %></h1>
 <table>
 	<tr>
 		<td>
 			<% if SipServer.count == 0 %>
-			  <%= link_to 'Create first SIP server', new_sip_server_path %>
+			  <%= link_to t(:create_first_sip_server), new_sip_server_path %>
 			<% else %>
-			  First SIP server already configured
+			  <%= t(:first_sip_server_configured) %>
 			<% end %>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<% if SipProxy.count == 0 %>
-			  <%= link_to 'Create first SIP proxy server', new_sip_proxy_path %>
+			  <%= link_to t(:create_first_sip_proxy), new_sip_proxy_path %>
 			<% else %>
-			  First SIP proxy server already configured
+			 <%= t(:first_sip_proxy_configured) %>
 			<% end %>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<% if VoicemailServer.count == 0 %>
-			  <%= link_to 'Create first voicemail server', new_voicemail_server_path %>
+			  <%= link_to t(:create_first_voicemail_server), new_voicemail_server_path %>
 			<% else %>
-			  First voicemail server already configured
+			 <%= t(:first_voicemail_server_configured) %>
 			<% end %>
 		</td>
 	</tr>

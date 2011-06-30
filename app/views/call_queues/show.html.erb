@@ -1,27 +1,27 @@
 
 
 <p>
-  <b>Name:</b>
+  <b><%= t(:name) %>:</b>
   <%= @call_queue.name %>
 </p>
 
 <p>
-  <b>Uuid:</b>
+  <b><%= t(:uuid) %>:</b>
   <%= @call_queue.uuid %>
 </p>
-<b>Extensions:</b>
+<b><%= t(:extensions) %>:</b>
   <% if @call_queue.extensions.count == 0 %>
     <div class="noticebox">
-      You need to create an extension to call the queue!
+      <%= t(:call_queue_need_to_create_extension) %>
   </div>
   <% end %>
   <ul>
   <% @call_queue.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
   <% end %>
-    <li><%= link_to 'create extension', new_call_queue_extension_path(@call_queue, {:destination => @call_queue.uuid}) %>
+    <li><%= link_to t(:new_extension), new_call_queue_extension_path(@call_queue, {:destination => @call_queue.uuid}) %>
   </ul>
 </p>
 
-<%= link_to 'Edit', edit_call_queue_path(@call_queue) %> |
-<%= link_to 'Back', call_queues_path %>
+<%= link_to t(:edit), edit_call_queue_path(@call_queue) %> |
+<%= link_to t(:back), call_queues_path %>

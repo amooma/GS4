@@ -1,21 +1,21 @@
 
 
 <p>
-  <b>Destination:</b>
+  <b><%= t(:destination) %>:</b>
   <%= @fax_document.destination %>
 </p>
 <p>
-  <b>Title:</b>
+  <b><%= t(:title) %>:</b>
   <%= @fax_document.title %>
 </p>
 <p>
-  <b>Document:</b>
+  <b><%= t(:document) %>:</b>
   <%= @fax_document.file %>
 </p>
 <p>
   <img src="<%= fax_document_path(@fax_document, :format => 'png') %>" />
 </p>
 
-<%= link_to 'Download', fax_document_path(@fax_document, :format => 'tif') %> |
-<%= link_to 'Edit', edit_fax_document_path(@fax_document) %> |
-<%= link_to 'Back', fax_documents_path %>
+<%= link_to t(:download), fax_document_path(@fax_document, :format => 'tif') %> |
+<%= link_to t(:edit), edit_fax_document_path(@fax_document) %> |
+<%= link_to t(:back), fax_documents_path %>

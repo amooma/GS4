@@ -1,5 +1,5 @@
-<h1>New call_forward</h1>
+<h1><%= t(:new_call_forward) %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', call_forwards_path if can?( :index, CallForward ) %>
+<%= link_to t(:back), call_forwards_path if can?( :index, CallForward ) %>

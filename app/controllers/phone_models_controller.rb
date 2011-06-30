@@ -63,7 +63,7 @@ class PhoneModelsController < ApplicationController
     
     respond_to do |format|
       if @phone_model.save
-        format.html { redirect_to(@phone_model, :notice => 'Phone model was successfully created.') }
+        format.html { redirect_to(@phone_model, :notice => t(:phone_model_created)) }
         format.xml  { render :xml => @phone_model, :status => :created, :location => @phone_model }
       else
         format.html { render :action => "new" }
@@ -81,7 +81,7 @@ class PhoneModelsController < ApplicationController
 
     respond_to do |format|
       if @phone_model.update_attributes(params[:phone_model])
-        format.html { redirect_to(@phone_model, :notice => 'Phone model was successfully updated.') }
+        format.html { redirect_to(@phone_model, :notice => t(:phone_model_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

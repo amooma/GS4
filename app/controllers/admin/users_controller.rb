@@ -32,7 +32,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       @user = User.new(params[:user])
       if @user.save
-        format.html { redirect_to( admin_users_path, :notice => "#{ @user.username } created." ) }
+        format.html { redirect_to( admin_users_path, :notice => t(:user_created)) }
         format.xml  { render :xml => admin_users_path(@user), :status => :created, :location => admin_users_path(@user) }
       else
         format.html { render :action => 'new' }
@@ -53,7 +53,7 @@ class Admin::UsersController < ApplicationController
     
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to( admin_users_path, :notice => "#{ @user.username } updated." ) }
+        format.html { redirect_to( admin_users_path, :notice => t(:user_updated)) }
         format.xml  { render :xml => admin_users_path(@user), :status => :updated, :location => admin_users_path(@user) }
       else
         format.html { render :action => 'edit' }

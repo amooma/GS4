@@ -1,18 +1,18 @@
 
 <p>
-  <b>SIP host:</b>
+  <b><%= t(:sip_host)%>:</b>
   <%= @voicemail_server.host %>
 </p>
 
 <p>
-  <b>SIP port:</b>
+  <b><%= t(:sip_port)%>:</b>
   <%= @voicemail_server.port %>
 </p>
 
 <p>
-  <b>Is on this node?:</b>
-  <%= @voicemail_server.is_local ? "yes" : "no" %>
+  <b><%= t(:is_local)%>:</b>
+  <%= @voicemail_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
 
 
-<%= link_to 'Back', voicemail_servers_path %>
+<%= link_to t(:back), voicemail_servers_path %>

@@ -1,7 +1,7 @@
 <%= form_for(@authentication) do |f| %>
   <% if @authentication.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@authentication.errors.count, "error") %> prohibited this authentication from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@authentication.errors.count, "error"), :model_name => t(:authentication)) %>:</h2>
 
       <ul>
       <% @authentication.errors.full_messages.each do |msg| %>
@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
+    <%= f.label :user_id, t(:user_id) %><br />
     <%= f.text_field :user_id %>
   </div>
   <div class="field">
-    <%= f.label :provider %><br />
+    <%= f.label :provider, t(:provider) %><br />
     <%= f.text_field :provider %>
   </div>
   <div class="field">
-    <%= f.label :uid %><br />
+    <%= f.label :uid, t(:uid) %><br />
     <%= f.text_field :uid %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>

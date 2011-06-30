@@ -1,11 +1,11 @@
 <table>
   <tr>
-    <th>MAC address</th>
-    <th>Manufacturer</th>
-    <th>Phone model</th>
-    <th>IP address</th>
-    <th>SIP accounts</th>
-    <th>Reboot</th>
+    <th><%= t(:mac_address) %></th>
+    <th><%= t(:manufacturer) %></th>
+    <th><%= t(:phone_model) %></th>
+    <th><%= t(:ip_address) %></th>
+    <th><%= t(:sip_accounts) %></th>
+    <th><%= t(:reboot) %></th>
     <th></th>
     <th></th>
   </tr>
@@ -18,7 +18,7 @@
     <td><%= phone.ip_address %></td>
     <td>
       <ul>
-        <li><%= link_to 'create new sip account', new_phone_sip_account_path(phone) %></li>
+        <li><%= link_to t(:new_sip_account), new_phone_sip_account_path(phone) %></li>
 <% phone.sip_accounts.each { |sip_account| %>
         <li><%= link_to sip_account.auth_name, phone_sip_account_path(phone, sip_account) %></li>
 <% } %>
@@ -26,13 +26,13 @@
     </td>
     <td>
 	<% if phone.rebootable? %>
-    <%= link_to 'Reboot', phone_reboot_path(phone), :confirm => "Do you really want to reboot this #{phone.phone_model.name}?" %>
+    <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
     <% else %>
-    <small>(IP address is unknown or reboot_path is nil)</small>
+    <small>(<%= t(:ip_unknown_or_path_nil) %>)</small>
     <% end %>
     </td>
-    <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
-    <td><%= button_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:edit), edit_phone_path(phone) %></td>
+    <td><%= button_to t(:destroy), phone, :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

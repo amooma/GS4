@@ -1,7 +1,7 @@
 <%= form_for(@call_queue) do |f| %>
   <% if @call_queue.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@call_queue.errors.count, "error") %> prohibited this call_queue from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@call_queue.errors.count, "error"), :model_name => t(:call_queue)) %>:</h2>
 
       <ul>
       <% @call_queue.errors.full_messages.each do |msg| %>
@@ -12,14 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, t(:name) %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :uuid %><br />
+    <%= f.label :uuid, t(:uuid) %><br />
     <%= f.text_field :uuid %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>

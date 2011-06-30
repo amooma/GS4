@@ -1,13 +1,13 @@
-<h1>Listing call_forwards</h1>
+<h1><%= t(:listing_call_forwards) %></h1>
 
 <table>
   <tr>
-    <th>Sip account</th>
-    <th>Source</th>
-    <th>Call forward reason</th>
-    <th>Destination</th>
-    <th>Call timeout</th>
-    <th>Active</th>
+    <th><%= t(:sip_account) %></th>
+    <th><%= t(:source) %></th>
+    <th><%= t(:call_forward_reason) %></th>
+    <th><%= t(:destination) %></th>
+    <th><%= t(:call_timeout) %></th>
+    <th><%= t(:active) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -24,13 +24,13 @@
     <td><%= call_forward.destination %></td>
     <td><%= call_forward.call_timeout %></td>
     <td><%= call_forward.active %></td>
-    <td><%= link_to 'Show', call_forward if can?( :show, call_forward ) %></td>
-    <td><%= link_to 'Edit', edit_call_forward_path(call_forward) if can?( :edit, call_forward ) %></td>
-    <td><%= button_to 'Destroy', call_forward, :confirm => 'Are you sure?', :method => :delete if can?( :destroy, call_forward ) %></td>
+    <td><%= link_to t(:show), call_forward if can?( :show, call_forward ) %></td>
+    <td><%= link_to t(:edit), edit_call_forward_path(call_forward) if can?( :edit, call_forward ) %></td>
+    <td><%= button_to t(:destroy), call_forward, :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, call_forward ) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Call forward', new_call_forward_path if can?( :new, CallForward ) %>
+<%= link_to t(:new_call_forward), new_call_forward_path if can?( :new, CallForward ) %>

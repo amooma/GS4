@@ -51,7 +51,7 @@ class CallForwardsController < ApplicationController
 
     respond_to do |format|
       if @call_forward.save
-        format.html { redirect_to(@call_forward, :notice => 'Call forward was successfully created.') }
+        format.html { redirect_to(@call_forward, :notice => t(:call_forward_created)) }
         format.xml  { render :xml => @call_forward, :status => :created, :location => @call_forward }
       else
         format.html { render :action => "new" }
@@ -67,7 +67,7 @@ class CallForwardsController < ApplicationController
 
     respond_to do |format|
       if @call_forward.update_attributes(params[:call_forward])
-        format.html { redirect_to(@call_forward, :notice => 'Call forward was successfully updated.') }
+        format.html { redirect_to(@call_forward, :notice => t(:call_forward_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

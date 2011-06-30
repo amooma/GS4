@@ -1,7 +1,7 @@
 <%= form_for(@call_log) do |f| %>
   <% if @call_log.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@call_log.errors.count, "error") %> prohibited this call_log from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@call_log.errors.count, "error"), :model_name => t(:call_log)) %>:</h2>
 
       <ul>
       <% @call_log.errors.full_messages.each do |msg| %>
@@ -12,38 +12,38 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :sip_account_id %><br />
+    <%= f.label :sip_account_id, t(:sip_account_id) %><br />
     <%= f.text_field :sip_account_id %>
   </div>
   <div class="field">
-    <%= f.label :source %><br />
+    <%= f.label :source, t(:source) %><br />
     <%= f.text_field :source %>
   </div>
   <div class="field">
-    <%= f.label :source_name %><br />
+    <%= f.label :source_name, t(:source_name) %><br />
     <%= f.text_field :source_name %>
   </div>
   <div class="field">
-    <%= f.label :destination %><br />
+    <%= f.label :destination, t(:destination) %><br />
     <%= f.text_field :destination %>
   </div>
   <div class="field">
-    <%= f.label :destination_name %><br />
+    <%= f.label :destination_name, t(:destination_name) %><br />
     <%= f.text_field :destination_name %>
   </div>
   <div class="field">
-    <%= f.label :call_type %><br />
+    <%= f.label :call_type, t(:call_type) %><br />
     <%= f.text_field :call_type %>
   </div>
   <div class="field">
-    <%= f.label :disposition %><br />
+    <%= f.label :disposition, t(:disposition) %><br />
     <%= f.text_field :disposition %>
   </div>
   <div class="field">
-    <%= f.label :forwarded_to %><br />
+    <%= f.label :forwarded_to, t(:forwarded_to) %><br />
     <%= f.text_field :forwarded_to %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>
