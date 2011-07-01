@@ -21,9 +21,9 @@ de:
   destination: "Ziel"
   errors_model_not_saved: "%{errors_count} Fehler haben die Speicherung von %{model_name} verhindert"
   
-  !ruby/symbol role_user: "user"
-  !ruby/symbol role_admin: "admin"
-  !ruby/symbol role_cdr: "CDR admin"
+  !ruby/symbol role_user: "Benutzer"
+  !ruby/symbol role_admin: "Admin"
+  !ruby/symbol role_cdr: "CDR-Admin"
   
   role: "Rolle"
   
