@@ -1,11 +1,15 @@
 class ConferencesController < ApplicationController
   
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
 
   # GET /conferences
   # GET /conferences.xml
   def index
-    @conferences = Conference.all
+    @conferences = Conference.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +51,7 @@ class ConferencesController < ApplicationController
 
     respond_to do |format|
       if @conference.save
-        format.html { redirect_to(@conference, :notice => 'Conference was successfully created.') }
+        format.html { redirect_to(@conference, :notice => t(:conference_created)) }
         format.xml  { render :xml => @conference, :status => :created, :location => @conference }
       else
         format.html { render :action => "new" }
@@ -63,7 +67,7 @@ class ConferencesController < ApplicationController
 
     respond_to do |format|
       if @conference.update_attributes(params[:conference])
-        format.html { redirect_to(@conference, :notice => 'Conference was successfully updated.') }
+        format.html { redirect_to(@conference, :notice => t(:conference_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -178,6 +178,7 @@ Gemeinschaft4::Application.routes.draw do
 	# root :to => "welcome#index"
 	
 	root :to => 'admin#index'
+	#TODO Create "home" pages for non-admins.
 	
 	
 	# See how all your routes lay out with "rake routes"

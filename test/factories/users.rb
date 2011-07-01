@@ -5,4 +5,5 @@ Factory.define :user do |f|
   f.sequence(:password_confirmation) { |n| "password#{n}" }
   f.sequence(:gn) { |n| "User#{n}" }
   f.sequence(:sn) { |n| "User#{n}" }
+  f.role 'user'
 end

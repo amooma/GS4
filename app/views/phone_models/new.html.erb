@@ -1,9 +1,9 @@
 <% if params[:manufacturer_id].nil? %>
-  <h1>New phone model</h1>
+  <h1><%= t(:new_phone_model) %></h1>
 <% else %>
-  <h1>New <%= @phone_model.manufacturer.name %> phone model</h1>
+  <h1><%= t(:new_phone_model_named, :name => @phone_model.manufacturer.name) %></h1>
 <% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', phone_models_path %>
+<%= link_to t(:back), phone_models_path if can?( :index, PhoneModel ) %>

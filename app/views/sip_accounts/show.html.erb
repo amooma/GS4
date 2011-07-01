@@ -24,8 +24,8 @@
 <p>
   <b><%= t(:extensions) %>:</b>
   <% if @sip_account.extensions.count == 0 %>
-    <div class="noticebox">
-      <%= t(:need_to_create_extension) %>
+  <div class="noticebox">
+    <%= t(:sip_account_need_to_create_extension) %>
   </div>
   <% end %>
   <ul>
@@ -69,7 +69,16 @@
 
 <p>
   <b><%= t(:registered) %>:</b>
-  <%= Location.where( :username => "#{@sip_account.auth_name}" ).blank? ? "no" : "yes" %>
+  <%
+    num_locations = Location.where({
+      :username => "#{@sip_account.auth_name}",
+      #:domain   => "...",  #OPTIMIZE Check domain.
+    }).where(
+      Location.arel_table[:contact].not_in([ nil, '' ])
+    ).count
+  %><%=
+    num_locations > 0 ? t(:yes_lowercase) : t(:no_lowercase)
+  %>
 </p>
 
 <p>

@@ -52,6 +52,8 @@ gem "bcrypt-ruby", :require => "bcrypt"
 #   aptitude install libxml2 libxslt1.1
 gem "omniauth"
 
+gem 'cancan', '~> 1.6.5'
+
 
 # FastCGI (aptitude install libfcgi-dev)
 group :production do

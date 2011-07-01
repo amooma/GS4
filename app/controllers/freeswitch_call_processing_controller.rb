@@ -2,10 +2,11 @@
 
 class FreeswitchCallProcessingController < ApplicationController
 (
+	skip_authorization_check
 	# Allow access from 127.0.0.1 and [::1] only.
 	prepend_before_filter { |controller|
 		if ! request.local?
-			if user_signed_in?  #OPTIMIZE && is admin
+			if user_signed_in? && current_user.role == "admin"
 				# For debugging purposes.
 				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
 			else
@@ -17,8 +18,6 @@ class FreeswitchCallProcessingController < ApplicationController
 			end
 		end
 	}
-	#before_filter :authenticate_user!
-	#OPTIMIZE Implement SSL with client certificates.
 	
 	
 	# http://wiki.freeswitch.org/wiki/Mod_logfile#Log_Levels
@@ -118,10 +117,10 @@ class FreeswitchCallProcessingController < ApplicationController
 				})
 				.first )
 			if ! src_sip_account.nil?
-				src_call_log = CallLog.where(
-									:uuid => call_uuid,
-									:sip_account_id => src_sip_account.id
-								).first
+				src_call_log = CallLog.where({
+					:uuid => call_uuid,
+					:sip_account_id => src_sip_account.id
+				}).first
 			end
 		end
 		
@@ -143,10 +142,10 @@ class FreeswitchCallProcessingController < ApplicationController
 					})
 					.first )
 				if ! dst_sip_account.nil?
-					dst_call_log = CallLog.where(
-										:uuid => call_uuid,
-										:sip_account_id => dst_sip_account.id
-									).first
+					dst_call_log = CallLog.where({
+						:uuid => call_uuid,
+						:sip_account_id => dst_sip_account.id
+					}).first
 				end
 			end
 		end
@@ -219,14 +218,15 @@ class FreeswitchCallProcessingController < ApplicationController
 				# We didn't try to call the SIP account yet.
 				# If source is one of our accounts, wee need to write a call_log
 				if src_sip_account
-							CallLog.create(:sip_account_id => src_sip_account.id,
-											   :source => src_cid_sip_user,
-											   :source_name =>  src_cid_sip_display,
-											   :destination => dst_sip_dnis_user,
-											   :uuid => call_uuid,
-											   :call_type => 'out',
-											   :disposition => 'answered'
-											   )
+					CallLog.create({
+						:sip_account_id => src_sip_account.id,
+						:source => src_cid_sip_user,
+						:source_name =>  src_cid_sip_display,
+						:destination => dst_sip_dnis_user,
+						:uuid => call_uuid,
+						:call_type => 'out',
+						:disposition => 'answered',
+					})
 				end
 				# Set Caller-ID for call forward:
 				#OPTIMIZE Shouldn't all of the caller-ID stuff (see further below) be handled here then?
@@ -243,11 +243,11 @@ class FreeswitchCallProcessingController < ApplicationController
 				if ( cfwd_reason_assistant = CallForwardReason.where(:value => "assistant").first)
 					if ( assistant_sip_account = SipAccount.where(:auth_name => "#{dst_sip_user_real}").first )
 						is_assistant = ! CallForward.where({
-								:call_forward_reason_id => cfwd_reason_assistant.id,
-								:sip_account_id => assistant_sip_account.id,
-								:destination => "#{src_cid_sip_user}",
-								:active => true
-							}).first.nil?
+							:call_forward_reason_id => cfwd_reason_assistant.id,
+							:sip_account_id => assistant_sip_account.id,
+							:destination => "#{src_cid_sip_user}",
+							:active => true,
+						}).first.nil?
 					end
 				end
 				
@@ -258,50 +258,58 @@ class FreeswitchCallProcessingController < ApplicationController
 						action :respond, "480 Blacklisted"
 					else
 						check_valid_voicemail_box_destination( call_forward_always.destination )
-						CallLog.create(:sip_account_id => dst_sip_account.id,
-										   :source => src_cid_sip_user,
-										   :source_name =>  src_cid_sip_display,
-										   :destination => dst_sip_dnis_user,
-										   :forwarded_to => call_forward_always.destination,
-										   :call_type => 'in',
-										   :disposition => 'forwarded',
-										   :uuid => call_uuid
-										   )
+						CallLog.create({
+							:sip_account_id => dst_sip_account.id,
+							:source => src_cid_sip_user,
+							:source_name =>  src_cid_sip_display,
+							:destination => dst_sip_dnis_user,
+							:forwarded_to => call_forward_always.destination,
+							:call_type => 'in',
+							:disposition => 'forwarded',
+							:uuid => call_uuid,
+						})
 						action :transfer, "#{sip_user_encode( call_forward_always.destination )} XML default"
 					end
 					
 				)
 				elsif ! is_assistant.nil? && call_forward_assistant; (
-					CallLog.create(:sip_account_id => dst_sip_account.id,
-										   :source => src_cid_sip_user,
-										   :source_name =>  src_cid_sip_display,
-										   :destination => dst_sip_dnis_user,
-										   :call_type => 'in',
-										   :uuid => call_uuid,
-										   :disposition => 'answered'
-										   )
+					# ...
+					
+					CallLog.create({
+						:sip_account_id => dst_sip_account.id,
+						:source => src_cid_sip_user,
+						:source_name =>  src_cid_sip_display,
+						:destination => dst_sip_dnis_user,
+						:call_type => 'in',
+						:uuid => call_uuid,
+						:disposition => 'answered',
+					})
 					action :bridge, "sofia/internal/#{sip_user_encode( dst_sip_user_real )}@#{dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 					
 				)
 				elsif call_forward_assistant; (
-					CallLog.create(:sip_account_id => dst_sip_account.id,
-										   :source => src_cid_sip_user,
-										   :source_name =>  src_cid_sip_display,
-										   :destination => dst_sip_dnis_user,
-										   :call_type => 'in',
-										   :uuid => call_uuid,
-										   :disposition => 'answered'
-										   )
+					# ...
+					
+					CallLog.create({
+						:sip_account_id => dst_sip_account.id,
+						:source => src_cid_sip_user,
+						:source_name =>  src_cid_sip_display,
+						:destination => dst_sip_dnis_user,
+						:call_type => 'in',
+						:uuid => call_uuid,
+						:disposition => 'answered',
+					})
 					assistant_sip_user = Extension.where( :extension => "#{call_forward_assistant.destination}" ).first
 					if assistant_sip_user
-						CallLog.create(:sip_account_id => assistant_sip_user.id,
-										   :source => src_cid_sip_user,
-										   :source_name =>  src_cid_sip_display,
-										   :destination => dst_sip_dnis_user,
-										   :call_type => 'in',
-										   :uuid => call_uuid,
-										   :disposition => 'answered'
-										   )
+						CallLog.create({
+							:sip_account_id => assistant_sip_user.id,
+							:source => src_cid_sip_user,
+							:source_name =>  src_cid_sip_display,
+							:destination => dst_sip_dnis_user,
+							:call_type => 'in',
+							:uuid => call_uuid,
+							:disposition => 'answered',
+						})
 						action :export, "alert_info=http://www.notused.com;info=#{dst_sip_user_real};x-line-id=0"
 						#OPTIMIZE? If it's ignored then don't use a registered DNS name but something like "localhost".
 						# localhost does NOT work! - "example.com"?
@@ -358,14 +366,15 @@ class FreeswitchCallProcessingController < ApplicationController
 					# Ring the SIP user via Kamailio:
 					#
 					if dst_sip_account
-						CallLog.create(:sip_account_id => dst_sip_account.id,
-										   :source => src_cid_sip_user,
-										   :source_name =>  src_cid_sip_display,
-										   :destination => dst_sip_dnis_user,
-										   :call_type => 'in',
-										   :uuid => call_uuid,
-										   :disposition => 'answered'
-										   )
+						CallLog.create({
+							:sip_account_id => dst_sip_account.id,
+							:source => src_cid_sip_user,
+							:source_name =>  src_cid_sip_display,
+							:destination => dst_sip_dnis_user,
+							:call_type => 'in',
+							:uuid => call_uuid,
+							:disposition => 'answered',
+						})
 						action_log( FS_LOG_INFO, "Calling SIP account #{dst_sip_user_real} ..." )
 						action :set       , "call_timeout=#{timeout}"
 						action :export    , "sip_contact_user=ufs"
@@ -397,15 +406,16 @@ class FreeswitchCallProcessingController < ApplicationController
 							if ! dst_call_log.nil?
 								dst_call_log.destroy
 							end
-							CallLog.create(:sip_account_id => dst_sip_account.id,
-										   :source => src_cid_sip_user,
-										   :source_name =>  src_cid_sip_display,
-										   :destination => dst_sip_dnis_user,
-										   :forwarded_to => call_forward.destination,
-										   :call_type => 'in',
-										   :disposition => 'forwarded',
-										   :uuid => call_uuid
-										   )
+							CallLog.create({
+								:sip_account_id => dst_sip_account.id,
+								:source => src_cid_sip_user,
+								:source_name =>  src_cid_sip_display,
+								:destination => dst_sip_dnis_user,
+								:forwarded_to => call_forward.destination,
+								:call_type => 'in',
+								:disposition => 'forwarded',
+								:uuid => call_uuid,
+							})
 							action :transfer, "#{sip_user_encode( call_forward.destination )} XML default"
 						end
 					else
@@ -413,14 +423,15 @@ class FreeswitchCallProcessingController < ApplicationController
 							if dst_call_log
 								dst_call_log.destroy
 							end
-							CallLog.create(:sip_account_id => dst_sip_account.id,
-											:source => src_cid_sip_user,
-											:source_name =>  src_cid_sip_display,
-											:destination => dst_sip_dnis_user,
-											:disposition => 'noanswer',
-											:call_type => 'in',
-											:uuid => call_uuid
-											)
+							CallLog.create({
+								:sip_account_id => dst_sip_account.id,
+								:source => src_cid_sip_user,
+								:source_name =>  src_cid_sip_display,
+								:destination => dst_sip_dnis_user,
+								:disposition => 'noanswer',
+								:call_type => 'in',
+								:uuid => call_uuid,
+							})
 						end
 						action :hangup
 					end

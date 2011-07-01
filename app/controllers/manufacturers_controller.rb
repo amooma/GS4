@@ -2,10 +2,14 @@ class ManufacturersController < ApplicationController
   
   #TODO before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /manufacturers
   # GET /manufacturers.xml
   def index
-    @manufacturers = Manufacturer.all
+    @manufacturers = Manufacturer.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +51,7 @@ class ManufacturersController < ApplicationController
 
     respond_to do |format|
       if @manufacturer.save
-        format.html { redirect_to(@manufacturer, :notice => 'Manufacturer was successfully created.') }
+        format.html { redirect_to(@manufacturer, :notice => t(:manufacturer_created)) }
         format.xml  { render :xml => @manufacturer, :status => :created, :location => @manufacturer }
       else
         format.html { render :action => "new" }
@@ -63,7 +67,7 @@ class ManufacturersController < ApplicationController
 
     respond_to do |format|
       if @manufacturer.update_attributes(params[:manufacturer])
-        format.html { redirect_to(@manufacturer, :notice => 'Manufacturer was successfully updated.') }
+        format.html { redirect_to(@manufacturer, :notice => t(:manufacturer_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

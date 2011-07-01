@@ -3,40 +3,51 @@ module ApplicationHelper
 	# Define the top navigation menu items
 	#
 	def top_menu_items
+		menu_items = []
 		if user_signed_in?
-			menu_items = [
-				
-				{ :text => "Admin"         , :url => admin_index_path },
-				
-				{ :text => "Accounts", :sub => [
-					{ :text => "Users"         , :url => admin_users_path },
-					{ :text => "SIP Accounts"  , :url => sip_accounts_path },
-					{ :text => "Callforwards"  , :url => call_forwards_path },
-				]},
-				
-				{ :text => "Phones"        , :url => phones_path },
-				
-				{ :text => "Extensions"    , :url => extensions_path },
-				
-				{ :text => "Media services", :sub => [
-					{ :text => "Queues"        , :url => call_queues_path },
-					{ :text => "Conferences"   , :url => conferences_path },
-					{ :text => "Fax documents" , :url => fax_documents_path },
-				]},
-				
-				{ :text => "Servers", :sub => [
-					{ :text => "SIP Domains"       , :url => sip_servers_path },
-					{ :text => "SIP Proxies"       , :url => sip_proxies_path },
-					{ :text => "Voicemail Servers" , :url => voicemail_servers_path },
-					{ :text => "Nodes"             , :url => nodes_path },
-				]},
-				
-				{ :text => "Help"          , :url => admin_help_path }
-				
-			]
+			case current_user.role
+				when "admin"
+					menu_items = [
+						{ :text => t(:admin)         , :url => admin_index_path },
+						
+						{ :text => t(:accounts), :sub => [
+							{ :text => t(:users)         , :url => admin_users_path },
+							{ :text => t(:sip_accounts)  , :url => sip_accounts_path },
+							{ :text => t(:callforwards)  , :url => call_forwards_path },
+						]},
+						
+						{ :text => t(:phones)        , :url => phones_path },
+						
+						{ :text => t(:extensions)    , :url => extensions_path },
+						
+						{ :text => t(:media_services), :sub => [
+							{ :text => t(:queues)        , :url => call_queues_path },
+							{ :text => t(:conferences)   , :url => conferences_path },
+							{ :text => t(:fax_documents) , :url => fax_documents_path },
+						]},
+						
+						{ :text => t(:servers), :sub => [
+							{ :text => t(:sip_domains)       , :url => sip_servers_path },
+							{ :text => t(:sip_proxies)       , :url => sip_proxies_path },
+							{ :text => t(:voicemail_servers) , :url => voicemail_servers_path },
+							{ :text => t(:nodes)             , :url => nodes_path },
+						]},
+						
+						{ :text => t(:help)          , :url => admin_help_path },
+					]
+				when "cdr"
+					menu_items = [
+						{ :text => t(:call_logs)     , :url => call_logs_path },
+					]
+				when "user"
+					menu_items = [
+						{ :text => t(:callforwards)  , :url => call_forwards_path },
+						{ :text => t(:call_logs)     , :url => call_logs_path },
+					]
+			end
 		else
 			menu_items = [
-				{ :text => "Sign in"       , :url => new_user_session_path }
+				{ :text => t(:sign_in)       , :url => new_user_session_path },
 			]
 		end
 		return menu_items

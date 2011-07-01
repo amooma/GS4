@@ -33,6 +33,7 @@ GEM
     arel (2.0.9)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    cancan (1.6.5)
     chunky_png (1.2.0)
     compass (0.11.1)
       chunky_png (~> 1.1)
@@ -163,6 +164,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   bcrypt-ruby
+  cancan (~> 1.6.5)
   compass (~> 0.11.1)
   default_value_for
   devise (~> 1.1)

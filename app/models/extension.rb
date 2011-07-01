@@ -41,5 +41,9 @@ class Extension < ActiveRecord::Base
   # Do not allow "anonymous" as a destination. It is reserved. (RFC 2543, RFC 3325)  
   validates_exclusion_of  :destination, :in => [ 'anonymous' ]
   
+  
+  #OPTIMIZE Check that the destination of a SIP account's extension cannot be modified, either here or in the controller.
+  #http://127.0.0.1:3000/sip_accounts/1/extensions/new?destination=FOOBAR
+  
 end
 

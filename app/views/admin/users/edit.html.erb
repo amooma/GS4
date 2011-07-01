@@ -1,11 +1,11 @@
 
-<h1>Edit user: <%= @user.username %></h1>
+<h1><%= t(:editing_user) %>: <%= @user.username %></h1>
 
 <%= form_for(:user,  :url => { :action => "update"}, :html => { :method => "put" }) do |f| %>
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@user.errors.count, "error"), :model_name => t(:user)) %>:</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
@@ -16,32 +16,41 @@
   <% end %>
 
 <div class="field">
-  <%= f.label :username %>  <br />
+  <%= f.label :username, t(:username) %><br />
   <%= f.text_field :username %>
 </div>
 <div class="field">
-  <%= f.label :password %>  <br />
+  <%= f.label :password, t(:password) %><br />
   <%= f.password_field :password %>
 </div>
 <div class="field">
-  <%= f.label :password_confirmation, 'Password confirmation' %>  <br />
+  <%= f.label :password_confirmation, t(:password_confirmation) %><br />
   <%= f.password_field :password_confirmation %>
 </div>
 <div class="field">
-  <%= f.label :gn, 'Given name' %>  <br />
+  <%= f.label :gn, t(:given_name) %><br />
   <%= f.text_field :gn %>
 </div>
 <div class="field">
-  <%= f.label :sn, 'Surname' %>  <br />
+  <%= f.label :sn, t(:surname) %><br />
   <%= f.text_field :sn %>
 </div>
 <div class="field">
-  <%= f.label :email, "E-mail address" %><br/>
+  <%= f.label :email, t(:email_address) %><br />
   <%= f.text_field :email %>
 </div>
-<div class="actions">
-  <%= f.submit %>
+<div class="field">
+  <%= f.label :role, t("role").to_s.sub(/^(\w)/) {|s| s.capitalize} %><br />
+  <%= f.hidden_field :role %>
+  <%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
+    {}, { :disabled => true, :id => nil, :name => '' }
+  %>
 </div>
-<%= link_to 'Back', admin_users_path %>
+
+<div class="actions">
+  <%= f.submit(t(:save)) %>
+</div>
+
+<%= link_to t(:back), admin_users_path %>
 
 <% end %>

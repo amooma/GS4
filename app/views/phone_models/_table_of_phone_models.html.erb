@@ -1,10 +1,10 @@
 <table>
   <tr>
-    <th>Name</th>
-    <th>Manufacturer</th>
-    <th>Number of phones</th>
-    <th>Max number of SIP accounts</th>
-    <th>Number of keys</th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:manufacturer) %></th>
+    <th><%= t(:number_of_phones) %></th>
+    <th><%= t(:max_number_of_sip_accounts) %></th>
+    <th><%= t(:number_of_keys) %></th>
     <th></th>
     <th></th>
   </tr>
@@ -16,8 +16,8 @@
     <td><%= phone_model.phones.count %></td>
     <td><%= phone_model.max_number_of_sip_accounts %></td>
     <td><%= phone_model.number_of_keys %></td>
-    <td><%= link_to 'Edit', edit_phone_model_path(phone_model) %></td>
-    <td><%= button_to 'Destroy', phone_model, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:edit), edit_phone_model_path(phone_model) if can?( :edit, phone_model ) %></td>
+    <td><%= button_to t(:destroy), phone_model, :confirm => 'Are you sure?', :method => :delete if can?( :destroy, phone_model ) %></td>
   </tr>
 <% end %>
 </table>

@@ -1,11 +1,15 @@
 class CallQueuesController < ApplicationController
   
   before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
 
   # GET /call_queues
   # GET /call_queues.xml
   def index
-    @call_queues = CallQueue.all
+    @call_queues = CallQueue.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,7 +52,7 @@ class CallQueuesController < ApplicationController
 
     respond_to do |format|
       if @call_queue.save
-        format.html { redirect_to(@call_queue, :notice => 'Call queue was successfully created.') }
+        format.html { redirect_to(@call_queue, :notice => t(:call_queue_created)) }
         format.xml  { render :xml => @call_queue, :status => :created, :location => @call_queue }
       else
         format.html { render :action => "new" }
@@ -64,7 +68,7 @@ class CallQueuesController < ApplicationController
 
     respond_to do |format|
       if @call_queue.update_attributes(params[:call_queue])
-        format.html { redirect_to(@call_queue, :notice => 'Call queue was successfully updated.') }
+        format.html { redirect_to(@call_queue, :notice => t(:call_queue_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

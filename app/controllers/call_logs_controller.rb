@@ -1,27 +1,15 @@
 class CallLogsController < ApplicationController
   
-  # Allow access from 127.0.0.1 and [::1] only.
-	prepend_before_filter { |controller|
-		if ! request.local?
-			if user_signed_in?  #OPTIMIZE && is admin
-				# For debugging purposes.
-				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
-			else
-				logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
-				render :status => '403 None of your business',
-					:layout => false, :content_type => 'text/plain',
-					:text => "<!-- This is none of your business. -->"
-				# Maybe allow access in "development" mode?
-			end
-		end
-	}
-	#before_filter :authenticate_user!
-	#OPTIMIZE Implement SSL with client certificates. :authenticate_user!
+  before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
   
   # GET /call_logs
   # GET /call_logs.xml
   def index
-    @call_logs = CallLog.all
+    @call_logs = CallLog.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -63,7 +51,7 @@ class CallLogsController < ApplicationController
 
     respond_to do |format|
       if @call_log.save
-        format.html { redirect_to(@call_log, :notice => 'Call log was successfully created.') }
+        format.html { redirect_to(@call_log, :notice => t(:call_log_created)) }
         format.xml  { render :xml => @call_log, :status => :created, :location => @call_log }
       else
         format.html { render :action => "new" }
@@ -79,7 +67,7 @@ class CallLogsController < ApplicationController
 
     respond_to do |format|
       if @call_log.update_attributes(params[:call_log])
-        format.html { redirect_to(@call_log, :notice => 'Call log was successfully updated.') }
+        format.html { redirect_to(@call_log, :notice => t(:call_log_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -99,8 +87,5 @@ class CallLogsController < ApplicationController
       format.xml  { head :ok }
     end
   end
- 
-  def _bold( str )
-      return "\e[0;32;1m#{str} \e[0m "
-  end
+
 end

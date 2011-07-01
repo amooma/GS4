@@ -1,6 +1,6 @@
-<h1>Editing call_log</h1>
+<h1><%= t(:editing_call_log) %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @call_log %> |
-<%= link_to 'Back', call_logs_path %>
+<%= link_to t(:show), @call_log if can?( :show, @call_log ) %> |
+<%= link_to t(:back), call_logs_path if can?( :index, CallLog ) %>

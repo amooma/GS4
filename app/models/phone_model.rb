@@ -83,7 +83,7 @@ class PhoneModel < ActiveRecord::Base
   # Validates if the phone model has a manufacturer.
   def does_a_manufacturer_to_this_phone_model_exist
     if ! Manufacturer.exists?(:id => self.manufacturer_id)
-      errors.add(:manufacturer_id, "There is no manufacturer with the given ID #{self.manufacturer_id}.")
+      errors.add(:manufacturer_id, I18n.t(:no_maufacturer_with_id, :id => self.manufacturer_id))
     end      
   end
   
@@ -94,14 +94,14 @@ class PhoneModel < ActiveRecord::Base
       begin
         uri = URI.parse( self.url )
         if ! uri.absolute?
-          errors.add( :url, "is invalid (has to have a scheme)" )
+          errors.add( :url, I18n.t(:invalid_no_scheme))
         elsif ! uri.hierarchical?
-          errors.add( :url, "is invalid (not hierarchical)" )
+          errors.add( :url, I18n.t(:invalid_not_hierarchical))
         elsif !( uri.is_a?( URI::HTTP ) || uri.is_a?( URI::HTTPS ) )
-          errors.add( :url, "is invalid (must have http or https scheme)" )
+          errors.add( :url, I18n.t(:invalid_no_http_scheme))
         end
       rescue URI::InvalidURIError
-        errors.add( :url, "is invalid" )
+        errors.add( :url, I18n.t(:invalid))
       end
     end
   end
@@ -113,7 +113,7 @@ class PhoneModel < ActiveRecord::Base
   def validate_max_number_of_sip_accounts_for_an_existing_phone_model
     if !self.new_record? and self.changed_attributes.keys.include?('max_number_of_sip_accounts') and self.max_number_of_sip_accounts < PhoneModel.find(self.id).max_number_of_sip_accounts
       if self.phones.collect {|phone| phone.sip_accounts.count}.max > self.max_number_of_sip_accounts
-        errors.add( :max_number_of_sip_accounts, "There are already phones with more than #{self.max_number_of_sip_accounts} sip_accounts in the database. Delete sip_accounts first before reducing max_number_of_sip_accounts." )
+        errors.add( :max_number_of_sip_accounts, I18n.t(:phones_with_more_sip_accounts_exit, :sip_accounts => self.max_number_of_sip_accounts))
       end
     end
   end
@@ -127,10 +127,10 @@ class PhoneModel < ActiveRecord::Base
       sip_accounts = self.phones.collect {|phone| phone.sip_accounts}.flatten
       number_of_used_keys = sip_accounts.collect {|sip_account| sip_account.phone_keys}.flatten.collect {|phone_key| phone_key.phone_model_key_id}.uniq.count
       if number_of_used_keys > self.number_of_keys
-        errors.add( :number_of_keys, "There are already phones with more than #{self.number_of_keys} phone_keys in the database. Delete phone_keys first before reducing number_of_keys." )
+        errors.add( :number_of_keys, I18n.t(:phones_with_more_keys_exist, :keys => self.number_of_keys))
       end
       if self.phone_model_keys.count > self.number_of_keys
-        errors.add( :number_of_keys, "There are already more than #{self.number_of_keys} phone_model_keys in the database. Delete phone_model_keys first before reducing number_of_keys." )
+        errors.add( :number_of_keys, I18n.t(:more_phone_model_keys_exist, :keys => self.number_of_keys))
       end
     end
   end

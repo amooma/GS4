@@ -1,49 +1,49 @@
 
 <p>
-  <b>Date:</b>
+  <b><%= t(:date_date) %>:</b>
   <%= @call_log.created_at.localtime %>
 </p>
 
 <p>
-  <b>Sip account:</b>
+  <b><%= t(:sip_account) %>:</b>
   <%= @call_log.sip_account_id %>
 </p>
 
 <p>
-  <b>Source:</b>
+  <b><%= t(:source) %>:</b>
   <%= @call_log.source %>
 </p>
 
 <p>
-  <b>Source name:</b>
+  <b><%= t(:source_name) %>:</b>
   <%= @call_log.source_name %>
 </p>
 
 <p>
-  <b>Destination:</b>
+  <b><%= t(:destination) %>:</b>
   <%= @call_log.destination %>
 </p>
 
 <p>
-  <b>Destination name:</b>
+  <b><%= t(:destination_name) %>:</b>
   <%= @call_log.destination_name %>
 </p>
 
 <p>
-  <b>Call type:</b>
+  <b><%= t(:call_type) %>:</b>
   <%= @call_log.call_type %>
 </p>
 
 <p>
-  <b>Disposition:</b>
+  <b><%= t(:disposition) %>:</b>
   <%= @call_log.disposition %>
 </p>
 
 <p>
-  <b>Forwarded to:</b>
+  <b><%= t(:forwarded_to) %>:</b>
   <%= @call_log.forwarded_to %>
 </p>
 
 
-<%= link_to 'Edit', edit_call_log_path(@call_log) %> |
-<%= link_to 'Back', call_logs_path %>
+<%= link_to t(:edit), edit_call_log_path(@call_log) if can?( :edit, @call_log ) %> |
+<%= link_to t(:back), call_logs_path if can?( :index, CallLog ) %>

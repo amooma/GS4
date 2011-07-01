@@ -1,16 +1,16 @@
-<h1>Listing call_logs</h1>
+<h1><%= t(:listing_call_logs) %></h1>
 
 <table>
   <tr>
-	<th>Date</th>
-    <th>Sip account</th>
-    <th>Source</th>
-    <th>Source name</th>
-    <th>Destination</th>
-    <th>Destination name</th>
-    <th>Call type</th>
-    <th>Disposition</th>
-    <th>Forwarded to</th>
+	<th><%= t(:date_date) %></th>
+    <th><%= t(:sip_account) %></th>
+    <th><%= t(:source) %></th>
+    <th><%= t(:source_name) %></th>
+    <th><%= t(:destination) %></th>
+    <th><%= t(:destination_name) %></th>
+    <th><%= t(:call_type) %></th>
+    <th><%= t(:disposition) %></th>
+    <th><%= t(:forwarded_to) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +18,7 @@
 
 <% @call_logs.each do |call_log| %>
   <tr>
-	<td><%= call_log.created_at.localtime.strftime("%m/%d/%y %H:%M") %></td>
+	<td><%= l(call_log.created_at.localtime, :format => :short) %></td>
     <td><%= call_log.sip_account_id %></td>
     <td><%= call_log.source %></td>
     <td><%= call_log.source_name %></td>
@@ -27,13 +27,13 @@
     <td><%= call_log.call_type %></td>
     <td><%= call_log.disposition %></td>
     <td><%= call_log.forwarded_to %></td>
-    <td><%= link_to 'Show', call_log %></td>
-    <td><%= link_to 'Edit', edit_call_log_path(call_log) %></td>
-    <td><%= button_to 'Destroy', call_log, :method => :delete %></td>
+    <td><%= link_to t(:show), call_log if can?( :show, call_log ) %></td>
+    <td><%= link_to t(:edit), edit_call_log_path(call_log) if can?( :edit, call_log ) %></td>
+    <td><%= button_to t(:destroy), call_log, :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, call_log ) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Call log', new_call_log_path %>
+<%= link_to t(:new_call_log), new_call_log_path if can?( :new, CallLog ) %>

@@ -75,7 +75,7 @@ class SipAccount < ActiveRecord::Base
       :ha1        =>  Digest::MD5.hexdigest( "#{self.auth_name}:#{self.sip_server.host}:#{self.password}" )
     )
     if ! subscriber.valid?
-      errors.add( :base,  I18n.t(:subscriber_not_created))
+      errors.add( :base, I18n.t(:subscriber_not_created))
     end
   end
   

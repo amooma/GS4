@@ -1,5 +1,7 @@
 class FaxDocument < ActiveRecord::Base
 	
+	#TODO Make FaxDocuments associated to something. (SipAccounts? Users?)
+	
 	validates_presence_of     :raw_file
 	validates_presence_of     :file
 	

@@ -2,10 +2,14 @@ class NodesController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = Node.all
+    @nodes = Node.accessible_by( current_ability, :index ).all
     
     respond_to do |format|
       format.html # index.html.erb

@@ -1,11 +1,15 @@
 class CallForwardsController < ApplicationController
   
   before_filter :authenticate_user!
-
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /call_forwards
   # GET /call_forwards.xml
   def index
-    @call_forwards = CallForward.all
+    @call_forwards = CallForward.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +51,7 @@ class CallForwardsController < ApplicationController
 
     respond_to do |format|
       if @call_forward.save
-        format.html { redirect_to(@call_forward, :notice => 'Call forward was successfully created.') }
+        format.html { redirect_to(@call_forward, :notice => t(:call_forward_created)) }
         format.xml  { render :xml => @call_forward, :status => :created, :location => @call_forward }
       else
         format.html { render :action => "new" }
@@ -63,7 +67,7 @@ class CallForwardsController < ApplicationController
 
     respond_to do |format|
       if @call_forward.update_attributes(params[:call_forward])
-        format.html { redirect_to(@call_forward, :notice => 'Call forward was successfully updated.') }
+        format.html { redirect_to(@call_forward, :notice => t(:call_forward_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

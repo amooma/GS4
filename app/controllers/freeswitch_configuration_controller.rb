@@ -1,9 +1,10 @@
 class FreeswitchConfigurationController < ApplicationController
 	
+	skip_authorization_check
 	# Allow access from 127.0.0.1 and [::1] only.
 	prepend_before_filter { |controller|
 		if ! request.local?
-			if user_signed_in?  #OPTIMIZE && is admin
+			if user_signed_in? && current_user.role == "admin"
 				logger.info(_bold( "[FS] Request from #{request.remote_addr.inspect} is not local but the user is an admin ..." ))
 			else
 				logger.info(_bold( "[FS] Denying non-local request from #{request.remote_addr.inspect} ..." ))
@@ -21,7 +22,7 @@ class FreeswitchConfigurationController < ApplicationController
 			@sip_server_ip = local_ip
 		end
 		
-		@domain = @sip_server_ip
+		@domain      = @sip_server_ip
 		@domain_name = @sip_server_ip
 		
 		@sounds_dir = '/opt/freeswitch/sounds'

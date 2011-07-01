@@ -2,17 +2,21 @@ class PhonesController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   # GET /phones
   # GET /phones.xml
   def index
     if params[:mac_address]
-      @phones = Phone.where('mac_address'=> params[:mac_address])
+      @phones = Phone.accessible_by( current_ability, :index ).where('mac_address'=> params[:mac_address])
     elsif params[:ip_address]
-      @phones = Phone.where('ip_address' => params[:ip_address])
+      @phones = Phone.accessible_by( current_ability, :index ).where('ip_address' => params[:ip_address])
     elsif ! params[:phone_model_id].blank?
-      @phones = PhoneModel.find(params[:phone_model_id]).phones
+      @phones = PhoneModel.find(params[:phone_model_id]).phones.accessible_by( current_ability, :index )
     else
-      @phones = Phone.all      
+      @phones = Phone.accessible_by( current_ability, :index ).all      
     end
     
     respond_to do |format|
@@ -26,7 +30,7 @@ class PhonesController < ApplicationController
   def show
     @phone = Phone.find(params[:id])
     
-    @sip_accounts = @phone.sip_accounts
+    @sip_accounts = @phone.sip_accounts.accessible_by( current_ability, :index )
     
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +42,8 @@ class PhonesController < ApplicationController
   # GET /phones/new.xml
   def new
     @phone = Phone.new
-    @phone_models = PhoneModel.order(:name)
+    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
+    
     if !params[:phone_model_id].nil? and PhoneModel.exists?(params[:phone_model_id])
       @phone.phone_model_id = params[:phone_model_id]
     else
@@ -55,7 +60,7 @@ class PhonesController < ApplicationController
   def edit
     @phone = Phone.find(params[:id])
     
-    @phone_models = PhoneModel.order(:name)
+    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
   end
   
   # POST /phones
@@ -63,7 +68,7 @@ class PhonesController < ApplicationController
   def create
     @phone = Phone.new(params[:phone])
     
-    @phone_models = PhoneModel.order(:name)
+    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
     
     respond_to do |format|
       if @phone.save
@@ -81,7 +86,8 @@ class PhonesController < ApplicationController
   def update
     @phone = Phone.find(params[:id])
     
-    @phone_models = PhoneModel.order(:name)
+    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
+    
     if @phone.update_attributes(params[:http_password]) || @phone.update_attributes(params[:http_user])
       @phone.reboot
     end

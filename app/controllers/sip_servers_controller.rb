@@ -2,8 +2,12 @@ class SipServersController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   before_filter { |controller|
-     @sip_servers = SipServer.all
+     @sip_servers = SipServer.accessible_by( current_ability, :index ).all
   }
   
   # GET /sip_servers
@@ -30,11 +34,13 @@ class SipServersController < ApplicationController
   # GET /sip_servers/new.xml
   def new
     @sip_server = SipServer.new
+    
     if SipServer.count == 0
       @sip_server.host = request.env['SERVER_NAME']
       @sip_server.is_local= true
       @sip_server.port = "5060"
     end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_server }

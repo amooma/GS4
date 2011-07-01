@@ -1,4 +1,10 @@
 class PersonalPhonebooksController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+
   # GET /personal_phonebooks
   # GET /personal_phonebooks.xml
   def index

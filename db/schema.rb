@@ -371,6 +371,7 @@ ActiveRecord::Schema.define(:version => 20110630104635) do
     t.string   "username"
     t.string   "sn"
     t.string   "gn"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

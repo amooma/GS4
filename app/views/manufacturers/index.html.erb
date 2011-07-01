@@ -1,10 +1,10 @@
-<h1>Listing manufacturers</h1>
+<h1><%= t(:listing_manufacturers)%></h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Homepage</th>
-    <th>Phone models</th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:homepage) %></th>
+    <th><%= t(:phone_models) %></th>
     <th></th>
     <th></th>
   </tr>
@@ -14,12 +14,12 @@
     <td><%= link_to manufacturer.name, manufacturer %></td>
     <td><%= link_to manufacturer.url, manufacturer.url, :target => '_blank' %></td>
     <td><%= manufacturer.phone_models.count %></td>
-    <td><%= link_to 'Edit', edit_manufacturer_path(manufacturer) %></td>
-    <td><%= button_to 'Destroy', manufacturer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t(:edit), edit_manufacturer_path(manufacturer) if can?( :edit, manufacturer ) %></td>
+    <td><%= button_to t(:destroy), manufacturer, :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, manufacturer ) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Manufacturer', new_manufacturer_path %>
+<%= link_to t(:new_manufacturer), new_manufacturer_path if can?( :new, Manufacturer ) %>

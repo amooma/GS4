@@ -10,17 +10,27 @@ admin1:
   email: admin1@example.com
   gn: Admin1
   sn: Example
+  role: admin
+
+cdr1:
+  username: cdr1
+  email: cdr1@example.com
+  gn: CdrAdmin1
+  sn: Example
+  role: cdr
 
 one:
   username: one
   email: one@example.com
   gn: One
   sn: Example
+  role: user
 
 two:
   username: two
   email: two@example.com
   gn: Two
   sn: Example
+  role: user
 
 

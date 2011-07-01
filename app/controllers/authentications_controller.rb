@@ -1,5 +1,9 @@
 class AuthenticationsController < ApplicationController
 	
+	# https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+	load_and_authorize_resource
+	
+	
 	def index
 		@authentications = current_user.authentications if current_user
 	end

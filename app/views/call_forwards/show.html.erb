@@ -1,33 +1,34 @@
 
 
 <p>
-  <b>Sip account:</b>
+  <b><%= t(:sip_account) %>:</b>
   <%= @call_forward.sip_account_id %>
 </p>
 
 <p>
-  <b>Source:</b>
+  <b><%= t(:source) %>:</b>
   <%= @call_forward.source %>
 </p>
 
 <p>
-  <b>Call forward reason:</b>
+  <b><%= t(:call_forward_reason) %>:</b>
   <%= @call_forward.call_forward_reason_id %>
 </p>
 
 <p>
-  <b>Destination:</b>
+  <b><%= t(:destination) %>:</b>
   <%= @call_forward.destination %>
 </p>
 
 <p>
-  <b>Call timeout:</b>
+  <b><%= t(:call_timeout) %>:</b>
   <%= @call_forward.call_timeout %>
 </p>
 
 <p>
-  <b>Active:</b>
+  <b><%= t(:active) %>:</b>
   <%= @call_forward.active %>
 </p>
-<%= link_to 'Edit', edit_call_forward_path(@call_forward) %> |
-<%= link_to 'Back', call_forwards_path %>
+
+<%= link_to t(:edit), edit_call_forward_path(@call_forward) if can?( :edit, @call_forward ) %> |
+<%= link_to t(:back), call_forwards_path if can?( :index, CallForward ) %>

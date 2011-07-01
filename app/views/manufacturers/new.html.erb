@@ -1,5 +1,5 @@
-<h1>New manufacturer</h1>
+<h1><%= t(:new_manufacturer) %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', manufacturers_path %>
+<%= link_to t(:back), manufacturers_path if can?( :index, Manufacturer ) %>

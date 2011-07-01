@@ -2,8 +2,12 @@ class SipProxiesController < ApplicationController
   
   before_filter :authenticate_user!
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  load_and_authorize_resource
+  
+  
   before_filter { |controller|
-    @sip_proxies = SipProxy.all
+    @sip_proxies = SipProxy.accessible_by( current_ability, :index ).all
   }
   
   # GET /sip_proxies
