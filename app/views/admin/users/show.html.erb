@@ -18,5 +18,11 @@
   <%= @user.sn %>
 </p>
 
+<p>
+  <b><%= t(:role) %>:</b>
+  <%= User::ROLES[ @user.role ].to_s.sub(/^(\w)/) {|s| s.capitalize}%>
+</p>
+
+
 <%= link_to t(:edit), edit_admin_user_path(@user) %> |
 <%= link_to t(:back), admin_users_path %>

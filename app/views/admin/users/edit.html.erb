@@ -40,7 +40,7 @@
   <%= f.text_field :email %>
 </div>
 <div class="field">
-  <%= f.label :role, t("role").to_s.sub(/^(\w)/) {|s| s.capitalize} %><br />
+  <%= f.label :role, t(:role) %><br />
   <%= f.hidden_field :role %>
   <%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
     {}, { :disabled => true, :id => nil, :name => '' }
