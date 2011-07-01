@@ -1,0 +1,29 @@
+<h1>Listing personal_phonebooks</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Phone number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @personal_phonebooks.each do |personal_phonebook| %>
+  <tr>
+    <td><%= personal_phonebook.user_id %></td>
+    <td><%= personal_phonebook.first_name %></td>
+    <td><%= personal_phonebook.last_name %></td>
+    <td><%= personal_phonebook.phone_number %></td>
+    <td><%= link_to 'Show', personal_phonebook %></td>
+    <td><%= link_to 'Edit', edit_personal_phonebook_path(personal_phonebook) %></td>
+    <td><%= button_to 'Destroy', personal_phonebook, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Personal phonebook', new_personal_phonebook_path %>

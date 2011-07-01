@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616140627) do
+ActiveRecord::Schema.define(:version => 20110630104635) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -149,6 +149,15 @@ ActiveRecord::Schema.define(:version => 20110616140627) do
   create_table "ouis", :force => true do |t|
     t.string   "value"
     t.integer  "manufacturer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "personal_phonebooks", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -328,6 +337,19 @@ ActiveRecord::Schema.define(:version => 20110616140627) do
     t.string   "ha1"
     t.string   "ha1b"
     t.string   "rpid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_group_members", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "user_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_groups", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  resources :personal_phonebooks
+
 	resources :call_logs
 	
 	resources :call_queues
