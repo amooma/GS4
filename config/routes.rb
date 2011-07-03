@@ -1,7 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :personal_phonebooks
-
+	resources :personal_phonebooks
+	
 	resources :call_logs
 	
 	resources :call_queues
@@ -10,9 +10,9 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :conferences
 	
-	get "setup/index"
-	get "setup/create"
-	get "setup/new"
+	get "setup/index"  #OPTIMIZE Is this route being used?
+	get "setup/create"  #OPTIMIZE Is this route being used?
+	get "setup/new"  #OPTIMIZE Is this route being used?
 	
 	match '/auth/:provider/callback' => 'authentications#create'
 	resources :authentications      , :only => [ :index, :create, :destroy ]
@@ -29,7 +29,7 @@ Gemeinschaft4::Application.routes.draw do
 		resources :extensions
 	end
 	
-	resources :sip_phones
+	resources :sip_phones  #OPTIMIZE Is this route being used?
 	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]
 	resources :nodes                , :only => [ :index, :show ] # for now
@@ -40,7 +40,7 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :admin                , :only => [ :index ]
 	
-	resources :kamailio             , :only => [ :index ], :format => 'txt'
+	resources :kamailio             , :only => [ :index ], :format => 'txt'  #OPTIMIZE Is this route being used?
 	
 	resources :subscribers          , :only => [ :index, :show ]  #OPTIMIZE Do we need a route for subscribers?
 	
@@ -73,11 +73,11 @@ Gemeinschaft4::Application.routes.draw do
 	end
 	
 	# Cantina
-	resources :reboot_requests, :only => [:index, :show, :create, :new ]
+	resources :reboot_requests, :only => [:index, :show, :create, :new ]  #OPTIMIZE Is this route being used?
 	
 	resources :manufacturer_snom    , :only => [ :index ]
-	resources :manufacturer_aastra  , :only => [ :index ]
-	resources :manufacturer_tiptel  , :only => [ :index ]
+	resources :manufacturer_aastra  , :only => [ :index ]  #OPTIMIZE Is this route being used?
+	resources :manufacturer_tiptel  , :only => [ :index ]  #OPTIMIZE Is this route being used?
 	
 	match '/manufacturer_snom/:mac_address/:action',
 		:via        => [ :get, :post ],
@@ -89,32 +89,31 @@ Gemeinschaft4::Application.routes.draw do
 		:controller => :manufacturer_snom,
 		:format     => :'xml'
 	
-	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'
+	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'  #OPTIMIZE Is this route being used?
 	
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',
 		:constraints => { :mac_address => /000413.*/ }
 	
-	resources :provisioning_log_entries, :only => [ :index, :show ]
-	resources :phone_model_mac_addresses
+	resources :provisioning_log_entries, :only => [ :index, :show ]  #OPTIMIZE Is this route being used?
+	resources :phone_model_mac_addresses  #OPTIMIZE Is this route being used?
 	match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
 	
 	# http://guides.rubyonrails.org/routing.html#nested-resources
 	resources :phones do
-		resources :sip_accounts
+		resources :sip_accounts  #OPTIMIZE Is it still useful to nest sip_accounts in phones?
 	end
 	resources :sip_accounts do
-		resources :phone_keys
-		
+		resources :phone_keys  #OPTIMIZE Is this route being used?
 	end
 	
-	resources :codecs
+	resources :codecs  #OPTIMIZE Is this route being used?
 	
-	resources :sip_account_codecs
+	resources :sip_account_codecs  #OPTIMIZE Is this route being used?
 	
-	resources :phone_key_function_definitions
+	resources :phone_key_function_definitions  #OPTIMIZE Is this route being used?
 	
-	resources :phone_model_keys
+	resources :phone_model_keys  #OPTIMIZE Is this route being used?
 	
 	resources :manufacturers do
 		resources :phone_models
