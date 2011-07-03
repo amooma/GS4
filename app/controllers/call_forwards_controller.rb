@@ -36,6 +36,7 @@ class CallForwardsController < ApplicationController
   # GET /call_forwards/new.xml
   def new
     @call_forward = CallForward.new
+    @call_forward.active = true
 
     respond_to do |format|
       format.html # new.html.erb
