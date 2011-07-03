@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.association :sip_account, :label_method => :caller_name %>
+    <%= f.association :sip_account, :label => t(:sip_account), :label_method => :caller_name %>
   </div>
   <div class="field">
-    <%= f.label :source, t(:source) %><br />
+    <%= f.label :source, t(:source) %>
     <%= f.text_field :source %>
   </div>
   <div class="field">
-    <%= f.association :call_forward_reason, :label_method => :value, :include_blank => false %>
+    <%= f.association :call_forward_reason, :label => t(:call_forward_reason), :label_method => :value, :include_blank => false %>
   </div>
   <div class="field">
-    <%= f.label :destination, t(:destination) %><br />
+    <%= f.label :destination, t(:destination) %>
     <%= f.text_field :destination %>
   </div>
   <div class="field">
-    <%= f.label :call_timeout, t(:call_timeout) %><br />
+    <%= f.label :call_timeout, t(:call_timeout) %>
     <%= f.text_field :call_timeout %>
   </div>
   <div class="field">
