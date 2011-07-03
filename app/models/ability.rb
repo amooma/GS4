@@ -34,6 +34,7 @@ class Ability
         can    :manage  , Admin
         can    :manage  , User
         can    :manage  , SipAccount
+        can    :read_title, SipAccount
         can    :manage  , CallForward
         can    :manage  , Extension
         can    :manage  , CallQueue
@@ -70,14 +71,25 @@ class Ability
       when "user"
       (
         can    :read    , CallForward, :sip_account => { :user_id => user.id }
-        can    :create  , CallForward
-        #TODO Add check (in the controller) that users can't create CallForwards for other users' SIP accounts.
+        can    :new     , CallForward
+        can    :create  , CallForward do |call_forward|
+          if call_forward.try(:sip_account) == nil
+            # error handled in the model
+            true
+          else
+            call_forward.try(:sip_account).try(:user_id) == user.id \
+            && user.id != nil
+          end
+        end
         can    :update  , CallForward do |call_forward|
-          call_forward.try(:sip_account).try(:user_id) == user.id
+          call_forward.try(:sip_account).try(:user_id) == user.id \
+          && user.id != nil
         end
         can    :destroy , CallForward do |call_forward|
-          call_forward.try(:sip_account).try(:user_id) == user.id
+          call_forward.try(:sip_account).try(:user_id) == user.id \
+          && user.id != nil
         end
+        can    :read_title, SipAccount, :user_id => user.id
         
         #can    :read    , Extension, :sip_accounts => { :user_id => user.id }
         # No need to give the user read access to his/her extensions.

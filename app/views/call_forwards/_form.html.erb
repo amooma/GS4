@@ -12,7 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.association :sip_account, :label => t(:sip_account), :label_method => :caller_name %>
+    <%= f.label :sip_account_id, t(:sip_account) %>
+    <%= f.select( :sip_account_id,
+      @sip_accounts.collect { |r| [ "#{r.caller_name} (ID #{r.id})", r.id ] },
+      { :include_blank => (@sip_accounts.count > 1), :selected => @call_forward.sip_account_id }
+    ) %>    
   </div>
   <div class="field">
     <%= f.label :source, t(:source) %>

@@ -5,6 +5,10 @@ class CallForwardsController < ApplicationController
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   load_and_authorize_resource
   
+  before_filter { |controller|
+    @sip_accounts = SipAccount.accessible_by( current_ability, :read_title ).all
+  }
+  
   
   # GET /call_forwards
   # GET /call_forwards.xml
