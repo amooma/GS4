@@ -6,6 +6,7 @@ app/helpers/admin/*.rb      opt/gemeinschaft/app/helpers/admin/
 
 app/models/*.rb             opt/gemeinschaft/app/models/
 
+app/views/403.html.erb                          opt/gemeinschaft/app/views/
 app/views/authentications/*.erb                 opt/gemeinschaft/app/views/authentications/
 app/views/call_forwards/*.erb                   opt/gemeinschaft/app/views/call_forwards/
 app/views/call_logs/*.erb                       opt/gemeinschaft/app/views/call_logs/
