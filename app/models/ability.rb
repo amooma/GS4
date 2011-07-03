@@ -35,7 +35,6 @@ class Ability
         can    :manage  , User
         can    :manage  , SipAccount
         can    :manage  , CallForward
-        can    :manage  , Phone
         can    :manage  , Extension
         can    :manage  , CallQueue
         can    :manage  , Conference
@@ -59,6 +58,7 @@ class Ability
         can    :read    , PhoneModel
         cannot :manage  , Phone
         can    :read    , Phone
+        can    :reboot  , Phone
       )
       
       when "cdr"
