@@ -79,7 +79,7 @@ en:
   sip_account_updated: "SIP account was successfully updated"
   numeric_greater_than: "must be all digits and greater than %{value}"
   must_not_be_set_if_no_voicemail_server: "must not be set if the SIP account does not have a voicemail server"
-  auth_name_cannot_be_changed: "auth_name cannot be changed"
+  cannot_be_changed: "cannot be changed."
   subscriber_not_created: "Failed to create subscriber"
   subscriber_not_updated: "Failed to update subscriber"
   subscriber_not_deleted: "Failed to delete subscriber"

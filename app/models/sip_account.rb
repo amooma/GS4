@@ -39,7 +39,7 @@ class SipAccount < ActiveRecord::Base
   
   before_validation( :on => :update ) {
     if self.auth_name != self.auth_name_was
-      errors.add( :base , I18n.t(:auth_name_cannot_be_changed) )
+      errors.add( :auth_name, I18n.t(:cannot_be_changed) )
     end
   }
   
