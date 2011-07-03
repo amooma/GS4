@@ -159,6 +159,16 @@ digraph Gemeinschaft4 {
   <tr><td align="left" width="130" port="value">value <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
 </table>
 >];
+  m_PersonalPhonebook [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">PersonalPhonebook</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="first_name">first_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="last_name">last_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="phone_number">phone_number <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
   m_Phone [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Phone</font></td></tr>
 </table>
@@ -389,6 +399,7 @@ digraph Gemeinschaft4 {
 </table>
 >];
   m_User -> m_Authentication [arrowhead = "normal", arrowtail = "none", weight = "2"]
+  m_User -> m_PersonalPhonebook [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_User -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipProxy -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
   m_SipServer -> m_SipAccount [arrowhead = "normal", arrowtail = "none", weight = "2"]
