@@ -71,7 +71,6 @@ class Ability
         can    :read    , CallForward, :sip_account => { :user_id => user.id }
         can    :create  , CallForward
         #TODO Add check (in the controller) that users can't create CallForwards for other users' SIP accounts.
-        #TODO Same for update.
         can    :update  , CallForward do |call_forward|
           call_forward.try(:sip_account).try(:user_id) == user.id
         end

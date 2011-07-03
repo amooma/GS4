@@ -8,7 +8,6 @@ class CallForward < ActiveRecord::Base
   validates_presence_of :destination , :if  => Proc.new { |cf| cf.source.blank? }
   validates_uniqueness_of :call_forward_reason_id, :scope => [ :sip_account_id, :source ]
   
-  
   validates_numericality_of :call_timeout,
     :if => Proc.new { |me| (CallForwardReason.where( :value => "noanswer").first && me.call_forward_reason_id == CallForwardReason.where( :value => "noanswer").first.id) },
     :only_integer => true,
@@ -20,5 +19,13 @@ class CallForward < ActiveRecord::Base
     :in => [ nil ],
     :if => Proc.new { |me| (CallForwardReason.where( :value => "noanswer").first && me.call_forward_reason_id != CallForwardReason.where( :value => "noanswer").first.id) },
     :message => I18n.t(:reason_on_noanswer_only)
+  
+  # Make sure the call forward's SIP account can't be changed.
+  before_validation { |cfwd|
+    if cfwd.id \
+    && cfwd.sip_account_id != cfwd.sip_account_id_was
+      errors.add( :sip_account_id, I18n::t(:cannot_be_changed) )
+    end
+  }
   
 end
