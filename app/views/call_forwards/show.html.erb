@@ -2,7 +2,11 @@
 
 <p>
   <b><%= t(:sip_account) %>:</b>
-  <%= @call_forward.sip_account_id %>
+  <%
+    if @call_forward.sip_account
+      %><%= @call_forward.sip_account.caller_name %> <small>(ID <%= @call_forward.sip_account_id %>)</small><%
+    end
+  %>
 </p>
 
 <p>
@@ -12,7 +16,7 @@
 
 <p>
   <b><%= t(:call_forward_reason) %>:</b>
-  <%= @call_forward.call_forward_reason_id %>
+  <%= @call_forward.call_forward_reason ? @call_forward.call_forward_reason.value : '?' %>
 </p>
 
 <p>
@@ -27,7 +31,7 @@
 
 <p>
   <b><%= t(:active) %>:</b>
-  <%= @call_forward.active %>
+  <%= @call_forward.active ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
 
 <%= link_to t(:edit), edit_call_forward_path(@call_forward) if can?( :edit, @call_forward ) %> |

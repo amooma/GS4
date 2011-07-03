@@ -15,15 +15,16 @@
 
 <% @call_forwards.each do |call_forward| %>
   <tr>
-    <td>
-      <% if call_forward.sip_account %>
-        <%= call_forward.sip_account.caller_name %> (id <%= call_forward.sip_account_id %>)</td>
-      <% end %>
+    <td><%
+      if call_forward.sip_account
+        %><%= call_forward.sip_account.caller_name %> <small>(ID <%= call_forward.sip_account_id %>)</small><%
+      end
+    %></td>
     <td><%= call_forward.source %></td>
-    <td><%= call_forward.call_forward_reason ? call_forward.call_forward_reason.value : '-' %></td>
+    <td><%= call_forward.call_forward_reason ? call_forward.call_forward_reason.value : '?' %></td>
     <td><%= call_forward.destination %></td>
     <td><%= call_forward.call_timeout %></td>
-    <td><%= call_forward.active %></td>
+    <td><%= call_forward.active ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show), call_forward if can?( :show, call_forward ) %></td>
     <td><%= link_to t(:edit), edit_call_forward_path(call_forward) if can?( :edit, call_forward ) %></td>
     <td><%= button_to t(:destroy), call_forward, :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, call_forward ) %></td>
