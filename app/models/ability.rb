@@ -58,6 +58,7 @@ class Ability
         can    :read    , PhoneModel
         cannot :manage  , Phone
         can    :read    , Phone
+        can    :edit    , Phone
         can    :reboot  , Phone
       )
       
