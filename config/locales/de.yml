@@ -263,3 +263,5 @@ de:
   list_all_sip_proxies: "Alle SIP-Proxies anzeigen"
   list_all_sip_servers: "Alle SIP-Domänen/Server anzeigen"
   list_all_extensions: "Alle Rufnummern anzeigen"
+  home_page: "Home"
+  welcome_user: "Hallo %{given_name} %{surname}!"

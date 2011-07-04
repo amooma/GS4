@@ -176,9 +176,7 @@ Gemeinschaft4::Application.routes.draw do
 	# just remember to delete public/index.html.
 	# root :to => "welcome#index"
 	
-	root :to => 'admin#index'
-	#TODO Create "home" pages for non-admins.
-	
+	root :to => 'home#index'
 	
 	# See how all your routes lay out with "rake routes"
 	

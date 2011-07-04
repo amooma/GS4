@@ -31,6 +31,7 @@ class Ability
       
       when "admin"
       (
+        can    :read    , Home
         can    :manage  , Admin
         can    :manage  , User
         can    :manage  , SipAccount
@@ -70,6 +71,7 @@ class Ability
       
       when "user"
       (
+        can    :read    , Home
         can    :read    , CallForward, :sip_account => { :user_id => user.id }
         can    :new     , CallForward
         can    :create  , CallForward do |call_forward|

@@ -1,0 +1,24 @@
+<h1><%= t(:home_page) %></h1>
+
+<p><%= t(:welcome_user, :given_name => current_user.gn, :surname => current_user.sn) %></p>
+
+<p>
+	<b><%= t(:extensions) %> (<%= @extensions.count %>):</b>
+	<% if @extensions %>
+		<ul>
+		<% @extensions.each do |extension| %>
+			<li><%= extension.extension.extension %></li>
+		<% end %>
+		</ul>
+	<% end %>
+</p>
+<p>
+	<b><%= t(:sip_accounts) %> (<%= @sip_accounts.count %>):</b>
+	<% if @sip_accounts %>
+		<ul>
+		<% @sip_accounts.each do |sip_account| %>
+			<li><%= sip_account.caller_name %></li>
+		<% end %>
+		</ul>
+	<% end %>
+</p>

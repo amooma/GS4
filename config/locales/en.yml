@@ -251,4 +251,5 @@ en:
   list_all_sip_proxies: "List all SIP proxies"
   list_all_sip_servers: "List all SIP domains/servers"
   list_all_extensions: "List all extensions"
-  
+  home_page: "Home"
+  welcome_user: "Hallo %{given_name} %{surname}!"
