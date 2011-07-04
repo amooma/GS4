@@ -1,6 +1,18 @@
 # locale for GS4 in German 
 
 de:
+  date:
+    formats:
+        default: "%d.%m.%Y"
+        short: "%e.%m."
+        long: "%e. %B %Y"
+  time:
+    formats:
+        default: "%d.%m.%Y %H:%M"
+        time: "%H:%M"
+        short: "%e.%m. %H:%M"
+        long: "%A, %e. %B %Y, %H:%M"
+
   application_name: "Gemeinschaft 4"
   show: "Anzeigen"
   back: "Zurück"
@@ -251,4 +263,3 @@ de:
   list_all_sip_proxies: "Alle SIP-Proxies anzeigen"
   list_all_sip_servers: "Alle SIP-Domänen/Server anzeigen"
   list_all_extensions: "Alle Rufnummern anzeigen"
-  
