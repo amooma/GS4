@@ -253,3 +253,5 @@ en:
   list_all_extensions: "List all extensions"
   home_page: "Home"
   welcome_user: "Hallo %{given_name} %{surname}!"
+  no_phone_found_for_manufacturer: "No phones for this manufacturer found"
+  phone_id: "Phone ID"

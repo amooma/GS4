@@ -265,3 +265,5 @@ de:
   list_all_extensions: "Alle Rufnummern anzeigen"
   home_page: "Home"
   welcome_user: "Hallo %{given_name} %{surname}!"
+  no_phone_found_for_manufacturer: "Kein Telefon dieses Herstellers gefunden"
+  phone_id: "Telefon ID"

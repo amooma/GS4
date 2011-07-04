@@ -1,9 +1,9 @@
 <% if ! @phones.empty? %>
-<h1>Manufacturer <%= @phones.first.phone_model.manufacturer.name%> </h1>
+<h1><%= t(:manufacturer) %>: <%= @phones.first.phone_model.manufacturer.name %> </h1>
 <table> 
-<th>Phone ID</th>
-<th>Phone model</th>
-<th>MAC address</th>
+<th><%= t(:phone_id) %></th>
+<th><%= t(:phone_model) %></th>
+<th><%= t(:mac_address) %></th>
 <% @phones.each do |p|%>
 	<tr class="<%= cycle("even", "odd") %>"	> 
 	<td><%= p.id %></td>
@@ -13,5 +13,5 @@
 </tr>
 </table>
 <% else %>
-<h1>No phones for this manufacturer found</h1>
+<h1><%= t(:no_phone_found_for_manufacturer) %></h1>
 <% end %>
