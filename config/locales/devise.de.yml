@@ -1,0 +1,39 @@
+de:
+  errors:
+    messages:
+      not_found: "nicht gefunden"
+      already_confirmed: "wurde bereits bestätigt"
+      not_locked: "war nicht gesperrt"
+
+  devise:
+    failure:
+      unauthenticated: "Sie müssen sich einloggen oder anmelden bevor sie weitermachen können"
+      unconfirmed: "Sie müssen ihren Account bestätigen bevor sie weitermachen können"
+      locked: "Ihr Account ist gesperrt"
+      invalid: "Ungültiger Benutzername oder Passwort"
+      invalid_token: 'Ungültiger Authetifizierungstoken.'
+      timeout: "Sitzung abgelaufen, bitte erneut anmelden"
+      inactive: "Ihr Account is noch nicht aktiviert"
+    sessions:
+      signed_in: "Erfolgreich eingeloggt"
+      signed_out: "Erfolgreich ausgeloggt"
+    passwords:
+      send_instructions: "Sie erhalten in kürze ein eMail mit Anweisungen, wie sie ihr Passwort ändern können"
+      updated: "Ihr Passwort wurde erfolgreich geändert. Sie wurden nun eingeloggt"
+    confirmations:
+      send_instructions: "Sie erhalten in kürze ein eMail mit Anweisungen, wie sie ihren Account bestätigen können"
+      confirmed: "Ihr Account wurde erfolgreich bestätigt. Sie wurden nun eingeloggt"
+    registrations:
+      signed_up: "Sie haben sich erfolgreich angemeldet. Wenn aktiviert, wurde eine Bestätigungsmail an sie versendet"
+      updated: "Account erfolgreich aktualisiert"
+      destroyed: "Ihr Account wurde erfolgreicht gekündigt. Auf wiedersehen!"
+    unlocks:
+      send_instructions: "Sie erhalten in kürze ein eMail mit Anweisungen, wie sie ihren Account entsperren können"
+      unlocked: "Ihr Account wurde erfolgreich entsperrt. Sie wurden nun eingeloggt"
+    mailer:
+      confirmation_instructions:
+        subject: "Anweisungen zur Bestätigung ihres Accounts"
+      reset_password_instructions:
+        subject: "Anweisungen zum Zurücksetzen des Passworts"
+      unlock_instructions:
+        subject: "Anweisungen zum Entsperren ihres Accounts"
