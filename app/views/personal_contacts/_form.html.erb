@@ -1,0 +1,56 @@
+<%= form_for(@personal_contact) do |f| %>
+  <% if @personal_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@personal_contact.errors.count, "error") %> prohibited this personal_contact from being saved:</h2>
+
+      <ul>
+      <% @personal_contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% if @user_role == "admin" %>
+      <%= f.label :user_id, t(:user) %>
+      <%= f.select( :user_id,
+         @users.collect {|r| [ "#{r.sn}, #{r.gn} (#{r.username}, #{r.email})", r.id ] },
+         { :include_blank => true, :selected => @personal_contact.user_id }
+      ) %>
+    <% else %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname, t(:lastname) %><br />
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :firstname, t(:firstname) %><br />
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_private, t(:phone_private) %><br />
+    <%= f.text_field :phone_private %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_business, t(:phone_business) %><br />
+    <%= f.text_field :phone_business %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_mobile, t(:phone_mobile) %><br />
+    <%= f.text_field :phone_mobile %>
+  </div>
+  <div class="field">
+    <%= f.label :fax_private, t(:fax_private) %><br />
+    <%= f.text_field :fax_private %>
+  </div>
+  <div class="field">
+    <%= f.label :fax_business, t(:fax_business) %><br />
+    <%= f.text_field :fax_business %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @personal_contact.user_id %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%= @personal_contact.lastname %>
+</p>
+
+<p>
+  <b>Firstname:</b>
+  <%= @personal_contact.firstname %>
+</p>
+
+<p>
+  <b>Phone private:</b>
+  <%= @personal_contact.phone_private %>
+</p>
+
+<p>
+  <b>Phone business:</b>
+  <%= @personal_contact.phone_business %>
+</p>
+
+<p>
+  <b>Phone mobile:</b>
+  <%= @personal_contact.phone_mobile %>
+</p>
+
+<p>
+  <b>Fax private:</b>
+  <%= @personal_contact.fax_private %>
+</p>
+
+<p>
+  <b>Fax business:</b>
+  <%= @personal_contact.fax_business %>
+</p>
+
+
+<%= link_to 'Edit', edit_personal_contact_path(@personal_contact) %> |
+<%= link_to 'Back', personal_contacts_path %>

@@ -1,0 +1,37 @@
+<h1>Listing personal_contacts</h1>
+
+<table>
+  <tr>
+    <th><%= t(:user) %></th>
+    <th><%= t(:lastname) %></th>
+    <th><%= t(:firstname) %></th>
+    <th><%= t(:phone_private) %></th>
+    <th><%= t(:phone_business) %></th>
+    <th><%= t(:phone_mobile) %></th>
+    <th><%= t(:fax_private) %></th>
+    <th><%= t(:fax_business) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @personal_contacts.each do |personal_contact| %>
+  <tr>
+    <td><%= personal_contact.user_id %></td>
+    <td><%= personal_contact.lastname %></td>
+    <td><%= personal_contact.firstname %></td>
+    <td><%= personal_contact.phone_private %></td>
+    <td><%= personal_contact.phone_business %></td>
+    <td><%= personal_contact.phone_mobile %></td>
+    <td><%= personal_contact.fax_private %></td>
+    <td><%= personal_contact.fax_business %></td>
+    <td><%= link_to 'Show', personal_contact %></td>
+    <td><%= link_to 'Edit', edit_personal_contact_path(personal_contact) %></td>
+    <td><%= button_to 'Destroy', personal_contact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Personal contact', new_personal_contact_path %>

@@ -45,7 +45,7 @@ class Ability
         can    :manage  , SipProxy
         can    :manage  , VoicemailServer
         can    :manage  , Node
-        can    :manage  , PersonalPhonebook
+        can    :manage  , PersonalContact
         can    :read    , Subscriber  #OPTIMIZE @sd/pko: Is this still required?
         
         cannot :destroy , User do |u|
@@ -103,6 +103,12 @@ class Ability
         cannot :update  , FaxDocument
         
         can    :read    , CallLog, :sip_account => { :user_id => user.id }
+        can    :read    , PersonalContact,  :user_id => user.id
+        can    :new     , PersonalContact,  :user_id => user.id
+        can    :create  , PersonalContact,  :user_id => user.id
+        can    :update  , PersonalContact,  :user_id => user.id
+        can    :destroy , PersonalContact,  :user_id => user.id
+
       )
       
       else

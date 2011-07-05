@@ -1,6 +1,10 @@
-class CreatePersonalPhonebooks < ActiveRecord::Migration
+class DropPersonalPhonebook < ActiveRecord::Migration
   def self.up
-    create_table :personal_phonebooks do |t|
+   drop_table :personal_phonebooks
+  end
+
+  def self.down
+   create_table :personal_phonebooks do |t|
       t.integer :user_id
       t.string :first_name
       t.string :last_name
@@ -8,9 +12,6 @@ class CreatePersonalPhonebooks < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
 
-  def self.down
-    drop_table :personal_phonebooks
   end
 end
