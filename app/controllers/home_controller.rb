@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 	load_and_authorize_resource
   
 	def index
-		if (current_user.role == 'admin1')
+		if (current_user.role == 'admin')
 			@number_of_users         = User.count
 			@number_of_sip_accounts  = SipAccount.count
 			@number_of_phones        = Phone.count
