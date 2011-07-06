@@ -52,7 +52,7 @@ class PersonalContactsController < ApplicationController
 
     respond_to do |format|
       if @personal_contact.save
-        format.html { redirect_to(@personal_contact, :notice => 'Personal contact was successfully created.') }
+        format.html { redirect_to(@personal_contact, :notice => t(:personal_contact_created)) }
         format.xml  { render :xml => @personal_contact, :status => :created, :location => @personal_contact }
       else
         format.html { render :action => "new" }
@@ -68,7 +68,7 @@ class PersonalContactsController < ApplicationController
 
     respond_to do |format|
       if @personal_contact.update_attributes(params[:personal_contact])
-        format.html { redirect_to(@personal_contact, :notice => 'Personal contact was successfully updated.') }
+        format.html { redirect_to(@personal_contact, :notice => t(:personal_contact_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

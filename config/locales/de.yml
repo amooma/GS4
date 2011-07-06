@@ -310,3 +310,5 @@ de:
   new_personal_contact: "Neuer Kontakt"
   editing_personal_contact: "Kontakt bearbeiten"
   listing_personal_contacts: "Kontakte"
+  personal_contact_created: "Kontakt wurde erfolgreich angelegt"
+  personal_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
