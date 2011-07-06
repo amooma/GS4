@@ -1,44 +1,47 @@
 
-<p>
-  <b>User:</b>
-  <%= @personal_contact.user_id %>
-</p>
+
+<% if current_user.role == "admin" %>
+  <p>
+    <b><%= t(:user) %>:</b>
+    <%= @personal_contact.user_id %>
+  </p>
+<% end %>
 
 <p>
-  <b>Lastname:</b>
+  <b><%= t(:lastname) %>:</b>
   <%= @personal_contact.lastname %>
 </p>
 
 <p>
-  <b>Firstname:</b>
+  <b><%= t(:firstname) %>:</b>
   <%= @personal_contact.firstname %>
 </p>
 
 <p>
-  <b>Phone private:</b>
+  <b><%= t(:phone_private) %>:</b>
   <%= @personal_contact.phone_private %>
 </p>
 
 <p>
-  <b>Phone business:</b>
+  <b><%= t(:phone_business) %>:</b>
   <%= @personal_contact.phone_business %>
 </p>
 
 <p>
-  <b>Phone mobile:</b>
+  <b><%= t(:phone_mobile) %>:</b>
   <%= @personal_contact.phone_mobile %>
 </p>
 
 <p>
-  <b>Fax private:</b>
+  <b><%= t(:fax_private) %>:</b>
   <%= @personal_contact.fax_private %>
 </p>
 
 <p>
-  <b>Fax business:</b>
+  <b><%= t(:fax_business) %>:</b>
   <%= @personal_contact.fax_business %>
 </p>
 
 
-<%= link_to 'Edit', edit_personal_contact_path(@personal_contact) %> |
-<%= link_to 'Back', personal_contacts_path %>
+<%= link_to t(:edit), edit_personal_contact_path(@personal_contact) %> |
+<%= link_to t(:back), personal_contacts_path %>

@@ -1,7 +1,7 @@
 <%= form_for(@personal_contact) do |f| %>
   <% if @personal_contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@personal_contact.errors.count, "error") %> prohibited this personal_contact from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@personal_contact.errors.count, "error"), :model_name => t(:personal_contact)) %>:</h2>
 
       <ul>
       <% @personal_contact.errors.full_messages.each do |msg| %>
@@ -51,6 +51,6 @@
     <%= f.text_field :fax_business %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>
