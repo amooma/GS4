@@ -38,7 +38,7 @@ end
 def allowed_attributes(class_name, class_attributes)
 	attributes = {
 		'User' => [
-			'id','username','sn','gn','email','password'
+			'id','username','sn','gn','email','password','role',
 		]
 	}
 	
@@ -54,7 +54,7 @@ end
 def default_column_order(object_name, columns)
 	default_columns = {
 		'User' => [
-			'id','username','sn','gn','email',
+			'id','username','sn','gn','email','role',
 		]
 	}
 	
