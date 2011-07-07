@@ -46,12 +46,12 @@ class SipAccount < ActiveRecord::Base
   before_validation {
     if self.phone_id
       if self.user_id != nil
-        if  ! SipAccount.where("user_id != #{self.user_id} AND phone_id == #{self.phone_id}").empty? ||
+        if  ! SipAccount.find(:all, :conditions => ['user_id != ? AND phone_id = ? ', "#{self.user_id}", "#{self.phone_id}"]).empty? ||
           ! SipAccount.where(:user_id => nil, :phone_id => self.phone_id).empty?
             errors.add( :base, I18n.t(:phone_belongs_to_user_allready) )
         end
       else
-        if  ! SipAccount.where("user_id AND phone_id == #{self.phone_id}").empty?
+        if  ! SipAccount.find(:all, :conditions => ['user_id NOT ? AND phone_id = ?', nil, "#{self.phone_id}" ]).empty?
         errors.add( :base, I18n.t(:phone_belongs_to_user_allready) )
         end
         
