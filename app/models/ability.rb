@@ -109,7 +109,6 @@ class Ability
         can    :create  , PersonalContact,  :user_id => user.id
         can    :update  , PersonalContact,  :user_id => user.id
         can    :destroy , PersonalContact,  :user_id => user.id
-
       )
       
       else
