@@ -66,6 +66,7 @@ class Ability
       
       when "cdr"
       (
+        can    :read    , Home  # just a redirect_to( call_logs_path ) in the HomeController
         can    :read    , CallLog
       )
       
