@@ -298,7 +298,7 @@ en:
   listing_personal_contacts: "Contacts"
   personal_contact_created: "Contact was successfully created"
   personal_contact_updated: "Contact was successfully updated"
-  phone_belongs_to_user_allready: "Phone is already associated to different user"
+  phone_belongs_to_user_already: "Phone is already associated to a different user"
   
   from: "from"
   from_all: "(all)"

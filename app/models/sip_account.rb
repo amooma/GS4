@@ -48,11 +48,11 @@ class SipAccount < ActiveRecord::Base
       if self.user_id != nil
         if ! SipAccount.find(:all, :conditions => ['user_id != ? AND phone_id = ? ', "#{self.user_id}", "#{self.phone_id}"]).empty? \
         || ! SipAccount.where(:user_id => nil, :phone_id => self.phone_id).empty?
-          errors.add( :base, I18n.t(:phone_belongs_to_user_allready) )
+          errors.add( :base, I18n.t(:phone_belongs_to_user_already) )
         end
       else
         if ! SipAccount.find(:all, :conditions => ['user_id NOT ? AND phone_id = ?', nil, "#{self.phone_id}" ]).empty?
-          errors.add( :base, I18n.t(:phone_belongs_to_user_allready) )
+          errors.add( :base, I18n.t(:phone_belongs_to_user_already) )
         end
       end
     end
