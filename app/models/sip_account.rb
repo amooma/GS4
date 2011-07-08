@@ -123,6 +123,19 @@ class SipAccount < ActiveRecord::Base
     end
   end
   
+  # Returns whether a SIP account is registered (in Kamailio).
+  #
+  def registered?
+    return (
+      Location.where({
+        :username => "#{self.auth_name}",
+        #:domain   => "...",  #OPTIMIZE Check domain.
+      })
+      .where( Location.arel_table[:contact].not_eq(nil) )
+      .where( Location.arel_table[:contact].not_eq('') )
+    ).first != nil
+  end
+  
   def phone_reboot
     self.phone.reboot if self.phone
   end

@@ -29,15 +29,8 @@
 		<% @sip_accounts.each do |sip_account| %>
 		<tr>
 			<th><%= sip_account.caller_name %></th>
-			<td><%
-				num_locations = Location.where({
-					:username => "#{sip_account.auth_name}",
-					#:domain   => "...",  #OPTIMIZE Check domain.
-				}).where(
-					Location.arel_table[:contact].not_in([ nil, '' ])
-				).count
-			%><%=
-				num_locations > 0 ? t(:state_registered) : t(:state_not_registered)
+			<td><%=
+				sip_account.registered? ? t(:state_registered) : t(:state_not_registered)
 			%></td>
 		</tr>
 		<% end %>

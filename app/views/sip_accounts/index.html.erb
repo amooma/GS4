@@ -47,16 +47,7 @@
         <%= sip_account.phone.mac_address %>
       <% end %>
     </td>
-    <td><%
-      num_locations = Location.where({
-        :username => "#{sip_account.auth_name}",
-        #:domain   => "...",  #OPTIMIZE Check domain.
-      }).where(
-        Location.arel_table[:contact].not_in([ nil, '' ])
-      ).count
-    %><%=
-      num_locations > 0 ? t(:yes_lowercase) : t(:no_lowercase)
-    %></td>
+    <td><%= sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show), sip_account %></td>
     <td><%= link_to t(:edit), edit_sip_account_path(sip_account) %></td>
     <td><%= button_to t(:destroy), sip_account, :confirm => t(:are_you_sure), :method => :delete %></td>
