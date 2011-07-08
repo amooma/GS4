@@ -313,3 +313,11 @@ de:
   personal_contact_created: "Kontakt wurde erfolgreich angelegt"
   personal_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
   phone_belongs_to_user_allready: "Das Telefon wurde bereits einem Benutzer zugeordnet"
+  
+  from: "von"
+  from_all: "(alle)"
+  case: "Fall"
+  at: "um"
+  state_registered: "registriert"
+  state_not_registered: "nicht registriert"
+

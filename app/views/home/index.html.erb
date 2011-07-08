@@ -2,30 +2,33 @@
 
 <p><%= t(:welcome_user, :given_name => current_user.gn, :surname => current_user.sn) %></p>
 
-<p>
-	<b><%= t(:listing_extensions) %> (<%= @extensions.count %>):</b>
-	<% if @extensions %>
-		<table>
+<div class="index_overview">
+
+<section>
+	<h2><%= t(:listing_extensions) %> (<%= @extensions.try(:count) %>)</h2>
+	<% if @extensions.try(:count) > 0 %>
+	<table>
 		<% @extensions.each do |extension| %>
-			<tr>
-			<td><%= extension.extension.extension %></td>
-			<td>
-			<% if extension.extension.sip_accounts.first %>
-				<%= extension.extension.sip_accounts.first.caller_name %>
-			<% end %>
-			</td>
-			</tr>
+		<tr>
+			<th><%= extension.extension.extension %></th>
+			<td><%
+				if extension.extension.sip_accounts.first
+					%>&rarr; <%= t(:sip_account) %>: <%= extension.extension.sip_accounts.first.caller_name %><%
+				end
+			%></td>
+		</tr>
 		<% end %>
-		</table>
+	</table>
 	<% end %>
-</p>
-<p>
-	<b><%= t(:listing_sip_accounts) %> (<%= @sip_accounts.count %>):</b>
-	<% if @sip_accounts %>
-		<table>
+</section>
+
+<section>
+	<h2><%= t(:listing_sip_accounts) %> (<%= @sip_accounts.try(:count) %>)</h2>
+	<% if @sip_accounts.try(:count) > 0 %>
+	<table>
 		<% @sip_accounts.each do |sip_account| %>
-			<tr>
-			<td><%= sip_account.caller_name %></td>
+		<tr>
+			<th><%= sip_account.caller_name %></th>
 			<td><%
 				num_locations = Location.where({
 					:username => "#{sip_account.auth_name}",
@@ -33,50 +36,67 @@
 				}).where(
 					Location.arel_table[:contact].not_in([ nil, '' ])
 				).count
-				%><%=
-				num_locations > 0 ? t(:yes_lowercase) : t(:no_lowercase)
-				%>		</td>
-			</tr>
+			%><%=
+				num_locations > 0 ? t(:state_registered) : t(:state_not_registered)
+			%></td>
+		</tr>
 		<% end %>
-		</table>
+	</table>
 	<% end %>
-</p>
+</section>
 
-<p>
-	<b><%= t(:listing_call_forwards) %> (<%= @call_forwards.count %>):</b>
-	<% if @call_forwards %>
-		<table>
+<section>
+	<h2><%= t(:listing_call_forwards) %> (<%= @call_forwards.try(:count) %>)</h2>
+	<% if @call_forwards.try(:count) > 0 %>
+	<table>
+		<tr>
+			<th><%= t("from").titleize %></th>
+			<th><%= t("case").titleize %></th>
+			<th><%= t(:call_timeout).titleize %></th>
+			<th><%= t("destination").titleize %></th>
+		</tr>
 		<% @call_forwards.last(5).each do |entry| %>
-			<tr>
-			<td><%= entry.source %></td>
+		<tr>
+			<td><%= entry.source.blank? ? t(:from_all) : entry.source %></td>
 			<td><%= entry.call_forward_reason.value %></td>
 			<td><%= entry.call_timeout %></td>
 			<td><%= entry.destination %></td>
-			</tr>
+		</tr>
 		<% end %>
 		<% if @call_forwards.count > 5 %>
-			<tr><td colspan="4">...</td></tr>
+		<tr>
+			<td colspan="4">...</td>
+		</tr>
 		<% end %>
-		</table>
+	</table>
 	<% end %>
-</p>
+</section>
 
-<p>
-	<b><%= t(:calls_missed_number, :calls => @call_log_missed.count) %>:</b>
-	<% if @call_log_missed %>
-		<table>
+<section>
+	<h2><%= t(:calls_missed_number, :calls => @call_log_missed.try(:count)) %></h2>
+	<% if @call_log_missed.try(:count) > 0 %>
+	<table>
+		<tr>
+			<th><%= t("at").titleize %></th>
+			<th colspan="2"><%= t("from").titleize %></th>
+			<th colspan="2"><%= t("destination").titleize %></th>
+		</tr>
 		<% @call_log_missed.last(5).each do |entry| %>
-			<tr>
+		<tr>
 			<td><%= l(entry.created_at.localtime, :format => :short) %></td>
 			<td><%= entry.source %></td>
 			<td><%= entry.source_name %></td>
 			<td><%= entry.destination %></td>
 			<td><%= entry.destination_name %></td>
-			</tr>
+		</tr>
 		<% end %>
 		<% if @call_log_missed.count > 5 %>
-			<tr><td colspan="5">...</td></tr>
+		<tr>
+			<td colspan="5">...</td>
+		</tr>
 		<% end %>
-		</table>
+	</table>
 	<% end %>
-</p>
+</section>
+
+</div>

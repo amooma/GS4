@@ -1,8 +1,8 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :personal_contacts
-
-	resources :personal_phonebooks
+	resources :personal_contacts
+	
+	resources :personal_phonebooks  #OPTIMIZE Is this route being used?
 	
 	resources :call_logs
 	
