@@ -7,7 +7,7 @@ xml.SnomIPPhoneDirectory {
 		if exts.count > 0 
 			xml.tag!( 'DirectoryEntry' ) {
 				extension = exts.first.extension
-				xml.Name(t(:xml_menu_sip_account_extension, :caller_name => sip_account.caller_name, :extension => extension))
+				xml.Name(t(:xml_menu_phone_book_entry, :caller_name => sip_account.caller_name, :extension => extension))
 				xml.Telephone( extension )
 			}
 		end

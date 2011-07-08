@@ -263,7 +263,7 @@ en:
   call_forwarding_key_label_short: "CF"
   select_sip_account: "Select SIP Account"
   xml_menu_sip_account: "%{caller_name} (%{auth_name})"
-  xml_menu_sip_account_extension: "%{caller_name}: %{extension}"
+  xml_menu_phone_book_entry: "%{caller_name}: %{extension}"
   call_log_for: "Call log for %{name}"
   calls_placed_number: "Calls placed: %{calls}"
   calls_missed_number: "Calls missed: %{calls}"
