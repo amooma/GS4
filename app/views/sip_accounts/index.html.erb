@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <th><%= t(:user_id) %></th>
+    <th><%= t(:user) %></th>
     <th><%= t(:auth_name) %></th>
-    <th><%= t(:password) %></th>
     <th><%= t(:realm) %></th>
     <th><%= t(:sip_server_id) %></th>
     <th><%= t(:sip_proxy_id) %></th>
@@ -20,9 +19,13 @@
 
 <% @sip_accounts.each do |sip_account| %>
   <tr>
-    <td><%= sip_account.user_id %></td>
+    <td><%
+      if sip_account.user
+        %><%= sip_account.user.username %><br />
+        (<%= sip_account.user.sn %>, <%= sip_account.user.gn %>)<%
+      end
+    %></td>
     <td><%= sip_account.auth_name %></td>
-    <td><%= sip_account.password %></td>
     <td><%= sip_account.realm %></td>
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
