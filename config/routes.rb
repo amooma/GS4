@@ -71,7 +71,7 @@ Gemeinschaft4::Application.routes.draw do
 	
 	namespace :admin do
 		resources :users
-		resources :setup
+		resources :setup  #OPTIMIZE Do we need a full resource or just an index?
 	end
 	
 	# Cantina
