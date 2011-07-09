@@ -311,6 +311,8 @@ en:
   remember_me: "Remember me"
   sign_in_submit: "Sign in"
   forgot_password: "Forgot your password?"
+  send_reset_password_instructions: "Send me reset password instructions"
+  
   
   
 

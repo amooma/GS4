@@ -114,6 +114,11 @@ class Ability
       else
       (
         # guest user (not logged in)
+        
+        can    :read    , :Setup
+        can    :create  , :Setup
+        can    :new     , :Password
+        can    :create  , :Password
       )
       
     end

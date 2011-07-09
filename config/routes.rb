@@ -19,7 +19,10 @@ Gemeinschaft4::Application.routes.draw do
 	match '/auth/:provider/callback' => 'authentications#create'
 	resources :authentications      , :only => [ :index, :create, :destroy ]
 	
-	devise_for :users
+	devise_for :users, :controllers => {
+		:sessions   => 'devise/sessions',
+		:passwords  => 'passwords',
+	}
 	
 	resources :sip_accounts do
 		resources :extensions

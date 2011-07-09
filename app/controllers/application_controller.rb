@@ -35,8 +35,9 @@ class ApplicationController < ActionController::Base
   
   def requires_authorization
     no_cancan_for_controllers = [
-      'sessions',
-      'setup',
+      'sessions',   # Devise
+      #'passwords',  # Devise
+      #'setup',
     ]
     return ! no_cancan_for_controllers.include?( controller_name.to_s.downcase )
   end

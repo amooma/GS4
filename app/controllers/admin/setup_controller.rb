@@ -1,5 +1,8 @@
 class Admin::SetupController < ApplicationController
   
+  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
+  authorize_resource :class => :Setup
+  
   def index
     #@User = User.accessible_by( current_ability, :index ).count
   end
