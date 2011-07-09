@@ -83,7 +83,7 @@
       aus.</para>
 
       <para>Sie sehen eine Übersicht der schon vorhandender Benutzer. Um einen
-      neuen Benutzer anzulegen, klicken Sie auf den Link "New user". Es öffnet
+      neuen Benutzer anzulegen, klicken Sie auf den Link „New user“. Es öffnet
       sind folgende Eingabemaske:</para>
 
       <figure>
@@ -101,7 +101,7 @@
 
       <itemizedlist spacing="compact">
         <listitem>
-          <para>Username - Benutzername, der in der Anrwednugn verwendet
+          <para>Username - Benutzername, der in der Anwendung verwendet
           wird.</para>
         </listitem>
 
@@ -127,7 +127,7 @@
       </itemizedlist>
 
       <para>Haben Sie alle Angaben gemacht, dann klicken Sie auf die
-      Schaltfläche "Save User", um den neuen Benutzer zu speichern.</para>
+      Schaltfläche „Save User“, um den neuen Benutzer zu speichern.</para>
 
       <note>
         <para>Die Länge des Kennwortes muss mindestens 6 Zeichen
@@ -139,13 +139,13 @@
       <title>Benutzer bearbeiten</title>
 
       <para>In der Übersicht der vorhandenen Benutzer können Sie jeden
-      Benutzer bearbeiten. Klicken Sie dazu auf den Link "Edit". Sie gelangen
+      Benutzer bearbeiten. Klicken Sie dazu auf den Link „Edit“. Sie gelangen
       zu der Einsgabemaske für neue Benutzer, die schon mit den Daten des
       ausgewählten Benutzers vorbelegt ist. Jetzt können Sie die Daten des
       Benutzers ändern.</para>
 
       <para>Weiterhin können Sie einen existierenden Benutzer löschen. Klicken
-      Sie dazu auf die Schaltfläche "Destroy".</para>
+      Sie dazu auf die Schaltfläche „Destroy“.</para>
 
       <important>
         <para>Das Löschen eines Benutzers erfolgt ohne Rückfrage!</para>
@@ -162,8 +162,8 @@
       <para>In der Tabelle sehen Sie eine Übersicht der schon vorhandener
       SIP-Accounts.</para>
 
-      <para>Um einen neuen Benutzer anzulegen, klicken Sie auf den Link "New
-      SIP account". Es öffnet sind folgende Eingabemaske:</para>
+      <para>Um einen neuen Benutzer anzulegen, klicken Sie auf den Link „New
+      SIP account“. Es öffnet sind folgende Eingabemaske:</para>
 
       <figure>
         <title>Eingabemaske für das Anlegen eines neues SIP-Accounts.</title>
@@ -231,7 +231,7 @@
       </itemizedlist>
 
       <para>Haben Sie alle Angaben gemacht, klicken Sie auf die Schaltfläche
-      "Save SIP account", um den neuen SIP-Account zu speichern.</para>
+      „Save SIP account“, um den neuen SIP-Account zu speichern.</para>
 
       <note>
         <para>Vor dem Anlegen eines SIP-Accounts müssen die Server
@@ -261,7 +261,7 @@
 
       <para>Wurde der SIP-Account angelegt und es existieren noch keine
       Durchwahlen zu diesem Account, dann können Sie diese durch einen Klick
-      auf den Link "Create extension" erstellen.</para>
+      auf den Link „Create extension“ erstellen.</para>
 
       <para>Haben Sie auf den Link geklickt, dann öffnet sich eine
       Eingabemaske für eine neue Durchwahl (extension).</para>
@@ -299,7 +299,7 @@
       </itemizedlist>
 
       <para>Haben Sie in dieser Maske alle Angaben gemacht, klicken Sie auf
-      die Schaltfläche "Create Extension".</para>
+      die Schaltfläche „Create Extension“.</para>
 
       <tip>
         <para>Bitte beachten Sie, dass ein SIP-Account mehrere Durchwahlen
@@ -313,18 +313,18 @@
       <para>Existierende SIP-Accounts können auf drei Arten bearbeitet werden:
       ansehen, editieren oder löschen.</para>
 
-      <para>Klicken Sie auf den Link "Show" eines SIP-Accounts in der
+      <para>Klicken Sie auf den Link „Show“ eines SIP-Accounts in der
       Übersicht, dann erhalten Sie die Auflistung aller Daten, die zu diesem
       Account gehören. Diese Ansicht ist nur rein informativ und die darin
       enthaltenen Daten können nicht geändert werden.</para>
 
-      <para>Klicken Sie auf den Link "Edit" eines SIP-Accounts in der
+      <para>Klicken Sie auf den Link „Edit“ eines SIP-Accounts in der
       Übersicht, dann erhalten Sie die Auflistung aller Daten, die zu diesem
       Account gehören. Diese Ansicht ist entspricht der Eingabemaske beim
       Anlegen eine SIP-Accounts und Sie können die darin enthaltenen Daten
       entsprechend bearbeiten.</para>
 
-      <para>Klicken Sie auf die Schaltfläche "Destroy" eines SIP-Accounts in
+      <para>Klicken Sie auf die Schaltfläche „Destroy“ eines SIP-Accounts in
       der Übersicht, dann wird dieser SIP-Account gelöscht. Der Löschvorgang
       erfolgt ohne Rückfrage!</para>
 
@@ -343,7 +343,7 @@
       aus.</para>
 
       <para>Sie sehen eine Übersicht über die schon vorhandenen
-      Rufweiterleitungen. Klicken Sie auf den Link "New call forward", um eine
+      Rufweiterleitungen. Klicken Sie auf den Link „New call forward“, um eine
       neue Rufweiterleitung anzulegen.</para>
 
       <para>Es öffnet sich eine Eingabemaske.</para>
@@ -395,13 +395,13 @@
       </itemizedlist>
 
       <para>Haben Sie alle Angaben gemacht, dann klicken Sie auf die
-      Schaltfläche "Create Call forward", um die neue Rufumleitung zu
+      Schaltfläche „Create Call forward“, um die neue Rufumleitung zu
       erstellen.</para>
 
       <tip>
         <para>Mit den Rufumleitungen können Sie auch sog. Blacklists erstellen
         und so unerwünschte Anrufe ablehnen. Geben Sie dazu die Rufnummer des
-        Anrufers ein und lassen Sie das Feld "*Destination" leer. Kommt jetzt
+        Anrufers ein und lassen Sie das Feld „*Destination“ leer. Kommt jetzt
         ein Anruf von der Quellnummer an, dann wird dieser Anruf automatisch
         sofort beendet.</para>
       </tip>
@@ -413,13 +413,13 @@
       <para>Existierenden Rufumleitungen können editiert oder gelöscht
       werden.</para>
 
-      <para>Klicken Sie mit der Maus auf den Link "Edit" neben der gewünschten
+      <para>Klicken Sie mit der Maus auf den Link „Edit“ neben der gewünschten
       Rufumleitung in der Übersicht der Rufumleitung. Es öffnet sich eine
       Eingabemaske, die der Maske für das Anlegen neuer Rufumleitung ähnelt.
       Sie können die darin enthaltenen Daten entsprechend bearbeiten.</para>
 
       <para>Möchten Sie eine Rufumleitung löschen, dann klicken Sie auf die
-      Schaltfläche "Destroy" neben der entsprechenden Rufumleitung in der
+      Schaltfläche „Destroy“ neben der entsprechenden Rufumleitung in der
       Übersicht. Diese Rufumleitung wird ohne Rückfrage gelöscht.</para>
     </section>
   </section>
