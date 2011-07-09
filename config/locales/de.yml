@@ -205,7 +205,7 @@ de:
   numeric_in_range: "darf nur Ziffern enthalten und muss zwischen %{begin} und %{end} sein"
   reason_on_noanswer_only: "darf nur bei Grund = noanswer gesetzt werden"
   listing_subscribers: "Subscribers"
-  username: "Username"
+  username: "Benutzername"
   domain: "Domäne"
   email_address: "E-Mail-Adresse"
   ha1: "Ha1"
@@ -320,4 +320,11 @@ de:
   at: "um"
   state_registered: "registriert"
   state_not_registered: "nicht registriert"
+  
+  sign_in_title: "Anmeldung"
+  remember_me: "Merken"
+  sign_in_submit: "Anmelden"
+  forgot_password: "Passwort vergessen?"
+  
+  
 

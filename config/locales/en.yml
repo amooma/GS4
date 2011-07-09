@@ -306,4 +306,11 @@ en:
   at: "at"
   state_registered: "registered"
   state_not_registered: "not registered"
+  
+  sign_in_title: "Sign in"
+  remember_me: "Remember me"
+  sign_in_submit: "Sign in"
+  forgot_password: "Forgot your password?"
+  
+  
 
