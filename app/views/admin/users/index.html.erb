@@ -8,7 +8,7 @@
     <th><%= t(:given_name) %></th>
     <th><%= t(:surname) %></th>
     <th></th>
-	<th></th>
+    <th></th>
   </tr>
 
 <% @users.each do |user| %>
@@ -16,8 +16,8 @@
     <td><%= user.username %></td>
     <td><%= User::ROLES[ user.role ].to_s.sub(/^(\w)/) {|s| s.capitalize} %></td>
     <td><%= user.email %></td>
-	<td><%= user.gn %></td>
-	<td><%= user.sn%></td>
+    <td><%= user.gn %></td>
+    <td><%= user.sn %></td>
     <td><%= link_to t(:edit), edit_admin_user_path(user) %></td>
     <td><%
       if user.id != current_user.id
