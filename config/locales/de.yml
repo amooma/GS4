@@ -220,7 +220,7 @@ de:
   given_name: "Vorname"
   password_confirmation: "Passwort-Wiederholung"
   listing_users: "Benutzer"
-  current_user: "Aktueller Benutzer"
+  current_user: "aktueller Benutzer"
   new_user: "Neuer Benutzer"
   already_taken: "ist bereits vergeben"
   needed: "wird benötigt"

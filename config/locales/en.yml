@@ -206,7 +206,7 @@ en:
   given_name: "First name"
   password_confirmation: "Password confirmation"
   listing_users: "Users"
-  current_user: "Current user"
+  current_user: "current user"
   new_user: "New user"
   already_taken: "already taken"
   needed: "needed"
