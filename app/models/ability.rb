@@ -46,6 +46,7 @@ class Ability
         can    :manage  , VoicemailServer
         can    :manage  , Node
         can    :manage  , PersonalContact
+        can    :manage  , GlobalContact
         can    :read    , Subscriber  #OPTIMIZE @sd/pko: Is this still required?
         
         cannot :destroy , User do |u|
@@ -93,6 +94,7 @@ class Ability
           && user.id != nil
         end
         can    :read_title, SipAccount, :user_id => user.id
+        can    :read , GlobalContact
         
         #can    :read    , Extension, :sip_accounts => { :user_id => user.id }
         # No need to give the user read access to his/her extensions.

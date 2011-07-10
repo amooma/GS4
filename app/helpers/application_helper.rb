@@ -15,7 +15,7 @@ module ApplicationHelper
 							{ :text => t(:sip_accounts)  , :url => sip_accounts_path },
 							{ :text => t(:callforwards)  , :url => call_forwards_path },
                             { :text => t(:personal_contacts), :url => personal_contacts_path},
-						]},
+                            { :text => t(:global_contacts), :url => global_contacts_path},						]},
 						
 						{ :text => t(:phones)        , :url => phones_path },
 						
@@ -45,6 +45,7 @@ module ApplicationHelper
 						{ :text => t(:callforwards)  , :url => call_forwards_path },
 						{ :text => t(:call_logs)     , :url => call_logs_path },
 						{ :text => t(:personal_contacts), :url => personal_contacts_path},
+						{ :text => t(:global_contacts), :url => global_contacts_path},
 					]
 			end
 		else

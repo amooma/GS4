@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110705115200) do
+ActiveRecord::Schema.define(:version => 20110710113412) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -105,6 +105,18 @@ ActiveRecord::Schema.define(:version => 20110705115200) do
     t.datetime "received"
     t.datetime "sent"
     t.boolean  "outgoing"
+  end
+
+  create_table "global_contacts", :force => true do |t|
+    t.string   "lastname"
+    t.string   "firstname"
+    t.string   "phone_private"
+    t.string   "phone_business"
+    t.string   "phone_mobile"
+    t.string   "fax_private"
+    t.string   "fax_business"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "location", :force => true do |t|
@@ -341,6 +353,19 @@ ActiveRecord::Schema.define(:version => 20110705115200) do
     t.string   "ha1"
     t.string   "ha1b"
     t.string   "rpid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_group_members", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "user_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_groups", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

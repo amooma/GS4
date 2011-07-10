@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lastname:</b>
+  <%= @global_contact.lastname %>
+</p>
+
+<p>
+  <b>Firstname:</b>
+  <%= @global_contact.firstname %>
+</p>
+
+<p>
+  <b>Phone private:</b>
+  <%= @global_contact.phone_private %>
+</p>
+
+<p>
+  <b>Phone business:</b>
+  <%= @global_contact.phone_business %>
+</p>
+
+<p>
+  <b>Phone mobile:</b>
+  <%= @global_contact.phone_mobile %>
+</p>
+
+<p>
+  <b>Fax private:</b>
+  <%= @global_contact.fax_private %>
+</p>
+
+<p>
+  <b>Fax business:</b>
+  <%= @global_contact.fax_business %>
+</p>
+
+
+<%= link_to 'Edit', edit_global_contact_path(@global_contact) %> |
+<%= link_to 'Back', global_contacts_path %>

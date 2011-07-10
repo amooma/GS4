@@ -1,5 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  resources :global_contacts
+
 	resources :personal_contacts
 	
 	resources :personal_phonebooks  #OPTIMIZE Is this route being used?

@@ -1,0 +1,35 @@
+<h1>Listing global_contacts</h1>
+
+<table>
+  <tr>
+    <th>Lastname</th>
+    <th>Firstname</th>
+    <th>Phone private</th>
+    <th>Phone business</th>
+    <th>Phone mobile</th>
+    <th>Fax private</th>
+    <th>Fax business</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @global_contacts.each do |global_contact| %>
+  <tr>
+    <td><%= global_contact.lastname %></td>
+    <td><%= global_contact.firstname %></td>
+    <td><%= global_contact.phone_private %></td>
+    <td><%= global_contact.phone_business %></td>
+    <td><%= global_contact.phone_mobile %></td>
+    <td><%= global_contact.fax_private %></td>
+    <td><%= global_contact.fax_business %></td>
+    <td><%= link_to 'Show', global_contact %></td>
+    <td><%= link_to 'Edit', edit_global_contact_path(global_contact) %></td>
+    <td><%= link_to 'Destroy', global_contact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Global contact', new_global_contact_path %>
