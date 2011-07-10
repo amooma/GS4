@@ -313,6 +313,11 @@ en:
   forgot_password: "Forgot your password?"
   send_reset_password_instructions: "Send me reset password instructions"
   
-  
-  
+  global_contacts: "Global contacts"
+  global_contact: "Global contact"
+  new_global_contact: "New contact"
+  editing_global_contact: "Editing contact"
+  listing_global_contacts: "Global contacts"
+  global_contact_created: "Contact was successfully created"
+  global_contact_updated: "Contact was successfully updated"
 

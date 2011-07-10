@@ -1,0 +1,36 @@
+<h1><%= t(:listing_global_contacts) %></h1>
+
+<table>
+  <tr>
+
+    <th><%= t(:lastname) %></th>
+    <th><%= t(:firstname) %></th>
+    <th><%= t(:phone_private) %></th>
+    <th><%= t(:phone_business) %></th>
+    <th><%= t(:phone_mobile) %></th>
+    <th><%= t(:fax_private) %></th>
+    <th><%= t(:fax_business) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @global_contacts.each do |global_contact| %>
+  <tr>
+    <td><%= global_contact.lastname %></td>
+    <td><%= global_contact.firstname %></td>
+    <td><%= global_contact.phone_private %></td>
+    <td><%= global_contact.phone_business %></td>
+    <td><%= global_contact.phone_mobile %></td>
+    <td><%= global_contact.fax_private %></td>
+    <td><%= global_contact.fax_business %></td>
+    <td><%= link_to t(:show), global_contact %></td>
+    <td><%= link_to t(:edit), edit_global_contact_path(global_contact) if can?( :edit, GlobalContact ) %></td>
+    <td><%= button_to t(:destroy) , global_contact , :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, GlobalContact ) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t(:new_global_contact), new_global_contact_path if can?( :create, GlobalContact )%>

@@ -1,0 +1,2 @@
+module GlobalContactsHelper
+end
