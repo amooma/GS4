@@ -2,4 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to t(:back), global_contacts_path %>
+<%= link_to t(:back), global_contacts_path if can?( :index, GlobalContact ) %>

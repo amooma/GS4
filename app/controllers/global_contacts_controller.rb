@@ -8,7 +8,7 @@ class GlobalContactsController < ApplicationController
   # GET /global_contacts
   # GET /global_contacts.xml
   def index
-    @global_contacts = GlobalContact.all
+    @global_contacts = GlobalContact.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb

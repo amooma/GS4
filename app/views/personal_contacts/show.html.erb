@@ -3,7 +3,11 @@
 <% if current_user.role == "admin" %>
   <p>
     <b><%= t(:user) %>:</b>
-    <%= @personal_contact.user_id %>
+    <%
+      if @personal_contact.user
+        %><%= @personal_contact.user.username %><%
+      end
+    %>
   </p>
 <% end %>
 

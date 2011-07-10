@@ -3,18 +3,19 @@
 de:
   date:
     formats:
-        default: "%d.%m.%Y"
-        short: "%e.%m."
-        long: "%e. %B %Y"
+      default: "%d.%m.%Y"
+      short: "%e.%m."
+      long: "%e. %B %Y"
+  
   time:
     formats:
-        default: "%d.%m.%Y %H:%M"
-        time: "%H:%M"
-        short: "%e.%m. %H:%M"
-        long: "%A, %e. %B %Y, %H:%M"
-        call_log_recent: "%H:%M"
-        call_log_old: "%e.%m."
-
+      default: "%d.%m.%Y %H:%M"
+      time: "%H:%M"
+      short: "%e.%m. %H:%M"
+      long: "%A, %e. %B %Y, %H:%M"
+      call_log_recent: "%H:%M"
+      call_log_old: "%e.%m."
+  
   application_name: "Gemeinschaft 4"
   show: "Anzeigen"
   back: "Zurück"

@@ -20,7 +20,11 @@
 <% @personal_contacts.each do |personal_contact| %>
   <tr>
 <% if current_user.role == "admin" %>
-    <td><%= personal_contact.user_id %></td>
+    <td><%
+      if personal_contact.user
+        %><%= personal_contact.user.username %><%
+      end
+    %></td>
 <% end %>
     <td><%= personal_contact.lastname %></td>
     <td><%= personal_contact.firstname %></td>
