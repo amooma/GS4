@@ -327,6 +327,13 @@ de:
   forgot_password: "Passwort vergessen?"
   send_reset_password_instructions: "Anweisungen zum Zurücksetzen des Passworts zusenden"
   
+  global_contacts: "Globale Kontakte"
+  global_contact: "Globaler Kontakt"
+  new_global_contact: "Neuer Kontakt"
+  editing_global_contact: "Kontakt bearbeiten"
+  listing_global_contacts: "Kontakte"
+  global_contact_created: "Kontakt wurde erfolgreich angelegt"
+  global_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
   
   
 

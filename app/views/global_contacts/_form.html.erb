@@ -1,7 +1,7 @@
 <%= form_for(@global_contact) do |f| %>
   <% if @global_contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@global_contact.errors.count, "error") %> prohibited this global_contact from being saved:</h2>
+      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@global_contact.errors.count, "error"), :model_name => t(:global_contact)) %>:</h2>
 
       <ul>
       <% @global_contact.errors.full_messages.each do |msg| %>
@@ -11,35 +11,36 @@
     </div>
   <% end %>
 
+  
   <div class="field">
-    <%= f.label :lastname %><br />
+    <%= f.label :lastname, t(:lastname) %><br />
     <%= f.text_field :lastname %>
   </div>
   <div class="field">
-    <%= f.label :firstname %><br />
+    <%= f.label :firstname, t(:firstname) %><br />
     <%= f.text_field :firstname %>
   </div>
   <div class="field">
-    <%= f.label :phone_private %><br />
+    <%= f.label :phone_private, t(:phone_private) %><br />
     <%= f.text_field :phone_private %>
   </div>
   <div class="field">
-    <%= f.label :phone_business %><br />
+    <%= f.label :phone_business, t(:phone_business) %><br />
     <%= f.text_field :phone_business %>
   </div>
   <div class="field">
-    <%= f.label :phone_mobile %><br />
+    <%= f.label :phone_mobile, t(:phone_mobile) %><br />
     <%= f.text_field :phone_mobile %>
   </div>
   <div class="field">
-    <%= f.label :fax_private %><br />
+    <%= f.label :fax_private, t(:fax_private) %><br />
     <%= f.text_field :fax_private %>
   </div>
   <div class="field">
-    <%= f.label :fax_business %><br />
+    <%= f.label :fax_business, t(:fax_business) %><br />
     <%= f.text_field :fax_business %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(t(:save)) %>
   </div>
 <% end %>

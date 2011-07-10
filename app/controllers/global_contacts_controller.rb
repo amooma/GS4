@@ -50,7 +50,7 @@ class GlobalContactsController < ApplicationController
 
     respond_to do |format|
       if @global_contact.save
-        format.html { redirect_to(@global_contact, :notice => 'Global contact was successfully created.') }
+        format.html { redirect_to(@global_contact, :notice => t(:global_contact_updated)) }
         format.xml  { render :xml => @global_contact, :status => :created, :location => @global_contact }
       else
         format.html { render :action => "new" }
@@ -66,7 +66,7 @@ class GlobalContactsController < ApplicationController
 
     respond_to do |format|
       if @global_contact.update_attributes(params[:global_contact])
-        format.html { redirect_to(@global_contact, :notice => 'Global contact was successfully updated.') }
+        format.html { redirect_to(@global_contact, :notice => t(:global_contact_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
