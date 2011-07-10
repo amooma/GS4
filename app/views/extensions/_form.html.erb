@@ -18,7 +18,7 @@
   </div>
   <div class="field">
     <%= f.label :destination, t(:destination) %>
-    <%= f.text_field :destination, :readonly => ! @extension.destination.nil? %>
+    <%= f.text_field :destination, :readonly => ! @extension.destination.nil? && @extension.errors.count < 1 %>
     <%#OPTIMIZE If SIP account is set then set destination automatically or vice-versa. %>
   </div>
   <div class="field">
