@@ -35,5 +35,5 @@
 </p>
 
 
-<%= link_to t(:edit), edit_global_contact_path(@global_contact) if can?( :edit, GlobalContact ) %> |
-<%= link_to t(:back), global_contacts_path %>
+<%= link_to t(:edit), edit_global_contact_path(@global_contact) if can?( :edit, @global_contact ) %> |
+<%= link_to t(:back), global_contacts_path if can?( :index, GlobalContact ) %>
