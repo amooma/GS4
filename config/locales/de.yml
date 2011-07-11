@@ -16,6 +16,29 @@ de:
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
   
+  activerecord:
+    errors:
+      messages:
+        inclusion: "ist nicht in der Liste"
+        exclusion: "ist reserviert"
+        invalid: "ist ungültig"
+        confirmation: "entspricht nicht der Bestätigung"
+        accepted: "muss akzeptiert werden"
+        empty: "kann nicht leer sein"
+        blank: "kann nicht leer sein"
+        too_long: "ist zu lang (Min. %{count} Zeichen)"
+        too_short: "ist zu kurz (Max. %{count} Zeichen)"
+        wrong_length: "hat die falsche Länge (muss {{count}} Zeichen lang sein)"
+        taken: "ist bereits vergeben"
+        not_a_number: "ist keine Zahl"
+        greater_than: "muss größer als %{count} sein"
+        greater_than_or_equal_to: "muss größer oder gleich %{count} sein"
+        equal_to: "muss gleich %{count} sein"
+        less_than: "muss kleiner als %{count} sein"
+        less_than_or_equal_to: "muss kleiner oder gleich %{count} sein"
+        odd: "muss ungerade sein"
+        even: "muss gerade sein"
+
   application_name: "Gemeinschaft 4"
   show: "Anzeigen"
   back: "Zurück"
