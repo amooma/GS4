@@ -111,7 +111,8 @@ class PhoneModel < ActiveRecord::Base
   # existing model the system checks if there are any phones with 
   # more than that in the system.
   def validate_max_number_of_sip_accounts_for_an_existing_phone_model
-    if !self.new_record? and self.changed_attributes.keys.include?('max_number_of_sip_accounts') and self.max_number_of_sip_accounts < PhoneModel.find(self.id).max_number_of_sip_accounts
+    if ! self.new_record? and self.changed_attributes.keys.include?('max_number_of_sip_accounts') \
+    && self.max_number_of_sip_accounts < PhoneModel.find(self.id).max_number_of_sip_accounts
       if self.phones.collect {|phone| phone.sip_accounts.count}.max > self.max_number_of_sip_accounts
         errors.add( :max_number_of_sip_accounts, I18n.t(:phones_with_more_sip_accounts_exit, :sip_accounts => self.max_number_of_sip_accounts))
       end
@@ -123,7 +124,9 @@ class PhoneModel < ActiveRecord::Base
   # existing model the system checks if there are any phones with 
   # more than that in the system.
   def validate_number_of_keys_for_an_existing_phone_model
-    if !self.new_record? and self.changed_attributes.keys.include?('number_of_keys') and self.number_of_keys < PhoneModel.find(self.id).number_of_keys
+    if ! self.new_record? \
+    && self.changed_attributes.keys.include?('number_of_keys') \
+    && self.number_of_keys < PhoneModel.find(self.id).number_of_keys
       sip_accounts = self.phones.collect {|phone| phone.sip_accounts}.flatten
       number_of_used_keys = sip_accounts.collect {|sip_account| sip_account.phone_keys}.flatten.collect {|phone_key| phone_key.phone_model_key_id}.uniq.count
       if number_of_used_keys > self.number_of_keys
