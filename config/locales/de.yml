@@ -24,8 +24,8 @@ de:
         invalid: "ist ungültig"
         confirmation: "entspricht nicht der Bestätigung"
         accepted: "muss akzeptiert werden"
-        empty: "kann nicht leer sein"
-        blank: "kann nicht leer sein"
+        empty: "darf nicht leer sein"
+        blank: "darf nicht leer sein"
         too_long: "ist zu lang (Min. %{count} Zeichen)"
         too_short: "ist zu kurz (Max. %{count} Zeichen)"
         wrong_length: "hat die falsche Länge (muss {{count}} Zeichen lang sein)"
@@ -38,6 +38,21 @@ de:
         less_than_or_equal_to: "muss kleiner oder gleich %{count} sein"
         odd: "muss ungerade sein"
         even: "muss gerade sein"
+    models:
+      user: "Benutzer"
+      admin: "Administrator"
+      extension: "Rufnummer"
+    attributes:
+      user:
+        username: "Benutzername"
+        email: "E-Mail-Adresse"
+        password: "Passwort"
+        sn: "Nachname"
+        gn: "Vorname"
+        role: "Rolle"
+      
+      extension:
+        extension: "Rufnummer"
 
   application_name: "Gemeinschaft 4"
   show: "Anzeigen"
