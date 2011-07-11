@@ -7,6 +7,7 @@
 <% elsif ! @call_queue.nil? %>
   <%= render 'form_call_queue' %>
 <% else %>
-    <%= render 'form' %>
+  <%= render 'form' %>
 <% end %>
+
 <%= link_to t(:back), extensions_path %>
