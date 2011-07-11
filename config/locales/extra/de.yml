@@ -238,7 +238,7 @@ de:
   welcome_to_application_name: "Willkommen zu Gemeinschaft!"
   first_admin_step: "Der erste Schritt zur Administration ihrer Gemeinschaft-Telefonanlage ist es einen Administrator-Account anzulegen. Danach können sie sich auf dem GUI einloggen"
   create_admin_account: "Administrator-Account anlegen"
-  admin: "Administrator"
+  admin: "Admin"
   accounts: "Accounts"
   users: "Benutzer"
   callforwards: "Rufumleitungen"
