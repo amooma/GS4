@@ -68,6 +68,7 @@ class ExtensionsController < ApplicationController
       })
     else
       @extension = Extension.new
+      @extension.active = true
     end
     
     respond_to do |format|
