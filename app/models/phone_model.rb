@@ -113,8 +113,8 @@ class PhoneModel < ActiveRecord::Base
   def validate_max_number_of_sip_accounts_for_an_existing_phone_model
     if ! self.new_record? and self.changed_attributes.keys.include?('max_number_of_sip_accounts') \
     && self.max_number_of_sip_accounts < PhoneModel.find(self.id).max_number_of_sip_accounts
-      if self.phones.collect {|phone| phone.sip_accounts.count}.max > self.max_number_of_sip_accounts
-        errors.add( :max_number_of_sip_accounts, I18n.t(:phones_with_more_sip_accounts_exit, :sip_accounts => self.max_number_of_sip_accounts))
+      if self.max_number_of_sip_accounts.to_i < ( self.phones.collect {|phone| phone.sip_accounts.count}.max || 0 )
+        errors.add( :max_number_of_sip_accounts, I18n.t(:phones_with_more_sip_accounts_exist, :sip_accounts => self.max_number_of_sip_accounts))
       end
     end
   end
