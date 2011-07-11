@@ -1,0 +1,15 @@
+"de":
+  errors:
+    template:
+      header:
+        one:    "Konnte %{model} nicht speichern: 1 Fehler."
+        other:  "Konnte %{model} nicht speichern: %{count} Fehler."
+      body: "Bitte überprüfen Sie die folgenden Felder:"
+    
+    messages:
+      taken: "ist bereits vergeben"
+      record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
+      <<: *errors_messages
+    
+    full_messages:
+      format: "%{attribute} %{message}"
