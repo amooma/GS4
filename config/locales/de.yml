@@ -38,21 +38,387 @@ de:
         less_than_or_equal_to: "muss kleiner oder gleich %{count} sein"
         odd: "muss ungerade sein"
         even: "muss gerade sein"
+    
     models:
-      user: "Benutzer"
       admin: "Administrator"
+      authentication: "Authentifizierung"
+      call_forward_reason: "Rufumleitungsgrund"
+      call_forward: "Rufumleitung"
+      call_log: "Anrufliste"
+      call_queue_to_extension: "Warteschleife zu Rufnummer"
+      call_queue: "Warteschleife"
+      codec: "Codec"
+      conference_to_extension: "Konferenz zu Rufnummer"
+      conference: "Konferenz"
       extension: "Rufnummer"
+      fax_document: "Fax-Dokument"
+      global_contact: "Globaler Kontakt"
+      location: "Location"
+      manufacturer: "Hersteller"
+      node: "Node"
+      oui: "OUI"
+      personal_contact: "Persönlicher Kontakt"
+      phone_key_function_definition: "Telefontasten-Funktionsdefinition"
+      phone_key_to_function_mapping: "Telefontasten zu Funktion Mapping"
+      phone_key: "Telefontaste"
+      phone_model_codec: "Telefonmodell-Codec"
+      phone_model_key: "Telefonmodell Taste"
+      phone_model_mac_addresse: "Telefonmodell MAC-Adresse"
+      phone_model: "Telefonmodell"
+      phone: "Telefon"
+      provisioning_log_entry: "Provisioning-Log-Eintrag"
+      pua: "PUA"
+      reboot_request: "Neustart-Anfrage"
+      sip_account_codec: "SIP Account Codec"
+      sip_account_to_extension: "SIP Account zu Rufnummer"
+      sip_account: "SIP Account"
+      sip_proxy: "SIP Proxy"
+      sip_server: "SIP Server"
+      subscriber: "Subscriber"
+      user: "Benutzer"
+      version: "Version"
+      voicemail_server: "Voicemail Server"
+
     attributes:
-      user:
+      authentication:
+        user_id: "Benutzer ID"
+        provider: "Provider"
+        uid: "UID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      call_forward_reason:
+        value: "Wert"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      call_forward:
+        sip_account_id: ""
+        call_forward_reason_id: ""
+        destination: "Ziel"
+        call_timeout: "Zeit"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        source: "Quelle"
+        active: "Aktiv"
+
+      call_log:
+        sip_account_id: "SIP Account ID"
+        source: "Anrufer"
+        destination: "Ziel"
+        disposition: "Disposition"
+        forwarded_to: "Weitergeleitet an"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        call_type: "Anruftyp"
+        source_name: "Anrufername"
+        destination_name: "Zielname"
+        uuid: "UUID"
+
+      call_queue_to_extension:
+        call_queue_id: "Warteschleifen ID"
+        extension_id: "Rufnummer ID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      call_queue:
+        name: "Name"
+        uuid: "UUID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      codec:
+        name: "Name"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      conference_to_extension:
+        conference_id: "Konferenz ID"
+        extension_id: "Rufnummer ID"
+        position: "Position"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      conference:
+        name: "Name"
+        pin: "PIN"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        uuid: "UUID"
+
+      extension:
+        extension: "Rufnummer"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        destination: "Ziel"
+        active: "Aktiv"
+
+      fax_document:
+        file: "Datei"
+        title: "Titel"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        raw_file: "Rohdatei"
+        destination: "Ziel"
+        received: "Empfangen"
+        sent: "gesendet"
+        outgoing: "Ausgehend"
+
+      global_contact:
+        lastname: "Nachname"
+        firstname: "Vorname"
+        phone_private: "Telefon privat"
+        phone_business: "Telefon geschäftlich"
+        phone_mobile: "Handy"
+        fax_private: "Fax privat"
+        fax_business: "Fax geschäftlich"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      location:
         username: "Benutzername"
+        domain: "Domäne"
+        contact: "Kontakt"
+        received: "Empfangen"
+        path: "Pfad"
+        expires: "Erlischt"
+        q: "Q"
+        callid: "Anruf ID"
+        cseq: "Anrufsequenz"
+        last_modified: "Verändert"
+        flags: "Flags"
+        user_agent: "User-Agent"
+        socket: "Socket"
+        methods: "Methoden"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      manufacturer:
+        name: "Name"
+        ieee_name: "IEEE Name"
+        url: "URL"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      node:
+        management_host: "Management Host"
+        management_port: "Management Port"
+        title: "Titel"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      oui:
+        value: "Wert"
+        manufacturer_id: "Hersteller ID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      personal_contact:
+        user_id: "Benutzer ID"
+        lastname: "Nachname"
+        firstname: "Vorname"
+        phone_private: "Telefon privat"
+        phone_business: "Telefon geschäftlich"
+        phone_mobile: "Handy"
+        fax_private: "Fax privat"
+        fax_business: "Fax geschäftlich"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_key_function_definition:
+        name: "Name"
+        type_of_class: "Klassentyp"
+        regex_validation: "Reg.-Ausdr. Validierung"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_key_to_function_mapping:
+        phone_model_key_id: "Telefonmodell-Tasten-ID"
+        phone_key_function_definition_id: "Telefon-Tasten-Definitions-ID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_key:
+        phone_model_key_id: "Telefonmodell-Tasten-I"
+        phone_key_function_definition_id: "Telefon-Tasten-Definitions-ID"
+        value: "Wert"
+        label: "Label"
+        sip_account_id: ""
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_model_codec:
+        phone_model_id: "Telefonmodell ID"
+        codec_id: "Codec ID"
+        position: "Position"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_model_key:
+        name: "Name"
+        phone_model_id: "Telefonmodell ID"
+        position: "Position"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_model_mac_addresse:
+        phone_model_id: "Telefonmodell ID"
+        starts_with: "Beginnt mit"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone_model:
+        name: "Name"
+        url: "URL"
+        manufacturer_id: "Hersteller ID"
+        max_number_of_sip_accounts: "Max. Anzahl SIP Accounts"
+        number_of_keys: "Max. Anzahl Tasten"
+        default_http_user: "Default HTTP Benutzer"
+        default_http_password: "Default HTTP Passwort"
+        http_port: "HTTP Port"
+        reboot_request_path: "Neustart-Pfad"
+        ssl: "SSL"
+        http_request_timeout: "HTTP Timeout"
+        random_password_length: "Zufallspasswort-Länge"
+        random_password_consists_of: "Zufallspasswort besteht aus"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      phone:
+        mac_address: "MAC Addresse"
+        phone_model_id: "Telefonmodell ID"
+        ip_address: "IP Adresse"
+        last_ip_address: "Letzte IP Adresse"
+        http_user: "HTTP Benutzer"
+        http_password: "HTTP Passwort"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      provisioning_log_entry:
+        phone_id: "Telefon ID"
+        memo: "Memo"
+        succeeded: "Erfolgreich"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      pua:
+        pres_uri: "Pres. URI"
+        pres_id: "Pres. ID"
+        event: "Ereignis"
+        expires: "Läuft ab"
+        desired_expires: "Möchte ablaufen"
+        flag: "Flag"
+        etag: "Etag"
+        tuple_id: "Tuple ID"
+        watcher_uri: "Watcher URI"
+        call_id: "Anruf ID"
+        to_tag: "To Tag"
+        from_tag: "From Tag"
+        cseq: "Cseq"
+        record_route: "Record Route"
+        contact: "Contact"
+        remote_contact: "Remote Contact"
+        version: "Version"
+        extra_headers: "Estra Header"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      reboot_request:
+        phone_id: "Telefon ID"
+        start: "Start"
+        end: "Ende"
+        successful: "Erfolgreich"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      sip_account_codec:
+        codec_id: "Codec ID"
+        sip_account_id: "SIP Account ID"
+        position: "Position"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      sip_account_to_extension:
+        sip_account_id: ""
+        extension_id: ""
+        position: ""
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      sip_account:
+        user_id: "Benutzer ID"
+        auth_name: "Authentifizierungsname"
+        password: "Passwort"
+        realm: "Realm"
+        sip_server_id: "SIP Server ID"
+        sip_proxy_id: "SIP Proxy ID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        voicemail_pin: "Voicemail PIN"
+        position: "Position"
+        voicemail_server_id: "Voicemail Server ID"
+        phone_id: "Telefon ID"
+        caller_name: "Anrufername"
+
+      sip_proxy:
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        host: "Host"
+        port: "Port"
+        is_local: "Lokal"
+
+      sip_server:
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        host: "Host"
+        port: "Port"
+        is_local: "Lokal"
+
+      subscriber:
+        username: "Benutzetname"
+        domain: "Domain"
+        password: "Passwort"
+        email_address: "eMail-Adresse"
+        datetime_created: "Erstellt"
+        datetime_modified: "Verändert"
+        ha1: "HA1"
+        ha1b: "HA1b"
+        rpid: "RpID"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      user:
         email: "E-Mail-Adresse"
+        encrypted_password: "Versch. Passwort"
+        password_salt: "Passwort salt"
+        reset_password_token: "Reset Password Token"
+        remember_token: "Remember Token"
+        remember_created_at: "Remember Created at"
+        sign_in_count: "Eingeloggt"
+        current_sign_in_at: "Aktuelle Einloggen"
+        last_sign_in_at: "Letztes Einloggen"
+        current_sign_in_ip: "Aktuelle IP"
+        last_sign_in_ip: "Letzte IP"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        username: "Benutzername"
         password: "Passwort"
         sn: "Nachname"
         gn: "Vorname"
         role: "Rolle"
-      
-      extension:
-        extension: "Rufnummer"
+
+      version:
+        table_name: "Tabellenname"
+        table_version: "Tabellenversion"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+
+      voicemail_server:
+        host: "Host"
+        port: "Port"
+        created_at: "Erstellt"
+        updated_at: "Geändert"
+        is_local: "Lokal"
 
   application_name: "Gemeinschaft 4"
   show: "Anzeigen"
