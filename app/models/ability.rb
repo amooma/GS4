@@ -110,6 +110,7 @@ class Ability
         can    :new     , PersonalContact,  :user_id => user.id
         can    :create  , PersonalContact,  :user_id => user.id
         can    :update  , PersonalContact,  :user_id => user.id
+        #FIXME User can change the user_id attribute. -- See abilities for CallForward.
         can    :destroy , PersonalContact,  :user_id => user.id
       )
       
