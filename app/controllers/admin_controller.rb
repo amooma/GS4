@@ -3,9 +3,6 @@ class AdminController < ApplicationController
   # Let's make sure that we have a database.
   rescue_from ActiveRecord::StatementInvalid, :with => :rescue_missing
   
-  # The first time you have to setup an admin account.
-  before_filter :check_if_admin_account_exists
-  
   
   before_filter :authenticate_user!
   
@@ -43,12 +40,6 @@ class AdminController < ApplicationController
   
   def rescue_missing
     redirect_to( '/db_migrate_missing.html' )
-  end
-  
-  def check_if_admin_account_exists
-    if User.count == 0
-      redirect_to(new_admin_setup_path)
-    end
   end
   
 end

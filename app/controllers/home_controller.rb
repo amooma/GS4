@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
 	
+	# The first time you have to setup an admin account.
+	before_filter :check_if_admin_account_exists
+	
+	
 	before_filter :authenticate_user!
 	
 	# https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
@@ -41,6 +45,12 @@ class HomeController < ApplicationController
 	end
 	
 	private
+	
+	def check_if_admin_account_exists
+		if User.count == 0
+			redirect_to( new_admin_setup_path )
+		end
+	end
 	
 	DISPOSITION_NOANSWER  = 'noanswer'
 	DISPOSITION_ANSWERED  = 'answered'
