@@ -53,7 +53,7 @@ config/environments/test.rb         opt/gemeinschaft/config/environments/
 config/environments/production.rb   opt/gemeinschaft/config/environments/
 
 config/initializers/*.rb    opt/gemeinschaft/config/initializers/
-config/locales/*.yml        opt/gemeinschaft/config/locales/
+config/locales              opt/gemeinschaft/config/
 
 config.ru           opt/gemeinschaft/
 Gemfile             opt/gemeinschaft/
