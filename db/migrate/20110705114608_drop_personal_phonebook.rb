@@ -1,4 +1,5 @@
 class DropPersonalPhonebook < ActiveRecord::Migration
+  
   def self.up
    drop_table :personal_phonebooks
   end
