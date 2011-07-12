@@ -1,32 +1,16 @@
-<%= form_for(@fax_document, :html => { :multipart => true }) do |f| %>
-  <% if @fax_document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@fax_document.errors.count, "error"), :model_name => t(:fax)) %></h2>
-
-      <ul>
-      <% @fax_document.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :file, t(:file) %><br />
-    <% if @fax_document.file.nil? %>
-      <%= f.file_field :upload %>
-    <% else %>
-      <%= @fax_document.file %>
-    <% end %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :destination, t(:destination) %><br />
-    <%= f.text_field :destination %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit(t(:send)) %>
-  </div>
-  <%= f.hidden_field :outgoing, :value => true %>
+<%= simple_form_for( @fax_document, :html => { :multipart => true }) do |f| %>
+	<%= f.error_messages %>
+	
+	<% if @fax_document.file.nil? %>
+		<%= f.input :file do %>
+			<%= f.file_field :upload %>
+		<% end %>
+	<% else %>
+		<%= @fax_document.file %>
+	<% end %>
+	
+	<%= f.input :destination %>
+	<%= f.input :outgoing, :as => :hidden, :input_html => { :value => "true" } %>
+	
+	<%= f.button :submit %>
 <% end %>

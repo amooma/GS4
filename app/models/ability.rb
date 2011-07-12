@@ -46,6 +46,7 @@ class Ability
         can    :manage  , VoicemailServer
         can    :manage  , Node
         can    :manage  , PersonalContact
+        can    :edit_uid, PersonalContact
         can    :manage  , GlobalContact
         can    :read    , Subscriber  #OPTIMIZE @sd/pko: Is this still required?
         
@@ -113,6 +114,7 @@ class Ability
         can    :update  , PersonalContact,  :user_id => user.id
         #FIXME User can change the user_id attribute. -- See abilities for CallForward.
         can    :destroy , PersonalContact,  :user_id => user.id
+        cannot :edit_uid, PersonalContact
       )
       
       else

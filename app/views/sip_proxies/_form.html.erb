@@ -1,37 +1,15 @@
-<%= form_for(@sip_proxy) do |f| %>
-<% if @sip_proxy.errors.any? %>
-<div id="error_explanation">
-  <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@sip_proxy.errors.count, "error"), :model_name => t(:sip_proxy)) %>:</h2>
-  <ul>
-    <% @sip_proxy.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
-<div class="field">
-  <%= f.label :host, t(:sip_host) %><br />
-  <%= f.text_field :host %>
-</div>
-<div class="field">
-  <%= f.label :port, t(:sip_port) %><br />
-  <%= f.text_field :port %>
-</div>
-<div class="field">
-  <%= f.check_box :is_local %>
-  <%= f.label :is_local, t(:is_local) %>
-</div>
-<div class="field">
-  <%= f.label :last_sip_proxy_id, t(:take_over_accounts) %><br />
-  <%= f.select( :last_sip_proxy_id,
-    @sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
-    { :include_blank => true }
-  ) %>
-</div>
-<div class="actions">
-  <%= f.submit(t(:save)) %>
-</div>
+<%= simple_form_for( @sip_proxy ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :host %>
+	<%= f.input :port %>
+	<%= f.input :is_local %>
+	<%= f.input :last_sip_proxy do %>
+		<%= f.select( :last_sip_proxy_id,
+			@sip_proxies.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
+			{ :include_blank => true }
+		) %>
+	<% end %>
+	
+	<%= f.button :submit %>
 <% end %>

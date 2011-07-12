@@ -1,29 +1,9 @@
-<%= form_for(@authentication) do |f| %>
-  <% if @authentication.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@authentication.errors.count, "error"), :model_name => t(:authentication)) %>:</h2>
-
-      <ul>
-      <% @authentication.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_id, t(:user_id) %><br />
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :provider, t(:provider) %><br />
-    <%= f.text_field :provider %>
-  </div>
-  <div class="field">
-    <%= f.label :uid, t(:uid) %><br />
-    <%= f.text_field :uid %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for( @authentication ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.association :user, :label_method => :username %>
+	<%= f.input :provider %>
+	<%= f.input :uid %>
+	
+	<%= f.button :submit %>
 <% end %>

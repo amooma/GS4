@@ -1,43 +1,17 @@
-<%= simple_form_for @call_forward do |f| %>
-  <% if @call_forward.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@call_forward.errors.count, "error"), :model_name => t(:call_forward)) %>:</h2>
-
-      <ul>
-      <% @call_forward.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :sip_account_id, t(:sip_account) %>
-    <%= f.select( :sip_account_id,
-      @sip_accounts.collect { |r| [ "#{r.caller_name} (ID #{r.id})", r.id ] },
-      { :include_blank => (@sip_accounts.count > 1), :selected => @call_forward.sip_account_id }
-    ) %>    
-  </div>
-  <div class="field">
-    <%= f.label :source, t(:source) %>
-    <%= f.text_field :source %>
-  </div>
-  <div class="field">
-    <%= f.association :call_forward_reason, :label => t(:call_forward_reason), :label_method => :value, :include_blank => false %>
-  </div>
-  <div class="field">
-    <%= f.label :destination, t(:destination) %>
-    <%= f.text_field :destination %>
-  </div>
-  <div class="field">
-    <%= f.label :call_timeout, t(:call_timeout) %>
-    <%= f.text_field :call_timeout %>
-  </div>
-  <div class="field">
-    <%= f.check_box :active %>
-    <%= f.label :active, t(:active) %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for( @call_forward ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :sip_account do %>
+		<%= f.select( :sip_account_id,
+			@sip_accounts.collect { |r| [ "#{r.caller_name} (ID #{r.id})", r.id ] },
+			{ :include_blank => (@sip_accounts.count > 1), :selected => @call_forward.sip_account_id }
+		) %>
+	<% end %>
+	<%= f.input :source %>
+	<%= f.association :call_forward_reason, :label_method => :value, :include_blank => true %>
+	<%= f.input :call_timeout %>
+	<%= f.input :destination %>
+	<%= f.input :active %>
+	
+	<%= f.button :submit %>
 <% end %>

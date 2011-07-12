@@ -5,62 +5,23 @@
 <%= t(:first_admin_step) %>
 </p>
 
-<%= form_for :user,  :url => { :action => "create" } do |f| %>
-
-  <% if @user && @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<div class="field">
-    <%= f.label :username, t(:username) %>
-    <br />
-    <%= f.text_field :username %>
-</div>
-<div class="field">
-    <%= f.label :password, t(:password) %>
-    <br />
-    <%= f.password_field :password %>
-</div>
-<div class="field">
-    <%= f.label :password_confirmation, t(:password_confirmation) %>
-    <br />
-    <%= f.password_field :password_confirmation %>
-</div>
-<div class="field">
-    <%= f.label :gn, t(:given_name) %>
-    <br />
-    <%= f.text_field :gn %>
-</div>
-<div class="field">
-    <%= f.label :sn, t(:surname) %>
-    <br />
-    <%= f.text_field :sn %>
-</div>
-<div class="field">
-    <%= f.label :email, t(:email_address) %>
-	<br />
-    <%= f.text_field :email %>
-</div>
-<div class="field">
-	<%= f.label :role, t(:role) %>
-	<br />
-	<%= f.hidden_field :role, :value => "admin" %>
-	<%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
-		{ :selected => "admin" },
-		{ :disabled => true, :id => nil, :name => '' }
-	%>
-</div>
-
-<div class="actions">
-    <%= f.submit(t(:create_admin_account)) %>
-</div>
-
+<%= simple_form_for( @user, :url => { :action => "create" }) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :username %>
+	<%= f.input :password              , :as => :password %>
+	<%= f.input :password_confirmation , :as => :password %>
+	<%= f.input :sn %>
+	<%= f.input :gn %>
+	<%= f.input :email, :as => :email %>
+	
+	<%= f.input :role, :as => :hidden, :input_html => { :value => @user.role } %>
+	<%= f.input :role do %>
+		<%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
+			{ :selected => @user.role },
+			{ :disabled => true, :id => nil, :name => '' }
+		%>
+	<% end %>
+	
+	<%= f.button :submit %>
 <% end %>

@@ -1,54 +1,30 @@
-<%= form_for([@phone_model.manufacturer, @phone_model]) do |f| %>
-  <% if @phone_model.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@phone_model.errors.count, "error"), :model_name => t(:phone_model)) %>:</h2>
-
-      <ul>
-      <% @phone_model.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name, t(:name) %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :url, t(:url) %><br />
-    <%= f.text_field :url, :size => 60 %>
-  </div>
-
-<% if params[:manufacturer_id].nil? %>
-  <div class="field">
-    <%= f.label :manufacturer_id, t(:manufacturer) %><br />
-    <%= f.select( :manufacturer_id,
-      @manufacturers.collect {|r| [ r.name, r.id ] },
-      { :include_blank => false, :selected => @phone_model.manufacturer_id }
-    ) %>
-  </div>
-<% else %>
-  <%= f.hidden_field :manufacturer_id %>
-<% end %>
-
-  <div class="field">
-    <%= f.label :default_http_user, t(:default_http_user) %><br />
-    <%= f.text_field :default_http_user %>
-  </div>
-  <div class="field">
-    <%= f.label :default_http_password, t(:default_http_password) %><br />
-    <%= f.text_field :default_http_password %>
-  </div>
-  <div class="field">
-    <%= f.label :max_number_of_sip_accounts, t(:max_number_of_sip_accounts) %><br />
-    <%= f.text_field :max_number_of_sip_accounts %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_keys, t(:number_of_keys) %><br />
-    <%= f.text_field :number_of_keys %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for([ @phone_model.manufacturer, @phone_model ]) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :name %>
+	<%= f.input :url, :as => :url, :input_html => { :size => 60 } %>
+	
+	<% if params[:manufacturer_id].nil? %><%#OPTIMIZE Set @phone_model.manufacturer_id in the controller and use @phone_model.manufacturer_id here. %>
+		<%= f.input :manufacturer do %>
+			<%= f.select( :manufacturer_id,
+				@manufacturers.collect {|r| [ r.name, r.id ] },
+				{ :include_blank => false, :selected => @phone_model.manufacturer_id }
+			) %>
+		<% end %>
+	<% else %>
+		<%= f.input :manufacturer_id, :as => :hidden, :input_html => { :value => params[:manufacturer_id] } %>
+	<% end %>
+	
+	<%= f.input :default_http_user %>
+	<%= f.input :default_http_password %>
+	<%= f.input :max_number_of_sip_accounts %>
+	<%= f.input :number_of_keys %>
+	<%= f.input :ssl %>
+	<%= f.input :http_port %>
+	<%= f.input :reboot_request_path %>
+	<%= f.input :http_request_timeout %>
+	<%= f.input :random_password_length      , :as => :string %>
+	<%= f.input :random_password_consists_of , :as => :string, :input_html => { :size => 60 } %>
+	
+	<%= f.button :submit %>
 <% end %>

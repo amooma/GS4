@@ -1,37 +1,15 @@
-<%= form_for(@sip_server) do |f| %>
-<% if @sip_server.errors.any? %>
-<div id="error_explanation">
-  <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@sip_server.errors.count, "error"), :model_name => t(:sip_server)) %>:</h2>
-  <ul>
-    <% @sip_server.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
-<div class="field">
-  <%= f.label :name, t(:sip_host) %><br />
-  <%= f.text_field :host %>
-</div>
-<div class="field">
-  <%= f.label :port, t(:sip_port) %><br />
-  <%= f.text_field :port %>
-</div>
-<div class="field">
-  <%= f.check_box :is_local %>
-  <%= f.label :is_local, t(:is_local) %>
-</div>
-<div class="field">
-  <%= f.label :last_sip_server_id, t(:take_over_accounts) %><br />
-  <%= f.select( :last_sip_server_id,
-    @sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
-    { :include_blank => true }
-  ) %>
-</div>
-<div class="actions">
-  <%= f.submit(t(:save)) %>
-</div>
+<%= simple_form_for( @sip_server ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :host %>
+	<%= f.input :port %>
+	<%= f.input :is_local %>
+	<%= f.input :last_sip_server do %>
+		<%= f.select( :last_sip_server_id,
+			@sip_servers.collect {|r| [ "#{r.host} (ID #{r.id})", r.id ] },
+			{ :include_blank => true }
+		) %>
+	<% end %>
+	
+	<%= f.button :submit %>
 <% end %>

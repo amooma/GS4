@@ -23,6 +23,8 @@ class Admin::SetupController < ApplicationController
   end
   
   def new
+    @user = User.new
+    @user.role = "admin"
   end
   
 end

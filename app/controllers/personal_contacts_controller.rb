@@ -5,6 +5,10 @@ class PersonalContactsController < ApplicationController
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   load_and_authorize_resource
   
+  before_filter { |controller|
+    @users = User.accessible_by( current_ability, :index ).all
+  }
+  
    
   # GET /personal_contacts
   # GET /personal_contacts.xml
@@ -32,8 +36,7 @@ class PersonalContactsController < ApplicationController
   # GET /personal_contacts/new.xml
   def new
     @personal_contact = PersonalContact.new
-    @user_role = current_user.role
-    @users = User.all
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @personal_contact }

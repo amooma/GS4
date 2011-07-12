@@ -1,32 +1,9 @@
-<%= simple_form_for [@call_queue, @extension]  do |f| %>
-
-  <% if @extension.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@extension.errors.count, "error"), :model_name => t(:extension)) %>:</h2>
-
-      <ul>
-      <% @extension.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label t(:extension) %>
-    <%= f.text_field :extension %>
-  </div>
-  <div class="field">
-    <%= f.label t(:destination) %>
-    <%= f.text_field :destination, :readonly => ! @extension.destination.nil? %>
-    <%#OPTIMIZE If SIP account is set then set destination automatically or vice-versa. %>
-  </div>
-  <div class="field">
-    <%= f.label t(:active) %>
-    <%= f.check_box :active %>
-  </div>
-  <br />
-  <div class="actions">
-    <%= f.submit(t(:save_extension)) %>
-  </div>
+<%= simple_form_for([ @call_queue, @extension]) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :extension %>
+	<%= f.input :destination, :input_html => { :readonly => ! @extension.destination.nil? } %>
+	<%= f.input :active %>
+	
+	<%= f.button :submit %>
 <% end %>

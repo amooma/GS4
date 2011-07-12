@@ -1,13 +1,11 @@
 <h1><%= t(:new_extension) %></h1>
 
-<% if ! @sip_account.nil? %>
-  <%= render 'form_sip_account' %>
-<% elsif ! @conference.nil? %>
-  <%= render 'form_conference' %>
-<% elsif ! @call_queue.nil? %>
-  <%= render 'form_call_queue' %>
-<% else %>
-  <%= render 'form' %>
-<% end %>
+<%
+if    @sip_account %><%= render 'form_sip_account' %><%
+elsif @conference  %><%= render 'form_conference'  %><%
+elsif @call_queue  %><%= render 'form_call_queue'  %><%
+else               %><%= render 'form'             %><%
+end
+%>
 
 <%= link_to t(:back), extensions_path %>

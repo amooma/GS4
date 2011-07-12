@@ -1,29 +1,9 @@
-<%= form_for(@manufacturer) do |f| %>
-  <% if @manufacturer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@manufacturer.errors.count, "error"), :model_name => t(:manufacturer)) %>:</h2>
-
-      <ul>
-      <% @manufacturer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name, t(:name) %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :ieee_name, t(:ieee_name) %><br />
-    <%= f.text_field :ieee_name %>
-  </div>
-  <div class="field">
-    <%= f.label :url, t(:url) %><br />
-    <%= f.text_field :url %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for( @manufacturer ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :name %>
+	<%= f.input :ieee_name %>
+	<%= f.input :url, :as => :url %>
+	
+	<%= f.button :submit %>
 <% end %>

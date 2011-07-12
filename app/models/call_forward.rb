@@ -12,8 +12,7 @@ class CallForward < ActiveRecord::Base
     :if => Proc.new { |me| (CallForwardReason.where( :value => "noanswer").first && me.call_forward_reason_id == CallForwardReason.where( :value => "noanswer").first.id) },
     :only_integer => true,
     :less_than_or_equal_to => 120,
-	:greater_than_or_equal_to => 1,
-    :message => I18n.t(:numeric_in_range, :begin => 1, :end => 120)
+	:greater_than_or_equal_to => 1
   
   validates_inclusion_of :call_timeout,
     :in => [ nil ],

@@ -1,40 +1,16 @@
-<%= form_for(@phone) do |f| %>
-  <% if @phone.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@phone.errors.count, "error"), :model_name => t(:phone)) %>:</h2>
-
-      <ul>
-      <% @phone.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :mac_address, t(:mac_address) %><br />
-    <%= f.text_field :mac_address %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_model_id, t(:phone_model) %><br />
-    <%= f.select( :phone_model_id,
-      @phone_models.collect {|r| [ r.name, r.id ] },
-      { :include_blank => false, :selected => @phone.phone_model_id }
-    ) %>
-  </div>
-  <div class="field">
-    <%= f.label :ip_address, t(:ip_address) %><br />
-    <%= f.text_field :ip_address %>
-  </div>
-  <div class="field">
-    <%= f.label :http_user, t(:http_user) %><br />
-    <%= f.text_field :http_user %>
-  </div>
-  <div class="field">
-    <%= f.label :http_password, t(:http_password) %><br />
-    <%= f.text_field :http_password %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for( @phone ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :mac_address %>
+	<%= f.input :phone_model do %>
+		<%= f.select( :phone_model_id,
+			@phone_models.collect {|r| [ r.name, r.id ] },
+			{ :include_blank => false, :selected => @phone.phone_model_id }
+		) %>
+	<% end %>
+	<%= f.input :ip_address %>
+	<%= f.input :http_user %>
+	<%= f.input :http_password %>
+	
+	<%= f.button :submit %>
 <% end %>

@@ -1,25 +1,8 @@
-<%= form_for(@call_queue) do |f| %>
-  <% if @call_queue.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@call_queue.errors.count, "error"), :model_name => t(:call_queue)) %>:</h2>
-
-      <ul>
-      <% @call_queue.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name, t(:name) %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :uuid, t(:uuid) %><br />
-    <%= f.text_field :uuid %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for( @call_queue ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :name %>
+	<%= f.input :uuid %>
+	
+	<%= f.button :submit %>
 <% end %>

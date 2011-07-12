@@ -1,46 +1,13 @@
-<%= form_for(@global_contact) do |f| %>
-  <% if @global_contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@global_contact.errors.count, "error"), :model_name => t(:global_contact)) %>:</h2>
-
-      <ul>
-      <% @global_contact.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  
-  <div class="field">
-    <%= f.label :lastname, t(:lastname) %><br />
-    <%= f.text_field :lastname %>
-  </div>
-  <div class="field">
-    <%= f.label :firstname, t(:firstname) %><br />
-    <%= f.text_field :firstname %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_private, t(:phone_private) %><br />
-    <%= f.text_field :phone_private %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_business, t(:phone_business) %><br />
-    <%= f.text_field :phone_business %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_mobile, t(:phone_mobile) %><br />
-    <%= f.text_field :phone_mobile %>
-  </div>
-  <div class="field">
-    <%= f.label :fax_private, t(:fax_private) %><br />
-    <%= f.text_field :fax_private %>
-  </div>
-  <div class="field">
-    <%= f.label :fax_business, t(:fax_business) %><br />
-    <%= f.text_field :fax_business %>
-  </div>
-  <div class="actions">
-    <%= f.submit(t(:save)) %>
-  </div>
+<%= simple_form_for( @global_contact ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :lastname %>
+	<%= f.input :firstname %>
+	<%= f.input :phone_business , :as => :string %>
+	<%= f.input :phone_mobile   , :as => :string %>
+	<%= f.input :phone_private  , :as => :string %>
+	<%= f.input :fax_business   , :as => :string %>
+	<%= f.input :fax_private    , :as => :string %>
+	
+	<%= f.button :submit %>
 <% end %>

@@ -6,6 +6,11 @@ class CallLogsController < ApplicationController
   load_and_authorize_resource
   
   
+  before_filter { |controller|
+    @sip_accounts = SipAccount.accessible_by( current_ability, :read_title ).all
+  }
+  
+  
   # GET /call_logs
   # GET /call_logs.xml
   def index

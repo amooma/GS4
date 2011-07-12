@@ -1,28 +1,9 @@
-<%= form_for(@node) do |f| %>
-<% if @node.errors.any? %>
-<div id="error_explanation">
-<h2><%= t(:errors_model_not_saved ,:errors_count => pluralize(@node.errors.count, "error"), :model_name => t(:node)) %>:</h2>
-<ul>
-	<% @node.errors.full_messages.each do |msg| %>
-	<li><%= msg %></li>
-	<% end %>
-</ul>
-</div>
-<% end %>
-
-<div class="field">
-	<%= f.label :management_host, t(:management_host) %><br />
-	<%= f.text_field :management_host %>
-</div>
-<div class="field">
-	<%= f.label :management_port, t(:management_port) %><br />
-	<%= f.text_field :management_port %>
-</div>
-<div class="field">
-	<%= f.label :title, t(:title) %><br />
-	<%= f.text_field :title %>
-</div>
-<div class="actions">
-	<%= f.submit(t(:save)) %>
-</div>
+<%= simple_form_for( @node ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :management_host %>
+	<%= f.input :management_port %>
+	<%= f.input :title %>
+	
+	<%= f.button :submit %>
 <% end %>

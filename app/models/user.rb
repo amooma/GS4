@@ -25,9 +25,9 @@ class User < ActiveRecord::Base
   
   has_many :sip_accounts
   
-  validates_presence_of(   :username, :message => I18n.t(:needed))
-  validates_uniqueness_of( :username, :case_sensitive => false, :message => I18n.t(:already_taken))
-  validate_username(       :username )
+  validates_presence_of    :username
+  validates_uniqueness_of  :username, :case_sensitive => false
+  validate_username        :username
   
   validates_presence_of    :role
   validates_inclusion_of   :role, :in => self::ROLES.keys
