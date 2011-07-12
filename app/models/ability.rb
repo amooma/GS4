@@ -62,6 +62,7 @@ class Ability
         cannot :manage  , Phone
         can    :read    , Phone
         can    :edit    , Phone
+        can    :create  , Phone
         can    :reboot  , Phone
       )
       
