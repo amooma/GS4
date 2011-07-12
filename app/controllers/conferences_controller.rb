@@ -33,6 +33,7 @@ class ConferencesController < ApplicationController
   def new
     @conference = Conference.new
     @conference.uuid = "-conference-#{SecureRandom.hex(10)}"
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @conference }
