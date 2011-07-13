@@ -10,7 +10,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	#OPTIMIZE Use https for @xml_menu_url
 	
-	before_filter { |controller|               
+	before_filter { |controller|
 		@cfwd_case_busy_id      = CallForwardReason.where( :value => "busy"      ).first.try(:id)
 		@cfwd_case_noanswer_id  = CallForwardReason.where( :value => "noanswer"  ).first.try(:id)
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
@@ -25,7 +25,7 @@ class ManufacturerSnomController < ApplicationController
 	    if (@mac_address && @phone = Phone.where(:mac_address => @mac_address).first)
 	        @user = get_user_by_phone(@phone)
 			@sip_account = get_sip_account(@phone, params[:sip_account])
-	              
+			
 			if (@sip_account)
 				@sip_account_id = @sip_account.id
 				@sip_account_name = @sip_account.caller_name
