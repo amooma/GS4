@@ -6,19 +6,19 @@ xml.SnomIPPhoneMenu {
 	else
 		xml.Title(t(:application_name))
 	end
-
+	
 	xml.MenuItem {
 		xml.Name(t(:phone_book_internal))
 		xml.URL("#{@xml_menu_url}/phone_book_internal.xml")
 	}
-
+	
 	if (@global_contacts && @global_contacts.count > 0)
 		xml.MenuItem {
 			xml.Name(t(:global_contacts))
 			xml.URL("#{@xml_menu_url}/global_contacts.xml")
 		}
 	end
-
+	
 	if (@personal_contacts && @personal_contacts.count > 0)
 		xml.MenuItem {
 			xml.Name(t(:personal_contacts))
@@ -36,13 +36,14 @@ xml.SnomIPPhoneMenu {
 			xml.URL("#{@xml_menu_url}/call_forwarding.xml")
 		}
 	end
-
+	
 	if (@sip_accounts_count > 1)
 		xml.MenuItem {
 			xml.Name(t(:select_sip_account))
 			xml.URL("#{@xml_menu_url}/sip_accounts.xml")
 		}
 	end
+	
 	xml.SoftKeyItem {
 		xml.Name('F1')
 		xml.Label(t(:phone_book_internal_key_label_short))
