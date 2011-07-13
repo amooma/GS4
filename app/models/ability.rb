@@ -65,6 +65,7 @@ class Ability
         can    :edit    , Phone
         can    :create  , Phone
         can    :reboot  , Phone
+        can    :read    , :Setup
       )
       
       when "cdr"
