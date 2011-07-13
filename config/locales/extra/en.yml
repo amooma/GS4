@@ -300,7 +300,7 @@ en:
   personal_contact_updated: "Contact was successfully updated"
   phone_belongs_to_user_already: "Phone is already associated to a different user"
   phone_books: "Phone book"
-
+  
   from: "from"
   from_all: "(all)"
   case: "case"
