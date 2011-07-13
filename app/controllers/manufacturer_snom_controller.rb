@@ -10,7 +10,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	#OPTIMIZE Use https for @xml_menu_url
 	
-	before_filter { |controller|
+	before_filter { |controller|               
 		@cfwd_case_busy_id      = CallForwardReason.where( :value => "busy"      ).first.try(:id)
 		@cfwd_case_noanswer_id  = CallForwardReason.where( :value => "noanswer"  ).first.try(:id)
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
@@ -23,7 +23,9 @@ class ManufacturerSnomController < ApplicationController
 	    	@mac_address = nil
 	    end
 	    if (@mac_address && @phone = Phone.where(:mac_address => @mac_address).first)
+	        @user = get_user_by_phone(@phone)
 			@sip_account = get_sip_account(@phone, params[:sip_account])
+	              
 			if (@sip_account)
 				@sip_account_id = @sip_account.id
 				@sip_account_name = @sip_account.caller_name
@@ -73,36 +75,51 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def xml_menu
-		if (@sip_account)
-			phone = Phone.find_by_mac_address( @mac_address )
-			if phone
-				@sip_accounts_count = phone.sip_accounts.accessible_by( current_ability, :index ).count
-			else
-				@sip_accounts_count = 0
-			end
-		else
-			@sip_accounts_count = 0
+		@sip_accounts_count = @phone.sip_accounts.count
+		@global_contacts = GlobalContact.all
+		if (@user)
+			@personal_contacts = PersonalContact.where(:user_id => @user.id).all
+		end
+	end
+	
+	def phone_books_menu
+		@global_contacts = GlobalContact.all
+		if (@user)
+			@personal_contacts = PersonalContact.where(:user_id => @user.id).all
+		end
+		if (!@global_contacts && !@personal_contacts)
+			@sip_accounts = SipAccount.all
+			render :action => 'phone_book_internal'
 		end
 	end
 	
 	def phone_book_internal
-		@sip_accounts = SipAccount.accessible_by( current_ability, :read ).all
+		@sip_accounts = SipAccount.all
 	end
 	
+	def personal_contacts
+		if (@user)
+			@personal_contacts = PersonalContact.where(:user_id => @user.id).all
+		end
+	end
+	
+	def global_contacts
+		@global_contacts = GlobalContact.all
+	end
 	
 	def call_log
 		if (@sip_account)
-			@call_logs_in        = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
-			@call_logs_out       = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
-			@call_logs_missed    = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
-			call_logs_all_in     = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND ).all.count #OPTIMIZE user appropriate query  -- Huh?
-			@call_logs_forwarded = CallLog.accessible_by( current_ability, :index ).where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND,  :disposition => DISPOSITION_FORWARDED ).all.count 
+			@call_logs_in        = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_ANSWERED, :call_type => CALL_INBOUND ).all.count
+			@call_logs_out       = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_OUTBOUND ).all.count
+			@call_logs_missed    = CallLog.where(:sip_account_id => @sip_account.id, :disposition => DISPOSITION_NOANSWER, :call_type => CALL_INBOUND ).all.count
+			call_logs_all_in     = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND ).all.count #OPTIMIZE user appropriate query  -- Huh?
+			@call_logs_forwarded = CallLog.where(:sip_account_id => @sip_account.id, :call_type => CALL_INBOUND,  :disposition => DISPOSITION_FORWARDED ).all.count 
 		end
 	end
 	
 	def call_log_in
 		if (@sip_account)
-			@call_logs_in = CallLog.accessible_by( current_ability, :index ).where(
+			@call_logs_in = CallLog.where(
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_ANSWERED,
 				:call_type => CALL_INBOUND 
@@ -112,7 +129,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log_missed
 		if (@sip_account)
-			@call_logs_missed = CallLog.accessible_by( current_ability, :index ).where(
+			@call_logs_missed = CallLog.where(
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_NOANSWER,
 				:call_type => CALL_INBOUND
@@ -122,7 +139,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log_out
 		if (@sip_account)
-			@call_logs_out = CallLog.accessible_by( current_ability, :index ).where(
+			@call_logs_out = CallLog.where(
 				:sip_account_id => @sip_account.id, 
 				:call_type => CALL_OUTBOUND
 			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
@@ -131,7 +148,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_log_forwarded
 		if (@sip_account)
-			@call_logs_forwarded = CallLog.accessible_by( current_ability, :index ).where(
+			@call_logs_forwarded = CallLog.where(
 				:sip_account_id => @sip_account.id,
 				:call_type => CALL_INBOUND,
 				:disposition => DISPOSITION_FORWARDED
@@ -193,30 +210,30 @@ class ManufacturerSnomController < ApplicationController
 		
 		case cfwd_case
 		when 'always'
-			@title = "Unconditional Call Forwarding"
+			@title = t(:call_forwarding_unconditional)
 			reason = @cfwd_case_always_id
 		when 'busy'
-			@title = "Call Forwarding on Busy"
+			@title = t(:call_forwarding_on_busy)
 			reason = @cfwd_case_busy_id
 		when 'offline'
-			@title = "Call Forwarding on Offline"
+			@title = t(:call_forwarding_on_offline)
 			reason = @cfwd_case_offline_id
 		when 'noanswer'
-			@title = "Call Forwarding on No Answer"
+			@title = t(:call_forwarding_on_noanswer)
 			reason = @cfwd_case_noanswer_id
 		when 'assistant'
-			@title = "Call Forwarding to assistant"
+			@title = t(:call_forwarding_to_assistant)
 			reason = @cfwd_case_assistant_id
 		else
-			@message = "NO CASE"
+			@message = t(:call_forwarding_in_no_case)
 			return false
 		end
 		
 		call_forward = save_call_forward( @sip_account, reason, cfwd_destination, cfwd_timeout )
 		if (call_forward)
-			@message = "SAVED"
+			@message = t(:saved)
 		else
-			@message = "NOT SAVED #{@returnval}"
+			@message = t(:not_saved)
 		end
 	end
 	
@@ -227,7 +244,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def index
 		mfc = Manufacturer.where(:ieee_name => "SNOM Technology AG").first
-		@phones = mfc ? mfc.phones.accessible_by( current_ability, :index ) : []
+		@phones = mfc ? mfc.phones : []
 		
 		respond_to { |format|
 			format.html # index.html.erb
@@ -236,7 +253,7 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def get_sip_account(phone, sip_account_id = nil)
-		sip_accounts = phone.sip_accounts.accessible_by( current_ability, :index )
+		sip_accounts = phone.sip_accounts
 		
 		if (! sip_accounts) 
 			return nil
@@ -302,6 +319,22 @@ class ManufacturerSnomController < ApplicationController
 		end
 		
 		return call_forward_update
+	end
+	
+	def get_user_by_phone(phone)
+		sip_accounts = phone.sip_accounts
+		
+		if (! sip_accounts) 
+			return nil
+		end
+		
+		sip_accounts.each do |sip_account|
+			if (sip_account.user)
+				return sip_account.user
+			end
+		end
+		
+		return nil
 	end
 	
 	private
