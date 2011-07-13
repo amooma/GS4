@@ -256,7 +256,7 @@ en:
   no_phone_found_for_manufacturer: "No phones for this manufacturer found"
   phone_id: "Phone ID"
   xml_menu_title: "Gemeinschaft4 - %{sip_account}"
-  phone_book_internal: "Internal phones"
+  phone_book_internal: "Internal phonebook"
   call_log: "Call Log Entry"
   phone_book_internal_key_label_short: "PBI"
   call_log_key_label_short: "CL"

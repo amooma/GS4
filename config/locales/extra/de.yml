@@ -329,6 +329,7 @@ de:
   forgot_password: "Passwort vergessen?"
   send_reset_password_instructions: "Anweisungen zum Zurücksetzen des Passworts zusenden"
   
+  contacts: "Kontakte"
   global_contacts: "Kontakte (anlagenweit)"
   global_contact: "Kontakt (anlagenweit)"
   new_global_contact: "Neuer Kontakt (anlagenweit)"
