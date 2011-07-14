@@ -297,6 +297,8 @@ de:
   call_forwarding_busy_destination: "Bei Besetzt: %{destination}"
   call_forwarding_noanswer_destination: "Keine Antwort: %{destination}"
   call_forwarding_offline_destination: "Offline: %{destination}"
+  call_forwarding_saved: "Gespeichert"
+  call_forwarding_not_saved: "Nicht gespeichert"
   exit: "Beenden"
   call_forwarding_timeout: "Zeit"
   lastname: "Nachname"

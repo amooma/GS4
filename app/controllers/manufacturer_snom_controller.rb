@@ -209,31 +209,28 @@ class ManufacturerSnomController < ApplicationController
 		cfwd_timeout = params[:timeout]
 		
 		case cfwd_case
-		when 'always'
-			@title = t(:call_forwarding_unconditional)
-			reason = @cfwd_case_always_id
 		when 'busy'
-			@title = t(:call_forwarding_on_busy)
+			@title = t(:call_forwarding_busy)
 			reason = @cfwd_case_busy_id
 		when 'offline'
-			@title = t(:call_forwarding_on_offline)
+			@title = t(:call_forwarding_offline)
 			reason = @cfwd_case_offline_id
 		when 'noanswer'
-			@title = t(:call_forwarding_on_noanswer)
+			@title = t(:call_forwarding_noanswer)
 			reason = @cfwd_case_noanswer_id
 		when 'assistant'
-			@title = t(:call_forwarding_to_assistant)
+			@title = t(:call_forwarding_assistant)
 			reason = @cfwd_case_assistant_id
 		else
-			@message = t(:call_forwarding_in_no_case)
-			return false
+			@title = t(:call_forwarding_always)
+			reason = @cfwd_case_always_id
 		end
 		
 		call_forward = save_call_forward( @sip_account, reason, cfwd_destination, cfwd_timeout )
 		if (call_forward)
-			@message = t(:saved)
+			@message = t(:call_forwarding_saved)
 		else
-			@message = t(:not_saved)
+			@message = t(:call_forwarding_not_saved)
 		end
 	end
 	
