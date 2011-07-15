@@ -257,7 +257,7 @@ en:
   phone_id: "Phone ID"
   xml_menu_title: "Gemeinschaft4 - %{sip_account}"
   phone_book_internal: "Internal phones"
-  call_log: "Call Log Entry"
+  call_log: "Call Log"
   phone_book_internal_key_label_short: "PBI"
   call_log_key_label_short: "CL"
   call_forwarding_key_label_short: "CF"
@@ -325,4 +325,4 @@ en:
   global_contact_created: "Contact was successfully created"
   global_contact_updated: "Contact was successfully updated"
   
-
+  voicemail: "Voicemail"

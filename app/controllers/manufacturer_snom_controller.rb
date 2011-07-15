@@ -234,6 +234,15 @@ class ManufacturerSnomController < ApplicationController
 		end
 	end
 	
+	def call_forwarding_voicemail
+		if (@sip_account)
+			@always_destination    = get_call_forward( @sip_account, @cfwd_case_always_id )
+			@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
+			@busy_destination      = get_call_forward( @sip_account, @cfwd_case_busy_id )
+			@offline_destination   = get_call_forward( @sip_account, @cfwd_case_offline_id )
+		end
+	end
+	
 	def sip_accounts
 		@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
 		@sip_accounts = @phone.sip_accounts.all

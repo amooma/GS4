@@ -272,7 +272,7 @@ de:
   phone_id: "Telefon ID"
   xml_menu_title: "Gemeinschaft4 - %{sip_account}"
   phone_book_internal: "Internes Telefonbuch"
-  call_log: "Anruflisten-Eintrag"
+  call_log: "Anruflisten"
   phone_book_internal_key_label_short: "TBI"
   call_log_key_label_short: "AL"
   call_forwarding_key_label_short: "RU"
@@ -339,4 +339,4 @@ de:
   global_contact_created: "Kontakt wurde erfolgreich angelegt"
   global_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
   
-
+  voicemail: "Voicemail"
