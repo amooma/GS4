@@ -2,6 +2,7 @@ xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.SnomIPPhoneMenu {
 	xml.Title(t(:call_forwarding_for, :name => @sip_account_name))
+	
 	xml.MenuItem {
 		xml.Name(t(:call_forwarding_always_destination, :destination => @always_destination))
 		xml.URL("#{@xml_menu_url}/call_forwarding_always.xml")
@@ -22,6 +23,7 @@ xml.SnomIPPhoneMenu {
 		xml.Name(t(:call_forwarding_offline_destination, :destination => @offline_destination))
 		xml.URL("#{@xml_menu_url}/call_forwarding_offline.xml")
 	}
+	
 	xml.SoftKeyItem {
 		xml.Name('*')
 		xml.URL("#{@xml_menu_url}/xml_menu.xml")

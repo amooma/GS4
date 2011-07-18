@@ -9,6 +9,7 @@ xml.SnomIPPhoneDirectory {
 		if (index > @max_entries)
 			break
 		end
+		
 		if (call_entry.created_at < Time.now.advance(:hours => -12))
 			date_formatted = l(call_entry.created_at.localtime, :format => :call_log_old)
 		else
