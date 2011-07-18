@@ -35,6 +35,10 @@ xml.SnomIPPhoneMenu {
 			xml.Name(t(:call_forward))
 			xml.URL("#{@xml_menu_url}/call_forwarding.xml")
 		}
+		xml.MenuItem {
+			xml.Name(t(:voicemail))
+			xml.URL("#{@xml_menu_url}/call_forwarding_voicemail.xml")
+		}
 	end
 	
 	if (@sip_accounts_count > 1)
