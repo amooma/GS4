@@ -23,4 +23,4 @@ misc/freeswitch/fs-conf/freeswitch-gemeinschaft4.xml
 
 misc/fax/*.tif
 misc/fax/*.png
-
+db/backup/*
