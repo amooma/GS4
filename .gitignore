@@ -11,7 +11,10 @@ tmp/**/*
 *.komodoproject
 /.komodotools
 .tmp*~
+
 ERD.pdf
+ERD.png
+
 /vendor/cache
 /vendor/bundle
 .settings/*
