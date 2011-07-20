@@ -49,6 +49,7 @@ class Ability
         can    :edit_uid, PersonalContact
         can    :manage  , GlobalContact
         can    :read    , Subscriber  #OPTIMIZE @sd/pko: Is this still required?
+        can    :manage  , Configuration
         
         cannot :destroy , User do |u|
           u.try(:id) == user.id
