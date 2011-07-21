@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ConfigurationsControllerTest < ActionController::TestCase
   setup do
-    @configuration = configurations(:one)
+    @configuration = Factory.create(:configuration)
 
     an_admin_username = 'admin1'
     @admin_user = User.where( :username => an_admin_username ).first
@@ -30,7 +30,8 @@ class ConfigurationsControllerTest < ActionController::TestCase
   test "should create configuration" do
     sign_in :user, @admin_user
     assert_difference('Configuration.count') do
-      post :create, :configuration => @configuration.attributes
+      configuration = Factory.build(:configuration)
+      post :create, :configuration => configuration.attributes
     end
 
     assert_redirected_to configuration_path(assigns(:configuration))
