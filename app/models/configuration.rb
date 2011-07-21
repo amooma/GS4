@@ -3,7 +3,7 @@ class Configuration < ActiveRecord::Base
 	validates_presence_of   :name
 	validates_uniqueness_of :name
 	
-	#OPTIMIZE Es muss noch im model abgefangen werden, was nicht gelöscht werden darf, siehe db/seeds.rb.
+	#OPTIMIZE Es muss noch im model abgefangen werden, was nicht gelöscht werden darf, siehe db/seeds.rb. - Vielleicht benötgen wir noch Flags im Modell, welcher Eintrag gelöscht und welcher nur verändet aber nicht ganz gelöscht werden darf. - Ja, das wäre imho sauber.
 	
 	def self.get( name, default_value = nil )
 		begin
