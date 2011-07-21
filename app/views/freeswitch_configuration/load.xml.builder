@@ -550,10 +550,10 @@ xml.document( :type => 'freeswitch/xml' ) {
 		xml.configuration( :name => 'xml_rpc.conf', :description => 'XML RPC' ) {
 			#OPTIMIZE Ensure xml_rpc can be accessed from localhost only as there is no way to set a listen_to address here.
 			xml.settings {
-				xml.param( :name => 'http-port' , :value => @xml_rpc_port)
-				xml.param( :name => 'auth-realm', :value => @xml_rpc_realm)
-				xml.param( :name => 'auth-user' , :value => @xml_rpc_user)
-				xml.param( :name => 'auth-pass' , :value => @xml_rpc_password)
+				xml.param( :name => 'http-port' , :value => @xml_rpc_port )
+				xml.param( :name => 'auth-realm', :value => @xml_rpc_realm )
+				xml.param( :name => 'auth-user' , :value => @xml_rpc_user )
+				xml.param( :name => 'auth-pass' , :value => @xml_rpc_password )
 			}
 		}
 		
