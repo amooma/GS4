@@ -326,3 +326,9 @@ en:
   global_contact_updated: "Contact was successfully updated"
   
   voicemail: "Voicemail"
+
+  listing_configurations: "Listing configuration"
+  new_configuration: "New configuration entry"
+  editing_configuration: "Editing configuration"
+  configuration_created: "Configuration entry was successfully created"
+  configuration_updated: "Configuration entry was successfully updated"

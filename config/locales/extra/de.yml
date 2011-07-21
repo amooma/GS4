@@ -341,3 +341,9 @@ de:
   global_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
   
   voicemail: "Voicemail"
+
+  listing_configurations: "Konfiguration"
+  new_configuration: "Neuer Konfigurationseintrag"
+  editing_configuration: "Konfiguration bearbeiten"
+  configuration_created: "Eintrag erfolgreich erstellt"
+  configuration_updated: "Eintrag erfolgreich aktualisiert"

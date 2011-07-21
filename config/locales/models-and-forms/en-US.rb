@@ -20,6 +20,7 @@
 			:phone_model       => "phone model",
 			:manufacturer      => "phone manufacturer",
 			:sip_account       => "SIP account",
+            :configuration     => "Configuration"
 			
 		},
 		
@@ -156,7 +157,11 @@
 				:voicemail_pin => "Voicemail password",
 				:phone        => "Phone",
 			},
-			
+			:configuration => {
+				:name  => "Name",
+				:value => "Value",
+			},
+                        
 		},
 	},
 	
@@ -273,7 +278,11 @@
 				:voicemail_pin => "A numerical password that the user has to enter in order to listen to voicemail messages for this SIP account.",
 				:phone => "The phone onto which this SIP account should be provisioned.",
 			},
-			
+			:configuration => {
+				:name  => "Configuration key",
+				:value => "Configuration value",
+			},
+                   
 		},
 	},
 }}

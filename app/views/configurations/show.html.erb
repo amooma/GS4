@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b><%= t('activerecord.attributes.configuration.name') %>:</b>
   <%= @configuration.name %>
 </p>
 
 <p>
-  <b>Value:</b>
+  <b><%= t('activerecord.attributes.configuration.value') %>:</b>
   <%= @configuration.value %>
 </p>
 
 
-<%= link_to 'Edit', edit_configuration_path(@configuration) %> |
-<%= link_to 'Back', configurations_path %>
+<%= link_to t(:edit), edit_configuration_path(@configuration) %> |
+<%= link_to t(:back), configurations_path %>

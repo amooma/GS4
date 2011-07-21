@@ -20,6 +20,7 @@
 			:phone_model       => "Telefon-Modell",
 			:manufacturer      => "Telefon-Hersteller",
 			:sip_account       => "SIP-Account",
+			:configuration     => "Konfiguration"
 			
 		},
 		
@@ -156,7 +157,11 @@
 				:voicemail_pin => "Voicemail-Passwort",
 				:phone        => "Telefon",
 			},
-			
+			:configuration => {
+				:name  => "Name",
+				:value => "Wert",
+			},
+                        
 		},
 	},
 	
@@ -273,7 +278,11 @@
 				:voicemail_pin => "Ein numerisches Passwort das der Benutzer zur Abfrage von Anrufbeantworter-Sprachnachrichten für diesen SIP-Account eingeben muss.",
 				:phone => "Das Telefon auf das dieser SIP-Account provisioniert werden soll.",
 			},
-			
+			:configuration => {
+				:name  => "Name des Konfigurationseintrags",
+				:value => "Wert des Konfigurationseintrags",
+			},
+                   
 		},
 	},
 }}
