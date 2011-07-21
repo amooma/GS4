@@ -48,7 +48,7 @@ class ConfigurationsController < ApplicationController
 
     respond_to do |format|
       if @configuration.save
-        format.html { redirect_to(@configuration, :notice => 'Configuration was successfully created.') }
+        format.html { redirect_to(@configuration, :notice => t(:configuration_created)) }
         format.xml  { render :xml => @configuration, :status => :created, :location => @configuration }
       else
         format.html { render :action => "new" }
@@ -64,7 +64,7 @@ class ConfigurationsController < ApplicationController
 
     respond_to do |format|
       if @configuration.update_attributes(params[:configuration])
-        format.html { redirect_to(@configuration, :notice => 'Configuration was successfully updated.') }
+        format.html { redirect_to(@configuration, :notice => t(:configuration_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
