@@ -34,6 +34,7 @@ class FreeswitchConfigurationController < ApplicationController
 		@xml_rpc_realm     = Configuration.get(:xml_rpc_realm, 'gemeinschaft' )
 		@xml_rpc_user      = Configuration.get(:xml_rpc_user )
 		@xml_rpc_password  = Configuration.get(:xml_rpc_password )
+		
 		respond_to { |format|
 			format.xml 
 		}
