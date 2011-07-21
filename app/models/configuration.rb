@@ -9,5 +9,10 @@ class Configuration < ActiveRecord::Base
 		rescue
 			return default_value ? default_value.to_s : nil
 		end
+		
+		#OPTIMIZE Don't use exceptions for normal control flow.
+		#config = self.where(:name => name).first
+		#return config.value if config
+		#return default_value ? default_value.to_s : nil
 	end
 end
