@@ -710,7 +710,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.tag!( 'load', :module => 'mod_spandsp' )
 			}
 		}
-
+		
 		xml.configuration( :name => 'post_load_modules.conf', :description => 'Modules' ) {
 			xml.modules {
 			}
