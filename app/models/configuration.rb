@@ -7,7 +7,7 @@ class Configuration < ActiveRecord::Base
 		begin
 			return self.where(:name => name).first.value
 		rescue
-			return default_value
+			return default_value ? default_value.to_s : nil
 		end
 	end
 end
