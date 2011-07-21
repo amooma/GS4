@@ -75,5 +75,15 @@
 			) %></li>
 		</ul>
 	</section>
-
+	<section>
+		<h2><%= t(:configurations) %></h2>
+		<ul>
+			<li><%= link_to( "#{t(:list_all_configurations)}(#{@number_of_configurations})",
+				url_for(:controller => '/configurations', :action => 'index')
+			) %></li>
+			<li><%= link_to( t(:new_configuration),
+				url_for(:controller => '/configurations', :action => 'new')
+			) %></li>
+		</ul>
+	</section>
 </div>
