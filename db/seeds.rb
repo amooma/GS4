@@ -2,6 +2,21 @@
 # the database with its default values. The data can then be loaded
 # with the rake db:seed (or created alongside the db with db:setup).
 
+################################################################
+# Global configuration
+################################################################
+
+Configuration.create([
+	{ :name => 'auth_db_engine'          , :value => 'odbc' },
+	{ :name => 'dbtext_subscriber_file'  , :value => '/etc/kamailio/db_text/subscriber' },
+	{ :name => 'xml_rpc_host'            , :value => '127.0.0.1' },
+	{ :name => 'xml_rpc_port'            , :value => '8080' },
+	{ :name => 'xml_rpc_realm'           , :value => 'gemeinschaft' },
+	{ :name => 'xml_rpc_user'            , :value => SecureRandom.hex(10) },
+	{ :name => 'xml_rpc_password'        , :value => SecureRandom.hex(10) },
+	{ :name => 'fax_files_directory'     , :value => '/opt/gemeinschaft/misc/fax/' },                   
+])
+
 
 ################################################################
 # Nodes
