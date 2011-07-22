@@ -104,6 +104,9 @@ ln -s /opt/gemeinschaft/misc/kamailio/etc /etc/kamailio
 sed -i 's/RUN_KAMAILIO=no/RUN_KAMAILIO=yes/' /etc/default/kamailio
 
 cp /opt/gemeinschaft/misc/lighttpd.conf /etc/lighttpd/
+cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
+chown www-data /etc/ssl/amooma/*
+chmod 0600 /etc/ssl/amooma/*
 
 mv /opt/freeswitch/conf /opt/freeswitch/conf.dist
 ln -s /opt/gemeinschaft/misc/freeswitch/fs-conf /opt/freeswitch/conf
