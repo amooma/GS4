@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @global_contact if can?( :show, @global_contact ) %> |
-<%= link_to 'Back', global_contacts_path if can?( :index, GlobalContact ) %>
+<%= link_to t(:show), @global_contact if can?( :show, @global_contact ) %> |
+<%= link_to t(:back), global_contacts_path if can?( :index, GlobalContact ) %>
