@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to t(:show), @call_forward if can?( :show, @call_forward ) %> |
-<%= link_to t(:back), call_forwards_path if can?( :index, CallForward ) %>
+<%= link_to t(:Go_to_list), call_forwards_path if can?( :index, CallForward ) %>
