@@ -20,7 +20,7 @@
 			:phone_model       => "phone model",
 			:manufacturer      => "phone manufacturer",
 			:sip_account       => "SIP account",
-            :configuration     => "Configuration"
+            :configuration     => "Configuration",
 			
 		},
 		
@@ -282,7 +282,7 @@
 				:name  => "Configuration key",
 				:value => "Configuration value",
 			},
-                   
+			
 		},
 	},
 }}

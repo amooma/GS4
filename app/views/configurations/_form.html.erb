@@ -1,8 +1,8 @@
-<%= simple_form_for(@configuration) do |f| %>
+<%= simple_form_for( @configuration ) do |f| %>
   	<%= f.error_messages %>
-
-
-    <%= f.input :name %><br />
-    <%= f.input :value %><br />
+	
+    <%= f.input :name %>
+    <%= f.input :value %>
+    
   	<%= f.button :submit %>
 <% end %>

@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to t(:show), @call_log if can?( :show, @call_log ) %> |
-<%= link_to t(:back), call_logs_path if can?( :index, CallLog ) %>
+<%= link_to t(:Go_to_list), call_logs_path if can?( :index, CallLog ) %>

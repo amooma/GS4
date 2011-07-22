@@ -4,6 +4,13 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Gemeinschaft4::Application.initialize!
 
+
+
+
+#OPTIMIZE Are the constants in following still used?
+# See https://github.com/amooma/Gemeinschaft4/commit/5578a080873a01ce86202e151f365c72be53adf0
+
+
 DOMAIN = '127.0.0.1'
 
 AUTH_DB_ENGINE = 'odbc'

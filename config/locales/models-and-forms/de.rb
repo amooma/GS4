@@ -20,7 +20,7 @@
 			:phone_model       => "Telefon-Modell",
 			:manufacturer      => "Telefon-Hersteller",
 			:sip_account       => "SIP-Account",
-			:configuration     => "Konfiguration"
+			:configuration     => "Konfiguration",
 			
 		},
 		
@@ -282,7 +282,7 @@
 				:name  => "Name des Konfigurationseintrags",
 				:value => "Wert des Konfigurationseintrags",
 			},
-                   
+			
 		},
 	},
 }}

@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to t(:show), @phone_model if can?( :show, @phone_model ) %> |
-<%= link_to t(:back), phone_models_path if can?( :index, PhoneModel ) %>
+<%= link_to t(:Go_to_list), phone_models_path if can?( :index, PhoneModel ) %>

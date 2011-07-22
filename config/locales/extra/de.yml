@@ -19,6 +19,7 @@ de:
   application_name: "Gemeinschaft 4"
   show: "Anzeigen"
   back: "Zurück"
+  Go_to_list: "Zur Liste"
   edit: "Bearbeiten"
   send: "Senden"
   save: "Speichern"
@@ -341,10 +342,11 @@ de:
   global_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
   
   voicemail: "Voicemail"
-
+  
   listing_configurations: "Konfiguration"
   new_configuration: "Neuer Konfigurationseintrag"
   editing_configuration: "Konfiguration bearbeiten"
   configuration_created: "Eintrag erfolgreich erstellt"
   configuration_updated: "Eintrag erfolgreich aktualisiert"
   list_all_configurations: "Alle Konfigurationseinträge"
+  
