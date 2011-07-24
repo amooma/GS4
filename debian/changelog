@@ -1,3 +1,9 @@
+gemeinschaft (4.0~beta4-1) squeeze; urgency=low
+
+  * New stuff.
+
+ -- Philipp Kempgen <root@localhost>  Thu, 21 Jul 2011 12:00:00 +0200
+
 gemeinschaft (4.0~beta3-1) squeeze; urgency=low
 
   * Adjusted to the new stuff.

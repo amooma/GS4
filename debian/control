@@ -116,7 +116,7 @@ Description: Gemeinschaft - SIP proxy
 Package: gemeinschaft-sip-pbx-freeswitch
 Architecture: all
 Provides: gemeinschaft-sip-pbx
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), freeswitch (>= 1.0.6), freeswitch-spidermonkey
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), freeswitch (>= 1.0.6), freeswitch-spidermonkey, gemeinschaft-web-service
 Replaces: freeswitch, freeswitch-spidermonkey, gemeinschaft-sip-pbx-freeswitch
 Recommends: gemeinschaft-sip-proxy, freeswitch-lang-en, freeswitch-lang-de, freeswitch-sounds-music-8000 (>= 1.0.7), freeswitch-sounds-music-16000 (>= 1.0.7), freeswitch-sounds-music-32000 (>= 1.0.7), freeswitch-sounds-music-48000 (>= 1.0.7)
 Suggests: logrotate, monit, freeswitch (>= 1.0.7), freeswitch-lang-es, freeswitch-lang-fr, freeswitch-lang-it, freeswitch-lang-nl, freeswitch-lang-ru, freeswitch-sounds-en-us-callie-8000 (>= 1.0.15), freeswitch-sounds-en-us-callie-16000 (>= 1.0.15), freeswitch-sounds-en-us-callie-32000 (>= 1.0.15), freeswitch-sounds-en-us-callie-48000 (>= 1.0.15), freeswitch-sounds-es-mx-maria-44100, freeswitch-sounds-ru-RU-elena-8000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-16000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-32000 (>= 1.0.12), freeswitch-sounds-ru-RU-elena-48000 (>= 1.0.12)
@@ -155,9 +155,9 @@ Description: Gemeinschaft - SIP PBX - FreeSwitch
 
 Package: gemeinschaft-web-service
 Architecture: all
-Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), lighttpd (>= 1.4.28), adduser
+Depends: ${misc:Depends}, gemeinschaft-common (= ${binary:Version}), lighttpd (>= 1.4.28), openssl, adduser
 Replaces: lighttpd, gemeinschaft-web-service
-Suggests: logrotate
+Suggests: logrotate, dnsmasq
 Provides: gemeinschaft-provisioning
 Description: Gemeinschaft - web service
  Web interface (HTML and XML API) of the Gemeinschaft telephony

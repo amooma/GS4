@@ -33,6 +33,8 @@ case "$1" in
 		#		"$conffile" \
 		#		|| true
 		#fi
+		
+		[ ! -e /etc/ssl/amooma ] || rm -rf /etc/ssl/amooma
 	;;
 	
 	*)

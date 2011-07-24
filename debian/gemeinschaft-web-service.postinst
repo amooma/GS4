@@ -29,6 +29,23 @@ case "$1" in
 			adduser "$USER" "$gemeinschaft_group"
 		fi
 		
+		# Generate an SSL key and certificate:
+		mkdir -p /etc/ssl/amooma
+		cd       /etc/ssl/amooma/
+		[ ! -e server.pem ] || rm server.pem
+		openssl req -new \
+		  -newkey rsa:2048 \
+		  -x509 \
+		  -sha256 \
+		  -keyout server.pem \
+		  -out    server.pem \
+		  -days 3650 \
+		  -nodes \
+		  -batch -multivalue-rdn -utf8 \
+		  -subj '/OU=Telephony/CN=Gemeinschaft PBX'
+		chown ${USER}:${gemeinschaft_group} server.pem
+		chmod 400 server.pem
+		
 		echo "Restarting web server ..." >&2
 		invoke-rc.d lighttpd stop
 		invoke-rc.d lighttpd start
