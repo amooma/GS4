@@ -98,11 +98,7 @@ class Ability
         end
         can    :read_title, SipAccount, :user_id => user.id
         can    :read , GlobalContact
-        
-        #can    :read    , Extension, :sip_accounts => { :user_id => user.id }
-        # No need to give the user read access to his/her extensions.
-        #TODO Create a "home" page instead which displays the extensions.
-        
+
         #can    :read    , FaxDocument #, :sip_account => { :user_id => user.id }
         #can    :create  , FaxDocument
         #TODO Once faxes are associated to SIP accounts or users, add check (in the controller) that users can't create FaxDocuments for other users.
