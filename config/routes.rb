@@ -96,8 +96,6 @@ Gemeinschaft4::Application.routes.draw do
 		:controller => :manufacturer_snom,
 		:format     => :'xml'
 	
-	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'  #OPTIMIZE Is this route being used?
-	
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',
 		:constraints => { :mac_address => /000413.*/ }
