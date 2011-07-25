@@ -1,30 +1,34 @@
 #! /usr/bin/env ruby
 
+begin
+
 # print to standard error
-def error(error_text)
-	$stderr.puts error_text
+def error( error_text )
+	$stderr.puts( error_text.to_s )
 end
 
-def validation_error(errors)
-	errors.each do |attribute_name, error_messages|
-		error "\"#{attribute_name}\" #{error_messages}"
-	end
+def validation_error( errors )
+	error "Validation errors:"
+	errors.full_messages.each { |message|
+		error "  - #{message}"
+	}
 end
+
 # ensure specified columns exist in model
-def check_columns(given_columns, object_columns)
+def check_columns( given_columns, object_columns )
 	if (object_columns.class != Array)
-		error "Object contains no columns"
+		error "Object contains no columns."
 		return false
 	elsif (given_columns.class == Hash)
 		given_columns = given_columns.keys
 	elsif (given_columns.class != Array)
-		error "No columns specified"
+		error "No columns specified."
 		return false
 	end
 	unknown_column = false
 	given_columns.each do |column_name|
 		if (! object_columns.include? column_name)
-			error "Column \"#{column_name}\" not found"
+			error "Column \"#{column_name}\" not found."
 			unknown_column = true
 		end
 	end
@@ -35,10 +39,10 @@ def check_columns(given_columns, object_columns)
 end
 
 # define allowed attributes
-def allowed_attributes(class_name, class_attributes)
+def allowed_attributes( class_name, class_attributes )
 	attributes = {
 		'User' => [
-			'id','username','sn','gn','email','password','role',
+			'id', 'username', 'sn', 'gn', 'email', 'password', 'role',
 		]
 	}
 	
@@ -51,10 +55,10 @@ def allowed_attributes(class_name, class_attributes)
 end
 
 # define default column order for frequently used models
-def default_column_order(object_name, columns)
+def default_column_order( object_name, columns )
 	default_columns = {
 		'User' => [
-			'id','username','sn','gn','email','role',
+			'id', 'username', 'sn', 'gn', 'email', 'role',
 		]
 	}
 	
@@ -66,56 +70,153 @@ def default_column_order(object_name, columns)
 	return columns
 end
 
+
+def get_terminal_width( default = nil )
+	cols = nil
+	
+	c = ENV['COLUMNS'].to_s.strip.to_i
+	cols = c if c > 0
+	
+	if cols == nil
+		begin
+			c = `tput cols`.strip.to_i
+			cols = c if c > 0
+		rescue
+		end
+	end
+	
+	cols = default if cols == nil
+	return cols
+end
+
+
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require File.expand_path('../../config/boot',  __FILE__)
 require APP_PATH
 
 Rails.application.require_environment!
+$stderr.print "(Rails environment: #{Rails.env})\n"
 
-usage_banner = "Usage: #{$0} <command> <object-name> [options]"
 
-# first parameter ist always the command
-if (! ARGV[0]) 
-	error "No command specified"
-	error usage_banner
+
+def get_subclasses_of( superclasses )
+	subclasses = []
+	superclasses.each do |superclass|
+		ObjectSpace.each_object( class << superclass; self; end ) do |obj|
+			if obj != superclass && (obj.name.blank? || eval("defined?(::#{obj}) && ::#{obj}.object_id == obj.object_id"))
+				subclasses << obj
+			end
+		end
+	end
+	subclasses.sort! { |a,b| a.to_s <=> b.to_s }
+	return subclasses
+end
+
+def load_rails_models
+	Dir.glob( Rails.root.to_s + '/app/models/*.rb').each { |file|
+		#require File.expand_path(file)
+		#ActiveSupport::Dependencies.load_file( file )
+		ActiveSupport::Dependencies.require_or_load( file )
+	}
+end
+
+def get_rails_models
+	load_rails_models
+	models = get_subclasses_of([ ActiveRecord::Base ])
+	models.reject! { |m| m.respond_to?( :'abstract_class?' ) && m.abstract_class? }
+	return models
+end
+
+def str_wrap( s, width=72 )
+	return s.gsub( /(.{1,#{width}})(\s+|\Z)/, "\\1\n" )
+end
+
+
+
+terminal_width = get_terminal_width( 72 )
+
+usage_banner = <<-HEREDOC
+Usage: #{$0} action resource [options]
+  action:  "list"    : List entries.
+           "add"     : Add an entry.
+           "update"  : Update an entry.
+  resource:  Name of the resource model.
+             (e.g. "SipAccount" / "sip_account")
+             Plural forms are singularized automatically.
+             Available resources:
+#{  indent=4; str_wrap( get_rails_models.map{ |m| m.to_s }.join(", "), [(terminal_width-indent-1), 30].max ).split("\n").map{ |x| (" " * indent) + x.to_s }.join("\n")  }
+HEREDOC
+
+options = {
+	:column_separator => ' | ',
+}
+columns = {}
+require 'optparse'
+optionparser = OptionParser.new do |opts|
+	opts.banner = usage_banner
+	opts.separator "  "
+	opts.separator "  options:"
+	opts.on( '-c <column1,column2,column3>', Array, "Specify column order." ) { |value|
+		options[:column_order] = value
+	}
+	opts.on( '-s <separator>', String, "Specify column separator.", "Default: \"#{ options[:column_separator] }\"" ) { |value|
+		options[:column_separator] = value
+	}
+	opts.on( '-h', "Display this help screen." ) {
+		puts optionparser
+		exit 0
+	}
+	opts.separator "  "
+	opts.separator "  In addition to the standard options there are resource-specific ones."
+	opts.separator "  Find them with the -h option e.g. `#{$0} list MyResource -h`."
+end
+
+
+
+# first parameter ist always the action
+if (! ARGV[0])
+	error "No action specified."
+	error optionparser
 	exit 1
 end
-command_name = ARGV[0].downcase
+action_name = ARGV[0].downcase
 
 # second parameter is the model name
+if (! ARGV[1])
+	error "No resource specified."
+	error optionparser
+	exit 1
+end
+model_class = ARGV[1]
 begin
-	model_class = ARGV[1].singularize.camelize.constantize
+	model_class = model_class.singularize.camelize
+	model_class = model_class.constantize  # This is where errors can happen.
 rescue
-	error "Object not found"
-	error usage_banner
+	error "Resource \"#{model_class}\" not found."
+	error optionparser
 	exit 1
 end
 
 # retrieve attribute names from model
-attribute_names = allowed_attributes(model_class.name, model_class.new.attributes.keys)
-column_order =  default_column_order(model_class.name, model_class.column_names)
-
-options = Hash.new()
-columns = Hash.new()
-require 'optparse'
-optionparser = OptionParser.new do |option|
-	option.banner = usage_banner
-	option.on('-c <column1,column2,column3>', Array, 'Specify column order') do |value|
-		options[:column_order] = value
-	end
-	option.on('-s <separator>', String, 'Specify column separator','Default: "|"') do |value|
-		options[:column_separator] = value
-	end
-	option.on( '-h', 'Display this help screen' ) do
-		puts option
-		exit
-	end
-	attribute_names.each do |option_name|
-		option.on("--#{option_name} <value>", String, "Set \"#{option_name}\" attribute") do |value|
-			columns[option_name] = value
-		end
-	end
+begin
+	attribute_names = allowed_attributes( model_class.name, model_class.new.attributes.keys )
+	column_order =  default_column_order( model_class.name, model_class.column_names )
+rescue ActiveRecord::StatementInvalid => e
+	error "Model \"#{model_class}\" does not have a database table."
+	error optionparser
+	exit 1
 end
+
+#optionparser.separator "  "
+optionparser.separator "  Resource-specific options (find by / set attribute):"
+attribute_names.each { |attr_name|
+	optionparser.on( "--#{attr_name} <value>", String, "\"#{attr_name}\" attribute." ) { |value|
+		columns[attr_name] = value
+	}
+}
+optionparser.separator ""
+
+
 
 # parse options
 begin 
@@ -123,36 +224,34 @@ begin
 rescue OptionParser::InvalidOption => e
 	error e
 	error optionparser
+	#error usage_banner
 	exit 1
 rescue OptionParser::NeedlessArgument => e
 	error e
 	error optionparser
+	#error usage_banner
 	exit 1
 end
 
 # ensure given options represent model attributes
 if (options[:column_order])    
-    if (! check_columns(options[:column_order], attribute_names))
-		error "Some columns not found"
+    if (! check_columns( options[:column_order], attribute_names ))
+		error "Some columns not found."
 		exit 1
 	else
 		column_order = options[:column_order]
 	end
 end
 
-if (columns.count > 0 && ! check_columns(columns, attribute_names))
-	error "Some columns not found"
+if (columns.count > 0 && ! check_columns( columns, attribute_names ))
+	error "Some columns not found."
 	exit 1
 end
 
-if (options[:column_separator])
-	column_separator = options[:column_separator]
-else
-	column_separator = '|'
-end
+
 
 # process comand
-case command_name
+case action_name
 when 'list'
 	begin
 		if (columns.count > 0)
@@ -161,36 +260,40 @@ when 'list'
 			entries = model_class.all
 		end
 	rescue => e
-		error "Could not find objects"
+		error "Could not find objects."
 		exit 1
 	end
 	if (entries)
-		puts column_order.join(column_separator)
-		entries.each do |entry|
+		separator = ("-" * (terminal_width - 2))
+		$stderr.puts separator
+		$stderr.puts column_order.join( options[:column_separator] )
+		$stderr.puts separator
+		entries.each { |entry|
 			values = Array.new()
-			column_order.each do |column|
+			column_order.each { |column|
 				values << entry[column]
-			end
-			puts values.join(column_separator)
-		end
+			}
+			puts values.join( options[:column_separator] )
+		}
+		$stderr.puts separator
 	end
 when 'add'
 	new_object = model_class.create(columns)
 	if (new_object)
 		if (new_object.save)
-			puts "Object \"#{model_class.name}\" added"
+			puts "Object \"#{model_class.name}\" added."
 		else
 			validation_error new_object.errors
-			error "Object \"#{model_class.name}\" could not be added"
+			error "Object \"#{model_class.name}\" could not be added."
 			exit 1
 		end
 	else
-		error "Object \"#{model_class.name}\" not added"
+		error "Object \"#{model_class.name}\" not added."
 		exit 1
 	end
 when 'update'
 	if (columns['id'].blank?)
-		error "No object ID specified"
+		error "No object ID specified."
 		puts columns
 		exit 1
 	end
@@ -198,15 +301,40 @@ when 'update'
 	if (object_found)
 		object_updated = object_found.update_attributes(columns)
 	else
-		error "No object ID \"#{columns.id}\" found"
+		error "No object ID \"#{columns.id}\" found."
+		exit 1
 	end
 	
 	if (object_updated)
-		puts "Object \"#{model_class.name}\" updated"
+		puts "Object \"#{model_class.name}\" updated."
 	else
-		error "Object \"#{model_class.name}\" not updated"
+		error "Object \"#{model_class.name}\" not updated."
+		exit 1
 	end
+#OPTIMIZE Add 'delete' action.
 else
-	error "command \"#{command_name}\" not found"
+	error "Invalid action \"#{action_name}\"."
+	error optionparser
 	exit 1
 end
+
+
+rescue SignalException => e
+	$stderr.print "#{e.class.to_s}"
+	$stderr.print " (Signal #{e.signo.to_s})" if e.respond_to?(:signo) && e.signo
+	$stderr.puts ""
+	exit 130
+end
+
+exit 0  # suppress the useless stuff in following that would otherwise be printed (from minitest?):
+=begin
+Loaded suite ./script/gs4cmd
+Started
+
+Finished in 0.002... seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors, 0 skips
+
+Test run options: --seed ...
+=end
+
