@@ -25,8 +25,35 @@ class ApplicationController < ActionController::Base
     @app_number_of_users = User.count
   }
   
-  def local_ip
-    UDPSocket.open {|s| s.connect("255.255.255.254", 1); s.addr.last }
+  def guess_local_ip_address
+    ret = nil
+    begin
+      ipsocket_addr_info = UDPSocket.open {|s| s.connect("255.255.255.254", 1); s.addr(false) }
+      ret = ipsocket_addr_info.last if ipsocket_addr_info
+    rescue
+    end
+    return ret
+  end
+  
+  def guess_local_host
+    ret = guess_local_ip_address
+    if ! ret
+      begin
+        if request
+          ret = request.env['SERVER_NAME']
+        end
+      rescue
+      end
+    end
+    if ret && [
+      "",
+      "127.0.0.1",
+      "localhost",
+      "0.0.0.0",
+    ].include?(ret)
+      ret = nil
+    end
+    return ret
   end
   
   

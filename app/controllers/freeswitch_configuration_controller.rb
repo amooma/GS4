@@ -19,7 +19,7 @@ class FreeswitchConfigurationController < ApplicationController
 		if ( sip_server = SipServer.where(:is_local => true).first )
 			@sip_server_ip = sip_server.host
 		else
-			@sip_server_ip = local_ip
+			@sip_server_ip = guess_local_ip_address
 		end
 		
 		@domain      = @sip_server_ip
