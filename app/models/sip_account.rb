@@ -129,7 +129,8 @@ class SipAccount < ActiveRecord::Base
   
   def delete_subscriber()
     if (! self.sip_proxy_id_was.nil?) \
-    && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local)  #FIXME self.sip_proxy can be nil (=> pko)
+    && (sip_proxy = SipProxy.find_by_id( self.sip_proxy_id_was)) \
+    && (sip_proxy.is_local)
       subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
       if subscriber_delete
         if ! subscriber_delete.destroy
