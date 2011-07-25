@@ -51,8 +51,6 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :kamailio             , :only => [ :index ], :format => 'txt'  #OPTIMIZE Is this route being used?
 	
-	resources :subscribers          , :only => [ :index, :show ]  #OPTIMIZE Do we need a route for subscribers?
-	
 	match '/admin/help',
 		:via        => [ :get ],
 		:controller => :admin,
@@ -97,8 +95,6 @@ Gemeinschaft4::Application.routes.draw do
 		:via        => [ :get, :post ],
 		:controller => :manufacturer_snom,
 		:format     => :'xml'
-	
-	resources :phone_book_internal_users , :only => [ :index ] , :format => 'xml'  #OPTIMIZE Is this route being used?
 	
 	match 'settings-:mac_address' => 'manufacturer_snom#show',
 		:format => 'xml',

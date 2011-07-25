@@ -1,8 +1,6 @@
 xml.instruct!
 
-#OPTIMIZE Add comments (descriptions etc.) from the original configuration (misc/freeswitch/fs-conf/). (=> pko)
-# As this file has probably been generated in a (semi-)automatic way it should be easy.
-#OPTIMIZE If you decide to go this route then import changes in misc/freeswitch/fs-conf/ into this file and delete misc/freeswitch/fs-conf/**.xml (=> pko)
+#OPTIMIZE Add comments (descriptions etc.) - Some could probably be salvaged from the original FreeSWITCH configuration.
 
 xml.document( :type => 'freeswitch/xml' ) {
 	
@@ -923,7 +921,6 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 			xml.extension( :name => 'kam-queue-in' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(-queue-.*)$' ) {
-					xml.action( :application => 'answer' )  #OPTIMIZE Why answer the call?
 					xml.action( :application => 'playback', :data => 'ivr/ivr-hold_connect_call.wav' )
 					xml.action( :application => 'set', :data => 'fifo_music=$${hold_music}' )
 					xml.action( :application => 'fifo', :data => '$1 in' )

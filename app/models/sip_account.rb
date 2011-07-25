@@ -61,7 +61,7 @@ class SipAccount < ActiveRecord::Base
   after_validation( :on => :create ) {
     if (self.sip_server) \
     && (self.sip_proxy) \
-    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil (=> pko) - #OPTIMIZE @sd: Has this been resolved by 0cb666c2d61092e92a7b79e3a6e3fb148308dccc? See Message-ID: <4DED6A74.1070002@amooma.de>, Date: Tue, 07 Jun 2011 02:01:56 +0200
+    && (self.sip_proxy.is_local)
       create_subscriber()
     end
   }
@@ -69,7 +69,7 @@ class SipAccount < ActiveRecord::Base
   after_validation( :on => :update ) {
     if (self.sip_server) \
     && (self.sip_proxy) \
-    && (self.sip_proxy.is_local)  #FIXME self.sip_proxy can be nil (=> pko) - #OPTIMIZE @sd: Has this been resolved by 0cb666c2d61092e92a7b79e3a6e3fb148308dccc? See Message-ID: <4DED6A74.1070002@amooma.de>, Date: Tue, 07 Jun 2011 02:01:56 +0200
+    && (self.sip_proxy.is_local)
       update_subscriber()
     else
       delete_subscriber()
@@ -80,8 +80,24 @@ class SipAccount < ActiveRecord::Base
     delete_subscriber()
   }
   
-  #OPTIMIZE private ?
+  # Returns whether a SIP account is registered (in Kamailio).
+  #
+  def registered?
+    return (
+      Location.where({
+        :username => "#{self.auth_name}",
+        #:domain   => "...",  #OPTIMIZE Check domain.
+      })
+      .where( Location.arel_table[:contact].not_eq(nil) )
+      .where( Location.arel_table[:contact].not_eq('') )
+    ).first != nil
+  end
   
+  def phone_reboot
+    self.phone.reboot if self.phone
+  end
+  
+  private
   def create_subscriber()
     subscriber = Subscriber.create(
       :username   =>  self.auth_name,
@@ -113,7 +129,8 @@ class SipAccount < ActiveRecord::Base
   
   def delete_subscriber()
     if (! self.sip_proxy_id_was.nil?) \
-    && (SipProxy.find_by_id( self.sip_proxy_id_was).is_local)  #FIXME self.sip_proxy can be nil (=> pko)
+    && (sip_proxy = SipProxy.find_by_id( self.sip_proxy_id_was)) \
+    && (sip_proxy.is_local)
       subscriber_delete = Subscriber.find_by_username( self.auth_name_was )
       if subscriber_delete
         if ! subscriber_delete.destroy
@@ -122,22 +139,4 @@ class SipAccount < ActiveRecord::Base
       end
     end
   end
-  
-  # Returns whether a SIP account is registered (in Kamailio).
-  #
-  def registered?
-    return (
-      Location.where({
-        :username => "#{self.auth_name}",
-        #:domain   => "...",  #OPTIMIZE Check domain.
-      })
-      .where( Location.arel_table[:contact].not_eq(nil) )
-      .where( Location.arel_table[:contact].not_eq('') )
-    ).first != nil
-  end
-  
-  def phone_reboot
-    self.phone.reboot if self.phone
-  end
-  
 end

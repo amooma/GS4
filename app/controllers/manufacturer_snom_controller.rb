@@ -5,8 +5,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	# We can't use load_and_authorize_resource here because
 	# ManufacturerSnom isn't a resource.
-	skip_authorization_check
-	
+	skip_authorization_check	
 	
 	#OPTIMIZE Use https for @xml_menu_url
 	
@@ -20,20 +19,38 @@ class ManufacturerSnomController < ApplicationController
 	    if ! params[:mac_address].blank?
 	    	@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 	    else
-	    	@mac_address = nil
-	    end
-	    if (@mac_address && @phone = Phone.where(:mac_address => @mac_address).first)
-	        @user = get_user_by_phone(@phone)
-			@sip_account = get_sip_account(@phone, params[:sip_account])
-			
-			if (@sip_account)
-				@sip_account_id = @sip_account.id
-				@sip_account_name = @sip_account.caller_name
-				@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
+			render(
+				:status => 404,
+				:layout => false,
+				:content_type => 'text/plain',
+				:text => "<!-- No phone specified. -->",
+			)
+		end
+	              
+	    @phone = Phone.where(:mac_address => @mac_address).first
+	    
+	    if (@phone)
+	        if (controller.action_name == 'show')
+			elsif (@phone.ip_address == request.remote_ip)
+				@user = get_user_by_phone(@phone)
+				@sip_account = get_sip_account(@phone, params[:sip_account])
+				
+				if (@sip_account)
+					@sip_account_id = @sip_account.id
+					@sip_account_name = @sip_account.caller_name
+					@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
+				else
+					@sip_account_id = nil
+					@sip_account_name = ''
+					@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+				end
 			else
-				@sip_account_id = nil
-				@sip_account_name = ''
-				@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+				render(
+					:status => 404,
+					:layout => false,
+					:content_type => 'text/plain',
+					:text => "<!-- IP address #{request.remote_ip} not authorized. -->",
+				)
 			end
 		else
 			render(
@@ -42,12 +59,10 @@ class ManufacturerSnomController < ApplicationController
 				:content_type => 'text/plain',
 				:text => "<!-- Phone #{@mac_address.inspect} not found. -->",
 			)
-		end
+		end          
 	}
 	
-	def show
-		
-		
+	def show	
 		##### Codec mapping {
 		# map from Codec names as in seeds.rb to their respective name
 		# (or rather: number) on Snom:
