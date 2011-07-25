@@ -51,8 +51,6 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :kamailio             , :only => [ :index ], :format => 'txt'  #OPTIMIZE Is this route being used?
 	
-	resources :subscribers          , :only => [ :index, :show ]  #OPTIMIZE Do we need a route for subscribers?
-	
 	match '/admin/help',
 		:via        => [ :get ],
 		:controller => :admin,
