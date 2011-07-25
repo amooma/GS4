@@ -38,7 +38,7 @@ class SipServersController < ApplicationController
     if SipServer.count == 0
       @sip_server.host = guess_local_host
       @sip_server.is_local= true
-      @sip_server.port = 5060  #TODO Remove (see Message-ID: <4E2CBA1A.8090404@amooma.de>, https://groups.google.com/group/amooma-dev/msg/99ab848d9c7659ce) and test.
+      @sip_server.port = 5060  #OPTIMIZE Remove (see Message-ID: <4E2CBA1A.8090404@amooma.de>, https://groups.google.com/group/amooma-dev/msg/99ab848d9c7659ce) and test.
     end
     
     respond_to do |format|
