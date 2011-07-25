@@ -921,7 +921,6 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 			xml.extension( :name => 'kam-queue-in' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(-queue-.*)$' ) {
-					xml.action( :application => 'answer' )  #OPTIMIZE Why answer the call?
 					xml.action( :application => 'playback', :data => 'ivr/ivr-hold_connect_call.wav' )
 					xml.action( :application => 'set', :data => 'fifo_music=$${hold_music}' )
 					xml.action( :application => 'fifo', :data => '$1 in' )
