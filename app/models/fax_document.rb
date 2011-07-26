@@ -5,6 +5,8 @@ class FaxDocument < ActiveRecord::Base
 	validates_presence_of     :raw_file
 	validates_presence_of     :file
 	
+	#OPTIMIZE Make sure that even admins can't "inject" bad config values (e.g. file paths).
+	
 	before_validation( :on => :create ) {
 		if (! self.raw_file)
 			self.create_raw_file_from_document()
@@ -18,6 +20,7 @@ class FaxDocument < ActiveRecord::Base
 				if (! File.exists?(thumbnail))
 					thumbnail_size = Configuration.get(:fax_thumbnail_size, '210x310')
 					system "convert -resize #{thumbnail_size}\! #{Configuration.get(:fax_files_directory)}/#{raw_file}.tif #{Configuration.get(:fax_files_directory)}/#{raw_file}.png"
+					#OPTIMIZE Protect against bad strings from Configuration.get() by shell-escaping the arguments.
 				end
 				if (! self.destination.blank?)
 					originate_call(self.destination, raw_file)
@@ -78,8 +81,10 @@ class FaxDocument < ActiveRecord::Base
 		
 		#create fax g3 file
 		system "gs -q -r#{resolution} -g#{page_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=#{output_path}.tif -- #{input_file}"
+		#OPTIMIZE Protect against bad strings from Configuration.get() by shell-escaping the arguments.
 		if (! File.exist?(output_path+'.tif'))
 			system "convert -density #{resolution} -resize #{page_size}\! -monochrome -compress Fax #{input_file} #{output_path}.tif"
+			#OPTIMIZE Protect against bad strings from Configuration.get() by shell-escaping the arguments.
 		end
 		
 		thumbnail_resolution = Configuration.get(:fax_thumbnail_resolution, '21x31')
@@ -87,8 +92,10 @@ class FaxDocument < ActiveRecord::Base
 		
 		#create fax png thumbnail
 		system "gs -q -r#{thumbnail_resolution} -g#{thumbnail_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}"
+		#OPTIMIZE Protect against bad strings from Configuration.get() by shell-escaping the arguments.
 		if (File.exist?(output_path+'.tif') && ! File.exist?(output_path+'.png'))
 			system "convert -resize #{thumbnail_size}\! #{output_path}.tif #{output_path}.png"
+			#OPTIMIZE Protect against bad strings from Configuration.get() by shell-escaping the arguments.
 		end
 		
 		#check if all fallbacks failed and the files are still not present
