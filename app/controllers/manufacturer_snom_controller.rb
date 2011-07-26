@@ -17,9 +17,9 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
 		
 		if ! params[:mac_address].blank?
-			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')           
+			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 			@phone = Phone.where(:mac_address => @mac_address).first
-		
+			
 			if (@phone)
 				if (@phone.ip_address == request.remote_ip)
 					@user = get_user_by_phone(@phone)
@@ -57,7 +57,7 @@ class ManufacturerSnomController < ApplicationController
 				:content_type => 'text/plain',
 				:text => "<!-- No phone specified. -->",
 			)
-		end         
+		end
 	}
 	
 	def show
