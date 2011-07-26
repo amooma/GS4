@@ -2,19 +2,5 @@ misc/freeswitch/fs-conf/*.xml       opt/freeswitch/conf/
 misc/freeswitch/fs-conf/*.tpl       opt/freeswitch/conf/
 #misc/freeswitch/fs-conf/mime.types  opt/freeswitch/conf/
 
-misc/freeswitch/fs-conf/autoload_configs/*.conf.xml   opt/freeswitch/conf/autoload_configs/
-
-misc/freeswitch/fs-conf/dialplan/*.xml                opt/freeswitch/conf/dialplan/
-
-misc/freeswitch/fs-conf/directory/*.xml               opt/freeswitch/conf/directory/
-misc/freeswitch/fs-conf/directory/default/*.xml       opt/freeswitch/conf/directory/default/
-
-misc/freeswitch/fs-conf/ivr_menus/*.xml               opt/freeswitch/conf/ivr_menus/
-
-misc/freeswitch/fs-conf/sip_profiles/*.xml            opt/freeswitch/conf/sip_profiles/
-misc/freeswitch/fs-conf/sip_profiles/external/*.xml   opt/freeswitch/conf/sip_profiles/external/
-misc/freeswitch/fs-conf/sip_profiles/internal/*.xml   opt/freeswitch/conf/sip_profiles/internal/
-
-
 misc/freeswitch/fs-scripts/*.js     opt/freeswitch/scripts/
-
+misc/freeswitch/fs-scripts/*.sh     opt/freeswitch/scripts/
