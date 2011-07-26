@@ -5,7 +5,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	# We can't use load_and_authorize_resource here because
 	# ManufacturerSnom isn't a resource.
-	skip_authorization_check	
+	skip_authorization_check
 	
 	#OPTIMIZE Use https for @xml_menu_url
 	
@@ -15,10 +15,10 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
-	    
-	    if ! params[:mac_address].blank?
-	    	@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-	    else
+		
+		if ! params[:mac_address].blank?
+			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+		else
 			render(
 				:status => 404,
 				:layout => false,
@@ -26,11 +26,12 @@ class ManufacturerSnomController < ApplicationController
 				:text => "<!-- No phone specified. -->",
 			)
 		end
-	              
-	    @phone = Phone.where(:mac_address => @mac_address).first
-	    
-	    if (@phone)
-	        if (controller.action_name == 'show')
+		
+		@phone = Phone.where(:mac_address => @mac_address).first
+		
+		if (@phone)
+			if (controller.action_name == 'show')
+				# Nothing?
 			elsif (@phone.ip_address == request.remote_ip)
 				@user = get_user_by_phone(@phone)
 				@sip_account = get_sip_account(@phone, params[:sip_account])
@@ -59,10 +60,10 @@ class ManufacturerSnomController < ApplicationController
 				:content_type => 'text/plain',
 				:text => "<!-- Phone #{@mac_address.inspect} not found. -->",
 			)
-		end          
+		end
 	}
 	
-	def show	
+	def show
 		##### Codec mapping {
 		# map from Codec names as in seeds.rb to their respective name
 		# (or rather: number) on Snom:
