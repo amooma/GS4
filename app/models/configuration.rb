@@ -11,16 +11,26 @@ class Configuration < ActiveRecord::Base
 	
 	#OPTIMIZE Add do_not_delete flag to model, see db/seeds.rb
 	
-	def self.get( name, default_value = nil )
-		if @@conf.key?( name )
-			return @@conf[name]
+	def self.get( name, default_value = nil, cast_class = nil )
+		if (! @@conf.key?( name ))
+			config_entry = self.where(:name => name).first
+			if config_entry
+				if (cast_class != nil)
+					@@conf[name] = self.cast_explicitely(config_entry.value, cast_class.name)
+				elsif (default_value)
+					@@conf[name] = self.cast_explicitely(config_entry.value, default_value.class.name)
+				else
+					@@conf[name] = config_entry.value
+				end
+			elsif (cast_class != nil)
+				@@conf[name] = self.cast_explicitely(default_value, cast_class.name)
+			else
+				@@conf[name] = default_value
+			end
 		end
 		
-		config_entry = self.where(:name => name).first
-		if config_entry
-			@@conf[name] = config_entry.value
-		else
-			@@conf[name] = default_value ? default_value.to_s : nil
+		if (cast_class != nil)
+			return self.cast_explicitely(@@conf[name], cast_class.name)
 		end
 		return @@conf[name]
 	end
@@ -29,4 +39,33 @@ class Configuration < ActiveRecord::Base
 		@@conf.clear
 	end
 	
+	private
+	def self.cast_explicitely(value, class_name)
+		case class_name
+		when 'Fixnum'
+			begin
+				return Integer(value)
+			rescue
+				return Integer(0)
+			end
+		when 'Integer'
+			begin
+				return Integer(value)
+			rescue
+				return Integer(0)
+			end
+		when 'Float'
+			begin
+				return Float(value)
+			rescue
+				return Float(0)
+			end
+		else
+			begin
+				return String(value)
+			rescue
+				return String('')
+			end
+		end
+	end
 end
