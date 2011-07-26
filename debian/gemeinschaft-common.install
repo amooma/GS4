@@ -27,7 +27,6 @@ app/views/phones/*.erb                          opt/gemeinschaft/app/views/phone
 app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
 app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
 app/views/sip_servers/*.erb                     opt/gemeinschaft/app/views/sip_servers/
-app/views/subscribers/*.erb                     opt/gemeinschaft/app/views/subscribers/
 app/views/voicemail_servers/*.erb               opt/gemeinschaft/app/views/voicemail_servers/
 
 app/views/admin/*.erb                           opt/gemeinschaft/app/views/admin/
