@@ -17,40 +17,37 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
 		
 		if ! params[:mac_address].blank?
-			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-		else
-			render(
-				:status => 404,
-				:layout => false,
-				:content_type => 'text/plain',
-				:text => "<!-- No phone specified. -->",
-			)
-		end
+			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')           
+			@phone = Phone.where(:mac_address => @mac_address).first
 		
-		@phone = Phone.where(:mac_address => @mac_address).first
-		
-		if (@phone)
-			if (controller.action_name == 'show')
-				# Nothing?
-			elsif (@phone.ip_address == request.remote_ip)
-				@user = get_user_by_phone(@phone)
-				@sip_account = get_sip_account(@phone, params[:sip_account])
-				
-				if (@sip_account)
-					@sip_account_id = @sip_account.id
-					@sip_account_name = @sip_account.caller_name
-					@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
-				else
-					@sip_account_id = nil
-					@sip_account_name = ''
-					@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+			if (@phone)
+				if (@phone.ip_address == request.remote_ip)
+					@user = get_user_by_phone(@phone)
+					@sip_account = get_sip_account(@phone, params[:sip_account])
+					
+					if (@sip_account)
+						@sip_account_id = @sip_account.id
+						@sip_account_name = @sip_account.caller_name
+						@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
+					else
+						@sip_account_id = nil
+						@sip_account_name = ''
+						@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+					end
+				elsif (controller.action_name != 'show')
+					render(
+						:status => 404,
+						:layout => false,
+						:content_type => 'text/plain',
+						:text => "<!-- IP address #{request.remote_ip} not authorized. -->",
+					)
 				end
 			else
 				render(
 					:status => 404,
 					:layout => false,
 					:content_type => 'text/plain',
-					:text => "<!-- IP address #{request.remote_ip} not authorized. -->",
+					:text => "<!-- Phone #{@mac_address.inspect} not found. -->",
 				)
 			end
 		else
@@ -58,9 +55,9 @@ class ManufacturerSnomController < ApplicationController
 				:status => 404,
 				:layout => false,
 				:content_type => 'text/plain',
-				:text => "<!-- Phone #{@mac_address.inspect} not found. -->",
+				:text => "<!-- No phone specified. -->",
 			)
-		end
+		end         
 	}
 	
 	def show
