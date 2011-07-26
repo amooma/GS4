@@ -64,6 +64,7 @@ class Ability
         can    :read    , Phone
         can    :edit    , Phone
         can    :create  , Phone
+        can    :destroy , Phone
         can    :reboot  , Phone
         can    :read    , :Setup
       )
