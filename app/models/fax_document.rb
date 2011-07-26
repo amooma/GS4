@@ -10,13 +10,14 @@ class FaxDocument < ActiveRecord::Base
 			self.create_raw_file_from_document()
 		end
 		if (self.raw_file)
-			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+			raw_file = "#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.tif"
 			if (! self.raw_file || ! File.exists?(raw_file))
 				errors.add( :base, I18n.t(:fax_document_not_found))
 			else
-				thumbnail = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.png"
+				thumbnail = "#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.png"
 				if (! File.exists?(thumbnail))
-					create_thumbnail_from_fax( self.raw_file )
+					thumbnail_size = Configuration.get(:fax_thumbnail_size, '210x310')
+					system "convert -resize #{thumbnail_size}\! #{Configuration.get(:fax_files_directory)}/#{raw_file}.tif #{Configuration.get(:fax_files_directory)}/#{raw_file}.png"
 				end
 				if (! self.destination.blank?)
 					originate_call(self.destination, raw_file)
@@ -29,7 +30,7 @@ class FaxDocument < ActiveRecord::Base
 	
 	after_validation( :on => :update ) {
 		if outgoing
-			raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}.tif"
+			raw_file = "#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.tif"
 			if (! self.raw_file || ! File.exists?(raw_file))
 				errors.add( :base, I18n.t(:fax_document_not_found))
 			elsif (! self.destination.blank?)
@@ -39,7 +40,7 @@ class FaxDocument < ActiveRecord::Base
 	}
 	
 	before_destroy {
-		raw_file = "#{FAX_FILES_DIRECTORY}/#{self.raw_file}"
+		raw_file = "#{Configuration.get(:fax_files_directory)}/#{self.raw_file}"
 		begin
 			File.unlink( raw_file + '.tif' )
 		rescue
@@ -65,10 +66,11 @@ class FaxDocument < ActiveRecord::Base
 			errors.add( :base, I18n.t(:fax_document_not_found))
 			return false
 		end
-		resolution = '204x98'
-		page_size = '1728x1078'
+		resolution =  Configuration.get(:fax_default_resolution, '204x98')
+		page_size = Configuration.get(:fax_default_page_size, '1728x1078')
+		
 		output_file = "FAX-OUT-#{SecureRandom.hex(10)}"
-		output_path = "#{FAX_FILES_DIRECTORY}/#{output_file}"
+		output_path = "#{Configuration.get(:fax_files_directory)}/#{output_file}"
 		if (File.exist?(output_path+'.tif'))
 			errors.add( :base, I18n.t(:file_exists))
 			return false
@@ -77,13 +79,16 @@ class FaxDocument < ActiveRecord::Base
 		#create fax g3 file
 		system "gs -q -r#{resolution} -g#{page_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=#{output_path}.tif -- #{input_file}"
 		if (! File.exist?(output_path+'.tif'))
-			system "convert -density 204x98 -resize 1728x1186\! -monochrome -compress Fax #{input_file} #{output_path}.tif"
+			system "convert -density #{resolution} -resize #{page_size}\! -monochrome -compress Fax #{input_file} #{output_path}.tif"
 		end
 		
+		thumbnail_resolution = Configuration.get(:fax_thumbnail_resolution, '21x31')
+		thumbnail_size = Configuration.get(:fax_thumbnail_size, '210x310')
+		
 		#create fax png thumbnail
-		system "gs -q -r21x31 -g210x310 -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}"
+		system "gs -q -r#{thumbnail_resolution} -g#{thumbnail_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=#{output_path}.png -- #{input_file}"
 		if (File.exist?(output_path+'.tif') && ! File.exist?(output_path+'.png'))
-			system "convert -resize 210x310\! #{output_path}.tif #{output_path}.png"
+			system "convert -resize #{thumbnail_size}\! #{output_path}.tif #{output_path}.png"
 		end
 		
 		#check if all fallbacks failed and the files are still not present
@@ -99,20 +104,14 @@ class FaxDocument < ActiveRecord::Base
 		return true
 	end
 	
-	def create_thumbnail_from_fax( raw_file )
-		return system "convert -resize 210x310\! #{FAX_FILES_DIRECTORY}/#{raw_file}.tif #{FAX_FILES_DIRECTORY}/#{raw_file}.png"
-	end
-	
 	def originate_call( destination, raw_file )
-		require 'net/http'
+		if ( sip_server = SipServer.where(:is_local => true).first )
+			domain = sip_server.host
+		else
+			return false
+		end
 		
-		request_path = "/webapi/originate?sofia/internal/#{destination}@#{DOMAIN};fs_path=sip:127.0.0.1:5060%20&txfax(#{raw_file})"
-		
-		http = Net::HTTP.new(XML_RPC_HOST, XML_RPC_PORT)
-		request = Net::HTTP::Get.new(request_path, nil )
-		request.basic_auth(XML_RPC_USER , XML_RPC_PASSWORD)
-		response = http.request( request )
+		require 'xml_rpc'
+		XmlRpc.send_fax(destination, domain, raw_file)
 	end
-
-		
 end
