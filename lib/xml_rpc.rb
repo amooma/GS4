@@ -15,6 +15,7 @@ module XmlRpc
 		else
 			xml_rpc__ssl = false
 		end
+		#xml_rpc__ssl      = (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 		
 		begin
 			server = XMLRPC::Client.new(xml_rpc_host, xml_rpc_directory, xml_rpc_port, nil, nil, xml_rpc_user, xml_rpc_password, xml_rpc__ssl, xml_rpc_timeout)
@@ -40,21 +41,21 @@ module XmlRpc
 	
 	def self.voicemails_get(sip_account, domain)
 		response = request('vm_list', "#{sip_account}@#{domain} xml")
-
+		
 		if (!response || response == 'ERROR!')
 			return false
 		end
 		
 		return Hash.from_xml(response)['voicemail']['message']
 	end
-
+	
 	def self.voicemail_set_read(sip_account, domain, uuid, read = true)
 		if (read)
 			read_status = 'read'
 		else
 			read_status = 'unread'
 		end
-
+		
 		response = request('vm_read', "#{sip_account}@#{domain} #{read_status} #{uuid}")
 		if (!response)
 			return false
@@ -65,7 +66,7 @@ module XmlRpc
 			return false
 		end
 	end
-
+	
 	def self.voicemail_set_unread(sip_account, domain, uuid)
 		return voicemail_set_read(sip_account, domain, uuid, false)
 	end
@@ -84,7 +85,7 @@ module XmlRpc
 	
 	def self.voicemail_get_details(sip_account, domain, uuid)
 		require 'json'
-
+		
 		response = request('vm_fsdb_msg_get', "xml default #{domain} #{sip_account} #{uuid}")
 		if (!response)
 			return false
