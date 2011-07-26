@@ -1,7 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :configurations
-
+	resources :configurations
+	
 	resources :global_contacts
 	
 	resources :personal_contacts
