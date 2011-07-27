@@ -39,16 +39,19 @@ def check_columns( given_columns, object_columns )
 end
 
 # define allowed attributes
-def allowed_attributes( class_name, class_attributes )
+def allowed_attributes( class_object )
 	attributes = {
 		'User' => [
 			'id', 'username', 'sn', 'gn', 'email', 'password', 'role',
 		]
 	}
 	
+	class_name = class_object.name
+	
 	if (attributes.include? class_name)
 		return attributes[class_name]
 	end
+	class_attributes = ['id'].concat(class_object.new.attributes.keys)
 	class_attributes.delete('created_at')
 	class_attributes.delete('updated_at')
 	return class_attributes
@@ -89,12 +92,43 @@ def get_terminal_width( default = nil )
 	return cols
 end
 
+def find_best_locale( env_locale = nil )
+	env_locale ||= ENV['LANG']
+	lang = env_locale.to_s.downcase.gsub('_','-')
+	if lang.match( /^de/    ); return :'de'    ; end
+	if lang.match( /^en-us/ ); return :'en-US' ; end
+	if lang.match( /^en/    ); return :'en-US' ; end
+	return nil  # default locale (config.i18n.default_locale)
+end
+
 
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require File.expand_path('../../config/boot',  __FILE__)
 require APP_PATH
 
-Rails.application.require_environment!
+begin
+	Rails.application.require_environment!
+rescue ActiveRecord::AdapterNotSpecified => e
+	error "No such Rails environment: \"#{Rails.env}\"."
+	exit 1
+end
+
+# Set locale:
+I18n.locale = find_best_locale()
+
+# Make "translation missing" quiet in production:
+if Rails.env.production?
+	I18n.exception_handler = Proc.new { |e, locale=nil, key=nil, args={}|
+		ret = key
+		ret.gsub!( /^activerecord\.models\./, '' )
+		ret.gsub!( /^activerecord\.attributes\./, '' )
+		ret.gsub!( /^simple_form\.hints\./, '' )
+		ret.gsub!('_',' ')
+		ret = ret.humanize
+		ret
+	}
+end
+
 $stderr.print "(Rails environment: #{Rails.env})\n"
 
 
@@ -136,15 +170,15 @@ end
 terminal_width = get_terminal_width( 72 )
 
 usage_banner = <<-HEREDOC
-Usage: #{$0} action resource [options]
-  action:  "list"    : List entries.
-           "add"     : Add an entry.
-           "update"  : Update an entry.
+Usage: #{$0} action [resource] [options]
+  action:  "list"      : List entries.
+           "add"       : Add an entry.
+           "update"    : Update an entry.
+           "delete"    : Delete an entry.
+           "resources" : List available resources.
   resource:  Name of the resource model.
              (e.g. "SipAccount" / "sip_account")
              Plural forms are singularized automatically.
-             Available resources:
-#{  indent=4; str_wrap( get_rails_models.map{ |m| m.to_s }.join(", "), [(terminal_width-indent-1), 30].max ).split("\n").map{ |x| (" " * indent) + x.to_s }.join("\n")  }
 HEREDOC
 
 options = {
@@ -171,8 +205,6 @@ optionparser = OptionParser.new do |opts|
 	opts.separator "  Find them with the -h option e.g. `#{$0} list MyResource -h`."
 end
 
-
-
 # first parameter ist always the action
 if (! ARGV[0])
 	error "No action specified."
@@ -181,39 +213,51 @@ if (! ARGV[0])
 end
 action_name = ARGV[0].downcase
 
-# second parameter is the model name
-if (! ARGV[1])
-	error "No resource specified."
-	error optionparser
-	exit 1
-end
-model_class = ARGV[1]
-begin
-	model_class = model_class.singularize.camelize
-	model_class = model_class.constantize  # This is where errors can happen.
-rescue
-	error "Resource \"#{model_class}\" not found."
-	error optionparser
-	exit 1
-end
 
-# retrieve attribute names from model
-begin
-	attribute_names = allowed_attributes( model_class.name, model_class.new.attributes.keys )
-	column_order =  default_column_order( model_class.name, model_class.column_names )
-rescue ActiveRecord::StatementInvalid => e
-	error "Model \"#{model_class}\" does not have a database table."
-	error optionparser
-	exit 1
-end
+if (action_name != 'resources')
+	# second parameter is the model name
+	if (! ARGV[1])
+		error "No resource specified."
+		error optionparser
+		exit 1
+	end
+	model_class = ARGV[1]
+	begin
+		model_class = model_class.singularize.camelize
+		model_class = model_class.constantize  # This is where errors can happen.
+	rescue
+		error "Resource \"#{model_class}\" not found."
+		error optionparser
+		exit 1
+	end
 
-#optionparser.separator "  "
-optionparser.separator "  Resource-specific options (find by / set attribute):"
-attribute_names.each { |attr_name|
-	optionparser.on( "--#{attr_name} <value>", String, "\"#{attr_name}\" attribute." ) { |value|
-		columns[attr_name] = value
+	# retrieve attribute names from model
+	begin
+		attribute_names = allowed_attributes( model_class )
+		column_order =  default_column_order( model_class.name, model_class.column_names )
+	rescue ActiveRecord::StatementInvalid => e
+		error "Model \"#{model_class}\" does not have a database table."
+		error optionparser
+		exit 1
+	end
+
+	optionparser.separator "  Resource-specific options (find by / set attribute):"
+	optionparser.on( '--id <value>', "Numeric ID", 'Used as key on update/delete operations.') { |value|
+		columns['id'] = value
 	}
-}
+	attribute_names.each { |attr_name|
+		if (attr_name == 'id')
+			next
+		end
+		optionparser.on( "--#{attr_name} <value>",
+			String, I18n.t("activerecord.attributes.#{model_class.name.underscore}.#{attr_name}"),
+			String, I18n.t("simple_form.hints.#{model_class.name.underscore}.#{attr_name}")
+		) { |value|
+			columns[attr_name] = value
+		}
+	}
+end
+
 optionparser.separator ""
 
 
@@ -252,6 +296,28 @@ end
 
 # process comand
 case action_name
+when 'resources'
+	models = get_rails_models
+	if (models)
+		model_name_length_max = 0
+		models.each do |model|
+			model_name_length = model.to_s.length
+			if (model_name_length > model_name_length_max)
+				model_name_length_max = model_name_length
+			end
+		end
+		
+		models.each do |model|
+			model_name = model.to_s
+			model_description = I18n.t("activerecord.models.#{model_name.underscore}").to_s
+			indent = model_name_length_max + 2
+			puts model_name.ljust(model_name_length_max) +
+				"  " + str_wrap(
+					model_description,
+					[ (terminal_width - indent - 1), 30, model_name_length_max + 10 ].max
+				).split("\n").join( "\n" + (" " * indent) )
+		end
+	end
 when 'list'
 	begin
 		if (columns.count > 0)
@@ -298,20 +364,32 @@ when 'update'
 		exit 1
 	end
 	object_found = model_class.where(:id  => columns['id']).first
-	if (object_found)
-		object_updated = object_found.update_attributes(columns)
-	else
+	if (! object_found)
 		error "No object ID \"#{columns.id}\" found."
 		exit 1
 	end
-	
-	if (object_updated)
-		puts "Object \"#{model_class.name}\" updated."
-	else
+	object_updated = object_found.update_attributes(columns)
+	if (! object_updated)
 		error "Object \"#{model_class.name}\" not updated."
 		exit 1
 	end
-#OPTIMIZE Add 'delete' action.
+	puts "Object \"#{model_class.name}\" updated."
+when 'delete'
+	if (columns['id'].blank?)
+		error "No object ID specified."
+		exit 1
+	end
+	object_found = model_class.where(:id  => columns['id']).first
+	if (! object_found)
+		error "No object ID \"#{columns.id}\" found."
+		exit 1
+	end
+	object_deleted = object_found.delete
+	if (! object_deleted)
+		error "Object \"#{model_class.name}\" not deleted."
+		exit 1
+	end
+	puts "Object \"#{model_class.name}\" deleted."
 else
 	error "Invalid action \"#{action_name}\"."
 	error optionparser
