@@ -30,12 +30,14 @@ class AdminController < ApplicationController
       end
     end
   end
+  
   def shutdown
     @result = `sudo /sbin/shutdown -h now`
     respond_to do |format|
-        format.html
+      format.html
     end
-  end       
+  end
+  
   def help
     respond_to do |format|
       format.html
