@@ -55,10 +55,12 @@ Gemeinschaft4::Application.routes.draw do
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => 'help'
+	
 	match '/admin/shutdown',
-				:via	=> [ :get ],
-				:controller => :admin,
-				:action => :shutdown
+		:via        => [ :get ],
+		:controller => :admin,
+		:action     => :shutdown
+	
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,
@@ -70,7 +72,7 @@ Gemeinschaft4::Application.routes.draw do
 		:controller => :freeswitch_call_processing,
 		:action     => 'actions',
 		:format     => :'xml'
-
+	
 	match '/freeswitch-configuration/freeswitch',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_configuration,
