@@ -19,7 +19,7 @@ class ManufacturerSnomController < ApplicationController
 			@phone = Phone.where(:mac_address => @mac_address).first
 			
 			if (@phone)
-				if (@phone.ip_address != request.remote_ip)
+				if (@phone.ip_address == request.remote_ip)
 					@user = get_user_by_phone(@phone)
 					@sip_account = get_sip_account(@phone, params[:sip_account])
 					
