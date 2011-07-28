@@ -333,5 +333,10 @@ en:
   editing_configuration: "Editing configuration"
   configuration_created: "Configuration entry was successfully created"
   configuration_updated: "Configuration entry was successfully updated"
+  configurations: "Configuration"
   list_all_configurations: "All configuration entries"
   
+  maintainance: "Maintainance"
+  
+  shutdown: "System shutdown"
+  shutdown_initiated: "System is shutting down"
