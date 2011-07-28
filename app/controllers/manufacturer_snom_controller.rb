@@ -1,13 +1,11 @@
 class ManufacturerSnomController < ApplicationController
 	
-	#TODO Authentication (=> pko) See freeswitch_*_controller.rb
+	#TODO Authentication
 	# No development access for admins though as this contains personal data.
 	
 	# We can't use load_and_authorize_resource here because
 	# ManufacturerSnom isn't a resource.
 	skip_authorization_check
-	
-	#OPTIMIZE Use https for @xml_menu_url
 	
 	before_filter { |controller|
 		@cfwd_case_busy_id      = CallForwardReason.where( :value => "busy"      ).first.try(:id)
@@ -28,11 +26,11 @@ class ManufacturerSnomController < ApplicationController
 					if (@sip_account)
 						@sip_account_id = @sip_account.id
 						@sip_account_name = @sip_account.caller_name
-						@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
+						@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}/#{@sip_account_id}"
 					else
 						@sip_account_id = nil
 						@sip_account_name = ''
-						@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+						@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
 					end
 				elsif (controller.action_name != 'show')
 					render(
@@ -257,7 +255,7 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def sip_accounts
-		@xml_menu_url = "http://#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
+		@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
 		@sip_accounts = @phone.sip_accounts.all
 	end
 	
