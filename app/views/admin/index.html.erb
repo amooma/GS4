@@ -79,7 +79,7 @@
 	<section>
 		<h2><%= t(:configurations) %></h2>
 		<ul>
-			<li><%= link_to( "#{t(:list_all_configurations)}(#{@number_of_configurations})",
+			<li><%= link_to( "#{t(:list_all_configurations)} (#{@number_of_configurations})",
 				url_for(:controller => '/configurations', :action => 'index')
 			) %></li>
 			<li><%= link_to( t(:new_configuration),
@@ -87,12 +87,14 @@
 			) %></li>
 		</ul>
 	</section>
+	
 	<section>
 		<h2><%= t(:maintainance) %></h2>
-			<ul>
-				<li><%= link_to( t(:shutdown),
-				url_for(:controller => '/admin', :action => 'shutdown' )
-				) %></li>
-			</ul>
+		<ul>
+			<li><%= link_to( t(:shutdown),
+				url_for(:controller => '/admin', :action => 'shutdown')
+			) %></li>
+		</ul>
 	</section>
+	
 </div>
