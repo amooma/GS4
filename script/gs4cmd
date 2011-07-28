@@ -17,7 +17,7 @@ end
 # ensure specified columns exist in model
 def check_columns( given_columns, object_columns )
 	if (object_columns.class != Array)
-		error "Object contains no columns."
+		error "Record contains no columns."
 		return false
 	elsif (given_columns.class == Hash)
 		given_columns = given_columns.keys
@@ -171,11 +171,13 @@ terminal_width = get_terminal_width( 72 )
 
 usage_banner = <<-HEREDOC
 Usage: #{$0} action [resource] [options]
-  action:  "list"      : List entries.
-           "add"       : Add an entry.
-           "update"    : Update an entry.
-           "delete"    : Delete an entry.
-           "resources" : List available resources.
+  action:  "list"       : List records.
+           "count"      : Count records.
+           "add"        : Add a record.
+           "update"     : Update a record.
+           "delete"     : Delete specified records.
+           "delete-all" : Delete all records.
+           "resources"  : List available resources.
   resource:  Name of the resource model.
              (e.g. "SipAccount" / "sip_account")
              Plural forms are singularized automatically.
@@ -242,7 +244,7 @@ if (action_name != 'resources')
 	end
 
 	optionparser.separator "  Resource-specific options (find by / set attribute):"
-	optionparser.on( '--id <value>', "Numeric ID", 'Used as key on update/delete operations.') { |value|
+	optionparser.on( '--id <value>', "Numeric ID", 'Used as single key on update operations.') { |value|
 		columns['id'] = value
 	}
 	attribute_names.each { |attr_name|
@@ -320,13 +322,9 @@ when 'resources'
 	end
 when 'list'
 	begin
-		if (columns.count > 0)
-			entries = model_class.where(columns).all
-		else
-			entries = model_class.all
-		end
+		entries = model_class.where(columns).all
 	rescue => e
-		error "Could not find objects."
+		error "Could not find records."
 		exit 1
 	end
 	if (entries)
@@ -343,29 +341,32 @@ when 'list'
 		}
 		$stderr.puts separator
 	end
+when 'count'
+	entries = model_class.where(columns).all.count
+	puts "#{entries} record(s) \"#{model_class.name}\" found."
 when 'add'
-	new_object = model_class.create(columns)
+	new_object = model_class.new(columns)
 	if (new_object)
 		if (new_object.save)
-			puts "Object \"#{model_class.name}\" added."
+			puts "Record \"#{model_class.name}\" added."
 		else
 			validation_error new_object.errors
-			error "Object \"#{model_class.name}\" could not be added."
+			error "Record \"#{model_class.name}\" could not be added."
 			exit 1
 		end
 	else
-		error "Object \"#{model_class.name}\" not added."
+		error "Record \"#{model_class.name}\" not added."
 		exit 1
 	end
 when 'update'
 	if (columns['id'].blank?)
-		error "No object ID specified."
+		error "No record-ID specified."
 		puts columns
 		exit 1
 	end
 	object_found = model_class.where(:id  => columns['id']).first
 	if (! object_found)
-		error "No object ID \"#{columns.id}\" found."
+		error "No record-ID \"#{columns.id}\" found."
 		exit 1
 	end
 	object_updated = object_found.update_attributes(columns)
@@ -374,22 +375,24 @@ when 'update'
 		exit 1
 	end
 	puts "Object \"#{model_class.name}\" updated."
-when 'delete'
-	if (columns['id'].blank?)
-		error "No object ID specified."
+when 'delete', 'delete-all'
+	
+	if (action_name == 'delete-all')
+		objects_deleted = model_class.destroy_all()
+	else
+		if (columns.count > 0)
+			objects_deleted = model_class.destroy_all(columns)
+		else
+			error "No attributes specified."
+			error "Use \"delete-all\" if you intend to delete all records."
+		end
+	end
+	
+	if (! objects_deleted)
+		error "Records \"#{model_class.name}\" not deleted."
 		exit 1
 	end
-	object_found = model_class.where(:id  => columns['id']).first
-	if (! object_found)
-		error "No object ID \"#{columns.id}\" found."
-		exit 1
-	end
-	object_deleted = object_found.delete
-	if (! object_deleted)
-		error "Object \"#{model_class.name}\" not deleted."
-		exit 1
-	end
-	puts "Object \"#{model_class.name}\" deleted."
+	puts "#{objects_deleted.count} record(s) \"#{model_class.name}\" deleted."
 else
 	error "Invalid action \"#{action_name}\"."
 	error optionparser
