@@ -55,7 +55,10 @@ Gemeinschaft4::Application.routes.draw do
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => 'help'
-	
+	match '/admin/shutdown',
+				:via	=> [ :get ],
+				:controller => :admin,
+				:action => :shutdown
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,
