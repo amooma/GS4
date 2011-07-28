@@ -348,5 +348,6 @@ de:
   editing_configuration: "Konfiguration bearbeiten"
   configuration_created: "Eintrag erfolgreich erstellt"
   configuration_updated: "Eintrag erfolgreich aktualisiert"
+  configurations: "Konfiguration"
   list_all_configurations: "Alle Konfigurationseinträge"
   
