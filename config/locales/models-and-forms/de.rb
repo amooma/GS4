@@ -41,7 +41,7 @@
 			:sip_account_to_extension      => "SIP-Account zu Rufnummer",
 			:subscriber                    => "Subscriber",
 			:version                       => "Version",
-
+			
 		},
 		
 		:attributes => {

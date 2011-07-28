@@ -41,7 +41,7 @@
 			:sip_account_to_extension      => "SIP account to extension",
 			:subscriber                    => "Subscriber",
 			:version                       => "Version",
-                   
+			
 		},
 		
 		:attributes => {
