@@ -71,7 +71,7 @@
 				:sip_account_id         => "SIP-Account ID",
 			},
 			:call_forward_reason => {
-				:value    => "Wert",     
+				:value    => "Wert",
 			},
 			:call_log => {
 				:sip_account   => "SIP-Account",
@@ -118,7 +118,7 @@
 				:outgoing     => "Ausgehend",
 				:received     => "Empfangen am",
 				:sent         => "Gesendet am",
-				:title        => "Titel",   
+				:title        => "Titel",
 			},
 			:global_contact => {
 				:lastname        => "Nachname",
@@ -198,7 +198,7 @@
 				:phone_model_key_id                => "Telefonmodell-Taste",
 				:sip_account_id                    => "SIP-Account-ID",
 				:value                             => "Wert",
-			},  
+			},
 			:phone_key_function_definition => {
 				:name             => "Name",
 				:regex_validation => "Überprüfung des reg. Ausdrucks",
@@ -222,7 +222,7 @@
 				:http_request_timeout => "HTTP-Request-Timeout",
 				:random_password_length => "Passwort-Länge",
 				:random_password_consists_of => "Zeichen im Passwort",
-				:manufacturer_id => "Hersteller-ID",                             
+				:manufacturer_id => "Hersteller-ID",
 			},
 			:phone_model_codec => {
 				:codec_id       => "Codec-ID",
@@ -261,7 +261,7 @@
 				:to_tag          => "To tag",
 				:tuple_id        => "Tuple id",
 				:version         => "Version",
-				:watcher_uri     => "Watcher URI",       
+				:watcher_uri     => "Watcher URI",
 			},
 			:reboot_request => {
 				:end        => "Ende",
@@ -288,7 +288,7 @@
 				:phone_id            => "Telefon-ID",
 				:sip_server_id       => "SIP-Server-ID",
 				:sip_proxy_id        => "SIP-Proxy-ID",
-				:user_id             => "Benutzer-ID", 
+				:user_id             => "Benutzer-ID",
 				:voicemail_server_id => "Voicemail-Server-ID",
 				:position            => "Position",
 			},
@@ -311,7 +311,7 @@
 				:ha1b              => "Ha1b",
 				:password          => "Passwort",
 				:rpid              => "Remote party ID",
-				:username          => "Benutzername",                            
+				:username          => "Benutzername",
 			},
 			:version => {
 				:table_name    => "Tabellen-Name",
@@ -321,7 +321,7 @@
 				:name  => "Name",
 				:value => "Wert",
 			},
-                        
+			
 		},
 	},
 	

@@ -68,10 +68,10 @@
 				:destination            => "Destination",
 				:active                 => "Active",
 				:call_forward_reason_id => "Call forward reason ID",
-				:sip_account_id         => "SIP account ID",                              
+				:sip_account_id         => "SIP account ID",
 			},
 			:call_forward_reason => {
-				:value    => "Wert",     
+				:value    => "Wert",
 			},
 			:call_log => {
 				:sip_account   => "SIP account",
@@ -118,7 +118,7 @@
 				:outgoing     => "Outbound",
 				:received     => "Received",
 				:sent         => "Sent",
-				:title        => "Title",                              
+				:title        => "Title",
 			},
 			:global_contact => {
 				:lastname        => "Lastname",
@@ -198,7 +198,7 @@
 				:phone_model_key_id                => "Phone model key ID",
 				:sip_account_id                    => "SIP Account ID",
 				:value                             => "Value",
-			}, 
+			},
 			:phone_key_function_definition => {
 				:name             => "Name",
 				:regex_validation => "Regular expression validation",
@@ -233,7 +233,7 @@
 				:name           => "Name",
 				:phone_model_id => "Phone model ID",
 				:position       => "Position",
-			},          
+			},
 			:phone_model_mac_address => {
 				:phone_model_id => "Phone model ID",
 				:starts_with    => "Starts with",
@@ -261,7 +261,7 @@
 				:to_tag          => "To tag",
 				:tuple_id        => "Tuple id",
 				:version         => "Version",
-				:watcher_uri     => "Watcher URI",       
+				:watcher_uri     => "Watcher URI",
 			},
 			:reboot_request => {
 				:end        => "End",
@@ -288,7 +288,7 @@
 				:phone_id            => "Phone ID",
 				:sip_server_id       => "SIP server ID",
 				:sip_proxy_id        => "SIP proxy ID",
-				:user_id             => "User ID", 
+				:user_id             => "User ID",
 				:voicemail_server_id => "Voicemail server ID",
 				:position            => "Position",
 			},
@@ -311,7 +311,7 @@
 				:ha1b              => "Ha1b",
 				:password          => "Password",
 				:rpid              => "Remote party ID",
-				:username          => "Username",                            
+				:username          => "Username",
 			},
 			:version => {
 				:table_name    => "Table name",
@@ -321,7 +321,7 @@
 				:name  => "Name",
 				:value => "Value",
 			},
-                        
+			
 		},
 	},
 	
@@ -427,7 +427,7 @@
 				:url => "URL der Webseite des Herstellers",
 			},
 			:sip_account => {
-				:user => "The user account which this SIP account belongs to.",                           
+				:user => "The user account which this SIP account belongs to.",
 				:caller_name => "The caller name of this SIP account.",
 				:auth_name => "The SIP username is used to authenticate the SIP account. You should usually use the randomly generated username. It will automatically be provisioned onto the respective phone.",
 				:password => "The SIP password is used to authenticate the SIP account. You should usually use the randomly generated password. It will automatically be provisioned onto the respective phone.",
