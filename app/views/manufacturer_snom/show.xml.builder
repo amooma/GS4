@@ -37,7 +37,7 @@ xml.settings {
 		xml.gui_fkey3( 'none', :perm => 'R')
 		xml.gui_fkey4( 'none', :perm => 'R')
 		
-		xml.dkey_directory( "url #{@xml_menu_url}/phone_book_internal.xml", :perm => 'RW' )
+		xml.dkey_directory( "url #{@xml_menu_url}/phone_books_menu.xml", :perm => 'RW' )
 		xml.dkey_menu( "url #{@xml_menu_url}/xml_menu.xml", :perm => 'RW' )
 		
 		sip_accounts = {}
