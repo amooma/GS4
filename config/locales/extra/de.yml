@@ -351,7 +351,7 @@ de:
   configurations: "Konfiguration"
   list_all_configurations: "Alle Konfigurationseinträge"
   
-  maintainance: "Wartung"
+  maintenance: "Wartung"
   
-  shutdown: "System herunter fahren"
-  shutdown_initiated: "System wird herunter gefahren"
+  shutdown: "System herunterfahren"
+  shutdown_initiated: "System wird heruntergefahren"

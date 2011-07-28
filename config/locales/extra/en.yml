@@ -336,7 +336,7 @@ en:
   configurations: "Configuration"
   list_all_configurations: "All configuration entries"
   
-  maintainance: "Maintainance"
+  maintenance: "Maintenance"
   
   shutdown: "System shutdown"
   shutdown_initiated: "System is shutting down"
