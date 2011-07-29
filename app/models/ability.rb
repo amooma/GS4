@@ -67,6 +67,8 @@ class Ability
         can    :destroy , Phone
         can    :reboot  , Phone
         can    :read    , :Setup
+        can    :read    , Voicemail
+        can    :destroy , Voicemail
       )
       
       when "cdr"
@@ -113,6 +115,9 @@ class Ability
         #FIXME User can change the user_id attribute. -- See abilities for CallForward.
         can    :destroy , PersonalContact,  :user_id => user.id
         cannot :edit_uid, PersonalContact
+      
+        can    :read    , Voicemail
+        can    :destroy , Voicemail
       )
       
       else

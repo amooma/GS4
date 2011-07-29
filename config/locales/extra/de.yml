@@ -355,3 +355,13 @@ de:
   
   shutdown: "System herunterfahren"
   shutdown_initiated: "System wird heruntergefahren"
+
+  listing_voicemails: "Voicemails"
+  folder: "Verzeichnis"
+  duration: "Dauer"
+  status: "Status"
+  read: "Gelesen"
+  unread: "Ungelesen"
+  received: "Empfangen"
+  caller_number: "Nummer"
+  forwarded_by: "Weitergeleitet durch"

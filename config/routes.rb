@@ -134,7 +134,8 @@ Gemeinschaft4::Application.routes.draw do
 	end
 	
 	resources :fax_documents
-	
+
+	resources :voicemails
 	# The priority is based upon order of creation:
 	# first created -> highest priority.
 	
