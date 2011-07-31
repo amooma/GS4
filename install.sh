@@ -167,6 +167,8 @@ rm 'freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz' 2>&1 || true
 rm 'freeswitch-sounds-music-8000-1.0.8.tar.gz' 2>&1 || true
 rm 'freeswitch-sounds-music-16000-1.0.8.tar.gz' 2>&1 || true
 
+chgrp gemeinschaft /opt/freeswitch/
+
 echo -e "Starting FreeSWITCH\n"
 chown www-data:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 echo -e "Starting FreeSWITCH\n"
