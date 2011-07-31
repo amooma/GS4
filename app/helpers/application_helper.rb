@@ -25,6 +25,7 @@ module ApplicationHelper
 							{ :text => t(:queues)        , :url => call_queues_path },
 							{ :text => t(:conferences)   , :url => conferences_path },
 							{ :text => t(:fax_documents) , :url => fax_documents_path },
+							{ :text => t(:voicemails), :url => voicemails_path},
 						]},
 						
 						{ :text => t(:servers), :sub => [
@@ -46,6 +47,7 @@ module ApplicationHelper
 						{ :text => t(:call_logs)     , :url => call_logs_path },
 						{ :text => t(:personal_contacts), :url => personal_contacts_path},
 						{ :text => t(:global_contacts), :url => global_contacts_path},
+						{ :text => t(:voicemails), :url => voicemails_path},
 					]
 			end
 		else

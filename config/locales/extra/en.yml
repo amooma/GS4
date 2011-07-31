@@ -342,6 +342,7 @@ en:
   shutdown_initiated: "System is shutting down"
 
   listing_voicemails: "Voicemails"
+  voicemails: "Voicemails"
   folder: "Folder"
   duration: "Duration"
   status: "Status"
