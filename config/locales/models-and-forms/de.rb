@@ -348,8 +348,8 @@
 	:simple_form => {
 		:hints => {
 			:user => {
-				:username => "Der Benutzername dient zum Einloggen in dieser Web-Oberfläche.",
-				:password => "Das Passwort dient zum Einloggen in dieser Web-Oberfläche.",
+				:username => "Der Benutzername dient zum Einloggen in die Web-Oberfläche.",
+				:password => "Das Passwort dient zum Einloggen in die Web-Oberfläche.",
 				:password_confirmation => "Erneute Eingabe des Passworts um Tippfehler zu vermeiden.",
 				:sn => "Nachname / Familienname bzw. Firmenname",
 				:gn => "Vorname / Rufname",

@@ -347,8 +347,8 @@
 	:simple_form => {
 		:hints => {
 			:user => {
-				:username => "The username serves to log in to this web GUI.",
-				:password => "The password serves to log in to this web GUI.",
+				:username => "The username serves to log in to the web GUI.",
+				:password => "The password serves to log in to the web GUI.",
 				:password_confirmation => "Repeat the password to avoid typos.",
 				:sn => "Last name / surname / family name resp. company name",
 				:gn => "First name / given name",
