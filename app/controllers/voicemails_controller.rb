@@ -14,7 +14,6 @@ class VoicemailsController < ApplicationController
 		if sip_accounts
 			sip_accounts.each do |sip_account|
 				voicemails_account = XmlRpc.voicemails_get(sip_account.auth_name, sip_account.sip_server.host)
-				
 				if voicemails_account == false
 					flash[:alert] = t(:error_retrieving_voicemail_list, :name => sip_account.auth_name)
 				elsif voicemails_account
@@ -33,8 +32,6 @@ class VoicemailsController < ApplicationController
 				 end
 			end	
 		end
-		
-		
 		
 		respond_to do |format|
 			format.html
@@ -55,7 +52,7 @@ class VoicemailsController < ApplicationController
 				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)
 			end
 		end
-	
+
 		respond_to do |format|
 			format.html
 			format.xml  { render :xml => @voicemail }
