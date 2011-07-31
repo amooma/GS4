@@ -365,3 +365,5 @@ de:
   received: "Empfangen"
   caller_number: "Nummer"
   forwarded_by: "Weitergeleitet durch"
+  error_retrieving_voicemail_list: "Abrufen der Voicemails von %{name} fehlgeschlagen"
+  error_retrieving_voicemail: "Abrufen der Voicemail %{name} fehlgeschlagen"

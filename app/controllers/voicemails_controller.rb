@@ -14,7 +14,10 @@ class VoicemailsController < ApplicationController
 		if sip_accounts
 			sip_accounts.each do |sip_account|
 				voicemails_account = XmlRpc.voicemails_get(sip_account.auth_name, sip_account.sip_server.host)
-				if voicemails_account
+				
+				if voicemails_account == false
+					flash[:alert] = t(:error_retrieving_voicemail_list, :name => sip_account.auth_name)
+				elsif voicemails_account
 					@voicemails = @voicemails.concat(voicemails_account)
 				end
 			end
@@ -25,10 +28,14 @@ class VoicemailsController < ApplicationController
 				 if (voicemail_details && voicemail_details.key?('VM-Message-Duration'))
 				 	voicemail_message['duration'] =  voicemail_details['VM-Message-Duration']
 				 else
+					 flash[:alert] =  t(:error_retrieving_voicemail, :name => voicemail_message['uuid'])
 					 voicemail_message['duration'] = 0
 				 end
 			end	
 		end
+		
+		
+		
 		respond_to do |format|
 			format.html
 			format.xml { render :xml => @voicemails }
@@ -44,8 +51,11 @@ class VoicemailsController < ApplicationController
 		if sip_account
 			@auth_name = sip_account.auth_name
 			@voicemail = XmlRpc.voicemail_get_details(@auth_name, sip_account.sip_server.host, uuid)
+			if @voicemail == false
+				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)
+			end
 		end
-		
+	
 		respond_to do |format|
 			format.html
 			format.xml  { render :xml => @voicemail }

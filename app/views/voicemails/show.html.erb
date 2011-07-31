@@ -1,4 +1,6 @@
 
+
+<% if @voicemail %>
 <p>
   <b><%= t(:sip_account) %>:</b>
   <%= @auth_name %>
@@ -38,5 +40,7 @@
   <b><%= t(:forwarded_by) %>:</b>
   <%= @voicemail['VM-Message-Forwarded-By'] %>
 </p>
+
+<% end %>
 
 <%= link_to t(:Go_to_list), voicemails_path %>
