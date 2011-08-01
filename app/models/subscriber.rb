@@ -11,13 +11,13 @@ class Subscriber < ActiveRecord::Base
   
   private
   def generate_auth_db
-    if (AUTH_DB_ENGINE == 'dbtext')
+    if (Configuration.get(:auth_db_engine) == 'dbtext')
       generate_dbtext()
     end
   end
   
   def generate_dbtext
-    dbtext = File.open(DBTEXT_SUBSCRIBER_FILE, "w")
+    dbtext = File.open(File.expand_path(Configuration.get(:dbtext_subscriber_file, '/etc/kamailio/db_text/subscriber')), "w")
     dbtext.puts("username(str) domain(str) password(str) email_address(str) datetime_created(int) datetime_modified(int) ha1(str) ha1b(str) rpid(str,null)")
     Subscriber.all().each do |subscriber|
       if (subscriber.domain == nil || subscriber.domain == "")
