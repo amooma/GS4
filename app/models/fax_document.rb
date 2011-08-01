@@ -12,19 +12,22 @@ class FaxDocument < ActiveRecord::Base
 			self.create_raw_file_from_document()
 		end
 		if (self.raw_file)
-			raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.tif")
-	
+			raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+			raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_file_suffix}")
 			if (! self.raw_file || ! File.exists?(raw_file))
 				errors.add( :base, I18n.t(:fax_document_not_found))
 			else
-				thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.png")
-	
+				thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
+				thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{thumbnail_suffix}")
 				if (! File.exists?(thumbnail_file))
 					thumbnail_size = "#{Configuration.get(:fax_thumbnail_width, 210, Integer)}x#{Configuration.get(:fax_thumbnail_height, 310, Integer)}"
 					system "convert -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
 				end
 				if (! self.destination.blank?)
-					originate_call(self.destination, raw_file)
+					if (originate_call(self.destination, raw_file) == false)
+						delete_fax_files(self.raw_file)
+						errors.add( :base, I18n.t(:fax_document_not_sent))
+					end
 				end
 			end
 		else
@@ -34,26 +37,20 @@ class FaxDocument < ActiveRecord::Base
 	
 	after_validation( :on => :update ) {
 		if outgoing
-			raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.tif")
+			raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+			raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_file_suffix}")
 			if (! self.raw_file || ! File.exists?(raw_file))
 				errors.add( :base, I18n.t(:fax_document_not_found))
 			elsif (! self.destination.blank?)
-				originate_call(self.destination, raw_file)
+				if (originate_call(self.destination, raw_file) == false)
+					errors.add( :base, I18n.t(:fax_document_not_sent))
+				end
 			end
 		end
 	}
 	
 	before_destroy {
-		raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.tif")
-		begin
-			File.unlink( raw_file )
-		rescue
-		end
-		thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}.png")
-		begin
-			File.unlink( thumbnail_file )
-		rescue
-		end
+		delete_fax_files(self.raw_file)
 	}
 	
 	def upload=(file_data)
@@ -73,10 +70,11 @@ class FaxDocument < ActiveRecord::Base
 		end
 		resolution =  "#{Configuration.get(:fax_default_horizontal_resolution, 204, Integer)}x#{Configuration.get(:fax_default_vertical_resolution, 98, Integer)}"
 		page_size = "#{Configuration.get(:fax_default_page_width, 1728, Integer)}x#{Configuration.get(:fax_default_page_height, 1078, Integer)}"
-		
+		raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+		thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
 		file_base_name = "#{File.basename(Configuration.get(:fax_outgoing_file_prefix, 'fax_out_'))}#{SecureRandom.hex(10)}"
-		raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{file_base_name}.tif")
-		thumbnail_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{file_base_name}.png")
+		raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{file_base_name}#{raw_file_suffix}")
+		thumbnail_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{file_base_name}#{thumbnail_suffix}")
 		
 		if (File.exist?(raw_file))
 			errors.add( :base, I18n.t(:file_exists))
@@ -120,6 +118,21 @@ class FaxDocument < ActiveRecord::Base
 		end
 		
 		require 'xml_rpc'
-		XmlRpc.send_fax(destination, domain, raw_file)
+		return XmlRpc.send_fax(destination, domain, raw_file)
+	end
+	
+	def delete_fax_files(raw_file)
+		thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
+		thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{raw_file}#{thumbnail_suffix}")
+		begin
+			File.unlink( thumbnail_file )
+		rescue
+		end
+		raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+		raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{raw_file}#{raw_file_suffix}")
+		begin
+			File.unlink( raw_file )
+		rescue
+		end
 	end
 end

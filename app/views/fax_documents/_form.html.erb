@@ -1,12 +1,12 @@
 <%= simple_form_for( @fax_document, :html => { :multipart => true }) do |f| %>
 	<%= f.error_messages %>
 	
-	<% if @fax_document.file.nil? %>
+	<% if @edit_document %>
+		<%= @fax_document.file %>
+	<% else %>
 		<%= f.input :file do %>
 			<%= f.file_field :upload %>
 		<% end %>
-	<% else %>
-		<%= @fax_document.file %>
 	<% end %>
 	
 	<%= f.input :destination %>

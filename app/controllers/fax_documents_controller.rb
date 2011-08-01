@@ -25,13 +25,17 @@ class FaxDocumentsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @fax_document }
-      format.tif { 
-        send_file "#{FAX_FILES_DIRECTORY}/#{@fax_document.raw_file}.tif", :type => "image/tiff", 
-          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.tif'
+      format.tif {
+        raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+        raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@fax_document.raw_file}#{raw_file_suffix}")
+        send_file raw_file, :type => "image/tiff", 
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + raw_file_suffix
       }
       format.png {
-        send_file "#{FAX_FILES_DIRECTORY}/#{@fax_document.raw_file}.png", :type => "image/png", :disposition => 'inline', 
-          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.png'
+        thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
+        thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@fax_document.raw_file}#{thumbnail_suffix}")
+        send_file thumbnail_file, :type => "image/png", :disposition => 'inline', 
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + thumbnail_suffix
       }
     end
   end
@@ -50,6 +54,7 @@ class FaxDocumentsController < ApplicationController
   # GET /fax_documents/1/edit
   def edit
     @fax_document = FaxDocument.find(params[:id])
+    @edit_document = true
   end
 
   # POST /fax_documents
