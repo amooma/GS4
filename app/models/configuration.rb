@@ -60,6 +60,18 @@ class Configuration < ActiveRecord::Base
 			rescue
 				return Float(0)
 			end
+		when 'TrueClass'
+			return true
+		when 'FalseClass'
+			return false
+		when 'NilClass'
+			return nil
+		when 'Boolean', 'Configuration::Boolean'
+			begin
+				return ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
+			rescue
+				return false
+			end
 		else
 			begin
 				return String(value)
@@ -68,4 +80,8 @@ class Configuration < ActiveRecord::Base
 			end
 		end
 	end
+	
+	class Boolean
+	end
 end
+
