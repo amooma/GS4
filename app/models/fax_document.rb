@@ -21,7 +21,7 @@ class FaxDocument < ActiveRecord::Base
 				thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{thumbnail_suffix}")
 				if (! File.exists?(thumbnail_file))
 					thumbnail_size = "#{Configuration.get(:fax_thumbnail_width, 210, Integer)}x#{Configuration.get(:fax_thumbnail_height, 310, Integer)}"
-					system "convert -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
+					system "convert -quiet -flatten -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
 				end
 				if (! self.destination.blank?)
 					if (originate_call(self.destination, raw_file) == false)
@@ -84,17 +84,15 @@ class FaxDocument < ActiveRecord::Base
 		#create fax g3 file
 		system "gs -q -r#{resolution} -g#{page_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=\"#{raw_file}\" -- \"#{input_file}\""
 		if (! File.exist?(raw_file))
-			system "convert -density #{resolution} -resize #{page_size}\! -monochrome -compress Fax \"#{input_file}\" \"#{raw_file}\""
+			system "convert -quiet -density #{resolution} -resize #{page_size}\! -monochrome -compress Fax \"#{input_file}\" \"#{raw_file}\""
 		end
 		
 		thumbnail_resolution = "#{Configuration.get(:fax_thumbnail_horizontal_resolution, 21, Integer)}x#{Configuration.get(:fax_thumbnail_vertical_resolution, 31, Integer)}"
 		thumbnail_size = "#{Configuration.get(:fax_thumbnail_width, 210, Integer)}x#{Configuration.get(:fax_thumbnail_height, 310, Integer)}"
 		
 		#create fax png thumbnail
-		system "gs -q -r#{thumbnail_resolution} -g#{thumbnail_size} -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pngmono -sOutputFile=\"#{thumbnail_file}\" -- \"#{input_file}\""
-		
-		if (File.exist?(raw_file) && ! File.exist?(thumbnail_file))
-			system "convert -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
+		if (File.exist?(raw_file))
+			system "convert -quiet -flatten -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
 		end
 		
 		#check if all fallbacks failed and the files are still not present
