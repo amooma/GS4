@@ -421,7 +421,7 @@
 			},
 			:fax_document => {
 				:destination => "The destination number.",
-				:file => "The file you want to send. Supported formats: PDF,PS,EPS,TIFF,G3,PNG,JPG,NEF,...", 
+				:file => "The PDF file you want to send.", 
 				:raw_file => "The raw fax G3 data file.",
 				:outgoing => "Is this fax to be sent.",
 				:received => "Time and date this fax was received.",
