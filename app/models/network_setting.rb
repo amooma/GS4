@@ -73,7 +73,7 @@ class NetworkSetting < ActiveRecord::Base
         dnsmasq_conf = ""
       end
       file_path_etc = "/tmp/"
-      file_path_network = "/tmp"
+      file_path_network = "/tmp/"
       if RAILS_ENV == "production"
         file_path_etc = "/etc/"
         file_path_network = "/etc/network/"
