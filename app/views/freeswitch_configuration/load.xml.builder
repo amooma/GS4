@@ -668,13 +668,13 @@ xml.document( :type => 'freeswitch/xml' ) {
 		
 		xml.configuration( :name => 'fax.conf', :description => 'FAX application configuration' ) {
 			xml.settings {
-				xml.param( :name => 'use-ecm', :value => 'true' )
+				xml.param( :name => 'use-ecm', :value => Configuration.get(:fax_use_ecm, true, Configuration::Boolean) )
 				xml.param( :name => 'verbose', :value => 'true' )
-				xml.param( :name => 'disable-v17', :value => 'false' )
-				xml.param( :name => 'ident', :value => 'Gemeinschaft4 FAX Ident' )
-				xml.param( :name => 'header', :value => 'Gemeinschaft4 FAX Header' )
-				xml.param( :name => 'spool-dir', :value => '/tmp' )
-				xml.param( :name => 'file-prefix', :value => 'fax' )
+				xml.param( :name => 'disable-v17', :value => Configuration.get(:fax_disable_v17, false, Configuration::Boolean) )
+				xml.param( :name => 'ident', :value => h(Configuration.get(:fax_ident, "", String)) )
+				xml.param( :name => 'header', :value => h(Configuration.get(:fax_header, "", String)) )
+				xml.param( :name => 'spool-dir', :value => @fax_files_directory )
+				xml.param( :name => 'file-prefix', :value => @rxfax_file_prefix )
 			}
 		}
 		
@@ -946,10 +946,10 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'set', :data => 'proxy_media=true' )
 					xml.action( :application => 'set', :data => 'bypass_media=false' )
 					xml.action( :application => 'set', :data => 'inherit_codec=true' )
-					xml.action( :application => 'set', :data => 'fax_enable_t38_request=true' )
-					xml.action( :application => 'set', :data => 'fax_enable_t38=true' )
-					xml.action( :application => 'set', :data => "api_hangup_hook=system ${base_dir}/scripts/fax_store.sh FAX-IN-${uuid} ${destination_number} ${caller_id_number}" )
-					xml.action( :application => 'rxfax', :data => "#{FAX_FILES_DIRECTORY}/FAX-IN-${uuid}.tif" )
+					xml.action( :application => 'set', :data => "fax_enable_t38_request=#{Configuration.get(:fax_enable_t38_request, true, Configuration::Boolean)}" )
+					xml.action( :application => 'set', :data => "fax_enable_t38=#{Configuration.get(:fax_enable_t38, true, Configuration::Boolean)}" )
+					xml.action( :application => 'set', :data => "api_hangup_hook=system ${base_dir}/scripts/fax_store.sh #{@rxfax_file_base_name} ${destination_number} ${caller_id_number}" )
+					xml.action( :application => 'rxfax', :data => @rxfax_file )
 					xml.action( :application => 'hangup' )
 				}
 			}
