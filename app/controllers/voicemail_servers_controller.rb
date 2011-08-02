@@ -1,5 +1,7 @@
 class VoicemailServersController < ApplicationController
-  
+    
+  skip_before_filter :setup, :only => :new
+    
   before_filter :authenticate_user!
   
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
