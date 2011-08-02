@@ -1,6 +1,6 @@
 class NetworkSettingsController < ApplicationController
 
-  skip_before_filter :setup, :only => [:new, :create]
+  skip_before_filter :setup, :only => [:new, :create, :show]
   before_filter :authenticate_user!
   
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
@@ -51,7 +51,7 @@ class NetworkSettingsController < ApplicationController
 
     respond_to do |format|
       if @network_setting.save
-        format.html { redirect_to(@network_setting, :notice => t.(:network_setting_created)) }
+        format.html { redirect_to(@network_setting, :notice => t(:network_setting_created)) }
         format.xml  { render :xml => @network_setting, :status => :created, :location => @network_setting }
       else
         format.html { render :action => "new" }

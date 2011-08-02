@@ -29,14 +29,18 @@ class AdminController < ApplicationController
   
   
   def shutdown
+    if RAILS_ENV == "production"
     @result = `sudo /sbin/shutdown -h now`
+    end
     respond_to do |format|
       format.html
     end
   end
 
   def reboot
+    if RAILS_ENV == "production"
     @result = `sudo /sbin/shutdown -r now`
+    end
     respond_to do |format|
       format.html
     end
