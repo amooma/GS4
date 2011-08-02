@@ -357,6 +357,7 @@ en:
 
 
   network_setting: "Network settings"
+  new_network_seting: "Network settings"
   editing_network_setting: "Edit network settings"
   network_setting_updated: "Network settings updated. Please reboot to activate changes."
   network_setting_created: "Network settings saved. Please reboot to activate changes."
@@ -370,4 +371,4 @@ en:
   start_dhcp_server: "Start DHCP server"
   interface: "Network interface"
   reboot_initiated: "System is rebooting"
-  reboot: "
+  reboot: "Reboot"

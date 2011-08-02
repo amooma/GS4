@@ -371,6 +371,7 @@ de:
   error_retrieving_voicemail: "Abrufen der Voicemail %{name} fehlgeschlagen"
   
   network_setting: "Netzwerk Einstellungen"
+  new_network_setting: "Netzwerk Einstellungen"
   editing_network_setting: "Netzwerk Einstellungen bearbeiten"
   network_setting_updated: "Netwerkeinsellungen aktualisiert. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
   network_setting_created: "Netzwerkeinstellungen erstellt. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
