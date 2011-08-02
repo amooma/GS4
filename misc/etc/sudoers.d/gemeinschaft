@@ -1,3 +1,4 @@
 Cmnd_Alias SHUTDOWN = /sbin/shutdown -h now
-www-data  ALL = (ALL) NOPASSWD: SHUTDOWN
+Cmnd_Alias REBOOT = /sbin/shutdown -r now
+www-data  ALL = (ALL) NOPASSWD: SHUTDOWN, REBOOT
 

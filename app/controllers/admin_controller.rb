@@ -11,7 +11,11 @@ class AdminController < ApplicationController
   
   
   def index
-    if SipServer.count == 0 || SipProxy.count == 0 || VoicemailServer.count == 0
+    if NetworkSetting.count == 0
+      respond_to do |format|
+        format.html { redirect_to(new_network_setting_path) }
+      end
+    elsif SipServer.count == 0 || SipProxy.count == 0 || VoicemailServer.count == 0
       respond_to do |format|
         format.html { redirect_to(admin_setup_index_path) }
       end
@@ -33,6 +37,13 @@ class AdminController < ApplicationController
   
   def shutdown
     @result = `sudo /sbin/shutdown -h now`
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def reboot
+    @result = `sudo /sbin/shutdown -r now`
     respond_to do |format|
       format.html
     end
