@@ -343,6 +343,7 @@
 				:value => "Wert",
 			},
 			:network_setting => {
+				:network_setting_created => "etzwerkeinstellungen erstellt. Bitte starten Sie das System neu, um die Änderungen zu aktivieren.",
 				:ip_address => "IP Adresse",
 				:netmask => "Netzmaske",
 				:gateway => "Standard Gateway",

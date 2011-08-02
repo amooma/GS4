@@ -1,6 +1,6 @@
 class SipProxiesController < ApplicationController
 
-  skip_before_filter :setup, :only => :new
+  skip_before_filter :setup, :only => [:new, :create]
 
   before_filter :authenticate_user!
   
