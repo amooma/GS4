@@ -14,22 +14,9 @@ class NetworkSetting < ActiveRecord::Base
       errors.add(:dhcp_client, I18n.t(:can_not_be_changed))
     end
   }
-  validate_hostname_or_ip :ip_address, :allow_nil => true
-  validates_presence_of :ip_address, :if => Proc.new {
-    |me| self.dhcp_client == true }
-
-  validate_hostname_or_ip :dhcp_range_start, :allow_nil => true
-  validates_presence_of  :dhcp_range_start, :if => Proc.new {
-    |me| self.start_dhcp_server == true 
-  }
-  validate_hostname_or_ip :name_server, :allow_nil => true
   
-  validate_hostname_or_ip :gateway, :allow_nil => true
-  
-  validate_hostname_or_ip :dhcp_range_end, :allow_nil => true
-  validates_presence_of :dhcp_range_end, :if => Proc.new {
-    |me| self.start_dhcp_server == false || self.dhcp_client == true
-  }
+  validate :validate_settings
+ 
   validates_inclusion_of :interface, :in => ['eth0']
 
 
@@ -93,9 +80,41 @@ class NetworkSetting < ActiveRecord::Base
     end
   end
  }
+ 
+  def validate_settings
+    if dhcp_client 
+      if ! ip_address.empty?
+        errors.add(:ip_address, I18n.t(:must_not_be_set))
+      end
+      if ! netmask.empty?
+        errors.add(:netmask, I18n.t(:must_not_be_set))
+      end
+      if ! gateway.empty?
+        errors.add(:gateway, I18n.t(:must_not_be_set))
+      end
+      if start_dhcp_server
+        errors.add(:start_dhcp_server, I18n.t(:must_not_be_set))
+      end
+      if ! name_server.empty?
+        errors.add(:name_server, I18n.t(:must_not_be_set))
+      end
+    else
+      ActiveRecord::Base.validate_hostname_or_ip :ip_address
+      ActiveRecord::Base.validate_hostname_or_ip :gateway
+      ActiveRecord::Base.validate_hostname_or_ip :name_server
+      ActiveRecord::Base.validate_netmask :netmask
+    end
+    
+    if start_dhcp_server
+      ActiveRecord::Base.validate_hostname_or_ip :dhcp_range_start
+      ActiveRecord::Base.validate_hostname_or_ip :dhcp_range_end
+    end
+  end
+  
   private
   
   def write_files(filename, output)
     File.open(filename, 'w') {|f| f.write(output) }
   end
+ 
 end

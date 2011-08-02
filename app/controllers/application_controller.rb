@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   # https://github.com/ryanb/cancan/wiki/Ensure-Authorization
   check_authorization :if => :requires_authorization
-  before_filter :setup
+  before_filter :setup, :only => [ :index, :show ]
   
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied. (Action: #{exception.action}, Resource: #{exception.subject})"

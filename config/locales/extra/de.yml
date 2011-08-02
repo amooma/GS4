@@ -375,6 +375,10 @@ de:
   editing_network_setting: "Netzwerk Einstellungen bearbeiten"
   network_setting_updated: "Netwerkeinsellungen aktualisiert. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
   network_setting_created: "Netzwerkeinstellungen erstellt. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
+  must_not_be_set: "Darf nicht gesetzt sein"
+  can_not_be_changed: "Kann nicht geändert werden"
+  allready_configured: "Bereits eingerichtet"
+
   ip_address: "IP Adresse"
   netmask: "Netzmaske"
   gateway: "Standard Gateway"

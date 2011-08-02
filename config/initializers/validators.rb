@@ -8,7 +8,10 @@ ActiveRecord::Base.class_eval do
       :allow_nil    => false,
     }.merge!( options ) )
   end
-  
+  def self.validate_netmask(attr_name)
+    validates_format_of [attr_name ], :with =>
+    /^(((128|192|224|240|248|252|254)\.0\.0\.0)|(255\.(0|128|192|224|240|248|252|254)\.0\.0)|(255\.255\.(0|128|192|224|240|248|252|254)\.0)|(255\.255\.255\.(0|128|192|224|240|248|252|254)))$/i
+  end
   def self.validate_hostname_or_ip( attr_names, options={} )
     # Validate the server. This is the "host" rule from RFC 3261
     # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
