@@ -35,6 +35,12 @@ class FreeswitchConfigurationController < ApplicationController
 		@xml_rpc_user      = Configuration.get(:xml_rpc_user )
 		@xml_rpc_password  = Configuration.get(:xml_rpc_password )
 		
+		raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+		@rxfax_file_prefix = File.basename(Configuration.get(:fax_incoming_file_prefix, 'fax_in_'))
+		@rxfax_file_base_name = "#{@rxfax_file_prefix}${uuid}#{raw_file_suffix}"
+		@rxfax_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@rxfax_file_base_name}")
+		@fax_files_directory =  File.expand_path( Configuration.get(:fax_files_directory) )
+
 		respond_to { |format|
 			format.xml 
 		}
