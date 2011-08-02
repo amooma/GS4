@@ -100,9 +100,11 @@
 				:name  => "Name",
 			},
 			:conference => {
-				:name  => "Name",
-				:pin   => "Password",
-				:uuid  => "Identifier",
+				:name    => "Name",
+				:pin     => "Password",
+				:uuid    => "Identifier",
+				:user    => "User",                            
+				:user_id => "User ID",
 			},
 			:conference_to_extension => {
 				:conference     => "Conference",
@@ -405,9 +407,11 @@
 				:name  => "Name of the codec e.g. alaw,ulaw,gsm",
 			},
 			:conference => {
-				:name => "A title of your choice.",
-				:pin => "A numeric password that callers have to enter in order to enter this conference room.",
-				:uuid => "Is used for the system-internal identification and should usually not be changed.",
+				:name    => "A title of your choice.",
+				:pin     => "A numeric password that callers have to enter in order to enter this conference room.",
+				:uuid    => "Is used for the system-internal identification and should usually not be changed.",
+				:user    => "The user which this conference belongs to.",
+				:user_id => "Relation to User"
 			},
 			:conference_to_extension => {
 				:conference_id  => "Relation to Conference",
@@ -463,7 +467,7 @@
 				:phone_mobile => "Cell phone number",
 				:fax_private => "Private fax number",
 				:fax_business => "Business fax number",
-				:user_id => "Realtion to User"                  
+				:user_id => "Relation to User",                  
 			},
 			:node => {
 				:management_host => "Host name / IP address. Do not use “localhost” or “127.0.0.1” here, unless this is the only node in a 1-server setup.",
