@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719195722) do
+ActiveRecord::Schema.define(:version => 20110731141828) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -152,6 +152,20 @@ ActiveRecord::Schema.define(:version => 20110719195722) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "network_settings", :force => true do |t|
+    t.string   "ip_address"
+    t.string   "netmask"
+    t.string   "gateway"
+    t.string   "name_server"
+    t.string   "dhcp_range_start"
+    t.string   "dhcp_range_end"
+    t.boolean  "start_dhcp_server"
+    t.boolean  "dhcp_client"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "interface"
   end
 
   create_table "nodes", :force => true do |t|

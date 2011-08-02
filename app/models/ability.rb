@@ -69,6 +69,10 @@ class Ability
         can    :read    , :Setup
         can    :read    , Voicemail
         can    :destroy , Voicemail
+        can    :create  , NetworkSetting
+        can    :read    , NetworkSetting
+        can    :edit    , NetworkSetting
+        can    :update  , NetworkSetting
       )
       
       when "cdr"

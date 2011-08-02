@@ -41,6 +41,7 @@
 			:sip_account_to_extension      => "SIP account to extension",
 			:subscriber                    => "Subscriber",
 			:version                       => "Version",
+			:network_setting							 => "Network settings"
 			
 		},
 		
@@ -340,7 +341,17 @@
 				:name  => "Name",
 				:value => "Value",
 			},
-			
+			:network_setting => {
+				:ip_address => "IP address",
+				:netmask => "Netmask",
+				:gateway => "Defaullt gateway",
+				:name_server => "DNS server",
+				:dhcp_range_start => "First available dhcp address",
+				:dhcp_range_end => "Last available IP address",
+				:dhcp_client => "Obtain IP address automatically",
+				:start_dhcp_server => "Start DHCP Server",
+				:interface => "Network interface",
+			},
 		},
 	},
 	
@@ -633,7 +644,10 @@
 				:name  => "Configuration key",
 				:value => "Configuration value",
 			},
-			
+			:network_setting => {
+				:ip_address => "IP address of the server. Can NOT be changed afterwards!",
+				:dhcp_client => "IP address will be obtained from an existing DHCP server. Can NOT be changed afterwards!"
+			},
 		},
 	},
 }}

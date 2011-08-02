@@ -41,6 +41,7 @@
 			:sip_account_to_extension      => "SIP-Account zu Rufnummer",
 			:subscriber                    => "Subscriber",
 			:version                       => "Version",
+			:network_setting							 => "Netzwerk Konfiguration"
 			
 		},
 		
@@ -341,6 +342,17 @@
 				:name  => "Name",
 				:value => "Wert",
 			},
+			:network_setting => {
+				:ip_address => "IP Adresse",
+				:netmask => "Netzmaske",
+				:gateway => "Standard Gateway",
+				:name_server => "DNS Server",
+				:dhcp_range_start => "Erste verfügbare DHCP Adresse",
+				:dhcp_range_end => "Letzte verfügbare DHCP Adresse",
+				:dhcp_client => "IP Adresse automatisch beziehen",
+				:start_dhcp_server => "DHCP Server starten",
+				:interface => "Netzwerk Schnittstelle",
+			},
 			
 		},
 	},
@@ -634,7 +646,10 @@
 				:name  => "Name des Konfigurationseintrags",
 				:value => "Wert des Konfigurationseintrags",
 			},
-			
+			:network_setting => {
+				:ip_address => "IP Adresse des Servers. Kann NICHT mehr geändert werden!",
+				:dhcp_client => "Die IP Adresse wird von einem bestehenden DHCP Server bezogen. Kann NICHT mehr geändert werden!"
+			}	,
 		},
 	},
 }}
