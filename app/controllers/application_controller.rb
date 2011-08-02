@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   
   # https://github.com/ryanb/cancan/wiki/Ensure-Authorization
   check_authorization :if => :requires_authorization
+  before_filter :setup
   
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied. (Action: #{exception.action}, Resource: #{exception.subject})"
@@ -68,5 +69,15 @@ class ApplicationController < ActionController::Base
     ]
     return ! no_cancan_for_controllers.include?( controller_name.to_s.downcase )
   end
-  
+  def setup
+    if NetworkSetting.count == 0 
+      respond_to do |format|
+        format.html { redirect_to(new_network_setting_path) }
+      end
+    elsif SipServer.count == 0 || SipProxy.count == 0 || VoicemailServer.count == 0
+      respond_to do |format|
+        format.html { redirect_to(admin_setup_index_path) }
+      end
+    end
+  end
 end
