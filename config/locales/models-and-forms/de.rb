@@ -423,7 +423,7 @@
 			},
 			:fax_document => {
 				:destination => "Die Ziel-Rufnummer.",
-				:file => "Die als Fax-Dokument zu sendende Bild-Datei.",  #OPTIMIZE Unterstützte Datei-Formate nennen.
+				:file => "Die zu versendende Datei. Unterstützte Formate: PDF,PS,EPS,TIFF,G3,PNG,JPG,NEF,...", 
 				:raw_file => "Die Faxdatei im G3 Rohformat.",
 				:outgoing => "Soll das Fax versendet werden?",
 				:received => "Zeitpunkt des Empfangs",
