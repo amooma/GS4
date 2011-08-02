@@ -78,9 +78,9 @@ class NetworkSetting < ActiveRecord::Base
         file_path_etc = "/etc/"
         file_path_network = "/etc/network/"
       end
-      write_files('#{file_path_etc}dnsmasq.conf', dnsmasq_conf)
-      write_files('#{file_path_etc}resolv.conf', resolv_conf)
-      write_files('#{file_path}interfaces', network_interfaces)
+      write_files("#{file_path_etc}dnsmasq.conf", dnsmasq_conf)
+      write_files("#{file_path_etc}resolv.conf", resolv_conf)
+      write_files("#{file_path_network}interfaces", network_interfaces)
     end
   }
  after_save(:on => :create) {
