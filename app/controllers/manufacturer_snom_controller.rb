@@ -19,6 +19,7 @@ class ManufacturerSnomController < ApplicationController
 			@phone = Phone.where(:mac_address => @mac_address).first
 			
 			if (@phone)
+	            @xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"  
 				if (@phone.ip_address == request.remote_ip)
 					@user = get_user_by_phone(@phone)
 					@sip_account = get_sip_account(@phone, params[:sip_account])
@@ -30,7 +31,6 @@ class ManufacturerSnomController < ApplicationController
 					else
 						@sip_account_id = nil
 						@sip_account_name = ''
-						@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
 					end
 				elsif (controller.action_name != 'show')
 					render(
