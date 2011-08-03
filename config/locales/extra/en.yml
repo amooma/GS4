@@ -364,7 +364,6 @@ en:
   must_not_be_set: "Must not be set"
   can_not_be_changed: "Can not be changes"
   allready_onfigured: "Allready configured"
-  ip_address: "IP address"
   netmask: "Netmask"
   gateway: "Default gateway"
   name_server: "DNS server"

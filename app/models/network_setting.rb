@@ -15,7 +15,7 @@ class NetworkSetting < ActiveRecord::Base
     end
   }
   
-  validate :validate_settings
+  #validate :validate_settings
  
   validates_inclusion_of :interface, :in => ['eth0']
 
@@ -100,8 +100,8 @@ class NetworkSetting < ActiveRecord::Base
       end
     else
       ActiveRecord::Base.validate_hostname_or_ip :ip_address
-      ActiveRecord::Base.validate_hostname_or_ip :gateway
-      ActiveRecord::Base.validate_hostname_or_ip :name_server
+      ActiveRecord::Base.validate_hostname_or_ip :gateway, :allow_nil => true
+      ActiveRecord::Base.validate_hostname_or_ip :name_server, :allow_nil => true
       ActiveRecord::Base.validate_netmask :netmask
     end
     

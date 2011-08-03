@@ -14,18 +14,18 @@
     <th></th>
   </tr>
 
-<% @network_settings.each do |network_setting| %>
+<% @network_settings.each do |network_setting2| %>
   <tr>
-    <td><%= network_setting.ip_address %></td>
-    <td><%= network_setting.netmask %></td>
-    <td><%= network_setting.gateway %></td>
-    <td><%= network_setting.name_server %></td>
-    <td><%= network_setting.dhcp_range_start %></td>
-    <td><%= network_setting.dhcp_range_end %></td>
-    <td><%= network_setting.start_dhcp_server %></td>
-    <td><%= network_setting.dhcp_client %></td>
-    <td><%= link_to t(:show), network_setting %></td>
-    <td><%= link_to t(:edit), edit_network_setting_path(network_setting) %></td>
+    <td><%= network_setting2.ip_address %></td>
+    <td><%= network_setting2.netmask %></td>
+    <td><%= network_setting2.gateway %></td>
+    <td><%= network_setting2.name_server %></td>
+    <td><%= network_setting2.dhcp_range_start %></td>
+    <td><%= network_setting2.dhcp_range_end %></td>
+    <td><%= network_setting2.start_dhcp_server %></td>
+    <td><%= network_setting2.dhcp_client %></td>
+    <td><%= link_to t(:show), network_setting2 %></td>
+    <td><%= link_to t(:edit), edit_network_setting_path(network_setting2) %></td>
   </tr>
 <% end %>
 </table>

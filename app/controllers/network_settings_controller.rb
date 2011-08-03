@@ -1,6 +1,6 @@
 class NetworkSettingsController < ApplicationController
 
-  skip_before_filter :setup, :only => [:new, :create, :show]
+  skip_before_filter :setup
   before_filter :authenticate_user!
   
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions

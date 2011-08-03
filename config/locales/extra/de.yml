@@ -379,7 +379,6 @@ de:
   can_not_be_changed: "Kann nicht geändert werden"
   allready_configured: "Bereits eingerichtet"
 
-  ip_address: "IP Adresse"
   netmask: "Netzmaske"
   gateway: "Standard Gateway"
   name_server: "DNS Server"
