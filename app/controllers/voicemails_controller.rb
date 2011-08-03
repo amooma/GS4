@@ -17,7 +17,11 @@ class VoicemailsController < ApplicationController
 				if voicemails_account == false
 					flash[:alert] = t(:error_retrieving_voicemail_list, :name => sip_account.to_display)
 				elsif voicemails_account
-					@voicemails = @voicemails.concat(voicemails_account)
+					if (voicemails_account.class == Array)
+						 @voicemails = @voicemails.concat(voicemails_account)
+					else	
+						 @voicemails << voicemails_account
+					end
 				end
 			end
 		end
