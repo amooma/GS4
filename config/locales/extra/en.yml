@@ -378,3 +378,13 @@ en:
   user_to_display: "%{username} (%{email})"
   sip_account_to_display: "%{caller_name} (%{auth_name})"
   
+  voicemail_pin_change: "Change voicemail PIN"
+  old_voicemail_pin: "Current Voicemail PIN"
+  voicemail_pin_confirmation: "Voicemail PIN confirmation"
+  voicemail_no_pin: "No PIN"
+  voicemail_no_old_pin: "No current PIN"
+  voicemail_no_pin_confirmation: "No confirmaton PIN"
+  voicemail_pin_confirmation_different: "PIN and confirmation PIN differ"
+  voicemail_old_pin_different: "PIN and current PIN differ"
+  voicemail_pin_changed: "Voicemail PIN changed"
+  

@@ -141,6 +141,10 @@ Gemeinschaft4::Application.routes.draw do
 	resources :fax_documents
 
 	resources :voicemails
+    
+	match 'pin_change' => 'pin_change#edit', :as => :pin_change
+	match 'pin_change/update' => 'pin_change#update', :as => :pin_change
+	
 	# The priority is based upon order of creation:
 	# first created -> highest priority.
 	

@@ -1,0 +1,2 @@
+class PinChange < SipAccount
+end

@@ -392,3 +392,13 @@ de:
   
   user_to_display: "%{username} (%{gn} %{sn})"
   sip_account_to_display: "%{caller_name} (%{auth_name})"
+  
+  voicemail_pin_change: "Voicemail PIN Ändern"
+  old_voicemail_pin: "Bisherige Voicemail PIN"
+  voicemail_pin_confirmation: "Voicemail PIN Bestätigung"
+  voicemail_no_pin: "Keine PIN angegeben"
+  voicemail_no_old_pin: "Keine bisherige PIN angegeben"
+  voicemail_no_pin_confirmation: "Keine Bestätigungs-PIN eingegeben"
+  voicemail_pin_confirmation_different: "PIN und Bestätigung stimmen nicht überein"
+  voicemail_old_pin_different: "PIN und bisherige PIN stimmen nicht überein"
+  voicemail_pin_changed: "Voicemail PIN erfolgreich geändert"

@@ -73,6 +73,8 @@ class Ability
         can    :read    , NetworkSetting
         can    :edit    , NetworkSetting
         can    :update  , NetworkSetting
+        can    :edit    , PinChange, :user_id => user.id
+        can    :update  , PinChange, :user_id => user.id
       )
       
       when "cdr"
@@ -128,6 +130,10 @@ class Ability
         can    :edit,     Conference,  :user_id => user.id
         can    :update  , Conference,  :user_id => user.id
         cannot :edit_uid, Conference
+
+		can    :edit    , PinChange, :user_id => user.id
+        can    :update  , PinChange, :user_id => user.id
+      
       )
       
       else
