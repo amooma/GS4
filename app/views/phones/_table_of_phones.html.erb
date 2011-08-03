@@ -20,7 +20,7 @@
       <ul>
         <li><%= link_to t(:new_sip_account), new_phone_sip_account_path(phone) %></li>
 <% phone.sip_accounts.each { |sip_account| %>
-        <li><%= link_to sip_account.auth_name, phone_sip_account_path(phone, sip_account) %></li>
+        <li><%= link_to sip_account.to_display, phone_sip_account_path(phone, sip_account) %></li>
 <% } %>
       </ul>
     </td>
