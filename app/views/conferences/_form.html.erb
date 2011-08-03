@@ -1,6 +1,16 @@
 <%= simple_form_for( @conference ) do |f| %>
 	<%= f.error_messages %>
-	
+
+	<% if can?( :edit_uid, @conference ) %>
+		<%= f.input :user do %>
+			<%= f.select( :user_id,
+				@users.collect {|r| [ r.to_display, r.id ] },
+				{ :include_blank => true, :selected => @conference.user_id }
+			) %>
+		<% end %>
+	<% else %>
+		<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+	<% end %>	
 	<%= f.input :name %>
 	<%= f.input :pin %>
 	<%= f.input :uuid, :as => :hidden %>

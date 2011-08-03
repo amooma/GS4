@@ -15,8 +15,11 @@ class VoicemailsController < ApplicationController
 			sip_accounts.each do |sip_account|
 				voicemails_account = XmlRpc.voicemails_get(sip_account.auth_name, sip_account.sip_server.host)
 				if voicemails_account == false
-					flash[:alert] = t(:error_retrieving_voicemail_list, :name => sip_account.auth_name)
+					flash[:alert] = t(:error_retrieving_voicemail_list, :name => sip_account.to_display)
 				elsif voicemails_account
+					voicemails_account.each do |voicemail|
+						voicemail['sip_account_display'] = sip_account.to_display
+					end
 					@voicemails = @voicemails.concat(voicemails_account)
 				end
 			end
@@ -47,6 +50,7 @@ class VoicemailsController < ApplicationController
 		
 		if sip_account
 			@auth_name = sip_account.auth_name
+			@sip_account_display = sip_account.to_display
 			@voicemail = XmlRpc.voicemail_get_details(@auth_name, sip_account.sip_server.host, uuid)
 			if @voicemail == false
 				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)

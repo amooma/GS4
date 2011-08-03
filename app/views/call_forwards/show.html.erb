@@ -4,7 +4,7 @@
   <b><%= t(:sip_account) %>:</b>
   <%
     if @call_forward.sip_account
-      %><%= @call_forward.sip_account.caller_name %> <small>(ID <%= @call_forward.sip_account_id %>)</small><%
+      %><%= @call_forward.sip_account.to_display %> <%
     end
   %>
 </p>

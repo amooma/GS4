@@ -13,7 +13,7 @@
 			<th><%= extension.extension.extension %></th>
 			<td><%
 				if extension.extension.sip_accounts.first
-					%>&rarr; <%= t(:sip_account) %>: <%= extension.extension.sip_accounts.first.caller_name %><%
+					%>&rarr; <%= t(:sip_account) %>: <%= extension.extension.sip_accounts.first.to_display %><%
 				end
 			%></td>
 		</tr>
@@ -28,7 +28,7 @@
 	<table>
 		<% @sip_accounts.each do |sip_account| %>
 		<tr>
-			<th><%= sip_account.caller_name %></th>
+			<th><%= sip_account.to_display %></th>
 			<td><%=
 				sip_account.registered? ? t(:state_registered) : t(:state_not_registered)
 			%></td>

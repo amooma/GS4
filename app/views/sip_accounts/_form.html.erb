@@ -3,7 +3,7 @@
 	
 	<%= f.input :user do %>
 		<%= f.select( :user_id,
-			@users.collect {|r| [ "#{r.sn}, #{r.gn} (#{r.username}, #{r.email})", r.id ] },
+			@users.collect {|r| [ r.to_display, r.id ] },
 			{ :include_blank => true, :selected => @sip_account.user_id }
 		) %>
 	<% end %>

@@ -11,7 +11,7 @@
 </p>
 
 <b><%= t(:extensions) %>:</b>
-  <% if @conference.extensions.count == 0 %>
+  <% if @conference.extensions.count == 0 && current_user.role == "admin" %>
   <div class="noticebox">
     <%= t(:conference_need_to_create_extension) %>
   </div>
@@ -20,9 +20,13 @@
   <% @conference.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
   <% end %>
+    <% if current_user.role == "admin" %>
     <li><%= link_to t(:new_extension), new_conference_extension_path(@conference, {:destination => @conference.uuid}) %>
+    <% end %>
   </ul>
 </p>
 
+<% if (current_user.role == "admin" || current_user.id == @conference.user_id) %>
 <%= link_to t(:edit), edit_conference_path(@conference) %> |
+<% end %>
 <%= link_to t(:Go_to_list), conferences_path %>

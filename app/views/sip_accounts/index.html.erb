@@ -21,9 +21,8 @@
   <tr>
     <td><%
       if sip_account.user
-        %><%= sip_account.user.username %><br />
-        (<%= sip_account.user.sn %>, <%= sip_account.user.gn %>)<%
-      end
+        %><%= sip_account.user.to_display %><br />
+    <% end
     %></td>
     <td><%= sip_account.auth_name %></td>
     <td><%= sip_account.realm %></td>

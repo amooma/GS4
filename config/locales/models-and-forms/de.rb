@@ -100,9 +100,11 @@
 				:name  => "Name",
 			},
 			:conference => {
-				:name  => "Name",
-				:pin   => "Passwort",
-				:uuid  => "Identifikator",
+				:name    => "Name",
+				:pin     => "Passwort",
+				:uuid    => "Identifikator",
+				:user    => "Benutzer",   
+				:user_id => "Benutzer-ID",
 			},
 			:conference_to_extension => {
 				:conference     => "Konferenzraum",
@@ -412,6 +414,8 @@
 				:name => "Eine frei wählbare Bezeichnung für diesen Konferenz-Raum.",
 				:pin => "Ein numerisches Passwort das Anrufer zum Betreten des Konferenz-Raumes eingeben müssen.",
 				:uuid => "Wird zur system-internen eindeutigen Identifizierung verwendet und sollte normalerweise nicht verändert werden!",
+				:user => "Der Benutzer dem diese Konferenz gehört.",
+				:user_id => "Relation zu User",
 			},
 			:conference_to_extension => {
 				:conference_id  => "Relation zu Conference",
@@ -467,7 +471,7 @@
 				:phone_mobile => "Cell phone number",
 				:fax_private => "Private fax number",
 				:fax_business => "Business fax number",
-				:user_id => "Realtion to User"
+				:user_id => "Relation zu User",
 			},
 			:node => {
 				:management_host => "Hostname / IP-Adresse. Hier darf nicht „localhost“ oder „127.0.0.1“ verwendet werden, außer es handelt sich um den einzigen Knoten im 1-Server-Betrieb.",

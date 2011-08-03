@@ -2,6 +2,8 @@ class Conference < ActiveRecord::Base
   has_many :conference_to_extensions, :dependent => :destroy
   has_many :extensions, :through => :conference_to_extensions
   
+  belongs_to :user
+  
   validates_uniqueness_of :uuid
   validates_presence_of :uuid
   
