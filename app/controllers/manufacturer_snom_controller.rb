@@ -75,7 +75,6 @@ class ManufacturerSnomController < ApplicationController
 		
 		
 		if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
-			call_forwarding_save
 			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 			@phone.update_attributes(:ip_address => request.remote_ip)
 		end
