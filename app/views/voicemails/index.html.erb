@@ -16,7 +16,7 @@
 <% if @voicemails %>
 <% @voicemails.each do |voicemail_message| %>
   <tr>
-    <td><%= voicemail_message['sip_account_display'] %></td>
+    <td><%= voicemail_message['username'] %></td>
 	<td><%= voicemail_message['folder'] %></td>
 
 	<td><%= l(Time.at(voicemail_message['created_epoch'].to_i).localtime, :format => :short)  %></td>

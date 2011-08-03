@@ -17,9 +17,6 @@ class VoicemailsController < ApplicationController
 				if voicemails_account == false
 					flash[:alert] = t(:error_retrieving_voicemail_list, :name => sip_account.to_display)
 				elsif voicemails_account
-					voicemails_account.each do |voicemail|
-						voicemail['sip_account_display'] = sip_account.to_display
-					end
 					@voicemails = @voicemails.concat(voicemails_account)
 				end
 			end
