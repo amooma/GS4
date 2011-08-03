@@ -97,6 +97,10 @@ class SipAccount < ActiveRecord::Base
     self.phone.reboot if self.phone
   end
   
+  def to_display
+    return I18n.t(:sip_account_to_display, :id => self.id, :auth_name => self.auth_name, :caller_name => self.caller_name, :position => self.position, :realm => self.realm)
+  end
+  
   private
   def create_subscriber()
     subscriber = Subscriber.create(

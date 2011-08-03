@@ -43,4 +43,7 @@ class User < ActiveRecord::Base
     :if => Proc.new { |user| user.role == "cdr" },
     :message => "must not be CDR for more than one user."
   
+  def to_display
+    return I18n.t(:user_to_display, :id => self.id, :username => self.username, :email => self.email, :sn => self.sn, :gn => self.gn, :role => self.role)
+  end
 end

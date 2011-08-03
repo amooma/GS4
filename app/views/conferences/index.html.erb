@@ -15,7 +15,7 @@
 
 <% @conferences.each do |conference| %>
   <tr>
-    <td><%= conference.user ? conference.user.username : '' %></td>
+    <td><%= conference.user ? conference.user.to_display : '' %></td>
     <td><%= conference.name %></td>
     <td><%= conference.pin %></td>
     <td>

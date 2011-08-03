@@ -390,3 +390,6 @@ de:
   interface: "Netzwerk Schnittstelle"
   reboot_initiated: "System wird neu gestartet"
   reboot: "System neu starten"
+  
+  user_to_display: "%{username} (%{gn} %{sn})"
+  sip_account_to_display: "%{caller_name} (%{auth_name})"

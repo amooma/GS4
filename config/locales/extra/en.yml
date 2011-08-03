@@ -375,3 +375,7 @@ en:
   interface: "Network interface"
   reboot_initiated: "System is rebooting"
   reboot: "Reboot"
+  
+  user_to_display: "%{username} (%{email})"
+  sip_account_to_display: "%{caller_name} (%{auth_name})"
+  

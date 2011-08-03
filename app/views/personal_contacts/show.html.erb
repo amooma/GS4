@@ -5,7 +5,7 @@
     <b><%= t(:user) %>:</b>
     <%
       if @personal_contact.user
-        %><%= @personal_contact.user.username %><%
+        %><%= @personal_contact.user.to_display %><%
       end
     %>
   </p>

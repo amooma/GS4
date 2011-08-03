@@ -3,7 +3,7 @@
 	
 	<%= f.input :sip_account do %>
 		<%= f.select( :sip_account_id,
-			@sip_accounts.collect { |r| [ "#{r.caller_name} (ID #{r.id})", r.id ] },
+			@sip_accounts.collect { |r| [ r.to_display, r.id ] },
 			{ :include_blank => (@sip_accounts.count > 1), :selected => @call_log.sip_account_id }
 		) %>
 	<% end %>

@@ -2,7 +2,7 @@
 <p>
   <b>User:</b>
   <% if @sip_account.user %>
-    <%= @sip_account.user.sn %>, <%= @sip_account.user.gn %> (<%= @sip_account.user.username %>, <%= @sip_account.user.email %>) <%= "(ID #{@sip_account.user_id})" %>
+    <%= @sip_account.user.to_display %>
   <% end %>
 </p>
 

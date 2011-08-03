@@ -22,7 +22,7 @@
 <% if current_user.role == "admin" %>
     <td><%
       if personal_contact.user
-        %><%= personal_contact.user.username %><%
+        %><%= personal_contact.user.to_display %><%
       end
     %></td>
 <% end %>
