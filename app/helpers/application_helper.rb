@@ -48,6 +48,7 @@ module ApplicationHelper
 						{ :text => t(:personal_contacts), :url => personal_contacts_path},
 						{ :text => t(:global_contacts), :url => global_contacts_path},
 						{ :text => t(:voicemails), :url => voicemails_path},
+						{ :text => t(:conferences)   , :url => conferences_path },
 					]
 			end
 		else

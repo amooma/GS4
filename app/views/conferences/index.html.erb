@@ -2,34 +2,48 @@
 
 <table>
   <tr>
+    <th><%= t(:user) %></th>
     <th><%= t(:name) %></th>
     <th><%= t(:pin) %></th>
     <th><%= t(:extensions) %></th>
     <th></th>
     <th></th>
+<% if (current_user.role == "admin") %>
     <th></th>
+<% end %>
   </tr>
 
 <% @conferences.each do |conference| %>
   <tr>
+    <td><%= conference.user ? conference.user.username : '' %></td>
     <td><%= conference.name %></td>
     <td><%= conference.pin %></td>
     <td>
     <% if !conference.extensions.nil? %>
       <ul>
+      <% if  current_user.role == "admin" %>
       <% conference.extensions.each do |extension| %>
         <li><%= link_to extension.extension, conference_extension_path(conference, extension) %></li>
+      <% end %>
+      <% else %>
+      <% conference.extensions.each do |extension| %>
+        <li><%= extension.extension %></li>
+      <% end %>
       <% end %>
       </ul>
     <% end %>
     </td>
     <td><%= link_to t(:show), conference %></td>
-    <td><%= link_to t(:edit), edit_conference_path(conference) %></td>
+    <td><%= (current_user.role == "admin" || current_user.id == conference.user_id) ? ( link_to t(:edit), edit_conference_path(conference) ) : '' %></td>
+<% if (current_user.role == "admin") %>
     <td><%= button_to t(:destroy), conference, :confirm => t(:are_you_sure), :method => :delete %></td>
+<% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<% if  current_user.role == "admin" %>
 <%= link_to t(:new_conference), new_conference_path %>
+<% end %>

@@ -122,6 +122,12 @@ class Ability
       
         can    :read    , Voicemail
         can    :destroy , Voicemail
+      
+        can    :read,     Conference,  :user_id => user.id
+        can    :read,     Conference,  :user_id => nil
+        can    :edit,     Conference,  :user_id => user.id
+        can    :update  , Conference,  :user_id => user.id
+        cannot :edit_uid, Conference
       )
       
       else

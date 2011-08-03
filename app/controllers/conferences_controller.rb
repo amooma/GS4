@@ -5,6 +5,9 @@ class ConferencesController < ApplicationController
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   load_and_authorize_resource
   
+  before_filter { |controller|
+    @users = User.accessible_by( current_ability, :index ).all
+  }
 
   # GET /conferences
   # GET /conferences.xml
