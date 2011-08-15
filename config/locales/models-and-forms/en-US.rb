@@ -435,7 +435,7 @@
 				:destination => "The destination number.",
 				:file => "The PDF file you want to send.", 
 				:raw_file => "The raw fax G3 data file.",
-				:outgoing => "Is this fax to be sent.",
+				:outgoing => "Is this fax to be sent?",
 				:received => "Time and date this fax was received.",
 				:sent => "Time and date this fax was sent.",
 				:title => "Document title.",
