@@ -1,4 +1,4 @@
-#TODO Add pin_change.
+#OPTIMIZE Add pin_change.(?) `./script/gs4cmd resources`: "translation missing: de.activerecord.models.pin_change". See app/models/pin_change.rb.
 
 { :"en-US" => {
 	
@@ -22,6 +22,7 @@
 			:phone_model                   => "Phone model",
 			:manufacturer                  => "Phone manufacturer",
 			:sip_account                   => "SIP account",
+			:pin_change                    => "(SIP account: change voicemail PIN)",  #OPTIMIZE See app/models/pin_change.rb
 			:configuration                 => "Configuration",
 			:authentication                => "Authentication",
 			:call_forward_reason           => "Call forward reason",
