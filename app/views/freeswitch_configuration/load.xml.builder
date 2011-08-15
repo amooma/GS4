@@ -1,6 +1,8 @@
 xml.instruct!
 
-#OPTIMIZE Add comments (descriptions etc.) - Some could probably be salvaged from the original FreeSWITCH configuration.
+#OPTIMIZE Add comments (descriptions etc.) from the original configuration (misc/freeswitch/fs-conf/).
+# As this file has probably been generated in a (semi-)automatic way it should be easy.
+# If it won't ever happen then delete this comment.
 
 xml.document( :type => 'freeswitch/xml' ) {
 	
@@ -15,6 +17,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie' ) {
 			xml.phrases {
 				xml.macros {
+					
 					xml.macro( :name => 'voicemail_hello' ) {
 						xml.input( :pattern => '(.*)' ) {
 							xml.match {
