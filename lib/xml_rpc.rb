@@ -9,7 +9,7 @@ module XmlRpc
 		xml_rpc_password  = Configuration.get(:xml_rpc_password )
 		xml_rpc_directory = Configuration.get(:xml_rpc_directory, '/RPC2' )
 		xml_rpc_api       = Configuration.get(:xml_rpc_api, 'freeswitch.api' )
-		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 10 )
+		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 8 )
 		if (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 			xml_rpc__ssl = true
 		else
@@ -17,12 +17,27 @@ module XmlRpc
 		end
 		#xml_rpc__ssl      = (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 		
+		Rails::logger.debug(_bold( "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}#{! arguments.empty? ? '?...' : ''}\" ..." ))
+		Rails::logger.debug( "(Params: #{arguments.inspect})" )
+		error_msg = nil
 		begin
-			server = XMLRPC::Client.new( xml_rpc_host, xml_rpc_directory, xml_rpc_port, nil, nil, xml_rpc_user, xml_rpc_password, xml_rpc__ssl, xml_rpc_timeout )
-			return server.call( xml_rpc_api, method, arguments )
-		rescue
-			return false
+			xmlrpc_client = XMLRPC::Client.new( xml_rpc_host, xml_rpc_directory, xml_rpc_port, nil, nil, xml_rpc_user, xml_rpc_password, xml_rpc__ssl, xml_rpc_timeout )
+			return xmlrpc_client.call( xml_rpc_api, method, arguments )
+		rescue Errno::ECONNREFUSED => e
+			error_msg = "Failed to connect to XML-RPC service (#{xml_rpc_host}:#{xml_rpc_port}). ECONNREFUSED: #{e.message}"
+		rescue Errno::EHOSTUNREACH => e
+			error_msg = "Failed to connect to XML-RPC service (#{xml_rpc_host}:#{xml_rpc_port}). EHOSTUNREACH: #{e.message}"
+		rescue Timeout::Error => e
+			error_msg = "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}\" failed. (timeout)"
+		rescue XMLRPC::FaultException => e
+			error_msg = "XML-RPC error: #{e.faultCode} #{e.faultString}"
+		rescue SocketError => e
+			error_msg = "XML-RPC request to \"#{xml_rpc_host}:#{xml_rpc_port}\" failed. #{e.class.to_s}: #{e.message}"
+		rescue => e
+			error_msg = "XML-RPC request failed. #{e.class.to_s}: #{e.message}"
 		end
+		Rails::logger.error(_bold( error_msg )) if error_msg
+		return false
 	end
 	
 	def self.send_fax( destination, domain, raw_file )
@@ -95,6 +110,10 @@ module XmlRpc
 		rescue
 			return false
 		end
+	end
+	
+	def self._bold( str )
+		return "\e[0;32;1m#{str} \e[0m "
 	end
 	
 end
