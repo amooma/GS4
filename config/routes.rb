@@ -1,7 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :network_settings
-
+	resources :network_settings
+	
 	resources :configurations
 	
 	resources :global_contacts
@@ -139,7 +139,7 @@ Gemeinschaft4::Application.routes.draw do
 	end
 	
 	resources :fax_documents
-
+	
 	resources :voicemails
     
 	match 'pin_change' => 'pin_change#edit', :as => :pin_change
