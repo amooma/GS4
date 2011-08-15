@@ -62,10 +62,12 @@ Gemeinschaft4::Application.routes.draw do
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => :shutdown
+	
 	match '/admin/reboot',
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => :reboot
+	
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,
