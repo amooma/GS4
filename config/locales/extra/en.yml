@@ -355,8 +355,8 @@ en:
   received: "Received"
   caller_number: "Caller number"
   forwarded_by: "Forwarded by"
-  error_retrieving_voicemail_list: "Error retrieving voicemails for %{name}"
-  error_retrieving_voicemail: "Error retrieving voicemail %{name}"
+  error_retrieving_voicemail_list: "Error retrieving voicemails for %{name}."
+  error_retrieving_voicemail: "Error retrieving voicemail %{name}."
   
   network_setting: "Network settings"
   new_network_seting: "Network settings"
