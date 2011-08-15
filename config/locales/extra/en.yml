@@ -341,7 +341,7 @@ en:
   
   shutdown: "System shutdown"
   shutdown_initiated: "System is shutting down"
-
+  
   listing_voicemails: "Voicemails"
   voicemails: "Voicemails"
   folder: "Folder"
@@ -354,16 +354,18 @@ en:
   forwarded_by: "Forwarded by"
   error_retrieving_voicemail_list: "Error retrieving voicemails for %{name}"
   error_retrieving_voicemail: "Error retrieving voicemail %{name}"
-
-
+  
   network_setting: "Network settings"
   new_network_seting: "Network settings"
   editing_network_setting: "Edit network settings"
   network_setting_updated: "Network settings updated. Please reboot to activate changes."
   network_setting_created: "Network settings saved. Please reboot to activate changes."
-  must_not_be_set: "Must not be set"
-  can_not_be_changed: "Can not be changes"
-  allready_onfigured: "Allready configured"
+  must_not_be_set: "must not be set"
+  can_not_be_changed: "cannot be changed"
+  network_settings_already_configured: "Network settings already configured."
+  
+  already_configured: "already configured"
+  
   netmask: "Netmask"
   gateway: "Default gateway"
   name_server: "DNS server"

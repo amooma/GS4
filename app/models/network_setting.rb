@@ -2,7 +2,7 @@ class NetworkSetting < ActiveRecord::Base
   
   before_validation( :on => :create ) {
     if NetworkSetting.count > 0
-      errors.add( :network_setting, I18n.t(:allready_configured))
+      errors.add( :base, I18n.t(:network_settings_already_configured))
     end
   }
   
