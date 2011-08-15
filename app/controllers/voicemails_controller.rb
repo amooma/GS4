@@ -14,6 +14,7 @@ class VoicemailsController < ApplicationController
 		sip_accounts = current_user.sip_accounts.all
 		@voicemails = []
 		errors = []
+		
 		if sip_accounts
 			sip_accounts.each { |sip_account|
 				next if ! sip_account.voicemail_server
@@ -29,17 +30,17 @@ class VoicemailsController < ApplicationController
 				end
 			}
 		end
-		if ! @voicemails.empty?
-			@voicemails.each { |voicemail_message|
-				voicemail_details = XmlRpc.voicemail_get_details( voicemail_message['username'], voicemail_message['domain'], voicemail_message['uuid'] )
-				if (voicemail_details && voicemail_details.key?('VM-Message-Duration'))
-					voicemail_message['duration'] = voicemail_details['VM-Message-Duration']
-				else
-					errors << t( :error_retrieving_voicemail, :name => voicemail_message['uuid'] )
-					voicemail_message['duration'] = 0
-				end
-			}	
-		end
+		
+		@voicemails.each { |voicemail_message|
+			voicemail_details = XmlRpc.voicemail_get_details( voicemail_message['username'], voicemail_message['domain'], voicemail_message['uuid'] )
+			if (voicemail_details && voicemail_details.key?('VM-Message-Duration'))
+				voicemail_message['duration'] = voicemail_details['VM-Message-Duration']
+			else
+				errors << t( :error_retrieving_voicemail, :name => voicemail_message['uuid'] )
+				voicemail_message['duration'] = 0
+			end
+		}
+		
 		if errors.count > 0
 			flash[:alert] = errors.join(" ")
 		end
