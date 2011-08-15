@@ -144,8 +144,8 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :voicemails
     
-	match 'pin_change' => 'pin_change#edit', :as => :pin_change
-	match 'pin_change/update' => 'pin_change#update', :as => :pin_change
+	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
+	match 'pin_change/update' => 'pin_change#update' , :as => :pin_change  #TODO "Missing template pin_change/edit"
 	
 	# The priority is based upon order of creation:
 	# first created -> highest priority.
