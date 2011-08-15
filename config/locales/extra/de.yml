@@ -354,6 +354,9 @@ de:
   
   maintenance: "Wartung"
   
+  Contacts: "Kontakte"
+  Settings: "Einstellungen"
+  
   shutdown: "System herunterfahren"
   shutdown_initiated: "System wird heruntergefahren"
   
@@ -395,7 +398,7 @@ de:
   user_to_display: "%{username} (%{gn} %{sn})"
   sip_account_to_display: "%{caller_name} (%{auth_name})"
   
-  voicemail_pin_change: "Voicemail-PIN ändern"
+  voicemail_pin_change: "Voicemail-PIN"
   old_voicemail_pin: "Bisherige Voicemail-PIN"
   voicemail_pin_confirmation: "Voicemail-PIN-Bestätigung"
   voicemail_no_pin: "Keine PIN angegeben"

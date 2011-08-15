@@ -48,12 +48,21 @@ module ApplicationHelper
 				when "user"
 					menu_items = [
 						{ :text => t(:callforwards)  , :url => call_forwards_path },
+						
 						{ :text => t(:call_logs)     , :url => call_logs_path },
-						{ :text => t(:personal_contacts) , :url => personal_contacts_path },
-						{ :text => t(:global_contacts)   , :url => global_contacts_path },
+						
+						{ :text => t(:Contacts), :sub => [
+							{ :text => t(:personal_contacts) , :url => personal_contacts_path },
+							{ :text => t(:global_contacts)   , :url => global_contacts_path },
+						]},
+						
 						{ :text => t(:voicemails)    , :url => voicemails_path },
-						{ :text => t(:voicemail_pin_change), :url => pin_change_path },
+						
 						{ :text => t(:conferences)   , :url => conferences_path },
+						
+						{ :text => t(:Settings), :sub => [
+							{ :text => t(:voicemail_pin_change), :url => pin_change_path },
+						]},
 					]
 			end
 		else
