@@ -381,7 +381,7 @@ en:
   sip_account_to_display: "%{caller_name} (%{auth_name})"
   
   voicemail_pin_change: "Change voicemail PIN"
-  old_voicemail_pin: "Current Voicemail PIN"
+  old_voicemail_pin: "Current voicemail PIN"
   voicemail_pin_confirmation: "Voicemail PIN confirmation"
   voicemail_no_pin: "No PIN"
   voicemail_no_old_pin: "No current PIN"
