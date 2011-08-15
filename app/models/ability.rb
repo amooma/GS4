@@ -75,12 +75,14 @@ class Ability
         can    :update  , NetworkSetting
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
+        #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
       )
       
       when "cdr"
       (
         can    :read    , Home  # just a redirect_to( call_logs_path ) in the HomeController
         can    :read    , CallLog
+        #OPTIMIZE Add PinChange?
       )
       
       when "user"
@@ -134,6 +136,7 @@ class Ability
         
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
+        #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
       )
       
       else
