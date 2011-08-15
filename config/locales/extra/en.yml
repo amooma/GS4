@@ -377,7 +377,7 @@ en:
   reboot_initiated: "System is rebooting"
   reboot: "Reboot"
   
-  user_to_display: "%{username} (%{email})"
+  user_to_display: "%{username} (%{gn} %{sn})"
   sip_account_to_display: "%{caller_name} (%{auth_name})"
   
   voicemail_pin_change: "Change voicemail PIN"
