@@ -16,13 +16,14 @@
     <%= t(:conference_need_to_create_extension) %>
   </div>
   <% end %>
+  
   <ul>
   <% @conference.extensions.each do |extension| %>
     <li><%= extension.extension %></li>  
   <% end %>
-    <% if current_user.role == "admin" %>
-    <li><%= link_to t(:new_extension), new_conference_extension_path(@conference, {:destination => @conference.uuid}) %>
-    <% end %>
+  <% if current_user.role == "admin" %>
+    <li><%= link_to t(:new_extension), new_conference_extension_path( @conference, {:destination => @conference.uuid}) %>
+  <% end %>
   </ul>
 </p>
 
