@@ -27,8 +27,8 @@
         (link_to 'WAV', voicemail_path(voicemail_message['uuid'], :account => voicemail_message['username'], \
         :format => 'wav')) : ''
     %></td>
-    <td><%= link_to t(:show), voicemail_path(:id => voicemail_message['uuid'], :account => voicemail_message['username']) %></td>
-    <td><%= button_to t(:destroy), voicemail_path(:id => voicemail_message['uuid'], :account => voicemail_message['username']), :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to    t(:show)    , voicemail_path( :id => voicemail_message['uuid'], :account => voicemail_message['username'] ) %></td>
+    <td><%= button_to  t(:destroy) , voicemail_path( :id => voicemail_message['uuid'], :account => voicemail_message['username'] ), :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 <% end %>
