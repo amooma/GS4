@@ -6,6 +6,7 @@ class NetworkSettingsController < ApplicationController
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   load_and_authorize_resource
   
+  
   # GET /network_settings
   # GET /network_settings.xml
   def index
