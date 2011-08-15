@@ -15,7 +15,7 @@ class NetworkSetting < ActiveRecord::Base
     end
   }
   
-  #validate :validate_settings
+  #validate :validate_settings  #OPTIMIZE Validate attributes.
   
   validates_inclusion_of :interface, :in => ['eth0']  #OPTIMIZE Interface name is system-specific.
   
