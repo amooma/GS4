@@ -13,7 +13,7 @@
     <th></th>
   </tr>
 
-<% if @voicemails %>
+<% if ! @voicemails.empty? %>
 <% @voicemails.each do |voicemail_message| %>
   <tr>
     <td><%= voicemail_message['username'] %></td>
