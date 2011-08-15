@@ -129,6 +129,7 @@ class Ability
         can    :read,     Conference,  :user_id => nil
         can    :edit,     Conference,  :user_id => user.id
         can    :update  , Conference,  :user_id => user.id
+        #FIXME User can change the user_id attribute. -- See abilities for CallForward.
         cannot :edit_uid, Conference
         
         can    :edit    , PinChange, :user_id => user.id
