@@ -25,7 +25,7 @@ class AdminController < ApplicationController
 	end
 	
 	def shutdown
-		if RAILS_ENV == "production"
+		if ::Rails.env.to_s == "production"
 			@result = `sudo /sbin/shutdown -h now`  #OPTIMIZE Use -n flag (non-interactive) to sudo.
 		end
 		
@@ -35,7 +35,7 @@ class AdminController < ApplicationController
 	end
 	
 	def reboot
-		if RAILS_ENV == "production"
+		if ::Rails.env.to_s == "production"
 			@result = `sudo /sbin/shutdown -r now`  #OPTIMIZE Use -n flag (non-interactive) to sudo.  #OPTIMIZE Is "shutdown -r now" really what you want (reboot)?
 		end
 		

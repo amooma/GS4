@@ -65,7 +65,7 @@ class NetworkSetting < ActiveRecord::Base
       #OPTIMIZE File paths are system-specific. E.g. limit this to Debian.
       file_path_etc     = "/tmp/"
       file_path_network = "/tmp/"
-      if RAILS_ENV == "production"
+      if ::Rails.env.to_s == "production"
         file_path_etc     = "/etc/"
         file_path_network = "/etc/network/"
       end
