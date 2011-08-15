@@ -1,6 +1,6 @@
 module XmlRpc
 	
-	def self.request(method, arguments)
+	def self.request( method, arguments )
 		require 'xmlrpc/client'
 		
 		xml_rpc_host      = Configuration.get(:xml_rpc_host, '127.0.0.1' )
@@ -18,17 +18,17 @@ module XmlRpc
 		#xml_rpc__ssl      = (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 		
 		begin
-			server = XMLRPC::Client.new(xml_rpc_host, xml_rpc_directory, xml_rpc_port, nil, nil, xml_rpc_user, xml_rpc_password, xml_rpc__ssl, xml_rpc_timeout)
-			return server.call(xml_rpc_api, method, arguments)
+			server = XMLRPC::Client.new( xml_rpc_host, xml_rpc_directory, xml_rpc_port, nil, nil, xml_rpc_user, xml_rpc_password, xml_rpc__ssl, xml_rpc_timeout )
+			return server.call( xml_rpc_api, method, arguments )
 		rescue
 			return false
 		end
 	end
 	
-	def self.send_fax(destination, domain, raw_file)
+	def self.send_fax( destination, domain, raw_file )
 		response = request('originate', "sofia/internal/#{destination}@#{domain};fs_path=sip:127.0.0.1:5060 &txfax(#{raw_file})")
 		
-		if (!response)
+		if (! response)
 			return false
 		end
 		
@@ -39,17 +39,17 @@ module XmlRpc
 		end
 	end
 	
-	def self.voicemails_get(sip_account, domain)
+	def self.voicemails_get( sip_account, domain )
 		response = request('vm_list', "#{sip_account}@#{domain} xml")
 		
-		if (!response || response == 'ERROR!')
+		if (! response || response == 'ERROR!')
 			return false
 		end
 		
 		return Hash.from_xml(response)['voicemail']['message']
 	end
 	
-	def self.voicemail_set_read(sip_account, domain, uuid, read = true)
+	def self.voicemail_set_read( sip_account, domain, uuid, read = true )
 		if (read)
 			read_status = 'read'
 		else
@@ -57,7 +57,7 @@ module XmlRpc
 		end
 		
 		response = request('vm_read', "#{sip_account}@#{domain} #{read_status} #{uuid}")
-		if (!response)
+		if (! response)
 			return false
 		end
 		if (response.strip == "+OK")
@@ -67,13 +67,13 @@ module XmlRpc
 		end
 	end
 	
-	def self.voicemail_set_unread(sip_account, domain, uuid)
-		return voicemail_set_read(sip_account, domain, uuid, false)
+	def self.voicemail_set_unread( sip_account, domain, uuid )
+		return voicemail_set_read( sip_account, domain, uuid, false )
 	end
 	
 	def self.voicemail_delete(sip_account, domain, uuid)
 		response = request('vm_delete', "#{sip_account}@#{domain} #{uuid}")
-		if (!response)
+		if (! response)
 			return false
 		end
 		if (response.strip == "+OK")
@@ -83,11 +83,11 @@ module XmlRpc
 		end
 	end
 	
-	def self.voicemail_get_details(sip_account, domain, uuid)
+	def self.voicemail_get_details( sip_account, domain, uuid )
 		require 'json'
 		
 		response = request('vm_fsdb_msg_get', "xml default #{domain} #{sip_account} #{uuid}")
-		if (!response)
+		if (! response)
 			return false
 		end
 		begin
@@ -96,4 +96,5 @@ module XmlRpc
 			return false
 		end
 	end
+	
 end
