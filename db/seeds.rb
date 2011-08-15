@@ -14,7 +14,7 @@ Configuration.create([
 	{ :name => 'xml_rpc_realm'           , :value => 'gemeinschaft' },
 	{ :name => 'xml_rpc_user'            , :value => SecureRandom.hex(10) },
 	{ :name => 'xml_rpc_password'        , :value => SecureRandom.hex(10) },
-	{ :name => 'xml_rpc_timeout'         , :value => '60' },
+	{ :name => 'xml_rpc_timeout'         , :value => '8' },
 	{ :name => 'fax_files_directory'     , :value => '/opt/gemeinschaft/misc/fax/' },
 ])
 
