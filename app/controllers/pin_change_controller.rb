@@ -1,11 +1,14 @@
 class PinChangeController < ApplicationController
-	 
+	
 	before_filter :authenticate_user!
-
+	
+	# https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
 	load_and_authorize_resource
-
+	
+	
 	def edit
 		@sip_accounts = current_user.sip_accounts.find(:all, :conditions => ['voicemail_server_id NOT NULL'])
+		
 		respond_to do |format|
 			format.html
 			format.xml { head :ok }
@@ -14,13 +17,19 @@ class PinChangeController < ApplicationController
 	
 	def update
 		@sip_accounts = current_user.sip_accounts.find(:all, :conditions => ['voicemail_server_id NOT NULL'])
-		@sip_account = current_user.sip_accounts.where(:id => params[:sip_account_id]).first
+		@sip_account  = current_user.sip_accounts.where(:id => params[:sip_account_id]).first
+		
 		if (@sip_account)
 			@changes = false
-			pin = params[:voicemail_pin]
-			old_pin = params[:old_voicemail_pin]
+			
+			pin              = params[:voicemail_pin]
+			old_pin          = params[:old_voicemail_pin]
 			pin_confirmation = params[:voicemail_pin_confirmation]
-			active_pin = @sip_account.voicemail_pin
+			
+			active_pin       = @sip_account.voicemail_pin
+			
+			@errors = false  #OPTIMIZE Why is this an instance variable instead of a local variable?
+			
 			if (pin.blank?)
 				@sip_account.errors.add( :base, t(:voicemail_no_pin))
 				@errors = true
@@ -53,7 +62,8 @@ class PinChangeController < ApplicationController
 		
 		respond_to do |format|
 			format.html { render :action => "edit" }
-			format.xml { head :ok }
+			format.xml  { head :ok }
 		end
 	end
+	
 end
