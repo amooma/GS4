@@ -1,3 +1,5 @@
+#TODO Add pin_change.
+
 { :"en-US" => {
 	
 	:activerecord => {
@@ -41,7 +43,7 @@
 			:sip_account_to_extension      => "SIP account to extension",
 			:subscriber                    => "Subscriber",
 			:version                       => "Version",
-			:network_setting							 => "Network settings"
+			:network_setting               => "Network settings",
 			
 		},
 		
@@ -348,12 +350,13 @@
 				:netmask => "Netmask",
 				:gateway => "Defaullt gateway",
 				:name_server => "DNS server",
-				:dhcp_range_start => "First available dhcp address",
+				:dhcp_range_start => "First available DHCP address",
 				:dhcp_range_end => "Last available IP address",
 				:dhcp_client => "Obtain IP address automatically",
-				:start_dhcp_server => "Start DHCP Server",
+				:start_dhcp_server => "Start DHCP server",
 				:interface => "Network interface",
 			},
+			
 		},
 	},
 	

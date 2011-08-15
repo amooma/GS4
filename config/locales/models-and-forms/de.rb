@@ -1,3 +1,5 @@
+#TODO Add pin_change.
+
 { :"de" => {
 	
 	:activerecord => {
@@ -36,12 +38,12 @@
 			:phone_model_mac_address       => "Telefonmodell-MAC-Adresse",
 			:provisioning_log_entry        => "Provisioning-Log-Eintrag",
 			:pua                           => "Presence user agent",
-			:reboot_request                => "Neustartanfrage",
+			:reboot_request                => "Neustart-Anfrage",
 			:sip_account_codec             => "SIP-Account-Codec",
 			:sip_account_to_extension      => "SIP-Account zu Rufnummer",
 			:subscriber                    => "Subscriber",
 			:version                       => "Version",
-			:network_setting							 => "Netzwerk Konfiguration"
+			:network_setting               => "Netzwerk-Konfiguration",
 			
 		},
 		
@@ -347,15 +349,15 @@
 			:network_setting => {
 				:network_setting_created => "Netzwerkeinstellungen erstellt. Bitte starten Sie das System neu, um die Änderungen zu aktivieren.",
 				:allready_configured => "Bereits eingerichtet",
-				:ip_address => "IP Adresse",
+				:ip_address => "IP-Adresse",
 				:netmask => "Netzmaske",
 				:gateway => "Standard Gateway",
-				:name_server => "DNS Server",
+				:name_server => "DNS-Server",
 				:dhcp_range_start => "Erste verfügbare DHCP Adresse",
 				:dhcp_range_end => "Letzte verfügbare DHCP Adresse",
-				:dhcp_client => "IP Adresse automatisch beziehen",
-				:start_dhcp_server => "DHCP Server starten",
-				:interface => "Netzwerk Schnittstelle",
+				:dhcp_client => "IP-Adresse automatisch beziehen",
+				:start_dhcp_server => "DHCP-Server starten",
+				:interface => "Netzwerk-Schnittstelle",
 			},
 			
 		},
@@ -515,8 +517,8 @@
 				:phone_key_function_definition_id  => "Relation zu PhoneKeyFunctionDefinition",
 				:phone_model_key                   => "Relation zu PhoneModelKey",
 				:phone_model_key_id                => "Relation zu PhoneModelKey",
-				:sip_account                       => "Relation zu SIP Account",
-				:sip_account_id                    => "Relation zu SIP Account",
+				:sip_account                       => "Relation zu SIP-Account",
+				:sip_account_id                    => "Relation zu SIP-Account",
 				:value                             => "Gespeicherter Wert der Taste",
 			},
 			:phone_key_function_definition => {
@@ -653,9 +655,9 @@
 				:value => "Wert des Konfigurationseintrags",
 			},
 			:network_setting => {
-				:ip_address => "IP Adresse des Servers. Kann NICHT mehr geändert werden!",
-				:dhcp_client => "Die IP Adresse wird von einem bestehenden DHCP Server bezogen. Kann NICHT mehr geändert werden!"
-			}	,
+				:ip_address => "IP-Adresse des Servers. Kann NICHT mehr geändert werden!",
+				:dhcp_client => "Die IP-Adresse wird von einem bestehenden DHCP-Server bezogen. Kann NICHT mehr geändert werden!"
+			},
 		},
 	},
 }}
