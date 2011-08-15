@@ -1,7 +1,7 @@
 class Admin::SetupController < ApplicationController
   
-  
   skip_before_filter :setup
+  
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   authorize_resource :class => :Setup
   
