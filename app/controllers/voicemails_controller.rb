@@ -18,7 +18,7 @@ class VoicemailsController < ApplicationController
 		if sip_accounts
 			sip_accounts.each { |sip_account|
 				next if ! sip_account.voicemail_server
-				voicemails_account = XmlRpc.voicemails_get( sip_account.auth_name, sip_account.voicemail_server.host )
+				voicemails_account = XmlRpc::voicemails_get( sip_account.auth_name, sip_account.voicemail_server.host )
 				if ! voicemails_account
 					errors << t( :error_retrieving_voicemail_list, :name => sip_account.to_display )
 				elsif voicemails_account
@@ -32,7 +32,7 @@ class VoicemailsController < ApplicationController
 		end
 		
 		@voicemails.each { |voicemail_message|
-			voicemail_details = XmlRpc.voicemail_get_details( voicemail_message['username'], voicemail_message['domain'], voicemail_message['uuid'] )
+			voicemail_details = XmlRpc::voicemail_get_details( voicemail_message['username'], voicemail_message['domain'], voicemail_message['uuid'] )
 			if (voicemail_details && voicemail_details.key?('VM-Message-Duration'))
 				voicemail_message['duration'] = voicemail_details['VM-Message-Duration']
 			else
@@ -62,7 +62,7 @@ class VoicemailsController < ApplicationController
 			@sip_account_display = sip_account.to_display
 			
 			if sip_account.voicemail_server
-				@voicemail = XmlRpc.voicemail_get_details( @auth_name, sip_account.voicemail_server.host, uuid )
+				@voicemail = XmlRpc::voicemail_get_details( @auth_name, sip_account.voicemail_server.host, uuid )
 			else
 				@voicemail = false
 			end
@@ -102,7 +102,7 @@ class VoicemailsController < ApplicationController
 		if sip_account
 			@auth_name = sip_account.auth_name
 			if sip_account.voicemail_server
-				@voicemail = XmlRpc.voicemail_delete( @auth_name, sip_account.voicemail_server.host, uuid )
+				@voicemail = XmlRpc::voicemail_delete( @auth_name, sip_account.voicemail_server.host, uuid )
 			else
 				@voicemail = false
 			end
