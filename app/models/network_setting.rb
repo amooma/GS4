@@ -1,5 +1,7 @@
 class NetworkSetting < ActiveRecord::Base
   
+  #OPTIMIZE Make netmask an integer instead of a string and use the prefix length instead of a dotted quad. Easier to handle (validate/store/convert) and works for both IPv4 and IPv6.
+  
   before_validation( :on => :create ) {
     if NetworkSetting.count > 0
       errors.add( :base, I18n.t(:network_settings_already_configured))
