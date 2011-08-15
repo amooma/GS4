@@ -6,6 +6,8 @@ class Conference < ActiveRecord::Base
   belongs_to :user
   
   
+  #OPTIMIZE Validate presence of :user if :user_id is set.
+  
   validates_numericality_of :pin, :only_integer => true, :greater_than_or_equal_to => 0
   #OPTIMIZE Fix the PIN validation. Make the database column a string instead of an integer.
   # This doesn't let you use PINs that start with "0" (except for 0 itself).
