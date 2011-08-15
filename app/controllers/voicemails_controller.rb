@@ -1,11 +1,11 @@
 class VoicemailsController < ApplicationController
-	 
+	
 	before_filter :authenticate_user!
-
+	
 	load_and_authorize_resource
-  
-	before_filter { |controller|        
-		require 'xml_rpc'                          
+	
+	before_filter { |controller|
+		require 'xml_rpc'
 	}
 	
 	def index
@@ -29,7 +29,7 @@ class VoicemailsController < ApplicationController
 			@voicemails.each do |voicemail_message|
 				 voicemail_details = XmlRpc.voicemail_get_details(voicemail_message['username'], voicemail_message['domain'], voicemail_message['uuid'])
 				 if (voicemail_details && voicemail_details.key?('VM-Message-Duration'))
-				 	voicemail_message['duration'] =  voicemail_details['VM-Message-Duration']
+				 	voicemail_message['duration'] = voicemail_details['VM-Message-Duration']
 				 else
 					 flash[:alert] =  t(:error_retrieving_voicemail, :name => voicemail_message['uuid'])
 					 voicemail_message['duration'] = 0
@@ -57,7 +57,7 @@ class VoicemailsController < ApplicationController
 				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)
 			end
 		end
-
+		
 		respond_to do |format|
 			format.html
 			format.xml  { render :xml => @voicemail }
@@ -71,12 +71,12 @@ class VoicemailsController < ApplicationController
 						:layout => false,
 						:content_type => 'text/plain',
 						:text => "<!-- File not found. -->",
-					)  
+					)
 				end
 			}
 		end
 	end
-
+	
 	def destroy
 		if (params[:id] && params[:account])
 			uuid = params[:id]
@@ -89,8 +89,9 @@ class VoicemailsController < ApplicationController
 		end
 		
 		respond_to do |format|
-		format.html { redirect_to(voicemails_url) }
-		format.xml  { head :ok }
+			format.html { redirect_to(voicemails_url) }
+			format.xml  { head :ok }
 		end
 	end
+	
 end
