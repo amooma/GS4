@@ -1,4 +1,9 @@
 #!/bin/bash -x
+
+# Gemeinschaft4 Git branch. In the master branch do not set this to anything but "master"!
+GIT_BRANCH="master"
+
+
 echo -e "Please enter your github.com username\n"
 read USER
 
@@ -77,7 +82,7 @@ echo -e "Stopping services for configuration\n"
 echo -e "Getting GS4\n"
 
 cd /opt
-git clone -b 1.2 https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git gemeinschaft
+git clone -b "$GIT_BRANCH" "https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git" gemeinschaft
 
 echo -e "Installing ruby\n"
 cd /opt/gemeinschaft/misc/ruby-sane
