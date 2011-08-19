@@ -85,7 +85,7 @@ echo 'Pin-Priority: 999'
 aptitude update
 apt-cache policy libsqliteodbc
 echo -e "Installing sqlite-odbc\n"
-aptitude install libsqliteodbc/testing
+aptitude install -y libsqliteodbc/testing
 
 
 echo -e "Stopping services ...\n"
@@ -102,7 +102,9 @@ git clone -b "$GIT_BRANCH" "https://$USER:$PASS@github.com/amooma/Gemeinschaft4.
 echo -e "Installing Ruby ...\n"
 cd /opt/gemeinschaft/misc/ruby-sane
 make deb-install
-gem install rails
+
+echo -e "Installing Ruby on Rails ...\n"
+gem install   rails
 gem install   rake -v 0.8.7
 gem uninstall rake -v 0.9.0 || true  # isn't installed anyway
 
