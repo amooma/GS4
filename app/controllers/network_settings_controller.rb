@@ -6,10 +6,11 @@ class NetworkSettingsController < ApplicationController
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   load_and_authorize_resource
   
+  
   # GET /network_settings
   # GET /network_settings.xml
   def index
-    @network_settings = NetworkSetting.all
+    @network_settings = NetworkSetting.accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       format.html # index.html.erb

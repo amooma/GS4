@@ -60,7 +60,6 @@ class ApplicationController < ActionController::Base
   
   private
   
-  
   def requires_authorization
     no_cancan_for_controllers = [
       'sessions',   # Devise
@@ -69,19 +68,20 @@ class ApplicationController < ActionController::Base
     ]
     return ! no_cancan_for_controllers.include?( controller_name.to_s.downcase )
   end
+  
   def setup
     if ::Rails.env == 'production' || ::Rails.env == 'development'
       if User.count == 0
         respond_to do |format|
-          format.html { redirect_to(new_admin_setup_path) }
+          format.html { redirect_to( new_admin_setup_path ) }
         end
       elsif NetworkSetting.count == 0 
         respond_to do |format|
-          format.html { redirect_to(new_network_setting_path) }
+          format.html { redirect_to( new_network_setting_path ) }
         end
       elsif SipServer.count == 0 || SipProxy.count == 0 || VoicemailServer.count == 0
         respond_to do |format|
-          format.html { redirect_to(admin_setup_index_path) }
+          format.html { redirect_to( admin_setup_index_path ) }
         end
       end
     end

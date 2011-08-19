@@ -40,7 +40,8 @@ class Configuration < ActiveRecord::Base
 	end
 	
 	private
-	def self.cast_explicitely(value, class_name)
+	
+	def self.cast_explicitely( value, class_name )
 		case class_name
 		when 'Fixnum'
 			begin
@@ -68,7 +69,7 @@ class Configuration < ActiveRecord::Base
 			return nil
 		when 'Boolean', 'Configuration::Boolean'
 			begin
-				return ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
+				return ActiveRecord::ConnectionAdapters::Column.value_to_boolean( value )
 			rescue
 				return false
 			end

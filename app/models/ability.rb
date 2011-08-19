@@ -75,12 +75,14 @@ class Ability
         can    :update  , NetworkSetting
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
+        #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
       )
       
       when "cdr"
       (
         can    :read    , Home  # just a redirect_to( call_logs_path ) in the HomeController
         can    :read    , CallLog
+        #OPTIMIZE Add PinChange?
       )
       
       when "user"
@@ -106,7 +108,7 @@ class Ability
           && user.id != nil
         end
         can    :read_title, SipAccount, :user_id => user.id
-        can    :read , GlobalContact
+        can    :read    , GlobalContact
         
         #can    :read    , FaxDocument #, :sip_account => { :user_id => user.id }
         #can    :create  , FaxDocument
@@ -114,26 +116,27 @@ class Ability
         cannot :update  , FaxDocument
         
         can    :read    , CallLog, :sip_account => { :user_id => user.id }
-        can    :read    , PersonalContact,  :user_id => user.id
-        can    :new     , PersonalContact,  :user_id => user.id
-        can    :create  , PersonalContact,  :user_id => user.id
-        can    :update  , PersonalContact,  :user_id => user.id
+        can    :read    , PersonalContact, :user_id => user.id
+        can    :new     , PersonalContact, :user_id => user.id
+        can    :create  , PersonalContact, :user_id => user.id
+        can    :update  , PersonalContact, :user_id => user.id
         #FIXME User can change the user_id attribute. -- See abilities for CallForward.
-        can    :destroy , PersonalContact,  :user_id => user.id
+        can    :destroy , PersonalContact, :user_id => user.id
         cannot :edit_uid, PersonalContact
-      
+        
         can    :read    , Voicemail
         can    :destroy , Voicemail
-      
-        can    :read,     Conference,  :user_id => user.id
-        can    :read,     Conference,  :user_id => nil
-        can    :edit,     Conference,  :user_id => user.id
-        can    :update  , Conference,  :user_id => user.id
+        
+        can    :read,     Conference, :user_id => user.id
+        can    :read,     Conference, :user_id => nil
+        can    :edit,     Conference, :user_id => user.id
+        can    :update  , Conference, :user_id => user.id
+        #FIXME User can change the user_id attribute. -- See abilities for CallForward.
         cannot :edit_uid, Conference
-
-		can    :edit    , PinChange, :user_id => user.id
+        
+        can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
-      
+        #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
       )
       
       else

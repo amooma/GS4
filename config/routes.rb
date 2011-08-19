@@ -1,7 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :network_settings
-
+	resources :network_settings
+	
 	resources :configurations
 	
 	resources :global_contacts
@@ -62,10 +62,12 @@ Gemeinschaft4::Application.routes.draw do
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => :shutdown
+	
 	match '/admin/reboot',
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => :reboot
+	
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,
@@ -139,11 +141,11 @@ Gemeinschaft4::Application.routes.draw do
 	end
 	
 	resources :fax_documents
-
+	
 	resources :voicemails
     
-	match 'pin_change' => 'pin_change#edit', :as => :pin_change
-	match 'pin_change/update' => 'pin_change#update', :as => :pin_change
+	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
+	match 'pin_change/update' => 'pin_change#update' , :as => :pin_change  #TODO "Missing template pin_change/edit"
 	
 	# The priority is based upon order of creation:
 	# first created -> highest priority.

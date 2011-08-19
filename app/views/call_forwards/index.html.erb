@@ -15,11 +15,11 @@
 
 <% @call_forwards.each do |call_forward| %>
   <tr>
-    <td>
-    <% if call_forward.sip_account %>
-    <%= call_forward.sip_account.to_display %> 
-    <% end %>
-    </td>
+    <td><%
+      if call_forward.sip_account
+        %><%= call_forward.sip_account.to_display %><%
+      end
+    %></td>
     <td><%= call_forward.source %></td>
     <td><%= call_forward.call_forward_reason ? call_forward.call_forward_reason.value : '?' %></td>
     <td><%= call_forward.destination %></td>

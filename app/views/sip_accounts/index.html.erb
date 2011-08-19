@@ -21,8 +21,8 @@
   <tr>
     <td><%
       if sip_account.user
-        %><%= sip_account.user.to_display %><br />
-    <% end
+        %><%= sip_account.user.to_display %><%
+      end
     %></td>
     <td><%= sip_account.auth_name %></td>
     <td><%= sip_account.realm %></td>
@@ -32,8 +32,8 @@
     <td><%= sip_account.caller_name %></td>
     <td><%
       sip_account_extensions = sip_account.extensions.accessible_by( current_ability, :show )
+      if sip_account_extensions
     %>
-    <% if sip_account_extensions %>
       <ul>
       <% sip_account_extensions.each do |extension| %>
         <li><%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %></li>

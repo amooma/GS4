@@ -9,6 +9,7 @@
     <th></th>
     <th></th>
 <% if (current_user.role == "admin") %>
+<%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
     <th></th>
 <% end %>
   </tr>
@@ -19,11 +20,12 @@
     <td><%= conference.name %></td>
     <td><%= conference.pin %></td>
     <td>
-    <% if !conference.extensions.nil? %>
+    <% if ! conference.extensions.empty? %>
       <ul>
-      <% if  current_user.role == "admin" %>
+      <% if current_user.role == "admin" %>
+      <%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
       <% conference.extensions.each do |extension| %>
-        <li><%= link_to extension.extension, conference_extension_path(conference, extension) %></li>
+        <li><%= link_to( extension.extension, conference_extension_path( conference, extension ) ) %></li>
       <% end %>
       <% else %>
       <% conference.extensions.each do |extension| %>
@@ -35,7 +37,9 @@
     </td>
     <td><%= link_to t(:show), conference %></td>
     <td><%= (current_user.role == "admin" || current_user.id == conference.user_id) ? ( link_to t(:edit), edit_conference_path(conference) ) : '' %></td>
+    <%#OPTIMIZE Don't use roles or logic in a view. Use CanCan abilities. %>
 <% if (current_user.role == "admin") %>
+<%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
     <td><%= button_to t(:destroy), conference, :confirm => t(:are_you_sure), :method => :delete %></td>
 <% end %>
   </tr>
@@ -44,6 +48,7 @@
 
 <br />
 
-<% if  current_user.role == "admin" %>
+<% if current_user.role == "admin" %>
+<%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
 <%= link_to t(:new_conference), new_conference_path %>
 <% end %>
