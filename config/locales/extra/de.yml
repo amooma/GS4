@@ -376,7 +376,7 @@ de:
   network_setting: "Netzwerk-Einstellungen"
   new_network_setting: "Netzwerk-Einstellungen"
   editing_network_setting: "Netzwerk-Einstellungen bearbeiten"
-  network_setting_updated: "Netzwerk-Einsellungen aktualisiert. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
+  network_setting_updated: "Netzwerk-Einstellungen aktualisiert. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
   network_setting_created: "Netzwerk-Einstellungen erstellt. Bitte starten Sie das System neu, um die Änderungen zu aktivieren."
   must_not_be_set: "darf nicht gesetzt sein"
   can_not_be_changed: "kann nicht geändert werden"
