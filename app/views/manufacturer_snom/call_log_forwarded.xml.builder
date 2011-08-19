@@ -25,13 +25,4 @@ xml.SnomIPPhoneDirectory {
 			xml.Telephone( call_entry.source )
 		}
 	}
-	xml.SoftKeyItem {
-		xml.Name('*')
-		xml.URL("#{@xml_menu_url}/xml_menu.xml")
-	}
 }
-
-
-# Local Variables:
-# mode: ruby
-# End:

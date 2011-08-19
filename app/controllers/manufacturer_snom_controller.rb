@@ -19,7 +19,7 @@ class ManufacturerSnomController < ApplicationController
 			@phone = Phone.where(:mac_address => @mac_address).first
 			
 			if (@phone)
-				@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"  
+				@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
 				if (@phone.ip_address == request.remote_ip)
 					@user = get_user_by_phone(@phone)
 					@sip_account = get_sip_account(@phone, params[:sip_account])
@@ -84,14 +84,6 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
-	def xml_menu
-		@sip_accounts_count = @phone.sip_accounts.count
-		@global_contacts = GlobalContact.all
-		if (@user)
-			@personal_contacts = PersonalContact.where(:user_id => @user.id).all
-		end
-	end
-	
 	def phone_books_menu
 		@global_contacts = GlobalContact.all
 		if (@user)
@@ -133,7 +125,7 @@ class ManufacturerSnomController < ApplicationController
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_ANSWERED,
 				:call_type => CALL_INBOUND 
-			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
+			).limit(Configuration.get(:snom_display_max_entries, 20, Integer)).order('created_at DESC')
 		end
 	end
 	
@@ -143,7 +135,7 @@ class ManufacturerSnomController < ApplicationController
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_NOANSWER,
 				:call_type => CALL_INBOUND
-			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
+			).limit(Configuration.get(:snom_display_max_entries, 20, Integer)).order('created_at DESC')
 		end
 	end
 	
@@ -152,7 +144,7 @@ class ManufacturerSnomController < ApplicationController
 			@call_logs_out = CallLog.where(
 				:sip_account_id => @sip_account.id, 
 				:call_type => CALL_OUTBOUND
-			).limit(DISPLAY_MAX_ENTRIES).order('created_at DESC')
+			).limit(Configuration.get(:snom_display_max_entries, 20, Integer)).order('created_at DESC')
 		end
 	end
 	
@@ -164,7 +156,7 @@ class ManufacturerSnomController < ApplicationController
 				:disposition => DISPOSITION_FORWARDED
 				).order('created_at DESC')
 		end
-		@max_entries = DISPLAY_MAX_ENTRIES
+		@max_entries = Configuration.get(:snom_display_max_entries, 20, Integer)
 	end
 	
 	def call_forwarding
@@ -206,7 +198,7 @@ class ManufacturerSnomController < ApplicationController
 			)
 				@noanswer_timeout = call_forward.call_timeout
 			else
-				@noanswer_timeout = 20
+				@noanswer_timeout = Configuration.get(:call_forward_default_timeout, 20, Integer)
 			end
 		end
 	end
@@ -253,9 +245,8 @@ class ManufacturerSnomController < ApplicationController
 		end
 	end
 	
-	def sip_accounts
-		@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
-		@sip_accounts = @phone.sip_accounts.all
+	def state_settings
+		@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"                          
 	end
 	
 	def index
@@ -269,17 +260,12 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def get_sip_account(phone, sip_account_id = nil)
-		sip_accounts = phone.sip_accounts
 		
-		if (! sip_accounts) 
-			return nil
+		if (sip_account_id && sip_accounts = phone.sip_accounts)
+			return sip_accounts.find_by_id( sip_account_id )
 		end
-		
-		if (sip_account_id.blank?)
-			return sip_accounts.first
-		end
-		
-		return sip_account = sip_accounts.find_by_id( sip_account_id )
+				
+		return nil
 	end
 	
 	def get_call_forward( sip_account, reason )
@@ -295,8 +281,8 @@ class ManufacturerSnomController < ApplicationController
 	def save_call_forward( sip_account, reason, destination, timeout = nil )
 		if (reason == @cfwd_case_noanswer_id && (! destination.blank?))
 			timeout = timeout.to_i
-			if (timeout < 1 || timeout > 120)
-				timeout = 20
+			if (timeout < 1 || timeout > Configuration.get(:call_forward_max_timeout, 120, Integer))
+				timeout = Configuration.get(:call_forward_default_timeout, 20, Integer)
 			end
 		else
 			timeout = nil
@@ -359,5 +345,4 @@ class ManufacturerSnomController < ApplicationController
 	DISPOSITION_FORWARDED = 'forwarded'
 	CALL_INBOUND = 'in'
 	CALL_OUTBOUND = 'out'
-	DISPLAY_MAX_ENTRIES = 20
 end
