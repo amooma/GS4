@@ -104,7 +104,7 @@ cd /opt/gemeinschaft/misc/ruby-sane
 make deb-install
 gem install rails
 gem install   rake -v 0.8.7
-gem uninstall rake -v 0.9.0
+gem uninstall rake -v 0.9.0 || true  # isn't installed anyway
 
 
 echo -e "Configuring ODBC ...\n"
