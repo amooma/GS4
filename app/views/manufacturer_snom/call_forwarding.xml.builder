@@ -23,14 +23,4 @@ xml.SnomIPPhoneMenu {
 		xml.Name(t(:call_forwarding_offline_destination, :destination => @offline_destination))
 		xml.URL("#{@xml_menu_url}/call_forwarding_offline.xml")
 	}
-	
-	xml.SoftKeyItem {
-		xml.Name('*')
-		xml.URL("#{@xml_menu_url}/xml_menu.xml")
-	}
 }
-
-
-# Local Variables:
-# mode: ruby
-# End:

@@ -21,14 +21,4 @@ xml.SnomIPPhoneInput {
 			xml.InputFlags('t')
 		}
 	end
-	xml.SoftKeyItem {
-		xml.Label(t(:exit))
-		xml.Name('F2')
-		xml.URL("#{@xml_menu_url}/xml_menu.xml")
-	}
 }
-
-
-# Local Variables:
-# mode: ruby
-# End:

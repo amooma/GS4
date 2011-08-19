@@ -14,21 +14,21 @@
   </tr>
 
 <% if ! @voicemails.empty? %>
-<% @voicemails.each do |voicemail_message| %>
+<% @voicemails.each do |vm_msg| %>
   <tr>
-    <td><%= voicemail_message['username'] %></td>
-    <td><%= voicemail_message['folder'] %></td>
-    <td><%= l( Time.at( voicemail_message['created_epoch'].to_i ).localtime, :format => :short ) %></td>
-    <td><%= voicemail_message['cid_number'] %></td>
-    <td><%= voicemail_message['cid_name'] %></td>
-    <td><%= voicemail_message['duration'] %></td>
-    <td><%= voicemail_message['read_epoch'].to_i > 0 ? t(:read) : t(:unread) %></td>
-    <td><%= File.exist?( voicemail_message['path'] ) ? \
-        (link_to 'WAV', voicemail_path(voicemail_message['uuid'], :account => voicemail_message['username'], \
-        :format => 'wav')) : ''
+    <td><%= vm_msg['username'] %></td>
+    <td><%= vm_msg['folder'] %></td>
+    <td><%= l( Time.at( vm_msg['created_epoch'].to_i ).localtime, :format => :short ) %></td>
+    <td><%= vm_msg['cid_number'] %></td>
+    <td><%= vm_msg['cid_name'] %></td>
+    <td><%= vm_msg['duration'] %></td>
+    <td><%= vm_msg['read_epoch'].to_i > 0 ? t(:read) : t(:unread) %></td>
+    <td><%= File.exist?( vm_msg['path'] ) ? \
+      (link_to 'Wav', voicemail_path( vm_msg['uuid'], :account => vm_msg['username'], \
+      :format => 'wav' )) : ''
     %></td>
-    <td><%= link_to    t(:show)    , voicemail_path( :id => voicemail_message['uuid'], :account => voicemail_message['username'] ) %></td>
-    <td><%= button_to  t(:destroy) , voicemail_path( :id => voicemail_message['uuid'], :account => voicemail_message['username'] ), :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to    t(:show)    , voicemail_path( :id => vm_msg['uuid'], :account => vm_msg['username'] ) %></td>
+    <td><%= button_to  t(:destroy) , voicemail_path( :id => vm_msg['uuid'], :account => vm_msg['username'] ), :confirm => t(:are_you_sure), :method => :delete %></td>
   </tr>
 <% end %>
 <% end %>

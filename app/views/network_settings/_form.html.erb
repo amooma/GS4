@@ -1,15 +1,15 @@
-<%= simple_form_for(@network_setting) do |f| %>
+<%= simple_form_for( @network_setting ) do |f| %>
 	<%= f.error_messages %>
-  
-  <%= f.input :ip_address %>
-  <%= f.input :netmask %>
-  <%= f.input :gateway %>
-  <%= f.input :name_server %>
-  <%= f.input :dhcp_range_start %>
-  <%= f.input :dhcp_range_end %>
-  <%= f.input :dhcp_client, :as => :boolean %>
-  <%= f.input :start_dhcp_server, :as => :boolean %>
-  <%= f.input :interface, :as => :hidden, :input_html => { :value => 'eth0' } %>
-  <%= f.submit %>
-  
+	
+	<%= f.input :ip_address %>
+	<%= f.input :netmask %>
+	<%= f.input :gateway %>
+	<%= f.input :name_server %>
+	<%= f.input :dhcp_range_start %>
+	<%= f.input :dhcp_range_end %>
+	<%= f.input :dhcp_client %>
+	<%= f.input :start_dhcp_server %>
+	<%= f.input :interface, :as => :hidden, :input_html => { :value => 'eth0' } %>
+	
+	<%= f.button :submit %>
 <% end %>
