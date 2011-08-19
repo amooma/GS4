@@ -17,7 +17,7 @@ class NetworkSetting < ActiveRecord::Base
     end
   }
   
-  #validate :validate_settings  #OPTIMIZE Validate attributes.
+  validate :validate_settings  #OPTIMIZE Validate attributes.
   
   validates_inclusion_of :interface, :in => ['eth0']  #OPTIMIZE Interface name is system-specific.
   
@@ -65,6 +65,7 @@ class NetworkSetting < ActiveRecord::Base
       end
       
       #OPTIMIZE File paths are system-specific. E.g. limit this to Debian.
+      #No need to do that! It is limited by is_appliance! -> Wa are Knoppix
       file_path_etc     = "/tmp/"
       file_path_network = "/tmp/"
       if ::Rails.env.to_s == "production"
