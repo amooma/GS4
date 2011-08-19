@@ -28,7 +28,9 @@ class NetworkSetting < ActiveRecord::Base
   "
   
   after_save {
-    if Configuration.get( :is_appliance, false, Configuration::Boolean )
+    if Configuration.get( :is_appliance, false, Configuration::Boolean ); (
+      # is_appliance => This is a Knoppix system.
+      
       if self.dhcp_client == false
         network_interfaces = "
         #{network_interfaces}
@@ -64,8 +66,6 @@ class NetworkSetting < ActiveRecord::Base
         dnsmasq_conf = ""
       end
       
-      #OPTIMIZE File paths are system-specific. E.g. limit this to Debian.
-      #No need to do that! It is limited by is_appliance! -> Wa are Knoppix
       file_path_etc     = "/tmp/"
       file_path_network = "/tmp/"
       if ::Rails.env.to_s == "production"
@@ -76,7 +76,8 @@ class NetworkSetting < ActiveRecord::Base
       write_files("#{file_path_etc}dnsmasq.conf", dnsmasq_conf)
       write_files("#{file_path_etc}resolv.conf", resolv_conf)
       write_files("#{file_path_network}interfaces", network_interfaces)
-    end
+      
+    )end
   }
   
   after_save(:on => :create) {
