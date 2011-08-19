@@ -96,7 +96,4 @@ xml.SnomIPPhoneMenu(:title => t(:application_name)) {
 			}
 		}
 	}
-	xml.MenuItem(:name => 'TEST') {	
-		xml.URL("http://192.168.0.50:3000/manufacturer_snom/0004134531F6/state_settings.xml")
-	}
 }
