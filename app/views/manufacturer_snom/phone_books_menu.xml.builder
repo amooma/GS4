@@ -21,3 +21,7 @@ xml.SnomIPPhoneMenu(:title => t(:phone_books)) {
 	}
 }
 
+
+# Local Variables:
+# mode: ruby
+# End:

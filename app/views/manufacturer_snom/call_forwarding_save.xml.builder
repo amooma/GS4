@@ -6,3 +6,8 @@ xml.SnomIPPhoneText {
 	
 	xml.fetch("#{@xml_menu_url}/call_forwarding.xml", :mil => '3000') 
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

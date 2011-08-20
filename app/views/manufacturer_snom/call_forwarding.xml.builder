@@ -24,3 +24,8 @@ xml.SnomIPPhoneMenu {
 		xml.URL("#{@xml_menu_url}/call_forwarding_offline.xml")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

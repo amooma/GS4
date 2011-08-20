@@ -205,7 +205,7 @@ class ManufacturerSnomController < ApplicationController
 	
 	def call_forwarding_save
 		reason = nil
-
+		
 		cfwd_case = params[:case]
 		cfwd_destination = params[:destination]
 		cfwd_timeout = params[:timeout]
@@ -246,7 +246,7 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def state_settings
-		@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"                          
+		@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
 	end
 	
 	def index
@@ -259,12 +259,12 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
-	def get_sip_account(phone, sip_account_id = nil)
+	def get_sip_account( phone, sip_account_id = nil )
 		
 		if (sip_account_id && sip_accounts = phone.sip_accounts)
 			return sip_accounts.find_by_id( sip_account_id )
 		end
-				
+		
 		return nil
 	end
 	
