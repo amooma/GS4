@@ -39,11 +39,6 @@ xml.SnomIPPhoneMenu {
 			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=offline&destination=-vbox-#{@sip_account.auth_name}")
 		end
 	}
-	
-	xml.SoftKeyItem {
-		xml.Name('*')
-		xml.URL("#{@xml_menu_url}/xml_menu.xml")
-	}
 }
 
 

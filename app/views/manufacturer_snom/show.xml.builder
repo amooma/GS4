@@ -38,7 +38,7 @@ xml.settings {
 		xml.gui_fkey4( 'none', :perm => 'R')
 		
 		xml.dkey_directory( "url #{@xml_menu_url}/phone_books_menu.xml", :perm => 'RW' )
-		xml.dkey_menu( "url #{@xml_menu_url}/xml_menu.xml", :perm => 'RW' )
+		xml.dkey_menu( 'keyevent F_SETTINGS', :perm => 'RW' )
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
@@ -175,6 +175,9 @@ xml.settings {
 		}
 	end
 	
+	xml.uploads {
+		xml.file( :url => "#{@xml_menu_url}/state_settings.xml", :type => "gui_xml_state_settings" )
+	}
 }
 
 

@@ -1,6 +1,21 @@
 # locale for GS4 in English 
 
 en:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%e %b"
+      long: "%B %e, %Y"
+
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      time: "%H:%M"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+      call_log_recent: "%H:%M"
+      call_log_old: "%e.%m."
+      
   application_name: "Gemeinschaft 4"
   show: "Show"
   back: "Back"

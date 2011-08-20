@@ -10,12 +10,6 @@ xml.SnomIPPhoneInput {
 		xml.DefaultValue("#{@offline_destination}")
 		xml.InputFlags('t')
 	}
-	
-	xml.SoftKeyItem {
-		xml.Label(t(:exit))
-		xml.Name('F2')
-		xml.URL("#{@xml_menu_url}/xml_menu.xml")
-	}
 }
 
 

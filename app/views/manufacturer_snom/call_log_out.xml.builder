@@ -15,10 +15,6 @@ xml.SnomIPPhoneDirectory {
 			xml.Telephone( call_entry.destination )
 		}
 	}
-	xml.SoftKeyItem {
-		xml.Name('*')
-		xml.URL("#{@xml_menu_url}/xml_menu.xml")
-	}
 }
 
 
