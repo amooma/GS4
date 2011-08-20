@@ -9,14 +9,20 @@ ActiveRecord::Base.class_eval do
     }.merge!( options ) )
   end
   
-  def self.validate_netmask( attr_name )
-    validates_format_of [attr_name], :with =>
+  def self.validate_netmask( attr_names, options={} )
+    configuration = {
+      :allow_nil   => false,
+      :allow_blank => false,
+      :with =>
       /^(
          ((128|192|224|240|248|252|254)\.0\.0\.0)
         |(255\.(0|128|192|224|240|248|252|254)\.0\.0)
         |(255\.255\.(0|128|192|224|240|248|252|254)\.0)
         |(255\.255\.255\.(0|128|192|224|240|248|252|254))
       )$/x
+    }
+    configuration.merge!( options )
+    validates_format_of( attr_names, configuration )
   end
   
   def self.validate_hostname_or_ip( attr_names, options={} )
