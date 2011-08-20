@@ -22,7 +22,9 @@ function log( level, message )
 		case LOG_CRIT    : log_level_fs = 'crit'    ; break;
 		default          : log_level_fs = 'alert'   ; break;
 	}
-	console_log( log_level_fs, message + "\n" );
+	uuid = (session && session.uuid) ? '('+ session.uuid.substr(0,2) + session.uuid.substr(-4,4) +') ' : '';
+	indent = '        '.substr( 0, 8 - log_level_fs.length )
+	console_log( log_level_fs, indent + uuid + message + "\n" );
 }
 
 
@@ -226,14 +228,26 @@ try {
 				throw new Error( "Did not receive any data." );
 			}
 			var curl_response_data = buffer_obj.data;
+			delete buffer_obj;
+			
+			// mod_spidermonkey_curl sometimes doesn't handle "Transfer-Encoding:
+			// chunked properly it seems. The final "0" last chunk slips into
+			// the data sometimes. Timing issue?
+			if (curl_response_data.match( /0\s*$/ )) {
+				log( LOG_INFO, "Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly." );
+				// FreeSwitch could send "TE: identity;q=1,chunked;q=0".
+				//curl_response_data = curl_response_data.replace( /\s*0\s*$/, '' );
+				curl_response_data = curl_response_data.replace( /[^>]+$/, '' );
+			}
+			
 			// E4X XML() doesn't understand the XML processing instruction
 			// nor whitespace at the beginning or end. :-(
+			// (See also https://bugzilla.mozilla.org/show_bug.cgi?id=321564 )
 			curl_response_data = curl_response_data
 				.replace( /^<\?xml[^>]*\?>/, '' )
 				.replace( /^\s*/, '' )
 				.replace( /\s*$/, '' )
-				;
-			delete buffer_obj;
+				;			
 			
 			if ((typeof XML) == 'undefined') {
 				throw new Error( "E4X XML parser is not available!" );
@@ -242,13 +256,15 @@ try {
 				var xml_obj = new XML( curl_response_data );
 			}
 			catch (e if e instanceof SyntaxError) {
-				log( LOG_INFO, "Response from web service is:\n-----------------\n"+ curl_response_data +"\n-----------------" );
+				log( LOG_INFO, "Response from web service is:\n----------------------\n"+ curl_response_data +"\n----------------------" );
 				log( LOG_ERROR, "XML error: "+ e.message );
 				throw new Error( "Response is not valid XML!" );
 			}
 			if (xml_obj.name() != 'dialplan-actions') {
+				log( LOG_INFO, "Response from web service is:\n----------------------\n"+ curl_response_data +"\n----------------------" );
 				throw new Error( "Expected root node \"dialplan-actions\" (got \""+ xml_obj.name() +"\")!" );
 			}
+			log( LOG_DEBUG, "Response from web service is:\n----------------------\n"+ curl_response_data +"\n----------------------" );
 			return xml_obj;
 		},
 		
@@ -366,7 +382,9 @@ catch (e) {
 	log( LOG_ERROR, (e.name != 'Error' ? e.name +": " : '') + e.message +" in "+ e.fileName +", line "+ e.lineNumber );
 	// Fallback mode:
 	log( LOG_WARNING, "Fallback mode ..." );
+	
 	dst = session.destination.replace( /^-kambridge-/, '' );
+	//session.setVariable( 'sip_h_X-Diversion', dst+'@127.0.0.1;reason=fallback' );
 	session.execute( 'export', 'sip_contact_user=ufs' );
 	session.execute( 'bridge', 'sofia/internal/'+dst+'@127.0.0.1' );
 }
