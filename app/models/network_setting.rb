@@ -114,7 +114,7 @@ class NetworkSetting < ActiveRecord::Base
     )end
   }
   
-  after_save(:on => :create) {
+  after_save( :on => :create ) {
     if ! dhcp_client
       servers = [ 'SipServer', 'SipProxy', 'VoicemailServer' ]
       servers.each do |server|
@@ -124,6 +124,7 @@ class NetworkSetting < ActiveRecord::Base
       end
     end
   }
+  
   
   private
   
