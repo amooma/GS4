@@ -227,7 +227,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			if call_disposition.blank?; (
 				# We didn't try to call the SIP account yet.
 				
-				# If source is one of our accounts, we need to write a call_log
+				# If source is one of our accounts, write a call log:
 				if src_sip_account
 					call_log(
 						src_sip_account.id, 'out', 'answered', call_uuid,
@@ -235,18 +235,21 @@ class FreeswitchCallProcessingController < ApplicationController
 					)
 				end
 				
-				# Set Caller-ID for call forward:
+				# Set Caller-ID for call forward (for case "assistant"?):
 				#OPTIMIZE Shouldn't all of the caller-ID stuff (see further below) be handled here then?
 				# RFC 2543:
 				action :set, "effective_caller_id_number=#{ sip_user_encode( src_cid_sip_user )}"
 				action :set, "effective_caller_id_name=#{ sip_displayname_encode( src_cid_sip_display )}"
 				action :set, "sip_h_P-Preferred-Identity=#{ sip_displayname_quote( src_cid_sip_display )} <sip:#{ sip_user_encode( src_cid_sip_user )}@#{ src_cid_sip_domain }>"
 				
+				
 				# Check unconditional call-forwarding ("always"):
 				#
 				call_forward_always    = find_call_forward( dst_sip_account, :always    , src_cid_sip_user )
 				call_forward_assistant = find_call_forward( dst_sip_account, :assistant , src_cid_sip_user )
 				
+				#OPTIMIZE Clear up / explain this is_assistant code. It's hard to understand. Who's the assistant, the src or the dst?
+				is_assistant = false
 				if (cfwd_reason_assistant = CallForwardReason.where(:value => "assistant").first)
 					if (assistant_sip_account = SipAccount.where(:auth_name => "#{dst_sip_user_real}").first)
 						is_assistant = ! CallForward.where({
@@ -262,7 +265,8 @@ class FreeswitchCallProcessingController < ApplicationController
 					# We have an unconditional call-forward.
 					
 					if call_forward_always.destination.blank?
-						action :respond, "480 Blacklisted"
+						# Blacklisted.
+						action :respond, "480 Temporarily Unavailable"
 					else
 						check_valid_voicemail_box_destination( call_forward_always.destination )
 						call_log(
@@ -273,7 +277,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					end
 					
 				)
-				elsif ! is_assistant.nil? && call_forward_assistant; (
+				elsif is_assistant && call_forward_assistant; (
 					# ...(?)
 					
 					call_log(
@@ -381,7 +385,8 @@ class FreeswitchCallProcessingController < ApplicationController
 					call_forward = find_call_forward( dst_sip_account, call_forward_reason, src_cid_sip_user )
 					if call_forward; (
 						if call_forward.destination.blank?
-							action :respond, "480 Blacklisted"
+							# Blacklisted.
+							action :respond, "480 Temporarily Unavailable"
 						else
 							check_valid_voicemail_box_destination( call_forward.destination )
 							dst_call_log.destroy if dst_call_log
@@ -411,7 +416,15 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		respond_to { |format|
 			format.xml {
-				render :actions, :layout => false
+				default_subfmt = :common
+				params[:subfmt] = default_subfmt if params[:subfmt].blank?
+				params[:subfmt] = params[:subfmt].to_sym
+				#params[:subfmt] = default_subfmt if ! [ :e4x, :common ].include?( params[:subfmt] )
+				
+				case params[:subfmt]
+					when :e4x   ; render :'actions.e4x'    , :layout => false
+					else        ; render :'actions.common' , :layout => false
+				end
 			}
 			format.all {
 				render :status => '406 Not Acceptable',

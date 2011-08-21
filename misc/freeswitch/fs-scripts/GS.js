@@ -1,6 +1,5 @@
 
-DIALPLAN_SERVICE_URL = 'http://127.0.0.1:80/freeswitch-call-processing/actions.xml';
-//#OPTIMIZE We may want to use HTTPS. Maybe via a Stunnel.
+DIALPLAN_SERVICE_URL = 'http://127.0.0.1:80/freeswitch-call-processing/actions.e4x.xml';
 
 
 LOG_DEBUG   = 1;
@@ -177,6 +176,16 @@ try {
 			}
 		},
 		
+		log_curl_response_data: function( log_level, curl_response_data )
+		{
+			max_length = 20000
+			log( log_level, "Response from web service is ("+ (curl_response_data.length) +" c):\n----------------------\n"
+				+ ((curl_response_data.length <= max_length)
+					? curl_response_data
+					: curl_response_data.substr(0,max_length) + '...' )
+				+"\n----------------------" );
+		},
+		
 		request_actions: function()
 		{
 			log( LOG_DEBUG, "Requesting dialplan actions via HTTP ..." );
@@ -194,13 +203,17 @@ try {
 					// so it has to be an object instead of a scalar.
 					try {
 						if (arg.data.length == 0  // nothing received so far
-						&&  string.length >= 5    // received something now
-						&&  string.substr(0,5) != '<?xml'
+						//&&  string.length >= 5    // received something now
+						//&&  string.substr(0,5) != '<?xml'
+						//&&  string.substr(0,1) != '<'  // XML declaration ("<?xml") or root element ("<dp-actions")
+						//&&  ! string.match( /<(?:\?xml|dp-actions)/ )
+						&&  string.length >= 1    // received something now
+						&&  string.substr(0,1) != '<'  // XML declaration ("<?xml") or root element ("<dp-actions")
 						) {
+							log( LOG_INFO, "Response from web service starts with:\n----------------------\n"+ string +"\n----------------------" );
 							throw new Error( "Data is not XML!" );
 						}
-						// We get chunks of data.
-						arg.data += string;
+						arg.data += string;  // We get multiple pieces of data and have to concatenate them.
 						return true;  // continue
 					}
 					catch (e) {
@@ -214,37 +227,52 @@ try {
 				8,              // timeout in seconds
 				'application/x-www-form-urlencoded'  // Content-Type
 			);
+			// mod_spidermonkey_curl doesn't even let us set an Accept header
+			// to specify the format we want.  :-/
 			t = (new Date()).getTime() - t;
 			delete query_data;
-			if (t < 1000) {
-				log( LOG_INFO    , "Request to web service took "+ (t) +" ms." );
-			} else if (t < 2000) {
-				log( LOG_NOTICE  , "Request to web service took "+ (t) +" ms." );
-			} else {
-				log( LOG_WARNING , "Request to web service took "+ (t) +" ms." );
-			}
+			if      (t < 1000) { log( LOG_INFO    , "Request to web service took "+ (t) +" ms." ); }
+			else if (t < 2000) { log( LOG_NOTICE  , "Request to web service took "+ (t) +" ms." ); }
+			else               { log( LOG_WARNING , "Request to web service took "+ (t) +" ms." ); }
+			
 			
 			if (buffer_obj.data.length == 0) {
-				throw new Error( "Did not receive any data." );
+				throw new Error( "Did not receive any (valid) data." );
 			}
 			var curl_response_data = buffer_obj.data;
 			delete buffer_obj;
 			
 			// mod_spidermonkey_curl sometimes doesn't handle "Transfer-Encoding:
-			// chunked properly it seems. The final "0" last chunk slips into
-			// the data sometimes. Timing issue?
-			if (curl_response_data.match( /0\s*$/ )) {
-				log( LOG_INFO, "Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly." );
+			// chunked properly. The final "0" last chunk slips into the data
+			// sometimes. Timing issue?
+			// Even worse: Chunking occurs mid-data. The first chunk has been
+			// observed to have a maximum length of 0x1ff8 bytes (= 8184 B
+			// = 8 kiB - 8 B). A chunk (without chunk extensions) of 0x1ff8
+			// bytes has an overhead of "1ff8" + "\r\n" + "\r\n" = 8 bytes,
+			// so the chunk has exactly 8 kiB including the overhead.
+			// BTW: 8184 bytes are roughly 100 actions on average.
+			if (curl_response_data.match( /0\r?\n?\r?\n?$/ )) {
+				log( LOG_NOTICE, "--------Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly. Fixed." );
 				// FreeSwitch could send "TE: identity;q=1,chunked;q=0".
 				//curl_response_data = curl_response_data.replace( /\s*0\s*$/, '' );
 				curl_response_data = curl_response_data.replace( /[^>]+$/, '' );
 			}
+			if (curl_response_data.match( /^[0-9a-zA-Z]+(\s;[^\r\n]+)?([\r\n]{1,2}|$)/m )) {  // chunk size
+				log( LOG_WARNING, "--------Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly!" );
+			}
+			else if (curl_response_data.match( /^[^\s<]/m )
+			||       curl_response_data.match( /[^>][\r\n]?$/m )) {
+				log( LOG_WARNING, "--------Curl or mod_spidermonkey_curl did likely not parse chunked Transfer-Encoding correctly!" );
+			}
 			
-			// E4X XML() doesn't understand the XML processing instruction
-			// nor whitespace at the beginning or end. :-(
+			// E4X XML() doesn't understand the XML declaration nor whitespace
+			// at the beginning or end. :-(
 			// (See also https://bugzilla.mozilla.org/show_bug.cgi?id=321564 )
+			// The E4X ECMA spec (ECMA-357) says: "converts it to XML by
+			// parsing the string as XML." That's not true. An XML-compliant
+			// XML parser would understand the XML declaration.
 			curl_response_data = curl_response_data
-				.replace( /^<\?xml[^>]*\?>/, '' )
+				.replace( /^<\?xml[^>]*\?>\s*/, '' )
 				.replace( /^\s*/, '' )
 				.replace( /\s*$/, '' )
 				;			
@@ -256,15 +284,15 @@ try {
 				var xml_obj = new XML( curl_response_data );
 			}
 			catch (e if e instanceof SyntaxError) {
-				log( LOG_INFO, "Response from web service is:\n----------------------\n"+ curl_response_data +"\n----------------------" );
+				this.log_curl_response_data( LOG_INFO, curl_response_data );
 				log( LOG_ERROR, "XML error: "+ e.message );
 				throw new Error( "Response is not valid XML!" );
 			}
-			if (xml_obj.name() != 'dialplan-actions') {
-				log( LOG_INFO, "Response from web service is:\n----------------------\n"+ curl_response_data +"\n----------------------" );
-				throw new Error( "Expected root node \"dialplan-actions\" (got \""+ xml_obj.name() +"\")!" );
+			if (xml_obj.name() != 'dp-actions') {
+				this.log_curl_response_data( LOG_INFO, curl_response_data );
+				throw new Error( "Expected root node \"dp-actions\" (got \""+ xml_obj.name() +"\")!" );
 			}
-			log( LOG_DEBUG, "Response from web service is:\n----------------------\n"+ curl_response_data +"\n----------------------" );
+			this.log_curl_response_data( LOG_DEBUG, curl_response_data );
 			return xml_obj;
 		},
 		
@@ -298,17 +326,17 @@ try {
 				// the service might send invalid elements in an
 				// endless loop. That's why we throw exceptions here.
 				switch (tag_name) {
-					case 'action':
-						var attr_appl = item.@application .toString();
+					case 'act':
+						var attr_appl = item.@app         .toString();
 						var attr_data = item.@data        .toString();
-						log( LOG_DEBUG, '<'+ tag_name +' application="'+ attr_appl +'" data="'+ attr_data +'" />' );
+						log( LOG_DEBUG, '<'+ tag_name +' app="'+ attr_appl +'" data="'+ attr_data +'" />' );
 						if (attr_appl == '') {
-							throw new Error( "Missing attribute \"application\" in <"+ tag_name +"> tag!" );
+							throw new Error( "Missing attribute \"app\" in <"+ tag_name +"> tag!" );
 						}
 						switch (attr_appl) {
 							case '_continue':
 								// This is a safety precaution. We require an
-								// explicit <action application="_continue" />
+								// explicit <act app="_continue" />
 								// if the web service wants us to continue
 								// the processing iterations, so we avoid
 								// running an endless loop.
