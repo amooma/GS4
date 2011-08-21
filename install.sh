@@ -150,6 +150,7 @@ bundle exec rake db:seed     RAILS_ENV=production
 
 cd /opt/gemeinschaft/public/
 bundle install --path .
+#OPTIMIZE "bundle install --path ." installs the Gems into a "ruby" directory in /opt/gemeinschaft/. Why should we need this? We don't need it with the Debian packages.
 
 
 echo -e "Creating and populating group \"gemeinschaft\" ...\n"
