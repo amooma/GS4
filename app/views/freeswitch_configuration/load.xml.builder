@@ -931,10 +931,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 			xml.extension( :name => 'kam-vbox' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-vbox-(.+)$' ) {
-				xml.action( :application => 'set', :data => 'voicemail_alternate_greet_id=${sip_to_user}')
-
-				#xml.param( :name => 'vm-alternate-greet-id', :value => '4444'  )
-
+				xml.action( :application => 'set', :data => 'voicemail_alternate_greet_id=${sip_to_user}' )
 					xml.action( :application => 'answer', :data => 'voicemail_authorized=true' )
 					xml.action( :application => 'voicemail', :data => 'default ${domain_name} $1' )
 				}
