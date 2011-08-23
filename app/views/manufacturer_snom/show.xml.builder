@@ -84,8 +84,8 @@ xml.settings {
 			xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r )
 			xml.user_pname(             sac[:auth_user]       , saopts_r  )
 			xml.user_pass(              sac[:password]        , saopts_r  )
-			xml.user_host(              sac[:registrar]       , saopts_r  )
-			xml.user_outbound(          sac[:outbound_proxy]  , saopts_r  )
+			xml.user_host("#{sac[:registrar]}#{@snom_transport_tls}", saopts_r  )
+			xml.user_outbound("#{sac[:outbound_proxy]}#{@snom_transport_tls}", saopts_r  )
 			xml.user_name(              sac[:user]            , saopts_r  )
 			xml.user_realname(          sac[:display_name]    , saopts_r  )
 			xml.user_idle_text(         sac[:screen_name]     , saopts_r  )
@@ -108,8 +108,8 @@ xml.settings {
 			xml.user_full_sdp_answer(   'on'                  , saopts_rw )
 			xml.user_dynamic_payload(   'on'                  , saopts_rw ) # "Turns on dynamic payload type for G726."
 			xml.user_g726_packing_order('on'                  , saopts_r  ) # on = RFC 3551, off = AAL2
-			xml.user_srtp(              'off'                 , saopts_rw )
-			xml.user_savp(              'off'                 , saopts_rw )
+			xml.user_srtp(              @snom_srtp            , saopts_rw )
+			xml.user_savp(              @snom_savp            , saopts_rw )
 			xml.codec_size(             '20'                  , saopts_rw )
 			
 			codec_i = 1

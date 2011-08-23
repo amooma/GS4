@@ -20,7 +20,7 @@ class ManufacturerSnomController < ApplicationController
 			
 			if (@phone)
 				@xml_menu_url = "#{request.protocol}#{request.env['SERVER_NAME']}:#{request.env['SERVER_PORT']}/manufacturer_snom/#{@mac_address}"
-				if (@phone.ip_address == request.remote_ip || true)
+				if (@phone.ip_address == request.remote_ip)
 					@user = get_user_by_phone(@phone)
 					@sip_account = get_sip_account(@phone, params[:sip_account])
 					
@@ -78,6 +78,11 @@ class ManufacturerSnomController < ApplicationController
 			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 			@phone.update_attributes(:ip_address => request.remote_ip)
 		end
+		
+		@snom_srtp = Configuration.get(:snom_srtp, true, Configuration::Boolean) ? 'on' : 'off'
+		savp = Configuration.get(:snom_savp, 'off', String).downcase
+		@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
+		@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
 		
 		respond_to { |format|
 			format.xml
