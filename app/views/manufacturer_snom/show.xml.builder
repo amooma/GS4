@@ -120,6 +120,7 @@ xml.settings {
 				break if codec_i > max_codec_i
 			end
 		}
+		xml.tls_server_authentication( Configuration.get(:snom_tls_server_authentication, false, Configuration::Boolean) ? 'on' : 'off', :perm => 'RW' )
 	end
 	
 	
