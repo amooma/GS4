@@ -121,6 +121,9 @@ xml.settings {
 			end
 		}
 		xml.tls_server_authentication( Configuration.get(:snom_tls_server_authentication, false, Configuration::Boolean) ? 'on' : 'off', :perm => 'RW' )
+		if (@webserver_cert)
+		   xml.webserver_cert(@webserver_cert, :perm => 'RW' )
+		end
 	end
 	
 	
