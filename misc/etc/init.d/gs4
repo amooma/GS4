@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TO_CHANGE="/etc/network/interfaces /etc/dnsmasq.conf /etc/resolv.conf"
+
+for i in $TO_CHANGE; do 
+
+chgrp gemeinschaft $i
+chmod g+rw $i
+
+done 
