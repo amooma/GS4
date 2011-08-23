@@ -74,11 +74,12 @@ Gemeinschaft4::Application.routes.draw do
 		:action     => 'search',
 		:format     => :'xml'
 	
-	match '/freeswitch-call-processing/actions',
+	match '/freeswitch-call-processing/actions((.:subfmt).:format)',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_call_processing,
 		:action     => 'actions',
-		:format     => :'xml'
+		:defaults    => { :format => :'xml', :subfmt => nil },
+		:constraints => { :format => /[a-z0-9]+/, :subfmt => /[a-z0-9]+/ }
 	
 	match '/freeswitch-configuration/freeswitch',
 		:via        => [ :get, :post ],

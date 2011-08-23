@@ -39,6 +39,7 @@ xml.settings {
 		
 		xml.dkey_directory( "url #{@xml_menu_url}/phone_books_menu.xml", :perm => 'RW' )
 		xml.dkey_menu( 'keyevent F_SETTINGS', :perm => 'RW' )
+		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
 		@phone.sip_accounts.each { |sip_account|
@@ -173,7 +174,7 @@ xml.settings {
 			)
 		}
 	end
-
+	
 	xml.uploads {
 		xml.file( :url => "#{@xml_menu_url}/state_settings.xml", :type => "gui_xml_state_settings" )
 	}

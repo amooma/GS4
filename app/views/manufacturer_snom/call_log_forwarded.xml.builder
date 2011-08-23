@@ -26,3 +26,8 @@ xml.SnomIPPhoneDirectory {
 		}
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

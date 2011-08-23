@@ -23,7 +23,7 @@ Package: gemeinschaft-common
 Architecture: all
 Conflicts: gemeinschaft (<< 3.99)
 Depends: ${misc:Depends}, ruby-sane1.9.1 (>= 1.9.2), gemeinschaft-ruby-gems (= ${binary:Version}), adduser
-Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp, harden-servers, harden-clients, portsentry
+Suggests: gemeinschaft-doc, gemeinschaft-tests, ntp | time-daemon, harden-servers, harden-clients, portsentry
 Description: Gemeinschaft - common files
  Common files of the Gemeinschaft telephony server.
 

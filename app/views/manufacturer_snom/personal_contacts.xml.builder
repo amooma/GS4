@@ -41,3 +41,8 @@ xml.SnomIPPhoneDirectory {
 		xml.URL("#{@xml_menu_url}/personal_contacts.xml?keys=")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

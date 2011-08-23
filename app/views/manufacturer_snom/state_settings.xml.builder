@@ -1,6 +1,7 @@
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 	
 xml.SnomIPPhoneMenu(:title => t(:application_name)) {
+	
 	xml.Menu(:name => t(:phone_books)) {
 		xml.MenuItem(:name => t(:phone_book_internal)) {
 			xml.URL("#{@xml_menu_url}/phone_book_internal.xml")
@@ -67,7 +68,7 @@ xml.SnomIPPhoneMenu(:title => t(:application_name)) {
 			xml.Action("equalizer")
 		}
 	}
-		
+	
 	xml.Menu(:name => "$(lang:maintenance_settings)") {
 		xml.MenuItem(:name => "$(lang:system_information_menu)") {
 			xml.Action("sysinfo")
@@ -97,3 +98,9 @@ xml.SnomIPPhoneMenu(:title => t(:application_name)) {
 		}
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
+

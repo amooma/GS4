@@ -11,3 +11,8 @@ xml.SnomIPPhoneInput {
 		xml.InputFlags('t')
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:

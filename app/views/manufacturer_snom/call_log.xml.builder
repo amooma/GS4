@@ -21,3 +21,7 @@ xml.SnomIPPhoneMenu {
 	}
 }
 
+
+# Local Variables:
+# mode: ruby
+# End:

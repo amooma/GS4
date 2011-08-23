@@ -27,3 +27,8 @@ xml.SnomIPPhoneDirectory {
 		xml.URL("#{@xml_menu_url}/phone_book_internal.xml?keys=")
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
