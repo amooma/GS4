@@ -1,0 +1,40 @@
+ <VirtualHost *:80>
+	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.notice" 
+	CustomLog "|/usr/bin/logger -t apache -i -p local6.notice" combined
+	rewriteengine on
+	RewriteCond %{HTTP_HOST} 127.0.0.1|localhost
+	RewriteRule ^.* - [L]
+	RewriteCond %{REQUEST_URI} ^/(settings)
+        RewriteRule ^.* - [L]
+	
+
+	RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [R,L]
+ 
+	DocumentRoot /opt/gemeinschaft/public
+	PassengerAppRoot /opt/gemeinschaft
+	RailsEnv development
+      	<Directory /opt/gemeinschaft/public>
+       		AllowOverride all              
+         	Options -MultiViews            
+      		Options FollowSymLinks
+	</Directory>
+   </VirtualHost>
+
+
+ <VirtualHost *:443>
+	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.notice" 
+	CustomLog "|/usr/bin/logger -t apache -i -p local6.notice" combined
+
+
+     	DocumentRoot /opt/gemeinschaft/public
+        PassengerAppRoot /opt/gemeinschaft
+        RailsEnv development
+      	<Directory /opt/gemeinschaft/public>
+         	AllowOverride all
+         	Options -MultiViews
+        	Options FollowSymLinks
+      	</Directory>
+ 	SSLEngine on
+       	SSLCertificateFile    /etc/ssl/amooma/server_cert.pem
+        SSLCertificateKeyFile /etc/ssl/amooma/server_key.pem
+   </VirtualHost>
