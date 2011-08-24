@@ -55,7 +55,6 @@ aptitude install -y --allow-untrusted \
   libxslt-dev \
   libsqlite3-dev \
   libjpeg62 \
-  lighttpd \
   kamailio  \
   kamailio-unixodbc-modules \
   freeswitch \
@@ -66,7 +65,6 @@ aptitude install -y --allow-untrusted \
   ghostscript  \
   imagemagick  \
   curl 
-
 echo -e "Adding testing and setting APT Pin-Priority ...\n"
 (
 echo 'deb     http://ftp.debian.org/debian/ testing main'
@@ -90,7 +88,7 @@ aptitude install -y libsqliteodbc/testing
 
 echo -e "Stopping services ...\n"
 /etc/init.d/freeswitch  stop
-/etc/init.d/lighttpd    stop
+
 /etc/init.d/kamailio    stop
 
 
@@ -106,9 +104,12 @@ make deb-install
 echo -e "Installing Ruby on Rails ...\n"
 gem install   rails
 gem install   rake -v 0.8.7
-gem uninstall rake -v 0.9.0 || true  # isn't installed anyway
+apt-get install -t testing libpcre3-dev
+apt-get install -t testing libcurl4-openssl-dev
+aptitude install -y apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev
 
 
+/etc/init.d/apache2   stop
 echo -e "Configuring ODBC ...\n"
 
 echo "[gemeinschaft-production]
@@ -125,9 +126,10 @@ mv /etc/kamailio /etc/kamailio.dist
 ln -s /opt/gemeinschaft/misc/kamailio/etc /etc/kamailio
 sed -i 's/RUN_KAMAILIO=no/RUN_KAMAILIO=yes/' /etc/default/kamailio
 
-echo -e "Configuring Lighttpd ...\n"
+echo -e "Configuring Apache ...\n"
 
-cp /opt/gemeinschaft/misc/lighttpd.conf /etc/lighttpd/
+cp /opt/gemeinschaft/misc/etc/apache/gemeinschaft /etc/apache2/sites-available
+a2ensite gemeinschaft
 cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
 chown www-data /etc/ssl/amooma/*
 chmod 0600 /etc/ssl/amooma/*
@@ -169,10 +171,13 @@ echo -e "Downloading FreeSwitch sound files ...\n"
 mkdir -p /opt/freeswitch/sounds
 /opt/gemeinschaft/misc/freeswitch/download-freeswitch-sounds || true
 
+gem install passenger
+
+passenger-install-apache2-module
 
 echo -e "Starting services ...\n"
 
-/etc/init.d/lighttpd start
+/etc/init.d/apache2 start
 /etc/init.d/kamailio start
 
 echo -e "Retrieving FreeSwitch configuration ...\n"
@@ -201,14 +206,36 @@ rm 'freeswitch-sounds-en-us-callie-16000-1.0.15.tar.gz'  2>&1 || true
 rm 'freeswitch-sounds-music-8000-1.0.8.tar.gz'           2>&1 || true
 rm 'freeswitch-sounds-music-16000-1.0.8.tar.gz'          2>&1 || true
 
-chgrp gemeinschaft /opt/freeswitch
+chgrp -R gemeinschaft /opt/freeswitch
 
+cp /opt/gemeinschaft/misc/etc/sudoers.d/gemeinschaft /etc/sudoers.d/
+chmod 0440 /etc/sudoers.d/gemeinschaft
+grep '#includedir /etc/sudoers.d' /etc/sudoers || echo  '#includedir /etc/sudoers.d' >> /etc/sudoers
+
+cp /opt/gemeinschaft/misc/etc/apparmor.d/* /etc/apparmor.d/
 
 echo -e "Starting FreeSwitch ...\n"
 chown www-data:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
 /etc/init.d/freeswitch start
 
+echo -e "\n"
+echo -e "Is this an appliance on Knoppix base? (y|n)"
+read n
+case $n in
+	y|Y)
+		
+		cd /opt/gemeinschaft;
+		bundle exec rake db:appliance_seed
+		cp /opt/gemeinschaft/misc/etc/init.d/* /etc/init.d/
+		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
+		shopt -s extglob
+		rm /etc/apache/sites-enabled/!(gemenschaft)
+	;;
+	*)
+	;;
+esac
 
 echo -e "\n\n"
 echo -e "Done.\n\n"
+
 
