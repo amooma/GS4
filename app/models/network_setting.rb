@@ -78,7 +78,7 @@ class NetworkSetting < ActiveRecord::Base
       else
         network_interfaces = "
         #{network_interfaces}
-        iface #{interface}
+        auto #{interface}
         iface #{interface} inet dhcp
         "
       end
