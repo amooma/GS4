@@ -133,6 +133,7 @@ a2ensite gemeinschaft
 cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
 chown www-data /etc/ssl/amooma/*
 chmod 0600 /etc/ssl/amooma/*
+a2enmod rewrite
 
 echo -e "Configuring FreeSwitch ...\n"
 
@@ -174,7 +175,7 @@ mkdir -p /opt/freeswitch/sounds
 gem install passenger
 
 passenger-install-apache2-module
-
+a2enmod ssl
 echo -e "Starting services ...\n"
 
 /etc/init.d/apache2 start
@@ -225,11 +226,10 @@ case $n in
 	y|Y)
 		
 		cd /opt/gemeinschaft;
-		bundle exec rake db:appliance_seed
+		RAILS_ENV=production bundle exec rake db:appliance_seed
 		cp /opt/gemeinschaft/misc/etc/init.d/* /etc/init.d/
 		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
-		shopt -s extglob
-		rm /etc/apache/sites-enabled/!(gemenschaft)
+		a2dissite default
 	;;
 	*)
 	;;
