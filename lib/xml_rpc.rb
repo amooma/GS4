@@ -10,12 +10,7 @@ module XmlRpc
 		xml_rpc_directory = Configuration.get(:xml_rpc_directory, '/RPC2' )
 		xml_rpc_api       = Configuration.get(:xml_rpc_api, 'freeswitch.api' )
 		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 20 )
-		if (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
-			xml_rpc__ssl = true
-		else
-			xml_rpc__ssl = false
-		end
-		#xml_rpc__ssl      = (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
+		xml_rpc__ssl      =(Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 		
 		Rails::logger.debug(_bold( "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}#{! arguments.empty? ? '?...' : ''}\" ..." ))
 		Rails::logger.debug( "(Params: #{arguments.inspect})" )
