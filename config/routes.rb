@@ -197,7 +197,11 @@ Gemeinschaft4::Application.routes.draw do
 		resources :phones
 	end
 	
-	resources :fax_documents
+	resources :fax_documents do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
 	resources :voicemails do
 		member do
