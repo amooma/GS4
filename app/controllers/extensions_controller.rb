@@ -168,6 +168,10 @@ class ExtensionsController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @extension = Extension.find( params[:id] )
+  end
+  
   private
   
   def find_sip_account

@@ -15,7 +15,7 @@
     <td><%= voicemail_server.port %></td>
     <td><%= voicemail_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show), voicemail_server %></td>
-    <td><%= button_to t(:destroy), voicemail_server, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_voicemail_server_path(voicemail_server) if can?( :destroy, voicemail_server ) %></td>
   </tr>
 <% end %>
 </table>

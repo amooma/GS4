@@ -1,0 +1,15 @@
+
+<p>
+  <b><%= t(:sip_host)%>:</b>
+  <%= @voicemail_server.host %>
+</p>
+
+<p>
+  <b><%= t(:sip_port)%>:</b>
+  <%= @voicemail_server.port %>
+</p>
+
+<p>
+  <b><%= t(:is_local)%>:</b>
+  <%= @voicemail_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>

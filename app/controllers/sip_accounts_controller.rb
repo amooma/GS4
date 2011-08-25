@@ -111,4 +111,8 @@ class SipAccountsController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @sip_account = SipAccount.find(params[:id])
+  end
+  
 end

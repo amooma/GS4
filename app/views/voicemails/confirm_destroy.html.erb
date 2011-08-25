@@ -1,0 +1,4 @@
+
+<h2><%= t(:confirm_destroy_record, :model_name => t(:voicemail))%></h2>
+<%= button_to  t(:destroy) , voicemail_path( :id => @voicemail_id, :account => @sip_account ), :method => :delete %>
+<%= link_to t(:cancel), voicemails_path if can?( :index, Voicemail ) %>

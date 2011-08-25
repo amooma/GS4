@@ -89,4 +89,8 @@ class CallQueuesController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @call_queue = CallQueue.find(params[:id])
+  end
+  
 end

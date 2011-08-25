@@ -1,0 +1,17 @@
+
+<p>
+  <b><%= t(:name) %>:</b>
+  <%= @call_queue.name %>
+</p>
+
+<p>
+  <b><%= t(:uuid) %>:</b>
+  <%= @call_queue.uuid %>
+</p>
+<b><%= t(:extensions) %>:</b>
+  <ul>
+  <% @call_queue.extensions.each do |extension| %>
+    <li><%= extension.extension %></li>  
+  <% end %>
+  </ul>
+</p>

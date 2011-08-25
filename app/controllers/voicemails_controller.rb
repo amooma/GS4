@@ -114,4 +114,8 @@ class VoicemailsController < ApplicationController
 		end
 	end
 	
+	def confirm_destroy
+		@voicemail_id = params[:id]
+		@sip_account = params[:account]
+	end
 end

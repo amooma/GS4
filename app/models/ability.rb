@@ -66,13 +66,15 @@ class Ability
         can    :create  , Phone
         can    :destroy , Phone
         can    :reboot  , Phone
+        can    :confirm_destroy , Phone
         can    :read    , :Setup
         can    :read    , Voicemail
         can    :destroy , Voicemail
-        can    :create  , NetworkSetting
-        can    :read    , NetworkSetting
-        can    :edit    , NetworkSetting
-        can    :update  , NetworkSetting
+        can    :confirm_destroy , Voicemail
+#        can    :create  , NetworkSetting
+#        can    :read    , NetworkSetting
+#        can    :edit    , NetworkSetting
+ #       can    :update  , NetworkSetting
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
         #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
@@ -122,11 +124,13 @@ class Ability
         can    :update  , PersonalContact, :user_id => user.id
         #FIXME User can change the user_id attribute. -- See abilities for CallForward.
         can    :destroy , PersonalContact, :user_id => user.id
+        can    :confirm_destroy , PersonalContact, :user_id => user.id
         cannot :edit_uid, PersonalContact
         
         can    :read    , Voicemail
         can    :destroy , Voicemail
-        
+        can    :confirm_destroy , Voicemail
+      
         can    :read,     Conference, :user_id => user.id
         can    :read,     Conference, :user_id => nil
         can    :edit,     Conference, :user_id => user.id

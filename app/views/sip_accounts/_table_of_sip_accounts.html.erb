@@ -23,7 +23,7 @@
     <td><%= sip_account.sip_server_id %></td>
     <td><%= sip_account.sip_proxy_id %></td>
     <td><%= link_to t(:edit), edit_sip_account_path(sip_account) %></td>
-    <td><%= button_to t(:destroy), sip_account, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_sip_account_path(sip_account) if can?( :destroy, sip_account ) %></td>
   </tr>
 <% end %>
 </table>

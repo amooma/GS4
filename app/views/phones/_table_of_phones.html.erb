@@ -32,7 +32,7 @@
     <% end %>
     </td>
     <td><%= link_to t(:edit), edit_phone_path(phone) %></td>
-    <td><%= button_to t(:destroy), phone, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_phone_path(phone) if can?( :destroy, phone ) %></td>
   </tr>
 <% end %>
 </table>

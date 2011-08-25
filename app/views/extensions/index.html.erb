@@ -17,7 +17,7 @@
     <td><%= extension.active %></td>
     <td><%= link_to t(:show), extension %></td>
     <td><%= link_to t(:edit), edit_extension_path(extension) %></td>
-    <td><%= button_to t(:destroy), extension, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_extension_path(extension) if can?( :destroy, extension ) %></td>
   </tr>
 <% end %>
 </table>

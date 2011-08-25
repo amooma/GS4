@@ -1,18 +1,5 @@
 
-<p>
-  <b><%= t(:extension) %>:</b>
-  <%= @extension.extension %>
-</p>
-
-<p>
-  <b><%= t(:destination) %>:</b>
-  <%= @extension.destination %>
-</p>
-
-<p>
-  <b><%= t(:active) %>:</b>
-  <%= @extension.active %>
-</p>
-
+<h1><%= t(:extension) %></h1>
+<%= render 'show' %>
 <%= link_to t(:edit), edit_extension_path(@extension) %> |
 <%= link_to t(:Go_to_list), extensions_path %>

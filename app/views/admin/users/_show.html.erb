@@ -1,0 +1,25 @@
+
+<p>
+  <b><%= t(:username) %>:</b>
+  <%= @user.username %>
+</p>
+
+<p>
+  <b><%= t(:email_address) %>:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b><%= t(:given_name) %>:</b>
+  <%= @user.gn %>
+</p>
+
+<p>
+  <b><%= t(:surname) %>:</b>
+  <%= @user.sn %>
+</p>
+
+<p>
+  <b><%= t(:role) %>:</b>
+  <%= User::ROLES[ @user.role ].to_s.sub(/^(\w)/) {|s| s.capitalize}%>
+</p>

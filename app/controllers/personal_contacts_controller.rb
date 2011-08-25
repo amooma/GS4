@@ -91,4 +91,8 @@ class PersonalContactsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def confirm_destroy
+    @personal_contact = PersonalContact.find(params[:id])
+  end
 end

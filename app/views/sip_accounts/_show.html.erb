@@ -1,0 +1,70 @@
+
+<p>
+  <b>User:</b>
+  <% if @sip_account.user %>
+    <%= @sip_account.user.to_display %>
+  <% end %>
+</p>
+
+<p>
+  <b><%= t(:auth_name) %>:</b>
+  <%= @sip_account.auth_name %>
+</p>
+
+<p>
+  <b><%= t(:password) %>:</b>
+  <%= @sip_account.password %>
+</p>
+
+<p>
+  <b><%= t(:realm) %>:</b>
+  <%= @sip_account.realm %>
+</p>
+
+<p>
+  <b><%= t(:extensions) %>:</b>
+  <ul>
+  <% @sip_account.extensions.each do |extension| %>
+    <li><%= extension.extension %></li>  
+  <% end %>
+  </ul>
+</p>
+<p>
+  <b><%= t(:caller_name) %>:</b>
+  <%= @sip_account.caller_name %>
+</p>
+<p>
+  <b><%= t(:sip_server) %>:</b>
+  <% if @sip_account.sip_server %>
+    <%= "#{@sip_account.sip_server.host}#{@sip_account.sip_server.port ? (':' + @sip_account.sip_server.port.to_s) : ''} (ID #{@sip_account.sip_server.id})" %>
+  <% end %>
+</p>
+
+<p>
+  <b><%= t(:sip_proxy) %>:</b>
+  <% if @sip_account.sip_proxy %>
+    <%= "#{@sip_account.sip_proxy.host}#{@sip_account.sip_proxy.port ? (':' + @sip_account.sip_proxy.port.to_s) : ''} (ID #{@sip_account.sip_proxy.id})" %>
+  <% end %>
+</p>
+
+<p>
+  <b><%= t(:voicemail_server) %>:</b>
+  <% if @sip_account.voicemail_server %>
+    <%= "#{@sip_account.voicemail_server.host}#{@sip_account.voicemail_server.port ? (':' + @sip_account.voicemail_server.port.to_s) : ''} (ID #{@sip_account.voicemail_server.id})" %>
+  <% end %>
+</p>
+
+<p>
+  <b><%= t(:sip_phone) %>:</b>
+  <% if @sip_account.phone %>
+    <%= "#{@sip_account.phone.mac_address} (ID #{@sip_account.phone.id})" %>
+  <% end %>
+</p>
+
+<p>
+  <b><%= t(:registered) %>:</b>
+  <%= @sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
+
+<p>
+</p>
