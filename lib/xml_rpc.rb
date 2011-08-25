@@ -9,7 +9,7 @@ module XmlRpc
 		xml_rpc_password  = Configuration.get(:xml_rpc_password )
 		xml_rpc_directory = Configuration.get(:xml_rpc_directory, '/RPC2' )
 		xml_rpc_api       = Configuration.get(:xml_rpc_api, 'freeswitch.api' )
-		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 8 )
+		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 20 )
 		if (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 			xml_rpc__ssl = true
 		else
@@ -28,7 +28,7 @@ module XmlRpc
 		rescue Errno::EHOSTUNREACH => e
 			error_msg = "Failed to connect to XML-RPC service (#{xml_rpc_host}:#{xml_rpc_port}). EHOSTUNREACH: #{e.message}"
 		rescue Timeout::Error => e
-			error_msg = "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}\" failed. (timeout)"
+			error_msg = "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}\" failed. (timeout, > #{xml_rpc_timeout} s)"
 		rescue XMLRPC::FaultException => e
 			error_msg = "XML-RPC error: #{e.faultCode} #{e.faultString}"
 		rescue SocketError => e
