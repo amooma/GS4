@@ -5,12 +5,14 @@ xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 xml.settings {
 	
 	xml.tag! 'phone-settings' do
+		xml.auto_reboot_on_setting_change( 'off', :perm => 'RW' )
 		xml.web_language( 'English', :perm => 'RW' )
 		xml.timezone( 'GMT+1', :perm => 'RW' )
 		xml.date_us_format( 'off', :perm => 'RW' )
 		xml.time_24_format( 'on', :perm => 'RW' )
-		
+		xml.reset_settings( '', :perm => 'RW' )
 		xml.update_policy( 'settings_only', :perm => 'RW' )
+		xml.settings_refresh_timer( '0', :perm => 'RW' )
 		xml.firmware_status( '', :perm => 'RW' )
 		
 		xml.webserver_type( 'http_https', :perm => 'R' )
@@ -183,8 +185,3 @@ xml.settings {
 		xml.file( :url => "#{@xml_menu_url}/state_settings.xml", :type => "gui_xml_state_settings" )
 	}
 }
-
-
-# Local Variables:
-# mode: ruby
-# End:

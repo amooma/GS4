@@ -59,45 +59,56 @@ class ManufacturerSnomController < ApplicationController
 	}
 	
 	def show
-		##### Codec mapping {
-		# map from Codec names as in seeds.rb to their respective name
-		# (or rather: number) on Snom:
-		@codec_mapping_snom = {
-			'ulaw' =>  0,  # G.711 u-law
-			'alaw' =>  8,  # G.711 a-law
-			'gsm'  =>  3,  # GSM
-			'g722' =>  9,  # G.722
-			'g726' =>  2,  # G.726-32  Assume that "g726" in the codecs table means G.726-32.
-			'g729' => 18,  # G.729a
-			'g723' =>  4,  # G.723.1  Assume that "g723" in the codecs table does not mean G.723 but G.723.1.
-		}
-		##### Codec mapping }
-		
-		
-		if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
-			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
-			@phone.update_attributes(:ip_address => request.remote_ip)
-		end
-		
-		@snom_srtp = Configuration.get(:snom_srtp, true, Configuration::Boolean) ? 'on' : 'off'
-		savp = Configuration.get(:snom_savp, 'off', String).downcase
-		@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
-		@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
-		
-		webserver_cert_dir = File.expand_path(Configuration.get(:phone_certificates_directory, ''))
-		webserver_certificates_suffix = File.basename(Configuration.get(:phone_certificates_suffix, '.crt'))
-		webserver_certificates_key_suffix = File.basename(Configuration.get(:phone_certificates_key_suffix, '.key'))
-		webserver_certificates_file = File.expand_path("#{webserver_cert_dir}/#{@mac_address}#{webserver_certificates_suffix}")
-		webserver_certificates_key_file = File.expand_path("#{webserver_cert_dir}/#{@mac_address}#{webserver_certificates_key_suffix}")
-		if File.exist?(webserver_certificates_key_file) && File.exist?(webserver_certificates_file)
-			webserver_certificate = File.open(webserver_certificates_file, 'r') { |f| f.read }
-			webserver_key = File.open(webserver_certificates_key_file, 'r') { |f| f.read }
-			@webserver_cert = "\n#{webserver_certificate.strip}\n#{webserver_key.strip}\n"
-		end
+		switch_protocol = 'https://'
+		if ( request.protocol != switch_protocol && Configuration.get(:snom_https_provisioning, true, Configuration::Boolean) )
+			switch_port = Configuration.get(:snom_https_provisioning_port, 443, Integer)
+			settings_format = 'xml'
+			@provisioning_url = "#{switch_protocol}#{request.env['SERVER_NAME']}:#{switch_port}/settings-#{@mac_address}.#{settings_format}"
+			@ip_address = request.remote_ip
+			respond_to { |format|
+				format.xml { render :action => "switch_protocol" }
+			}
+		else					
+			##### Codec mapping {
+			# map from Codec names as in seeds.rb to their respective name
+			# (or rather: number) on Snom:
+			@codec_mapping_snom = {
+				'ulaw' =>  0,  # G.711 u-law
+				'alaw' =>  8,  # G.711 a-law
+				'gsm'  =>  3,  # GSM
+				'g722' =>  9,  # G.722
+				'g726' =>  2,  # G.726-32  Assume that "g726" in the codecs table means G.726-32.
+				'g729' => 18,  # G.729a
+				'g723' =>  4,  # G.723.1  Assume that "g723" in the codecs table does not mean G.723 but G.723.1.
+			}
+			##### Codec mapping }
+			
+			
+			if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
+				@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
+				@phone.update_attributes(:ip_address => request.remote_ip)
+			end
+			
+			@snom_srtp = Configuration.get(:snom_srtp, true, Configuration::Boolean) ? 'on' : 'off'
+			savp = Configuration.get(:snom_savp, 'off', String).downcase
+			@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
+			@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
+			
+			webserver_cert_dir = File.expand_path(Configuration.get(:phone_certificates_directory, ''))
+			webserver_certificates_suffix = File.basename(Configuration.get(:phone_certificates_suffix, '.crt'))
+			webserver_certificates_key_suffix = File.basename(Configuration.get(:phone_certificates_key_suffix, '.key'))
+			webserver_certificates_file = File.expand_path("#{webserver_cert_dir}/#{@mac_address}#{webserver_certificates_suffix}")
+			webserver_certificates_key_file = File.expand_path("#{webserver_cert_dir}/#{@mac_address}#{webserver_certificates_key_suffix}")
+			if File.exist?(webserver_certificates_key_file) && File.exist?(webserver_certificates_file)
+				webserver_certificate = File.open(webserver_certificates_file, 'r') { |f| f.read }
+				webserver_key = File.open(webserver_certificates_key_file, 'r') { |f| f.read }
+				@webserver_cert = "\n#{webserver_certificate.strip}\n#{webserver_key.strip}\n"
+			end
 
-		respond_to { |format|
-			format.xml
-		}
+			respond_to { |format|
+				format.xml
+			}
+		end
 	end
 	
 	def phone_books_menu
