@@ -71,10 +71,10 @@ class Ability
         can    :read    , Voicemail
         can    :destroy , Voicemail
         can    :confirm_destroy , Voicemail
-#        can    :create  , NetworkSetting
-#        can    :read    , NetworkSetting
-#        can    :edit    , NetworkSetting
- #       can    :update  , NetworkSetting
+        can    :create  , NetworkSetting
+        can    :read    , NetworkSetting
+        can    :edit    , NetworkSetting
+        can    :update  , NetworkSetting
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
         #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
