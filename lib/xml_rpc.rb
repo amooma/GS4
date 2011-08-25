@@ -57,11 +57,56 @@ module XmlRpc
 	def self.voicemails_get( sip_account, domain )
 		response = request('vm_list', "#{sip_account}@#{domain} xml")
 		
+		# response is a string and look like this:
+		# <voicemail>
+		# 	<message>
+		# 		...
+		# 	</message>
+		# 	<message>
+		# 		...
+		# 	</message>
+		# </voicemail>
+		# Without messages (no surprise):
+		# <voicemail>
+		# </voicemail>
+		
 		if (! response || response == 'ERROR!')
 			return false
 		end
 		
-		return Hash.from_xml(response)['voicemail']['message']
+		h = Hash.from_xml( response )
+		#Rails.logger.info( "--------------- #{h.inspect}" )
+		
+		# The hash looks like this:
+		# {
+		# 	"voicemail" => {
+		# 		"message" => [
+		# 			{
+		# 				...
+		# 			},
+		# 			{
+		# 				...
+		# 			}
+		# 		]
+		# 	}
+		# }
+		# Without messages (surprise!):
+		# {
+		# 	"voicemail" => "\n"
+		# }
+		
+		if ! h || ! h['voicemail']
+			return false
+		end
+		
+		if h['voicemail'].kind_of?( Hash ) \
+		&& h['voicemail']['message'].kind_of?( Array )
+			return h['voicemail']['message']
+		else
+			# If there are no voicemail messages we don't want to return
+			# nil but an empty array:
+			return []
+		end
 	end
 	
 	def self.voicemail_set_read( sip_account, domain, uuid, read = true )
