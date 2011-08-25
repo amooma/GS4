@@ -382,7 +382,7 @@
 				:call_forward_reason => "The case for which this call forward should be valid.",
 				:call_forward_reason_id => "Relation to CallForwardReason",
 				:call_timeout => "For a call forward on no answer: timeout in seconds.",
-				:destination => "The call forward's destination number. To deflect calls leave the destination empty; this should usually only be done for a specific caller number (blacklist)",
+				:destination => "The call forward's destination number. To forward calls to voicemail enter „voicemail“. To deflect calls leave the destination empty; this should usually only be done for calls from a specific caller number (blacklist)",
 				:active => "Only active call forwarding rules will be followed. This way you can easily deactivate call forwards temporarily without having to delete them.",
 			},  
 			:call_forward_reason => {
