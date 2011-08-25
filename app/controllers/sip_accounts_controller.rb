@@ -10,7 +10,7 @@ class SipAccountsController < ApplicationController
     @sip_servers  = SipServer .accessible_by( current_ability, :index ).order([ :host ])
     @sip_proxies  = SipProxy  .accessible_by( current_ability, :index ).order([ :host ])
     @voicemail_servers = VoicemailServer .accessible_by( current_ability, :index ).order([ :host ])
-    @users        = User      .accessible_by( current_ability, :index ).order([ :sn, :gn, :username ])
+    @users        = User      .accessible_by( current_ability, :index ).order([ :sn, :gn, :username ]).keep_if{ |u| Ability.new(u).can?(:have, SipAccount) }
     @num_users    = User      .accessible_by( current_ability, :index ).count
   }
   

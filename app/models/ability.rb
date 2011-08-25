@@ -36,6 +36,7 @@ class Ability
         can    :manage  , User
         can    :manage  , SipAccount
         can    :read_title, SipAccount
+        cannot :have    , SipAccount
         can    :manage  , CallForward
         can    :manage  , Extension
         can    :manage  , CallQueue
@@ -83,11 +84,15 @@ class Ability
         can    :read    , Home  # just a redirect_to( call_logs_path ) in the HomeController
         can    :read    , CallLog
         #OPTIMIZE Add PinChange?
+        cannot :have    , SipAccount
       )
       
       when "user"
       (
         can    :read    , Home
+        
+        can    :have    , SipAccount
+        
         can    :read    , CallForward, :sip_account => { :user_id => user.id }
         can    :new     , CallForward
         can    :create  , CallForward do |call_forward|
