@@ -242,6 +242,11 @@ case $n in
 		mkdir -p /opt/gemeinschaft-local/opt/gemeinschaft/misc/
 		mv /opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft-local/opt/gemeinschaft/misc/
 		ln -s /opt/gemeinschaft-local/opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft/misc/freeswitch
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/
+		mv /opt/freeswitch/db/ /opt/gemeinschaft-local/data/opt/freeswitch/
+		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/db /opt/freeswitch/
+		mkdir -p /opt/gemeinschaft-local/opt/freeswitch/run
+		ln -s /opt/gemeinschaft-local/opt/freeswitch/run /opt/freeswitch/
 	;;
 	*)
 	;;
