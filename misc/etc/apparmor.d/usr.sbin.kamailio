@@ -1,7 +1,7 @@
 # Last Modified: Tue Jul 19 15:26:08 2011
 #include <tunables/global>
 
-/usr/sbin/kamailio flags=(complain) {
+/usr/sbin/kamailio  {
   #include <abstractions/base>
   #include <abstractions/nameservice>
 
