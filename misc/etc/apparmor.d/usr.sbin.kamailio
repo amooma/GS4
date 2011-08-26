@@ -10,6 +10,7 @@
 
   network inet udp,
   /opt/gemeinschaft/db/production.sqlite3 mr,
+  /opt/gemeinschaft-local/db/production.sqlite3 mr,
   /opt/gemeinschaft/misc/kamailio/etc r,
   /usr/lib/kamailio/** r,
   /var/run/kamailio/* w,
