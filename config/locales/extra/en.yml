@@ -415,3 +415,4 @@ en:
   delete: "Delete"
   cancel: "Cancel"
   automatic_reboot: "The system will reboot after this action!"
+  mandatory_fields: "Fields marked with * are mandatory!"
