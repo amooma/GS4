@@ -13,8 +13,8 @@
 <% phones.each do |phone| %>
   <tr>
     <td><%= link_to phone.mac_address, phone %></td>
-    <td><%= link_to truncate(phone.phone_model.manufacturer.name, :length => 20), phone.phone_model.manufacturer %></td>
-    <td><%= link_to phone.phone_model.name, phone.phone_model %></td>
+    <td><%= truncate(phone.phone_model.manufacturer.name, :length => 20) %></td>
+    <td><%= phone.phone_model.name %></td>
     <td><%= phone.ip_address %></td>
     <td>
       <ul>
