@@ -33,7 +33,7 @@ class NetworkSettingsController < ApplicationController
   # GET /network_settings/new.xml
   def new
     @network_setting = NetworkSetting.new
-
+    flash[:notice] = t(:automatic_reboot)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @network_setting }
