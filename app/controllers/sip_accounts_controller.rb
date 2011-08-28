@@ -55,7 +55,9 @@ class SipAccountsController < ApplicationController
       @sip_account.sip_proxy  = SipProxy.accessible_by( current_ability, :index ).first
       @sip_account.realm      = SipProxy.accessible_by( current_ability, :index ).first.try(:host)
     end
-    
+    if VoicemailServer.count == 1
+      @sip_account.voicemail_server = VoicemailServer.accessible_by( current_ability, :index).first
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account }
