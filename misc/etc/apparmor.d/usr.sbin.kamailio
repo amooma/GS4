@@ -1,0 +1,21 @@
+# Last Modified: Tue Jul 19 15:26:08 2011
+#include <tunables/global>
+
+/usr/sbin/kamailio  {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  capability dac_override,
+
+
+  network inet udp,
+  /opt/gemeinschaft/db/production.sqlite3 mr,
+  /opt/gemeinschaft-local/db/production.sqlite3 mr,
+  /opt/gemeinschaft/misc/kamailio/etc r,
+  /usr/lib/kamailio/** r,
+  /var/run/kamailio/* w,
+  /tmp/ser_ctl w,
+  /etc/odbc.ini r,
+  /etc/odbcinst.ini r,
+
+}

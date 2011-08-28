@@ -176,10 +176,7 @@ gem install passenger
 
 passenger-install-apache2-module
 a2enmod ssl
-echo -e "Starting services ...\n"
 
-/etc/init.d/apache2 start
-/etc/init.d/kamailio start
 
 echo -e "Retrieving FreeSwitch configuration ...\n"
 
@@ -215,21 +212,47 @@ grep '#includedir /etc/sudoers.d' /etc/sudoers || echo  '#includedir /etc/sudoer
 
 cp /opt/gemeinschaft/misc/etc/apparmor.d/* /etc/apparmor.d/
 
-echo -e "Starting FreeSwitch ...\n"
 chown www-data:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
-/etc/init.d/freeswitch start
 
 echo -e "\n"
 echo -e "Is this an appliance on Knoppix base? (y|n)"
 read n
 case $n in
 	y|Y)
-		
+		test -f /etc/sudoers.secure && grep '#includedir /etc/sudoers.d' /etc/sudoers.secure || echo  '#includedir /etc/sudoers.d' >> /etc/sudoers.secure	
 		cd /opt/gemeinschaft;
 		RAILS_ENV=production bundle exec rake db:appliance_seed
 		cp /opt/gemeinschaft/misc/etc/init.d/* /etc/init.d/
-		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
+		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 networking firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
 		a2dissite default
+		mv /opt/gemeinschaft/db/* /opt/gemeinschaft-local/db/
+		rmdir /opt/gemeinschaft/db/
+		ln -s /opt/gemeinschaft-local/db /opt/gemeinschaft/db
+		chown -R www-data /opt/gemeinschaft-local/db
+		mv /etc/resolv.conf /opt/gemeinschaft-local/data/etc/
+		ln -s /opt/gemeinschaft-local/data/etc/resolv.conf /etc/resolv.conf
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch
+		mv /opt/freeswitch/recordings /opt/gemeinschaft-local/data/opt/freeswitch/
+		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/recordings /opt/freeswitch/
+		mkdir -p /opt/gemeinschaft-local/data/opt/gemeinschaft/misc
+		mv /opt/gemeinschaft/misc/fax/ /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/
+		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/fax/ /opt/gemeinschaft/misc/fax
+		mv /opt/gemeinschaft/tmp/ /opt/gemeinschaft-local/data/opt/gemeinschaft/
+		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/tmp /opt/gemeinschaft/tmp
+		mkdir -p /opt/gemeinschaft-local/opt/gemeinschaft/misc/
+		mv /opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/
+		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft/misc/freeswitch
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/
+		mv /opt/freeswitch/db/ /opt/gemeinschaft-local/data/opt/freeswitch/
+		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/db /opt/freeswitch/
+		mkdir -p /opt/gemeinschaft-local/opt/freeswitch/run
+		ln -s /opt/gemeinschaft-local/opt/freeswitch/run /opt/freeswitch/
+		mkdir /var/log/freeswitch
+		rmdir /opt/freeswitch/log
+		ln -s /var/log/freeswitch /opt/freeswitch/log
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/storage
+		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/storage /opt/freeswitch/
+
 	;;
 	*)
 	;;

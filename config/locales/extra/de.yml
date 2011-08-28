@@ -414,3 +414,4 @@ de:
   confirm_destroy_record: "%{model_name} wirklich löschen?"
   delete: "Löschen"
   cancel: "Abbrechen"
+  automatic_reboot: "Das System wird nach dieser Aktion automatisch neu gestartet!"
