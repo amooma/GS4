@@ -7,15 +7,21 @@
 ################################################################
 
 Configuration.create([
-	{ :name => 'auth_db_engine'          , :value => 'odbc' },
-	{ :name => 'dbtext_subscriber_file'  , :value => '/etc/kamailio/db_text/subscriber' },
-	{ :name => 'xml_rpc_host'            , :value => '127.0.0.1' },
-	{ :name => 'xml_rpc_port'            , :value => '8080' },
-	{ :name => 'xml_rpc_realm'           , :value => 'gemeinschaft' },
-	{ :name => 'xml_rpc_user'            , :value => SecureRandom.hex(10) },
-	{ :name => 'xml_rpc_password'        , :value => SecureRandom.hex(10) },
-	{ :name => 'xml_rpc_timeout'         , :value => '8' },
-	{ :name => 'fax_files_directory'     , :value => '/opt/gemeinschaft/misc/fax/' },
+	{ :name => 'auth_db_engine'              , :value => 'odbc' },
+	{ :name => 'dbtext_subscriber_file'      , :value => '/etc/kamailio/db_text/subscriber' },
+	{ :name => 'xml_rpc_host'                , :value => '127.0.0.1' },
+	{ :name => 'xml_rpc_port'                , :value => '8080' },
+	{ :name => 'xml_rpc_realm'               , :value => 'gemeinschaft' },
+	{ :name => 'xml_rpc_user'                , :value => SecureRandom.hex(10) },
+	{ :name => 'xml_rpc_password'            , :value => SecureRandom.hex(10) },
+	{ :name => 'xml_rpc_timeout'             , :value => '8' },
+	{ :name => 'fax_files_directory'         , :value => '/opt/gemeinschaft/misc/fax/' },
+	{ :name => 'fax_max_files'               , :value => '2048' },
+	{ :name => 'fax_max_duration'            , :value => '900' },
+	{ :name => 'fax_files_directory'         , :value => '/opt/gemeinschaft/misc/fax/' },
+	{ :name => 'voicemail_max_record_length' , :value => '300' },
+	{ :name => 'voicemail_min_record_length' , :value => '3' },
+	{ :name => 'voicemail_max_files'         , :value => '2048' },                      
 ])
 
 
