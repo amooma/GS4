@@ -223,7 +223,7 @@ case $n in
 		cd /opt/gemeinschaft;
 		RAILS_ENV=production bundle exec rake db:appliance_seed
 		cp /opt/gemeinschaft/misc/etc/init.d/* /etc/init.d/
-		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 networking firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
+		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 networking dnsmasq firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
 		a2dissite default
 		mv /opt/gemeinschaft/db/* /opt/gemeinschaft-local/db/
 		rmdir /opt/gemeinschaft/db/
@@ -232,7 +232,7 @@ case $n in
 		mv /etc/resolv.conf /opt/gemeinschaft-local/data/etc/
 		ln -s /opt/gemeinschaft-local/data/etc/resolv.conf /etc/resolv.conf
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch
-		mv /opt/freeswitch/recordings /opt/gemeinschaft-local/data/opt/freeswitch/
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/recordings
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/recordings /opt/freeswitch/
 		mkdir -p /opt/gemeinschaft-local/data/opt/gemeinschaft/misc
 		mv /opt/gemeinschaft/misc/fax/ /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/
