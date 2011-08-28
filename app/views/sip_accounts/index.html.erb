@@ -4,10 +4,6 @@
   <tr>
     <th><%= t(:user) %></th>
     <th><%= t(:auth_name) %></th>
-    <th><%= t(:realm) %></th>
-    <th><%= t(:sip_server_id) %></th>
-    <th><%= t(:sip_proxy_id) %></th>
-    <th><%= t(:voicemail_server_id) %></th>
     <th><%= t(:caller_name) %></th>
     <th><%= t(:extensions) %></th>
     <th><%= t(:sip_phone) %></th>
@@ -25,10 +21,6 @@
       end
     %></td>
     <td><%= sip_account.auth_name %></td>
-    <td><%= sip_account.realm %></td>
-    <td><%= sip_account.sip_server_id %></td>
-    <td><%= sip_account.sip_proxy_id %></td>
-    <td><%= sip_account.voicemail_server_id %></td>
     <td><%= sip_account.caller_name %></td>
     <td><%
       sip_account_extensions = sip_account.extensions.accessible_by( current_ability, :show )
