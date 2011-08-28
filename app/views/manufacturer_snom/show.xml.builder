@@ -7,6 +7,7 @@ xml.settings {
 	xml.tag! 'phone-settings' do
 		xml.auto_reboot_on_setting_change( 'off', :perm => 'RW' )
 		xml.web_language( 'English', :perm => 'RW' )
+		xml.language( 'Deutsch', :perm => 'RW')
 		xml.timezone( 'GMT+1', :perm => 'RW' )
 		xml.date_us_format( 'off', :perm => 'RW' )
 		xml.time_24_format( 'on', :perm => 'RW' )
