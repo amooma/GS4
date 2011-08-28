@@ -223,7 +223,7 @@ case $n in
 		cd /opt/gemeinschaft;
 		RAILS_ENV=production bundle exec rake db:appliance_seed
 		cp /opt/gemeinschaft/misc/etc/init.d/* /etc/init.d/
-		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
+		sed -i 's/\(SERVICES="\)\(.*\)/\1gs4 networking firewall apache2 apparmor freeswitch kamailio"/' /etc/rc.local
 		a2dissite default
 		mv /opt/gemeinschaft/db/* /opt/gemeinschaft-local/db/
 		rmdir /opt/gemeinschaft/db/
@@ -240,13 +240,19 @@ case $n in
 		mv /opt/gemeinschaft/tmp/ /opt/gemeinschaft-local/data/opt/gemeinschaft/
 		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/tmp /opt/gemeinschaft/tmp
 		mkdir -p /opt/gemeinschaft-local/opt/gemeinschaft/misc/
-		mv /opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft-local/opt/gemeinschaft/misc/
-		ln -s /opt/gemeinschaft-local/opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft/misc/freeswitch
+		mv /opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/
+		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft/misc/freeswitch
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/
 		mv /opt/freeswitch/db/ /opt/gemeinschaft-local/data/opt/freeswitch/
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/db /opt/freeswitch/
 		mkdir -p /opt/gemeinschaft-local/opt/freeswitch/run
 		ln -s /opt/gemeinschaft-local/opt/freeswitch/run /opt/freeswitch/
+		mkdir /var/log/freeswitch
+		rmdir /opt/freeswitch/log
+		ln -s /var/log/freeswitch /opt/freeswitch/log
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/storage
+		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/storage /opt/freeswitch/
+
 	;;
 	*)
 	;;
