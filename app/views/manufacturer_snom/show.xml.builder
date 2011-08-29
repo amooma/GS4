@@ -187,3 +187,9 @@ xml.settings {
 		xml.file( :url => "#{@xml_menu_url}/state_settings.xml", :type => "gui_xml_state_settings" )
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
