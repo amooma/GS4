@@ -49,9 +49,11 @@ class NetworkSettingsController < ApplicationController
   # POST /network_settings.xml
   def create
     @network_setting = NetworkSetting.new(params[:network_setting])
+    
     if @network_setting.save
       if ::Rails.env.to_s == "production"
         # reboot
+        #OPTIMIZE I don't want to shutdown my host system by accident when I test the production mode.
         @result = `sudo -n /sbin/shutdown -r now`
       end
     end
