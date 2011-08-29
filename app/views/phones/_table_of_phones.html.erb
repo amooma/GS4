@@ -25,7 +25,7 @@
       </ul>
     </td>
     <td>
-	<% if phone.rebootable? %>
+    <% if phone.rebootable? %>
     <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
     <% else %>
     <small>(<%= t(:ip_unknown_or_path_nil) %>)</small>
