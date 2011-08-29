@@ -65,6 +65,7 @@ aptitude install -y --allow-untrusted \
   ghostscript  \
   imagemagick  \
   curl 
+
 echo -e "Adding testing and setting APT Pin-Priority ...\n"
 (
 echo 'deb     http://ftp.debian.org/debian/ testing main'
@@ -88,7 +89,6 @@ aptitude install -y libsqliteodbc/testing
 
 echo -e "Stopping services ...\n"
 /etc/init.d/freeswitch  stop
-
 /etc/init.d/kamailio    stop
 
 
@@ -104,12 +104,16 @@ make deb-install
 echo -e "Installing Ruby on Rails ...\n"
 gem install   rails
 gem install   rake -v 0.8.7
+
+
+echo -e "Installing Apache ...\n"
+#OPTIMIZE Use aptitude
 apt-get install -t testing libpcre3-dev
 apt-get install -t testing libcurl4-openssl-dev
 aptitude install -y apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev
-
-
 /etc/init.d/apache2   stop
+
+
 echo -e "Configuring ODBC ...\n"
 
 echo "[gemeinschaft-production]
@@ -172,8 +176,9 @@ echo -e "Downloading FreeSwitch sound files ...\n"
 mkdir -p /opt/freeswitch/sounds
 /opt/gemeinschaft/misc/freeswitch/download-freeswitch-sounds || true
 
-gem install passenger
 
+echo -e "Installing Passenger ...\n"
+gem install passenger
 passenger-install-apache2-module
 a2enmod ssl
 
@@ -206,13 +211,18 @@ rm 'freeswitch-sounds-music-16000-1.0.8.tar.gz'          2>&1 || true
 
 chgrp -R gemeinschaft /opt/freeswitch
 
+
+
 cp /opt/gemeinschaft/misc/etc/sudoers.d/gemeinschaft /etc/sudoers.d/
 chmod 0440 /etc/sudoers.d/gemeinschaft
 grep '#includedir /etc/sudoers.d' /etc/sudoers || echo  '#includedir /etc/sudoers.d' >> /etc/sudoers
 
+
 cp /opt/gemeinschaft/misc/etc/apparmor.d/* /etc/apparmor.d/
 
+
 chown www-data:gemeinschaft /opt/freeswitch/conf/freeswitch-gemeinschaft4.xml
+
 
 echo -e "\n"
 echo -e "Is this an appliance on Knoppix base? (y|n)"
@@ -252,13 +262,11 @@ case $n in
 		ln -s /var/log/freeswitch /opt/freeswitch/log
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/storage
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/storage /opt/freeswitch/
-
-	;;
+		;;
 	*)
-	;;
+		;;
 esac
 
 echo -e "\n\n"
 echo -e "Done.\n\n"
-
 
