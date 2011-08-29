@@ -28,6 +28,7 @@ xml.settings {
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
 		xml.ignore_security_warning( 'on', :perm => 'R')
+		xml.update_called_party_id( 'off', :perm => 'RW')
 		sip_account =  @phone.sip_accounts.first
 		if (! sip_account.nil?)
 			xml.alert_group_ring_text( @phone.sip_accounts.first.auth_name, :perm => 'RW' )
