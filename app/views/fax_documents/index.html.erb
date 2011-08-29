@@ -14,16 +14,14 @@
 
 <% @fax_documents.each do |fax_document| %>
   <tr>
-    <td>
-    <%= fax_document.outgoing ? t(:outbound) : t(:inbound) %>
-    </td>
+    <td><%= fax_document.outgoing ? t(:outbound) : t(:inbound) %></td>
     <td><%= l( Time.at(fax_document.created_at.localtime), :format => :short) %></td>
     <td><%= fax_document.file %></td>
-    <td>
-    <% if ! fax_document.file.blank? %>
-      <%= link_to File.basename(fax_document.file, File.extname(fax_document.file)) + '.tif', fax_document_path(fax_document, :format => 'tif') %>
-    <% end %>
-    </td>
+    <td><%
+      if ! fax_document.file.blank?
+        %><%= link_to File.basename( fax_document.file, File.extname(fax_document.file)) + '.tif', fax_document_path( fax_document, :format => 'tif') %><%
+      end
+    %></td>
     <td><%= fax_document.destination %></td>
     <td><%= link_to t(:show)    ,                                    fax_document %></td>
     <td><%= link_to t(:edit)    ,            edit_fax_document_path( fax_document ) %></td>
