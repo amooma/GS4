@@ -96,6 +96,7 @@ class ManufacturerSnomController < ApplicationController
 			@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
 			@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
 			
+			#OPTIMIZE Add explanation.
 			webserver_cert_dir = File.expand_path(Configuration.get(:phone_certificates_directory, ''))
 			webserver_certificates_suffix = File.basename(Configuration.get(:phone_certificates_suffix, '.crt'))
 			webserver_certificates_key_suffix = File.basename(Configuration.get(:phone_certificates_key_suffix, '.key'))
@@ -106,7 +107,7 @@ class ManufacturerSnomController < ApplicationController
 				webserver_key = File.open(webserver_certificates_key_file, 'r') { |f| f.read }
 				@webserver_cert = "\n#{webserver_certificate.strip}\n#{webserver_key.strip}\n"
 			end
-
+			
 			respond_to { |format|
 				format.xml
 			}
