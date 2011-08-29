@@ -76,4 +76,8 @@ class SipProxiesController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @sip_proxy = SipProxy.find(params[:id])
+  end  
+  
 end

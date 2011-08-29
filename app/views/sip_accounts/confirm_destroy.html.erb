@@ -1,0 +1,7 @@
+<%= simple_form_for( @sip_account, :html => { :method => :delete } ) do |f| %>
+	<%= f.error_messages %>
+	<h2><%= t(:confirm_destroy_record, :model_name => t("activerecord.models.sip_account"))%></h2>
+	<%= render 'show' %>
+	<%= f.button :submit, t(:delete) if can?( :destroy, @sip_account ) %>
+	<%= link_to t(:cancel), sip_accounts_path if can?( :index, SipAccount ) %>
+<% end %>

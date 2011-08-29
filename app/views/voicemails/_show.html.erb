@@ -1,0 +1,45 @@
+
+<% if @voicemail %>
+
+<p>
+  <b><%= t(:sip_account) %>:</b>
+  <%= @sip_account_display %>
+</p>
+
+<p>
+  <b><%= t(:folder) %>:</b>
+  <%= @voicemail['VM-Message-Folder'] %>
+</p>
+
+<p>
+  <b><%= t(:received) %>:</b>
+  <%= l( Time.at( @voicemail['VM-Message-Received-Epoch'].to_i ).localtime, :format => :short ) %>
+</p>
+
+<p>
+  <b><%= t(:read) %>:</b>
+  <%= @voicemail['VM-Message-Read-Epoch'].to_i > 0 ? l( Time.at( @voicemail['VM-Message-Read-Epoch'].to_i ).localtime, :format => :short ) : t(:no_lowercase) %>
+</p>
+
+<p>
+  <b><%= t(:caller_name) %>:</b>
+  <%= @voicemail['VM-Message-Caller-Name'] %>
+</p>
+
+<p>
+  <b><%= t(:caller_number) %>:</b>
+  <%= @voicemail['VM-Message-Caller-Number'] %>
+</p>
+
+<p>
+  <b><%= t(:duration) %>:</b>
+  <%= @voicemail['VM-Message-Duration'].to_i %> s
+</p>
+
+<p>
+  <b><%= t(:forwarded_by) %>:</b>
+  <%= @voicemail['VM-Message-Forwarded-By'] %>
+</p>
+
+<% end %>
+

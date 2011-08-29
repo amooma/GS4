@@ -8,10 +8,7 @@
     <th><%= t(:extensions) %></th>
     <th></th>
     <th></th>
-<% if (current_user.role == "admin") %>
-<%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
     <th></th>
-<% end %>
   </tr>
 
 <% @conferences.each do |conference| %>
@@ -20,35 +17,25 @@
     <td><%= conference.name %></td>
     <td><%= conference.pin %></td>
     <td>
-    <% if ! conference.extensions.empty? %>
       <ul>
-      <% if current_user.role == "admin" %>
-      <%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
-      <% conference.extensions.each do |extension| %>
-        <li><%= link_to( extension.extension, conference_extension_path( conference, extension ) ) %></li>
-      <% end %>
-      <% else %>
-      <% conference.extensions.each do |extension| %>
-        <li><%= extension.extension %></li>
-      <% end %>
-      <% end %>
+      <% conference.extensions.each do |extension| %>      
+        <li>
+        <% if can?( :show, extension ) %>
+        <%= link_to( extension.extension, conference_extension_path( conference, extension ) ) %>
+        <% else %>
+        <%= extension.extension %>
+        <% end %>
+        </li>
+        <% end %>
       </ul>
-    <% end %>
     </td>
     <td><%= link_to t(:show), conference %></td>
-    <td><%= (current_user.role == "admin" || current_user.id == conference.user_id) ? ( link_to t(:edit), edit_conference_path(conference) ) : '' %></td>
-    <%#OPTIMIZE Don't use roles or logic in a view. Use CanCan abilities. %>
-<% if (current_user.role == "admin") %>
-<%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
-    <td><%= button_to t(:destroy), conference, :confirm => t(:are_you_sure), :method => :delete %></td>
-<% end %>
+    <td><%= link_to t(:edit), edit_conference_path(conference) if can?(:edit, conference) %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_conference_path(conference) if can?( :destroy, conference ) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if current_user.role == "admin" %>
-<%#OPTIMIZE Don't use roles in a view. Use CanCan abilities. %>
-<%= link_to t(:new_conference), new_conference_path %>
-<% end %>
+<%= link_to t(:new_conference), new_conference_path if can?(:create, Conference) %>

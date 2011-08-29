@@ -82,4 +82,8 @@ class Admin::UsersController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @user = User.find(params[:id])
+  end
+  
 end

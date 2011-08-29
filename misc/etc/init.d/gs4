@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+chgrp -R gemeinschaft /opt/gemeinschaft-local
+chmod -R g+rw /opt/gemeinschaft-local
+

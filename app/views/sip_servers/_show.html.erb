@@ -1,0 +1,15 @@
+
+<p>
+  <b><%= t(:sip_host)%>:</b>
+  <%= @sip_server.host %>
+</p>
+
+<p>
+  <b><%= t(:sip_port)%>:</b>
+  <%= @sip_server.port %>
+</p>
+
+<p>
+  <b><%= t(:is_local)%>:</b>
+  <%= @sip_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>

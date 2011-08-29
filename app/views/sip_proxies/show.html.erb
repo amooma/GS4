@@ -1,18 +1,3 @@
-
-<p>
-  <b><%= t(:sip_host) %>:</b>
-  <%= @sip_proxy.host %>
-</p>
-
-<p>
-  <b><%= t(:sip_port) %>:</b>
-  <%= @sip_proxy.port %>
-</p>
-
-<p>
-  <b><%= t(:is_local) %>:</b>
-  <%= @sip_proxy.is_local ? t(:yes_lowercase) : t(:no_lowercase) %>
-</p>
-
-
+<h1><%= t(:sip_proxy) %></h1>
+<%= render 'show' %>
 <%= link_to t(:Go_to_list), sip_proxies_path %>

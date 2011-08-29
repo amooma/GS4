@@ -86,4 +86,9 @@ class GlobalContactsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def confirm_destroy
+      @global_contact = GlobalContact.find(params[:id])
+  end
+  
 end

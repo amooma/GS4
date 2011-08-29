@@ -50,6 +50,7 @@ de:
   management_port: "Management-Port"
   editing_fax_document: "Fax-Dokument bearbeiten"
   fax_documents: "Fax-Dokumente"
+  fax_document: "Fax-Dokument"
   new_fax: "Neues Fax"
   fax_document_created: "Fax-Dokument wurde erfolgreich angelegt"
   fax_document_updated: "Fax-Dokument wurde erfolgreich aktualisiert"
@@ -57,6 +58,8 @@ de:
   fax_document_not_found: "Fax-Dokument nicht gefunden"
   fax_document_not_sent: "Fax-Dokument konnte nicht gesendet werden"
   fax_thumbnail_not_created: "Fax-Vorschau konnte nicht angelegt werden"
+  outbound: "OUT"
+  inbound: "IN"
   extension: "Rufnummer"
   editing_extension: "Rufnummer bearbeiten"
   new_extension: "Neue Rufnummer"
@@ -410,3 +413,8 @@ de:
   
   sip_account_user_cant_have_sip_accounts: "kann keinen SIP-Account haben."
   
+  confirm_destroy_record: "%{model_name} wirklich löschen?"
+  delete: "Löschen"
+  cancel: "Abbrechen"
+  automatic_reboot: "Das System wird nach dieser Aktion automatisch neu gestartet!"
+  mandatory_fields: "Mit einem * gekennzeichnete Felder müssen ausgefüllt werden!"

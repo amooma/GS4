@@ -1,51 +1,5 @@
 
-
-<% if current_user.role == "admin" %>
-  <p>
-    <b><%= t(:user) %>:</b>
-    <%
-      if @personal_contact.user
-        %><%= @personal_contact.user.to_display %><%
-      end
-    %>
-  </p>
-<% end %>
-
-<p>
-  <b><%= t(:lastname) %>:</b>
-  <%= @personal_contact.lastname %>
-</p>
-
-<p>
-  <b><%= t(:firstname) %>:</b>
-  <%= @personal_contact.firstname %>
-</p>
-
-<p>
-  <b><%= t(:phone_private) %>:</b>
-  <%= @personal_contact.phone_private %>
-</p>
-
-<p>
-  <b><%= t(:phone_business) %>:</b>
-  <%= @personal_contact.phone_business %>
-</p>
-
-<p>
-  <b><%= t(:phone_mobile) %>:</b>
-  <%= @personal_contact.phone_mobile %>
-</p>
-
-<p>
-  <b><%= t(:fax_private) %>:</b>
-  <%= @personal_contact.fax_private %>
-</p>
-
-<p>
-  <b><%= t(:fax_business) %>:</b>
-  <%= @personal_contact.fax_business %>
-</p>
-
-
+<h1><%= t(:personal_contact) %></h1>
+<%= render 'show' %>
 <%= link_to t(:edit), edit_personal_contact_path(@personal_contact) %> |
 <%= link_to t(:Go_to_list), personal_contacts_path %>

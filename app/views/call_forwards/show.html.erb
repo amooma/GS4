@@ -1,38 +1,6 @@
 
 
-<p>
-  <b><%= t(:sip_account) %>:</b>
-  <%
-    if @call_forward.sip_account
-      %><%= @call_forward.sip_account.to_display %> <%
-    end
-  %>
-</p>
-
-<p>
-  <b><%= t(:source) %>:</b>
-  <%= @call_forward.source %>
-</p>
-
-<p>
-  <b><%= t(:call_forward_reason) %>:</b>
-  <%= @call_forward.call_forward_reason ? @call_forward.call_forward_reason.value : '?' %>
-</p>
-
-<p>
-  <b><%= t(:destination) %>:</b>
-  <%= @call_forward.destination %>
-</p>
-
-<p>
-  <b><%= t(:call_timeout) %>:</b>
-  <%= @call_forward.call_timeout %>
-</p>
-
-<p>
-  <b><%= t(:active) %>:</b>
-  <%= @call_forward.active ? t(:yes_lowercase) : t(:no_lowercase) %>
-</p>
-
+<h1><%= t(:call_forward) %></h1>
+<%= render 'show' %>
 <%= link_to t(:edit), edit_call_forward_path(@call_forward) if can?( :edit, @call_forward ) %> |
 <%= link_to t(:Go_to_list), call_forwards_path if can?( :index, CallForward ) %>

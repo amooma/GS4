@@ -28,6 +28,7 @@ class Admin::SetupController < ApplicationController
   def new
     @user = User.new
     @user.role = "admin"
+    flash[:notice] = t(:mandatory_fields)
   end
   
 end

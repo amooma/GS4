@@ -734,11 +734,11 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.profile( :name => 'default' ) {
 					xml.param( :name => 'file-extension', :value => 'wav' )
 					xml.param( :name => 'terminator-key', :value => '#' )
-					xml.param( :name => 'max-login-attempts', :value => '3' )
+					xml.param( :name => 'max-login-attempts', :value => Configuration.get(:voicemail_max_login_attempts, 3, Integer) )
 					xml.param( :name => 'digit-timeout', :value => '10000' )
-					xml.param( :name => 'min-record-len', :value => '3' )
-					xml.param( :name => 'max-record-len', :value => '300' )
-					xml.param( :name => 'max-retries', :value => '3' )
+					xml.param( :name => 'min-record-len', :value => Configuration.get(:voicemail_min_record_length, 3, Integer) )
+					xml.param( :name => 'max-record-len', :value => Configuration.get(:voicemail_max_record_length, 300, Integer) )
+					xml.param( :name => 'max-retries', :value => Configuration.get(:voicemail_max_retries, 3, Integer) )
 					xml.param( :name => 'tone-spec', :value => '%(1000, 0, 640)' )
 					xml.param( :name => 'callback-dialplan', :value => 'XML' )
 					xml.param( :name => 'callback-context', :value => 'default' )
@@ -814,7 +814,9 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'local-network-acl', :value => 'localnet.auto' )
 						xml.param( :name => 'manage-presence', :value => 'true' )
 						xml.param( :name => 'inbound-codec-negotiation', :value => 'generous' )
-						xml.param( :name => 'tls', :value => 'false' )
+						xml.param( :name => 'tls', :value => Configuration.get(:sip_internal_tls, false, Configuration::Boolean))
+						xml.param( :name => 'tls-sip-port', :value => Configuration.get(:sip_internal_tls_port, 5061, Integer) )
+						xml.param( :name => 'tls-cert-dir', :value => File.expand_path(Configuration.get(:sip_internal_tls_cert_dir, '/opt/freeswitch/conf/ssl/', String)) )
 						xml.param( :name => 'accept-blind-reg', :value => 'false' )
 						xml.param( :name => 'accept-blind-auth', :value => 'false' )
 						xml.param( :name => 'nonce-ttl', :value => '60' )
@@ -867,7 +869,9 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'ext-sip-ip', :value => 'auto-nat' )
 						xml.param( :name => 'rtp-timeout-sec', :value => '300' )
 						xml.param( :name => 'rtp-hold-timeout-sec', :value => '1800' )
-						xml.param( :name => 'tls', :value => 'false' )
+						xml.param( :name => 'tls', :value => "#{Configuration.get(:sip_external_tls, false, Configuration::Boolean)}" )
+						xml.param( :name => 'tls-sip-port', :value => Configuration.get(:sip_external_tls_port, 5061, Integer) )
+						xml.param( :name => 'tls-cert-dir', :value => File.expand_path(Configuration.get(:sip_external_tls_cert_dir, '/opt/freeswitch/conf/ssl/', String)) )
 					}
 				}
 			}

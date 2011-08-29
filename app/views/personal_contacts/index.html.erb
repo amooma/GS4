@@ -35,7 +35,7 @@
     <td><%= personal_contact.fax_business %></td>
     <td><%= link_to t(:show), personal_contact %></td>
     <td><%= link_to t(:edit), edit_personal_contact_path(personal_contact) %></td>
-    <td><%= button_to t(:destroy), personal_contact, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_personal_contact_path(personal_contact) if can?( :destroy, personal_contact ) %></td>
   </tr>
 <% end %>
 </table>

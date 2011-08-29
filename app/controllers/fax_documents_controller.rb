@@ -102,4 +102,8 @@ class FaxDocumentsController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @fax_document = FaxDocument.find(params[:id])
+  end
+  
 end

@@ -13,8 +13,8 @@
 <% phones.each do |phone| %>
   <tr>
     <td><%= link_to phone.mac_address, phone %></td>
-    <td><%= link_to truncate(phone.phone_model.manufacturer.name, :length => 20), phone.phone_model.manufacturer %></td>
-    <td><%= link_to phone.phone_model.name, phone.phone_model %></td>
+    <td><%= truncate(phone.phone_model.manufacturer.name, :length => 20) %></td>
+    <td><%= phone.phone_model.name %></td>
     <td><%= phone.ip_address %></td>
     <td>
       <ul>
@@ -32,7 +32,7 @@
     <% end %>
     </td>
     <td><%= link_to t(:edit), edit_phone_path(phone) %></td>
-    <td><%= button_to t(:destroy), phone, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_phone_path(phone) if can?( :destroy, phone ) %></td>
   </tr>
 <% end %>
 </table>

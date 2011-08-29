@@ -50,6 +50,7 @@ en:
   management_port: "Management port"
   editing_fax_document: "Editing Fax document"
   fax_documents: "Fax Documents"
+  fax_document: "Fax Document"
   new_fax: "New Fax"
   fax_document_created: "Fax document was successfully created"
   fax_document_updated: "Fax document was successfully updated"
@@ -57,6 +58,8 @@ en:
   fax_document_not_found: "Fax document not found"
   fax_document_not_sent: "Fax document could not be sent"
   fax_thumbnail_not_created: "Fax preview could not be created"
+  outbound: "OUT"
+  inbound: "IN"
   extension: "Extension"
   editing_extension: "Editing extension"
   new_extension: "New extension"
@@ -410,3 +413,8 @@ en:
   
   sip_account_user_cant_have_sip_accounts: "can't have a SIP account."
   
+  confirm_destroy_record: "Are you sure you want to destroy this {resource}?" 
+  delete: "Delete"
+  cancel: "Cancel"
+  automatic_reboot: "The system will reboot after this action!"
+  mandatory_fields: "Fields marked with * are mandatory!"

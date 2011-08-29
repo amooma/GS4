@@ -114,6 +114,10 @@ class PhonesController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @phone = Phone.find(params[:id])
+  end
+  
   # Reboots the phone
   def reboot
     @phone = Phone.find(params[:id])

@@ -89,12 +89,23 @@ class ExtensionsController < ApplicationController
   # POST /extensions
   # POST /extensions.xml
   def create
+    redirect_source = true
+    if ( @sip_account.nil? &&  @conference.nil? &&  @call_queue.nil? )
+      if ( @sip_account    = SipAccount.where(:auth_name => params[:extension][:destination]).first )
+        redirect_source = false
+      elsif ( @conference  = Conference.where(:uuid => params[:extension][:destination]).first )
+        redirect_source = false
+      elsif ( @call_queue  = CallQueue.where(:uuid => params[:extension][:destination]).first )
+        redirect_source = false  
+      end
+    end
+
     if ! @sip_account.nil?
       @extension = @sip_account.extensions.build(params[:extension])
       
       respond_to do |format|
         if @sip_account.save
-          format.html { redirect_to( @sip_account, :notice => t(:extension_created) )}
+          format.html { redirect_source ? redirect_to( @sip_account, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
           format.xml  { render :xml => @sip_account, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -106,7 +117,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @conference.save
-          format.html { redirect_to( @conference, :notice => t(:extension_created) )}
+          format.html { redirect_source ? redirect_to( @conference, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
           format.xml  { render :xml => @conference, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -118,7 +129,7 @@ class ExtensionsController < ApplicationController
       
       respond_to do |format|
         if @call_queue.save
-          format.html { redirect_to( @call_queue, :notice => t(:extension_created) )}
+          format.html { redirect_source ? redirect_to( @call_queue, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
           format.xml  { render :xml => @call_queue, :status => :created, :location => @extension }
         else
           format.html { render :action => "new" }
@@ -166,6 +177,10 @@ class ExtensionsController < ApplicationController
       format.html { redirect_to(extensions_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def confirm_destroy
+    @extension = Extension.find( params[:id] )
   end
   
   private

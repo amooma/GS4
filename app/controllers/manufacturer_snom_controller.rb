@@ -13,7 +13,7 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
-		
+		@max_entries    = Configuration.get(:snom_display_max_entries, 40, Integer)
 		if ! params[:mac_address].blank?
 			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 			@phone = Phone.where(:mac_address => @mac_address).first
@@ -59,29 +59,56 @@ class ManufacturerSnomController < ApplicationController
 	}
 	
 	def show
-		##### Codec mapping {
-		# map from Codec names as in seeds.rb to their respective name
-		# (or rather: number) on Snom:
-		@codec_mapping_snom = {
-			'ulaw' =>  0,  # G.711 u-law
-			'alaw' =>  8,  # G.711 a-law
-			'gsm'  =>  3,  # GSM
-			'g722' =>  9,  # G.722
-			'g726' =>  2,  # G.726-32  Assume that "g726" in the codecs table means G.726-32.
-			'g729' => 18,  # G.729a
-			'g723' =>  4,  # G.723.1  Assume that "g723" in the codecs table does not mean G.723 but G.723.1.
-		}
-		##### Codec mapping }
-		
-		
-		if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
-			@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
-			@phone.update_attributes(:ip_address => request.remote_ip)
+		switch_protocol = 'https://'
+		if ( request.protocol != switch_protocol && Configuration.get(:snom_https_provisioning, true, Configuration::Boolean) )
+			switch_port = Configuration.get(:snom_https_provisioning_port, 443, Integer)
+			settings_format = 'xml'
+			@provisioning_url = "#{switch_protocol}#{request.env['SERVER_NAME']}:#{switch_port}/settings-#{@mac_address}.#{settings_format}"
+			@ip_address = request.remote_ip
+			respond_to { |format|
+				format.xml { render :action => "switch_protocol" }
+			}
+		else					
+			##### Codec mapping {
+			# map from Codec names as in seeds.rb to their respective name
+			# (or rather: number) on Snom:
+			@codec_mapping_snom = {
+				'ulaw' =>  0,  # G.711 u-law
+				'alaw' =>  8,  # G.711 a-law
+				'gsm'  =>  3,  # GSM
+				'g722' =>  9,  # G.722
+				'g726' =>  2,  # G.726-32  Assume that "g726" in the codecs table means G.726-32.
+				'g729' => 18,  # G.729a
+				'g723' =>  4,  # G.723.1  Assume that "g723" in the codecs table does not mean G.723 but G.723.1.
+			}
+			##### Codec mapping }
+			
+			
+			if (! request.env['HTTP_USER_AGENT'].index("snom").nil?)
+				@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
+				@phone.update_attributes(:ip_address => request.remote_ip)
+			end
+			
+			@snom_srtp = Configuration.get(:snom_srtp, true, Configuration::Boolean) ? 'on' : 'off'
+			savp = Configuration.get(:snom_savp, 'optional', String).downcase
+			@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
+			@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
+			
+			webserver_cert_dir = File.expand_path(Configuration.get(:phone_certificates_directory, ''))
+			webserver_certificates_suffix = File.basename(Configuration.get(:phone_certificates_suffix, '.crt'))
+			webserver_certificates_key_suffix = File.basename(Configuration.get(:phone_certificates_key_suffix, '.key'))
+			webserver_certificates_file = File.expand_path("#{webserver_cert_dir}/#{@mac_address}#{webserver_certificates_suffix}")
+			webserver_certificates_key_file = File.expand_path("#{webserver_cert_dir}/#{@mac_address}#{webserver_certificates_key_suffix}")
+			if File.exist?(webserver_certificates_key_file) && File.exist?(webserver_certificates_file)
+				webserver_certificate = File.open(webserver_certificates_file, 'r') { |f| f.read }
+				webserver_key = File.open(webserver_certificates_key_file, 'r') { |f| f.read }
+				@webserver_cert = "\n#{webserver_certificate.strip}\n#{webserver_key.strip}\n"
+			end
+
+			respond_to { |format|
+				format.xml
+			}
 		end
-		
-		respond_to { |format|
-			format.xml
-		}
 	end
 	
 	def phone_books_menu
@@ -96,17 +123,57 @@ class ManufacturerSnomController < ApplicationController
 	end
 	
 	def phone_book_internal
-		@sip_accounts = SipAccount.all
+		@keys = params[:keys].to_s.gsub( /[^0-9]/, '' )
+		if @keys.blank?
+			@sip_accounts = SipAccount.all
+		else
+			key_sql = "caller_name LIKE \"#{KEYPAD_TABLE[@keys[0]].join('%" OR caller_name LIKE "')}%\""
+			@sip_accounts = SipAccount.find(:all, :conditions => key_sql)
+		end
+		@internal_contacts = Array.new()
+		number_keys = @keys.length()
+		@sip_accounts.each do |sip_account|
+			if (@internal_contacts.length() >= @max_entries)
+				break
+			end
+			exts = sip_account.extensions.where(:active => true)
+			if exts.count > 0
+				lastname, firstname = sip_account.caller_name.split(/, *| /, 2)
+				if number_keys > 1
+					for key_pos in (1..number_keys)
+						if key_pos == number_keys
+							@internal_contacts.push({:lastname => lastname, :firstname => firstname, :number => exts.first.extension})
+						elsif (key_pos > lastname.length() || !KEYPAD_TABLE[@keys[key_pos]].include?(lastname[key_pos]))
+							break
+						end
+					end
+				else
+					@internal_contacts.push({:lastname => lastname, :firstname => firstname, :number => exts.first.extension})
+				end
+			end
+		end
 	end
 	
 	def personal_contacts
 		if (@user)
-			@personal_contacts = PersonalContact.where(:user_id => @user.id).all
+			@keys = params[:keys].to_s.gsub( /[^0-9]/, '' )
+			if @keys.blank?
+				@personal_contacts = PersonalContact.where(:user_id => @user.id).limit(@max_entries).all
+			else
+				key_sql = "user_id = #{@user.id} AND lastname LIKE \"#{KEYPAD_TABLE[@keys[0]].join('%" OR lastname LIKE "')}%\""
+				@personal_contacts = filter_contacts(PersonalContact.find(:all, :conditions => key_sql), @keys)
+			end
 		end
 	end
 	
 	def global_contacts
-		@global_contacts = GlobalContact.all
+		@keys = params[:keys].to_s.gsub( /[^0-9]/, '' )
+		if @keys.blank?
+			@global_contacts = GlobalContact.limit(@max_entries).all	
+		else
+			key_sql = "lastname LIKE \"#{KEYPAD_TABLE[@keys[0]].join('%" OR lastname LIKE "')}%\""
+			@global_contacts = filter_contacts(GlobalContact.find(:all, :conditions => key_sql), @keys)
+		end
 	end
 	
 	def call_log
@@ -125,7 +192,7 @@ class ManufacturerSnomController < ApplicationController
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_ANSWERED,
 				:call_type => CALL_INBOUND 
-			).limit(Configuration.get(:snom_display_max_entries, 20, Integer)).order('created_at DESC')
+			).limit(@max_entries).order('created_at DESC')
 		end
 	end
 	
@@ -135,7 +202,7 @@ class ManufacturerSnomController < ApplicationController
 				:sip_account_id => @sip_account.id,
 				:disposition => DISPOSITION_NOANSWER,
 				:call_type => CALL_INBOUND
-			).limit(Configuration.get(:snom_display_max_entries, 20, Integer)).order('created_at DESC')
+			).limit(@max_entries).order('created_at DESC')
 		end
 	end
 	
@@ -144,7 +211,7 @@ class ManufacturerSnomController < ApplicationController
 			@call_logs_out = CallLog.where(
 				:sip_account_id => @sip_account.id, 
 				:call_type => CALL_OUTBOUND
-			).limit(Configuration.get(:snom_display_max_entries, 20, Integer)).order('created_at DESC')
+			).limit(@max_entries).order('created_at DESC')
 		end
 	end
 	
@@ -156,7 +223,6 @@ class ManufacturerSnomController < ApplicationController
 				:disposition => DISPOSITION_FORWARDED
 				).order('created_at DESC')
 		end
-		@max_entries = Configuration.get(:snom_display_max_entries, 20, Integer)
 	end
 	
 	def call_forwarding
@@ -259,8 +325,28 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
+	def filter_contacts(contacts_all, keys)
+		number_keys = keys.length()
+		contacts_filtered = Array.new()
+		if !contacts_all
+			return contacts_filtered
+		end
+		contacts_all.each do |contact|
+			if (contacts_filtered.length() >= @max_entries)
+				break
+			end
+			for key_pos in (1..number_keys)
+				if key_pos == number_keys
+					contacts_filtered.push(contact)
+				elsif (key_pos > contact.lastname.length() || !KEYPAD_TABLE[keys[key_pos]].include?(contact.lastname[key_pos]))
+					break
+				end
+			end				
+		end
+		return contacts_filtered
+	end
+	
 	def get_sip_account( phone, sip_account_id = nil )
-		
 		if (sip_account_id && sip_accounts = phone.sip_accounts)
 			return sip_accounts.find_by_id( sip_account_id )
 		end
@@ -345,4 +431,16 @@ class ManufacturerSnomController < ApplicationController
 	DISPOSITION_FORWARDED = 'forwarded'
 	CALL_INBOUND = 'in'
 	CALL_OUTBOUND = 'out'
+	KEYPAD_TABLE = {
+		'0' => [' ','-','.',',','0'],
+		'1' => [' ','-','.',',','1'],
+		'2' => ['a','b','c','2'],
+		'3' => ['d','e','f','3'],
+		'4' => ['g','h','i','4'],
+		'5' => ['j','k','l','5'],
+		'6' => ['m','n','o','6'],
+		'7' => ['p','q','r','s','7'],
+		'8' => ['t','u','v','8'],
+		'9' => ['w','x','y','z','9'],
+	}
 end

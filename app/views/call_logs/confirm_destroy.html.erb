@@ -1,0 +1,7 @@
+<%= simple_form_for( @call_log, :html => { :method => :delete } ) do |f| %>
+	<%= f.error_messages %>
+	<h2><%= t(:confirm_destroy_record, :model_name => t("activerecord.models.call_log"))%></h2>
+	<%= render 'show' %>
+	<%= f.button :submit, t(:delete) if can?( :destroy, @call_log ) %>
+	<%= link_to t(:cancel), call_logs_path if can?( :index, CallLog ) %>
+<% end %>
