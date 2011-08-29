@@ -23,6 +23,10 @@ class Rack::PathInfoRewriter
     parts = env['REQUEST_URI'].split('?')
     env['PATH_INFO'    ] = parts[0]
     env['QUERY_STRING' ] = parts[1].to_s
+    
+    # Since lighttpd 1.4.23, you also can use the "fix-root-scriptname"
+    # flag in fastcgi.server.
+    
     @app.call(env)
   end
 end
