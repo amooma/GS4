@@ -26,7 +26,7 @@
     <td><%= global_contact.fax_business %></td>
     <td><%= link_to t(:show), global_contact %></td>
     <td><%= link_to t(:edit), edit_global_contact_path(global_contact) if can?( :edit, global_contact ) %></td>
-    <td><%= button_to t(:destroy) , global_contact , :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, global_contact ) %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_global_contact_path(global_contact) if can?( :destroy, global_contact ) %></td>
   </tr>
 <% end %>
 </table>

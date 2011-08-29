@@ -93,4 +93,8 @@ class CallForwardsController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @call_forward = CallForward.find(params[:id])
+  end
+  
 end

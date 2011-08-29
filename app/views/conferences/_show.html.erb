@@ -1,0 +1,18 @@
+
+<p>
+  <b><%= t(:name) %>:</b>
+  <%= @conference.name %>
+</p>
+
+<p>
+  <b><%= t(:pin) %>:</b>
+  <%= @conference.pin %>
+</p>
+
+<b><%= t(:extensions) %>:</b>
+  <ul>
+  <% @conference.extensions.each do |extension| %>
+    <li><%= extension.extension %></li>  
+  <% end %>
+  </ul>
+</p>

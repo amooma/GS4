@@ -1,18 +1,6 @@
+<h1><%= t(:phone) %></h1>
 
-<p>
-  <b><%= t(:mac_address) %>:</b>
-  <%= @phone.mac_address %>
-</p>
-
-<p>
-  <b><%= t(:phone_model) %>:</b>
-  <%= link_to @phone.phone_model.name, @phone.phone_model %>
-</p>
-
-<p>
-  <b><%= t(:ip_address) %>:</b>
-  <%= @phone.ip_address %>
-</p>
+<%= render 'show' %>
 
 <%= link_to t(:edit), edit_phone_path(@phone) %>
 

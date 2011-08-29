@@ -96,4 +96,8 @@ class VoicemailServersController < ApplicationController
     end
   end
   
+  def confirm_destroy
+    @voicemail_server = VoicemailServer.find(params[:id])
+  end  
+  
 end

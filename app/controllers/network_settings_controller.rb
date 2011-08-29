@@ -33,7 +33,7 @@ class NetworkSettingsController < ApplicationController
   # GET /network_settings/new.xml
   def new
     @network_setting = NetworkSetting.new
-
+    flash[:notice] = t(:automatic_reboot)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @network_setting }
@@ -49,6 +49,11 @@ class NetworkSettingsController < ApplicationController
   # POST /network_settings.xml
   def create
     @network_setting = NetworkSetting.new(params[:network_setting])
+    if @network_setting.save
+            if ::Rails.env.to_s == "production"
+              @result = `sudo -n /sbin/shutdown -r now`  #OPTIMIZE Is "shutdown -r now" really what you want (reboot)?
+            end
+    end
 
     respond_to do |format|
       if @network_setting.save

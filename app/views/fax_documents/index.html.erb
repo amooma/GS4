@@ -2,7 +2,8 @@
 
 <table>
   <tr>
-	<th></th>
+    <th></th>
+    <th><%= t(:date_date) %></th>
     <th><%= t(:document) %></th>
     <th><%= t(:fax) %></th>
     <th><%= t(:destination) %></th>
@@ -14,12 +15,9 @@
 <% @fax_documents.each do |fax_document| %>
   <tr>
     <td>
-    <% if fax_document.outgoing %>
-      OUT
-    <% else %>
-      IN
-    <% end %>
+    <%= fax_document.outgoing ? t(:outbound) : t(:inbound) %>
     </td>
+    <td><%= l( Time.at(fax_document.created_at.localtime), :format => :short) %></td>
     <td><%= fax_document.file %></td>
     <td>
     <% if ! fax_document.file.blank? %>
@@ -29,7 +27,7 @@
     <td><%= fax_document.destination %></td>
     <td><%= link_to t(:show), fax_document %></td>
     <td><%= link_to t(:edit), edit_fax_document_path(fax_document) %></td>
-    <td><%= button_to t(:destroy), fax_document, :confirm => t(:are_you_sure), :method => :delete %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_fax_document_path(fax_document) if can?( :destroy, fax_document ) %></td>
   </tr>
 <% end %>
 </table>

@@ -1,0 +1,7 @@
+<%= simple_form_for( @call_forward, :html => { :method => :delete } ) do |f| %>
+	<%= f.error_messages %>
+	<h2><%= t(:confirm_destroy_record, :model_name => t("activerecord.models.call_forward"))%></h2>
+	<%= render 'show' %>
+	<%= f.button :submit, t(:delete) if can?( :destroy, @call_forward ) %>
+	<%= link_to t(:cancel), call_forwards_path if can?( :index, CallForward ) %>
+<% end %>

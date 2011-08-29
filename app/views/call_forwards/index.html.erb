@@ -27,7 +27,7 @@
     <td><%= call_forward.active ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show), call_forward if can?( :show, call_forward ) %></td>
     <td><%= link_to t(:edit), edit_call_forward_path(call_forward) if can?( :edit, call_forward ) %></td>
-    <td><%= button_to t(:destroy), call_forward, :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, call_forward ) %></td>
+    <td><%= link_to t(:destroy), confirm_destroy_call_forward_path(call_forward) if can?( :destroy, call_forward ) %></td>
   </tr>
 <% end %>
 </table>

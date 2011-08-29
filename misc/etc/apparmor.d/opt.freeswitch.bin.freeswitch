@@ -1,0 +1,21 @@
+# Last Modified: Tue Jul 19 15:26:08 2011
+#include <tunables/global>
+
+/opt/freeswitch/bin/freeswitch  {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  capability dac_override,
+
+
+  network inet,
+  /opt/gemeinschaft-local/data/opt/freeswitch/ rw,
+  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/** r,
+  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-conf/freeswitch-gemeinschaft4.xml wr,
+  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-scripts/* xr,
+  /opt/freeswitch/** r,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/* rw,
+  /var/log/freeswitch/* rw,
+  /opt/gemeinschaft-local/data/opt/freeswitch/storage/** rw,
+}
+

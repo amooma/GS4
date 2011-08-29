@@ -21,7 +21,7 @@
     <td><%= link_to t(:edit), edit_admin_user_path(user) %></td>
     <td><%
       if user.id != current_user.id
-        %><%= button_to t(:destroy), admin_user_path(user), :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, user ) %><%
+        %><%= link_to t(:destroy), confirm_destroy_admin_user_path(user) if can?( :destroy, user ) %><%
       else
         %>(<%= t(:current_user) %>)<%
       end

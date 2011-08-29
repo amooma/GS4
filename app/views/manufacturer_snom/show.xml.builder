@@ -5,14 +5,17 @@ xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 xml.settings {
 	
 	xml.tag! 'phone-settings' do
+		xml.auto_reboot_on_setting_change( 'off', :perm => 'RW' )
 		xml.web_language( 'English', :perm => 'RW' )
-		xml.timezone( 'GMT+1', :perm => 'RW' )
+		xml.language( 'Deutsch', :perm => 'RW')
+		xml.timezone( 'GER+1', :perm => 'RW' )
 		xml.date_us_format( 'off', :perm => 'RW' )
 		xml.time_24_format( 'on', :perm => 'RW' )
-		
+		xml.reset_settings( '', :perm => 'RW' )
 		xml.update_policy( 'settings_only', :perm => 'RW' )
+		xml.settings_refresh_timer( '0', :perm => 'RW' )
 		xml.firmware_status( '', :perm => 'RW' )
-		
+		xml.ntp_server("#{request.env['SERVER_NAME']}", :perm => 'RW')
 		xml.webserver_type( 'http_https', :perm => 'R' )
 		xml.http_scheme( 'off', :perm => 'RW' )  # off = Basic, on = Digest
 		xml.http_port( '80', :perm => 'R' )
@@ -25,6 +28,7 @@ xml.settings {
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
 		xml.ignore_security_warning( 'on', :perm => 'R')
+		xml.update_called_party_id( 'off', :perm => 'RW')
 		sip_account =  @phone.sip_accounts.first
 		if (! sip_account.nil?)
 			xml.alert_group_ring_text( @phone.sip_accounts.first.auth_name, :perm => 'RW' )
@@ -84,8 +88,8 @@ xml.settings {
 			xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r )
 			xml.user_pname(             sac[:auth_user]       , saopts_r  )
 			xml.user_pass(              sac[:password]        , saopts_r  )
-			xml.user_host(              sac[:registrar]       , saopts_r  )
-			xml.user_outbound(          sac[:outbound_proxy]  , saopts_r  )
+			xml.user_host("#{sac[:registrar]}#{@snom_transport_tls}", saopts_r  )
+			xml.user_outbound("#{sac[:outbound_proxy]}#{@snom_transport_tls}", saopts_r  )
 			xml.user_name(              sac[:user]            , saopts_r  )
 			xml.user_realname(          sac[:display_name]    , saopts_r  )
 			xml.user_idle_text(         sac[:screen_name]     , saopts_r  )
@@ -108,8 +112,8 @@ xml.settings {
 			xml.user_full_sdp_answer(   'on'                  , saopts_rw )
 			xml.user_dynamic_payload(   'on'                  , saopts_rw ) # "Turns on dynamic payload type for G726."
 			xml.user_g726_packing_order('on'                  , saopts_r  ) # on = RFC 3551, off = AAL2
-			xml.user_srtp(              'off'                 , saopts_rw )
-			xml.user_savp(              'off'                 , saopts_rw )
+			xml.user_srtp(              @snom_srtp            , saopts_rw )
+			xml.user_savp(              @snom_savp            , saopts_rw )
 			xml.codec_size(             '20'                  , saopts_rw )
 			
 			codec_i = 1
@@ -120,6 +124,10 @@ xml.settings {
 				break if codec_i > max_codec_i
 			end
 		}
+		xml.tls_server_authentication( Configuration.get(:snom_tls_server_authentication, false, Configuration::Boolean) ? 'on' : 'off', :perm => 'RW' )
+		if (@webserver_cert)
+		   xml.webserver_cert(@webserver_cert, :perm => 'RW' )
+		end
 	end
 	
 	
@@ -179,8 +187,3 @@ xml.settings {
 		xml.file( :url => "#{@xml_menu_url}/state_settings.xml", :type => "gui_xml_state_settings" )
 	}
 }
-
-
-# Local Variables:
-# mode: ruby
-# End:

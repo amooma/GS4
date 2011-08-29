@@ -4,19 +4,41 @@ Gemeinschaft4::Application.routes.draw do
 	
 	resources :configurations
 	
-	resources :global_contacts
+	resources :global_contacts do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
-	resources :personal_contacts
+	resources :personal_contacts do
+		member do
+			get 'confirm_destroy'
+		end
+	end
+		
+	resources :call_logs do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
-	resources :personal_phonebooks  #OPTIMIZE Is this route being used?
+	resources :call_queues do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
-	resources :call_logs
+	resources :call_forwards do  #OPTIMIZE Nest this inside sip_accounts and adjust the views accordingly.
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
-	resources :call_queues
-	
-	resources :call_forwards  #OPTIMIZE Nest this inside sip_accounts and adjust the views accordingly.
-	
-	resources :conferences
+	resources :conferences do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
 	get "setup/index"  #OPTIMIZE Is this route being used?
 	get "setup/create"  #OPTIMIZE Is this route being used?
@@ -40,14 +62,30 @@ Gemeinschaft4::Application.routes.draw do
 		resources :extensions
 	end
 	
-	resources :sip_phones  #OPTIMIZE Is this route being used?
-	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ]
-	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ]
+	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ] do
+		member do
+			get 'confirm_destroy'
+		end
+	end
+	resources :sip_proxies          , :only => [ :index, :show, :new, :create, :destroy ] do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	resources :nodes                , :only => [ :index, :show ] # for now
 	# Remember to comment-in the tests in test/functional/nodes_controller_test.rb
 	# once you enable more routes for the nodes.
-	resources :voicemail_servers
-	resources :extensions
+	resources :voicemail_servers do
+		member do
+			get 'confirm_destroy'
+		end
+	end	
+	
+	resources :extensions do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
 	resources :admin                , :only => [ :index ]
 	
@@ -88,7 +126,11 @@ Gemeinschaft4::Application.routes.draw do
 		:format     => :'xml'
 	
 	namespace :admin do
-		resources :users
+		resources :users do
+			member do
+				get 'confirm_destroy'
+			end
+		end
 		resources :setup  #OPTIMIZE Do we need a full resource or just an index?
 	end
 	
@@ -117,12 +159,26 @@ Gemeinschaft4::Application.routes.draw do
 	resources :phone_model_mac_addresses  #OPTIMIZE Is this route being used?
 	match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
 	
+	
 	# http://guides.rubyonrails.org/routing.html#nested-resources
 	resources :phones do
 		resources :sip_accounts  #OPTIMIZE Is it still useful to nest sip_accounts in phones?
 	end
+	
+	resources :phones do
+		member do
+			get 'confirm_destroy'
+		end
+	end
+	
 	resources :sip_accounts do
 		resources :phone_keys  #OPTIMIZE Is this route being used?
+	end
+	
+	resources :sip_accounts do
+		member do
+			get 'confirm_destroy'
+		end
 	end
 	
 	resources :codecs  #OPTIMIZE Is this route being used?
@@ -141,12 +197,21 @@ Gemeinschaft4::Application.routes.draw do
 		resources :phones
 	end
 	
-	resources :fax_documents
+	resources :fax_documents do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
-	resources :voicemails
+	resources :voicemails do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
 	resources :sip_gateways, :path => 'sip-gateways'
-    
+	#OPTIMIZE Add confirm_destroy here if necessary.
+	
 	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
 	match 'pin_change/update' => 'pin_change#update' , :as => :pin_change  #TODO "Missing template pin_change/edit"
 	
