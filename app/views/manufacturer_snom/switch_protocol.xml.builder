@@ -12,3 +12,9 @@ xml.settings {
 		xml.setting_server( @provisioning_url, :perm => 'RW' )		
 	end	
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
