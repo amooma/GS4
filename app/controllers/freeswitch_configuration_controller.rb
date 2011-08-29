@@ -27,9 +27,12 @@ class FreeswitchConfigurationController < ApplicationController
 		
 		@sounds_dir        = Configuration.get(:freeswitch_sounds_dir, '/opt/freeswitch/sounds')
 		@hold_music        = Configuration.get(:freeswitch_hold_music, 'local_stream://moh')
+		
 		@internal_sip_port = Configuration.get(:internal_sip_port, 15060)
 		@external_sip_port = Configuration.get(:external_sip_port, 15080)
+		
 		@timezones         = timezones()
+		
 		@xml_rpc_port      = Configuration.get(:xml_rpc_port, 8080 )
 		@xml_rpc_realm     = Configuration.get(:xml_rpc_realm, 'gemeinschaft' )
 		@xml_rpc_user      = Configuration.get(:xml_rpc_user )
