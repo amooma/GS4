@@ -22,6 +22,7 @@ PassengerRuby /usr/bin/ruby1.9.1
  	
 	DocumentRoot /opt/gemeinschaft/public
 	PassengerAppRoot /opt/gemeinschaft
+	#RailsEnv development
 	
 	<Directory /opt/gemeinschaft/public>
 		AllowOverride all
@@ -44,6 +45,7 @@ PassengerRuby /usr/bin/ruby1.9.1
 	
 	DocumentRoot /opt/gemeinschaft/public
 	PassengerAppRoot /opt/gemeinschaft
+	#RailsEnv development
 	
 	<Directory /opt/gemeinschaft/public>
 		AllowOverride all
