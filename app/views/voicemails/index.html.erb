@@ -27,8 +27,8 @@
       (link_to 'Wav', voicemail_path( vm_msg['uuid'], :account => vm_msg['username'], \
       :format => 'wav' )) : ''
     %></td>
-    <td><%= link_to    t(:show), voicemail_path( :id => vm_msg['uuid'], :account => vm_msg['username'] ) %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_voicemail_path( :id => vm_msg['uuid'], :account => vm_msg['username'] ) if can?( :destroy, Voicemail ) %></td>
+    <td><%= link_to t(:show)    ,                 voicemail_path( :id => vm_msg['uuid'], :account => vm_msg['username'] ) %></td>
+    <td><%= link_to t(:destroy) , confirm_destroy_voicemail_path( :id => vm_msg['uuid'], :account => vm_msg['username'] ) if can?( :destroy, Voicemail ) %></td>
   </tr>
 <% end %>
 <% end %>
