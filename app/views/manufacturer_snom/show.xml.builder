@@ -8,14 +8,14 @@ xml.settings {
 		xml.auto_reboot_on_setting_change( 'off', :perm => 'RW' )
 		xml.web_language( 'English', :perm => 'RW' )
 		xml.language( 'Deutsch', :perm => 'RW')
-		xml.timezone( 'GMT+1', :perm => 'RW' )
+		xml.timezone( 'GER+1', :perm => 'RW' )
 		xml.date_us_format( 'off', :perm => 'RW' )
 		xml.time_24_format( 'on', :perm => 'RW' )
 		xml.reset_settings( '', :perm => 'RW' )
 		xml.update_policy( 'settings_only', :perm => 'RW' )
 		xml.settings_refresh_timer( '0', :perm => 'RW' )
 		xml.firmware_status( '', :perm => 'RW' )
-		
+		xml.ntp_server("#{request.env['SERVER_NAME']}", :perm => 'RW')
 		xml.webserver_type( 'http_https', :perm => 'R' )
 		xml.http_scheme( 'off', :perm => 'RW' )  # off = Basic, on = Digest
 		xml.http_port( '80', :perm => 'R' )
