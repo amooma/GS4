@@ -50,6 +50,7 @@ class Ability
         can    :edit_uid, PersonalContact
         can    :manage  , GlobalContact
         can    :manage  , Configuration
+        can    :manage  , SipGateway
         
         cannot :destroy , User do |u|
           u.try(:id) == user.id

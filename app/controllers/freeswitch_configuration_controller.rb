@@ -33,6 +33,8 @@ class FreeswitchConfigurationController < ApplicationController
 		
 		@timezones         = timezones()
 		
+		@sip_gateways      = SipGateway.all
+		
 		@xml_rpc_port      = Configuration.get(:xml_rpc_port, 8080 )
 		@xml_rpc_realm     = Configuration.get(:xml_rpc_realm, 'gemeinschaft' )
 		@xml_rpc_user      = Configuration.get(:xml_rpc_user )

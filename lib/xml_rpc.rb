@@ -74,6 +74,44 @@ module XmlRpc
 		end
 	end
 	
+	def self.sofia_profile_reload_and_restart( profile )
+		if ! profile.match( /^[a-zA-Z0-9\-_.]+$/ ); return false; end
+		
+		Rails.logger.info( "Reloading and restarting Sofia SIP user-agent #{profile.inspect} ..." )
+		
+		# Reload an restart the Sofia profile as a background job because
+		# otherwise the request would block for more than 60 seconds.
+		response = request( 'sofia', "profile '#{profile}' restart reloadxml", true )
+		return response
+	end
+	
+	def self.sofia_gateway_states()
+		response = request( 'sofia', "xmlstatus gateway" )
+		
+		if (! response || response == 'ERROR!'); return false; end
+		
+		begin
+			h = Hash.from_xml( response )
+		rescue REXML::ParseException => e
+			Rails.logger.warn( "Failed to parse the XML-RPC response from FreeSwitch. #{e.message}" )
+			return false
+		end
+		
+		if ! h || ! h['gateways']; return false; end
+		
+		if h['gateways'].kind_of?( Hash )
+			if           h['gateways']['gateway'].kind_of?( Array )
+				return   h['gateways']['gateway']
+			elsif        h['gateways']['gateway'].kind_of?( Hash )
+				return [ h['gateways']['gateway'] ]
+			end
+		end
+		
+		# If there are no gateways we don't want to return
+		# nil but an empty array:
+		return []
+	end
+	
 	def self.voicemails_get( sip_account, domain )
 		response = request('vm_list', "#{sip_account}@#{domain} xml")
 		

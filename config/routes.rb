@@ -144,6 +144,8 @@ Gemeinschaft4::Application.routes.draw do
 	resources :fax_documents
 	
 	resources :voicemails
+	
+	resources :sip_gateways, :path => 'sip-gateways'
     
 	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
 	match 'pin_change/update' => 'pin_change#update' , :as => :pin_change  #TODO "Missing template pin_change/edit"

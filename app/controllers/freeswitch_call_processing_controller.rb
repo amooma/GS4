@@ -496,6 +496,31 @@ class FreeswitchCallProcessingController < ApplicationController
 						action_log( FS_LOG_INFO, "Entering conference room <#{ enc_sip_user( arg_dst_sip_user_real ) }@#{ arg_dst_sip_domain }> ..." )
 						action :conference, "#{enc_sip_user( dst_conference.uuid )}@default+#{enc_sip_user( dst_conference.pin )}"
 					)
+					else (
+						logger.info(_bold( "#{logpfx} Extension <#{ enc_sip_user( arg_dst_sip_user_real ) }> not found. Calling outbound ..." ))
+						action :export    , "sip_contact_user=ufs"
+						sip_gateway = SipGateway.first  #OPTIMIZE
+						if ! sip_gateway; (
+							logger.info(_bold( "#{logpfx} No gateways." ))
+							
+						)
+						else (
+							sip_gateway_name = "gateway-#{sip_gateway.id}"
+							logger.info(_bold( "#{logpfx} Calling via gateway #{sip_gateway.hostport.inspect} (#{sip_gateway_name}) ..." ))
+							
+							action :bridge    ,
+								#"{sip_network_destination=sip:#{enc_sip_user( arg_dst_sip_user_real )}@127.0.0.1:5060}" <<
+								"{sip_route_uri=sip:127.0.0.1:5060}" <<
+								"{sip_invite_req_uri=sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }}" <<  # Request-URI
+								"{sip_invite_to_uri=<sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }>}" <<  # To-URI
+								"sofia/gateway/#{sip_gateway_name}/" <<
+								"#{enc_sip_user( arg_dst_sip_user_real )}" <<
+								";fs_path=sip:127.0.0.1:5060"
+							
+							after_bridge_actions()
+						) end
+						
+					) end
 					
 				) end
 			) end

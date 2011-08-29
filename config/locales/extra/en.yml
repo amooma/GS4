@@ -410,3 +410,34 @@ en:
   
   sip_account_user_cant_have_sip_accounts: "can't have a SIP account."
   
+  freeswitch_api:
+    
+    reg_states:
+      TRYING     : "Trying …"
+      REGISTER   : "Registering …"
+      REGED      : "Registered."
+      UNREGED    : "Un-registered."
+      UNREGISTER : "Un-registering …"
+      FAILED     : "Failed."
+      FAIL_WAIT  : "Failed. Waiting …"
+      EXPIRED    : "Expired."
+      NOREG      : "Not applicable."
+      NOAVAIL    : "Not available."
+    
+    gw_statuses:
+      DOWN : "Down."
+      UP   : "Up."
+  
+  menu:
+    sip_gateways: "SIP gateways"
+  
+  sip_gateway_was_created: "SIP gateway was created."
+  sip_gateway_was_updated: "SIP gateway was updated."
+  
+  sip_gateway_view_index: "SIP gateways"
+  sip_gateway_view_new: "New SIP gateway"
+  sip_gateway_view_edit: "Editing SIP gateway"
+  
+  sip_gateway_reg_state: "Reg. state"
+  sip_gateway_status: "Status"
+  

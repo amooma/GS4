@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  host: host1.example.com
+  port: 5060
+  realm: MyString
+  username: MyString
+  password: MyString
+  register: false
+  reg_transport: udp
+  expire: 1800
+
+two:
+  host: 192.168.9.9
+  port: 5060
+  realm: MyString
+  username: MyString
+  password: MyString
+  register: false
+  reg_transport: udp
+  expire: 1800

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110802131449) do
+ActiveRecord::Schema.define(:version => 20110824120001) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -347,6 +347,21 @@ ActiveRecord::Schema.define(:version => 20110802131449) do
     t.integer  "voicemail_server_id"
     t.integer  "phone_id"
     t.string   "caller_name"
+  end
+
+  create_table "sip_gateways", :force => true do |t|
+    t.string   "host"
+    t.integer  "port"
+    t.string   "realm"
+    t.string   "username"
+    t.string   "password"
+    t.string   "from_user"
+    t.string   "from_domain"
+    t.boolean  "register"
+    t.string   "reg_transport"
+    t.integer  "expire"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sip_proxies", :force => true do |t|

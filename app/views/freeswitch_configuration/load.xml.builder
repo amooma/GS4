@@ -835,6 +835,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'rtp-rewrite-timestamps', :value => 'true' )
 					}
 				}
+=begin
 				xml.profile( :name => 'external' ) {
 					xml.aliases {
 					}
@@ -870,12 +871,149 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'tls', :value => 'false' )
 					}
 				}
+=end
+				xml.profile( :name => 'gateways' ) {
+					xml.aliases {
+					}
+					xml.gateways { @sip_gateways.each { |gw|
+						
+						gw_name = 'gateway-' + gw.id.to_s
+						
+						xml.gateway( :name => gw_name.to_s ) {
+							
+							# outbound-proxy seems to have no effect at all. :-/
+							#xml.param( :name => 'outbound-proxy' , :value => '127.0.0.1:5060' )
+							
+							xml.param( :name => 'proxy'          , :value => gw.hostport.to_s )
+							xml.param( :name => 'register-proxy' , :value => '127.0.0.1:5060' )
+							#xml.param( :name => 'register-proxy' , :value => '[::1]:5060' )
+							#xml.param( :name => 'register-proxy' , :value => '[::ffff:192.168.65.140]:5060' )
+							#xml.param( :name => 'register-proxy' , :value => '[0000:0000:0000:0000:0000:ffff:192.168.65.140]:5060' )
+							
+							xml.param( :name => 'realm'          , :value => (! gw.realm.blank? ? gw.realm.to_s : gw.host.to_s) )
+							xml.param( :name => 'username'       , :value => gw.username.to_s )
+							xml.param( :name => 'auth-username'  , :value => gw.username.to_s )
+							xml.param( :name => 'password'       , :value => gw.password.to_s )
+							
+							xml.param( :name => 'from-user'      , :value => (! gw.from_user.blank? ? gw.from_user.to_s : gw.username.to_s) )
+							xml.param( :name => 'from-domain'    , :value => (! gw.from_domain.blank? ? gw.from_domain.to_s : gw.host.to_s) )
+							
+							# Extension for inbound calls:
+							xml.param( :name => 'extension'      , :value => '-gw+' + gw_name.to_s )
+							
+							# Without extension-in-contact the Contact is:
+							# Contact: <sip:gw+{gateway_name}@{sip-ip}:{sip-port};transport={register-transport};gw={gateway_name}>
+							# With extension-in-contact the Contact is:
+							# Contact: <sip:{extension}@{sip-ip}:{sip-port};transport={register-transport};gw={gateway_name}>
+							xml.param( :name => 'extension-in-contact', :value => 'true' )
+							
+							xml.param( :name => 'expire-seconds' , :value => gw.expire.to_s )
+							xml.param( :name => 'retry-seconds'  , :value => '30' )
+							xml.param( :name => 'register'       , :value => (gw.register ? 'true' : 'false') )
+							xml.param( :name => 'register-transport', :value => gw.reg_transport.to_s )
+							xml.param( :name => 'caller-id-in-from', :value => 'false' )
+							
+							xml.param( :name => 'contact-host'   , :value => "#{@sip_server_ip}" )
+							
+							# Extra SIP parameters to send in the Contact:
+							#xml.param( :name => 'contact-params', :value => 'tport=tcp' )
+							
+							xml.param( :name => 'ping', :value => '25' )
+							
+							# If the from-domain or from-user are set, don't use them for the To URI:
+							xml.param( :name => 'distinct-to', :value => 'true' )
+							
+							#xml.param( :name => 'context', :value => gw_name )
+							
+							# See parse_gateways() in FreeSwitch's
+							# src/mod/endpoints/mod_sofia/sofia.c for additional
+							# parameters.
+														
+							#xml.variables {
+							#	xml.variable( :direction => 'outbound', :name => 'dtmf_type', :value => 'rfc2833' )
+							#}
+						}
+						
+					}}
+					xml.domains {
+						xml.domain( :name => 'all', :alias => 'false', :parse => 'true' )
+					}
+					xml.settings {
+						xml.param( :name => 'user-agent-string', :value => 'Gemeinschaft4' )
+						xml.param( :name => 'debug', :value => '0' )
+						xml.param( :name => 'sip-trace', :value => 'no' )
+						xml.param( :name => 'sip-port', :value => "#{@external_sip_port}" )
+						xml.param( :name => 'dialplan', :value => 'XML' )
+						#xml.param( :name => 'context', :value => 'public' )
+						#xml.param( :name => 'context', :value => 'gateways' )
+						xml.param( :name => 'context', :value => 'from-external' )
+						xml.param( :name => 'rfc2833-pt', :value => '101' )
+						xml.param( :name => 'dtmf-duration', :value => '2000' )
+						xml.param( :name => 'pass-rfc2833', :value => 'true' )
+						xml.param( :name => 'inbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
+						xml.param( :name => 'outbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
+						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
+						# http://wiki.freeswitch.org/wiki/Codec_negotiation#Late_Negotiation_.28requires_param.29
+						xml.param( :name => 'hold-music', :value => "#{@hold_music}" )
+						xml.param( :name => 'rtp-timer-name', :value => 'soft' )
+						
+						xml.param( :name => 'apply-nat-acl', :value => 'nat.auto,loopback.auto,127.0.0.1/24' )
+						xml.param( :name => 'local-network-acl', :value => 'localnet.auto' )
+						
+						xml.param( :name => 'apply-inbound-acl', :value => '127.0.0.1/32' )  # traffic from Kamailio
+						xml.param( :name => 'manage-presence', :value => 'false' )
+						xml.param( :name => 'inbound-codec-negotiation', :value => 'generous' )
+						xml.param( :name => 'nonce-ttl', :value => '60' )
+						xml.param( :name => 'auth-calls', :value => 'false' )
+						
+						xml.param( :name => 'rtp-ip', :value => "#{@sip_server_ip}" )
+						xml.param( :name => 'sip-ip', :value => '127.0.0.1' )
+						xml.param( :name => 'ext-rtp-ip', :value => 'auto-nat' )
+						
+						# outbound-proxy seems to have no effect at all. :-/
+						#xml.param( :name => 'outbound-proxy' , :value => '127.0.0.1:5060' )
+						
+						# ext-sip-ip: "auto-nat": FS will send 127.0.0.1 in the
+						# Contact in REGISTER. "auto": detected IP address of the
+						# default route:
+						#xml.param( :name => 'ext-sip-ip', :value => 'auto-nat' )
+						xml.param( :name => 'ext-sip-ip', :value => 'auto' )
+						
+						xml.param( :name => 'rtp-timeout-sec', :value => '300' )
+						xml.param( :name => 'rtp-hold-timeout-sec', :value => '1800' )
+						xml.param( :name => 'tls', :value => 'false' )
+						xml.param( :name => 'inbound-use-callid-as-uuid', :value => 'false' )
+						xml.param( :name => 'outbound-use-callid-as-uuid', :value => 'false' )
+						xml.param( :name => 'enable-100rel', :value => 'true' )
+						xml.param( :name => 'caller-id-type', :value => 'pid' )
+						xml.param( :name => 'disable-transfer', :value => 'true' )
+						xml.param( :name => 'manual-redirect', :value => 'true' )
+						xml.param( :name => 'disable-register', :value => 'false' )
+						xml.param( :name => 'challenge-realm', :value => 'auto_from' )
+						xml.param( :name => 'log-auth-failures', :value => 'false' )
+					}
+				}
 			}
 		}
 	}
 	
 	
 	xml.section( :name => 'dialplan', :description => 'Regex/XML dialplan' ) {
+		
+		xml.context( :name => 'from-external' ) {
+			
+			xml.extension( :name => 'gs-main-from-kamailio-external' ) {
+				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
+				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {
+					xml.action( :application => 'set', :data => 'from_external=1' )
+					xml.action( :application => 'javascript', :data => 'GS.js' )
+					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )  # 503 Service Unavailable
+				}
+			}
+			
+			#OPTIMIZE Add kam-fax-receive here as well?
+			
+		}
 		
 		xml.context( :name => 'internal' ) {  #OPTIMIZE This context is called "public" in the original configuration (misc/freeswitch/fs-conf/).
 			
@@ -911,14 +1049,14 @@ xml.document( :type => 'freeswitch/xml' ) {
 			xml.extension( :name => 'kam-queue-login' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-queue-login-(.*)$' ) {
 					xml.action( :application => 'answer' )
-					xml.action( :application => 'set', :data => 'result=${fifo_member(add $1 {fifo_member_wait=nowait}sofia/internal/${sip_from_uri}}' )
+					xml.action( :application => 'set', :data => 'result=${fifo_member(add $1 {fifo_member_wait=nowait}sofia/internal/${sip_from_uri}}' )  #OPTIMIZE Missing ")" in the data?
 					xml.action( :application => 'playback', :data => 'ivr/ivr-you_are_now_logged_in.wav' )
 				}
 			}
 			xml.extension( :name => 'kam-queue-logout' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-queue-logout-(.*)$' ) {
 					xml.action( :application => 'answer' )
-					xml.action( :application => 'set', :data => 'result=${fifo_member(del $1 {fifo_member_wait=nowait}sofia/internal/${sip_from_uri}}' )
+					xml.action( :application => 'set', :data => 'result=${fifo_member(del $1 {fifo_member_wait=nowait}sofia/internal/${sip_from_uri}}' )  #OPTIMIZE Missing ")" in the data?
 					xml.action( :application => 'playback', :data => 'ivr/ivr-you_are_now_logged_out.wav' )
 				}
 			}
@@ -962,7 +1100,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {
 					xml.action( :application => 'javascript', :data => 'GS.js' )
-					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )
+					xml.action( :application => 'hangup', :data => 'NORMAL_TEMPORARY_FAILURE' )  # 503 Service Unavailable
 				}
 			}
 			
