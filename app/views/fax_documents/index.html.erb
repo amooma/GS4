@@ -25,9 +25,9 @@
     <% end %>
     </td>
     <td><%= fax_document.destination %></td>
-    <td><%= link_to t(:show), fax_document %></td>
-    <td><%= link_to t(:edit), edit_fax_document_path(fax_document) %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_fax_document_path(fax_document) if can?( :destroy, fax_document ) %></td>
+    <td><%= link_to t(:show)    ,                                    fax_document %></td>
+    <td><%= link_to t(:edit)    ,            edit_fax_document_path( fax_document ) %></td>
+    <td><%= link_to t(:destroy) , confirm_destroy_fax_document_path( fax_document ) if can?( :destroy, fax_document ) %></td>
   </tr>
 <% end %>
 </table>
