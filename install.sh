@@ -239,14 +239,14 @@ case $n in
 		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/fax/ /opt/gemeinschaft/misc/fax
 		mv /opt/gemeinschaft/tmp/ /opt/gemeinschaft-local/data/opt/gemeinschaft/
 		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/tmp /opt/gemeinschaft/tmp
-		mkdir -p /opt/gemeinschaft-local/opt/gemeinschaft/misc/
+		mkdir -p /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/
 		mv /opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/
 		ln -s /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch /opt/gemeinschaft/misc/freeswitch
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/
 		mv /opt/freeswitch/db/ /opt/gemeinschaft-local/data/opt/freeswitch/
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/db /opt/freeswitch/
-		mkdir -p /opt/gemeinschaft-local/opt/freeswitch/run
-		ln -s /opt/gemeinschaft-local/opt/freeswitch/run /opt/freeswitch/
+		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/run
+		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/run /opt/freeswitch/
 		mkdir /var/log/freeswitch
 		rmdir /opt/freeswitch/log
 		ln -s /var/log/freeswitch /opt/freeswitch/log
