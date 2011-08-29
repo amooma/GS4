@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Internal server error (500)</title>
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	<!--[if IE]><link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" /><![endif]-->
+	<style type="text/css">
+		nav.hnav ul:hover li       a,
+		nav.hnav ul       li:hover a,
+		nav.hnav ul       li       a:hover {
+			background: inherit !important;
+		}
+		
+		div.dialog {
+			text-align: center;
+			font-size: 1.5em;
+			line-height: 1.3em;
+			width: 25em;
+			padding: 0 2em;
+			margin: 4em auto 0 auto;
+		}
+		h1 { font-size: 1em; line-height: 1.3em; color: #f00; font-weight: bold; }
+ 	</style>
 </head>
-
 <body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>We're sorry, but something went wrong.</h1>
-    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
-  </div>
+	<header>
+		<!--
+		<a class="tty" href="#content">Skip navigation</a>
+		-->
+		<div id="header">
+			<div id="application">
+				<a href="/">Gemeinschaft</a>
+			</div>
+
+			<div id="user_nav">
+				&nbsp;
+			</div>
+
+			<div class="clear"></div>
+		</div>
+		<hr class="tty" width="100%" />
+
+		<!-- layouts/top_navigation { -->
+		<!--
+		<span class="tty">Navigation:</span>
+		-->
+		<nav class="hnav">
+			<ul>
+				<li><a>Internal server error &nbsp; (500)</a></li>
+			</ul>
+		</nav>
+		<!-- layouts/top_navigation } -->
+	</header>
+	<hr class="tty" width="100%" />
+
+	<div id="content">
+		
+		<div class="dialog">
+			<h1>Internal server error.</h1>
+			<p>Something went wrong. Sorry.</p>
+			<p>Please go to the<br />
+				&rarr;&nbsp;&nbsp; <b><a href="/">Start page</a></b> &nbsp;&nbsp;&larr;
+			</p>
+		</div>
+
+	</div>
 </body>
 </html>
