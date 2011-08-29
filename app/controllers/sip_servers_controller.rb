@@ -80,6 +80,6 @@ class SipServersController < ApplicationController
   
   def confirm_destroy
     @sip_server = SipServer.find(params[:id])
-  end    
+  end
   
 end

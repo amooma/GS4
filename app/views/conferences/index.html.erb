@@ -29,9 +29,9 @@
         <% end %>
       </ul>
     </td>
-    <td><%= link_to t(:show), conference %></td>
-    <td><%= link_to t(:edit), edit_conference_path(conference) if can?(:edit, conference) %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_conference_path(conference) if can?( :destroy, conference ) %></td>
+    <td><%= link_to t(:show)    ,                                  conference %></td>
+    <td><%= link_to t(:edit)    ,            edit_conference_path( conference ) if can?(:edit    , conference) %></td>
+    <td><%= link_to t(:destroy) , confirm_destroy_conference_path( conference ) if can?(:destroy , conference) %></td>
   </tr>
 <% end %>
 </table>

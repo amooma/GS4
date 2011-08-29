@@ -1,35 +1,37 @@
 #!/bin/bash
 
 case $1 in 
+	
 	start)
-	iptables -A INPUT -i lo -o lo -j ACCEPT
-	iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
-	iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
-	iptables -A INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
-	iptables -A INPUT -i eth0 -p udp --dport 5060 -j ACCEPT
-	iptables -A INPUT -i eth0 -p udp --sport 67:68 --dport 67:68 -j ACCEPT
-	iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-	iptables -A OUTPUT -j ACCEPT
-	iptables -A INPUT -i eth0 -j DROP
-	ip6tables -A INPUT -i lo -j ACCEPT
-	ip6tables -A INPUT -j DROP
-chgrp gemeinschaft /etc/resolv.conf
-chmod g+rw /etc/resolv.conf
-;;
-
+		iptables -A INPUT -i lo -o lo -j ACCEPT
+		iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
+		iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+		iptables -A INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
+		iptables -A INPUT -i eth0 -p udp --dport 5060 -j ACCEPT
+		iptables -A INPUT -i eth0 -p udp --sport 67:68 --dport 67:68 -j ACCEPT
+		iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+		iptables -A OUTPUT -j ACCEPT
+		iptables -A INPUT -i eth0 -j DROP
+		
+		ip6tables -A INPUT -i lo -j ACCEPT
+		ip6tables -A INPUT -j DROP
+		
+		chgrp gemeinschaft /etc/resolv.conf
+		chmod g+rw /etc/resolv.conf
+		;;
+	
 	stop)
-
-	iptables -F
-	ip6tables -F
-;;
-
+		iptables -F
+		ip6tables -F
+		;;
+	
 	restart)
-	$0 stop
-	$0 start
-;;
+		$0 stop
+		$0 start
+		;;
+	
 	*)
-
-exit 0;
-;;
+		exit 0;
+		;;
 esac
 

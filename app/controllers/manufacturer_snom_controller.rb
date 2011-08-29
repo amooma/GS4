@@ -13,7 +13,9 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
+		
 		@max_entries    = Configuration.get(:snom_display_max_entries, 40, Integer)
+		
 		if ! params[:mac_address].blank?
 			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 			@phone = Phone.where(:mac_address => @mac_address).first
@@ -94,6 +96,7 @@ class ManufacturerSnomController < ApplicationController
 			@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
 			@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
 			
+			#OPTIMIZE Add explanation.
 			webserver_cert_dir = File.expand_path(Configuration.get(:phone_certificates_directory, ''))
 			webserver_certificates_suffix = File.basename(Configuration.get(:phone_certificates_suffix, '.crt'))
 			webserver_certificates_key_suffix = File.basename(Configuration.get(:phone_certificates_key_suffix, '.key'))
@@ -104,7 +107,7 @@ class ManufacturerSnomController < ApplicationController
 				webserver_key = File.open(webserver_certificates_key_file, 'r') { |f| f.read }
 				@webserver_cert = "\n#{webserver_certificate.strip}\n#{webserver_key.strip}\n"
 			end
-
+			
 			respond_to { |format|
 				format.xml
 			}
@@ -325,7 +328,7 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
-	def filter_contacts(contacts_all, keys)
+	def filter_contacts( contacts_all, keys )
 		number_keys = keys.length()
 		contacts_filtered = Array.new()
 		if !contacts_all
@@ -341,7 +344,7 @@ class ManufacturerSnomController < ApplicationController
 				elsif (key_pos > contact.lastname.length() || !KEYPAD_TABLE[keys[key_pos]].include?(contact.lastname[key_pos]))
 					break
 				end
-			end				
+			end
 		end
 		return contacts_filtered
 	end
