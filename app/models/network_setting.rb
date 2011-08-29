@@ -66,7 +66,7 @@ class NetworkSetting < ActiveRecord::Base
       # is_appliance => This is a Knoppix system.
       
       if self.dhcp_client == false
-        network_interfaces = "
+        network_interfaces_write = "
         #{network_interfaces}
         
         auto #{interface}
@@ -76,7 +76,7 @@ class NetworkSetting < ActiveRecord::Base
         #{"gateway #{gateway}" if ! gateway.blank?}    
         "
       else
-        network_interfaces = "
+        network_interfaces_write = "
         #{network_interfaces}
         auto #{interface}
         iface #{interface} inet dhcp
@@ -109,7 +109,7 @@ class NetworkSetting < ActiveRecord::Base
       
       write_files("#{file_path_etc}dnsmasq.conf", dnsmasq_conf)
       write_files("#{file_path_etc}resolv.conf", resolv_conf)
-      write_files("#{file_path_network}interfaces", network_interfaces)
+      write_files("#{file_path_network}interfaces", network_interfaces_write)
       
     )end
   }
