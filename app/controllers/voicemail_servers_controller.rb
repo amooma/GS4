@@ -98,6 +98,6 @@ class VoicemailServersController < ApplicationController
   
   def confirm_destroy
     @voicemail_server = VoicemailServer.find(params[:id])
-  end  
+  end
   
 end
