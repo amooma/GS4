@@ -90,7 +90,7 @@ class ManufacturerSnomController < ApplicationController
 			end
 			
 			@snom_srtp = Configuration.get(:snom_srtp, true, Configuration::Boolean) ? 'on' : 'off'
-			savp = Configuration.get(:snom_savp, 'off', String).downcase
+			savp = Configuration.get(:snom_savp, 'optional', String).downcase
 			@snom_savp = ['off', 'optional', 'mandatory'].include?(savp) ?  savp : 'off'
 			@snom_transport_tls = Configuration.get(:snom_transport_tls, false, Configuration::Boolean) ? ';transport=tls' : ''
 			
