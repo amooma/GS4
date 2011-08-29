@@ -22,6 +22,14 @@ class SipAccount < ActiveRecord::Base
   validates_presence_of     :phone            , :if => Proc.new { |me| me.phone_id }
   validates_presence_of     :user             , :if => Proc.new { |me| me.user_id }
   
+  validate {
+    if self.user
+      if ! Ability.new( self.user ).can?( :have, SipAccount )
+        errors.add( :user, I18n.t( :sip_account_user_cant_have_sip_accounts ))
+      end
+    end
+  }
+  
   validate_password         :password
   
   validates_numericality_of :voicemail_pin,
