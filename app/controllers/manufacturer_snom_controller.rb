@@ -13,7 +13,9 @@ class ManufacturerSnomController < ApplicationController
 		@cfwd_case_offline_id   = CallForwardReason.where( :value => "offline"   ).first.try(:id)
 		@cfwd_case_always_id    = CallForwardReason.where( :value => "always"    ).first.try(:id)
 		@cfwd_case_assistant_id = CallForwardReason.where( :value => "assistant" ).first.try(:id)
+		
 		@max_entries    = Configuration.get(:snom_display_max_entries, 40, Integer)
+		
 		if ! params[:mac_address].blank?
 			@mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
 			@phone = Phone.where(:mac_address => @mac_address).first
@@ -325,7 +327,7 @@ class ManufacturerSnomController < ApplicationController
 		}
 	end
 	
-	def filter_contacts(contacts_all, keys)
+	def filter_contacts( contacts_all, keys )
 		number_keys = keys.length()
 		contacts_filtered = Array.new()
 		if !contacts_all
@@ -341,7 +343,7 @@ class ManufacturerSnomController < ApplicationController
 				elsif (key_pos > contact.lastname.length() || !KEYPAD_TABLE[keys[key_pos]].include?(contact.lastname[key_pos]))
 					break
 				end
-			end				
+			end
 		end
 		return contacts_filtered
 	end
