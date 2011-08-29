@@ -29,6 +29,7 @@ xml.settings {
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
 		xml.ignore_security_warning( 'on', :perm => 'R' )
 		xml.update_called_party_id( 'off', :perm => 'RW' )
+		
 		sip_account =  @phone.sip_accounts.first
 		if (! sip_account.nil?)
 			xml.alert_group_ring_text( @phone.sip_accounts.first.auth_name, :perm => 'RW' )
@@ -43,6 +44,7 @@ xml.settings {
 		
 		xml.dkey_directory( "url #{@xml_menu_url}/phone_books_menu.xml", :perm => 'RW' )
 		xml.dkey_menu( 'keyevent F_SETTINGS', :perm => 'RW' )
+		
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
@@ -77,15 +79,15 @@ xml.settings {
 				:display_name             => (is_defined ? sact.caller_name              : nil ),
 				:registration_expiry_time => 3600,
 				:dtmf_mode                => 'rfc2833',
-				:remote_password          => (is_defined ? sact.password          : nil ),
+				:remote_password          => (is_defined ? sact.password                 : nil ),
 				:position                 => (is_defined ? sact.position                 : nil ),
 			}
 			
 			saopts_r  = { :idx => idx, :perm => 'R'  }
 			saopts_rw = { :idx => idx, :perm => 'RW' }
-							
+			
 			xml.comment! "SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
-			xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r )
+			xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r  )
 			xml.user_pname(             sac[:auth_user]       , saopts_r  )
 			xml.user_pass(              sac[:password]        , saopts_r  )
 			xml.user_host("#{sac[:registrar]}#{@snom_transport_tls}", saopts_r  )
@@ -93,7 +95,7 @@ xml.settings {
 			xml.user_name(              sac[:user]            , saopts_r  )
 			xml.user_realname(          sac[:display_name]    , saopts_r  )
 			xml.user_idle_text(         sac[:screen_name]     , saopts_r  )
-			xml.user_expiry(            sac[:registration_expiry_time] || 3600 , saopts_r )
+			xml.user_expiry(            sac[:registration_expiry_time] || 3600 , saopts_r  )
 			xml.user_server_type(       'default'             , saopts_rw )
 			xml.user_send_local_name(   'on'                  , saopts_rw )
 			xml.user_dtmf_info(         sac[:dtmf_mode] == 'rfc2833' ? 'off' : 'sip_info_only' , saopts_r )
