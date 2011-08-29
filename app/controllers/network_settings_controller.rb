@@ -50,9 +50,9 @@ class NetworkSettingsController < ApplicationController
   def create
     @network_setting = NetworkSetting.new(params[:network_setting])
     if @network_setting.save
-            if ::Rails.env.to_s == "production"
-              @result = `sudo -n /sbin/shutdown -r now`  #OPTIMIZE Is "shutdown -r now" really what you want (reboot)?
-            end
+      if ::Rails.env.to_s == "production"
+        @result = `sudo -n /sbin/shutdown -r now`  #OPTIMIZE Is "shutdown -r now" really what you want (reboot)?
+      end
     end
 
     respond_to do |format|
