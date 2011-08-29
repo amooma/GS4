@@ -95,4 +95,5 @@ class PersonalContactsController < ApplicationController
   def confirm_destroy
     @personal_contact = PersonalContact.find(params[:id])
   end
+  
 end
