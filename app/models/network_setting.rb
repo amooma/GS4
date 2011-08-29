@@ -93,7 +93,7 @@ class NetworkSetting < ActiveRecord::Base
       if start_dhcp_server
         dnsmasq_conf ="
           dhcp-range=#{dhcp_range_start},#{dhcp_range_end},12h
-          dhcp-option=66,http://#{ip_address}:80
+          dhcp-option=66,https://#{ip_address}:443
           dhcp-option=67,settings
         "
       else
