@@ -127,7 +127,7 @@ body {
 	color: #000;
 	@include padding-leader(1);
 	@include padding-trailer(1);
-	padding: 0.8em 1.5em;
+	padding: 0.8em 1.5em 1.7em 1.5em;
 	max-width: 75em;
 	margin: auto;
 }
@@ -248,7 +248,7 @@ table {
 
 
 #header {
-	margin: 0 0 0.5em 0;
+	margin: 0.8em 0 0.5em 0;
 	padding: 0 2pt 1pt 2pt;
 }
 
@@ -291,23 +291,35 @@ table {
 
 
 
-.simple_form {
+form.simple_form {
 	
 	margin-top:    2em;
 	margin-bottom: 2em;
+	margin-left:   auto;
+	margin-right:  auto;
+	width: 80%;
 	font-size: 1.02em;
 	
+	padding: 0.9em 0.5em;
+	@include
+	background-image( linear-gradient( top, #e0e0ff, white 3px, #f9f9ff 98%, #dfdfff ));
+	border: 1px solid rgba(0,0,100,0.2);
+	@include
+	border-radius( 6pt );
+	@include box-shadow( 1px 2px 8px hsla( 0, 0%, 0%, 0.15 ));
+	
 	div.input {
-		padding: 6px;
+		padding: 5px;
 		display: table;
-		margin-bottom: 5px;
+		margin-bottom: 2px;
 	}
-
+	
 	label {
 		float: left;
 		width: 180px;
 		text-align: right;
 		margin: 2px 10px;
+		color: #046;
 	}
 	
 	div.input.boolean {
@@ -317,6 +329,7 @@ table {
 	input[type='submit'] {
 		margin-left: 196px;
 		margin-top: 1.5em;
+		margin-bottom: 0.5em;
 	}
 	
 	div.input.boolean label,
@@ -338,7 +351,7 @@ table {
 		color: #D00;
 		display: block;
 	}
-
+	
 	.hint {
 		clear: left;
 		margin-left: 196px;
@@ -356,6 +369,48 @@ table {
 		}
 	}
 }
+
+div.simple_form_show {
+	
+	margin-top:    2em;
+	margin-bottom: 2.5em;
+	margin-left:   auto;
+	margin-right:  auto;
+	width: 80%;
+	font-size: 1.02em;
+	
+	padding: 0.9em 0.5em;
+	@include
+	background-image( linear-gradient( top, #e0e0ff, white 3px, #f9f9ff 98%, #dfdfff ));
+	border: 1px solid rgba(0,0,100,0.2);
+	@include
+	border-radius( 6pt );
+	@include box-shadow( 1px 2px 8px hsla( 0, 0%, 0%, 0.15 ));
+	
+	/* like form.simple_form div.input */
+	p {
+		/* reset p */
+		margin: 0; padding: 0;
+		
+		display: table;
+		padding: 0px;
+		margin-bottom: 2px;
+		font-weight: bold;
+	}
+	
+	/* like form.simple_form label */
+	b {
+		/* reset b */
+		font-weight: normal;
+				
+		display: table-cell;
+		width: 180px;
+		text-align: right;
+		padding: 4px 15px;
+		color: #046;
+	}
+}
+
 
 
 .index_overview {
@@ -411,8 +466,6 @@ table {
 		display: none;
 	}
 }
-
-
 
 
 

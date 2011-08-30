@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b>User:</b>
   <% if @sip_account.user %>
@@ -23,16 +25,16 @@
 
 <p>
   <b><%= t(:extensions) %>:</b>
-  <ul>
   <% @sip_account.extensions.each do |extension| %>
-    <li><%= extension.extension %></li>  
+    <%= link_to "#{extension.extension}", sip_account_extension_path( @sip_account, extension ) %>,
   <% end %>
-  </ul>
 </p>
+
 <p>
   <b><%= t(:caller_name) %>:</b>
   <%= @sip_account.caller_name %>
 </p>
+
 <p>
   <b><%= t(:sip_server) %>:</b>
   <% if @sip_account.sip_server %>
@@ -66,5 +68,4 @@
   <%= @sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
 
-<p>
-</p>
+</div>

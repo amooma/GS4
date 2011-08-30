@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:name) %>:</b>
   <%= @call_queue.name %>
@@ -8,10 +10,13 @@
   <b><%= t(:uuid) %>:</b>
   <%= @call_queue.uuid %>
 </p>
-<b><%= t(:extensions) %>:</b>
-  <ul>
+
+<p>
+  <b><%= t(:extensions) %>:</b>
   <% @call_queue.extensions.each do |extension| %>
-    <li><%= extension.extension %></li>  
+    <%= link_to "#{extension.extension}", call_queue_extension_path( @call_queue, extension ) %>,
   <% end %>
-  </ul>
+  <%= link_to t(:new_extension), new_call_queue_extension_path( @call_queue, {:destination => @call_queue.uuid}) %>
 </p>
+
+</div>

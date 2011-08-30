@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:username) %>:</b>
   <%= @user.username %>
@@ -23,3 +25,5 @@
   <b><%= t(:role) %>:</b>
   <%= User::ROLES[ @user.role ].to_s.sub(/^(\w)/) {|s| s.capitalize}%>
 </p>
+
+</div>

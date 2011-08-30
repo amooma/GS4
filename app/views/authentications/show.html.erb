@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:user) %>:</b>
   <%= @authentication.user_id %>
@@ -14,6 +16,7 @@
   <%= @authentication.uid %>
 </p>
 
+</div>
 
 <%= link_to t(:edit), edit_authentication_path(@authentication) %> |
 <%= link_to t(:Go_to_list), authentications_path %>

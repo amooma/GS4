@@ -1,4 +1,13 @@
 
+<div class="simple_form_show">
+
+<p>
+  <b><%= t(:dhcp_client) %>:</b>
+  <%= @network_setting.dhcp_client ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
+
+<hr />
+
 <p>
   <b><%= t(:ip_address) %>:</b>
   <%= @network_setting.ip_address %>
@@ -19,6 +28,13 @@
   <%= @network_setting.name_server %>
 </p>
 
+<hr />
+
+<p>
+  <b><%= t(:start_dhcp_server) %>:</b>
+  <%= @network_setting.start_dhcp_server ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
+
 <p>
   <b><%= t(:dhcp_range_start) %>:</b>
   <%= @network_setting.dhcp_range_start %>
@@ -29,16 +45,7 @@
   <%= @network_setting.dhcp_range_end %>
 </p>
 
-<p>
-  <b><%= t(:start_dhcp_server) %>:</b>
-  <%= @network_setting.start_dhcp_server %>
-</p>
-
-<p>
-  <b><%= t(:start_dhcp_server) %>:</b>
-  <%= @network_setting.dhcp_client %>
-</p>
-
+</div>
 
 <%= link_to t(:edit), edit_network_setting_path(@network_setting) %> |
 <%= link_to t(:Go_to_list), network_settings_path %>
