@@ -54,7 +54,9 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 			# list gateways and domain aliases (as in the Sofia SIP profile)
 			# http://wiki.freeswitch.org/wiki/Mod_xml_curl#Startup
 			
-			logger.info(_bold( "[FS] Request for domains and gateways ..." ))
+			sofia_profile = _arg(:profile)  # e.g. "internal", "external", ...
+			
+			logger.info(_bold( "[FS] Request for domains and gateways for Sofia profile \"#{sofia_profile}\" ..." ))
 			
 			@sip_servers = SipServer.where( :is_local => true ) #.group( :host )
 			
@@ -107,14 +109,14 @@ class FreeswitchDirectoryEntriesController < ApplicationController
 				when 'message-count' then 'voicemail'
 				when 'user_call'     then 'dial-by-username'
 				else
-					if (_arg(:as_channel) && _arg(:as_channel).match(/^true|1$/i))
+					if (_arg(:as_channel) && _arg(:as_channel).to_s.match(/^true|1$/i))
 						'dial-by-username'
 					else
 						'unknown'
 					end
 			end
 			
-			logger.info(_bold( "[FS] Request for user #{_arg(:user)}@#{_arg(:domain)} (for #{type}) ..." ))
+			logger.info(_bold( "[FS] Request for user #{_arg(:user)}@#{_arg(:domain)} (reason: #{type}) ..." ))
 			
 			# Find the SIP account(s):
 			# (The query should not return more than 1 SIP account in most cases.)

@@ -410,7 +410,9 @@ de:
   voicemail_pin_confirmation_different: "PIN und Bestätigung stimmen nicht überein"
   voicemail_old_pin_different: "PIN und bisherige PIN stimmen nicht überein"
   voicemail_pin_changed: "Voicemail-PIN erfolgreich geändert"
-
+  
+  sip_account_user_cant_have_sip_accounts: "kann keinen SIP-Account haben."
+  
   confirm_destroy_record: "%{model_name} wirklich löschen?"
   delete: "Löschen"
   cancel: "Abbrechen"

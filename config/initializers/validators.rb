@@ -155,8 +155,11 @@ ActiveRecord::Base.class_eval do
   end
   
   # Validate username. This is the "user" rule from RFC 3261.
-  def self.validate_username( attr_name )
-    validates_format_of [ attr_name ], :with =>
+  def self.validate_username( attr_names, options={} )
+    configuration = {
+      :allow_nil   => false,
+      :allow_blank => false,
+      :with =>
       /^
         (?:
           (?:
@@ -166,11 +169,17 @@ ActiveRecord::Base.class_eval do
           %[0-9A-F]{2} |
           [&=+$,;?\/]
         ){1,255}
-      $/x, :allow_nil => false, :allow_blank => false
+      $/x
+    } 
+    configuration.merge!( options )
+    validates_format_of( attr_names, configuration )
   end
   
-  def self.validate_password( attr_name )
-    validates_format_of [ attr_name ], :with =>
+  def self.validate_password( attr_names, options={} )
+    configuration = {
+      :allow_nil   => true,
+      :allow_blank => true,
+      :with =>
       /^
         (?:
           (?:
@@ -180,7 +189,10 @@ ActiveRecord::Base.class_eval do
         %[0-9A-F]{2} |
         [&=+$,]
       ){0,255}
-      $/x, :allow_nil => true, :allow_blank => true
+      $/x
+    }
+    configuration.merge!( options )
+    validates_format_of( attr_names, configuration )
   end
   
 end

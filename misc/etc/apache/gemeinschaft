@@ -1,31 +1,33 @@
 LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8/ext/apache2/mod_passenger.so
 PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8
 PassengerRuby /usr/bin/ruby1.9.1
- 
+
 <VirtualHost *:80>
 	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.notice" 
 	CustomLog "|/usr/bin/logger -t apache -i -p local6.notice" combined
-	rewriteengine on
-	# Workaround for Apache2 exploit    
-    	RewriteCond %{REQUEST_METHOD} ^(HEAD|GET) [NC]
-    	RewriteCond %{HTTP:Range} ([0-9]*-[0-9]*)(\s*,\s*[0-9]*-[0-9]*)+
-    	RewriteRule .* - [F]
-
-
+	
+	RewriteEngine on
+	
+	# Workaround for Apache2 exploit
+	RewriteCond %{REQUEST_METHOD} ^(HEAD|GET) [NC]
+	RewriteCond %{HTTP:Range} ([0-9]*-[0-9]*)(\s*,\s*[0-9]*-[0-9]*)+
+	RewriteRule .* - [F]
+	
 	RewriteCond %{HTTP_HOST} 127.0.0.1|localhost
 	RewriteRule ^.* - [L]
 	RewriteCond %{REQUEST_URI} ^/(settings)
-        RewriteRule ^.* - [L]
+	RewriteRule ^.* - [L]
 	
-
 	RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [R,L]
- 
+ 	
 	DocumentRoot /opt/gemeinschaft/public
 	PassengerAppRoot /opt/gemeinschaft
-      	<Directory /opt/gemeinschaft/public>
-       		AllowOverride all              
-         	Options -MultiViews            
-      		Options FollowSymLinks
+	#RailsEnv development
+	
+	<Directory /opt/gemeinschaft/public>
+		AllowOverride all
+		Options -MultiViews
+		Options FollowSymLinks
 	</Directory>
 </VirtualHost>
 
@@ -33,23 +35,26 @@ PassengerRuby /usr/bin/ruby1.9.1
 <VirtualHost *:443>
 	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.notice" 
 	CustomLog "|/usr/bin/logger -t apache -i -p local6.notice" combined
-
-	rewriteengine on
-	# Workaround for Apache2 exploit    
+	
+	RewriteEngine on
+	
+	# Workaround for Apache2 exploit
 	RewriteCond %{REQUEST_METHOD} ^(HEAD|GET) [NC]
-    	RewriteCond %{HTTP:Range} ([0-9]*-[0-9]*)(\s*,\s*[0-9]*-[0-9]*)+
-    	RewriteRule .* - [F]
-
-
-
-     	DocumentRoot /opt/gemeinschaft/public
-        PassengerAppRoot /opt/gemeinschaft
-      	<Directory /opt/gemeinschaft/public>
-         	AllowOverride all
-         	Options -MultiViews
-        	Options FollowSymLinks
-      	</Directory>
+	RewriteCond %{HTTP:Range} ([0-9]*-[0-9]*)(\s*,\s*[0-9]*-[0-9]*)+
+	RewriteRule .* - [F]
+	
+	DocumentRoot /opt/gemeinschaft/public
+	PassengerAppRoot /opt/gemeinschaft
+	#RailsEnv development
+	
+	<Directory /opt/gemeinschaft/public>
+		AllowOverride all
+		Options -MultiViews
+		Options FollowSymLinks
+	</Directory>
+ 	
  	SSLEngine on
-       	SSLCertificateFile    /etc/ssl/amooma/server_cert.pem
-        SSLCertificateKeyFile /etc/ssl/amooma/server_key.pem
+	SSLCertificateFile    /etc/ssl/amooma/server_cert.pem
+	SSLCertificateKeyFile /etc/ssl/amooma/server_key.pem
 </VirtualHost>
+

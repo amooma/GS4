@@ -28,8 +28,10 @@ class User < ActiveRecord::Base
   validates_presence_of    :username
   validates_uniqueness_of  :username, :case_sensitive => false
   validate_username        :username
+  
   validates_presence_of    :password
   validates_presence_of    :password_confirmation
+  
   validates_presence_of    :role
   validates_inclusion_of   :role, :in => self::ROLES.keys
   

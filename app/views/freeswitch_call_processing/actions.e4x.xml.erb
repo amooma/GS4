@@ -1,5 +1,5 @@
 <dp-actions><%
-@dp_actions.each { |action| %>
+(@dp_actions || []).each { |action| %>
 	<act app="<%= action[0].to_s %>" data="<%= action[1].to_s %>"/><%
 } %>
 </dp-actions>

@@ -7,7 +7,7 @@ xml.settings {
 	xml.tag! 'phone-settings' do
 		xml.auto_reboot_on_setting_change( 'off', :perm => 'RW' )
 		xml.web_language( 'English', :perm => 'RW' )
-		xml.language( 'Deutsch', :perm => 'RW')
+		xml.language( 'Deutsch', :perm => 'RW' )
 		xml.timezone( 'GER+1', :perm => 'RW' )
 		xml.date_us_format( 'off', :perm => 'RW' )
 		xml.time_24_format( 'on', :perm => 'RW' )
@@ -15,20 +15,21 @@ xml.settings {
 		xml.update_policy( 'settings_only', :perm => 'RW' )
 		xml.settings_refresh_timer( '0', :perm => 'RW' )
 		xml.firmware_status( '', :perm => 'RW' )
-		xml.ntp_server("#{request.env['SERVER_NAME']}", :perm => 'RW')
+		xml.ntp_server( "#{request.env['SERVER_NAME']}", :perm => 'RW' )
 		xml.webserver_type( 'http_https', :perm => 'R' )
 		xml.http_scheme( 'off', :perm => 'RW' )  # off = Basic, on = Digest
 		xml.http_port( '80', :perm => 'R' )
 		xml.https_port( '443', :perm => 'R' )
 		xml.http_user( @phone.http_user.to_s, :perm => 'R' )
 		xml.http_pass( @phone.http_password.to_s, :perm => 'R' )
-		xml.tone_scheme( 'GER', :perm => 'RW')
-		xml.disable_redirection_menu( 'on', :perm => 'R')
+		xml.tone_scheme( 'GER', :perm => 'RW' )
+		xml.disable_redirection_menu( 'on', :perm => 'R' )
 		xml.retry_after_failed_register( '70', :perm => 'RW' )
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )
-		xml.ignore_security_warning( 'on', :perm => 'R')
-		xml.update_called_party_id( 'off', :perm => 'RW')
+		xml.ignore_security_warning( 'on', :perm => 'R' )
+		xml.update_called_party_id( 'off', :perm => 'RW' )
+		
 		sip_account =  @phone.sip_accounts.first
 		if (! sip_account.nil?)
 			xml.alert_group_ring_text( @phone.sip_accounts.first.auth_name, :perm => 'RW' )
@@ -43,6 +44,7 @@ xml.settings {
 		
 		xml.dkey_directory( "url #{@xml_menu_url}/phone_books_menu.xml", :perm => 'RW' )
 		xml.dkey_menu( 'keyevent F_SETTINGS', :perm => 'RW' )
+		
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0
@@ -77,15 +79,15 @@ xml.settings {
 				:display_name             => (is_defined ? sact.caller_name              : nil ),
 				:registration_expiry_time => 3600,
 				:dtmf_mode                => 'rfc2833',
-				:remote_password          => (is_defined ? sact.password          : nil ),
+				:remote_password          => (is_defined ? sact.password                 : nil ),
 				:position                 => (is_defined ? sact.position                 : nil ),
 			}
 			
 			saopts_r  = { :idx => idx, :perm => 'R'  }
 			saopts_rw = { :idx => idx, :perm => 'RW' }
-							
+			
 			xml.comment! "SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
-			xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r )
+			xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r  )
 			xml.user_pname(             sac[:auth_user]       , saopts_r  )
 			xml.user_pass(              sac[:password]        , saopts_r  )
 			xml.user_host("#{sac[:registrar]}#{@snom_transport_tls}", saopts_r  )
@@ -93,7 +95,7 @@ xml.settings {
 			xml.user_name(              sac[:user]            , saopts_r  )
 			xml.user_realname(          sac[:display_name]    , saopts_r  )
 			xml.user_idle_text(         sac[:screen_name]     , saopts_r  )
-			xml.user_expiry(            sac[:registration_expiry_time] || 3600 , saopts_r )
+			xml.user_expiry(            sac[:registration_expiry_time] || 3600 , saopts_r  )
 			xml.user_server_type(       'default'             , saopts_rw )
 			xml.user_send_local_name(   'on'                  , saopts_rw )
 			xml.user_dtmf_info(         sac[:dtmf_mode] == 'rfc2833' ? 'off' : 'sip_info_only' , saopts_r )
@@ -187,3 +189,9 @@ xml.settings {
 		xml.file( :url => "#{@xml_menu_url}/state_settings.xml", :type => "gui_xml_state_settings" )
 	}
 }
+
+
+# Local Variables:
+# mode: ruby
+# End:
+

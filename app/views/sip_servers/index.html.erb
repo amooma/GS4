@@ -14,8 +14,8 @@
     <td><%= sip_server.host %></td>
     <td><%= sip_server.port %></td>
     <td><%= sip_server.is_local ? t(:yes_lowercase) : t(:no_lowercase) %></td>
-    <td><%= link_to t(:show), sip_server %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_sip_server_path(sip_server) if can?( :destroy, sip_server ) %></td>
+    <td><%= link_to t(:show)    ,                                  sip_server %></td>
+    <td><%= link_to t(:destroy) , confirm_destroy_sip_server_path( sip_server ) if can?( :destroy, sip_server ) %></td>
   </tr>
 <% end %>
 </table>

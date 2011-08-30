@@ -1,5 +1,5 @@
 class PersonalContactsController < ApplicationController
- 
+  
   before_filter :authenticate_user!
   
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
@@ -95,4 +95,5 @@ class PersonalContactsController < ApplicationController
   def confirm_destroy
     @personal_contact = PersonalContact.find(params[:id])
   end
+  
 end

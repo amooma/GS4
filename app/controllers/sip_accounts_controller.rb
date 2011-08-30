@@ -10,7 +10,7 @@ class SipAccountsController < ApplicationController
     @sip_servers  = SipServer .accessible_by( current_ability, :index ).order([ :host ])
     @sip_proxies  = SipProxy  .accessible_by( current_ability, :index ).order([ :host ])
     @voicemail_servers = VoicemailServer .accessible_by( current_ability, :index ).order([ :host ])
-    @users        = User      .accessible_by( current_ability, :index ).order([ :sn, :gn, :username ])
+    @users        = User      .accessible_by( current_ability, :index ).order([ :sn, :gn, :username ]).keep_if{ |u| Ability.new(u).can?(:have, SipAccount) }
     @num_users    = User      .accessible_by( current_ability, :index ).count
   }
   
@@ -56,8 +56,9 @@ class SipAccountsController < ApplicationController
       @sip_account.realm      = SipProxy.accessible_by( current_ability, :index ).first.try(:host)
     end
     if VoicemailServer.count == 1
-      @sip_account.voicemail_server = VoicemailServer.accessible_by( current_ability, :index).first
+      @sip_account.voicemail_server = VoicemailServer.accessible_by( current_ability, :index ).first
     end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account }

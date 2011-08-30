@@ -14,14 +14,13 @@ Configuration.create([
 	{ :name => 'xml_rpc_realm'               , :value => 'gemeinschaft' },
 	{ :name => 'xml_rpc_user'                , :value => SecureRandom.hex(10) },
 	{ :name => 'xml_rpc_password'            , :value => SecureRandom.hex(10) },
-	{ :name => 'xml_rpc_timeout'             , :value => '8' },
+	{ :name => 'xml_rpc_timeout'             , :value => '20' },
 	{ :name => 'fax_files_directory'         , :value => '/opt/gemeinschaft/misc/fax/' },
 	{ :name => 'fax_max_files'               , :value => '2048' },
 	{ :name => 'fax_max_duration'            , :value => '900' },
-	{ :name => 'fax_files_directory'         , :value => '/opt/gemeinschaft/misc/fax/' },
 	{ :name => 'voicemail_max_record_length' , :value => '300' },
 	{ :name => 'voicemail_min_record_length' , :value => '3' },
-	{ :name => 'voicemail_max_files'         , :value => '2048' },                      
+	{ :name => 'voicemail_max_files'         , :value => '2048' },
 ])
 
 

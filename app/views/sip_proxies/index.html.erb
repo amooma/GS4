@@ -14,8 +14,8 @@
     <td><%= sip_proxy.host %></td>
     <td><%= sip_proxy.port %></td>
     <td><%= sip_proxy.is_local ? t(:yes_lowercase) : t(:no_lowercase) %></td>
-    <td><%= link_to t(:show), sip_proxy %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_sip_proxy_path(sip_proxy) if can?( :destroy, sip_proxy ) %></td>
+    <td><%= link_to t(:show)    ,                                 sip_proxy %></td>
+    <td><%= link_to t(:destroy) , confirm_destroy_sip_proxy_path( sip_proxy ) if can?( :destroy, sip_proxy ) %></td>
   </tr>
 <% end %>
 </table>

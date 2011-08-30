@@ -410,7 +410,9 @@ en:
   voicemail_pin_confirmation_different: "PIN and confirmation PIN differ"
   voicemail_old_pin_different: "PIN and current PIN differ"
   voicemail_pin_changed: "Voicemail PIN changed"
- 
+  
+  sip_account_user_cant_have_sip_accounts: "can't have a SIP account."
+  
   confirm_destroy_record: "Are you sure you want to destroy this {resource}?" 
   delete: "Delete"
   cancel: "Cancel"

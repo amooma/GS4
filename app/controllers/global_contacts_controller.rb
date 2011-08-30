@@ -88,7 +88,7 @@ class GlobalContactsController < ApplicationController
   end
   
   def confirm_destroy
-      @global_contact = GlobalContact.find(params[:id])
+    @global_contact = GlobalContact.find(params[:id])
   end
   
 end

@@ -9,13 +9,8 @@ module XmlRpc
 		xml_rpc_password  = Configuration.get(:xml_rpc_password )
 		xml_rpc_directory = Configuration.get(:xml_rpc_directory, '/RPC2' )
 		xml_rpc_api       = Configuration.get(:xml_rpc_api, 'freeswitch.api' )
-		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 8 )
-		if (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
-			xml_rpc__ssl = true
-		else
-			xml_rpc__ssl = false
-		end
-		#xml_rpc__ssl      = (Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
+		xml_rpc_timeout   = Configuration.get(:xml_rpc_timeout, 20 )
+		xml_rpc__ssl      =(Configuration.get(:xml_rpc_ssl, 'no' ) == 'yes')
 		
 		Rails::logger.debug(_bold( "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}#{! arguments.empty? ? '?...' : ''}\" ..." ))
 		Rails::logger.debug( "(Params: #{arguments.inspect})" )
@@ -28,7 +23,7 @@ module XmlRpc
 		rescue Errno::EHOSTUNREACH => e
 			error_msg = "Failed to connect to XML-RPC service (#{xml_rpc_host}:#{xml_rpc_port}). EHOSTUNREACH: #{e.message}"
 		rescue Timeout::Error => e
-			error_msg = "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}\" failed. (timeout)"
+			error_msg = "XML-RPC request to \"xmlrpc://#{xml_rpc_user}@#{xml_rpc_host}:#{xml_rpc_port}#{xml_rpc_directory};#{xml_rpc_api}.#{method}\" failed. (timeout, > #{xml_rpc_timeout} s)"
 		rescue XMLRPC::FaultException => e
 			error_msg = "XML-RPC error: #{e.faultCode} #{e.faultString}"
 		rescue SocketError => e
@@ -57,11 +52,56 @@ module XmlRpc
 	def self.voicemails_get( sip_account, domain )
 		response = request('vm_list', "#{sip_account}@#{domain} xml")
 		
+		# response is a string and look like this:
+		# <voicemail>
+		# 	<message>
+		# 		...
+		# 	</message>
+		# 	<message>
+		# 		...
+		# 	</message>
+		# </voicemail>
+		# Without messages (no surprise):
+		# <voicemail>
+		# </voicemail>
+		
 		if (! response || response == 'ERROR!')
 			return false
 		end
 		
-		return Hash.from_xml(response)['voicemail']['message']
+		h = Hash.from_xml( response )
+		#Rails.logger.info( "--------------- #{h.inspect}" )
+		
+		# The hash looks like this:
+		# {
+		# 	"voicemail" => {
+		# 		"message" => [
+		# 			{
+		# 				...
+		# 			},
+		# 			{
+		# 				...
+		# 			}
+		# 		]
+		# 	}
+		# }
+		# Without messages (surprise!):
+		# {
+		# 	"voicemail" => "\n"
+		# }
+		
+		if ! h || ! h['voicemail']
+			return false
+		end
+		
+		if h['voicemail'].kind_of?( Hash ) \
+		&& h['voicemail']['message'].kind_of?( Array )
+			return h['voicemail']['message']
+		else
+			# If there are no voicemail messages we don't want to return
+			# nil but an empty array:
+			return []
+		end
 	end
 	
 	def self.voicemail_set_read( sip_account, domain, uuid, read = true )

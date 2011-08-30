@@ -383,7 +383,7 @@
 				:call_forward_reason => "Der Fall in dem die Umleitung greifen soll.",
 				:call_forward_reason_id => "Relation zu CallForwardReason",
 				:call_timeout => "Bei einer Umleitung bei Nicht-Abheben: Klingeldauer in Sekunden.",
-				:destination => "Ziel-Rufnummer der Rufumleitung. Um Anrufe abzuweisen kann das Ziel leer gelassen werden; dies sollte normalerweise nur für eine bestimmte Anrufernummer gelten (Blacklist).",
+				:destination => "Ziel-Rufnummer der Rufumleitung. Für eine Umleitung auf den Anrufbeantworter: „voicemail“. Um Anrufe abzuweisen kann das Ziel leer gelassen werden; dies sollte normalerweise nur für Anrufe von einer bestimmte Anrufernummer eingerichtet werden (Blacklist).",
 				:active => "Nur aktive Rufumleitungen werden berücksichtigt. Auf diese Weise können Umleitungen vorübergehend deaktiviert werden ohne sie zu löschen.",
 			},
 			:call_forward_reason => {

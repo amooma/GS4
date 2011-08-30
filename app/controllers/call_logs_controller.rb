@@ -92,9 +92,9 @@ class CallLogsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
   def confirm_destroy
     @call_log = CallLog.find(params[:id])
   end
-  
   
 end

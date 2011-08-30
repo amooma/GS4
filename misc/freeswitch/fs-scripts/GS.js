@@ -252,17 +252,17 @@ try {
 			// so the chunk has exactly 8 kiB including the overhead.
 			// BTW: 8184 bytes are roughly 100 actions on average.
 			if (curl_response_data.match( /0\r?\n?\r?\n?$/ )) {
-				log( LOG_NOTICE, "--------Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly. Fixed." );
+				log( LOG_NOTICE, "Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly. Fixed." );
 				// FreeSwitch could send "TE: identity;q=1,chunked;q=0".
 				//curl_response_data = curl_response_data.replace( /\s*0\s*$/, '' );
 				curl_response_data = curl_response_data.replace( /[^>]+$/, '' );
 			}
 			if (curl_response_data.match( /^[0-9a-zA-Z]+(\s;[^\r\n]+)?([\r\n]{1,2}|$)/m )) {  // chunk size
-				log( LOG_WARNING, "--------Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly!" );
+				log( LOG_WARNING, "Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly!" );
 			}
 			else if (curl_response_data.match( /^[^\s<]/m )
-			||       curl_response_data.match( /[^>][\r\n]?$/m )) {
-				log( LOG_WARNING, "--------Curl or mod_spidermonkey_curl did likely not parse chunked Transfer-Encoding correctly!" );
+			||       curl_response_data.match( /[^>]$/m )) {
+				log( LOG_WARNING, "Curl or mod_spidermonkey_curl did likely not parse chunked Transfer-Encoding correctly!" );
 			}
 			
 			// E4X XML() doesn't understand the XML declaration nor whitespace

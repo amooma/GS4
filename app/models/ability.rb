@@ -26,6 +26,10 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     
+    #OPTIMIZE Create an alias so :destroy includes :confirm_destroy ?
+    # https://github.com/ryanb/cancan/wiki/Action-Aliases
+    #alias_action :destroy, :confirm_destroy, :to => :destroy
+    
     user ||= User.new
     case user.role
       
@@ -36,6 +40,7 @@ class Ability
         can    :manage  , User
         can    :manage  , SipAccount
         can    :read_title, SipAccount
+        cannot :have    , SipAccount
         can    :manage  , CallForward
         can    :manage  , Extension
         can    :manage  , CallQueue
@@ -65,8 +70,8 @@ class Ability
         can    :edit    , Phone
         can    :create  , Phone
         can    :destroy , Phone
-        can    :reboot  , Phone
         can    :confirm_destroy , Phone
+        can    :reboot  , Phone
         can    :read    , :Setup
         can    :read    , Voicemail
         can    :destroy , Voicemail
@@ -85,11 +90,15 @@ class Ability
         can    :read    , Home  # just a redirect_to( call_logs_path ) in the HomeController
         can    :read    , CallLog
         #OPTIMIZE Add PinChange?
+        cannot :have    , SipAccount
       )
       
       when "user"
       (
         can    :read    , Home
+        
+        can    :have    , SipAccount
+        
         can    :read    , CallForward, :sip_account => { :user_id => user.id }
         can    :new     , CallForward
         can    :create  , CallForward do |call_forward|
@@ -109,6 +118,7 @@ class Ability
           call_forward.try(:sip_account).try(:user_id) == user.id \
           && user.id != nil
         end
+        #OPTIMIZE Missing can    :confirm_destroy , CallForward do ... ?
         can    :read_title, SipAccount, :user_id => user.id
         can    :read    , GlobalContact
         
@@ -130,7 +140,7 @@ class Ability
         can    :read    , Voicemail
         can    :destroy , Voicemail
         can    :confirm_destroy , Voicemail
-      
+        
         can    :read,     Conference, :user_id => user.id
         can    :read,     Conference, :user_id => nil
         can    :edit,     Conference, :user_id => user.id
