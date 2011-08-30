@@ -12,7 +12,7 @@
   /opt/gemeinschaft-local/data/opt/freeswitch/ rw,
   /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/** r,
   /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-conf/freeswitch-gemeinschaft4.xml wr,
-  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-scripts/* xr,
+  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-scripts/* ixr,
   /opt/freeswitch/** r,
   /opt/gemeinschaft-local/data/opt/freeswitch/db/* rw,
   /var/log/freeswitch/* rw,
