@@ -406,6 +406,7 @@ en:
   reboot: "Reboot"
   
   user_to_display: "%{username} (%{gn} %{sn})"
+  user_to_display_improved: "%{username} (%{full_name})"
   sip_account_to_display: "%{caller_name} (%{auth_name})"
   
   voicemail_pin_change: "Voicemail PIN"
