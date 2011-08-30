@@ -47,7 +47,15 @@ class User < ActiveRecord::Base
   
   
   def to_display
-    return I18n.t( :user_to_display, :id => self.id, :username => self.username, :email => self.email, :sn => self.sn, :gn => self.gn, :role => self.role )
+    ret = I18n.t( :user_to_display_improved, {
+      :id          => self.id,
+      :username    => self.username,
+      :email       => self.email,
+      :full_name   => "#{self.gn.to_s.strip} #{self.sn.to_s.strip}" .strip,
+      :role        => self.role,
+    }).to_s
+    ret.strip!
+    return ret
   end
   
 end

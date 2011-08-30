@@ -1,5 +1,5 @@
 class PersonalContactsController < ApplicationController
- 
+  
   before_filter :authenticate_user!
   
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions

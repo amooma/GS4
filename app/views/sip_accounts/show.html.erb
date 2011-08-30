@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b>User:</b>
   <% if @sip_account.user %>
@@ -23,22 +25,23 @@
 
 <p>
   <b><%= t(:extensions) %>:</b>
-  <% if @sip_account.extensions.count == 0 %>
+  <% @sip_account.extensions.each do |extension| %>
+    <%= link_to "#{extension.extension}", sip_account_extension_path( @sip_account, extension ) %>,
+  <% end %>
+  <%= link_to t(:new_extension), new_sip_account_extension_path( @sip_account, {:destination => @sip_account.auth_name}) %>
+</p>
+
+<% if @sip_account.extensions.count == 0 %>
   <div class="noticebox">
     <%= t(:sip_account_need_to_create_extension) %>
   </div>
-  <% end %>
-  <ul>
-  <% @sip_account.extensions.each do |extension| %>
-    <li><%= extension.extension %></li>  
-  <% end %>
-    <li><%= link_to t(:new_extension), new_sip_account_extension_path(@sip_account, {:destination => @sip_account.auth_name}) %>
-  </ul>
-</p>
+<% end %>
+
 <p>
   <b><%= t(:caller_name) %>:</b>
   <%= @sip_account.caller_name %>
 </p>
+
 <p>
   <b><%= t(:sip_server) %>:</b>
   <% if @sip_account.sip_server %>
@@ -72,9 +75,7 @@
   <%= @sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
 
-<p>
-</p>
-
+</div>
 
 <%= link_to t(:edit), edit_sip_account_path(@sip_account) %> |
 <%= link_to t(:Go_to_list), sip_accounts_path %>

@@ -4,6 +4,7 @@
 
 <%= link_to t(:edit), edit_phone_path(@phone) %>
 
+
 <h2><%= t(:sip_accounts) %></h2>
 <p>
 <% if @sip_accounts.count < @phone.phone_model.max_number_of_sip_accounts %>

@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p><%#OPTIMIZE Remove? %>
+
+<div class="simple_form_show">
 
 <p>
   <b><%= t('activerecord.attributes.configuration.name') %>:</b>
@@ -10,6 +12,7 @@
   <%= @configuration.value %>
 </p>
 
+</div>
 
 <%= link_to t(:edit), edit_configuration_path(@configuration) %> |
 <%= link_to t(:Go_to_list), configurations_path %>

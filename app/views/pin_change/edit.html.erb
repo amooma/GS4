@@ -2,21 +2,23 @@
 
 <% if @errors == true %>
 <%= simple_form_for( @sip_account ) do |f| %>
-<%= f.error_messages %>
+	<%= f.error_messages %>
 <% end %>
 <% end %>
 
-<%= form_tag(pin_change_path) do %>
-<p>  <%=  t(:sip_account) %>
-     <%= select_tag :sip_account_id, options_from_collection_for_select(@sip_accounts, :id, :to_display) %>
-</p>
-
-<p> <%=  t(:old_voicemail_pin) %>
-<%= password_field_tag :old_voicemail_pin %></p>
-<p><%= t(:voicemail_pin) %>
-<%= password_field_tag :voicemail_pin %></p>
-<p><%= t(:voicemail_pin_confirmation) %>
-<%= password_field_tag :voicemail_pin_confirmation %></p>
-
-<%= submit_tag t(:voicemail_pin_change) %>
+<%= form_tag( pin_change_path ) do %>
+	<p><%= t(:sip_account) %>
+		<%= select_tag :sip_account_id, options_from_collection_for_select( @sip_accounts, :id, :to_display ) %>
+	</p>
+	
+	<p><%= t(:old_voicemail_pin) %>
+	<%= password_field_tag :old_voicemail_pin %></p>
+	
+	<p><%= t(:voicemail_pin) %>
+	<%= password_field_tag :voicemail_pin %></p>
+	
+	<p><%= t(:voicemail_pin_confirmation) %>
+	<%= password_field_tag :voicemail_pin_confirmation %></p>
+	
+	<%= submit_tag t(:voicemail_pin_change) %>
 <% end %>

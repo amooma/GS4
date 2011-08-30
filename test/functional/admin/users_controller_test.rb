@@ -184,7 +184,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   test "should update (admin)" do
     sign_in :user, @admin_user
     put :update, :id => @user.to_param, :user => @user.attributes
-    assert_response 302
+    assert_response 302  #TODO Fix the expected response or the test name.
     sign_out @admin_user
   end
   

@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:date_date) %>:</b>
   <%= l( Time.at(@fax_document.created_at.localtime)) %>
@@ -8,11 +10,15 @@
   <b><%= t(:destination) %>:</b>
   <%= @fax_document.destination %>
 </p>
+
 <p>
   <b><%= t(:title) %>:</b>
   <%= @fax_document.title %>
 </p>
+
 <p>
   <b><%= t(:document) %>:</b>
   <%= @fax_document.file %>
 </p>
+
+</div>
