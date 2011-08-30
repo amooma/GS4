@@ -313,13 +313,29 @@ de:
   phone_mobile: "Telefonnummer mobil"
   fax_private: "Faxnummer privat"
   fax_business: "Faxnummer geschäftlich"
-  personal_contact: "Kontakt (persönlich)"
+  
+  contacts: "Kontakte"
+  
+  
+  global_contacts: "Kontakte (anlagenweit)"
+  
+  global_contact: "Anlagenweiter Kontakt"
+  new_global_contact: "Neuer Kontakt (anlagenweit)"
+  editing_global_contact: "Kontakt bearbeiten (anlagenweit)"
+  listing_global_contacts: "Kontakte (anlagenweit)"
+  global_contact_created: "Kontakt wurde erfolgreich angelegt"
+  global_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
+  
   personal_contacts: "Kontakte (persönlich)"
-  new_personal_contact: "Neuer Kontakt (persönlich)"
-  editing_personal_contact: "Kontakt bearbeiten (persönlich)"
-  listing_personal_contacts: "Kontakte (persönlich)"
+  
+  personal_contact: "Persönlicher Kontakt"
+  new_personal_contact: "Neuer persönlicher Kontakt"
+  editing_personal_contact: "Persönlichen Kontakt bearbeiten"
+  listing_personal_contacts: "Persönliche Kontakte"
   personal_contact_created: "Kontakt wurde erfolgreich angelegt"
   personal_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
+  
+  
   phone_belongs_to_user_already: "Das Telefon wurde bereits einem Benutzer zugeordnet"
   phone_books: "Telefonbuch"
   
@@ -335,15 +351,6 @@ de:
   sign_in_submit: "Anmelden"
   forgot_password: "Passwort vergessen?"
   send_reset_password_instructions: "Anweisungen zum Zurücksetzen des Passworts zusenden"
-  
-  contacts: "Kontakte"
-  global_contacts: "Kontakte (anlagenweit)"
-  global_contact: "Kontakt (anlagenweit)"
-  new_global_contact: "Neuer Kontakt (anlagenweit)"
-  editing_global_contact: "Kontakt bearbeiten (anlagenweit)"
-  listing_global_contacts: "Kontakte (anlagenweit)"
-  global_contact_created: "Kontakt wurde erfolgreich angelegt"
-  global_contact_updated: "Kontakt wurde erfolgreich aktualisiert"
   
   voicemail: "Voicemail"
   
