@@ -248,6 +248,8 @@ case $n in
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/run
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/run /opt/freeswitch/
 		mkdir /var/log/freeswitch
+		chgrp gemeinschaft /var/log/freeswitch
+		chmod g+rw /var/log/freeswitch
 		rmdir /opt/freeswitch/log
 		ln -s /var/log/freeswitch /opt/freeswitch/log
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/storage
