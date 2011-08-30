@@ -137,6 +137,7 @@ a2ensite gemeinschaft
 cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
 chown www-data /etc/ssl/amooma/*
 chmod 0600 /etc/ssl/amooma/*
+#OPTIMIZE Does the web server need write permissions on the certificates? If it doesn't: chmod 0400 ...
 a2enmod rewrite
 
 echo -e "Configuring FreeSwitch ...\n"
@@ -279,7 +280,8 @@ case $n in
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/run /opt/freeswitch/
 		
 		mkdir /var/log/freeswitch
-		
+		chgrp gemeinschaft /var/log/freeswitch
+		chmod g+rw /var/log/freeswitch
 		rmdir /opt/freeswitch/log
 		ln -s /var/log/freeswitch /opt/freeswitch/log
 		

@@ -1,4 +1,5 @@
 
+<div class="simple_form_show">
 
 <p>
   <b><%= t(:name) %>:</b>
@@ -10,11 +11,14 @@
   <%= link_to @manufacturer.url %>
 </p>
 
+</div>
+
 <%= link_to t(:edit), edit_manufacturer_path(@manufacturer) if can?( :edit, @manufacturer ) %>
+
 
 <h2><%= t(:listing_phone_models) %></h2>
 <p>
-<%= link_to t(:new_phone_model), new_manufacturer_phone_model_path(@manufacturer) if can?( :create, PhoneModel ) %>	
+  <%= link_to t(:new_phone_model), new_manufacturer_phone_model_path(@manufacturer) if can?( :create, PhoneModel ) %>	
 </p>
 
 <% if @manufacturer.phone_models.count > 0 %>

@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <% if current_user.role == "admin" %>
   <p>
     <b><%= t(:user) %>:</b>
@@ -44,3 +46,5 @@
   <b><%= t(:fax_business) %>:</b>
   <%= @personal_contact.fax_business %>
 </p>
+
+</div>

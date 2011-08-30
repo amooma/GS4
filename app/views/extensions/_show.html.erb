@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:extension) %>:</b>
   <%= @extension.extension %>
@@ -11,5 +13,7 @@
 
 <p>
   <b><%= t(:active) %>:</b>
-  <%= @extension.active %>
+  <%= @extension.active ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
+
+</div>

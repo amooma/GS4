@@ -1,5 +1,6 @@
 
 <% if @voicemail %>
+<div class="simple_form_show">
 
 <p>
   <b><%= t(:sip_account) %>:</b>
@@ -41,5 +42,5 @@
   <%= @voicemail['VM-Message-Forwarded-By'] %>
 </p>
 
+</div>
 <% end %>
-

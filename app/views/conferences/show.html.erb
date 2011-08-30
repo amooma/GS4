@@ -1,5 +1,7 @@
 <h1><%= t(:conference) %></h1>
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:name) %>:</b>
   <%= @conference.name %>
@@ -10,22 +12,23 @@
   <%= @conference.pin %>
 </p>
 
-<b><%= t(:extensions) %>:</b>
-  <% if @conference.extensions.count == 0 && can?( :create, Extension ) %>
+<p>
+  <b><%= t(:extensions) %>:</b>
+  <% @conference.extensions.each do |extension| %>
+    <%= link_to "#{extension.extension}", conference_extension_path( @conference, extension ) %>,  
+  <% end %>
+  <% if can?( :create, Extension ) %>
+    <%= link_to t(:new_extension), new_conference_extension_path( @conference, {:destination => @conference.uuid}) %>
+  <% end %>
+</p>
+
+<% if @conference.extensions.count == 0 && can?( :create, Extension ) %>
   <div class="noticebox">
     <%= t(:conference_need_to_create_extension) %>
   </div>
-  <% end %>
-  
-  <ul>
-  <% @conference.extensions.each do |extension| %>
-    <li><%= extension.extension %></li>  
-  <% end %>
-  <% if can?( :create, Extension ) %>
-    <li><%= link_to t(:new_extension), new_conference_extension_path( @conference, {:destination => @conference.uuid}) %>
-  <% end %>
-  </ul>
-</p>
+<% end %>
 
-<%= link_to t(:edit), edit_conference_path(@conference) if can?(:edit, @conference)%> |
+</div>
+
+<%= link_to t(:edit), edit_conference_path(@conference) if can?(:edit, @conference) %> |
 <%= link_to t(:Go_to_list), conferences_path %>

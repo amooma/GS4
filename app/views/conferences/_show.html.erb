@@ -1,4 +1,6 @@
 
+<div class="simple_form_show">
+
 <p>
   <b><%= t(:name) %>:</b>
   <%= @conference.name %>
@@ -9,10 +11,11 @@
   <%= @conference.pin %>
 </p>
 
-<b><%= t(:extensions) %>:</b>
-  <ul>
+<p>
+  <b><%= t(:extensions) %>:</b>
   <% @conference.extensions.each do |extension| %>
-    <li><%= extension.extension %></li>  
+    <%= link_to "#{extension.extension}", conference_extension_path( @conference, extension ) %>,  
   <% end %>
-  </ul>
 </p>
+
+</div>
