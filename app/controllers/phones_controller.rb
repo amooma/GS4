@@ -5,6 +5,9 @@ class PhonesController < ApplicationController
   # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
   load_and_authorize_resource
   
+  before_filter { |controller|
+    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
+  }
   
   # GET /phones
   # GET /phones.xml
@@ -29,7 +32,6 @@ class PhonesController < ApplicationController
   # GET /phones/1.xml
   def show
     @phone = Phone.find(params[:id])
-    
     @sip_accounts = @phone.sip_accounts.accessible_by( current_ability, :index )
     
     respond_to do |format|
@@ -42,7 +44,6 @@ class PhonesController < ApplicationController
   # GET /phones/new.xml
   def new
     @phone = Phone.new
-    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
     
     if !params[:phone_model_id].nil? and PhoneModel.exists?(params[:phone_model_id])
       @phone.phone_model_id = params[:phone_model_id]
@@ -60,14 +61,12 @@ class PhonesController < ApplicationController
   def edit
     @phone = Phone.find(params[:id])
     
-    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
   end
   
   # POST /phones
   # POST /phones.xml
   def create
     @phone = Phone.new(params[:phone])
-    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
     
     respond_to do |format|
       if @phone.save
@@ -84,7 +83,6 @@ class PhonesController < ApplicationController
   # PUT /phones/1.xml
   def update
     @phone = Phone.find(params[:id])
-    @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
     
     if @phone.update_attributes(params[:http_password]) \
     || @phone.update_attributes(params[:http_user])
