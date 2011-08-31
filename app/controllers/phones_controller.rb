@@ -67,12 +67,11 @@ class PhonesController < ApplicationController
   # POST /phones.xml
   def create
     @phone = Phone.new(params[:phone])
-    
     @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
     
     respond_to do |format|
       if @phone.save
-        format.html { redirect_to(@phone, :notice => t(:phone_created)) }
+        format.html { redirect_to( @phone, :notice => t(:phone_created)) }
         format.xml  { render :xml => @phone, :status => :created, :location => @phone }
       else
         format.html { render :action => "new" }
@@ -85,15 +84,16 @@ class PhonesController < ApplicationController
   # PUT /phones/1.xml
   def update
     @phone = Phone.find(params[:id])
-    
     @phone_models = PhoneModel.accessible_by( current_ability, :index ).order(:name)
     
-    if @phone.update_attributes(params[:http_password]) || @phone.update_attributes(params[:http_user])
+    if @phone.update_attributes(params[:http_password]) \
+    || @phone.update_attributes(params[:http_user])
       @phone.reboot
     end
+    
     respond_to do |format|
       if @phone.update_attributes(params[:phone])
-        format.html { redirect_to(@phone, :notice => t(:phone_updated)) }
+        format.html { redirect_to( @phone, :notice => t(:phone_updated)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -109,7 +109,7 @@ class PhonesController < ApplicationController
     @phone.destroy
     
     respond_to do |format|
-      format.html { redirect_to(phones_url) }
+      format.html { redirect_to( phones_url ) }
       format.xml  { head :ok }
     end
   end
@@ -122,7 +122,7 @@ class PhonesController < ApplicationController
   def reboot
     @phone = Phone.find(params[:id])
     @phone.reboot
-    redirect_to(@phone, :notice => t(:phone_rebooting))
+    redirect_to( @phone, :notice => t(:phone_rebooting))
   end
   
 end
