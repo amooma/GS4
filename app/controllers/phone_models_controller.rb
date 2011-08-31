@@ -32,7 +32,6 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/new.xml
   def new
     @phone_model = PhoneModel.new
-    
     @manufacturers = Manufacturer.accessible_by( current_ability, :index ).order(:name)
 
     if params[:manufacturer_id].nil?
@@ -50,15 +49,14 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/1/edit
   def edit
     @phone_model = PhoneModel.find(params[:id])
-    
     @manufacturers = Manufacturer.accessible_by( current_ability, :index ).order(:name)
+    
   end
 
   # POST /phone_models
   # POST /phone_models.xml
   def create
     @phone_model = PhoneModel.new(params[:phone_model])
-    
     @manufacturers = Manufacturer.order(:name)
     
     respond_to do |format|
@@ -76,7 +74,6 @@ class PhoneModelsController < ApplicationController
   # PUT /phone_models/1.xml
   def update
     @phone_model = PhoneModel.find(params[:id])
-    
     @manufacturers = Manufacturer.accessible_by( current_ability, :index ).order(:name)
 
     respond_to do |format|
