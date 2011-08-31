@@ -69,6 +69,7 @@ class Ability
         cannot :manage  , Phone
         can    :read    , Phone
         can    :edit    , Phone
+        can    :update  , Phone
         can    :create  , Phone
         can    :destroy , Phone
         can    :confirm_destroy , Phone
