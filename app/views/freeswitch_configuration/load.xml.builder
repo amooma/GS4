@@ -4,6 +4,8 @@ xml.instruct!
 # As this file has probably been generated in a (semi-)automatic way it should be easy.
 # If it won't ever happen then delete this comment.
 
+#OPTIMIZE Don't use Configuration.get() in the view. Some variables are set in the controller and some here. Why mix?
+
 xml.document( :type => 'freeswitch/xml' ) {
 	
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => "domain=#{@domain}" )
