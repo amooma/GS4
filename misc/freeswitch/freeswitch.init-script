@@ -9,6 +9,10 @@
 # Description:       An advanced platform for voice services
 ### END INIT INFO
 
+
+#OPTIMIZE See comments at https://github.com/amooma/Gemeinschaft4/commit/bea7f4e0601b4943232ac311b7bb4d77bfd581cc
+
+
 # Author: Anthony Minesalle III <anthmct@yahoo.com>
 #
 
