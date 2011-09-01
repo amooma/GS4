@@ -19,7 +19,7 @@ class VoicemailsController < ApplicationController
 			sip_accounts.each { |sip_account|
 				next if ! sip_account.voicemail_server
 				sip_acct_voicemails = XmlRpc::voicemails_get( sip_account.auth_name, sip_account.voicemail_server.host )
-
+				
 				if ! sip_acct_voicemails
 					errors << t( :error_retrieving_voicemail_list, :name => sip_account.to_display )
 				elsif sip_acct_voicemails
