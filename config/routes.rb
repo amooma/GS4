@@ -96,11 +96,13 @@ Gemeinschaft4::Application.routes.draw do
 		:controller => :admin,
 		:action     => 'help'
 	
+	#OPTIMIZE Shutdown shouldn't be GET but POST. HTTP semantics.
 	match '/admin/shutdown',
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => :shutdown
 	
+	#OPTIMIZE Reboot shouldn't be GET but POST. HTTP semantics.
 	match '/admin/reboot',
 		:via        => [ :get ],
 		:controller => :admin,
