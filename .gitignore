@@ -28,6 +28,8 @@ misc/fax/*.tif
 misc/fax/*.png
 db/backup
 
+# ignore Sass cache:
+/.sass-cache
 
 # directory created by "bundle install --path ." (not needed anyway):
 /ruby
