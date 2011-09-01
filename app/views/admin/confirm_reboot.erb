@@ -1,6 +1,9 @@
-<h2><%= link_to( t(:reboot),
-				url_for(:controller => '/admin', :action => 'reboot')
-			) %>
-<%= link_to( t(:cancel),
-				url_for(:controller => '/admin', :action => 'index')
-			) %> </h2>
+<h2><%=
+	link_to( t(:reboot),
+		url_for(:controller => '/admin', :action => 'reboot')
+	)
+	%> <%=
+	link_to( t(:cancel),
+		url_for(:controller => '/admin', :action => 'index')
+	)
+%></h2>
