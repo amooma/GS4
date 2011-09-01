@@ -367,7 +367,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			cfwd_always    = find_call_forward( dst_sip_account, :always    , arg_src_cid_sip_user )
 			if cfwd_always; (
 				# We have an unconditional call-forward.
-				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
+				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd_always.reason_str.inspect} for caller #{cfwd_always.source.inspect} to #{cfwd_always.destination.inspect}." ))
 				
 				if cfwd_always.destination.blank?  # Blacklisted.
 					logger.info(_bold( "#{logpfx} Blacklisted." ))
@@ -414,7 +414,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				end
 				
 				if cfwd_assistant; (
-					logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
+					logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd_assistant.reason_str.inspect} for caller #{cfwd_assistant.source.inspect} to #{cfwd_assistant.destination.inspect}." ))
 					
 					if is_assistant; (  # Is the assistant of a call forward.(?)
 						logger.info(_bold( "#{logpfx} Is the assistant." ))
@@ -468,8 +468,8 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 					# Get timeout from call-forward on timeout ("noanswer"):
 					#
-					call_forward = find_call_forward( dst_sip_account, :noanswer, arg_src_cid_sip_user )
-					timeout = call_forward ? call_forward.call_timeout.to_i : 30
+					cfwd = find_call_forward( dst_sip_account, :noanswer, arg_src_cid_sip_user )
+					timeout = cfwd ? cfwd.call_timeout.to_i : 30
 					if timeout < 1; timeout = 1; end
 					
 					#case dst_type ...  # Checking the type that it should be is not the same as actually checking in the database!
@@ -532,10 +532,10 @@ class FreeswitchCallProcessingController < ApplicationController
 			# We will now check call-forwards on busy ("busy") / unavailable
 			# ("noanswer") / offline ("offline").
 			
-			cfwd_reason = CALL_FORWARD_DISPOSITIONS_MAP[ arg_call_disposition ]
-			logger.info(_bold( "#{logpfx} Call disposition: #{arg_call_disposition.inspect} => #{cfwd_reason.inspect}" ))
+			cfwd_mapped_reason = CALL_FORWARD_DISPOSITIONS_MAP[ arg_call_disposition ]
+			logger.info(_bold( "#{logpfx} Call disposition: #{arg_call_disposition.inspect} => #{cfwd_mapped_reason.inspect}" ))
 			
-			if ! cfwd_reason
+			if ! cfwd_mapped_reason
 				logger.info(_bold( "#{logpfx} Disposition does not map to any call forward case." ))
 				action :hangup
 				return
@@ -546,10 +546,10 @@ class FreeswitchCallProcessingController < ApplicationController
 			# Check if there is a call forward for the case:
 			############################################################
 			
-			cfwd = find_call_forward( dst_sip_account, cfwd_reason, arg_src_cid_sip_user )
+			cfwd = find_call_forward( dst_sip_account, cfwd_mapped_reason, arg_src_cid_sip_user )
 			
 			if cfwd; (  # Call forward.
-				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
+				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason_str.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
 				
 				if cfwd.destination.blank?  # Blacklisted.
 					logger.info(_bold( "#{logpfx} Blacklisted." ))
@@ -788,6 +788,7 @@ class FreeswitchCallProcessingController < ApplicationController
 	def find_call_forward( sip_account, reason, source )
 	(
 		return nil if ! sip_account
+		return nil if ! reason
 		
 		[ source, '' ].each { |the_source|
 			cfwd = (
