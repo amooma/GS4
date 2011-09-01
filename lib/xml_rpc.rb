@@ -128,6 +128,7 @@ module XmlRpc
 		# 		...
 		# 	</message>
 		# </voicemail>
+		# 
 		# Without messages (no surprise):
 		# <voicemail>
 		# </voicemail>
@@ -142,7 +143,6 @@ module XmlRpc
 			Rails.logger.warn( "Failed to parse the XML-RPC response from FreeSwitch. #{e.message}" )
 			return false
 		end
-		#Rails.logger.info( "--------------- #{h.inspect}" )
 		
 		# The hash looks like this:
 		# {
@@ -165,18 +165,20 @@ module XmlRpc
 		if ! h || ! h['voicemail']
 			return false
 		end
-				
-		if h['voicemail'].kind_of?( Hash )
-			if           h['voicemail']['message'].kind_of?( Array )
-				return   h['voicemail']['message']
-			elsif        h['voicemail']['message'].kind_of?( Hash )
-				return [ h['voicemail']['message'] ]
-			end
-		end
 		
 		# If there are no voicemail messages we don't want to return
 		# nil but an empty array:
-		return []
+		vms = []
+		
+		if h['voicemail'].kind_of?( Hash )
+			if           h['voicemail']['message'].kind_of?( Array )
+				vms =    h['voicemail']['message']
+			elsif        h['voicemail']['message'].kind_of?( Hash )
+				vms =  [ h['voicemail']['message'] ]
+			end
+		end
+		
+		return vms
 	end
 	
 	def self.voicemail_set_read( sip_account, domain, uuid, read = true )

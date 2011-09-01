@@ -24,12 +24,24 @@ class AdminController < ApplicationController
 		end
 	end
 	
+	def confirm_shutdown
+		respond_to do |format|
+			format.html
+		end
+	end
+	
 	def shutdown
 		if ::Rails.env.to_s == "production"
 			# shutdown
 			@result = `sudo /sbin/shutdown -h now`  #OPTIMIZE Use -n flag (non-interactive) to sudo.
 		end
 		
+		respond_to do |format|
+			format.html
+		end
+	end
+	
+	def confirm_reboot
 		respond_to do |format|
 			format.html
 		end

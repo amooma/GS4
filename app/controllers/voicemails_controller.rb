@@ -19,14 +19,12 @@ class VoicemailsController < ApplicationController
 			sip_accounts.each { |sip_account|
 				next if ! sip_account.voicemail_server
 				sip_acct_voicemails = XmlRpc::voicemails_get( sip_account.auth_name, sip_account.voicemail_server.host )
-				#Rails.logger.info "-------------- #{sip_acct_voicemails.inspect}"
+				
 				if ! sip_acct_voicemails
 					errors << t( :error_retrieving_voicemail_list, :name => sip_account.to_display )
 				elsif sip_acct_voicemails
 					if (sip_acct_voicemails.class == Array)
 						@voicemails = @voicemails.concat( sip_acct_voicemails )
-					else	
-						@voicemails << sip_acct_voicemails
 					end
 				end
 			}
