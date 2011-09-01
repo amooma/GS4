@@ -65,7 +65,7 @@ class Ability
         can    :read    , Manufacturer
         cannot :manage  , PhoneModel
         can    :read    , PhoneModel
-        can :manage  , Phone
+        can    :manage  , Phone
         can    :read    , :Setup
         can    :read    , Voicemail
         can    :destroy , Voicemail
