@@ -379,6 +379,11 @@ de:
   unread: "Ungelesen"
   received: "Empfangen"
   caller_number: "Nummer"
+  vm_caller: "Anrufer"
+  vm_priority: "Priorität"
+  vm_prio:
+    B_NORMAL: "normal"
+    A_URGENT: "dringend"
   forwarded_by: "Weitergeleitet durch"
   error_retrieving_voicemail_list: "Abrufen der Voicemails für %{name} fehlgeschlagen."
   error_retrieving_voicemail: "Abrufen der Voicemail %{name} fehlgeschlagen."
