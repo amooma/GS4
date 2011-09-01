@@ -432,11 +432,37 @@ xml.document( :type => 'freeswitch/xml' ) {
 			xml.settings {
 				xml.param( :name => 'default-template', :value => 'example' )
 				xml.param( :name => 'rotate-on-hup', :value => 'true' )
-				xml.param( :name => 'legs', :value => 'a' )
+				xml.param( :name => 'legs', :value => 'ab' )
 			}
 			xml.templates {
-				xml.template( 'INSERT INTO cdr VALUES ("${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}", "${accountcode}");', :name => 'sql' )
-				xml.template( '"${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}","${accountcode}","${read_codec}","${write_codec}"', :name => 'example' )
+				# :name_attr => 'content',
+				# This is just avoid Builder's strange syntax where attributes are specified after the text content.
+				{
+					:'sql'       => "INSERT INTO cdrs VALUES ( '${sql_escape(${caller_id_name})}', '${sql_escape(${caller_id_number})}', '${sql_escape(${destination_number})}', '${sql_escape(${context})}', '${sql_escape(${start_stamp})}', '${sql_escape(${answer_stamp})}', '${sql_escape(${end_stamp})}', '${sql_escape(${duration})}', '${sql_escape(${billsec})}', '${sql_escape(${hangup_cause})}', '${sql_escape(${uuid})}', '${sql_escape(${bleg_uuid})}', '${sql_escape(${accountcode})}' );",
+					:'example'   => '"${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}","${accountcode}","${read_codec}","${write_codec}"',
+				}.
+				each { | name, content |
+					xml.template( content.to_s, :name => name.to_s )
+				}
+				
+				# MySQL table (example):
+				#CREATE TABLE cdrs (
+				#	caller_id_name      varchar(30)   DEFAULT NULL,
+				#	caller_id_number    varchar(30)   DEFAULT NULL,
+				#	destination_number  varchar(30)   DEFAULT NULL,
+				#	context             varchar(20)   DEFAULT NULL,
+				#	start_stamp         datetime      DEFAULT NULL,
+				#	answer_stamp        datetime      DEFAULT NULL,
+				#	end_stamp           datetime      DEFAULT NULL,
+				#	duration            int(11)       DEFAULT NULL,
+				#	billsec             int(11)       DEFAULT NULL,
+				#	hangup_cause        varchar(50)   DEFAULT NULL,
+				#	uuid                varchar(100)  DEFAULT NULL,
+				#	bleg_uuid           varchar(100)  DEFAULT NULL,
+				#	accountcode         varchar(10)   DEFAULT NULL,
+				#	domain_name         varchar(100)  DEFAULT NULL
+				#);
+				
 			}
 		}
 		
@@ -791,6 +817,71 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.aliases {
 					}
 					xml.gateways {
+					if 'internal' != ::SipGateway::FREESWITCH_GATEWAYS_PROFILE
+						raise NotImplementedError.new( "SipGateway::FREESWITCH_GATEWAYS_PROFILE must be #{'internal'.inspect}." )
+					else
+					@sip_gateways.each { |gw|
+						
+						gw_name = 'gateway-' + gw.id.to_s
+						
+						xml.gateway( :name => gw_name.to_s ) {
+							
+							# outbound-proxy seems to have no effect at all. :-/
+							#xml.param( :name => 'outbound-proxy' , :value => '127.0.0.1:5060' )
+							
+							xml.param( :name => 'proxy'          , :value => gw.hostport.to_s )
+							xml.param( :name => 'register-proxy' , :value => '127.0.0.1:5060' )
+							#xml.param( :name => 'register-proxy' , :value => '[::1]:5060' )
+							#xml.param( :name => 'register-proxy' , :value => '[::ffff:192.168.65.140]:5060' )
+							#xml.param( :name => 'register-proxy' , :value => '[0000:0000:0000:0000:0000:ffff:192.168.65.140]:5060' )
+							
+							xml.param( :name => 'realm'          , :value => (! gw.realm.blank? ? gw.realm.to_s : gw.host.to_s) )
+							xml.param( :name => 'username'       , :value => gw.username.to_s )
+							xml.param( :name => 'auth-username'  , :value => gw.username.to_s )
+							xml.param( :name => 'password'       , :value => gw.password.to_s )
+							
+							xml.param( :name => 'from-user'      , :value => (! gw.from_user.blank? ? gw.from_user.to_s : gw.username.to_s) )
+							xml.param( :name => 'from-domain'    , :value => (! gw.from_domain.blank? ? gw.from_domain.to_s : gw.host.to_s) )
+							
+							# Extension for inbound calls:
+							xml.param( :name => 'extension'      , :value => '-gw+' + gw_name.to_s )
+							
+							# Without extension-in-contact the Contact is:
+							# Contact: <sip:gw+{gateway_name}@{sip-ip}:{sip-port};transport={register-transport};gw={gateway_name}>
+							# With extension-in-contact the Contact is:
+							# Contact: <sip:{extension}@{sip-ip}:{sip-port};transport={register-transport};gw={gateway_name}>
+							xml.param( :name => 'extension-in-contact', :value => 'true' )
+							
+							xml.param( :name => 'expire-seconds' , :value => gw.expire.to_s )
+							xml.param( :name => 'retry-seconds'  , :value => '30' )
+							xml.param( :name => 'register'       , :value => (gw.register ? 'true' : 'false') )
+							xml.param( :name => 'register-transport', :value => gw.reg_transport.to_s )
+							xml.param( :name => 'caller-id-in-from', :value => 'false' )
+							
+							#xml.param( :name => 'contact-host'   , :value => "#{@sip_server_ip}" )
+							xml.param( :name => 'contact-host'   , :value => "127.0.0.1" )
+							
+							# Extra SIP parameters to send in the Contact:
+							#xml.param( :name => 'contact-params', :value => 'tport=tcp' )
+							
+							xml.param( :name => 'ping', :value => '25' )
+							
+							# If the from-domain or from-user are set, don't use them for the To URI:
+							xml.param( :name => 'distinct-to', :value => 'true' )
+							
+							#xml.param( :name => 'context', :value => gw_name )
+							
+							# See parse_gateways() in FreeSwitch's
+							# src/mod/endpoints/mod_sofia/sofia.c for additional
+							# parameters.
+														
+							#xml.variables {
+							#	xml.variable( :direction => 'outbound', :name => 'dtmf_type', :value => 'rfc2833' )
+							#}
+						}
+						
+					}
+					end
 					}
 					xml.domains {
 						xml.domain( :name => 'all', :alias => 'true', :parse => 'false' )
@@ -802,41 +893,61 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'log-auth-failures', :value => 'true' )
 						xml.param( :name => 'context', :value => 'internal' )
 						xml.param( :name => 'rfc2833-pt', :value => '101' )
+						xml.param( :name => 'pass-rfc2833', :value => 'true' )
 						xml.param( :name => 'sip-port', :value => "#{@internal_sip_port}" )
 						xml.param( :name => 'dialplan', :value => 'XML' )
 						xml.param( :name => 'dtmf-duration', :value => '2000' )
-						xml.param( :name => 'inbound-codec-prefs', :value => 'PCMA,PCMU,GSM' )
-						xml.param( :name => 'outbound-codec-prefs', :value => 'PCMA,PCMU,GSM' )
 						xml.param( :name => 'rtp-timer-name', :value => '' )
+						
+						xml.param( :name => 'inbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
+						xml.param( :name => 'outbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
+						xml.param( :name => 'inbound-codec-negotiation', :value => 'greedy' )
+						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
+						# http://wiki.freeswitch.org/wiki/Codec_negotiation#Late_Negotiation_.28requires_param.29
+						
 						xml.param( :name => 'rtp-ip', :value => "#{@sip_server_ip}" )
 						xml.param( :name => 'sip-ip', :value => '127.0.0.1' )
+						
+						xml.param( :name => 'ext-rtp-ip', :value => 'auto-nat' )
+						# ext-sip-ip: "auto-nat": FS will send 127.0.0.1 in the
+						# Contact in REGISTER. "auto": detected IP address of the
+						# default route:
+						#xml.param( :name => 'ext-sip-ip', :value => 'auto-nat' )
+						xml.param( :name => 'ext-sip-ip', :value => 'auto' )
+						
 						xml.param( :name => 'hold-music', :value => "#{@hold_music}" )
 						xml.param( :name => 'apply-nat-acl', :value => 'nat.auto' )
 						xml.param( :name => 'apply-inbound-acl', :value => 'domains' )
 						xml.param( :name => 'local-network-acl', :value => 'localnet.auto' )
 						xml.param( :name => 'manage-presence', :value => 'true' )
-						xml.param( :name => 'inbound-codec-negotiation', :value => 'generous' )
+						
 						xml.param( :name => 'tls', :value => Configuration.get(:sip_internal_tls, false, Configuration::Boolean))
 						xml.param( :name => 'tls-sip-port', :value => Configuration.get(:sip_internal_tls_port, 5061, Integer) )
 						xml.param( :name => 'tls-cert-dir', :value => File.expand_path(Configuration.get(:sip_internal_tls_cert_dir, '/opt/freeswitch/conf/ssl/', String)) )
+						
 						xml.param( :name => 'accept-blind-reg', :value => 'false' )
 						xml.param( :name => 'accept-blind-auth', :value => 'false' )
+						
 						xml.param( :name => 'nonce-ttl', :value => '60' )
 						xml.param( :name => 'disable-transcoding', :value => 'false' )
+						
 						xml.param( :name => 'manual-redirect', :value => 'true' )
 						xml.param( :name => 'disable-transfer', :value => 'false' )
 						xml.param( :name => 'disable-register', :value => 'false' )
+						
 						xml.param( :name => 'auth-calls', :value => 'true' )
 						xml.param( :name => 'inbound-reg-force-matching-username', :value => 'true' )
 						xml.param( :name => 'auth-all-packets', :value => 'false' )
-						xml.param( :name => 'ext-rtp-ip', :value => 'auto-nat' )
-						xml.param( :name => 'ext-sip-ip', :value => 'auto-nat' )
+						
 						xml.param( :name => 'rtp-timeout-sec', :value => '300' )
 						xml.param( :name => 'rtp-hold-timeout-sec', :value => '1800' )
+						
 						xml.param( :name => 'force-subscription-expires', :value => '120' )
 						xml.param( :name => 'challenge-realm', :value => 'auto_from' )
-						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
 						xml.param( :name => 'rtp-rewrite-timestamps', :value => 'true' )
+						
+						xml.param( :name => 'inbound-use-callid-as-uuid', :value => 'false' )
+						xml.param( :name => 'outbound-use-callid-as-uuid', :value => 'false' )
 					}
 				}
 =begin
@@ -878,6 +989,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					}
 				}
 =end
+=begin
 				xml.profile( :name => 'gateways' ) {
 					xml.aliases {
 					}
@@ -999,6 +1111,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'log-auth-failures', :value => 'false' )
 					}
 				}
+=end
 			}
 		}
 	}
@@ -1006,6 +1119,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 	
 	xml.section( :name => 'dialplan', :description => 'Regex/XML dialplan' ) {
 		
+=begin
 		xml.context( :name => 'from-external' ) {
 			
 			xml.extension( :name => 'gs-main-from-kamailio-external' ) {
@@ -1020,12 +1134,15 @@ xml.document( :type => 'freeswitch/xml' ) {
 			#OPTIMIZE Add kam-fax-receive here as well?
 			
 		}
+=end
 		
 		xml.context( :name => 'internal' ) {  #OPTIMIZE This context is called "public" in the original configuration (misc/freeswitch/fs-conf/).
 			
 			xml.extension( :name => 'from-kamailio' ) {
 				xml.condition( :field => 'network_addr', :expression => '^127\.0\.0\.1$' )
 				xml.condition( :field => 'destination_number', :expression => '^(.+)$' ) {
+					xml.action( :application => 'log', :data => 'INFO -----[ New call ]--------------------------' )
+					#xml.action( :application => 'info' )
 					xml.action( :application => 'transfer', :data => '$1 XML default' )
 				}
 			}

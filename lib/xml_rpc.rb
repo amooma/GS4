@@ -85,7 +85,7 @@ module XmlRpc
 		return response
 	end
 	
-	def self.sofia_gateway_states()
+	def self.sofia_gateway_states( profile = nil )
 		response = request( 'sofia', "xmlstatus gateway" )
 		
 		if (! response || response == 'ERROR!'); return false; end
@@ -99,17 +99,21 @@ module XmlRpc
 		
 		if ! h || ! h['gateways']; return false; end
 		
+		# If there are no gateways we don't want to return
+		# nil but an empty array:
+		gws = []
+		
 		if h['gateways'].kind_of?( Hash )
 			if           h['gateways']['gateway'].kind_of?( Array )
-				return   h['gateways']['gateway']
+				gws =    h['gateways']['gateway']
 			elsif        h['gateways']['gateway'].kind_of?( Hash )
-				return [ h['gateways']['gateway'] ]
+				gws =  [ h['gateways']['gateway'] ]
 			end
 		end
 		
-		# If there are no gateways we don't want to return
-		# nil but an empty array:
-		return []
+		gws.select!{ |gw| gw['profile'] == profile } if profile
+		
+		return gws
 	end
 	
 	def self.voicemails_get( sip_account, domain )

@@ -38,7 +38,7 @@
         <%= sip_account.phone.mac_address %>
       <% end %>
     </td>
-    <td><%= sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %></td>
+    <td class="<%= sip_account.registered? ? 'status_yes' : 'status_no' %>"><%= sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show)    ,                                   sip_account %></td>
     <td><%= link_to t(:edit)    ,            edit_sip_account_path( sip_account ) %></td>
     <td><%= link_to t(:destroy) , confirm_destroy_sip_account_path( sip_account ) if can?( :destroy, sip_account ) %></td>

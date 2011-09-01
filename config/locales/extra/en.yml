@@ -453,9 +453,13 @@ en:
   sip_gateway_view_index: "SIP gateways"
   sip_gateway_view_new: "New SIP gateway"
   sip_gateway_view_edit: "Editing SIP gateway"
+  sip_gateway_view_show: "SIP gateway"
   
   sip_gateway_reg_state: "Reg. state"
   sip_gateway_status: "Status"
+  
+  sip_gateway_restart_info: "The SIP User-Agent in the PBX will be restarted if you create, change or delete a SIP gateway."
+  
   
   confirm_destroy_record: "Are you sure you want to destroy this {resource}?" 
   delete: "Delete"

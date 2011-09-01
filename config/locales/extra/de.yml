@@ -453,9 +453,13 @@ de:
   sip_gateway_view_index: "SIP-Gateways"
   sip_gateway_view_new: "Neues SIP-Gateway"
   sip_gateway_view_edit: "SIP-Gateway bearbeiten"
+  sip_gateway_view_show: "SIP-Gateway"
   
   sip_gateway_reg_state: "Reg.-Status"
   sip_gateway_status: "Status"
+  
+  sip_gateway_restart_info: "Beim Anlegen, Ändern oder Löschen eines SIP-Gateways wird der SIP-User-Agent in der TK-Anlage neu gestartet."
+  
   
   confirm_destroy_record: "%{model_name} wirklich löschen?"
   delete: "Löschen"

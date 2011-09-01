@@ -1,4 +1,5 @@
 <h1><%= t(:sip_gateway_view_index) %></h1>
+<div class="infobox"><%= t(:sip_gateway_restart_info) %></div>
 
 <table>
 	<tr>
@@ -19,7 +20,7 @@
 <%
 @sip_gateways.each { |sip_gw|
 	fs_gw_state = ( @freeswitch_gateways || [] ).keep_if{ |g|
-		g['profile'] == 'gateways' && g['name'] == 'gateway-' + sip_gw.id.to_s
+		g['name'] == 'gateway-' + sip_gw.id.to_s
 	}.first
 	
 	reg_state = (fs_gw_state||{})['state'  ]
@@ -46,7 +47,7 @@
 		<td><%= sip_gw.register ? t(:yes_lowercase) : t(:no_lowercase) %></td>
 		
 		<td><%= @reg_states[  reg_state ] || reg_state || '?' %> <%= reg_state_extra %></td>
-		<td><%= @gw_statuses[ gw_status ] || gw_status || '?' %> <%= gw_status_extra %></td>
+		<td class="<%= gw_status == 'UP' ? 'status_yes' : 'status_no' %>"><%= @gw_statuses[ gw_status ] || gw_status || '?' %> <%= gw_status_extra %></td>
 		
 		<td><%= link_to t(:show), sip_gw %></td>
 		<td><%= link_to t(:edit), edit_sip_gateway_path( sip_gw ) %></td>

@@ -1,4 +1,8 @@
 
+<h1><%= t(:sip_gateway_view_show) %></h1>
+
+<div class="simple_form_show">
+
 <% i18n_path = 'activerecord.attributes.sip_gateway.' %>
 
 <p>
@@ -41,6 +45,7 @@
 	<%= @sip_gateway.expire %>&nbsp;s
 </p>
 
+</div>
 
 <%= link_to t(:edit), edit_sip_gateway_path( @sip_gateway ) %> |
 <%= link_to t(:Go_to_list), sip_gateways_path %>

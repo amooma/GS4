@@ -40,7 +40,7 @@ class SipGatewaysController < ApplicationController
 	def index
 		@sip_gateways = SipGateway.accessible_by( current_ability, :index ).all
 		
-		@freeswitch_gateways = ::XmlRpc::sofia_gateway_states()
+		@freeswitch_gateways = ::XmlRpc::sofia_gateway_states( ::SipGateway::FREESWITCH_GATEWAYS_PROFILE )
 		#Rails.logger.info "-------------- #{@freeswitch_gateways.inspect}"
 		
 		respond_to do |format|

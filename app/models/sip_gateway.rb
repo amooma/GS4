@@ -57,12 +57,14 @@ class SipGateway < ActiveRecord::Base
 			(self.port.blank? ? '' : (':' + self.port.to_s))
 	end
 	
+	FREESWITCH_GATEWAYS_PROFILE = 'internal'  # do not change
+	
 	protected
 	
 	def sofia_profile_reload_and_restart
 		#if ::Rails.env.to_s != 'test'
 			require 'xml_rpc'
-			job_uuid = ::XmlRpc::sofia_profile_reload_and_restart( 'gateways' )
+			job_uuid = ::XmlRpc::sofia_profile_reload_and_restart( ::SipGateway::FREESWITCH_GATEWAYS_PROFILE )
 			#Rails.logger.info "-------------- #{result.inspect}"
 		#end
 	end
