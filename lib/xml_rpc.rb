@@ -61,9 +61,11 @@ module XmlRpc
 		# 		...
 		# 	</message>
 		# </voicemail>
+		# 
 		# Without messages (no surprise):
 		# <voicemail>
 		# </voicemail>
+		
 		if (! response || response == 'ERROR!')
 			return false
 		end
@@ -87,7 +89,7 @@ module XmlRpc
 		# {
 		# 	"voicemail" => "\n"
 		# }
-
+		
 		if ! h || ! h['voicemail']
 			return false
 		end
@@ -98,6 +100,8 @@ module XmlRpc
 			elsif h['voicemail']['message'].kind_of?( Hash )
 				return [ h['voicemail']['message'] ]
 			end
+			#FIXME Nothing is returned if h['voicemail']['message']
+			# is neither an Array nor a Hash!
 		else
 			# If there are no voicemail messages we don't want to return
 			# nil but an empty array:
