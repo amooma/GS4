@@ -71,7 +71,7 @@ module XmlRpc
 		end
 		
 		h = Hash.from_xml( response )
-	
+		
 		# The hash looks like this:
 		# {
 		# 	"voicemail" => {
