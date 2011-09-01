@@ -64,15 +64,12 @@ module XmlRpc
 		# Without messages (no surprise):
 		# <voicemail>
 		# </voicemail>
-		print "DEBUG 1 #############################''"
-		print response
 		if (! response || response == 'ERROR!')
 			return false
 		end
 		
 		h = Hash.from_xml( response )
-		#Rails.logger.info( "--------------- #{h.inspect}" )
-		
+	
 		# The hash looks like this:
 		# {
 		# 	"voicemail" => {
