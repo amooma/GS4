@@ -44,7 +44,7 @@ xml.settings {
 		
 		xml.dkey_directory( "url #{@xml_menu_url}/phone_books_menu.xml", :perm => 'RW' )
 		xml.dkey_menu( 'keyevent F_SETTINGS', :perm => 'RW' )
-		
+		xml.dkey_retrieve( 'speed -vmenu-')
 		
 		sip_accounts = {}
 		snom_sip_acct_idx = 0

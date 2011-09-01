@@ -105,7 +105,15 @@ Gemeinschaft4::Application.routes.draw do
 		:via        => [ :get ],
 		:controller => :admin,
 		:action     => :reboot
-	
+	match '/admin/confirm_reboot',
+		:via        => [ :get ],
+		:controller => :admin,
+		:action     => :confirm_reboot
+		match '/admin/confirm_shutdown',
+		:via        => [ :get ],
+		:controller => :admin,
+		:action     => :confirm_shutdown
+		
 	match '/freeswitch-directory-entries/search',
 		:via        => [ :get, :post ],
 		:controller => :freeswitch_directory_entries,

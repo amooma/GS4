@@ -23,7 +23,11 @@ class AdminController < ApplicationController
 			format.html
 		end
 	end
-	
+	def confirm_shutdown
+    respond_to do |format|
+			format.html
+		end
+	end
 	def shutdown
 		if ::Rails.env.to_s == "production"
 			# shutdown
@@ -34,7 +38,11 @@ class AdminController < ApplicationController
 			format.html
 		end
 	end
-	
+	def confirm_reboot
+    respond_to do |format|
+			format.html
+		end
+	end
 	def reboot
 		if ::Rails.env.to_s == "production"
 			# reboot
