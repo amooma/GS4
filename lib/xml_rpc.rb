@@ -64,14 +64,12 @@ module XmlRpc
 		# Without messages (no surprise):
 		# <voicemail>
 		# </voicemail>
-		
 		if (! response || response == 'ERROR!')
 			return false
 		end
 		
 		h = Hash.from_xml( response )
-		#Rails.logger.info( "--------------- #{h.inspect}" )
-		
+	
 		# The hash looks like this:
 		# {
 		# 	"voicemail" => {
@@ -89,14 +87,17 @@ module XmlRpc
 		# {
 		# 	"voicemail" => "\n"
 		# }
-		
+
 		if ! h || ! h['voicemail']
 			return false
 		end
 		
-		if h['voicemail'].kind_of?( Hash ) \
-		&& h['voicemail']['message'].kind_of?( Array )
-			return h['voicemail']['message']
+		if h['voicemail'].kind_of?( Hash )
+			if  h['voicemail']['message'].kind_of?( Array )
+				return h['voicemail']['message']
+			elsif h['voicemail']['message'].kind_of?( Hash )
+				return [ h['voicemail']['message'] ]
+			end
 		else
 			# If there are no voicemail messages we don't want to return
 			# nil but an empty array:
