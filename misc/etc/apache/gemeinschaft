@@ -1,14 +1,47 @@
+HostnameLookups Off
+KeepAlive On
+MaxKeepAliveRequests 40
+KeepAliveTimeout 60
+Timeout 100
+
 LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8/ext/apache2/mod_passenger.so
+
+# http://www.modrails.com/documentation/Users guide Apache.html
+
 PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8
 PassengerRuby /usr/bin/ruby1.9.1
 
+PassengerMaxPoolSize 4
+PassengerMaxInstancesPerApp 3
+# http://stackoverflow.com/questions/821820/how-does-phusion-passenger-reuse-threads-and-processes
+# Both virtual hosts (PassengerAppRoot /opt/gemeinschaft) are actually
+# the same application!
+
+PassengerPoolIdleTime 200
+PassengerMaxRequests 10000
+PassengerLogLevel 0
+RailsFrameworkSpawnerIdleTime 0
+RailsAppSpawnerIdleTime 0
+PassengerUserSwitching on
+PassengerDefaultUser nobody
+PassengerFriendlyErrorPages off
+PassengerSpawnMethod smart-lv2
+
+# http://httpd.apache.org/docs/current/mod/mod_log_config.html#formats
+#LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"" my_log_format
+#LogFormat "%h %l %u %t \"%r\" %>s %b" my_log_format
+#LogFormat "%h %l %u \"%r\" %>s %b" log_format_for_syslog_without_redundant_time
+LogFormat "%h %l %u \"%r\" %>s %b KA:%k \"%{User-agent}i\"" log_format_for_syslog_without_redundant_time
+
+
 <VirtualHost *:80>
-	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.notice" 
-	CustomLog "|/usr/bin/logger -t apache -i -p local6.notice" combined
+	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.info" 
+	CustomLog "|/usr/bin/logger -t apache -i -p local6.info" log_format_for_syslog_without_redundant_time
 	
 	RewriteEngine on
 	
 	# Workaround for Apache2 exploit
+	# http://mail-archives.apache.org/mod_mbox/httpd-announce/201108.mbox/%3C20110826103531.998348F82@minotaur.apache.org%3E
 	RewriteCond %{REQUEST_METHOD} ^(HEAD|GET) [NC]
 	RewriteCond %{HTTP:Range} ([0-9]*-[0-9]*)(\s*,\s*[0-9]*-[0-9]*)+
 	RewriteRule .* - [F]
@@ -20,9 +53,28 @@ PassengerRuby /usr/bin/ruby1.9.1
 	
 	RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [R,L]
  	
+ 	SetEnvIf Request_URI "^/freeswitch-call-processing/actions" downgrade-1.0 no-gzip no-cache
+	BrowserMatch "^freeswitch-spidermonkey-curl/1\." downgrade-1.0 no-gzip no-cache
+ 	BrowserMatch "^freeswitch-xml/1\." downgrade-1.0 no-gzip no-cache
+ 	
 	DocumentRoot /opt/gemeinschaft/public
+	
+	PassengerEnabled on
 	PassengerAppRoot /opt/gemeinschaft
-	#RailsEnv development
+	PassengerMinInstances 1
+	PassengerPreStart http://127.0.0.1:80/
+	PassengerStatThrottleRate 10
+	PassengerSpawnMethod smart-lv2
+	PassengerUseGlobalQueue on
+	PassengerUser  www-data
+	#PassengerGroup www-data
+	
+	# http://blog.phusion.nl/2010/01/08/phusion-passenger-2-2-9-released/
+	# http://blog.phusion.nl/2010/07/29/the-road-to-passenger-3-technology-preview-4-adding-new-features-and-removing-old-limitations/
+	RailsBaseURI /
+	#RackBaseURI  /
+	RailsEnv production
+	#RackEnv  production
 	
 	<Directory /opt/gemeinschaft/public>
 		AllowOverride all
@@ -33,19 +85,39 @@ PassengerRuby /usr/bin/ruby1.9.1
 
 
 <VirtualHost *:443>
-	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.notice" 
-	CustomLog "|/usr/bin/logger -t apache -i -p local6.notice" combined
+	ErrorLog  "|/usr/bin/logger -t apache -i -p local6.info" 
+	CustomLog "|/usr/bin/logger -t apache -i -p local6.info" log_format_for_syslog_without_redundant_time
 	
 	RewriteEngine on
 	
 	# Workaround for Apache2 exploit
+	# http://mail-archives.apache.org/mod_mbox/httpd-announce/201108.mbox/%3C20110826103531.998348F82@minotaur.apache.org%3E
 	RewriteCond %{REQUEST_METHOD} ^(HEAD|GET) [NC]
 	RewriteCond %{HTTP:Range} ([0-9]*-[0-9]*)(\s*,\s*[0-9]*-[0-9]*)+
 	RewriteRule .* - [F]
 	
+	SetEnvIf Request_URI "^/freeswitch-call-processing/actions" downgrade-1.0 no-gzip no-cache
+	BrowserMatch "^freeswitch-spidermonkey-curl/1\." downgrade-1.0 no-gzip no-cache
+	BrowserMatch "^freeswitch-xml/1\." downgrade-1.0 no-gzip no-cache
+	
 	DocumentRoot /opt/gemeinschaft/public
+	
+	PassengerEnabled on
 	PassengerAppRoot /opt/gemeinschaft
-	#RailsEnv development
+	PassengerMinInstances 1
+	PassengerPreStart https://127.0.0.1:443/
+	PassengerStatThrottleRate 10
+	PassengerSpawnMethod smart-lv2
+	PassengerUseGlobalQueue on
+	PassengerUser  www-data
+	#PassengerGroup www-data
+	
+	# http://blog.phusion.nl/2010/01/08/phusion-passenger-2-2-9-released/
+	# http://blog.phusion.nl/2010/07/29/the-road-to-passenger-3-technology-preview-4-adding-new-features-and-removing-old-limitations/
+	RailsBaseURI /
+	#RackBaseURI  /
+	RailsEnv production
+	#RackEnv  production
 	
 	<Directory /opt/gemeinschaft/public>
 		AllowOverride all
