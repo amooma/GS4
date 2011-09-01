@@ -28,3 +28,13 @@ line_comments = false
 # preferred_syntax = :sass
 # and then run:
 # sass-convert -R --from scss --to sass app/stylesheets scss && rm -rf sass && mv scss sass
+
+
+
+# http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options
+
+sass_options = {
+	:cache => true,
+}
+
+
