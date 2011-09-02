@@ -185,6 +185,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     sign_in :user, @admin_user
     put :update, :id => @user.to_param, :user => @user.attributes
     assert_response 302
+    #assert_redirected_to( admin_users_path( assigns(:user)))
     sign_out @admin_user
   end
   
