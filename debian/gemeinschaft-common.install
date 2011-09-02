@@ -29,6 +29,7 @@ app/views/nodes/*.erb                           opt/gemeinschaft/app/views/nodes
 app/views/personal_contacts/*.erb               opt/gemeinschaft/app/views/personal_contacts/
 app/views/phone_models/*.erb                    opt/gemeinschaft/app/views/phone_models/
 app/views/phones/*.erb                          opt/gemeinschaft/app/views/phones/
+app/views/pin_change/*.erb                      opt/gemeinschaft/app/views/pin_change/
 app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
 app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
 app/views/sip_servers/*.erb                     opt/gemeinschaft/app/views/sip_servers/
