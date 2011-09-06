@@ -355,7 +355,7 @@
 				:dhcp_range_start   => "Erste verfügbare DHCP-Adresse",
 				:dhcp_range_end     => "Letzte verfügbare DHCP-Adresse",
 				:dhcp_client        => "IP-Adresse automatisch beziehen",
-				:start_dhcp_server  => "Gemeischaft eigenen DHCP-Server starten",
+				:start_dhcp_server  => "Gemeinschaft-eigenen DHCP-Server starten",
 				:interface          => "Netzwerk-Schnittstelle",
 			},
 			
