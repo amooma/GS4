@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="640px"
+	height="400px"
+>
+	<style type="text/css">
+		#bg {
+			fill: #000;
+			stroke-width: 0;
+		}
+		
+		.requirements {
+			fill: #f96;
+			font-family: 'Arial';
+			font-size: 22px;
+		}
+		.requirements_title {
+			font-family: 'Arial Narrow';
+		}
+		
+		#amooma-url {
+			fill: #cbcdff;
+			font-family: 'Arial Narrow';
+			font-size: 27px;
+		}
+	</style>
+	
+	<!-- background -->
+	<rect x="0" y="0" width="100%" height="100%" id="bg" />
+	
+	<!-- Gemeinschaft logo -->
+	<image x="0px" y="0px"
+		width="340px" height="340px"
+		preserveAspectRatio="xMidYMid meet"
+		xlink:href="embeds/gs-logo.png"
+	/>
+	
+	<!--<g transform="rotate(-5,367,190)">-->
+		<!-- Amooma logo -->
+		<image x="367px" y="190px"
+			width="230px" height="100px"
+			preserveAspectRatio="xMidYMid meet"
+			xlink:href="embeds/amooma.png"
+		/>
+		
+		<text x="370px" y="292px" id="amooma-url">
+			http://www.amooma.de
+		</text>
+	<!--</g>-->
+	
+	<g>
+		<text x="370px" y="070px" class="requirements requirements_title">Min. hardware requirements:</text>
+		<text x="370px" y="100px" class="requirements">1 GB RAM</text>
+		<text x="370px" y="130px" class="requirements">2 GB hard drive</text>
+	</g>
+	
+</svg>
+

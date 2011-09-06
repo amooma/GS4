@@ -1,0 +1,44 @@
+#! /bin/sh
+
+set -e
+
+#SPLASH_OUT_BASE="logo"
+SPLASH_OUT_BASE="splash"
+
+[ ! -e "./output/${SPLASH_OUT_BASE}.png" ] || rm "./output/${SPLASH_OUT_BASE}.png"
+
+echo "Rasterizing SVG to PNG ..."
+java \
+	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-m "image/png" \
+	-w "640" \
+	-h "400" \
+	-dpi "72" \
+	-indexed "4" \
+	-d "./out/${SPLASH_OUT_BASE}.png" \
+	"orig/splash.svg"
+
+if [ ! -e "./out/${SPLASH_OUT_BASE}.png" ]; then
+	echo "###  Failed to convert."
+	exit 1
+fi
+
+file ./out/${SPLASH_OUT_BASE}.png
+
+echo ""
+echo "######  out: ./out/${SPLASH_OUT_BASE}.png"
+echo "#  "
+echo "#  Now convert the PNG file to PPM (binary, 16 colors!)."
+echo "#  "
+echo "#  Then install syslinux-common (aptitude install syslinux-common)"
+echo "#  and convert the PPM to LSS16:"
+echo "#  (  ppmtolss16 < out/${SPLASH_OUT_BASE}.ppm > out/${SPLASH_OUT_BASE}.16  )"
+echo "#  "
+echo "#  Check if the conversion worked:"
+echo "#  (  lss16toppm < out/${SPLASH_OUT_BASE}.16 > out/${SPLASH_OUT_BASE}-check.ppm  )"
+echo "#  And check the image."
+echo "#  "
+echo "######"
+echo ""
+exit 0
+
