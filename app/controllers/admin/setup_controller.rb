@@ -14,6 +14,7 @@ class Admin::SetupController < ApplicationController
     respond_to do |format|
       if User.count == 0      
         @user = User.new(params[:user])
+        @user.role = "admin"
         if @user.save
           format.html { redirect_to( admin_index_path, :notice => t(:user_name_created_login, :user_name => @user.username )) }
         else
@@ -27,7 +28,7 @@ class Admin::SetupController < ApplicationController
   
   def new
     @user = User.new
-    @user.role = "admin"
+	@user.username = "admin"
     flash[:notice] = t(:mandatory_fields)
   end
   

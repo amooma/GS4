@@ -354,7 +354,7 @@
 				:dhcp_range_start   => "First available DHCP address",
 				:dhcp_range_end     => "Last available IP address",
 				:dhcp_client        => "Obtain IP address automatically",
-				:start_dhcp_server  => "Start DHCP server",
+				:start_dhcp_server  => "Start built in DHCP server",
 				:interface          => "Network interface",
 			},
 			

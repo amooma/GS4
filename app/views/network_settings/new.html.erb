@@ -1,5 +1,6 @@
 <h1><%= t(:new_network_setting) %></h1>
 <%= render 'form' %>
 
-
+<% if @render_top_navigation %>
 <%= link_to 'Back', network_settings_path %>
+<% end %> 

@@ -240,7 +240,6 @@ de:
   first_sip_proxy_configured: "Erster SIP-Proxy-Server bereits konfiguriert"
   first_voicemail_server_configured: "Erster Voicemail-Server bereits konfiguriert"
   setup_admin_account: "Administrator-Account anlegen"
-  welcome_to_application_name: "Willkommen zu Gemeinschaft!"
   first_admin_step: "Der erste Schritt zur Administration Ihrer Gemeinschaft-Telefonanlage ist es einen Administrator-Account anzulegen. Danach können Sie sich auf dieser Web-Oberfläche einloggen."
   create_admin_account: "Administrator-Account anlegen"
   admin: "Admin"
@@ -426,4 +425,4 @@ de:
   cancel: "Abbrechen"
   automatic_reboot: "Das System wird nach dieser Aktion automatisch neu gestartet!"
   mandatory_fields: "Mit einem * gekennzeichnete Felder müssen ausgefüllt werden!"
-  save_reboot: "Speichern und System neu starten"
+  save_reboot: "Speichern und System neu starten (Reboot)"
