@@ -5,7 +5,7 @@
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	width="640px"
-	height="400px"
+	height="480px"
 >
 	<style type="text/css">
 		
@@ -49,19 +49,11 @@
 			stroke-width: 0;
 		}
 		
-		.requirements {
-			fill: #f96;
-			font-family: 'Yanone Kaffeesatz'; font-weight: 400;
-			font-size: 27px;
-		}
-		.requirements_title {
-			font-family: 'Yanone Kaffeesatz'; font-weight: 400;
-		}
-		
-		#amooma-url {
-			fill: #cbcdff;
-			font-family: 'Yanone Kaffeesatz'; font-weight: 400;
-			font-size: 31px;
+		.message {
+			fill: #0f0;
+			font-family: 'Yanone Kaffeesatz'; font-weight: 200;
+			font-size: 45px;
+			text-anchor: middle;
 		}
 	</style>
 	
@@ -69,29 +61,14 @@
 	<rect x="0" y="0" width="100%" height="100%" id="bg" />
 	
 	<!-- Gemeinschaft logo -->
-	<image x="0px" y="0px"
-		width="340px" height="340px"
+	<image x="0px" y="15px"
+		width="100%" height="340px"
 		preserveAspectRatio="xMidYMid meet"
-		xlink:href="embeds/gs-logo.png"
+		xlink:href="embeds/gs-logo.png" style="image-anchor: middle;"
 	/>
 	
-	<!--<g transform="rotate(-5,367,190)">-->
-		<!-- Amooma logo -->
-		<image x="358px" y="190px"
-			width="234px" height="100px"
-			preserveAspectRatio="xMidYMid meet"
-			xlink:href="embeds/amooma.png"
-		/>
-		
-		<text x="360px" y="293px" id="amooma-url">
-			http://www.amooma.de
-		</text>
-	<!--</g>-->
-	
 	<g>
-		<text x="360px" y="078px" class="requirements requirements_title">Min. hardware requirements:</text>
-		<text x="360px" y="110px" class="requirements">•&#xA0;&#xA0; 1 GB RAM</text>
-		<text x="360px" y="140px" class="requirements">•&#xA0;&#xA0; 2 GB hard drive</text>
+		<text x="320px" y="390px" class="message">&#xA0; Starting services …</text>
 	</g>
 	
 </svg>

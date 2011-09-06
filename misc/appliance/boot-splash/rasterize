@@ -11,8 +11,7 @@ echo "Rasterizing SVG to PNG ..."
 java \
 	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
 	-m "image/png" \
-	-w "640" \
-	-h "400" \
+	-w "640" -h "400" \
 	-dpi "72" \
 	-indexed "4" \
 	-d "./out/${SPLASH_OUT_BASE}.png" \
@@ -22,6 +21,36 @@ if [ ! -e "./out/${SPLASH_OUT_BASE}.png" ]; then
 	echo "###  Failed to convert."
 	exit 1
 fi
+
+
+echo "Rasterizing SVG to PNG ..."
+java \
+	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-m "image/png" \
+	-w "640" -h "480" \
+	-dpi "72" \
+	-d "./out/desktop-image-640x480.png" \
+	"orig/desktop-image.svg"
+
+echo "Rasterizing SVG to PNG ..."
+java \
+	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-m "image/png" \
+	-w "800" -h "600" \
+	-dpi "72" \
+	-d "./out/desktop-image-800x600.png" \
+	"orig/desktop-image.svg"
+
+echo "Rasterizing SVG to PNG ..."
+java \
+	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-m "image/png" \
+	-w "1024" -h "786" \
+	-dpi "72" \
+	-d "./out/desktop-image-1024x786.png" \
+	"orig/desktop-image.svg"
+
+
 
 file ./out/${SPLASH_OUT_BASE}.png
 
