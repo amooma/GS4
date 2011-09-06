@@ -957,6 +957,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'set', :data => "fax_enable_t38_request=#{Configuration.get(:fax_enable_t38_request, true, Configuration::Boolean)}" )
 					xml.action( :application => 'set', :data => "fax_enable_t38=#{Configuration.get(:fax_enable_t38, true, Configuration::Boolean)}" )
 					xml.action( :application => 'set', :data => "api_hangup_hook=system ${base_dir}/scripts/fax_store.sh #{@rxfax_file_base_name} ${destination_number} ${caller_id_number}" )
+					xml.action( :application => 'sched_hangup', :data => "+#{Configuration.get(:fax_max_duration, 1800, Integer)} allotted_timeout" )
 					xml.action( :application => 'rxfax', :data => @rxfax_file )
 					xml.action( :application => 'hangup' )
 				}
