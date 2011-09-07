@@ -7,8 +7,14 @@ SPLASH_OUT_BASE="splash"
 
 [ ! -e "./output/${SPLASH_OUT_BASE}.png" ] || rm "./output/${SPLASH_OUT_BASE}.png"
 
+if which javaw 1>>/dev/null ; then
+	JAVA="javaw"
+else
+	JAVA="java"
+fi
+
 echo "Rasterizing SVG to PNG ..."
-java \
+$JAVA \
 	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
 	-m "image/png" \
 	-w "640" -h "400" \
@@ -24,7 +30,7 @@ fi
 
 
 echo "Rasterizing SVG to PNG ..."
-java \
+$JAVA \
 	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
 	-m "image/png" \
 	-w "640" -h "480" \
@@ -33,7 +39,7 @@ java \
 	"orig/desktop-image.svg"
 
 echo "Rasterizing SVG to PNG ..."
-java \
+$JAVA \
 	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
 	-m "image/png" \
 	-w "800" -h "600" \
@@ -42,7 +48,7 @@ java \
 	"orig/desktop-image.svg"
 
 echo "Rasterizing SVG to PNG ..."
-java \
+$JAVA \
 	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
 	-m "image/png" \
 	-w "1024" -h "786" \
