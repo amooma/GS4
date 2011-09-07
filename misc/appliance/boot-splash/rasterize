@@ -5,7 +5,10 @@ set -e
 #SPLASH_OUT_BASE="logo"
 SPLASH_OUT_BASE="splash"
 
-[ ! -e "./output/${SPLASH_OUT_BASE}.png" ] || rm "./output/${SPLASH_OUT_BASE}.png"
+BATIK_RASTERIZER_JAR="./lib/batik-1.7/batik-rasterizer.jar"
+
+rm -f ./out/*.png || true
+rm -f ./out/*.pdf || true
 
 if which javaw 1>>/dev/null ; then
 	JAVA="javaw"
@@ -16,7 +19,7 @@ fi
 echo ""
 echo "###  Rasterizing splash -> PNG ..."
 $JAVA \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "640" -h "400" \
 	-dpi "72" \
@@ -33,7 +36,7 @@ fi
 echo ""
 echo "###  Converting splash -> PDF ..."
 $JAVA \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "application/pdf" \
 	-w "640" -h "400" \
 	-dpi "72" \
@@ -51,7 +54,7 @@ fi
 echo ""
 echo "###  Rasterizing desktop image -> PNG, 640*480 ..."
 $JAVA \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "640" -h "480" \
 	-dpi "72" \
@@ -66,7 +69,7 @@ fi
 echo ""
 echo "###  Rasterizing desktop image -> PNG, 800*600 ..."
 $JAVA \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "800" -h "600" \
 	-dpi "72" \
@@ -81,7 +84,7 @@ fi
 echo ""
 echo "###  Rasterizing desktop image -> PNG, 1024*786 ..."
 $JAVA \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "1024" -h "786" \
 	-dpi "72" \
