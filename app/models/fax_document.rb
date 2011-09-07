@@ -1,11 +1,9 @@
 class FaxDocument < ActiveRecord::Base
 	
-	#TODO Make FaxDocuments associated to something. (SipAccounts? Users?)
+	belongs_to :user
 	
-	validates_presence_of     :raw_file
-	validates_presence_of     :file
-	
-	#OPTIMIZE Make sure that even admins can't "inject" bad config values (e.g. file paths).
+	validates_presence_of :raw_file
+	validates_presence_of :file
 	
 	before_validation( :on => :create ) {
 		if (! self.raw_file)
