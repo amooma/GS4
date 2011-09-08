@@ -2,8 +2,8 @@ class FaxDocumentsController < ApplicationController
   
   before_filter :authenticate_user!, :unless => Proc.new { |r| r.request.remote_ip   == '127.0.0.1' }
   
-  skip_authorization_check
-  
+  load_and_authorize_resource :except => [:create]
+  skip_authorization_check :only => [:create]
   
   before_filter { |controller|
     @users = User.accessible_by( current_ability, :index ).all
