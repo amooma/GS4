@@ -442,7 +442,7 @@
 				:sent => "Zeitpunkt des Versands.",
 				:title => "Titel des Dokuments.",
 				:user => "Benutzer",
-				:user_id => "Benutzer-ID",              
+				:user_id => "Benutzer-ID",
 			},
 			:global_contact => {
 				:lastname => "Nachname / Familienname bzw. Firmenname",
