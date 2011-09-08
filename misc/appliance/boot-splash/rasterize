@@ -5,11 +5,21 @@ set -e
 #SPLASH_OUT_BASE="logo"
 SPLASH_OUT_BASE="splash"
 
-[ ! -e "./output/${SPLASH_OUT_BASE}.png" ] || rm "./output/${SPLASH_OUT_BASE}.png"
+BATIK_RASTERIZER_JAR="./lib/batik-1.7/batik-rasterizer.jar"
 
-echo "Rasterizing SVG to PNG ..."
-java \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+rm -f ./out/*.png || true
+rm -f ./out/*.pdf || true
+
+if which javaw 1>>/dev/null ; then
+	JAVA="javaw"
+else
+	JAVA="java"
+fi
+
+echo ""
+echo "###  Rasterizing splash -> PNG ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "640" -h "400" \
 	-dpi "72" \
@@ -18,37 +28,73 @@ java \
 	"orig/splash.svg"
 
 if [ ! -e "./out/${SPLASH_OUT_BASE}.png" ]; then
-	echo "###  Failed to convert."
+	echo "###  Failed to convert to PNG."
 	exit 1
 fi
 
 
-echo "Rasterizing SVG to PNG ..."
-java \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+echo ""
+echo "###  Converting splash -> PDF ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
+	-m "application/pdf" \
+	-w "640" -h "400" \
+	-dpi "72" \
+	-d "./out/${SPLASH_OUT_BASE}.pdf" \
+	"orig/splash.svg"
+
+if [ ! -e "./out/${SPLASH_OUT_BASE}.pdf" ]; then
+	echo "###  Failed to convert to PDF."
+	#exit 1
+fi
+
+
+
+
+echo ""
+echo "###  Rasterizing desktop image -> PNG, 640*480 ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "640" -h "480" \
 	-dpi "72" \
 	-d "./out/desktop-image-640x480.png" \
 	"orig/desktop-image.svg"
 
-echo "Rasterizing SVG to PNG ..."
-java \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+if [ ! -e "./out/desktop-image-640x480.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
+
+echo ""
+echo "###  Rasterizing desktop image -> PNG, 800*600 ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "800" -h "600" \
 	-dpi "72" \
 	-d "./out/desktop-image-800x600.png" \
 	"orig/desktop-image.svg"
 
-echo "Rasterizing SVG to PNG ..."
-java \
-	-jar "./lib/batik-1.7/batik-rasterizer.jar" \
+if [ ! -e "./out/desktop-image-800x600.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
+
+echo ""
+echo "###  Rasterizing desktop image -> PNG, 1024*786 ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
 	-m "image/png" \
 	-w "1024" -h "786" \
 	-dpi "72" \
 	-d "./out/desktop-image-1024x786.png" \
 	"orig/desktop-image.svg"
+
+if [ ! -e "./out/desktop-image-1024x786.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
 
 
 

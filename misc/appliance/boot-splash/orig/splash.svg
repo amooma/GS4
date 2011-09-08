@@ -6,6 +6,8 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	width="640px"
 	height="400px"
+	text-rendering="auto"
+	image-rendering="auto"
 >
 	<style type="text/css">
 		
