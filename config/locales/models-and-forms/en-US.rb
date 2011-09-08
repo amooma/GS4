@@ -45,7 +45,7 @@
 			:subscriber                    => "SIP subscriber",
 			:version                       => "Version",
 			:network_setting               => "Network settings",
-			:sip_gateway                   => "SIP gateway",
+			:sip_gateway                   => "Gateway",
 			
 		},
 		

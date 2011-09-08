@@ -447,20 +447,20 @@ en:
       UP   : "Up."
   
   menu:
-    sip_gateways: "SIP gateways"
+    sip_gateways: "Gateways"
   
-  sip_gateway_was_created: "SIP gateway was created."
-  sip_gateway_was_updated: "SIP gateway was updated."
+  sip_gateway_was_created: "Gateway was created."
+  sip_gateway_was_updated: "Gateway was updated."
   
-  sip_gateway_view_index: "SIP gateways"
-  sip_gateway_view_new: "New SIP gateway"
-  sip_gateway_view_edit: "Editing SIP gateway"
-  sip_gateway_view_show: "SIP gateway"
+  sip_gateway_view_index: "Media gateways"
+  sip_gateway_view_new: "New media gateway"
+  sip_gateway_view_edit: "Editing media gateway"
+  sip_gateway_view_show: "Media gateway"
   
   sip_gateway_reg_state: "Reg. state"
   sip_gateway_status: "Status"
   
-  sip_gateway_restart_info: "The SIP User-Agent in the PBX will be restarted if you create, change or delete a SIP gateway."
+  sip_gateway_restart_info: "The SIP User-Agent in the PBX will be restarted if you create, change or delete a gateway."
   
   
   confirm_destroy_record: "Are you sure you want to destroy this {resource}?" 

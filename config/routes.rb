@@ -221,7 +221,7 @@ Gemeinschaft4::Application.routes.draw do
 		end
 	end
 	
-	resources :sip_gateways, :path => 'sip-gateways'
+	resources :sip_gateways, :path => 'gateways'
 	#OPTIMIZE Add confirm_destroy here if necessary.
 	
 	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
