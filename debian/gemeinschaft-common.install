@@ -23,13 +23,13 @@ app/views/home/*.erb                            opt/gemeinschaft/app/views/home/
 app/views/layouts/*.erb                         opt/gemeinschaft/app/views/layouts/
 app/views/manufacturer_snom/*.erb               opt/gemeinschaft/app/views/manufacturer_snom/
 app/views/manufacturer_snom/*.builder           opt/gemeinschaft/app/views/manufacturer_snom/
-#app/views/manufacturers/*.erb                   opt/gemeinschaft/app/views/manufacturers/
-app/views/manufacturer_snom/manufacturers/*.erb opt/gemeinschaft/app/views/manufacturer_snom/manufacturers/
+app/views/manufacturers/*.erb                   opt/gemeinschaft/app/views/manufacturers/
 app/views/network_settings/*.erb                opt/gemeinschaft/app/views/network_settings/
 app/views/nodes/*.erb                           opt/gemeinschaft/app/views/nodes/
 app/views/personal_contacts/*.erb               opt/gemeinschaft/app/views/personal_contacts/
 app/views/phone_models/*.erb                    opt/gemeinschaft/app/views/phone_models/
 app/views/phones/*.erb                          opt/gemeinschaft/app/views/phones/
+app/views/pin_change/*.erb                      opt/gemeinschaft/app/views/pin_change/
 app/views/sip_accounts/*.erb                    opt/gemeinschaft/app/views/sip_accounts/
 app/views/sip_proxies/*.erb                     opt/gemeinschaft/app/views/sip_proxies/
 app/views/sip_servers/*.erb                     opt/gemeinschaft/app/views/sip_servers/

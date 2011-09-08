@@ -356,7 +356,7 @@
 				:dhcp_range_start   => "Erste verfügbare DHCP-Adresse",
 				:dhcp_range_end     => "Letzte verfügbare DHCP-Adresse",
 				:dhcp_client        => "IP-Adresse automatisch beziehen",
-				:start_dhcp_server  => "DHCP-Server starten",
+				:start_dhcp_server  => "Gemeinschaft-eigenen DHCP-Server starten",
 				:interface          => "Netzwerk-Schnittstelle",
 			},
 			:sip_gateway => {
@@ -454,6 +454,8 @@
 				:received => "Zeitpunkt des Empfangs",
 				:sent => "Zeitpunkt des Versands.",
 				:title => "Titel des Dokuments.",
+				:user => "Benutzer",
+				:user_id => "Benutzer-ID",              
 			},
 			:global_contact => {
 				:lastname => "Nachname / Familienname bzw. Firmenname",

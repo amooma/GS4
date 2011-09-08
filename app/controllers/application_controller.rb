@@ -21,9 +21,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
   before_filter { |controller|
     @app_number_of_users = User.count
+    if @app_number_of_users > 0 && NetworkSetting.count > 0
+       @render_top_navigation = true
+    end
   }
   
   def guess_local_ip_address
@@ -75,7 +77,7 @@ class ApplicationController < ActionController::Base
         respond_to do |format|
           format.html { redirect_to( new_admin_setup_path ) }
         end
-      elsif NetworkSetting.count == 0 
+      elsif NetworkSetting.count == 0
         respond_to do |format|
           format.html { redirect_to( new_network_setting_path ) }
         end

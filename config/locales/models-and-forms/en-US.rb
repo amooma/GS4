@@ -355,7 +355,7 @@
 				:dhcp_range_start   => "First available DHCP address",
 				:dhcp_range_end     => "Last available IP address",
 				:dhcp_client        => "Obtain IP address automatically",
-				:start_dhcp_server  => "Start DHCP server",
+				:start_dhcp_server  => "Start built-in DHCP server",
 				:interface          => "Network interface",
 			},
 			:sip_gateway => {
@@ -453,6 +453,8 @@
 				:received => "Time and date this fax was received.",
 				:sent => "Time and date this fax was sent.",
 				:title => "Document title.",
+				:user => "User",
+				:user_id => "User ID",
 			},
 			:global_contact => {
 				:lastname => "Last name / surname / family name resp. company name",

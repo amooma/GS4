@@ -1,0 +1,119 @@
+#! /bin/sh
+
+set -e
+
+#SPLASH_OUT_BASE="logo"
+SPLASH_OUT_BASE="splash"
+
+BATIK_RASTERIZER_JAR="./lib/batik-1.7/batik-rasterizer.jar"
+
+rm -f ./out/*.png || true
+rm -f ./out/*.pdf || true
+
+if which javaw 1>>/dev/null ; then
+	JAVA="javaw"
+else
+	JAVA="java"
+fi
+
+echo ""
+echo "###  Rasterizing splash -> PNG ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
+	-m "image/png" \
+	-w "640" -h "400" \
+	-dpi "72" \
+	-indexed "4" \
+	-d "./out/${SPLASH_OUT_BASE}.png" \
+	"orig/splash.svg"
+
+if [ ! -e "./out/${SPLASH_OUT_BASE}.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
+
+
+echo ""
+echo "###  Converting splash -> PDF ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
+	-m "application/pdf" \
+	-w "640" -h "400" \
+	-dpi "72" \
+	-d "./out/${SPLASH_OUT_BASE}.pdf" \
+	"orig/splash.svg"
+
+if [ ! -e "./out/${SPLASH_OUT_BASE}.pdf" ]; then
+	echo "###  Failed to convert to PDF."
+	#exit 1
+fi
+
+
+
+
+echo ""
+echo "###  Rasterizing desktop image -> PNG, 640*480 ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
+	-m "image/png" \
+	-w "640" -h "480" \
+	-dpi "72" \
+	-d "./out/desktop-image-640x480.png" \
+	"orig/desktop-image.svg"
+
+if [ ! -e "./out/desktop-image-640x480.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
+
+echo ""
+echo "###  Rasterizing desktop image -> PNG, 800*600 ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
+	-m "image/png" \
+	-w "800" -h "600" \
+	-dpi "72" \
+	-d "./out/desktop-image-800x600.png" \
+	"orig/desktop-image.svg"
+
+if [ ! -e "./out/desktop-image-800x600.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
+
+echo ""
+echo "###  Rasterizing desktop image -> PNG, 1024*786 ..."
+$JAVA \
+	-jar "$BATIK_RASTERIZER_JAR" \
+	-m "image/png" \
+	-w "1024" -h "786" \
+	-dpi "72" \
+	-d "./out/desktop-image-1024x786.png" \
+	"orig/desktop-image.svg"
+
+if [ ! -e "./out/desktop-image-1024x786.png" ]; then
+	echo "###  Failed to convert to PNG."
+	exit 1
+fi
+
+
+
+file ./out/${SPLASH_OUT_BASE}.png
+
+echo ""
+echo "######  out: ./out/${SPLASH_OUT_BASE}.png"
+echo "#  "
+echo "#  Now convert the PNG file to PPM (binary, 16 colors!)."
+echo "#  "
+echo "#  Then install syslinux-common (aptitude install syslinux-common)"
+echo "#  and convert the PPM to LSS16:"
+echo "#  (  ppmtolss16 < out/${SPLASH_OUT_BASE}.ppm > out/${SPLASH_OUT_BASE}.16  )"
+echo "#  "
+echo "#  Check if the conversion worked:"
+echo "#  (  lss16toppm < out/${SPLASH_OUT_BASE}.16 > out/${SPLASH_OUT_BASE}-check.ppm  )"
+echo "#  And check the image."
+echo "#  "
+echo "######"
+echo ""
+exit 0
+

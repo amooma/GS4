@@ -33,9 +33,11 @@ class NetworkSettingsController < ApplicationController
   # GET /network_settings/new.xml
   def new
     @network_setting = NetworkSetting.new
-    
-    flash[:notice] = t(:automatic_reboot)
-    
+    @network_setting.ip_address        = Configuration.get(:network_setting_default_address, "10.0.143.10")
+    @network_setting.netmask           = Configuration.get(:network_setting_default_netmask, "255.0.0.0")
+    @network_setting.dhcp_range_start  = Configuration.get(:network_setting_default_dhcp_range_start, "10.0.143.100")
+    @network_setting.dhcp_range_end    = Configuration.get(:network_setting_default_dhcp_range_end, "10.0.143.199")
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @network_setting }

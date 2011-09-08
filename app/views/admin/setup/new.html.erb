@@ -1,5 +1,5 @@
 <% page_title t(:setup_admin_account) %>
-<h1><%= t(:welcome_to_application_name) %></h1>
+<h1><%= t(:setup_admin_account) %></h1>
 
 <p>
 <%= t(:first_admin_step) %>
@@ -11,17 +11,7 @@
 	<%= f.input :username %>
 	<%= f.input :password              , :as => :password %>
 	<%= f.input :password_confirmation , :as => :password %>
-	<%= f.input :sn %>
-	<%= f.input :gn %>
 	<%= f.input :email, :as => :email %>
-	
-	<%= f.input :role, :as => :hidden, :input_html => { :value => @user.role } %>
-	<%= f.input :role do %>
-		<%= f.select :role, User::ROLES.map { |k,v| [ v.to_s.sub(/^(\w)/) {|s| s.capitalize}, k ] },
-			{ :selected => @user.role },
-			{ :disabled => true, :id => nil, :name => '' }
-		%>
-	<% end %>
 	
 	<%= f.button :submit %>
 <% end %>

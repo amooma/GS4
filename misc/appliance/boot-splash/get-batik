@@ -1,0 +1,30 @@
+#! /bin/sh
+
+set -e
+
+if [ -e "./lib/batik-1.7/batik-rasterizer.jar" ]; then
+	echo "###  You already have the Batik rasterizer."
+	exit 0
+fi
+
+echo "###  Downloading Batik ..."
+[ ! -d "./lib/" ] || mkdir "./lib"
+cd "./lib/"
+wget -c 'http://apache.prosite.de/xmlgraphics/batik/batik-1.7.zip'
+cd ..
+
+if [ ! -d "./lib/batik-1.7/." ]; then
+	echo "###  Unpacking Batik ..."
+	cd "./lib/"
+	jar xvf batik-1.7.zip
+	cd ..
+fi
+
+if [ ! -e "./lib/batik-1.7/batik-rasterizer.jar" ]; then
+	echo "###  batik-rasterizer.jar not found."
+	exit 1
+fi
+
+echo "###  You have Batik now."
+exit 0
+
