@@ -1,10 +1,11 @@
 <h1><%= t(:phone) %></h1>
-
 <%= render 'show' %>
-
 <%= link_to t(:edit), edit_phone_path(@phone) %>
 
 
+
+
+<hr style="margin: 3em 0 0 0;" />
 <h2><%= t(:sip_accounts) %></h2>
 <p>
 <% if @sip_accounts.count < @phone.phone_model.max_number_of_sip_accounts %>
