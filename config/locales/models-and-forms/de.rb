@@ -129,6 +129,8 @@
 				:received     => "Empfangen am",
 				:sent         => "Gesendet am",
 				:title        => "Titel",
+				:user         => "Benutzer",
+				:user_id      => "Benutzer-ID",
 			},
 			:global_contact => {
 				:lastname        => "Nachname",
