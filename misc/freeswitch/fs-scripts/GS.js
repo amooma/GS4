@@ -261,7 +261,8 @@ try {
 				log( LOG_WARNING, "Curl or mod_spidermonkey_curl did not parse chunked Transfer-Encoding correctly!" );
 			}
 			else if (curl_response_data.match( /^[^\s<]/m )
-			||       curl_response_data.match( /[^>]$/m )) {
+			//||       curl_response_data.match( /[^>]$/m )  // doesn't work as expected
+			) {
 				log( LOG_WARNING, "Curl or mod_spidermonkey_curl did likely not parse chunked Transfer-Encoding correctly!" );
 			}
 			
@@ -329,7 +330,7 @@ try {
 					case 'act':
 						var attr_appl = item.@app         .toString();
 						var attr_data = item.@data        .toString();
-						log( LOG_DEBUG, '<'+ tag_name +' app="'+ attr_appl +'" data="'+ attr_data +'" />' );
+						log( LOG_INFO, '<'+ tag_name +' app="'+ attr_appl +'" data="'+ attr_data +'" />' );
 						if (attr_appl == '') {
 							throw new Error( "Missing attribute \"app\" in <"+ tag_name +"> tag!" );
 						}

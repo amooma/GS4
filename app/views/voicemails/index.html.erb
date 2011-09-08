@@ -18,7 +18,9 @@
   <tr>
     <td><%= vm_msg['username'] %></td>
     <td><%= vm_msg['folder'] %></td>
-    <td><%= l( Time.at( vm_msg['created_epoch'].to_i ).localtime, :format => :short ) %></td>
+    <td><%= l( Time.at( vm_msg['created_epoch'].to_i ).localtime, :format => :short )
+      #OPTIMIZE The date format is missing the year. The time format is missing the timezone.
+    %></td>
     <td><%= vm_msg['cid_number'] %></td>
     <td><%= vm_msg['cid_name'] %></td>
     <td><%= vm_msg['duration'] %></td>

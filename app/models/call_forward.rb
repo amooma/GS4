@@ -27,4 +27,8 @@ class CallForward < ActiveRecord::Base
     end
   }
   
+  def reason_str
+    return self.call_forward_reason ? self.call_forward_reason.value : nil
+  end
+  
 end

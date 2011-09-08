@@ -130,7 +130,9 @@ ul ul ul {
 
 /* Debugging background, can be applied to other places if you need to check vertical alignment. */
 body#styles_typography #content {
-	background: url('/images/underline.png');
+	/*
+	background: image-url( "underline.png" );
+	*/
 }
 
 /* Chris Eppstein says: Other basic styling from your original css */
@@ -300,31 +302,33 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 	visibility: hidden;
 }
 
-form.simple_form {
+form.simple_form,
+div.simple_form_show {
 	margin-top: 2em;
 	margin-bottom: 2em;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
 	font-size: 1.02em;
-	padding: 0.9em 0.5em;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e0e0ff), color-stop(3px, #ffffff), color-stop(98%, #f9f9ff), color-stop(100%, #dfdfff));
-	background-image: -webkit-linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	background-image: -moz-linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	background-image: -o-linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	background-image: linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
+	padding: 1.2em 0.5em;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e0e0ff), color-stop(3px, #ffffff), color-stop(97%, #f6f6ff), color-stop(100%, #dfdfff));
+	background-image: -webkit-linear-gradient(top, #e0e0ff, #ffffff 3px, #f6f6ff 97%, #dfdfff);
+	background-image: -moz-linear-gradient(top, #e0e0ff, #ffffff 3px, #f6f6ff 97%, #dfdfff);
+	background-image: -o-linear-gradient(top, #e0e0ff, #ffffff 3px, #f6f6ff 97%, #dfdfff);
+	background-image: linear-gradient(top, #e0e0ff, #ffffff 3px, #f6f6ff 97%, #dfdfff);
 	border: 1px solid rgba(0, 0, 100, 0.2);
-	-moz-border-radius: 6pt;
-	-webkit-border-radius: 6pt;
-	-o-border-radius: 6pt;
-	-ms-border-radius: 6pt;
-	-khtml-border-radius: 6pt;
-	border-radius: 6pt;
-	-moz-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-	-webkit-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-	-o-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-	box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
+	-moz-border-radius: 7pt;
+	-webkit-border-radius: 7pt;
+	-o-border-radius: 7pt;
+	-ms-border-radius: 7pt;
+	-khtml-border-radius: 7pt;
+	border-radius: 7pt;
+	-moz-box-shadow: 1px 4px 12pt rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 1px 4px 12pt rgba(0, 0, 0, 0.25);
+	-o-box-shadow: 1px 4px 12pt rgba(0, 0, 0, 0.25);
+	box-shadow: 1px 4px 12pt rgba(0, 0, 0, 0.25);
 }
+
 form.simple_form div.input {
 	padding: 5px;
 	display: table;
@@ -377,29 +381,7 @@ form.simple_form div.input.boolean .hint {
 }
 
 div.simple_form_show {
-	margin-top: 2em;
 	margin-bottom: 2.5em;
-	margin-left: auto;
-	margin-right: auto;
-	width: 80%;
-	font-size: 1.02em;
-	padding: 0.9em 0.5em;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e0e0ff), color-stop(3px, #ffffff), color-stop(98%, #f9f9ff), color-stop(100%, #dfdfff));
-	background-image: -webkit-linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	background-image: -moz-linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	background-image: -o-linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	background-image: linear-gradient(top, #e0e0ff, #ffffff 3px, #f9f9ff 98%, #dfdfff);
-	border: 1px solid rgba(0, 0, 100, 0.2);
-	-moz-border-radius: 6pt;
-	-webkit-border-radius: 6pt;
-	-o-border-radius: 6pt;
-	-ms-border-radius: 6pt;
-	-khtml-border-radius: 6pt;
-	border-radius: 6pt;
-	-moz-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-	-webkit-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-	-o-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-	box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
 	/* like form.simple_form div.input */
 	/* like form.simple_form label */
 }
@@ -420,6 +402,16 @@ div.simple_form_show b {
 	text-align: right;
 	padding: 4px 15px;
 	color: #046;
+}
+
+.status_yes {
+	background-color: #eaf9ea !important;
+	color: #0a0 !important;
+}
+
+.status_no {
+	background-color: #ffd3d0 !important;
+	color: #a00 !important;
 }
 
 .index_overview {
@@ -471,16 +463,16 @@ div.simple_form_show b {
 }
 
 .noticebox {
-	margin: 0 0px 15px 0px;
-	padding: 5px;
+	margin: 0 0px 15pt 0px;
+	padding: 5pt;
 	min-width: 10em;
 	text-align: center;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-o-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	border-radius: 5px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
 	border: 2px solid #dd3;
 	background-color: #ffb;
 	color: #550;
@@ -488,6 +480,26 @@ div.simple_form_show b {
 	-webkit-box-shadow: 2px 2px 8px #bbbbbb;
 	-o-box-shadow: 2px 2px 8px #bbbbbb;
 	box-shadow: 2px 2px 8px #bbbbbb;
+}
+
+.infobox {
+	margin: 0 0px 15pt 0px;
+	padding: 5pt;
+	min-width: 10em;
+	text-align: center;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+	border: 2px solid #ccc;
+	background-color: #fff;
+	color: #666;
+	-moz-box-shadow: 2px 2px 8px #cccccc;
+	-webkit-box-shadow: 2px 2px 8px #cccccc;
+	-o-box-shadow: 2px 2px 8px #cccccc;
+	box-shadow: 2px 2px 8px #cccccc;
 }
 
 @media screen, projection, tv, print, handheld, embossed {

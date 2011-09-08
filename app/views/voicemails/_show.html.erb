@@ -14,12 +14,32 @@
 
 <p>
   <b><%= t(:received) %>:</b>
-  <%= l( Time.at( @voicemail['VM-Message-Received-Epoch'].to_i ).localtime, :format => :short ) %>
+  <%
+  if @voicemail['VM-Message-Received-Epoch']
+    %><%=
+      l( Time.at( @voicemail['VM-Message-Received-Epoch'].to_i ).localtime, :format => :short )
+    %><%
+    #OPTIMIZE The date format is missing the year. The time format is missing the timezone.
+  end
+  %>
 </p>
 
 <p>
   <b><%= t(:read) %>:</b>
-  <%= @voicemail['VM-Message-Read-Epoch'].to_i > 0 ? l( Time.at( @voicemail['VM-Message-Read-Epoch'].to_i ).localtime, :format => :short ) : t(:no_lowercase) %>
+  <%
+    if @voicemail['VM-Message-Read-Epoch']
+      %><%= (
+        (@voicemail['VM-Message-Read-Epoch'].to_i > 0) \
+        ? l( Time.at( @voicemail['VM-Message-Read-Epoch'].to_i ).localtime, :format => :short ) \
+        : t(:no_lowercase)
+      ) %><%
+    end
+  %>
+</p>
+
+<p>
+  <b><%= t(:vm_caller) %>:</b>
+  <%= @voicemail['VM-Message-Caller-Number'] %>
 </p>
 
 <p>
@@ -28,18 +48,32 @@
 </p>
 
 <p>
-  <b><%= t(:caller_number) %>:</b>
-  <%= @voicemail['VM-Message-Caller-Number'] %>
-</p>
-
-<p>
   <b><%= t(:duration) %>:</b>
-  <%= @voicemail['VM-Message-Duration'].to_i %> s
+  <%
+    if @voicemail['VM-Message-Duration']
+      %><%= @voicemail['VM-Message-Duration'].to_i %> s<%
+    end
+  %>
 </p>
 
 <p>
   <b><%= t(:forwarded_by) %>:</b>
   <%= @voicemail['VM-Message-Forwarded-By'] %>
+</p>
+
+<p>
+  <b><%= t(:vm_priority) %>:</b>
+  <%
+    if @voicemail['VM-Message-Read-Flags']
+      %><%=
+        case @voicemail['VM-Message-Read-Flags']
+          when 'B_NORMAL'  ; t('vm_prio.B_NORMAL')
+          when 'A_URGENT'  ; t('vm_prio.A_URGENT')
+          else             ; @voicemail['VM-Message-Read-Flags']
+        end
+      %><%
+    end
+  %>
 </p>
 
 </div>
