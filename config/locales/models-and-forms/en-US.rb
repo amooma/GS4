@@ -440,6 +440,8 @@
 				:received => "Time and date this fax was received.",
 				:sent => "Time and date this fax was sent.",
 				:title => "Document title.",
+				:user => "User",
+				:user_id => "User ID",
 			},
 			:global_contact => {
 				:lastname => "Last name / surname / family name resp. company name",

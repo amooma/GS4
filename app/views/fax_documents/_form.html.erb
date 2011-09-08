@@ -1,6 +1,17 @@
 <%= simple_form_for( @fax_document, :html => { :multipart => true }) do |f| %>
 	<%= f.error_messages %>
 	
+	<% if can?( :edit_uid, @fax_document ) %>
+		<%= f.input :user do %>
+			<%= f.select( :user_id,
+				@users.collect {|r| [ r.to_display, r.id ] },
+				{ :include_blank => false, :selected => @fax_document.user_id }
+			) %>
+		<% end %>
+	<% else %>
+		<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+	<% end %>
+	
 	<% if @edit_document %>
 		<%= @fax_document.file %>
 	<% else %>
