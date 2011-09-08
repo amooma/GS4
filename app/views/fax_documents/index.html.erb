@@ -3,9 +3,9 @@
 <table>
   <tr>
     <th><%= t(:direction) %></th>
-  <% if can?( :manage, FaxDocument ) %>
+    <% if can?( :manage, FaxDocument ) %>
     <th><%= t(:user) %></th>
-  <% end %>
+    <% end %>
     <th><%= t(:date_date) %></th>
     <th><%= t(:transmitted) %></th>
     <th><%= t(:document) %></th>
@@ -19,9 +19,9 @@
 <% @fax_documents.each do |fax_document| %>
   <tr>
     <td><%= fax_document.outgoing ? t(:outbound) : t(:inbound) %></td>
-  <% if can?( :manage, FaxDocument ) %>
+    <% if can?( :manage, FaxDocument ) %>
     <td><%= fax_document.user.to_display if fax_document.user %></td>
-  <% end %>
+    <% end %>
     <td><%= l( Time.at(fax_document.created_at.localtime), :format => :short) %></td>
     <td>
     <% if fax_document.sent %>
