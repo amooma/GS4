@@ -21,14 +21,14 @@
 <% if @fax_document.sent %>
 <p>
   <b><%= t(:sent) %>:</b>
-  <%= l( Time.at(@fax_document.sent.localtime), :format => :short) %>
+  <%= l( Time.at(@fax_document.sent.localtime)) %>
 </p>
 <% end %>
 
 <% if @fax_document.received %>
 <p>
   <b><%= t(:received) %>:</b>
-  <%= l( Time.at(@fax_document.received.localtime), :format => :short) %>
+  <%= l( Time.at(@fax_document.received.localtime)) %>
 </p>
 <% end %>
 
