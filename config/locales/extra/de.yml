@@ -447,12 +447,14 @@ de:
       UP   : "An."
   
   menu:
-    sip_gateways: "Gateways"
+    #sip_gateways: "Gateways"
+    sip_gateways: "Gateway"
   
   sip_gateway_was_created: "Gateway wurde angelegt."
   sip_gateway_was_updated: "Gateway wurde aktualisiert."
   
-  sip_gateway_view_index: "Media-Gateways"
+  #sip_gateway_view_index: "Media-Gateways"
+  sip_gateway_view_index: "Media-Gateway"
   sip_gateway_view_new: "Neues Media-Gateway"
   sip_gateway_view_edit: "Media-Gateway bearbeiten"
   sip_gateway_view_show: "Media-Gateway"
