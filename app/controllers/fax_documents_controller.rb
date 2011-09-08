@@ -1,10 +1,12 @@
 class FaxDocumentsController < ApplicationController
   
   before_filter :authenticate_user!, :unless => Proc.new { |r| r.request.remote_ip   == '127.0.0.1' }
-  
-  # https://github.com/ryanb/cancan/wiki/authorizing-controller-actions
-  load_and_authorize_resource
-  
+
+  skip_authorization_check
+
+  before_filter { |controller|
+    @users = User.accessible_by( current_ability, :index ).all
+  }
   
   # GET /fax_documents
   # GET /fax_documents.xml

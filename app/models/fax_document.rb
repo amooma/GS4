@@ -12,7 +12,7 @@ class FaxDocument < ActiveRecord::Base
 		if (self.raw_file)
 			raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
 			raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_file_suffix}")
-			if (! self.raw_file || ! File.exists?(raw_file))
+			if (! raw_file || ! File.exists?(raw_file))
 				errors.add( :base, I18n.t(:fax_document_not_found))
 			else
 				thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
@@ -21,7 +21,7 @@ class FaxDocument < ActiveRecord::Base
 					thumbnail_size = "#{Configuration.get(:fax_thumbnail_width, 210, Integer)}x#{Configuration.get(:fax_thumbnail_height, 310, Integer)}"
 					system "convert -quiet -flatten -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
 				end
-				if (! self.destination.blank?)
+				if (self.outgoing && ! self.destination.blank?)
 					if (originate_call(self.destination, raw_file) == false)
 						delete_fax_files(self.raw_file)
 						errors.add( :base, I18n.t(:fax_document_not_sent))

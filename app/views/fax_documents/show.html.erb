@@ -5,5 +5,7 @@
 </p>
 
 <%= link_to t(:download), fax_document_path(@fax_document, :format => 'tif') %> |
+<% if can?( :edit, @fax_document ) %>
 <%= link_to t(:edit), edit_fax_document_path(@fax_document) %> |
+<% end %>
 <%= link_to t(:Go_to_list), fax_documents_path %>
