@@ -64,8 +64,10 @@ class FaxDocumentsController < ApplicationController
   # POST /fax_documents.xml
   def create
     @fax_document = FaxDocument.new(params[:fax_document])
-    #@fax_document.save_file(params[:fax_document])
-    
+    if (! @fax_document.outgoing && ! @fax_document.user_id )
+      @fax_document.user_id = destination_to_user(@fax_document.destination)
+    end
+
     respond_to do |format|
       if  @fax_document.save
         format.html { redirect_to(@fax_document, :notice => t(:fax_document_created)) }
@@ -109,4 +111,12 @@ class FaxDocumentsController < ApplicationController
     @fax_document = FaxDocument.find(params[:id])
   end
   
+  private
+  def destination_to_user(destination)
+    extension = Extension.where(:extension => destination, :active => true).first
+    if (! extension || ! extension.users.first)
+      return nil
+    end
+    return extension.users.first.id
+  end
 end
