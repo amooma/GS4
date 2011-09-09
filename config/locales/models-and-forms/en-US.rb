@@ -57,6 +57,7 @@
 			:subscriber                    => "SIP subscriber",
 			:version                       => "Version",
 			:network_setting               => "Network settings",
+			:sip_gateway                   => "Gateway",
 			
 		},
 		
@@ -141,6 +142,8 @@
 				:received     => "Received",
 				:sent         => "Sent",
 				:title        => "Title",
+				:user         => "User",
+				:user_id      => "User ID",
 			},
 			:global_contact => {
 				:lastname        => "Lastname",
@@ -369,6 +372,18 @@
 				:start_dhcp_server  => "Start built-in DHCP server",
 				:interface          => "Network interface",
 			},
+			:sip_gateway => {
+				:host           => "Host",
+				:port           => "Port",
+				:realm          => "Realm",
+				:username       => "Username",
+				:password       => "Password",
+				:from_user      => "“From” user",
+				:from_domain    => "“From” domain",
+				:register       => "Register",
+				:reg_transport  => "Reg. transport",
+				:expire         => "Reg. expiration",
+			},
 			
 		},
 	},
@@ -394,7 +409,7 @@
 				:call_forward_reason => "The case for which this call forward should be valid.",
 				:call_forward_reason_id => "Relation to CallForwardReason",
 				:call_timeout => "For a call forward on no answer: timeout in seconds.",
-				:destination => "The call forward's destination number. To forward calls to voicemail enter „voicemail“. To deflect calls leave the destination empty; this should usually only be done for calls from a specific caller number (blacklist)",
+				:destination => "The call forward's destination number. To forward calls to voicemail enter “voicemail”. To deflect calls leave the destination empty; this should usually only be done for calls from a specific caller number (blacklist)",
 				:active => "Only active call forwarding rules will be followed. This way you can easily deactivate call forwards temporarily without having to delete them.",
 			},  
 			:call_forward_reason => {
@@ -452,6 +467,8 @@
 				:received => "Time and date this fax was received.",
 				:sent => "Time and date this fax was sent.",
 				:title => "Document title.",
+				:user => "User",
+				:user_id => "User ID",
 			},
 			:global_contact => {
 				:lastname => "Last name / surname / family name resp. company name",
@@ -680,6 +697,18 @@
 				:dhcp_client => "IP address will be obtained from an existing DHCP server. Can NOT be changed afterwards!",
 				:start_dhcp_server => "",
 				:interface => "",
+			},
+			:sip_gateway => {
+				:host           => "The hostname resp. domain. For an internal media gateway you can usually use the IP address.",
+				:port           => "The port number. Without a port the host will be treatet as a domain name and SIP mechanisms to determine the default port apply (DNS SRV record lookup). With a port the host will be treatet as a hostname resp. IP address (no DNS SRV record lookup). For an internal media gateway you can usually use “5060”.",
+				:realm          => "The SIP realm is (just as with HTTP) a name for the authentication area. For best compatibility the realm should be the same as the SIP host (resp. SIP domain). In that case you can leave this field empty.",
+				:username       => "The username for the SIP gateway.",
+				:password       => "The passwort for the SIP gateway.",
+				:from_user      => "The username in the URI in the “From” header. Leave empty to use the same value as the username.",
+				:from_domain    => "The domain in the URI in the “From” header. Leave empty to use the same value as the host.",
+				:register       => "Defines if this PBX should register itself at the gateway.",
+				:reg_transport  => "The value of the “transport” parameter used in the registration. “udp” or “tcp”.",
+				:expire         => "The duration in seconds for how long the registration is valid.",
 			},
 			
 		},

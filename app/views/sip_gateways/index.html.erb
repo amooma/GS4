@@ -1,0 +1,63 @@
+<h1><%= t(:sip_gateway_view_index) %></h1>
+<div class="infobox"><%= t(:sip_gateway_restart_info) %></div>
+
+<table>
+	<tr>
+		<% i18n_path = 'activerecord.attributes.sip_gateway.' %>
+		<th><%= I18n.t( i18n_path + 'host' ) %> (+ <%= I18n.t( i18n_path + 'port' ) %>)</th>
+		<th><%= I18n.t( i18n_path + 'realm' ) %></th>
+		<th><%= I18n.t( i18n_path + 'username' ) %></th>
+		<th><%= I18n.t( i18n_path + 'register' ) %></th>
+		
+		<th><%= t(:sip_gateway_reg_state) %></th>
+		<th><%= t(:sip_gateway_status) %></th>
+		
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	
+<%
+@sip_gateways.each { |sip_gw|
+	fs_gw_state = ( @freeswitch_gateways || [] ).keep_if{ |g|
+		g['name'] == 'gateway-' + sip_gw.id.to_s
+	}.first
+	
+	reg_state = (fs_gw_state||{})['state'  ]
+	gw_status = (fs_gw_state||{})['status' ]
+	
+	reg_state_extra = ''
+	gw_status_extra = ''
+	
+	if gw_status && matchdata = gw_status.match( /^(?<status>[A-Z0-9\_]+)/ )
+		# gw_status can be "UP (ping)"
+		gw_status_extra = gw_status[ matchdata['status'].length, 999 ].lstrip
+		gw_status = matchdata['status']
+	end
+	
+	if reg_state && matchdata = reg_state.match( /^(?<state>[A-Z0-9\_]+)/ )
+		reg_state_extra = reg_state[ matchdata['state'].length, 999 ].lstrip
+		reg_state = matchdata['state']
+	end
+%>
+	<tr>
+		<td><%= sip_gw.hostport %></td>
+		<td><%= sip_gw.realm %></td>
+		<td><%= sip_gw.username %></td>
+		<td><%= sip_gw.register ? t(:yes_lowercase) : t(:no_lowercase) %></td>
+		
+		<td><%= @reg_states[  reg_state ] || reg_state || '?' %> <%= reg_state_extra %></td>
+		<td class="<%= gw_status == 'UP' ? 'status_yes' : 'status_no' %>"><%= @gw_statuses[ gw_status ] || gw_status || '?' %> <%= gw_status_extra %></td>
+		
+		<td><%= link_to t(:show), sip_gw %></td>
+		<td><%= link_to t(:edit), edit_sip_gateway_path( sip_gw ) %></td>
+		<td><%= button_to t(:destroy), sip_gw, :confirm => t(:are_you_sure), :method => :delete %></td>
+	</tr>
+<% } %>
+</table>
+
+<br />
+
+<%= link_to t(:sip_gateway_view_new), new_sip_gateway_path if SipGateway.count < 1  # max. 1 SIP gateway for now
+%>
+

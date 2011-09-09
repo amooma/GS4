@@ -2,8 +2,12 @@
 
 <table>
   <tr>
-    <th></th>
+    <th><%= t(:direction) %></th>
+    <% if can?( :manage, FaxDocument ) %>
+    <th><%= t(:user) %></th>
+    <% end %>
     <th><%= t(:date_date) %></th>
+    <th><%= t(:transmitted) %></th>
     <th><%= t(:document) %></th>
     <th><%= t(:fax) %></th>
     <th><%= t(:destination) %></th>
@@ -15,7 +19,19 @@
 <% @fax_documents.each do |fax_document| %>
   <tr>
     <td><%= fax_document.outgoing ? t(:outbound) : t(:inbound) %></td>
+    <% if can?( :manage, FaxDocument ) %>
+    <td><%= fax_document.user.to_display if fax_document.user %></td>
+    <% end %>
     <td><%= l( Time.at(fax_document.created_at.localtime), :format => :short) %></td>
+    <td>
+    <% if fax_document.sent %>
+      <%= l( Time.at(fax_document.sent.localtime), :format => :short) %>
+    <% elsif fax_document.received %>
+      <%= l( Time.at(fax_document.received.localtime), :format => :short) %>
+    <% else %>
+      <%= t(:no_lowercase) %>
+    <% end %>
+    </td>
     <td><%= fax_document.file %></td>
     <td><%
       if ! fax_document.file.blank?
@@ -24,7 +40,7 @@
     %></td>
     <td><%= fax_document.destination %></td>
     <td><%= link_to t(:show)    ,                                    fax_document %></td>
-    <td><%= link_to t(:edit)    ,            edit_fax_document_path( fax_document ) %></td>
+    <td><%= link_to t(:send)    ,            edit_fax_document_path( fax_document ) if can?( :edit, fax_document ) %></td>
     <td><%= link_to t(:destroy) , confirm_destroy_fax_document_path( fax_document ) if can?( :destroy, fax_document ) %></td>
   </tr>
 <% end %>

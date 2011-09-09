@@ -1,0 +1,2 @@
+module SipGatewaysHelper
+end

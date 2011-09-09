@@ -4,6 +4,8 @@ class Extension < ActiveRecord::Base
   has_many :sip_accounts, :through => :sip_account_to_extensions
   has_many :conference_to_extensions, :dependent => :destroy
   has_many :conferences, :through => :conference_to_extensions
+  has_many :user_to_extensions, :dependent => :destroy
+  has_many :users, :through => :user_to_extensions
   
   
   validates_inclusion_of  :active, :in => [ true, false ], :allow_nil => false

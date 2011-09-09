@@ -58,8 +58,12 @@ de:
   fax_document_not_found: "Fax-Dokument nicht gefunden"
   fax_document_not_sent: "Fax-Dokument konnte nicht gesendet werden"
   fax_thumbnail_not_created: "Fax-Vorschau konnte nicht angelegt werden"
-  outbound: "OUT"
-  inbound: "IN"
+  fax_document_too_many: "Mehr als %{count} Fax-Dokumente angelegt, vor dem Anlegen bitte zunächst alte Dokumente löschen"
+  outbound: "Ausgehend"
+  inbound: "Eingehend"
+  direction: "Richtung"
+  transmitted: "Übertragen"
+  sent: "Gesendet"
   extension: "Rufnummer"
   editing_extension: "Rufnummer bearbeiten"
   new_extension: "Neue Rufnummer"
@@ -67,12 +71,12 @@ de:
   listing_extensions: "Rufnummern"
   extension_created: "Rufnummer wurde erfolgreich angelegt"
   extension_updated: "Rufnummer wurde erfolgreich aktualisiert"
-  editing_node: "Node bearbeiten"
-  listing_nodes: "Nodes"
-  new_node: "Neuer Node"
-  node_created: "Node wurde erfolgreich angelegt"
-  node_updated: "Node wurde erfolgreich aktualisiert"
-  node: "Node"
+  editing_node: "TK-Knoten bearbeiten"
+  listing_nodes: "TK-Knoten"
+  new_node: "Neuer TK-Knoten"
+  node_created: "TK-Knoten wurde erfolgreich angelegt"
+  node_updated: "TK-Knoten wurde erfolgreich aktualisiert"
+  node: "TK-Knoten"
   editing_sip_account: "SIP-Account bearbeiten"
   user: "Benutzer"
   auth_name: "Auth.-Name"
@@ -107,7 +111,7 @@ de:
   editing_sip_proxy: "SIP-Proxy bearbeiten"
   sip_host: "SIP-Host"
   sip_port: "SIP-Port"
-  is_local: "Auf diesem Node"
+  is_local: "Auf diesem TK-Knoten"
   take_over_accounts: "Accounts übernehmen"
   sip_proxies: "SIP-Proxies"
   listing_sip_proxies: "SIP-Proxies"
@@ -253,7 +257,7 @@ de:
   conferences: "Konferenzen"
   servers: "Server"
   sip_domains: "SIP-Domänen"
-  nodes: "Nodes"
+  nodes: "TK-Knoten"
   help: "Hilfe"
   sign_in: "Einloggen"
   sign_out: "Ausloggen"
@@ -378,6 +382,11 @@ de:
   unread: "Ungelesen"
   received: "Empfangen"
   caller_number: "Nummer"
+  vm_caller: "Anrufer"
+  vm_priority: "Priorität"
+  vm_prio:
+    B_NORMAL: "normal"
+    A_URGENT: "dringend"
   forwarded_by: "Weitergeleitet durch"
   error_retrieving_voicemail_list: "Abrufen der Voicemails für %{name} fehlgeschlagen."
   error_retrieving_voicemail: "Abrufen der Voicemail %{name} fehlgeschlagen."
@@ -419,6 +428,43 @@ de:
   voicemail_pin_changed: "Voicemail-PIN erfolgreich geändert"
   
   sip_account_user_cant_have_sip_accounts: "kann keinen SIP-Account haben."
+  
+  freeswitch_api:
+    
+    reg_states:
+      TRYING     : "Versuche …"
+      REGISTER   : "Registriere …"
+      REGED      : "Registriert."
+      UNREGED    : "Unregistriert."
+      UNREGISTER : "Ent-registriere …"
+      FAILED     : "Fehler."
+      FAIL_WAIT  : "Fehler. Warte …"
+      EXPIRED    : "Abgelaufen."
+      NOREG      : "Nicht zutreffend."
+      NOAVAIL    : "Nicht verfügbar."
+    
+    gw_statuses:
+      DOWN : "Aus."
+      UP   : "An."
+  
+  menu:
+    #sip_gateways: "Gateways"
+    sip_gateways: "Gateway"
+  
+  sip_gateway_was_created: "Gateway wurde angelegt."
+  sip_gateway_was_updated: "Gateway wurde aktualisiert."
+  
+  #sip_gateway_view_index: "Media-Gateways"
+  sip_gateway_view_index: "Media-Gateway"
+  sip_gateway_view_new: "Neues Media-Gateway"
+  sip_gateway_view_edit: "Media-Gateway bearbeiten"
+  sip_gateway_view_show: "Media-Gateway"
+  
+  sip_gateway_reg_state: "Reg.-Status"
+  sip_gateway_status: "Status"
+  
+  sip_gateway_restart_info: "Beim Anlegen, Ändern oder Löschen eines Gateways wird der SIP-User-Agent in der TK-Anlage neu gestartet."
+  
   
   confirm_destroy_record: "%{model_name} wirklich löschen?"
   delete: "Löschen"

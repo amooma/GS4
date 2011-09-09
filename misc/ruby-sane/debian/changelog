@@ -1,3 +1,9 @@
+ruby-sane (1.9.2.0-2) squeeze; urgency=low
+
+  * bundler 1.0.18.
+
+ -- Philipp Kempgen <root@localhost>  Mon, 29 Aug 2011 18:00:00 +0200
+
 ruby-sane (1.9.2.0-1) squeeze; urgency=low
 
   * Initial Release.

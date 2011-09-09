@@ -16,6 +16,8 @@ class FreeswitchConfigurationController < ApplicationController
 	}
 	
 	def load()
+		logger.info(_bold( "[FS] FreeSwitch requests configuration ..." ))
+		
 		if ( sip_server = SipServer.where(:is_local => true).first )
 			@sip_server_ip = sip_server.host
 		else
@@ -29,9 +31,11 @@ class FreeswitchConfigurationController < ApplicationController
 		@hold_music        = Configuration.get(:freeswitch_hold_music, 'local_stream://moh')
 		
 		@internal_sip_port = Configuration.get(:internal_sip_port, 15060)
-		@external_sip_port = Configuration.get(:external_sip_port, 15080)
+	#	@external_sip_port = Configuration.get(:external_sip_port, 15080)
 		
 		@timezones         = timezones()
+		
+		@sip_gateways      = SipGateway.all
 		
 		@xml_rpc_port      = Configuration.get(:xml_rpc_port, 8080 )
 		@xml_rpc_realm     = Configuration.get(:xml_rpc_realm, 'gemeinschaft' )

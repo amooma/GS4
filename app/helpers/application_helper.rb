@@ -35,6 +35,7 @@ module ApplicationHelper
 							{ :text => t(:sip_proxies)       , :url => sip_proxies_path },
 							{ :text => t(:voicemail_servers) , :url => voicemail_servers_path },
 							{ :text => t(:nodes)             , :url => nodes_path },
+							{ :text => t('menu.sip_gateways'), :url => sip_gateways_path },
 						]},
 						
 						{ :text => t(:help)          , :url => admin_help_path },

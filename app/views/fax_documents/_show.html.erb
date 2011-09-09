@@ -2,9 +2,42 @@
 <div class="simple_form_show">
 
 <p>
+  <b><%= t(:direction) %>:</b>
+  <%= @fax_document.outgoing ? t(:outbound) : t(:inbound) %>
+</p>
+
+<% if can?( :manage, FaxDocument ) %>
+<p>
+  <b><%= t(:user) %>:</b>
+  <%= @fax_document.user.to_display if @fax_document.user %>
+</p>
+<% end %>
+
+<p>
   <b><%= t(:date_date) %>:</b>
   <%= l( Time.at(@fax_document.created_at.localtime)) %>
 </p>
+
+<% if @fax_document.sent %>
+<p>
+  <b><%= t(:sent) %>:</b>
+  <%= l( Time.at(@fax_document.sent.localtime)) %>
+</p>
+<% end %>
+
+<% if @fax_document.received %>
+<p>
+  <b><%= t(:received) %>:</b>
+  <%= l( Time.at(@fax_document.received.localtime)) %>
+</p>
+<% end %>
+
+<% if (! @fax_document.received && ! @fax_document.sent) %>
+<p>
+  <b><%= t(:transmitted) %>:</b>
+  <%= t(:no_lowercase) %>
+</p>
+<% end %>
 
 <p>
   <b><%= t(:destination) %>:</b>

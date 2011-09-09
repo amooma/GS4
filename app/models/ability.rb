@@ -54,6 +54,7 @@ class Ability
         can    :edit_uid, PersonalContact
         can    :manage  , GlobalContact
         can    :manage  , Configuration
+        can    :manage  , SipGateway
         
         cannot :destroy , User do |u|
           u.try(:id) == user.id
@@ -116,9 +117,9 @@ class Ability
         can    :read_title, SipAccount, :user_id => user.id
         can    :read    , GlobalContact
         
-        #can    :read    , FaxDocument #, :sip_account => { :user_id => user.id }
-        #can    :create  , FaxDocument
-        #TODO Once faxes are associated to SIP accounts or users, add check (in the controller) that users can't create FaxDocuments for other users.
+        can    :read    , FaxDocument, :user_id => user.id 
+        can    :create  , FaxDocument, :user_id => user.id
+        can    :destroy , FaxDocument, :user_id => user.id
         cannot :update  , FaxDocument
         
         can    :read    , CallLog, :sip_account => { :user_id => user.id }

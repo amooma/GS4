@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110802131449) do
+ActiveRecord::Schema.define(:version => 20110908125305) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20110802131449) do
     t.datetime "received"
     t.datetime "sent"
     t.boolean  "outgoing"
+    t.integer  "user_id"
   end
 
   create_table "global_contacts", :force => true do |t|
@@ -349,6 +350,21 @@ ActiveRecord::Schema.define(:version => 20110802131449) do
     t.string   "caller_name"
   end
 
+  create_table "sip_gateways", :force => true do |t|
+    t.string   "host"
+    t.integer  "port"
+    t.string   "realm"
+    t.string   "username"
+    t.string   "password"
+    t.string   "from_user"
+    t.string   "from_domain"
+    t.boolean  "register"
+    t.string   "reg_transport"
+    t.integer  "expire"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sip_proxies", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -375,6 +391,13 @@ ActiveRecord::Schema.define(:version => 20110802131449) do
     t.string   "ha1"
     t.string   "ha1b"
     t.string   "rpid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_to_extensions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "extension_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

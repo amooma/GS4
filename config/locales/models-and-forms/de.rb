@@ -57,6 +57,7 @@
 			:subscriber                    => "SIP subscriber",
 			:version                       => "Version",
 			:network_setting               => "Netzwerk-Konfiguration",
+			:sip_gateway                   => "Gateway",
 			
 		},
 		
@@ -141,6 +142,8 @@
 				:received     => "Empfangen am",
 				:sent         => "Gesendet am",
 				:title        => "Titel",
+				:user         => "Benutzer",
+				:user_id      => "Benutzer-ID",
 			},
 			:global_contact => {
 				:lastname        => "Nachname",
@@ -370,7 +373,19 @@
 				:start_dhcp_server  => "Gemeinschaft-eigenen DHCP-Server starten",
 				:interface          => "Netzwerk-Schnittstelle",
 			},
-
+			:sip_gateway => {
+				:host           => "Host",
+				:port           => "Port",
+				:realm          => "Realm",
+				:username       => "Benutzername",
+				:password       => "Passwort",
+				:from_user      => "„From“-Benutzer",
+				:from_domain    => "„From“-Domain",
+				:register       => "Registrieren",
+				:reg_transport  => "Reg.-Transport",
+				:expire         => "Reg.-Dauer",
+			},
+			
 		},
 
 	},
@@ -454,6 +469,8 @@
 				:received => "Zeitpunkt des Empfangs",
 				:sent => "Zeitpunkt des Versands.",
 				:title => "Titel des Dokuments.",
+				:user => "Benutzer",
+				:user_id => "Benutzer-ID",
 			},
 			:global_contact => {
 				:lastname => "Nachname / Familienname bzw. Firmenname",
@@ -683,6 +700,19 @@
 				:start_dhcp_server => "",
 				:interface => "",
 			},
+			:sip_gateway => {
+				:host           => "Der Hostname bzw. die Domain. Bei einem internen Media-Gateway im einfachsten Fall die IP-Adresse.",
+				:port           => "Die Port-Nummer. Ohne Angabe eines Ports wird der Host als Domain angesehen und entsprechend der SIP-Mechanismen der Standard-Port verwendet (bzw. der DNS-SRV-Record-Abfrage). Mit Angabe eines Ports wird der Host als Hostname bzw. IP-Adresse angesehen (keine DNS-SRV-Record-Abfrage). Bei einem internen Media-Gateway können Sie hier normalerweise „5060“ angeben.",
+				:realm          => "Der SIP-„Realm“ ist (wie bei HTTP) ein Name für den Authentifizierungsbereich. Für optimale Kompatibilität sollte der Realm dem SIP-Host (bzw. SIP-Domäne) entsprechen, dann kann dieses Feld leer gelassen werden.",
+				:username       => "Der zu verwendende Benutzername auf dem SIP-Gateway.",
+				:password       => "Das Passwort auf dem SIP-Gateway.",
+				:from_user      => "Der Benutzername in der URI im „From“-Header. Leer für den gleichen Wert wie der Benutzername.",
+				:from_domain    => "Die Domain in der URI im „From“-Header. Leer für den gleichen Wert wie der Host.",
+				:register       => "Legt fest ob sich die TK-Anlage beim Gateway registrieren soll.",
+				:reg_transport  => "Der Wert des in der Registrierung mitgeteilten „transport“-Parameters. „udp“ oder „tcp“.",
+				:expire         => "Die Gültigkeitsdauer der Registrierung in Sekunden.",
+			},
+			
 		},
 	},
 }}

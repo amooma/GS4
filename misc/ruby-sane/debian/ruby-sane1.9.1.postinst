@@ -58,8 +58,11 @@ case "$1" in
     /usr/bin/update_rubygems
     rm -rf /var/lib/gems
     
-    gem install bundler --version "1.0.12"
-    #OPTIMIZE ? bundler v. 1.0.13 is broken. We'll use 1.0.12 for now.
+    gem install bundler --version "1.0.18"
+    # bundler v. 1.0.13 is broken.
+    # ("NOTE: Gem.source_index is deprecated, use Specification. It will be removed on or after 2011-11-01.")
+    # We'll use 1.0.12 for now.
+    # Update: bundler 1.0.18 seems to work.
     
     ## add RubyGems executable directory (bin wrappers) to PATH:
     #(

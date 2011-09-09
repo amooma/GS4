@@ -62,11 +62,15 @@ class VoicemailsController < ApplicationController
 			
 			if sip_account.voicemail_server
 				@voicemail = XmlRpc::voicemail_get_details( @auth_name, sip_account.voicemail_server.host, uuid )
+				if @voicemail && ! @voicemail['VM-Message-UUID']
+					@voicemail = false
+				end
 			else
 				@voicemail = false
 			end
 			
 			if ! @voicemail
+				#OPTIMIZE Don't use flash message here. Flash messages are meant for redirects.
 				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)
 			end
 		end

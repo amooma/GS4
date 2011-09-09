@@ -1,37 +1,39 @@
 class FaxDocument < ActiveRecord::Base
 	
-	#TODO Make FaxDocuments associated to something. (SipAccounts? Users?)
+	belongs_to :user
 	
-	validates_presence_of     :raw_file
-	validates_presence_of     :file
-	
-	#OPTIMIZE Make sure that even admins can't "inject" bad config values (e.g. file paths).
+	validates_presence_of :raw_file
+	validates_presence_of :file
 	
 	before_validation( :on => :create ) {
-		if (! self.raw_file)
-			self.create_raw_file_from_document()
-		end
-		if (self.raw_file)
-			raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
-			raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_file_suffix}")
-			if (! self.raw_file || ! File.exists?(raw_file))
-				errors.add( :base, I18n.t(:fax_document_not_found))
-			else
-				thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
-				thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{thumbnail_suffix}")
-				if (! File.exists?(thumbnail_file))
-					thumbnail_size = "#{Configuration.get(:fax_thumbnail_width, 210, Integer)}x#{Configuration.get(:fax_thumbnail_height, 310, Integer)}"
-					system "convert -quiet -flatten -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
-				end
-				if (! self.destination.blank?)
-					if (originate_call(self.destination, raw_file) == false)
-						delete_fax_files(self.raw_file)
-						errors.add( :base, I18n.t(:fax_document_not_sent))
+		if (FaxDocument.where(:user_id => self.user_id).count >= Configuration.get(:fax_max_files, 2048, Integer))
+			errors.add( :base, I18n.t(:fax_document_too_many, :count => Configuration.get(:fax_max_files)) )
+		else
+			if (! self.raw_file)
+				self.create_raw_file_from_document()
+			end
+			if (self.raw_file)
+				raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+				raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_file_suffix}")
+				if (! raw_file || ! File.exists?(raw_file))
+					errors.add( :base, I18n.t(:fax_document_not_found))
+				else
+					thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
+					thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{thumbnail_suffix}")
+					if (! File.exists?(thumbnail_file))
+						thumbnail_size = "#{Configuration.get(:fax_thumbnail_width, 210, Integer)}x#{Configuration.get(:fax_thumbnail_height, 310, Integer)}"
+						system "convert -quiet -flatten -resize #{thumbnail_size}\! \"#{raw_file}\" \"#{thumbnail_file}\""
+					end
+					if (self.outgoing && ! self.destination.blank?)
+						if (originate_call(self.destination, raw_file) == false)
+							delete_fax_files(self.raw_file)
+							errors.add( :base, I18n.t(:fax_document_not_sent))
+						end
 					end
 				end
+			else
+				errors.add( :base, I18n.t(:fax_document_not_created))
 			end
-		else
-	       errors.add( :base, I18n.t(:fax_document_not_created))
 		end
 	}
 	

@@ -58,8 +58,12 @@ en:
   fax_document_not_found: "Fax document not found"
   fax_document_not_sent: "Fax document could not be sent"
   fax_thumbnail_not_created: "Fax preview could not be created"
-  outbound: "OUT"
-  inbound: "IN"
+  fax_document_too_many: "Too many Fax documents (%{count})"
+  outbound: "Outbound"
+  inbound: "Inbound"
+  direction: "Direction"
+  transmitted: "Transmitted"
+  sent: "Sent"
   extension: "Extension"
   editing_extension: "Editing extension"
   new_extension: "New extension"
@@ -67,12 +71,12 @@ en:
   listing_extensions: "Extensions"
   extension_created: "Extension was successfully created"
   extension_updated: "Extension was successfully updated"
-  editing_node: "Editing node"
-  listing_nodes: "Nodes"
-  new_node: "New node"
-  node_created: "Node was successfully created"
-  node_updated: "Node was successfully updated"
-  node: "Node"
+  editing_node: "Editing PBX node"
+  listing_nodes: "PBX nodes"
+  new_node: "New PBX node"
+  node_created: "PBX node was successfully created"
+  node_updated: "PBX node was successfully updated"
+  node: "PBX node"
   editing_sip_account: "Editing SIP account"
   user: "User"
   auth_name: "Auth. name"
@@ -107,7 +111,7 @@ en:
   editing_sip_proxy: "Editing SIP proxy"
   sip_host: "SIP host"
   sip_port: "SIP port"
-  is_local: "Is on this node"
+  is_local: "Is on this PBX node"
   take_over_accounts: "Take over accounts from"
   sip_proxies: "SIP proxies"
   listing_sip_proxies: "SIP proxies"
@@ -253,7 +257,7 @@ en:
   conferences: "Conferences"
   servers: "Servers"
   sip_domains: "SIP Domains"
-  nodes: "Nodes"
+  nodes: "PBX nodes"
   help: "Help"
   sign_in: "Sign in"
   sign_out: "Sign out"
@@ -378,6 +382,11 @@ en:
   unread: "Unread"
   received: "Received"
   caller_number: "Caller number"
+  vm_caller: "Caller"
+  vm_priority: "Priority"
+  vm_prio:
+    B_NORMAL: "normal"
+    A_URGENT: "urgent"
   forwarded_by: "Forwarded by"
   error_retrieving_voicemail_list: "Error retrieving voicemails for %{name}."
   error_retrieving_voicemail: "Error retrieving voicemail %{name}."
@@ -419,6 +428,43 @@ en:
   voicemail_pin_changed: "Voicemail PIN changed"
   
   sip_account_user_cant_have_sip_accounts: "can't have a SIP account."
+  
+  freeswitch_api:
+    
+    reg_states:
+      TRYING     : "Trying …"
+      REGISTER   : "Registering …"
+      REGED      : "Registered."
+      UNREGED    : "Un-registered."
+      UNREGISTER : "Un-registering …"
+      FAILED     : "Failed."
+      FAIL_WAIT  : "Failed. Waiting …"
+      EXPIRED    : "Expired."
+      NOREG      : "Not applicable."
+      NOAVAIL    : "Not available."
+    
+    gw_statuses:
+      DOWN : "Down."
+      UP   : "Up."
+  
+  menu:
+    #sip_gateways: "Gateways"
+    sip_gateways: "Gateway"
+  
+  sip_gateway_was_created: "Gateway was created."
+  sip_gateway_was_updated: "Gateway was updated."
+  
+  #sip_gateway_view_index: "Media gateways"
+  sip_gateway_view_index: "Media gateway"
+  sip_gateway_view_new: "New media gateway"
+  sip_gateway_view_edit: "Editing media gateway"
+  sip_gateway_view_show: "Media gateway"
+  
+  sip_gateway_reg_state: "Reg. state"
+  sip_gateway_status: "Status"
+  
+  sip_gateway_restart_info: "The SIP User-Agent in the PBX will be restarted if you create, change or delete a gateway."
+  
   
   confirm_destroy_record: "Are you sure you want to destroy this {resource}?" 
   delete: "Delete"
