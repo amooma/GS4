@@ -1,5 +1,8 @@
 class Admin::WizardPhoneAndUserController < ApplicationController
+before_filter :authenticate_user!
+
 skip_authorization_check
+
 before_filter{
     @sip_proxy = SipProxy.where(:is_local => true).first
     @sip_server = SipServer.where(:is_local => true).first
