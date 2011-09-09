@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110908120001) do
+ActiveRecord::Schema.define(:version => 20110908125305) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -391,6 +391,13 @@ ActiveRecord::Schema.define(:version => 20110908120001) do
     t.string   "ha1"
     t.string   "ha1b"
     t.string   "rpid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_to_extensions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "extension_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

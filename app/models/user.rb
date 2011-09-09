@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :personal_contacts, :dependent => :destroy
   has_many :conferences, :dependent => :destroy
   has_many :fax_documents, :dependent => :destroy
+  has_many :user_to_extensions, :dependent => :destroy
+  has_many :extensions, :through => :user_to_extensions
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :confirmable, :timeoutable, :registerable and :activatable
