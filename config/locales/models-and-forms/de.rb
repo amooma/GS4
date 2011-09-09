@@ -1,7 +1,19 @@
 #OPTIMIZE Add pin_change.(?) `./script/gs4cmd resources`: "translation missing: de.activerecord.models.pin_change". See app/models/pin_change.rb.
 
 { :"de" => {
-	
+		:wfirst_name => "Vorname",
+		:wlast_name => "Nachname",
+		:wpassword => "Passwort",
+		:wpassword_confirmation => "Passwort Wiederholung",
+		:wemail => "E-Mail Adresse",
+		:wusername => "Benutzername",
+		:wextension => "Durchwahl",
+		:wcaller_name => "Anrufername",
+		:wvoicemail_pin => "Anrufbeantworter PIN",
+		:wmac_address => "MAC Adresse",
+		:wphone_model => "Telefon Modell",
+		:wizard_phone_and_user_saved => "Telefon und Account wurde angelegt.",
+		:wizard_phone_and_user => "Benutzer mit Telefon und Durchwahl anlegen ",
 	:activerecord => {
 		
 		:models => {
@@ -358,8 +370,9 @@
 				:start_dhcp_server  => "Gemeinschaft-eigenen DHCP-Server starten",
 				:interface          => "Netzwerk-Schnittstelle",
 			},
-			
+
 		},
+
 	},
 	
 	:simple_form => {
@@ -670,7 +683,6 @@
 				:start_dhcp_server => "",
 				:interface => "",
 			},
-			
 		},
 	},
 }}

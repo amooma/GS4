@@ -426,3 +426,6 @@ de:
   automatic_reboot: "Das System wird nach dieser Aktion automatisch neu gestartet!"
   mandatory_fields: "Mit einem * gekennzeichnete Felder müssen ausgefüllt werden!"
   save_reboot: "Speichern und System neu starten (Reboot)"
+  wizards: "Assistenten"
+  wizard_phone_and_user_new: "Benutzer mit Telefon und Durchwahl anlegen"
+  

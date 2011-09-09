@@ -426,3 +426,5 @@ en:
   automatic_reboot: "The system will reboot after this action!"
   mandatory_fields: "Fields marked with * are mandatory!"
   save_reboot: "Save settings and reboot system"
+  wizards: "Wizards"
+  wizard_phone_and_user_new: "Create user with phone and extension"

@@ -138,6 +138,7 @@ Gemeinschaft4::Application.routes.draw do
 		:format     => :'xml'
 	
 	namespace :admin do
+		resources :wizard_phone_and_user, :only => [:new, :create]
 		resources :users do
 			member do
 				get 'confirm_destroy'
