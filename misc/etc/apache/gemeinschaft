@@ -4,11 +4,11 @@ MaxKeepAliveRequests 40
 KeepAliveTimeout 60
 Timeout 100
 
-LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8/ext/apache2/mod_passenger.so
+LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so
 
 # http://www.modrails.com/documentation/Users guide Apache.html
 
-PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8
+PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9
 PassengerRuby /usr/bin/ruby1.9.1
 
 PassengerMaxPoolSize 4
