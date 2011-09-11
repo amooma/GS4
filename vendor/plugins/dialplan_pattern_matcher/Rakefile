@@ -1,0 +1,49 @@
+#!/usr/bin/env rake
+
+#require 'bundler'
+#Bundler::GemHelper.install_tasks
+
+require 'rake'
+require 'rake/testtask'
+#require 'rake/rdoctask'  # "rake/rdoctask is deprecated.  Use rdoc/task instead (in RDoc 2.4.2+)"
+
+
+desc "Default: \"rake test\""
+task :default => :test
+
+desc "Run the tests."
+Rake::TestTask.new( :test ) { |t|
+	#t.libs << 'lib'
+	t.libs << 'test'
+	t.pattern = 'test/**/*_test.rb'
+	#t.verbose = true
+}
+
+=begin
+desc "Generate documentation."
+Rake::RDocTask.new( :rdoc ) { |rdoc|
+	rdoc.rdoc_dir = 'rdoc'
+	rdoc.title    = 'DialplanPatternMatcher'
+	rdoc.options << '--line-numbers' << '--inline-source'
+	rdoc.rdoc_files.include('README')
+	rdoc.rdoc_files.include('lib/**/*.rb')
+}
+=end
+
+desc "Build a gem."
+task( :gem ) {
+	sh 'gem build *.gemspec'
+}
+
+=begin
+desc "Clean up."
+task( :clean ) {
+	sh 'rm *.gem'
+}
+=end
+
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: t
+# End:
