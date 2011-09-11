@@ -1,22 +1,23 @@
-<%= simple_form_for "", :url => "/admin/wizard_phone_and_user"  do |f| %>
-  <%= f.input :wfirst_name, :label => I18n.t(:wfirst_name), :input_html => {:value => params[:wfirst_name]} %>
-  <%= f.input :wlast_name, :label => I18n.t(:wlast_name), :input_html => {:value => params[:wlast_name]} %>
-  <%= f.input :wpassword, :label => I18n.t(:wpassword), :input_html => {:value => params[:wpassword]} %>
-  <%= f.input :wpassword_confirmation, :label => I18n.t(:wpassword_confirmation), :input_html => {:value => params[:wpassword_confirmation]} %>
-  <%= f.input :wemail, :label => I18n.t(:wemail), :input_html => {:value => params[:wemail]} %>
-  <%= f.input :wusername, :label => I18n.t(:wusername), :input_html => {:value => params[:wusername]}%>
-  <%= f.input :wextension, :label => I18n.t(:wextension), :input_html => {:value => params[:wextension]} %>
-  <%= f.input :wcaller_name, :label => I18n.t(:wcaller_name), :input_html => {:value => params[:wcaller_name]}%>
-  <%= f.input :wvoicemail_pin, :label => I18n.t(:wvoicemail_pin), :input_html => {:value => params[:wvoicemail_pin]}%>
-  <%= f.input :wmac_address, :label => I18n.t(:wmac_address), :input_html => {:value => params[:wmac_address]}%>
-  <%= f.input :wphone_model, :label => I18n.t(:wphone_model), do %>
-  <%= f.select( :phone_model_id,
+<%= simple_form_for "", :url => "/admin/wizard_phone_and_user" do |f| %>
+	
+	<%= f.input :wfirst_name    , :label => I18n.t(:wfirst_name    ), :input_html => { :value => params[:wfirst_name    ]} %>
+	<%= f.input :wlast_name     , :label => I18n.t(:wlast_name     ), :input_html => { :value => params[:wlast_name     ]} %>
+	<%= f.input :wpassword      , :label => I18n.t(:wpassword      ), :input_html => { :value => params[:wpassword      ]} %>
+	<%= f.input :wpassword_confirmation,
+	                              :label => I18n.t(:wpassword_confirmation ),
+	                                                                  :input_html => { :value => params[:wpassword_confirmation ]} %>
+	<%= f.input :wemail         , :label => I18n.t(:wemail         ), :input_html => { :value => params[:wemail         ]} %>
+	<%= f.input :wusername      , :label => I18n.t(:wusername      ), :input_html => { :value => params[:wusername      ]} %>
+	<%= f.input :wextension     , :label => I18n.t(:wextension     ), :input_html => { :value => params[:wextension     ]} %>
+	<%= f.input :wcaller_name   , :label => I18n.t(:wcaller_name   ), :input_html => { :value => params[:wcaller_name   ]} %>
+	<%= f.input :wvoicemail_pin , :label => I18n.t(:wvoicemail_pin ), :input_html => { :value => params[:wvoicemail_pin ]} %>
+	<%= f.input :wmac_address   , :label => I18n.t(:wmac_address   ), :input_html => { :value => params[:wmac_address   ]} %>
+	<%= f.input :wphone_model   , :label => I18n.t(:wphone_model   ), do %>
+		<%= f.select( :phone_model_id,
 			@phone_models.collect {|r| [ r.name, r.id ] },
 			{ :include_blank => false, :selected => params[:phone_model_id] }
 		) %>
-  <% end %>
-  
-    
-  <%= f.button :submit %>
+	<% end %>
 	
+	<%= f.button :submit %>
 <% end %>
