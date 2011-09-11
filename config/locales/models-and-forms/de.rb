@@ -58,6 +58,7 @@
 			:version                       => "Version",
 			:network_setting               => "Netzwerk-Konfiguration",
 			:sip_gateway                   => "Gateway",
+			:user_to_extension             => "Benutzer zu Rufnummer",
 			
 		},
 		
@@ -385,6 +386,12 @@
 				:reg_transport  => "Reg.-Transport",
 				:expire         => "Reg.-Dauer",
 			},
+			:user_to_extension => {
+				:user          => "Benutzer",
+				:user_id       => "Benutzer-ID",
+				:extension     => "Rufnummer",
+				:extension_id  => "Rufnummern-ID",
+			},
 			
 		},
 
@@ -711,6 +718,12 @@
 				:register       => "Legt fest ob sich die TK-Anlage beim Gateway registrieren soll.",
 				:reg_transport  => "Der Wert des in der Registrierung mitgeteilten „transport“-Parameters. „udp“ oder „tcp“.",
 				:expire         => "Die Gültigkeitsdauer der Registrierung in Sekunden.",
+			},
+			:user_to_extension => {
+				:user          => "",
+				:user_id       => "",
+				:extension     => "",
+				:extension_id  => "",
 			},
 			
 		},

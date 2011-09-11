@@ -58,6 +58,7 @@
 			:version                       => "Version",
 			:network_setting               => "Network settings",
 			:sip_gateway                   => "Gateway",
+			:user_to_extension             => "User to extension",
 			
 		},
 		
@@ -384,6 +385,12 @@
 				:reg_transport  => "Reg. transport",
 				:expire         => "Reg. expiration",
 			},
+			:user_to_extension => {
+				:user          => "User",
+				:user_id       => "User ID",
+				:extension     => "Extension",
+				:extension_id  => "Extension ID",
+			},
 			
 		},
 	},
@@ -709,6 +716,12 @@
 				:register       => "Defines if this PBX should register itself at the gateway.",
 				:reg_transport  => "The value of the “transport” parameter used in the registration. “udp” or “tcp”.",
 				:expire         => "The duration in seconds for how long the registration is valid.",
+			},
+			:user_to_extension => {
+				:user          => "",
+				:user_id       => "",
+				:extension     => "",
+				:extension_id  => "",
 			},
 			
 		},
