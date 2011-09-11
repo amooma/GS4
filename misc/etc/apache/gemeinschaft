@@ -52,11 +52,11 @@ LogFormat "%h %l %u \"%r\" %>s %b KA:%k \"%{User-agent}i\"" log_format_for_syslo
 	RewriteRule ^.* - [L]
 	
 	RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [R,L]
- 	
- 	SetEnvIf Request_URI "^/freeswitch-call-processing/actions" downgrade-1.0 no-gzip no-cache
+	
+	SetEnvIf Request_URI "^/freeswitch-call-processing/actions" downgrade-1.0 no-gzip no-cache
 	BrowserMatch "^freeswitch-spidermonkey-curl/1\." downgrade-1.0 no-gzip no-cache
- 	BrowserMatch "^freeswitch-xml/1\." downgrade-1.0 no-gzip no-cache
- 	
+	BrowserMatch "^freeswitch-xml/1\." downgrade-1.0 no-gzip no-cache
+	
 	DocumentRoot /opt/gemeinschaft/public
 	
 	PassengerEnabled on
@@ -124,8 +124,8 @@ LogFormat "%h %l %u \"%r\" %>s %b KA:%k \"%{User-agent}i\"" log_format_for_syslo
 		Options -MultiViews
 		Options FollowSymLinks
 	</Directory>
- 	
- 	SSLEngine on
+	
+	SSLEngine on
 	SSLCertificateFile    /etc/ssl/amooma/server_cert.pem
 	SSLCertificateKeyFile /etc/ssl/amooma/server_key.pem
 </VirtualHost>
