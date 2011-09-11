@@ -1,19 +1,23 @@
 #OPTIMIZE Add pin_change.(?) `./script/gs4cmd resources`: "translation missing: de.activerecord.models.pin_change". See app/models/pin_change.rb.
 
 { :"en-US" => {
-		:wfirst_name => "First name",
-		:wlast_name => "Last name",
-		:wpassword => "Password",
-		:wpassword_confirmation => "Repeat password",
-		:wemail => "E-Mail address",
-		:wusername => "Username",
-		:wextension => "Extension",
-		:wcaller_name => "Caller name",
-		:wvoicemail_pin => "Voicemail PIN",
-		:wmac_address => "MAC-Address",
-		:wphone_model => "Phone model",
-		:wizard_phone_and_user_saved => "Phone and account created.",
-		:wizard_phone_and_user => "Create User with phone and extension",
+	
+	############# #OPTMIZE Find a better place for these entries. {
+	:wfirst_name => "First name",
+	:wlast_name => "Last name",
+	:wpassword => "Password",
+	:wpassword_confirmation => "Repeat password",
+	:wemail => "E-Mail address",
+	:wusername => "Username",
+	:wextension => "Extension",
+	:wcaller_name => "Caller name",
+	:wvoicemail_pin => "Voicemail PIN",
+	:wmac_address => "MAC-Address",
+	:wphone_model => "Phone model",
+	:wizard_phone_and_user_saved => "Phone and account created.",
+	:wizard_phone_and_user => "Create User with phone and extension",
+	############# Find a better place for these entries. }
+	
 	:activerecord => {
 		
 		:models => {
