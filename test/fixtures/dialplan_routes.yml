@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  eac: 0
+  pattern_id: 1
+  sip_gateway_id: 1
+  name: MyRoute1
+  position: 1
+
+two:
+  eac: 0
+  pattern_id: 1
+  sip_gateway_id: 1
+  name: MyRoute2
+  position: 2

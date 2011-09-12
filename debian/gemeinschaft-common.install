@@ -13,6 +13,8 @@ app/views/call_logs/*.erb                       opt/gemeinschaft/app/views/call_
 app/views/call_queues/*.erb                     opt/gemeinschaft/app/views/call_queues/
 app/views/conferences/*.erb                     opt/gemeinschaft/app/views/conferences/
 app/views/configurations/*.erb                  opt/gemeinschaft/app/views/configurations/
+app/views/dialplan_patterns/*.erb               opt/gemeinschaft/app/views/dialplan_patterns/
+app/views/dialplan_routes/*.erb                 opt/gemeinschaft/app/views/dialplan_routes/
 app/views/extensions/*.erb                      opt/gemeinschaft/app/views/extensions/
 app/views/fax_documents/*.erb                   opt/gemeinschaft/app/views/fax_documents/
 app/views/freeswitch_call_processing/*.erb      opt/gemeinschaft/app/views/freeswitch_call_processing/

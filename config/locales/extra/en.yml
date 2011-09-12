@@ -37,6 +37,8 @@ en:
   destination: "Destination"
   errors_model_not_saved: "%{errors_count} prohibited this %{model_name} from being saved"
   
+  dependent_restricted: "Still in use."
+  
   !ruby/symbol role_user: "user"
   !ruby/symbol role_admin: "admin"
   !ruby/symbol role_cdr: "CDR admin"
@@ -450,6 +452,30 @@ en:
   menu:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
+    dp_patterns: "Dialplan patterns"
+    dp_routes: "Outbound routes"
+  
+  
+  dp_pattern:
+    was_created: "Dialplan pattern was created."
+    was_updated: "Dialplan pattern was updated."
+    view:
+      index: "Dialplan patterns"
+      new: "New dialplan pattern"
+      edit: "Editing dialplan pattern"
+      show: "Dialplan pattern"
+  
+  dp_route:
+    was_created: "Outbound dialplan route was created."
+    was_updated: "Outbound dialplan route was updated."
+    view:
+      index: "Outbound dialplan routes"
+      new: "New outbound dialplan route"
+      edit: "Editing outbound dialplan route"
+      show: "Outbound dialplan route"
+    all_users: "(all)"
+    no_gateway: "(forbidden)"
+  
   
   sip_gateway_was_created: "Gateway was created."
   sip_gateway_was_updated: "Gateway was updated."

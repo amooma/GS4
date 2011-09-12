@@ -1,0 +1,33 @@
+<%= simple_form_for( @dialplan_route ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :eac %>
+	
+	<%= f.input :dialplan_pattern do %>
+		<%= f.select( :pattern_id,
+			@dp_patterns.collect {|r| [ "#{r.pattern} -- #{r.name}", r.id ] },
+			{ :include_blank => true, :selected => @dialplan_route.pattern_id }
+		) %>
+		&nbsp;&nbsp;&nbsp;
+		<small><%= link_to t('dp_pattern.view.new'), new_dialplan_pattern_path %></small>
+	<% end %>
+	
+	<%= f.input :user do %>
+		<%= f.select( :user_id,
+			@users.collect {|r| [ r.to_display, r.id ] },
+			{ :include_blank => true, :selected => @dialplan_route.user_id }
+		) %>
+	<% end %>
+	
+	<%= f.input :sip_gateway do %>
+		<%= f.select( :sip_gateway_id,
+			@sip_gws.collect {|r| [ r.hostport, r.id ] },
+			{ :include_blank => true, :selected => @dialplan_route.sip_gateway_id }
+		) %>
+	<% end %>
+	
+	<%= f.input :name %>
+	<%= f.input :position, :as => :hidden %>
+	
+	<%= f.button :submit %>
+<% end %>

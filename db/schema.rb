@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110908125305) do
+ActiveRecord::Schema.define(:version => 20110910120002) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -91,6 +91,24 @@ ActiveRecord::Schema.define(:version => 20110908125305) do
   create_table "configurations", :force => true do |t|
     t.string   "name"
     t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dialplan_patterns", :force => true do |t|
+    t.string   "pattern"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dialplan_routes", :force => true do |t|
+    t.string   "eac"
+    t.integer  "pattern_id"
+    t.integer  "user_id"
+    t.integer  "sip_gateway_id"
+    t.string   "name"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

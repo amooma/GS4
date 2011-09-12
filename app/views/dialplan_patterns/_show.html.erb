@@ -1,0 +1,16 @@
+
+<div class="simple_form_show">
+
+<% i18n_path = 'activerecord.attributes.dialplan_pattern.' %>
+
+<p>
+	<b><%= t( i18n_path + 'pattern' ) %>:</b>
+	<big><tt><%= @dialplan_pattern.pattern %></tt></big>
+</p>
+
+<p>
+	<b><%= t( i18n_path + 'name' ) %>:</b>
+	<%= @dialplan_pattern.name %>
+</p>
+
+</div>

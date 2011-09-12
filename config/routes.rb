@@ -137,6 +137,19 @@ Gemeinschaft4::Application.routes.draw do
 		:action     => 'load',
 		:format     => :'xml'
 	
+	resources :dialplan_routes, :path => 'dialplan-routes' do
+		member do
+			post :move_up
+			post :move_down
+			post :move_to_top
+			post :move_to_bottom
+		end
+	end
+	#OPTIMIZE Add confirm_destroy here if necessary.
+	
+	resources :dialplan_patterns, :path => 'dialplan-patterns'
+	#OPTIMIZE Add confirm_destroy here if necessary.
+	
 	namespace :admin do
 		resources :wizard_phone_and_user, :only => [:new, :create]
 		resources :users do

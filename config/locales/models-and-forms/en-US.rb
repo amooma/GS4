@@ -63,6 +63,8 @@
 			:network_setting               => "Network settings",
 			:sip_gateway                   => "Gateway",
 			:user_to_extension             => "User to extension",
+			:dialplan_pattern              => "Dialplan pattern",
+			:dialplan_route                => "Dialplan route",
 			
 		},
 		
@@ -395,6 +397,23 @@
 				:extension     => "Extension",
 				:extension_id  => "Extension ID",
 			},
+			:dialplan_pattern => {
+				:name     => "Description",
+				:pattern  => "Pattern",
+			},
+			:dialplan_route => {
+				:eac                  => "EAC",
+				:dialplan_pattern     => "Pattern",
+				:dialplan_pattern_id  => "Pattern ID",
+				:pattern              => "Pattern",
+				:pattern_id           => "Pattern ID",
+				:user                 => "User",
+				:user_id              => "User ID",
+				:sip_gateway          => "Gateway",
+				:sip_gateway_id       => "Gateway ID",
+				:name                 => "Description",
+				:position             => "Position",
+			},
 			
 		},
 	},
@@ -726,6 +745,23 @@
 				:user_id       => "",
 				:extension     => "",
 				:extension_id  => "",
+			},
+			:dialplan_pattern => {
+				:name     => "A description.",
+				:pattern  => "The pattern.",  #TODO
+			},
+			:dialplan_route => {
+				:eac                  => "External access code to be dialed by the users to get a (virtual) outside line. Example: “0”. The EAC prefix will automatically be cut off the dialed number. Leave empty in order to enable dialing without EAC.",
+				:dialplan_pattern     => "The pattern which the dialed number (the dial string, after the EAC prefix) will be matched against.",
+				:dialplan_pattern_id  => "The pattern ID.",
+				:pattern              => "The pattern which the dialed number (the dial string, after the EAC prefix) will be matched against.",
+				:pattern_id           => "The pattern ID",
+				:user                 => "The user for which this route is valid. Leave empty for all users.",
+				:user_id              => "User ID",
+				:sip_gateway          => "The gateway to use for dialing. Leave empty to make the route forbidden.",
+				:sip_gateway_id       => "Gateway ID",
+				:name                 => "Description text",
+				:position             => "Order",
 			},
 			
 		},

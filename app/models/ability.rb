@@ -55,6 +55,8 @@ class Ability
         can    :manage  , GlobalContact
         can    :manage  , Configuration
         can    :manage  , SipGateway
+        can    :manage  , DialplanPattern
+        can    :manage  , DialplanRoute
         
         cannot :destroy , User do |u|
           u.try(:id) == user.id

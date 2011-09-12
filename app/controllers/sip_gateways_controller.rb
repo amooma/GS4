@@ -115,11 +115,22 @@ class SipGatewaysController < ApplicationController
 	# DELETE /sip_gateways/1.xml
 	def destroy
 		@sip_gateway = SipGateway.find( params[:id] )
-		@sip_gateway.destroy
 		
-		respond_to do |format|
-			format.html { redirect_to( sip_gateways_url ) }
-			format.xml  { head :ok }
+		begin
+			@sip_gateway.destroy
+			
+			respond_to do |format|
+				format.html { redirect_to( sip_gateways_url ) }
+				format.xml  { head :ok }
+			end
+		
+		rescue ::ActiveRecord::DeleteRestrictionError => e
+			@sip_gateway.errors.add( :base, "#{t(:dependent_restricted)} (#{e.message})" )
+			
+			respond_to do |format|
+				format.html { redirect_to( sip_gateways_url, :alert => "#{t(:dependent_restricted)} (#{e.message})" ) }
+				format.xml  { render :xml => @sip_gateway.errors, :status => :failed_dependency }
+			end
 		end
 	end
 	

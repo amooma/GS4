@@ -37,6 +37,8 @@ de:
   destination: "Ziel"
   errors_model_not_saved: "%{errors_count} haben die Speicherung von %{model_name} verhindert"
   
+  dependent_restricted: "Wird noch verwendet."
+  
   !ruby/symbol role_user: "Benutzer"
   !ruby/symbol role_admin: "Admin"
   !ruby/symbol role_cdr: "CDR-Admin"
@@ -450,6 +452,30 @@ de:
   menu:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
+    dp_patterns: "Wähl-Muster"
+    dp_routes: "Ausgehende Routen"
+  
+  
+  dp_pattern:
+    was_created: "Wähl-Muster wurde angelegt."
+    was_updated: "Wähl-Muster wurde aktualisiert."
+    view:
+      index: "Wähl-Muster"
+      new: "Neues Wähl-Muster"
+      edit: "Wähl-Muster bearbeiten"
+      show: "Wähl-Muster"
+  
+  dp_route:
+    was_created: "Ausgehende Wähl-Route wurde angelegt."
+    was_updated: "Ausgehende Wähl-Route wurde aktualisiert."
+    view:
+      index: "Ausgehende Wähl-Routen"
+      new: "Neue ausgehende Wähl-Route"
+      edit: "Ausgehende Wähl-Route bearbeiten"
+      show: "Ausgehende Wähl-Route"
+    all_users: "(alle)"
+    no_gateway: "(verboten)"
+  
   
   sip_gateway_was_created: "Gateway wurde angelegt."
   sip_gateway_was_updated: "Gateway wurde aktualisiert."

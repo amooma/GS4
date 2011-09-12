@@ -1,0 +1,8 @@
+<%= simple_form_for( @dialplan_pattern ) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :pattern %>
+	<%= f.input :name %>
+	
+	<%= f.button :submit %>
+<% end %>
