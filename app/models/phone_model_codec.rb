@@ -7,6 +7,7 @@ class PhoneModelCodec < ActiveRecord::Base
   
   validates_uniqueness_of :codec_id, :scope => :phone_model_id
   
+  #OPTIMIZE Remove custom messages or add translations.
   validates_presence_of(:phone_model_id, :message => "Need phone_model_id")
   validates_numericality_of(:phone_model_id, :message => "Only integer allowed as phone_model_id")
   validates_presence_of(:codec_id, :message => "Need codec_id")
