@@ -6,42 +6,42 @@
 <% i18n_path = 'activerecord.attributes.sip_gateway.' %>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'host' ) %> (+ <%= I18n.t( i18n_path + 'port' ) %>):</b>
+	<b><%= t( i18n_path + 'host' ) %> (+ <%= t( i18n_path + 'port' ) %>):</b>
 	<%= @sip_gateway.hostport %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'realm' ) %>:</b>
+	<b><%= t( i18n_path + 'realm' ) %>:</b>
 	<%= @sip_gateway.realm %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'username' ) %>:</b>
+	<b><%= t( i18n_path + 'username' ) %>:</b>
 	<%= @sip_gateway.username %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'password' ) %>:</b>
+	<b><%= t( i18n_path + 'password' ) %>:</b>
 	<%= @sip_gateway.password %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'from_user' ) %>:</b>
+	<b><%= t( i18n_path + 'from_user' ) %>:</b>
 	<%= @sip_gateway.from_user %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'from_domain' ) %>:</b>
+	<b><%= t( i18n_path + 'from_domain' ) %>:</b>
 	<%= @sip_gateway.from_domain %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'register' ) %>:</b>
+	<b><%= t( i18n_path + 'register' ) %>:</b>
 	<%= @sip_gateway.register ? t(:yes_lowercase) : t(:no_lowercase) %>
 </p>
 
 <p>
-	<b><%= I18n.t( i18n_path + 'expire' ) %>:</b>
+	<b><%= t( i18n_path + 'expire' ) %>:</b>
 	<%= @sip_gateway.expire %>&nbsp;s
 </p>
 
