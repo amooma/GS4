@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :fax_documents, :dependent => :destroy
   has_many :user_to_extensions, :dependent => :destroy
   has_many :extensions, :through => :user_to_extensions
+  has_many :sip_accounts
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :confirmable, :timeoutable, :registerable and :activatable
@@ -25,8 +26,6 @@ class User < ActiveRecord::Base
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :gn, :sn, :username, :role
-  
-  has_many :sip_accounts
   
   validates_presence_of    :username
   validates_uniqueness_of  :username, :case_sensitive => false

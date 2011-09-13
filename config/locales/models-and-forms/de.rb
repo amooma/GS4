@@ -3,17 +3,6 @@
 { :"de" => {
 	
 	############# #OPTMIZE Find a better place for these entries. {
-	:wfirst_name => "Vorname",
-	:wlast_name => "Nachname",
-	:wpassword => "Passwort",
-	:wpassword_confirmation => "Passwort Wiederholung",
-	:wemail => "E-Mail Adresse",
-	:wusername => "Benutzername",
-	:wextension => "Durchwahl",
-	:wcaller_name => "Anrufername",
-	:wvoicemail_pin => "Anrufbeantworter PIN",
-	:wmac_address => "MAC Adresse",
-	:wphone_model => "Telefon Modell",
 	:wizard_phone_and_user_saved => "Telefon und Account wurde angelegt.",
 	:wizard_phone_and_user => "Benutzer mit Telefon und Durchwahl anlegen ",
 	############# Find a better place for these entries. }

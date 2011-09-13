@@ -30,6 +30,7 @@ class Phone < ActiveRecord::Base
 	
 	has_many    :reboot_requests, :order => 'start', :dependent => :destroy
 	
+	accepts_nested_attributes_for :sip_accounts
 	
 	# log a provisioning
 	#
