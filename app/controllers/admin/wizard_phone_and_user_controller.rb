@@ -31,38 +31,39 @@ before_filter{
       :role => 'user'
     )
     if @user.save
-    @phone = Phone.find_or_create_by_mac_address(
-      :mac_address => params[:wmac_address].upcase,
-      :phone_model_id => params[:phone_model_id]
-    )
-    
-   
-    @sip_account = SipAccount.find_or_create_by_caller_name_and_user_id(
-      :user_id => @user.id,
-      :auth_name => @auth_name,
-      :password => @sip_password,
-      :realm => @sip_server.host,
-      :sip_server_id => @sip_server.id,
-      :sip_proxy_id => @sip_proxy.id,
-      :voicemail_server_id => @voicemail_server.id,
-      :voicemail_pin => params[:wvoicemail_pin],
-      :caller_name => params[:wcaller_name],
-      :phone_id => @phone.id
+      @phone = Phone.find_or_create_by_mac_address(
+        :mac_address => params[:wmac_address].upcase,
+        :phone_model_id => params[:phone_model_id]
+      )
       
-    )
-    
-   
-    @extension = Extension.find_or_create_by_extension_and_destination(
-    :extension => params[:wextension],
-    :destination =>  @auth_name,
-    :active => true
-    )
-    
-   
-    @sip_account_to_extension = SipAccountToExtension.find_or_create_by_extension_id_and_sip_account_id(
-      :extension_id => @extension.id,
-      :sip_account_id => @sip_account.id
-    )
+     if @phone.save
+        @sip_account = SipAccount.find_or_create_by_caller_name_and_user_id(
+          :user_id => @user.id,
+          :auth_name => @auth_name,
+          :password => @sip_password,
+          :realm => @sip_server.host,
+          :sip_server_id => @sip_server.id,
+          :sip_proxy_id => @sip_proxy.id,
+          :voicemail_server_id => @voicemail_server.id,
+          :voicemail_pin => params[:wvoicemail_pin],
+          :caller_name => params[:wcaller_name],
+          :phone_id => @phone.id
+          
+        )
+        
+       
+        @extension = Extension.find_or_create_by_extension_and_destination(
+        :extension => params[:wextension],
+        :destination =>  @auth_name,
+        :active => true
+        )
+        
+       
+        @sip_account_to_extension = SipAccountToExtension.find_or_create_by_extension_id_and_sip_account_id(
+          :extension_id => @extension.id,
+          :sip_account_id => @sip_account.id
+        )
+      end
    end
    
   

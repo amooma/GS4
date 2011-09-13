@@ -1,19 +1,23 @@
 #OPTIMIZE Add pin_change.(?) `./script/gs4cmd resources`: "translation missing: de.activerecord.models.pin_change". See app/models/pin_change.rb.
 
 { :"en-US" => {
-		:wfirst_name => "First name",
-		:wlast_name => "Last name",
-		:wpassword => "Password",
-		:wpassword_confirmation => "Repeat password",
-		:wemail => "E-Mail address",
-		:wusername => "Username",
-		:wextension => "Extension",
-		:wcaller_name => "Caller name",
-		:wvoicemail_pin => "Voicemail PIN",
-		:wmac_address => "MAC-Address",
-		:wphone_model => "Phone model",
-		:wizard_phone_and_user_saved => "Phone and account created.",
-		:wizard_phone_and_user => "Create User with phone and extension",
+	
+	############# #OPTMIZE Find a better place for these entries. {
+	:wfirst_name => "First name",
+	:wlast_name => "Last name",
+	:wpassword => "Password",
+	:wpassword_confirmation => "Repeat password",
+	:wemail => "E-Mail address",
+	:wusername => "Username",
+	:wextension => "Extension",
+	:wcaller_name => "Caller name",
+	:wvoicemail_pin => "Voicemail PIN",
+	:wmac_address => "MAC-Address",
+	:wphone_model => "Phone model",
+	:wizard_phone_and_user_saved => "Phone and account created.",
+	:wizard_phone_and_user => "Create User with phone and extension",
+	############# Find a better place for these entries. }
+	
 	:activerecord => {
 		
 		:models => {
@@ -58,6 +62,7 @@
 			:version                       => "Version",
 			:network_setting               => "Network settings",
 			:sip_gateway                   => "Gateway",
+			:user_to_extension             => "User to extension",
 			
 		},
 		
@@ -384,6 +389,12 @@
 				:reg_transport  => "Reg. transport",
 				:expire         => "Reg. expiration",
 			},
+			:user_to_extension => {
+				:user          => "User",
+				:user_id       => "User ID",
+				:extension     => "Extension",
+				:extension_id  => "Extension ID",
+			},
 			
 		},
 	},
@@ -709,6 +720,12 @@
 				:register       => "Defines if this PBX should register itself at the gateway.",
 				:reg_transport  => "The value of the “transport” parameter used in the registration. “udp” or “tcp”.",
 				:expire         => "The duration in seconds for how long the registration is valid.",
+			},
+			:user_to_extension => {
+				:user          => "",
+				:user_id       => "",
+				:extension     => "",
+				:extension_id  => "",
 			},
 			
 		},

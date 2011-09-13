@@ -1,19 +1,23 @@
 #OPTIMIZE Add pin_change.(?) `./script/gs4cmd resources`: "translation missing: de.activerecord.models.pin_change". See app/models/pin_change.rb.
 
 { :"de" => {
-		:wfirst_name => "Vorname",
-		:wlast_name => "Nachname",
-		:wpassword => "Passwort",
-		:wpassword_confirmation => "Passwort Wiederholung",
-		:wemail => "E-Mail Adresse",
-		:wusername => "Benutzername",
-		:wextension => "Durchwahl",
-		:wcaller_name => "Anrufername",
-		:wvoicemail_pin => "Anrufbeantworter PIN",
-		:wmac_address => "MAC Adresse",
-		:wphone_model => "Telefon Modell",
-		:wizard_phone_and_user_saved => "Telefon und Account wurde angelegt.",
-		:wizard_phone_and_user => "Benutzer mit Telefon und Durchwahl anlegen ",
+	
+	############# #OPTMIZE Find a better place for these entries. {
+	:wfirst_name => "Vorname",
+	:wlast_name => "Nachname",
+	:wpassword => "Passwort",
+	:wpassword_confirmation => "Passwort Wiederholung",
+	:wemail => "E-Mail Adresse",
+	:wusername => "Benutzername",
+	:wextension => "Durchwahl",
+	:wcaller_name => "Anrufername",
+	:wvoicemail_pin => "Anrufbeantworter PIN",
+	:wmac_address => "MAC Adresse",
+	:wphone_model => "Telefon Modell",
+	:wizard_phone_and_user_saved => "Telefon und Account wurde angelegt.",
+	:wizard_phone_and_user => "Benutzer mit Telefon und Durchwahl anlegen ",
+	############# Find a better place for these entries. }
+	
 	:activerecord => {
 		
 		:models => {
@@ -58,6 +62,7 @@
 			:version                       => "Version",
 			:network_setting               => "Netzwerk-Konfiguration",
 			:sip_gateway                   => "Gateway",
+			:user_to_extension             => "Benutzer zu Rufnummer",
 			
 		},
 		
@@ -385,9 +390,14 @@
 				:reg_transport  => "Reg.-Transport",
 				:expire         => "Reg.-Dauer",
 			},
+			:user_to_extension => {
+				:user          => "Benutzer",
+				:user_id       => "Benutzer-ID",
+				:extension     => "Rufnummer",
+				:extension_id  => "Rufnummern-ID",
+			},
 			
 		},
-
 	},
 	
 	:simple_form => {
@@ -711,6 +721,12 @@
 				:register       => "Legt fest ob sich die TK-Anlage beim Gateway registrieren soll.",
 				:reg_transport  => "Der Wert des in der Registrierung mitgeteilten „transport“-Parameters. „udp“ oder „tcp“.",
 				:expire         => "Die Gültigkeitsdauer der Registrierung in Sekunden.",
+			},
+			:user_to_extension => {
+				:user          => "",
+				:user_id       => "",
+				:extension     => "",
+				:extension_id  => "",
 			},
 			
 		},

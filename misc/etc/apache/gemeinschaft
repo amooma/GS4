@@ -4,10 +4,12 @@ MaxKeepAliveRequests 40
 KeepAliveTimeout 60
 Timeout 100
 
+#TODO Find a better solution for the passenger version here. If this config file depends on a specific version of passenger then install that very version in install.sh (gem install passenger --version '3.0.8') and in the corresponding packages.
 LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so
 
 # http://www.modrails.com/documentation/Users guide Apache.html
 
+#TODO Find a better solution for the passenger version here. If this config file depends on a specific version of passenger then install that very version in install.sh (gem install passenger --version '3.0.8') and in the corresponding packages.
 PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9
 PassengerRuby /usr/bin/ruby1.9.1
 
@@ -52,11 +54,11 @@ LogFormat "%h %l %u \"%r\" %>s %b KA:%k \"%{User-agent}i\"" log_format_for_syslo
 	RewriteRule ^.* - [L]
 	
 	RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [R,L]
- 	
- 	SetEnvIf Request_URI "^/freeswitch-call-processing/actions" downgrade-1.0 no-gzip no-cache
+	
+	SetEnvIf Request_URI "^/freeswitch-call-processing/actions" downgrade-1.0 no-gzip no-cache
 	BrowserMatch "^freeswitch-spidermonkey-curl/1\." downgrade-1.0 no-gzip no-cache
- 	BrowserMatch "^freeswitch-xml/1\." downgrade-1.0 no-gzip no-cache
- 	
+	BrowserMatch "^freeswitch-xml/1\." downgrade-1.0 no-gzip no-cache
+	
 	DocumentRoot /opt/gemeinschaft/public
 	
 	PassengerEnabled on
@@ -124,8 +126,8 @@ LogFormat "%h %l %u \"%r\" %>s %b KA:%k \"%{User-agent}i\"" log_format_for_syslo
 		Options -MultiViews
 		Options FollowSymLinks
 	</Directory>
- 	
- 	SSLEngine on
+	
+	SSLEngine on
 	SSLCertificateFile    /etc/ssl/amooma/server_cert.pem
 	SSLCertificateKeyFile /etc/ssl/amooma/server_key.pem
 </VirtualHost>

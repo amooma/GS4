@@ -1,0 +1,12 @@
+# Ignore the built gem:
+*.gem
+
+.bundle
+
+Gemfile.lock
+
+pkg/*
+
+# Ignore .DS_Store from Mac OS X:
+.DS_Store
+

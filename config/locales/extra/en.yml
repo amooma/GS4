@@ -58,7 +58,7 @@ en:
   fax_document_not_found: "Fax document not found"
   fax_document_not_sent: "Fax document could not be sent"
   fax_thumbnail_not_created: "Fax preview could not be created"
-  fax_document_too_many: "Too many Fax documents (%{count})"
+  fax_document_too_many: "Too many fax documents (%{count})"
   outbound: "Outbound"
   inbound: "Inbound"
   direction: "Direction"
