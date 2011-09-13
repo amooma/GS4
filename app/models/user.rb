@@ -15,11 +15,9 @@ class User < ActiveRecord::Base
   has_many :sip_accounts
   
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :lockable, :confirmable, :timeoutable, :registerable and :activatable
+  # :token_authenticatable, :lockable, :confirmable, :timeoutable, :registerable, :recoverable, :rememberable and :activatable
   devise(
     :database_authenticatable,  
-    :recoverable,
-    :rememberable,
     :trackable,
     :validatable
   )
