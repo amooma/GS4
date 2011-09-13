@@ -10,6 +10,7 @@
 	<% end %>
 	
 	<% f.simple_fields_for :sip_accounts do |sip_account| %>
+		
 		<% sip_account.simple_fields_for :extensions do |extension| %>
 			<%= extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
 			<%= extension.input :destination, :as => :hidden %>
@@ -25,11 +26,7 @@
 		<%= sip_account.input :sip_server_id, :as => :hidden %>
 		<%= sip_account.input :sip_proxy_id, :as => :hidden %>
 		<%= sip_account.input :voicemail_server_id, :as => :hidden %>
-		
-		
-		
 	<% end %>
 	
 	<%= f.button :submit %>
 <% end %>
-

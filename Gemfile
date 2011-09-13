@@ -55,12 +55,6 @@ gem "omniauth"
 gem 'cancan', '~> 1.6.5'
 
 
-# FastCGI (aptitude install libfcgi-dev)
-group :production do
-	gem 'fcgi', '~> 0.8'
-	#OPTIMIZE Is the "fcgi" gem still required? If it isn't then remove it here and in the Debian packages.
-end
-
 # Syslogger
 group :production do
 	gem 'syslogger', '~> 1.2'
