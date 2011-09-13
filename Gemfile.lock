@@ -55,7 +55,6 @@ GEM
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
       rack (< 2, >= 1.1.0)
-    fcgi (0.8.8)
     fssm (0.2.7)
     hirb (0.4.0)
     i18n (0.6.0)
@@ -172,7 +171,6 @@ DEPENDENCIES
   devise (~> 1.1)
   factory_girl_rails
   faker
-  fcgi (~> 0.8)
   hirb
   omniauth
   rails (~> 3.0.3)
