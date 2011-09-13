@@ -5,10 +5,10 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 	skip_authorization_check
 	
 	before_filter {
-		@sip_proxy         = SipProxy.where(:is_local => true).first
-		@sip_server        = SipServer.where(:is_local => true).first
-		@voicemail_server  = VoicemailServer.where(:is_local => true).first
-		@phone_models      = PhoneModel.all
+		@sip_proxy         = SipProxy        .where(:is_local => true).first
+		@sip_server        = SipServer       .where(:is_local => true).first
+		@voicemail_server  = VoicemailServer .where(:is_local => true).first
+		@phone_models      = PhoneModel      .all
 	}
 	
 	def new
