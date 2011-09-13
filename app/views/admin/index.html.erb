@@ -63,7 +63,7 @@
 
 
 <hr />
-<% if ! @phones.empty? %>
+<% if @phones && ! @phones.empty? %>
 	<h2><%= t(:listing_phones_last_modified) %></h2>
 	
 	<%= render :partial => 'phones/table_of_phones', :locals => {:phones => @phones} %>
