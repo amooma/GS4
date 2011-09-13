@@ -18,6 +18,7 @@ class AdminController < ApplicationController
 		@number_of_sip_servers     = SipServer     .count
 		@number_of_extensions      = Extension     .count
 		@number_of_configurations  = Configuration .count
+		
 		respond_to do |format|
 			format.html
 		end
