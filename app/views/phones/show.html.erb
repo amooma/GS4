@@ -1,18 +1,8 @@
 <h1><%= t(:phone) %></h1>
-<%= render 'show' %>
-<%= link_to t(:edit), edit_phone_path(@phone) %>
 
-
-
-
-<hr style="margin: 3em 0 0 0;" />
+<%= render :partial => 'phones/table_of_phones', :locals => {:phones => [@phone]} %>
 <h2><%= t(:sip_accounts) %></h2>
-<p>
-<% if @sip_accounts.count < @phone.phone_model.max_number_of_sip_accounts %>
-  <%= link_to t(:create_sip_account_for_phone), new_phone_sip_account_path(@phone) %>	
-<% else %>
-  <%= t(:phone_model_allows_number_accounts, :model_name => @phone.phone_model.name, :number_sip_accounts => @phone.phone_model.max_number_of_sip_accounts) %>
-<% end %>
-</p>
+<%= render :partial => 'sip_accounts/table_of_sip_accounts', :locals => {:sip_accounts => @phone.sip_accounts} %>
 
-<%= render :partial => 'sip_accounts/table_of_sip_accounts', :locals => {:sip_accounts => @sip_accounts} %>
+
+

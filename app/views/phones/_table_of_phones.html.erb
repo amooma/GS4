@@ -1,11 +1,9 @@
 <table>
   <tr>
     <th><%= t(:mac_address) %></th>
-    <th><%= t(:manufacturer) %></th>
     <th><%= t(:phone_model) %></th>
     <th><%= t(:ip_address) %></th>
-    <th><%= t(:sip_accounts) %></th>
-    <th><%= t(:reboot) %></th>
+    <th><%= t(:reboot_phone) %></th>
     <th></th>
     <th></th>
   </tr>
@@ -13,22 +11,26 @@
 <% phones.each do |phone| %>
   <tr>
     <td><%= link_to phone.mac_address, phone %></td>
-    <td><%= truncate(phone.phone_model.manufacturer.name, :length => 20) %></td>
-    <td><%= phone.phone_model.name %></td>
-    <td><%= phone.ip_address %></td>
     <td>
-      <ul>
-        <li><%= link_to t(:new_sip_account), new_phone_sip_account_path(phone) %></li>
-<% phone.sip_accounts.each { |sip_account| %>
-        <li><%= link_to sip_account.to_display, phone_sip_account_path(phone, sip_account) %></li>
-<% } %>
-      </ul>
+      <%= phone.phone_model.name %>
+      <br />
+      <small><%= t(:manufacturer) %>: <br /><%= truncate(phone.phone_model.manufacturer.name, :length => 20) %></small>
     </td>
-    <td>
-    <% if phone.rebootable? %>
-    <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
+    <td><%= phone.ip_address.blank? ? '-' : phone.ip_address  %></td>
+    
+    <td class="<%= phone.created_at > Time.now - 60.minutes ? 'status_no' : '' %>">
+    <% if phone.created_at > Time.now - 60.minutes %>
+      <% if phone.rebootable? %>
+      <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
+      <% else %>
+      <%= t(:phone_created_reboot_needed, :time_ago => time_ago_in_words(phone.created_at)) %>
+      <% end %>
     <% else %>
-    <small>(<%= t(:ip_unknown_or_path_nil) %>)</small>
+      <% if phone.rebootable? %>
+      <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
+      <% else %>
+      <%= t(:phone_not_yet_provisioned) %>
+      <% end %>
     <% end %>
     </td>
     <td><%= link_to t(:edit), edit_phone_path(phone) %></td>

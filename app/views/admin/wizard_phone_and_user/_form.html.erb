@@ -15,8 +15,9 @@
 			{ :include_blank => false, :selected => params[:phone_model_id] }
 		) %>
   <% end %>
-  
-    
+  <%= f.input :authname, :input_html => { :value => @authname } , :as => :hidden %>
+	<%= f.input :sip_password, :input_html => { :value => @sip_password }, :as => :hidden %>
+	
   <%= f.button :submit %>
 	
 <% end %>

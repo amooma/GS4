@@ -18,6 +18,7 @@ class HomeController < ApplicationController
 			@number_of_sip_proxies   = SipProxy.count
 			@number_of_sip_servers   = SipServer.count
 			@number_of_extensions    = Extension.count
+			@phones = Phone.order('updated_at desc').limit(1)
 			
 			respond_to do |format|
 				format.html { render "admin/index" }
