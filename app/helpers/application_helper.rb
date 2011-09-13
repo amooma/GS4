@@ -66,10 +66,15 @@ module ApplicationHelper
 						]},
 					]
 			end
-		else
+		elsif ! current_page?(:controller => 'admin/setup', :action => 'new')
+
 			menu_items = [
 				{ :text => t(:sign_in)       , :url => new_user_session_path },
 			]
+		else
+     menu_items = [
+                   {},
+                   ] 
 		end
 		return menu_items
 	end
