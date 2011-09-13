@@ -105,7 +105,8 @@ snom    .ouis.create([
 # http://wiki.snom.com/Settings/mac
 #
 
-snom.phone_models.create(:name => 'Snom 190').phone_model_mac_addresses.create(:starts_with => '00041322')
+#snom.phone_models.create(:name => 'Snom 190').phone_model_mac_addresses.create(:starts_with => '00041322')
+
 snom300 = snom.phone_models.create(:name => 'Snom 300', 
                                    :url => 'http://www.snom.com/en/products/ip-phones/snom-300/',
                                    :max_number_of_sip_accounts =>  2 )
@@ -119,6 +120,7 @@ snom300.phone_model_mac_addresses.create([
                                          {:starts_with => '0004133B'},
                                          {:starts_with => '00041337'}
                                          ])
+
 # Uncomment the following code if you need all Snom 300 MAC Addresses
 # It'll fill your database by some 30,000 items.
 #                                                                                
@@ -129,6 +131,7 @@ snom300.phone_model_mac_addresses.create([
 #   end
 #   snom300.phone_model_mac_addresses.create(:starts_with => snom300_mac_address.upcase)
 # end
+
 snom.phone_models.create(:name => 'Snom 320', 
                          :url => 'http://www.snom.com/en/products/ip-phones/snom-320/',
                          :max_number_of_sip_accounts => 12,
