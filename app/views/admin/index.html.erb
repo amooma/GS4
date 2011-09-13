@@ -1,7 +1,7 @@
 <h1><%= t(:admin_page) %></h1>
 
-
 <div class="index_overview">
+	
 	<section>
 		<h2><%= t(:wizards) %></h2>
 		<ul>
@@ -34,8 +34,6 @@
 			) %></li>
 		</ul>
 	</section>
-
-	
 	
 	<section>
 		<h2><%= t(:extensions) %></h2>
@@ -49,7 +47,6 @@
 		</ul>
 	</section>
 	
-	
 	<section>
 		<h2><%= t(:maintenance) %></h2>
 		<ul>
@@ -61,12 +58,15 @@
 			) %></li>
 		</ul>
 	</section>
+	
 </div>
-	<hr/>
-	<% if ! @phones.empty? %>
-	<h2><%= t(:listing_phones_last_modified)%></h2>
 
+
+<hr />
+<% if ! @phones.empty? %>
+	<h2><%= t(:listing_phones_last_modified) %></h2>
+	
 	<%= render :partial => 'phones/table_of_phones', :locals => {:phones => @phones} %>
 	
 	<%= link_to( t(:list_all_phones), url_for(:controller => '/phones', :action => 'index')) if @number_of_phones > @phones.length %>
-	<% end %>
+<% end %>
