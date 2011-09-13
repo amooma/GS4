@@ -1,0 +1,41 @@
+# Last Modified: Mon Sep 12 23:00:52 2011
+#include <tunables/global>
+
+/KNOPPIX/opt/freeswitch/bin/freeswitch flags=(complain) {
+  #include <abstractions/base>
+
+  capability dac_override,
+  capability kill,
+
+
+
+  /KNOPPIX/etc/ld.so.cache r,
+  /KNOPPIX/lib/i386-linux-gnu/ld-*.so mr,
+  /KNOPPIX/lib/i386-linux-gnu/libc-*.so mr,
+  /KNOPPIX/lib/i386-linux-gnu/libcrypt-*.so mr,
+  /KNOPPIX/lib/i386-linux-gnu/libdl-*.so mr,
+  /KNOPPIX/lib/i386-linux-gnu/libgcc_s.so.* mr,
+  /KNOPPIX/lib/i386-linux-gnu/libm-*.so mr,
+  /KNOPPIX/lib/i386-linux-gnu/libpthread-*.so mr,
+  /KNOPPIX/lib/i386-linux-gnu/librt-*.so mr,
+  /KNOPPIX/lib/lib*so* mr,
+  /KNOPPIX/opt/freeswitch/ r,
+  /KNOPPIX/opt/freeswitch/lib/lib*so* mr,
+  /KNOPPIX/opt/freeswitch/sounds/** r,
+  /KNOPPIX/usr/lib/i386-linux-gnu/libstdc++.so.* mr,
+  /KNOPPIX/usr/lib/i686/cmov/libcrypto.so.* mr,
+  /KNOPPIX/usr/lib/i686/cmov/libssl.so.* mr,
+  /KNOPPIX/usr/lib/lib*so* mr,
+  /UNIONFS/etc/ld.so.cache r,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/ r,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/core.db rwk,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/core.db-journal rw,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/sofia_reg_internal.db wk,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/sofia_reg_internal.db-journal rw,
+  /opt/gemeinschaft-local/data/opt/freeswitch/db/voicemail_default.db k,
+  /opt/gemeinschaft-local/data/opt/freeswitch/run/freeswitch.pid rwk,
+  /opt/gemeinschaft-local/data/opt/freeswitch/storage/** rw,
+  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-conf/mime.types r,
+  /opt/gemeinschaft-local/data/opt/gemeinschaft/misc/freeswitch/fs-scripts/GS.js r,
+
+}

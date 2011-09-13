@@ -1,25 +1,45 @@
 <table>
   <tr>
-    <th><%= t(:name) %></th>
-    <th><%= t(:sip_phone) %></th>
-    <th><%= t(:mac_address) %></th>
+    <th><%= t(:user) %></th>
     <th><%= t(:auth_name) %></th>
-    <th><%= t(:password) %></th>
-    <th><%= t(:user_id) %></th>
+    <th><%= t(:caller_name) %></th>
+    <th><%= t(:extensions) %></th>
+    <th><%= t(:sip_phone) %></th>
+    <th><%= t(:registered) %></th>
+    <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% sip_accounts.each do |sip_account| %>
+<% @sip_accounts.each do |sip_account| %>
   <tr>
-    <td><%= link_to sip_account.auth_name, sip_account %></td>
-    <td><%= sip_account.phone.phone_model.name %></td>
-    <td><%= link_to sip_account.phone.mac_address, sip_account.phone %></td>
+    <td><%
+      if sip_account.user
+        %><%= sip_account.user.to_display %><%
+      end
+    %></td>
     <td><%= sip_account.auth_name %></td>
-    <td><%= sip_account.password %></td>
-    <td><%= sip_account.user_id %></td>
-    <td><%= link_to t(:edit), edit_sip_account_path(sip_account) %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_sip_account_path(sip_account) if can?( :destroy, sip_account ) %></td>
+    <td><%= sip_account.caller_name %></td>
+    <td><%
+      sip_account_extensions = sip_account.extensions.accessible_by( current_ability, :show )
+      if sip_account_extensions
+    %>
+      <ul>
+      <% sip_account_extensions.each do |extension| %>
+        <li><%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </td>
+    <td>
+      <% if sip_account.try(:phone) %>
+        <%= sip_account.phone.mac_address %>
+      <% end %>
+    </td>
+    <td class="<%= sip_account.registered? ? 'status_yes' : 'status_no' %>"><%= sip_account.registered? ? t(:yes_lowercase) : t(:no_lowercase) %></td>
+    <td><%= link_to t(:show)    ,                                   sip_account %></td>
+    <td><%= link_to t(:edit)    ,            edit_sip_account_path( sip_account ) %></td>
+    <td><%= link_to t(:destroy) , confirm_destroy_sip_account_path( sip_account ) if can?( :destroy, sip_account ) %></td>
   </tr>
 <% end %>
 </table>
