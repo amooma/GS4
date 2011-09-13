@@ -1,25 +1,35 @@
-<%= simple_form_for "", :url => "/admin/wizard_phone_and_user" do |f| %>
+<%= simple_form_for @phone, :url => "/admin/wizard_phone_and_user" do |f| %>
+	<%= f.error_messages %>
 	
-	<%= f.input :wfirst_name    , :label => I18n.t(:wfirst_name    ), :input_html => { :value => params[:wfirst_name    ]} %>
-	<%= f.input :wlast_name     , :label => I18n.t(:wlast_name     ), :input_html => { :value => params[:wlast_name     ]} %>
-	<%= f.input :wpassword      , :label => I18n.t(:wpassword      ), :input_html => { :value => params[:wpassword      ]} %>
-	<%= f.input :wpassword_confirmation,
-	                              :label => I18n.t(:wpassword_confirmation ),
-	                                                                  :input_html => { :value => params[:wpassword_confirmation ]} %>
-	<%= f.input :wemail         , :label => I18n.t(:wemail         ), :input_html => { :value => params[:wemail         ]} %>
-	<%= f.input :wusername      , :label => I18n.t(:wusername      ), :input_html => { :value => params[:wusername      ]} %>
-	<%= f.input :wextension     , :label => I18n.t(:wextension     ), :input_html => { :value => params[:wextension     ]} %>
-	<%= f.input :wcaller_name   , :label => I18n.t(:wcaller_name   ), :input_html => { :value => params[:wcaller_name   ]} %>
-	<%= f.input :wvoicemail_pin , :label => I18n.t(:wvoicemail_pin ), :input_html => { :value => params[:wvoicemail_pin ]} %>
-	<%= f.input :wmac_address   , :label => I18n.t(:wmac_address   ), :input_html => { :value => params[:wmac_address   ]} %>
-	<%= f.input :wphone_model   , :label => I18n.t(:wphone_model   ), do %>
+	<%= f.input :mac_address %>
+	<%= f.input :phone_model do %>
 		<%= f.select( :phone_model_id,
 			@phone_models.collect {|r| [ r.name, r.id ] },
-			{ :include_blank => false, :selected => params[:phone_model_id] }
+			{ :include_blank => false, :selected => @phone.phone_model_id }
 		) %>
-  <% end %>
-  <%= f.input :authname, :input_html => { :value => @authname } , :as => :hidden %>
-	<%= f.input :sip_password, :input_html => { :value => @sip_password }, :as => :hidden %>
+	<% end %>
 	
-  <%= f.button :submit %>
+	<% f.simple_fields_for :sip_accounts do |sip_account| %>
+		<% sip_account.simple_fields_for :extensions do |extension| %>
+			<%= extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
+			<%= extension.input :destination, :as => :hidden %>
+			<%= extension.input :active, :as => :hidden %>
+		<% end %>
+		
+		<%= sip_account.input :caller_name, :hint => t('simple_form.hints.sip_account.caller_name') %>
+		<%= sip_account.input :voicemail_pin, :as => :string, :required => true, :hint => t('simple_form.hints.sip_account.voicemail_pin') %>
+		
+		<%= sip_account.input :auth_name, :as => :hidden %>
+		<%= sip_account.input :password, :as => :hidden %>
+		<%= sip_account.input :realm, :as => :hidden %>
+		<%= sip_account.input :sip_server_id, :as => :hidden %>
+		<%= sip_account.input :sip_proxy_id, :as => :hidden %>
+		<%= sip_account.input :voicemail_server_id, :as => :hidden %>
+		
+		
+		
+	<% end %>
+	
+	<%= f.button :submit %>
 <% end %>
+

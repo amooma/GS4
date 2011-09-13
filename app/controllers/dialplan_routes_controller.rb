@@ -96,4 +96,46 @@ class DialplanRoutesController < ApplicationController
     end
   end
   
+  
+  # POST dialplan_routes/1/move_up
+  def move_up
+    @dialplan_route = DialplanRoute.find(params[:id])
+    @dialplan_route.move_higher if @dialplan_route
+    respond_to do |format|
+      format.html { redirect_to( :action => :index, :moved_id => @dialplan_route.try(:id) )}
+      format.xml  { head :ok }
+    end
+  end
+  
+  # POST dialplan_routes/1/move_down
+  def move_down
+    @dialplan_route = DialplanRoute.find(params[:id])
+    @dialplan_route.move_lower if @dialplan_route
+    respond_to do |format|
+      format.html { redirect_to( :action => :index, :moved_id => @dialplan_route.try(:id) )}
+      format.xml  { head :ok }
+    end
+  end
+  
+  # POST dialplan_routes/1/move_to_top
+  def move_to_top
+    @dialplan_route = DialplanRoute.find(params[:id])
+    @dialplan_route.move_to_top if @dialplan_route
+    respond_to do |format|
+      format.html { redirect_to( :action => :index, :moved_id => @dialplan_route.try(:id) )}
+      format.xml  { head :ok }
+    end
+  end
+  
+  # POST dialplan_routes/1/move_to_bottom
+  def move_to_bottom
+    @dialplan_route = DialplanRoute.find(params[:id])
+    @dialplan_route.move_to_bottom if @dialplan_route
+    respond_to do |format|
+      format.html { redirect_to( :action => :index, :moved_id => @dialplan_route.try(:id) )}
+      format.xml  { head :ok }
+    end
+  end
+  
+  
 end

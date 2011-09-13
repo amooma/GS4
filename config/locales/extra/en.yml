@@ -504,4 +504,4 @@ en:
   wizards: "Wizards"
   wizard_phone_and_user_new: "Create user with phone and extension"
   phone_created_reboot_needed: "Phone was created %{time_ago} ago. Please reboot it manually."
-  
+  default_caller_name: "Extension"

@@ -47,5 +47,14 @@ class Extension < ActiveRecord::Base
   #OPTIMIZE Check that the destination of a SIP account's extension cannot be modified, either here or in the controller.
   #http://127.0.0.1:3000/sip_accounts/1/extensions/new?destination=FOOBAR
   
+  def self.next_unused_extension
+    number_of_digits = Configuration.get(:default_extension_length, 3, Integer)
+    check_extension = 10 ** (number_of_digits - 1)
+    while Extension.exists?( :extension => check_extension.to_s )
+      check_extension += 1
+    end
+    return check_extension
+  end
+  
 end
 

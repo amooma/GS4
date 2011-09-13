@@ -12,6 +12,8 @@ class SipAccount < ActiveRecord::Base
   has_many :call_forwards, :dependent => :destroy
   acts_as_list :scope => :user
   
+  accepts_nested_attributes_for :extensions
+  
   validate_username         :auth_name
   validates_uniqueness_of   :auth_name, :case_sensitive => false, :scope => :sip_server_id
   # As long as caller_name stays here
