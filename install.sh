@@ -50,7 +50,6 @@ aptitude install -y --allow-untrusted \
   make \
   build-essential \
   debhelper \
-  libfcgi-dev \
   libxml++-dev \
   libxslt-dev \
   libsqlite3-dev \
