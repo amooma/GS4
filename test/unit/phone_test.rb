@@ -7,9 +7,9 @@ class PhoneTest < ActiveSupport::TestCase
 
   # Test a wrong oui start of the mac address
   #
-  should "not be a valid start of the mac address (oui has to be right)" do
+  should "not allow an invalid start of the MAC address (OUI has to be right)" do
     phone = Factory.build(:phone)
-    phone.mac_address = phone.mac_address.reverse
+    phone.mac_address = "000000010203"
     assert !phone.valid?
   end
 
