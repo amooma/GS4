@@ -16,19 +16,19 @@
         img = case phone.try(:phone_model).try(:manufacturer).try(:ieee_name)
           when 'SNOM Technology AG'
             case (phone.try(:phone_model).try(:name) || '').downcase.gsub( / +/, '' )
-              when 'snom300'; 'snom/s-300.png'
-              when 'snom320'; 'snom/s-320.png'
-              when 'snom360'; 'snom/s-360.png'
-              when 'snom370'; 'snom/s-370.png'
-              when 'snom820'; 'snom/s-820.png'
-              when 'snom821'; 'snom/s-821.png'
-              when 'snom870'; 'snom/s-870.png'
+              when 'snom300'; 'snom/Visio_snom300.png'
+              when 'snom320'; 'snom/Visio_snom320.png'
+              when 'snom360'; 'snom/Visio_snom360.png'
+              when 'snom370'; 'snom/Visio_snom370.png'
+              when 'snom820'; 'snom/Visio_snom820.png'
+              when 'snom821'; 'snom/Visio_snom821.png'
+              when 'snom870'; 'snom/Visio_snom870.png'
               else nil
             end
           else nil
         end
         if img
-          %><img src="<%= root_path %>images/phones/<%= img %>" alt=" " align="middle" style="vertical-align:middle; border:2px solid #777; border-radius:12px; margin:0 0.5em 0 0; box-shadow: 1px 2px 4px #999;" /><%
+          %><img src="<%= root_path %>images/phones/<%= img %>" width="80" alt="<%= "#{phone.phone_model.name} with the MAC Address #{phone.mac_address}" %>" align="middle" /><br /><%
         end
       %>
       <span style="white-space: nowrap;"><%= phone.phone_model.name %></span>

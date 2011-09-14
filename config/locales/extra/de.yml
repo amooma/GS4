@@ -142,7 +142,7 @@ de:
   sip_accounts: "SIP-Accounts"
   do_really_reboot: "Wollen Sie dieses %{name} wirklich neu starten?"
   ip_unknown_or_path_nil: "IP-Adresse unbekannt oder Pfad nicht gesetzt"
-  phone_not_yet_provisioned: "Telefon noch nicht provisioniert. Bitte Telefon manuell neu starten."
+  phone_not_yet_provisioned: "Das Telefon ist nicht provisioniert. Bitte versuchen Sie es manuell neu zu starten."
   create_sip_account_for_phone: "Neuen SIP-Account für dieses Telefon anlegen?"
   phone_model_allows_number_accounts: "Das Telefonmodell %{model_name} erlaubt nur %{number_sip_accounts} SIP-Accounts. Wenn nötig Accounts löschen"
   phone_created: "Telefon wurde erfolgreich angelegt"
