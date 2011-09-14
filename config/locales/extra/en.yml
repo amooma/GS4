@@ -142,7 +142,7 @@ en:
   sip_accounts: "SIP accounts"
   do_really_reboot: "Do you really want to reboot this %{name}?"
   ip_unknown_or_path_nil: "IP address unknown or reboot path not set"
-  phone_not_yet_provisioned: "Phone not provisioned. Please reboot manually." 
+  phone_not_yet_provisioned: "The phone has not been provisioned yet. Please reboot the phone manually." 
   create_sip_account_for_phone: "Create a new SIP account for this phone"
   phone_model_allows_number_accounts: "The phone model %{model_name} allows only %{number_sip_accounts} SIP accounts. To create one you have to delete one first"
   phone_created: "Phone was successfully created"
