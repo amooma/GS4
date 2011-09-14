@@ -453,6 +453,7 @@ de:
   menu:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
+    home: "Home"
   
   sip_gateway_was_created: "Gateway wurde angelegt."
   sip_gateway_was_updated: "Gateway wurde aktualisiert."

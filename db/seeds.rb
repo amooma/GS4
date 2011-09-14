@@ -109,6 +109,7 @@ snom    .ouis.create([
 
 snom300 = snom.phone_models.create(:name => 'Snom 300', 
                                    :url => 'http://www.snom.com/en/products/ip-phones/snom-300/',
+                                   :manual_url => 'http://wiki.snom.com/Snom300/Documentation',
                                    :max_number_of_sip_accounts =>  2 )
 snom300.phone_model_mac_addresses.create([
                                          {:starts_with => '00041325'},
@@ -134,6 +135,7 @@ snom300.phone_model_mac_addresses.create([
 
 snom.phone_models.create(:name => 'Snom 320', 
                          :url => 'http://www.snom.com/en/products/ip-phones/snom-320/',
+                         :manual_url => 'http://wiki.snom.com/Snom320/Documentation',
                          :max_number_of_sip_accounts => 12,
                          :number_of_keys => 12 ).
                          phone_model_mac_addresses.create([
@@ -147,6 +149,7 @@ snom.phone_models.create(:name => 'Snom 320',
                                          ])
 snom.phone_models.create(:name => 'Snom 360', 
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-360/',
+                        :manual_url => 'http://wiki.snom.com/Snom360/Documentation',
                         :max_number_of_sip_accounts => 12,
                         :number_of_keys => 12 ).
                         phone_model_mac_addresses.create([
@@ -158,6 +161,7 @@ snom.phone_models.create(:name => 'Snom 360',
                                         ])
 snom.phone_models.create(:name => 'Snom 370', 
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-370/',
+                        :manual_url => 'http://wiki.snom.com/Snom370/Documentation',
                         :max_number_of_sip_accounts => 12,
                         :number_of_keys => 12 ).
                         phone_model_mac_addresses.create([
@@ -168,6 +172,7 @@ snom.phone_models.create(:name => 'Snom 370',
                                         ])
 snom.phone_models.create(:name => 'Snom 820', 
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-820/',
+                        :manual_url => 'http://wiki.snom.com/Snom820/Documentation',
                         :max_number_of_sip_accounts => 12,
                         :number_of_keys => 12 ).
 			phone_model_mac_addresses.create([
@@ -175,6 +180,7 @@ snom.phone_models.create(:name => 'Snom 820',
                                         ])
 snom.phone_models.create(:name => 'Snom 821', 
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-821/',
+                        :manual_url => 'http://wiki.snom.com/Snom821/Documentation',
                         :max_number_of_sip_accounts => 12,
                         :number_of_keys => 12 ).
                         phone_model_mac_addresses.create([
@@ -182,6 +188,7 @@ snom.phone_models.create(:name => 'Snom 821',
                                         ])
 snom.phone_models.create(:name => 'Snom 870', 
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-870/',
+                        :manual_url => 'http://wiki.snom.com/Snom870/Documentation',
                         :max_number_of_sip_accounts => 12,
                         :number_of_keys => 12 ).
                         phone_model_mac_addresses.create([
