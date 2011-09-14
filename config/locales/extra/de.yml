@@ -476,8 +476,15 @@ de:
   automatic_reboot: "Das System wird nach dieser Aktion automatisch neu gestartet!"
   mandatory_fields: "Mit einem * gekennzeichnete Felder müssen ausgefüllt werden!"
   save_reboot: "Speichern und System neu starten (Reboot)"
+  
   wizards: "Assistenten"
-  wizard_phone_and_user_new: "Benutzer mit Telefon und Durchwahl anlegen"
+  wizard_phone: "Telefon mit Durchwahl anlegen"
+  wizard_phone_and_user: "Telefon mit Durchwahl und Benutzer anlegen"
+  wizard_phone_and_user_new: "Telefon mit Durchwahl und Benutzer anlegen"
+  wizard_phone_new: "Telefon mit Durchwahl anlegen"
+  
+  wizard_phone_and_user_saved: "Telefon %{phone_model} (MAC-Adresse: %{mac_address}) für den Benutzer %{username} wurde mit der Durchwahl %{extension} angelegt."
+  wizard_phone_saved: "Telefon %{phone_model} (MAC-Adresse: %{mac_address}) wurde mit der Durchwahl %{extension} angelegt."
   
   phone_created_reboot_needed: "Dieses Telefon wurde vor %{time_ago} in Gemeinschaft angelegt, hat aber bisher seine Konfiguration noch nicht abgerufen. Bitte das Telefon manuell auf Werkseinstellungen zurücksetzen."
   phone_set_config_url: "Danach bitte folgende Setting-URL auf dem Telefon konfigurieren:"

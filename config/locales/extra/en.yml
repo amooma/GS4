@@ -476,8 +476,15 @@ en:
   automatic_reboot: "The system will reboot after this action!"
   mandatory_fields: "Fields marked with * are mandatory!"
   save_reboot: "Save settings and reboot system"
+  
   wizards: "Wizards"
-  wizard_phone_and_user_new: "Create user with phone and extension"
+  wizard_phone: "Create phone with extension"
+  wizard_phone_and_user: "Create phone with extension and user"
+  wizard_phone_and_user_new: "Create phone with extension and user"
+  wizard_phone_new: "Create phone with extension"
+  
+  wizard_phone_and_user_saved: "Phone %{phone_model} (MAC address: %{mac_address}) for user %{username} was created with extension %{extension}."
+  wizard_phone_saved: "Phone %{phone_model} (MAC address: %{mac_address}) was created with extension %{extension}."
   
   phone_created_reboot_needed: "Phone was created %{time_ago} ago in Gemeinschaft but didn't request its configuration yet. Please reset the phone to factory defaults."
   phone_set_config_url: "Next, please configure the setting URL in following on the phone:"

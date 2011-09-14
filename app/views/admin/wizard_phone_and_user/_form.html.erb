@@ -14,18 +14,7 @@
 		<% end %>
 	<% end %>
 	
-	<%= f_sip_account.input :user, :label => false, :hint => false do %>
-		<%# f.simple_fields_for @phone.sip_accounts.first.user do |f_user| %>
-		<% f_sip_account.simple_fields_for @user do |f_user| %>
-			<%= f_user.input :gn, :hint => t('simple_form.hints.user.gn') %>
-			<%= f_user.input :sn, :hint => t('simple_form.hints.user.sn') %>
-			<%= f_user.input :username, :hint => t('simple_form.hints.user.username') %>
-			<%= f_user.input :email, :hint => t('simple_form.hints.user.email') %>
-			<%= f_user.input :password, :hint => t('simple_form.hints.user.password') %>
-			<%= f_user.input :password_confirmation, :hint => t('simple_form.hints.user.password_confirmation') %>
-			<%= f_user.input :role, :as => :hidden %>				
-		<% end %>
-	<% end %>
+	<%= render :partial => 'form_user', :locals => {:f_sip_account => f_sip_account} if @user %>
 	
 	<% f_sip_account.simple_fields_for :extensions do |f_extension| %>
 		<%= f_extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
@@ -34,14 +23,15 @@
 	<% end %>
 	
 	<%= f_sip_account.input :caller_name, :hint => t('simple_form.hints.sip_account.caller_name') %>
-	<%= f_sip_account.input :voicemail_pin, :as => :string, :required => true, :hint => t('simple_form.hints.sip_account.voicemail_pin') %>
-	
 	<%= f_sip_account.input :auth_name, :as => :hidden %>
 	<%= f_sip_account.input :password, :as => :hidden %>
 	<%= f_sip_account.input :realm, :as => :hidden %>
 	<%= f_sip_account.input :sip_server_id, :as => :hidden %>
 	<%= f_sip_account.input :sip_proxy_id, :as => :hidden %>
+	<% if @user %>
 	<%= f_sip_account.input :voicemail_server_id, :as => :hidden %>
+	<%= f_sip_account.input :voicemail_pin, :as => :string, :required => true, :hint => t('simple_form.hints.sip_account.voicemail_pin') %>
+	<% end %>
 	
 	<%= f.button :submit %>
 <% end %>

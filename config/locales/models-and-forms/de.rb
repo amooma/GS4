@@ -2,11 +2,6 @@
 
 { :"de" => {
 	
-	############# #OPTMIZE Find a better place for these entries. {
-	:wizard_phone_and_user_saved => "Telefon und Account wurde angelegt.",
-	:wizard_phone_and_user => "Benutzer mit Telefon und Durchwahl anlegen ",
-	############# Find a better place for these entries. }
-	
 	:activerecord => {
 		
 		:models => {

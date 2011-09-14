@@ -24,9 +24,11 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 			:voicemail_pin => 100000 + SecureRandom.random_number( 899999 ),
 			:caller_name => "#{I18n.t(:default_caller_name)} #{my_extension}"
 		)
-		@user = sip_account.build_user(
-			:role => "user",
-		)
+		if params[:with_user] == true.to_s
+			@user = sip_account.build_user(
+				:role => "user",
+			)
+		end
 		extension = sip_account.extensions.build(
 			:extension => my_extension,
 			:destination => sip_account.auth_name,
@@ -39,16 +41,32 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 	end
 	
 	def create
-		user = params[:phone][:sip_accounts_attributes]["0"][:user]
-		params[:phone][:sip_accounts_attributes]["0"].delete :user
+		with_user = !! params[:phone][:sip_accounts_attributes]["0"][:user]
+		if with_user
+			user = params[:phone][:sip_accounts_attributes]["0"][:user]
+			params[:phone][:sip_accounts_attributes]["0"].delete :user
+		end
 		
 		@phone = Phone.new(params[:phone])
 		@phone.phone_model ||= PhoneModel.find_by_mac_address(@phone.mac_address)
-		@user = @phone.sip_accounts.first.build_user(user)
+		@user = @phone.sip_accounts.first.build_user(user) if with_user
 		
 		respond_to do |format|
 			if @phone.save
-				format.html { redirect_to( root_path, :notice => I18n.t(:wizard_phone_and_user_saved) ) }
+				if with_user
+					format.html { redirect_to( root_path, :notice => I18n.t(:wizard_phone_and_user_saved,
+							:phone_model => @phone.phone_model.name,
+							:mac_address => @phone.mac_address,
+							:username    => @user.username,
+							:extension   => @phone.sip_accounts.first.extensions.first.extension
+						))}
+				else
+					format.html { redirect_to( root_path, :notice => I18n.t(:wizard_phone_saved,
+							:phone_model => @phone.phone_model.name,
+							:mac_address => @phone.mac_address,
+							:extension   => @phone.sip_accounts.first.extensions.first.extension
+						))}
+				end
 			else
 				format.html { render :action => "new" }
 			end

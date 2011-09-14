@@ -2,11 +2,6 @@
 
 { :"en-US" => {
 	
-	############# #OPTMIZE Find a better place for these entries. {
-	:wizard_phone_and_user_saved => "Phone and account created.",
-	:wizard_phone_and_user => "Create User with phone and extension",
-	############# Find a better place for these entries. }
-	
 	:activerecord => {
 		
 		:models => {
