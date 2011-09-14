@@ -15,7 +15,7 @@ class Phone < ActiveRecord::Base
 	validates_numericality_of :phone_model_id
 	
 	validate :validate_phone_model_exists  #OPTIMIZE
-	validate :cross_check_mac_address_with_ouis
+	validate :cross_check_mac_address_with_ouis, :if => Proc.new{|phone| ! phone.mac_address.blank?}
 	
 	after_validation :save_old_last_ip_address
 	

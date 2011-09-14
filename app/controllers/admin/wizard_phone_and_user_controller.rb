@@ -29,7 +29,9 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 			:destination => sip_account.auth_name,
 			:active => true
 		)
-		
+    #user = sip_account.build_user(
+    #  :role => "user"
+    #)
 		respond_to do |format|
 			format.html 
 		end
@@ -37,6 +39,7 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 	
 	def create
 		@phone = Phone.new(params[:phone])
+		@phone.phone_model ||= PhoneModel.find_by_mac_address(@phone.mac_address) 
 		
 		respond_to do |format|
 			if @phone.save

@@ -51,6 +51,7 @@ class PhoneModel < ActiveRecord::Base
     if !(
        mac_address.class != String \
     || mac_address == nil \
+    || mac_address.blank? \
     || mac_address.upcase.gsub(/[^A-F0-9]/,'').length > 12 \
     || mac_address.upcase.gsub(/[^A-F0-9]/,'').length < 7 \
     )

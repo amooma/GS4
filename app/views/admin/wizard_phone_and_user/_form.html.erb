@@ -2,15 +2,20 @@
 	<%= f.error_messages %>
 	
 	<%= f.input :mac_address %>
+	<% if @phone.errors.count > 0 %>
 	<%= f.input :phone_model do %>
 		<%= f.select( :phone_model_id,
 			@phone_models.collect {|r| [ r.name, r.id ] },
 			{ :include_blank => false, :selected => @phone.phone_model_id }
 		) %>
 	<% end %>
+	<% end %>
+
+		
 	
 	<% f.simple_fields_for :sip_accounts do |sip_account| %>
-		
+<%#= debug(@phone.sip_accounts.first.user) %>
+
 		<% sip_account.simple_fields_for :extensions do |extension| %>
 			<%= extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
 			<%= extension.input :destination, :as => :hidden %>
@@ -19,13 +24,13 @@
 		
 		<%= sip_account.input :caller_name, :hint => t('simple_form.hints.sip_account.caller_name') %>
 		<%= sip_account.input :voicemail_pin, :as => :string, :required => true, :hint => t('simple_form.hints.sip_account.voicemail_pin') %>
+		<%= sip_account.input :voicemail_server_id, :as => :hidden %>
 		
 		<%= sip_account.input :auth_name, :as => :hidden %>
 		<%= sip_account.input :password, :as => :hidden %>
 		<%= sip_account.input :realm, :as => :hidden %>
 		<%= sip_account.input :sip_server_id, :as => :hidden %>
 		<%= sip_account.input :sip_proxy_id, :as => :hidden %>
-		<%= sip_account.input :voicemail_server_id, :as => :hidden %>
 	<% end %>
 	
 	<%= f.button :submit %>
