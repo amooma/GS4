@@ -34,5 +34,7 @@
 	
 	<%= render :partial => 'phones/table_of_phones', :locals => {:phones => @phones} %>
 	
+	<p>
 	<%= link_to( t(:list_all_phones), url_for(:controller => '/phones', :action => 'index')) if @number_of_phones > @phones.length %>
+	</p>
 <% end %>
