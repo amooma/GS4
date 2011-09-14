@@ -3,7 +3,7 @@
     <th><%= t(:mac_address) %></th>
     <th><%= t(:phone_model) %></th>
     <th><%= t(:ip_address) %></th>
-    <th><%= t(:reboot_phone) %></th>
+    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -18,12 +18,24 @@
     </td>
     <td><%= phone.ip_address.blank? ? '-' : phone.ip_address  %></td>
     
-    <td class="<%= phone.created_at > Time.now - 60.minutes ? 'status_no' : '' %>">
-    <% if phone.created_at > Time.now - 60.minutes %>
+    <% t = Time.now - 45.minutes %>
+    <td class="<%= phone.created_at > t ? 'status_no' : '' %>">
+    <% if phone.created_at > t %>
       <% if phone.rebootable? %>
-      <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
+        <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
       <% else %>
-      <%= t(:phone_created_reboot_needed, :time_ago => time_ago_in_words(phone.created_at)) %>
+        <span style="font-size:4em; vertical-align:0%; float:left; display:block; margin:0 10px 10px 0;"><%= "\u{26A0}" %></span>
+        <%= t(:phone_created_reboot_needed, :time_ago => time_ago_in_words(phone.created_at)) %>
+        <% if ! phone.phone_model.manual_url.blank? %>
+          <%= link_to t(:phone_manual, :phone_model => phone.phone_model.name), phone.phone_model.manual_url %>.
+        <% end %>
+        
+        <% if ! NetworkSetting.first.try(:start_dhcp_server) %>
+          <p>
+            <%= t(:phone_set_config_url) %><br />
+            <tt><%= "https://#{ @controller.guess_local_host }#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
+          </p>
+        <% end %>
       <% end %>
     <% else %>
       <% if phone.rebootable? %>

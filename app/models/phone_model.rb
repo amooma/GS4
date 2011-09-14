@@ -107,6 +107,25 @@ class PhoneModel < ActiveRecord::Base
     end
   end
   
+  # Validates the Manual URL. (#OPTIMIZE DRY Write a validator.)
+  def validate_manual_url()
+    if !self.manual_url.blank?
+      require 'uri'
+      begin
+        uri = URI.parse( self.manual_url )
+        if ! uri.absolute?
+          errors.add( :manual_url, I18n.t(:invalid_no_scheme))
+        elsif ! uri.hierarchical?
+          errors.add( :manual_url, I18n.t(:invalid_not_hierarchical))
+        elsif !( uri.is_a?( URI::HTTP ) || uri.is_a?( URI::HTTPS ) )
+          errors.add( :manual_url, I18n.t(:invalid_no_http_scheme))
+        end
+      rescue URI::InvalidURIError
+        errors.add( :manual_url, I18n.t(:invalid))
+      end
+    end
+  end
+  
   # Validates the number of sip_accounts on a phone_model
   # If you change the number of maximum sip_accounts on an already
   # existing model the system checks if there are any phones with 

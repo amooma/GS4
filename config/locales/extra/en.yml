@@ -478,5 +478,9 @@ en:
   save_reboot: "Save settings and reboot system"
   wizards: "Wizards"
   wizard_phone_and_user_new: "Create user with phone and extension"
-  phone_created_reboot_needed: "Phone was created %{time_ago} ago. Please reboot it manually."
+  
+  phone_created_reboot_needed: "Phone was created %{time_ago} ago in Gemeinschaft but didn't request its configuration yet. Please reset the phone to factory defaults."
+  phone_set_config_url: "Next, please configure the setting URL in following on the phone:"
+  phone_manual: "Online manual for the %{phone_model}"
+  
   default_caller_name: "Extension"

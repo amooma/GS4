@@ -1,4 +1,3 @@
-<h1><%= t(:admin_page) %></h1>
 
 <div class="index_overview">
 	
@@ -10,43 +9,7 @@
 			) %></li>
 		</ul>
 	</section>
-	
-	<section>
-		<h2><%= t(:users) %></h2>
-		<ul>
-			<li><%= link_to( "#{t(:list_all_users)} (#{@number_of_users})",
-				url_for(:controller => '/admin/users', :action => 'index')
-			) %></li>
-			<li><%= link_to( t(:new_user),
-				url_for(:controller => '/admin/users', :action => 'new')
-			) %></li>
-		</ul>
-	</section>
-	
-	<section>
-		<h2><%= t(:sip_accounts) %></h2>
-		<ul>
-			<li><%= link_to( "#{t(:list_all_sip_accounts)} (#{@number_of_sip_accounts})",
-				url_for(:controller => '/sip_accounts', :action => 'index')
-			) %></li>
-			<li><%= link_to( t(:new_sip_account),
-				url_for(:controller => '/sip_accounts', :action => 'new')
-			) %></li>
-		</ul>
-	</section>
-	
-	<section>
-		<h2><%= t(:extensions) %></h2>
-		<ul>
-			<li><%= link_to( "#{t(:list_all_extensions)} (#{@number_of_extensions})",
-				url_for(:controller => '/extensions', :action => 'index')
-			) %></li>
-			<li><%= link_to( t(:new_extension),
-				url_for(:controller => '/extensions', :action => 'new')
-			) %></li>
-		</ul>
-	</section>
-	
+		
 	<section>
 		<h2><%= t(:maintenance) %></h2>
 		<ul>

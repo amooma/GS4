@@ -9,7 +9,7 @@ module ApplicationHelper
 				
 				when "admin"
 					menu_items = [
-						{ :text => t(:admin)         , :url => root_path },
+						{ :text => t('menu.home')        , :url => root_path },
 						
 						{ :text => t(:accounts), :sub => [
 							{ :text => t(:users)         , :url => admin_users_path },

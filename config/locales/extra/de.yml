@@ -478,5 +478,9 @@ de:
   save_reboot: "Speichern und System neu starten (Reboot)"
   wizards: "Assistenten"
   wizard_phone_and_user_new: "Benutzer mit Telefon und Durchwahl anlegen"
-  phone_created_reboot_needed: "Telefon wurde vor %{time_ago} angelegt. Bitte Telefon manuell booten."
+  
+  phone_created_reboot_needed: "Dieses Telefon wurde vor %{time_ago} in Gemeinschaft angelegt, hat aber bisher seine Konfiguration noch nicht abgerufen. Bitte das Telefon manuell auf Werkseinstellungen zurücksetzen."
+  phone_set_config_url: "Danach bitte folgende Setting-URL auf dem Telefon konfigurieren:"
+  phone_manual: "Online-Handbuch zum %{phone_model}"
+  
   default_caller_name: "Nebenstelle"
