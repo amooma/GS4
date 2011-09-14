@@ -531,7 +531,7 @@
 				:is_local => "Legt fest ob dieser TK-Knoten für diesen Voicemail-Dienst zuständig ist.",
 			},
 			:phone => {
-				:mac_address    => "Die MAC-Adresse (Media-Access-Control-Adresse) des Telefons. Sie ist üblicherweise auf dem Boden des Gerätes aufgedruckt bzw. über ein Menü am Display des Gerätes ablesbar.",
+				:mac_address    => "Die MAC-Adresse (Media-Access-Control-Adresse) des Telefons. Sie ist üblicherweise auf der Unterseite des Gerätes aufgedruckt bzw. über ein Menü am Display des Gerätes ablesbar.",
 				:phone_model    => "Das Telefon-Modell des Endgeräts.",
 				:phone_model_id => "Relation zu PhoneModel",
 				:ip_address     => "Die aktuelle IP-Adresse des Geräts. Diese ist meist über ein Menü am Display des Gerätes ablesbar.",
