@@ -1,3 +1,5 @@
+require 'scanf'
+
 class Phone < ActiveRecord::Base
 	
 	#OPTIMIZE Combine Phone and SipPhone into one model?
@@ -120,6 +122,10 @@ class Phone < ActiveRecord::Base
 			return false  #OPTIMIZE Try again later?
 		)end
 	)end
+	
+	def mac_address_to_display
+		return [].fill('%02x', 0, 6).join(':') % self.mac_address.scanf( '%2X' * 6 )
+	end
 	
 	private
 	

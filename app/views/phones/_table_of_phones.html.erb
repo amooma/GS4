@@ -10,7 +10,7 @@
 
 <% phones.each do |phone| %>
   <tr>
-    <td><%= link_to phone.mac_address, phone %></td>
+    <td><%= link_to phone.mac_address_to_display, phone %></td>
     <td>
       <%= phone.phone_model.name %>
       <br />
