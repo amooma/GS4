@@ -16,7 +16,9 @@
 		<a class="tty" href="#content"><%= t(:skip_navigation) %></a>
 		<div id="header">
 			<div id="application">
+				<% if !  current_page?(:controller => 'admin/setup', :action => 'new') %>
 				<a href="/"><%= t(:application_name) %></a>
+				<% end %>
 			</div>
 
 			<div id="user_nav">
@@ -25,7 +27,9 @@
 				(<%= t(:role) %>: <%= User::ROLES[ current_user.role ] %>) &nbsp;
 				<%= link_to t(:sign_out), destroy_user_session_path %>
 				<% else %>
+				<% if !  current_page?(:controller => 'admin/setup', :action => 'new') %>
 				<%= link_to t(:sign_in), new_user_session_path %>
+				<% end %>
 				<% end %>
 			</div>
 

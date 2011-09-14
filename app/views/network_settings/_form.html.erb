@@ -1,7 +1,7 @@
 <%= simple_form_for( @network_setting ) do |f| %>
 	<%= f.error_messages %>
 	
-	<%#= f.input :dhcp_client %>
+	<%= f.input :dhcp_client, :as => :hidden, :input_html => {:value => false} %>
 	<%= f.input :ip_address %>
 	<%= f.input :netmask %>
 	<%= f.input :gateway %>

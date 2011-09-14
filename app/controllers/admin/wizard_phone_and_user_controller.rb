@@ -43,6 +43,7 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 		params[:phone][:sip_accounts_attributes]["0"].delete :user
 		
 		@phone = Phone.new(params[:phone])
+		@phone.phone_model ||= PhoneModel.find_by_mac_address(@phone.mac_address)
 		@user = @phone.sip_accounts.first.build_user(user)
 		
 		respond_to do |format|

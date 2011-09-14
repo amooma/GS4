@@ -4,11 +4,14 @@
 	<%= f_sip_account.error_messages %>
 	
 	<%= f.input :mac_address %>
-	<%= f.input :phone_model do %>
-		<%= f.select( :phone_model_id,
-			@phone_models.collect {|r| [ r.name, r.id ] },
-			{ :include_blank => false, :selected => @phone.phone_model_id }
-		) %>
+	
+	<% if @phone.errors.count > 0 %>
+		<%= f.input :phone_model do %>
+			<%= f.select( :phone_model_id,
+				@phone_models.collect {|r| [ r.name, r.id ] },
+				{ :include_blank => false, :selected => @phone.phone_model_id }
+			) %>
+		<% end %>
 	<% end %>
 	
 	<%= f_sip_account.input :user, :label => false, :hint => false do %>
