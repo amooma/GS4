@@ -30,10 +30,18 @@
 			<% if navigation_item[:sub] %>
 				<ul>
 					<% navigation_item[:sub].each { |sub_navigation_item| %>
-						<li><%= link_to(
-							sub_navigation_item[:text], sub_navigation_item[:url],
-							(current_page?( sub_navigation_item[:url] ) ? { :class => 'current_page_navigation' } : {})
-						) %></li>
+						<li><%
+							if sub_navigation_item[:text] && sub_navigation_item[:url]
+								%><%=
+									link_to(
+										sub_navigation_item[:text], sub_navigation_item[:url],
+										(current_page?( sub_navigation_item[:url] ) ? { :class => 'current_page_navigation' } : {})
+									)
+								%><%
+							else
+								%><hr style="width:auto; margin: 4px 1px; border-size: 1px 0; border-style: solid none; border-color: #999 #eee #eee #999;" /><%
+							end
+						%></li>
 					<% } %>
 				</ul>
 			<% end %>
