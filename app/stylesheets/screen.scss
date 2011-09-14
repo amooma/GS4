@@ -288,6 +288,18 @@ table {
 	padding: 2px  8px 0  8px;
 }
 
+#footer {
+	text-align: center;
+	font-size: 0.9em;
+	color: #404040;
+	margin: 3em 0 0 0;
+	
+	.amooma-name {
+		text-transform: uppercase;
+		letter-spacing: 0.1pt;
+	}
+}
+
 .clear {
 	display: block;
 	float: none;
