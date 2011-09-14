@@ -23,13 +23,15 @@
 
 			<div id="user_nav">
 				<% if user_signed_in? %>
-				<%= t(:signed_in_as) %> <q><b><%= current_user.username %></b></q>
-				(<%= t(:role) %>: <%= User::ROLES[ current_user.role ] %>) &nbsp;
-				<%= link_to t(:sign_out), destroy_user_session_path %>
+					<%= t(:signed_in_as) %> <q><b><%= current_user.username %></b></q>
+					(<%= t(:role) %>: <%= User::ROLES[ current_user.role ] %>) &nbsp;
+					<%= link_to t(:sign_out), destroy_user_session_path %>
 				<% else %>
-				<% if !  current_page?(:controller => 'admin/setup', :action => 'new') %>
-				<%= link_to t(:sign_in), new_user_session_path %>
-				<% end %>
+					<% if !current_page?(:controller => 'admin/setup', :action => 'new') %>
+						<% if !current_page?(:controller => 'devise/sessions', :action => 'new') %>
+							<%= link_to t(:sign_in), new_user_session_path %>
+						<% end %>
+					<% end %>
 				<% end %>
 			</div>
 
@@ -53,5 +55,7 @@
 
 		<%= yield %>
 	</div>
+	<hr />
+	<small>Gemeinschaft 4.0 - Copyright 2011 by AMOOMA GmbH - Support und Consulting => <%= link_to 'http://www.amooma.de' %></small>
 </body>
 </html>
