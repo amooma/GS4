@@ -1,6 +1,6 @@
 <%
-  phone_model = phone.phone_model if !phone_model
-
+  phone_model ||= phone.phone_model
+  
   img = case phone_model.try(:manufacturer).try(:ieee_name)
     when 'SNOM Technology AG'
       case (phone_model.try(:name) || '').downcase.gsub( / +/, '' )
@@ -16,6 +16,6 @@
     else nil
   end
   if img
-    %><img src="<%= root_path %>images/phones/<%= img %>" width="80" alt="<%= "#{phone_model.name}" %><%= " with the MAC Address #{phone.mac_address}" if !phone_model %>" align="middle" /><br /><%
+    %><img src="<%= root_path %>images/phones/<%= img %>" width="80" alt="<%= "#{phone_model.name}" %><%= " with the MAC address #{phone.mac_address}" if ! phone_model %>" align="middle" /><br /><%
   end
 %>
