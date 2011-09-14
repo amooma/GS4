@@ -27,8 +27,8 @@
 					(<%= t(:role) %>: <%= User::ROLES[ current_user.role ] %>) &nbsp;
 					<%= link_to t(:sign_out), destroy_user_session_path %>
 				<% else %>
-					<% if !current_page?(:controller => 'admin/setup', :action => 'new') %>
-						<% if !current_page?(:controller => 'devise/sessions', :action => 'new') %>
+					<% if ! current_page?(:controller => 'admin/setup', :action => 'new') %>
+						<% if ! current_page?(:controller => 'devise/sessions', :action => 'new') %>
 							<%= link_to t(:sign_in), new_user_session_path %>
 						<% end %>
 					<% end %>
