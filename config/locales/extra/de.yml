@@ -16,7 +16,7 @@ de:
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
   
-  application_name: "Gemeinschaft 4"
+  application_name: "Gemeinschaft 4.0"
   show: "Anzeigen"
   back: "Zurück"
   Go_to_list: "Zur Liste"
@@ -144,7 +144,7 @@ de:
   sip_accounts: "SIP-Accounts"
   do_really_reboot: "Wollen Sie dieses %{name} wirklich neu starten?"
   ip_unknown_or_path_nil: "IP-Adresse unbekannt oder Pfad nicht gesetzt"
-  phone_not_yet_provisioned: "Telefon noch nicht provisioniert. Bitte Telefon manuell neu starten."
+  phone_not_yet_provisioned: "Das Telefon ist noch nicht provisioniert. Bitte versuchen Sie, es manuell neu zu starten."
   create_sip_account_for_phone: "Neuen SIP-Account für dieses Telefon anlegen?"
   phone_model_allows_number_accounts: "Das Telefonmodell %{model_name} erlaubt nur %{number_sip_accounts} SIP-Accounts. Wenn nötig Accounts löschen"
   phone_created: "Telefon wurde erfolgreich angelegt"
@@ -158,6 +158,7 @@ de:
   default_http_password: "Standard-HTTP-Passwort"
   max_number_of_sip_accounts: "Max. Anzahl SIP-Accounts"
   number_of_keys: "Anzahl Tasten"
+  online_manual: "Online-Handbuch"
   listing_phone_models: "Telefonmodelle"
   new_phone_model: "Neues Telefonmodell"
   new_phone_model_named: "Neues %{name} Telefonmodell"
@@ -248,9 +249,9 @@ de:
   first_sip_server_configured: "Erster SIP-Server bereits konfiguriert"
   first_sip_proxy_configured: "Erster SIP-Proxy-Server bereits konfiguriert"
   first_voicemail_server_configured: "Erster Voicemail-Server bereits konfiguriert"
-  setup_admin_account: "Administrator-Account anlegen"
-  first_admin_step: "Der erste Schritt zur Administration Ihrer Gemeinschaft-Telefonanlage ist es einen Administrator-Account anzulegen. Danach können Sie sich auf dieser Web-Oberfläche einloggen."
-  create_admin_account: "Administrator-Account anlegen"
+  setup_admin_account: "Gemeinschaft-4.0-Administrator-Account anlegen"
+  first_admin_step: "Bitte legen Sie hier einen Admin-Account an. Mit diesem Account können Sie sich auf der Web-GUI mit Admin-Rechten einloggen."
+  create_admin_account: "Gemeinschaft-Administrator-Account anlegen"
   admin: "Admin"
   accounts: "Accounts"
   users: "Benutzer"
@@ -272,7 +273,7 @@ de:
   setup_disabled_done: "Setup deaktiviert. Ist bereits eingerichtet!"
   user_name_created_login: "%{ user_name } angelegt. Sie können sich nun einloggen."
   admin_page: "Administration"
-  admin_page_subtitle: "Dies ist ein einfaches Web-Interface von Gemeinschaft 4"
+  admin_page_subtitle: "Dies ist ein einfaches Web-Interface von Gemeinschaft 4.0"
   list_all_users: "Alle Benutzer anzeigen"
   list_all_sip_accounts: "Alle SIP-Accounts anzeigen"
   list_all_phones: "Alle Telefone anzeigen"
@@ -455,6 +456,8 @@ de:
   menu:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
+    home: "Home"
+    
     dp_patterns: "Wähl-Muster"
     dp_routes: "Ausgehende Routen"
   
@@ -501,7 +504,18 @@ de:
   automatic_reboot: "Das System wird nach dieser Aktion automatisch neu gestartet!"
   mandatory_fields: "Mit einem * gekennzeichnete Felder müssen ausgefüllt werden!"
   save_reboot: "Speichern und System neu starten (Reboot)"
+  
   wizards: "Assistenten"
-  wizard_phone_and_user_new: "Benutzer mit Telefon und Durchwahl anlegen"
-  phone_created_reboot_needed: "Telefon wurde vor %{time_ago} angelegt. Bitte Telefon manuell booten."
+  wizard_phone: "Telefon mit Durchwahl anlegen"
+  wizard_phone_and_user: "Telefon mit Durchwahl und Benutzer anlegen"
+  wizard_phone_and_user_new: "Telefon mit Durchwahl und Benutzer anlegen"
+  wizard_phone_new: "Telefon mit Durchwahl anlegen"
+  
+  wizard_phone_and_user_saved: "Telefon %{phone_model} (MAC-Adresse: %{mac_address}) für den Benutzer %{username} wurde mit der Durchwahl %{extension} angelegt. Bitte booten Sie das Telefon jetzt manuell."
+  wizard_phone_saved: "Telefon %{phone_model} (MAC-Adresse: %{mac_address}) wurde mit der Durchwahl %{extension} angelegt. Bitte booten Sie das Telefon jetzt manuell."
+  
+  phone_created_reboot_needed: "Dieses Telefon wurde vor %{time_ago} in Gemeinschaft angelegt, hat aber bisher seine Konfiguration noch nicht abgerufen. Bitte das Telefon manuell auf Werkseinstellungen zurücksetzen."
+  phone_set_config_url: "Nach dem Zurücksetzen auf die Werkseinstellungen folgende Setting-URL auf dem Telefon konfigurieren:"
+  phone_manual: "Online-Handbuch zum %{phone_model}"
+  
   default_caller_name: "Nebenstelle"

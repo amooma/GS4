@@ -16,7 +16,7 @@ en:
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
       
-  application_name: "Gemeinschaft 4"
+  application_name: "Gemeinschaft 4.0"
   show: "Show"
   back: "Back"
   Go_to_list: "Go to the list"
@@ -144,7 +144,7 @@ en:
   sip_accounts: "SIP accounts"
   do_really_reboot: "Do you really want to reboot this %{name}?"
   ip_unknown_or_path_nil: "IP address unknown or reboot path not set"
-  phone_not_yet_provisioned: "Phone not provisioned. Please reboot manually." 
+  phone_not_yet_provisioned: "The phone has not been provisioned yet. Please reboot the phone manually." 
   create_sip_account_for_phone: "Create a new SIP account for this phone"
   phone_model_allows_number_accounts: "The phone model %{model_name} allows only %{number_sip_accounts} SIP accounts. To create one you have to delete one first"
   phone_created: "Phone was successfully created"
@@ -158,6 +158,7 @@ en:
   default_http_password: "Default HTTP password"
   max_number_of_sip_accounts: "Max. number of SIP accounts"
   number_of_keys: "Number of keys"
+  online_manual: "Online Manual"
   listing_phone_models: "Phone models"
   new_phone_model: "New phone model"
   new_phone_model_named: "New %{name} phone model"
@@ -248,7 +249,7 @@ en:
   first_sip_server_configured: "First SIP server already configured"
   first_sip_proxy_configured: "First SIP proxy server already configured"
   first_voicemail_server_configured: "First voicemail server already configured"
-  setup_admin_account: "Setup an administrator account"
+  setup_admin_account: "Gemeinschaft 4.0 administrator account setup"
   first_admin_step: "The first step in administrating your new Gemeinschaft PBX is to create a new account with admin privileges. After creating it here you can use it to login on this web GUI."
   create_admin_account: "Create administrator account"
   admin: "Admin"
@@ -272,7 +273,7 @@ en:
   setup_disabled_done: "Setup disabled. Already done!"
   user_name_created_login: "%{ user_name } created. You can log in now."
   admin_page: "Administration"
-  admin_page_subtitle: "This is a basic web interface to Gemeinschaft 4"
+  admin_page_subtitle: "This is a basic web interface to Gemeinschaft 4.0"
   list_all_users: "List all users"
   list_all_sip_accounts: "List all SIP accounts"
   list_all_phones: "List all phones"
@@ -455,6 +456,8 @@ en:
   menu:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
+    home: "Home"
+    
     dp_patterns: "Dialplan patterns"
     dp_routes: "Outbound routes"
   
@@ -501,7 +504,18 @@ en:
   automatic_reboot: "The system will reboot after this action!"
   mandatory_fields: "Fields marked with * are mandatory!"
   save_reboot: "Save settings and reboot system"
+  
   wizards: "Wizards"
-  wizard_phone_and_user_new: "Create user with phone and extension"
-  phone_created_reboot_needed: "Phone was created %{time_ago} ago. Please reboot it manually."
+  wizard_phone: "Create phone with extension"
+  wizard_phone_and_user: "Create phone with extension and user"
+  wizard_phone_and_user_new: "Create phone with extension and user"
+  wizard_phone_new: "Create phone with extension"
+  
+  wizard_phone_and_user_saved: "Phone %{phone_model} (MAC address: %{mac_address}) for user %{username} was created with extension %{extension}."
+  wizard_phone_saved: "Phone %{phone_model} (MAC address: %{mac_address}) was created with extension %{extension}."
+  
+  phone_created_reboot_needed: "Phone was created %{time_ago} ago in Gemeinschaft but didn't request its configuration yet. Please reset the phone to factory defaults."
+  phone_set_config_url: "Next, please configure the setting URL in following on the phone:"
+  phone_manual: "Online manual for the %{phone_model}"
+  
   default_caller_name: "Extension"

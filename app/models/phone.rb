@@ -1,3 +1,5 @@
+require 'scanf'
+
 class Phone < ActiveRecord::Base
 	
 	#OPTIMIZE Combine Phone and SipPhone into one model?
@@ -11,11 +13,9 @@ class Phone < ActiveRecord::Base
 	validates_uniqueness_of   :ip_address, :allow_nil => true, :allow_blank => true
 	validates_format_of       :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
 	
-	validates_presence_of     :phone_model_id
-	validates_numericality_of :phone_model_id
+	validates_presence_of     :phone_model
 	
-	validate :validate_phone_model_exists  #OPTIMIZE
-	validate :cross_check_mac_address_with_ouis
+	validate :cross_check_mac_address_with_ouis, :if => Proc.new{ |phone| ! phone.mac_address.blank? && ! phone.errors[:mac_address] }
 	
 	after_validation :save_old_last_ip_address
 	
@@ -123,20 +123,16 @@ class Phone < ActiveRecord::Base
 		)end
 	)end
 	
+	def mac_address_to_display
+		return [].fill('%02X', 0, 6).join(':') % self.mac_address.scanf( '%2X' * 6 )
+	end
+	
 	private
 	
 	# Formats a MAC address.
 	#
 	def format_mac_address
 		self.mac_address = self.mac_address.to_s().upcase().gsub( /[^A-F0-9]/, '' )
-	end
-	
-	# Validates if the phone model exists.
-	#
-	def validate_phone_model_exists
-		if ! PhoneModel.exists?( :id => self.phone_model_id )
-			errors.add( :phone_model_id, I18n.t(:phone_model_no_id, :model_id => self.phone_model_id ))
-		end
 	end
 	
 	# Saves the last IP address
@@ -155,6 +151,7 @@ class Phone < ActiveRecord::Base
 		oui_obj = Oui.where( :value => oui )
 		if oui_obj.first == nil \
 		|| oui_obj.first.manufacturer != self.phone_model.manufacturer
+			#errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.try(:manufacturer).try(:name) ))
 			errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.manufacturer.name ))
 		end
 	end

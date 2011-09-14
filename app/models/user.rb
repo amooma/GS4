@@ -14,13 +14,12 @@ class User < ActiveRecord::Base
   has_many :extensions, :through => :user_to_extensions
   has_many :dialplan_routes, :dependent => :destroy
   has_many :sip_accounts
+  has_many :phones, :through => :sip_accounts
   
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :lockable, :confirmable, :timeoutable, :registerable and :activatable
+  # :token_authenticatable, :lockable, :confirmable, :timeoutable, :registerable, :recoverable, :rememberable and :activatable
   devise(
     :database_authenticatable,  
-    :recoverable,
-    :rememberable,
     :trackable,
     :validatable
   )

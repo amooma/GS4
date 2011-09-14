@@ -51,6 +51,7 @@ class PhoneModel < ActiveRecord::Base
     if !(
        mac_address.class != String \
     || mac_address == nil \
+    || mac_address.blank? \
     || mac_address.upcase.gsub(/[^A-F0-9]/,'').length > 12 \
     || mac_address.upcase.gsub(/[^A-F0-9]/,'').length < 7 \
     )
@@ -102,6 +103,25 @@ class PhoneModel < ActiveRecord::Base
         end
       rescue URI::InvalidURIError
         errors.add( :url, I18n.t(:invalid))
+      end
+    end
+  end
+  
+  # Validates the Manual URL. (#OPTIMIZE DRY Write a validator.)
+  def validate_manual_url()
+    if !self.manual_url.blank?
+      require 'uri'
+      begin
+        uri = URI.parse( self.manual_url )
+        if ! uri.absolute?
+          errors.add( :manual_url, I18n.t(:invalid_no_scheme))
+        elsif ! uri.hierarchical?
+          errors.add( :manual_url, I18n.t(:invalid_not_hierarchical))
+        elsif !( uri.is_a?( URI::HTTP ) || uri.is_a?( URI::HTTPS ) )
+          errors.add( :manual_url, I18n.t(:invalid_no_http_scheme))
+        end
+      rescue URI::InvalidURIError
+        errors.add( :manual_url, I18n.t(:invalid))
       end
     end
   end

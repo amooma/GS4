@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110910120002) do
+ActiveRecord::Schema.define(:version => 20110914122821) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(:version => 20110910120002) do
     t.string   "random_password_consists_of"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "manual_url"
   end
 
   create_table "phones", :force => true do |t|

@@ -2,11 +2,6 @@
 
 { :"de" => {
 	
-	############# #OPTMIZE Find a better place for these entries. {
-	:wizard_phone_and_user_saved => "Telefon und Account wurde angelegt.",
-	:wizard_phone_and_user => "Benutzer mit Telefon und Durchwahl anlegen ",
-	############# Find a better place for these entries. }
-	
 	:activerecord => {
 		
 		:models => {
@@ -555,7 +550,7 @@
 				:is_local => "Legt fest ob dieser TK-Knoten für diesen Voicemail-Dienst zuständig ist.",
 			},
 			:phone => {
-				:mac_address    => "Die MAC-Adresse des Telefons. Sie ist üblicherweise auf der Rückseite des Gerätes aufgedruckt oder über ein Menü am Display des Gerätes ablesbar.",
+				:mac_address    => "Die MAC-Adresse (Media-Access-Control-Adresse) des Telefons. Sie ist üblicherweise auf der Unterseite des Gerätes aufgedruckt bzw. über ein Menü am Display des Gerätes ablesbar.",
 				:phone_model    => "Das Telefon-Modell des Endgeräts.",
 				:phone_model_id => "Relation zu PhoneModel",
 				:ip_address     => "Die aktuelle IP-Adresse des Geräts. Diese ist meist über ein Menü am Display des Gerätes ablesbar.",
@@ -708,7 +703,7 @@
 				:value => "Wert des Konfigurationseintrags",
 			},
 			:network_setting => {
-				:ip_address => "IP-Adresse des Servers. Kann NICHT mehr geändert werden!",
+				:ip_address => "IP-Adresse des Servers. Kann später NICHT mehr geändert werden!",
 				:netmask => "",
 				:gateway => "",
 				:name_server => "",

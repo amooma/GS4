@@ -28,13 +28,17 @@ px depends on the screen's resolution.
 /* font-size was 10pt */
 /*$base-line-height: 17.6px;  */
 /* line-height was 1.35em */
+/*
+$base-font-size:   13.55px;
+$base-line-height: 18.9px;
+*/
 body {
 	font-size: 100%;
-	line-height: 1.395em;
+	line-height: 1.38em;
 }
 
 html > body {
-	font-size: 13.55px;
+	font-size: 13.8px;
 }
 
 body {
@@ -44,40 +48,40 @@ body {
 /* Establish Header styles */
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
-	margin-top: 0.697em;
+	margin-top: 0.69em;
 }
 
 h1 {
-	font-size: 1.919em;
-	line-height: 1.454em;
-	margin-bottom: 0.697em;
+	font-size: 1.884em;
+	line-height: 1.465em;
+	margin-bottom: 0.69em;
 }
 
 h2 {
-	font-size: 1.624em;
-	line-height: 1.718em;
-	margin-bottom: 0.837em;
+	font-size: 1.594em;
+	line-height: 1.731em;
+	margin-bottom: 0.828em;
 }
 
 h3 {
-	font-size: 1.328em;
-	line-height: 1.05em;
-	margin-bottom: 1.046em;
+	font-size: 1.304em;
+	line-height: 1.058em;
+	margin-bottom: 1.035em;
 }
 
 h4 {
-	font-size: 1.181em;
-	line-height: 1.181em;
+	font-size: 1.159em;
+	line-height: 1.19em;
 }
 
 h5 {
-	font-size: 1.033em;
-	line-height: 1.35em;
+	font-size: 1.014em;
+	line-height: 1.36em;
 }
 
 h6 {
-	font-size: 0.959em;
-	line-height: 1.454em;
+	font-size: 0.942em;
+	line-height: 1.465em;
 }
 
 /* Establish styles for text blocks */
@@ -88,7 +92,7 @@ use the @extend directive to apply this class to your elements/classes/etc.
 .text-block, p,
 blockquote,
 li {
-	margin-bottom: 1.395em;
+	margin-bottom: 1.38em;
 }
 .text-block strong, p strong,
 blockquote strong,
@@ -105,8 +109,8 @@ li em {
 ol,
 ul {
 	list-style-position: inside;
-	margin-top: 1.395em;
-	margin-bottom: 1.395em;
+	margin-top: 1.38em;
+	margin-bottom: 1.38em;
 	padding-left: 1em;
 }
 ol li,
@@ -140,8 +144,8 @@ body#styles_typography #content {
 body {
 	background-color: #fff;
 	color: #000;
-	padding-top: 1.395em;
-	padding-bottom: 1.395em;
+	padding-top: 1.38em;
+	padding-bottom: 1.38em;
 	padding: 0.8em 1.5em 1.7em 1.5em;
 	max-width: 75em;
 	margin: auto;
@@ -153,12 +157,12 @@ body, p, ol, ul, td {
 
 pre {
 	background-color: #eee;
-	margin-top: 1.395em;
-	margin-bottom: 1.395em;
+	margin-top: 1.38em;
+	margin-bottom: 1.38em;
 	padding-left: 1em;
 	padding-right: 1em;
-	font-size: 0.812em;
-	line-height: 1.718em;
+	font-size: 0.797em;
+	line-height: 1.731em;
 }
 
 a {
@@ -177,7 +181,7 @@ div {
 	border: 0;
 }
 div.field, div.actions {
-	margin-bottom: 1.395em;
+	margin-bottom: 1.38em;
 }
 
 #notice, .app_notice {
@@ -238,7 +242,7 @@ table td {
 	border-width: 1px;
 	border-style: solid;
 	border-color: rgba(0, 0, 0, 0.05);
-	padding: 0.15em 0.4em;
+	padding: 0.25em 0.5em;
 	text-align: left;
 	vertical-align: top;
 	background-color: #f3f3f3;
@@ -294,12 +298,35 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 	padding: 2px  8px 0  8px;
 }
 
+#footer {
+	text-align: center;
+	font-size: 0.9em;
+	color: #404040;
+	margin: 3em 0 0 0;
+}
+#footer .amooma-name {
+	text-transform: uppercase;
+	letter-spacing: 0.1pt;
+}
+
 .clear {
 	display: block;
 	float: none;
 	clear: both;
 	height: 0;
 	visibility: hidden;
+}
+
+.vat {
+	vertical-align: top;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.vab {
+	vertical-align: bottom;
 }
 
 form.simple_form,
@@ -405,12 +432,10 @@ div.simple_form_show b {
 }
 
 .status_yes {
-	background-color: #eaf9ea !important;
 	color: #0a0 !important;
 }
 
 .status_no {
-	background-color: #ffd3d0 !important;
 	color: #a00 !important;
 }
 

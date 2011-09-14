@@ -2,11 +2,6 @@
 
 { :"en-US" => {
 	
-	############# #OPTMIZE Find a better place for these entries. {
-	:wizard_phone_and_user_saved => "Phone and account created.",
-	:wizard_phone_and_user => "Create User with phone and extension",
-	############# Find a better place for these entries. }
-	
 	:activerecord => {
 		
 		:models => {
@@ -554,7 +549,7 @@
 				:is_local => "Defines whether this PBX node is responsible for this voicemail service.",
 			},
 			:phone => {
-				:mac_address    => "The MAC address of this phone. You will usually find it printed on the back side of the phone or via a menu on the phone's display.",
+				:mac_address    => "The MAC address (Media Access Control address) of this phone. You will usually find it printed on the bottom side of the phone or via a menu on the phone's display.",
 				:phone_model    => "The model of this handset.",
 				:phone_model_id => "Relation to PhoneModel",
 				:ip_address     => "The phone's current IP address. You will usually find it via a menu on the phone's display.",

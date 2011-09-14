@@ -1,5 +1,4 @@
 vendor/bundle/ruby/1.9.1/gems/bcrypt-ruby-[0-9]*          opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
-vendor/bundle/ruby/1.9.1/gems/fcgi-[0-9]*                 opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/nokogiri-[0-9]*             opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/ruby-graphviz-[0-9]*        opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/
 vendor/bundle/ruby/1.9.1/gems/sqlite3-[0-9]*              opt/gemeinschaft/vendor/bundle/ruby/1.9.1/gems/

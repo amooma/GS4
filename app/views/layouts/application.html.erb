@@ -16,16 +16,22 @@
 		<a class="tty" href="#content"><%= t(:skip_navigation) %></a>
 		<div id="header">
 			<div id="application">
+				<% if !  current_page?(:controller => 'admin/setup', :action => 'new') %>
 				<a href="/"><%= t(:application_name) %></a>
+				<% end %>
 			</div>
 
 			<div id="user_nav">
 				<% if user_signed_in? %>
-				<%= t(:signed_in_as) %> <q><b><%= current_user.username %></b></q>
-				(<%= t(:role) %>: <%= User::ROLES[ current_user.role ] %>) &nbsp;
-				<%= link_to t(:sign_out), destroy_user_session_path %>
+					<%= t(:signed_in_as) %> <q><b><%= current_user.username %></b></q>
+					(<%= t(:role) %>: <%= User::ROLES[ current_user.role ] %>) &nbsp;
+					<%= link_to t(:sign_out), destroy_user_session_path %>
 				<% else %>
-				<%= link_to t(:sign_in), new_user_session_path %>
+					<% if ! current_page?(:controller => 'admin/setup', :action => 'new') %>
+						<% if ! current_page?(:controller => 'devise/sessions', :action => 'new') %>
+							<%= link_to t(:sign_in), new_user_session_path %>
+						<% end %>
+					<% end %>
 				<% end %>
 			</div>
 
@@ -49,5 +55,15 @@
 
 		<%= yield %>
 	</div>
+	
+	<footer id="footer">
+		<hr />
+		Gemeinschaft 4.0
+		&nbsp;&bull;&nbsp;
+		Copyright 2011 by <span class="amooma-name">Amooma</span> GmbH
+		&nbsp;&bull;&nbsp;
+		Support und Consulting
+		&nbsp;&rarr;&nbsp; <%= link_to 'http://www.amooma.de' %></small>
+	</footer>
 </body>
 </html>
