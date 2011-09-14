@@ -29,4 +29,10 @@
   <%= phone_model.number_of_keys %>
 </p>
 
+<% if !phone_model.manual_url.blank? %>
+	<p>
+	  <b><%= t(:online_manual)%>:</b>
+	  <%= link_to "#{t(:online_manual)} #{phone_model.name}", phone_model.manual_url %>
+	</p>
+<% end %>
 </div>

@@ -12,26 +12,9 @@
   <tr>
     <td class="vam"><%= link_to phone.mac_address_to_display, phone %></td>
     <td class="vam">
-      <%
-        img = case phone.try(:phone_model).try(:manufacturer).try(:ieee_name)
-          when 'SNOM Technology AG'
-            case (phone.try(:phone_model).try(:name) || '').downcase.gsub( / +/, '' )
-              when 'snom300'; 'snom/Visio_snom300.png'
-              when 'snom320'; 'snom/Visio_snom320.png'
-              when 'snom360'; 'snom/Visio_snom360.png'
-              when 'snom370'; 'snom/Visio_snom370.png'
-              when 'snom820'; 'snom/Visio_snom820.png'
-              when 'snom821'; 'snom/Visio_snom821.png'
-              when 'snom870'; 'snom/Visio_snom870.png'
-              else nil
-            end
-          else nil
-        end
-        if img
-          %><img src="<%= root_path %>images/phones/<%= img %>" width="80" alt="<%= "#{phone.phone_model.name} with the MAC Address #{phone.mac_address}" %>" align="middle" /><br /><%
-        end
-      %>
-      <span style="white-space: nowrap;"><%= phone.phone_model.name %></span>
+	  <%= render :partial => 'phone_models/image', :locals => {:phone => phone} %>
+	
+      <span style="white-space: nowrap;"><%= link_to phone.phone_model.name, phone.phone_model %></span>
       <!--
       <br />
       <small>(<%= truncate( phone.phone_model.manufacturer.name, :length => 20 ) %>)</small>

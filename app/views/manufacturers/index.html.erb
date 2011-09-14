@@ -13,7 +13,15 @@
   <tr class="<%= cycle("even", "odd") %>">
     <td><%= link_to manufacturer.name, manufacturer %></td>
     <td><%= link_to manufacturer.url, manufacturer.url, :target => '_blank' %></td>
-    <td><%= manufacturer.phone_models.count %></td>
+    <td>
+	  <% if manufacturer.phone_models.count > 0 %>
+	    <% manufacturer.phone_models.each do |phone_model| %>
+	      <%= link_to phone_model.name, phone_model %><%= ", " if phone_model != manufacturer.phone_models.last %>
+	    <% end %>
+      <% else %>
+        0
+	  <% end %>
+	</td>
     <td><%= link_to t(:edit), edit_manufacturer_path(manufacturer) if can?( :edit, manufacturer ) %></td>
     <td><%= button_to t(:destroy), manufacturer, :confirm => t(:are_you_sure), :method => :delete if can?( :destroy, manufacturer ) %></td>
   </tr>
