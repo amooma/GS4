@@ -488,7 +488,7 @@ de:
   wizard_phone_saved: "Telefon %{phone_model} (MAC-Adresse: %{mac_address}) wurde mit der Durchwahl %{extension} angelegt. Bitte booten Sie das Telefon jetzt manuell."
   
   phone_created_reboot_needed: "Dieses Telefon wurde vor %{time_ago} in Gemeinschaft angelegt, hat aber bisher seine Konfiguration noch nicht abgerufen. Bitte das Telefon manuell auf Werkseinstellungen zurücksetzen."
-  phone_set_config_url: "Danach bitte folgende Setting-URL auf dem Telefon konfigurieren:"
+  phone_set_config_url: "Nach dem Zurücksetzen auf die Werkseinstellungen folgende Setting-URL auf dem Telefon konfigurieren:"
   phone_manual: "Online-Handbuch zum %{phone_model}"
   
   default_caller_name: "Nebenstelle"
