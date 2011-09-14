@@ -156,6 +156,7 @@ de:
   default_http_password: "Standard-HTTP-Passwort"
   max_number_of_sip_accounts: "Max. Anzahl SIP-Accounts"
   number_of_keys: "Anzahl Tasten"
+  online_manual: "Online-Handbuch"
   listing_phone_models: "Telefonmodelle"
   new_phone_model: "Neues Telefonmodell"
   new_phone_model_named: "Neues %{name} Telefonmodell"
