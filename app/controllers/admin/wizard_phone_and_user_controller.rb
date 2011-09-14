@@ -24,6 +24,9 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 			:voicemail_pin => 100000 + SecureRandom.random_number( 899999 ),
 			:caller_name => "#{I18n.t(:default_caller_name)} #{my_extension}"
 		)
+		@user = sip_account.build_user(
+			:role => "user",
+		)
 		extension = sip_account.extensions.build(
 			:extension => my_extension,
 			:destination => sip_account.auth_name,
@@ -36,7 +39,11 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 	end
 	
 	def create
+		user = params[:phone][:sip_accounts_attributes]["0"][:user]
+		params[:phone][:sip_accounts_attributes]["0"].delete :user
+		
 		@phone = Phone.new(params[:phone])
+		@user = @phone.sip_accounts.first.build_user(user)
 		
 		respond_to do |format|
 			if @phone.save
