@@ -1,4 +1,4 @@
-<table>
+<table cellspacing="1">
   <tr>
     <th><%= t(:mac_address) %></th>
     <th><%= t(:phone_model) %></th>
@@ -10,16 +10,37 @@
 
 <% phones.each do |phone| %>
   <tr>
-    <td><%= link_to phone.mac_address_to_display, phone %></td>
-    <td>
-      <%= phone.phone_model.name %>
+    <td class="vam"><%= link_to phone.mac_address_to_display, phone %></td>
+    <td class="vam">
+      <%
+        img = case phone.try(:phone_model).try(:manufacturer).try(:ieee_name)
+          when 'SNOM Technology AG'
+            case (phone.try(:phone_model).try(:name) || '').downcase.gsub( / +/, '' )
+              when 'snom300'; 'snom/s-300.png'
+              when 'snom320'; 'snom/s-320.png'
+              when 'snom360'; 'snom/s-360.png'
+              when 'snom370'; 'snom/s-370.png'
+              when 'snom820'; 'snom/s-820.png'
+              when 'snom821'; 'snom/s-821.png'
+              when 'snom870'; 'snom/s-870.png'
+              else nil
+            end
+          else nil
+        end
+        if img
+          %><img src="<%= root_path %>images/phones/<%= img %>" alt=" " align="middle" style="vertical-align:middle; border:2px solid #777; border-radius:12px; margin:0 0.5em 0 0; box-shadow: 1px 2px 4px #999;" /><%
+        end
+      %>
+      <span style="white-space: nowrap;"><%= phone.phone_model.name %></span>
+      <!--
       <br />
-      <small><%= t(:manufacturer) %>: <br /><%= truncate(phone.phone_model.manufacturer.name, :length => 20) %></small>
+      <small>(<%= truncate( phone.phone_model.manufacturer.name, :length => 20 ) %>)</small>
+      -->
     </td>
-    <td><%= phone.ip_address.blank? ? '-' : phone.ip_address  %></td>
+    <td class="vam"><%= phone.ip_address.blank? ? '-' : phone.ip_address  %></td>
     
     <% t = Time.now - 45.minutes %>
-    <td class="<%= phone.created_at > t ? 'status_no' : '' %>">
+    <td class="vam <%= phone.created_at > t ? 'status_no' : '' %>">
     <% if phone.created_at > t %>
       <% if phone.rebootable? %>
         <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
@@ -46,8 +67,8 @@
     <% end %>
     </td>
     
-    <td><%= link_to t(:edit), edit_phone_path(phone) %></td>
-    <td><%= link_to t(:destroy), confirm_destroy_phone_path(phone) if can?( :destroy, phone ) %></td>
+    <td class="vam"><%= link_to t(:edit), edit_phone_path(phone) %></td>
+    <td class="vam"><%= link_to t(:destroy), confirm_destroy_phone_path(phone) if can?( :destroy, phone ) %></td>
   </tr>
 <% end %>
 </table>
