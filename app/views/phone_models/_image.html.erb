@@ -1,0 +1,21 @@
+<%
+  phone_model = phone.phone_model if !phone_model
+
+  img = case phone_model.try(:manufacturer).try(:ieee_name)
+    when 'SNOM Technology AG'
+      case (phone_model.try(:name) || '').downcase.gsub( / +/, '' )
+        when 'snom300'; 'snom/Visio_snom300.png'
+        when 'snom320'; 'snom/Visio_snom320.png'
+        when 'snom360'; 'snom/Visio_snom360.png'
+        when 'snom370'; 'snom/Visio_snom370.png'
+        when 'snom820'; 'snom/Visio_snom820.png'
+        when 'snom821'; 'snom/Visio_snom821.png'
+        when 'snom870'; 'snom/Visio_snom870.png'
+        else nil
+      end
+    else nil
+  end
+  if img
+    %><img src="<%= root_path %>images/phones/<%= img %>" width="80" alt="<%= "#{phone_model.name}" %><%= " with the MAC Address #{phone.mac_address}" if !phone_model %>" align="middle" /><br /><%
+  end
+%>
