@@ -39,9 +39,12 @@ px depends on the screen's resolution.
 */
 /*$base-font-size:   13px;    *//* font-size was 10pt */
 /*$base-line-height: 17.6px;  *//* line-height was 1.35em */
+/*
 $base-font-size:   13.55px;
 $base-line-height: 18.9px;
-
+*/
+$base-font-size:   13.8px;
+$base-line-height: $base-font-size * 1.38;
 
 @import "compass/typography";
 $ie-font-ratio: $base-font-size / 100%;
@@ -230,7 +233,7 @@ table {
 		border-width: 1px;
 		border-style: solid;
 		border-color: rgba(0,0,0,0.05);
-		padding: 0.15em 0.4em;
+		padding: 0.25em 0.5em;
 		text-align: left;
 		vertical-align: top;
 		background-color: #f3f3f3;
@@ -292,6 +295,10 @@ table {
 	height: 0;
 	visibility: hidden;
 }
+
+.vat { vertical-align: top; }
+.vam { vertical-align: middle; }
+.vab { vertical-align: bottom; }
 
 
 
