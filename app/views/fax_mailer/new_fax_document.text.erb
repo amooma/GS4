@@ -1,0 +1,15 @@
+<%= @user.gn %> <%= @user.sn %>,
+
+<%= t(:date_date) %>: <%= l( Time.at(@fax_document.created_at.localtime)) %>
+<% if @fax_document.sent %>
+<%= t(:sent) %>: <%= l( Time.at(@fax_document.sent.localtime)) %>
+<% end %>
+<% if @fax_document.received %>
+<%= t(:received) %>: <%= l( Time.at(@fax_document.received.localtime)) %>
+<% end %>
+<% if (! @fax_document.received && ! @fax_document.sent) %>
+<%= t(:transmitted) %>: <%= t(:no_lowercase) %>
+<% end %>
+<%= t(:source) %>: <%= @fax_document.source %>
+<%= t(:destination) %>: <%= @fax_document.destination %>
+<%= t(:title) %>: <%= @fax_document.title %>

@@ -2,6 +2,7 @@
   <tr>
     <th><%= t(:mac_address) %></th>
     <th><%= t(:phone_model) %></th>
+    <th><%= t(:extensions) %></th>
     <th><%= t(:ip_address) %></th>
     <th></th>
     <th></th>
@@ -21,6 +22,11 @@
       <small>(<%= truncate( phone.phone_model.manufacturer.name, :length => 20 ) %>)</small>
       -->
     </td>
+    <td>
+	  <% phone.extensions.each do |extension| %>
+	    <%= link_to extension.extension, extension %><%= ', ' if extension != phone.extensions.last %>
+	  <% end %>
+	</td>
     
     <% t = Time.now - 45.minutes %>
     
@@ -45,7 +51,7 @@
       <% if ! NetworkSetting.first.try(:start_dhcp_server) %>
         <p>
           <%= t(:phone_set_config_url) %><br />
-          <tt><%= "https://#{ @controller.guess_local_host }#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
+          <tt><%= "https://#{guess_local_ip_address}#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
         </p>
       <% end %>
     <% end %>

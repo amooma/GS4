@@ -226,6 +226,8 @@ Gemeinschaft4::Application.routes.draw do
 	resources :fax_documents do
 		member do
 			get 'confirm_destroy'
+			get 'number'
+			put 'transfer'
 		end
 	end
 	

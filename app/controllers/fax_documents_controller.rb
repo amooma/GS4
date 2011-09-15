@@ -26,19 +26,30 @@ class FaxDocumentsController < ApplicationController
     @fax_document = FaxDocument.find(params[:id])
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.xml  { render :xml => @fax_document }
       format.tif {
         raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
-        raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@fax_document.raw_file}#{raw_file_suffix}")
-        send_file raw_file, :type => "image/tiff", 
+        raw_file_name = @fax_document.raw_file_path
+        send_file raw_file_name, :type => "image/tiff", 
           :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + raw_file_suffix
       }
       format.png {
         thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
-        thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@fax_document.raw_file}#{thumbnail_suffix}")
-        send_file thumbnail_file, :type => "image/png", :disposition => 'inline', 
+        thumbnail_file_name = @fax_document.thumbnail_file_path
+        if ! thumbnail_file_name
+            thumbnail_file_name = @fax_document.to_thumbnail
+        end
+        send_file thumbnail_file_name, :type => "image/png", :disposition => 'inline', 
           :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + thumbnail_suffix
+      }
+      format.pdf {
+        pdf_file_name = @fax_document.pdf_file_path
+        if ! pdf_file_name
+            pdf_file_name = @fax_document.to_pdf
+        end
+        send_file pdf_file_name, :type => "application/pdf", 
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.pdf'
       }
     end
   end
@@ -70,7 +81,10 @@ class FaxDocumentsController < ApplicationController
 
     respond_to do |format|
       if  @fax_document.save
-        format.html { redirect_to(@fax_document, :notice => t(:fax_document_created)) }
+        if (Configuration.get(:fax_send_mail, true, Configuration::Boolean) && ! @fax_document.outgoing && @fax_document.user_id )
+          FaxMailer.new_fax_document(@fax_document).deliver
+        end
+		format.html { redirect_to :action => 'number', :id => @fax_document.id }
         format.xml  { render :xml => @fax_document, :status => :created, :location => @fax_document }
       else
         format.html { render :action => "new" }
@@ -109,6 +123,26 @@ class FaxDocumentsController < ApplicationController
   
   def confirm_destroy
     @fax_document = FaxDocument.find(params[:id])
+  end
+  
+  def number
+    @fax_document = FaxDocument.find(params[:id])
+  end
+  
+  def transfer
+    @fax_document = FaxDocument.find(params[:id])
+    if (params[:fax_document] && ! params[:fax_document][:destination].blank?)
+      destination = params[:fax_document][:destination]
+    end
+    respond_to do |format|
+      if @fax_document.update_attributes(:destination => destination) && @fax_document.transfer(destination)
+        format.html { redirect_to(@fax_document, :notice => t(:fax_document_sending)) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "number" }
+        format.xml  { render :xml => @fax_document.errors, :status => :unprocessable_entity }
+      end
+    end
   end
   
   private
