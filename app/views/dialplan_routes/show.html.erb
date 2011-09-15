@@ -1,4 +1,4 @@
-
+<% page_title t('dp_route.view.show') %>
 <h1><%= t('dp_route.view.show') %></h1>
 <%= render 'show' %>
 <%= link_to t(:edit), edit_dialplan_route_path( @dialplan_route ) if can?( :edit, @dialplan_route ) %> |
