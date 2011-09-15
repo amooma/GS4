@@ -29,19 +29,17 @@ class FaxDocumentsController < ApplicationController
       format.html 
       format.xml  { render :xml => @fax_document }
       format.tif {
-        raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
         raw_file_name = @fax_document.raw_file_path
         send_file raw_file_name, :type => "image/tiff", 
-          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + raw_file_suffix
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.tif'
       }
       format.png {
-        thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
         thumbnail_file_name = @fax_document.thumbnail_file_path
         if ! thumbnail_file_name
             thumbnail_file_name = @fax_document.to_thumbnail
         end
         send_file thumbnail_file_name, :type => "image/png", :disposition => 'inline', 
-          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + thumbnail_suffix
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.png'
       }
       format.pdf {
         pdf_file_name = @fax_document.pdf_file_path
