@@ -7,7 +7,7 @@ SRC="$3"
 RECEIVED=`date`
 
 POST_URL="http://127.0.0.1/fax_documents.xml"
-DOCUMENT="<outgoing>false</outgoing><file>$FAX_FILE</file><raw-file>$RAW_FILE</raw-file><title>Fax from $SRC</title><received>$RECEIVED</received><destination>$DST</destination>"
+DOCUMENT="<outgoing>false</outgoing><file>$FAX_FILE</file><raw-file>$RAW_FILE</raw-file><title>Fax from $SRC</title><received>$RECEIVED</received><destination>$DST</destination><source>$SRC</source>"
 POST_DATA="<?xml version=\"1.0\" > encoding=\"UTF-8\"?><fax-document>$DOCUMENT</fax-document>"
 
 curl --post302 -v --location-trusted -X POST -H 'Content-type: text/xml' -d "$POST_DATA" $POST_URL
