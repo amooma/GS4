@@ -4,7 +4,7 @@
   <img src="<%= fax_document_path(@fax_document, :format => 'png') %>" />
 </p>
 
-<%= link_to t(:download), fax_document_path(@fax_document, :format => 'tif') %> |
+<%= link_to t(:download), fax_document_path(@fax_document, :format => 'pdf') %> |
 <% if can?( :edit, @fax_document ) %>
 <%= link_to t(:edit), edit_fax_document_path(@fax_document) %> |
 <% end %>
