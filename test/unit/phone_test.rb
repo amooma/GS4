@@ -20,7 +20,6 @@ class PhoneTest < ActiveSupport::TestCase
     '007',
     'AAFF0011',
     '1122334455GG',
-    "00:11:22:aa:bb:cc:",
     '112233aabbcc11',
     'not_a_valid_MAC_address'
   ].each do |invalid_mac_address|

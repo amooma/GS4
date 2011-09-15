@@ -13,9 +13,10 @@ class Phone < ActiveRecord::Base
 	validates_uniqueness_of   :ip_address, :allow_nil => true, :allow_blank => true
 	validates_format_of       :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
 	
+	validates_numericality_of :phone_model_id, :greater_than => 0
 	validates_presence_of     :phone_model
 	
-	validate :cross_check_mac_address_with_ouis, :if => Proc.new{ |phone| ! phone.mac_address.blank? && ! phone.errors[:mac_address] }
+	validate :cross_check_mac_address_with_ouis, :if => Proc.new{ |phone| ! phone.mac_address.blank? && phone.errors[:mac_address].count == 0 }
 	
 	after_validation :save_old_last_ip_address
 	

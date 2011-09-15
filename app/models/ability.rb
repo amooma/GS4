@@ -70,9 +70,9 @@ class Ability
         can    :read    , PhoneModel
         can    :manage  , Phone
         can    :read    , :Setup
-        can    :read    , Voicemail
-        can    :destroy , Voicemail
-        can    :confirm_destroy , Voicemail
+        #can    :read    , Voicemail
+        #can    :destroy , Voicemail
+        #can    :confirm_destroy , Voicemail
         can    :create  , NetworkSetting
         can    :read    , NetworkSetting
         can    :edit    , NetworkSetting
