@@ -1,3 +1,4 @@
+<% page_title t(:global_contact) %>
 <h1><%= t(:global_contact) %></h1>
 <%= render 'show' %>
 <%= link_to t(:edit), edit_global_contact_path(@global_contact) if can?( :edit, @global_contact ) %> |

@@ -1,4 +1,4 @@
-
+<% page_title "#{t(:editing_user)}: #{@user.username}" %>
 <h1><%= t(:editing_user) %>: <%= @user.username %></h1>
 
 <%= simple_form_for( @user, :url => { :action => "update" }, :html => { :method => "put" }) do |f| %>
