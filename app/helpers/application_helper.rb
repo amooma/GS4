@@ -26,8 +26,7 @@ module ApplicationHelper
 						{ :text => t(:media_services), :sub => [
 							{ :text => t(:queues)        , :url => call_queues_path },
 							{ :text => t(:conferences)   , :url => conferences_path },
-							{ :text => t(:fax_documents) , :url => fax_documents_path },
-							{ :text => t(:voicemails)    , :url => voicemails_path },
+							{ :text => t(:fax_documents) , :url => fax_documents_path },  #OPTIMIZE Move Fax documents from admin to user.
 						]},
 						
 						{ :text => t(:servers), :sub => [
