@@ -70,14 +70,13 @@ module ApplicationHelper
 					]
 			end
 		elsif ! current_page?(:controller => 'admin/setup', :action => 'new')
-
 			menu_items = [
 				{ :text => t(:sign_in)       , :url => new_user_session_path },
 			]
 		else
-     menu_items = [
-                   {},
-                   ] 
+			menu_items = [
+				{},
+			] 
 		end
 		return menu_items
 	end
@@ -91,42 +90,42 @@ module ApplicationHelper
 	#
 	# The original File:
 	# actionpack/lib/action_view/helpers/url_helper.rb, line 231
-  #
-  def link_to(*args, &block)
-    if block_given?
-      options      = args.first || {}
-      html_options = args.second
-      link_to(capture(&block), options, html_options)
-    else
-      name         = args[0]
-      options      = args[1] || {}
-      html_options = args[2]
-  
-      html_options = convert_options_to_data_attributes(options, html_options)
-      url = url_for(options)
-  
-      href = html_options['href']
-      tag_options = tag_options(html_options)
-  
-      href_attr = "href=\"#{ERB::Util.html_escape(url)}\"" unless href
-      
-      # Lets check if this request came from localhost (e.g. the kiosk browser)
-      #
-      if request.env['REMOTE_ADDR'] != '127.0.0.1'
-        "<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape(name || url)}</a>".html_safe
-      else
-        if ERB::Util.html_escape(url)[0] == '/'
-          "<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape(name || url)}</a>".html_safe
-        else
-          if ERB::Util.html_escape(name || url) == ERB::Util.html_escape(url)
-            "#{ERB::Util.html_escape(name || url)}".html_safe
-          else
-            "#{ERB::Util.html_escape(name || url)} (#{ERB::Util.html_escape(url)})".html_safe
-          end
-        end
-      end
-    end
-  end
+	#
+	def link_to( *args, &block )
+		if block_given?
+			options      = args.first || {}
+			html_options = args.second
+			link_to( capture( &block ), options, html_options )
+		else
+			name         = args[0]
+			options      = args[1] || {}
+			html_options = args[2]
+			
+			html_options = convert_options_to_data_attributes( options, html_options )
+			url = url_for( options )
+			
+			href = html_options['href']
+			tag_options = tag_options( html_options )
+			
+			href_attr = "href=\"#{ERB::Util.html_escape( url )}\"" unless href
+			
+			# Lets check if this request came from localhost (e.g. the kiosk browser)
+			#
+			if request.env['REMOTE_ADDR'] != '127.0.0.1'
+				"<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape( name || url )}</a>".html_safe
+			else
+				if ERB::Util.html_escape( url )[0] == '/'
+					"<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape( name || url )}</a>".html_safe
+				else
+					if ERB::Util.html_escape( name || url ) == ERB::Util.html_escape( url )
+						"#{ERB::Util.html_escape( name || url )}".html_safe
+					else
+						"#{ERB::Util.html_escape( name || url )} (#{ERB::Util.html_escape( url )})".html_safe
+					end
+				end
+			end
+		end
+	end
 	
 end
 
