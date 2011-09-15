@@ -63,6 +63,7 @@ en:
   fax_thumbnail_not_created: "Fax preview could not be created"
   fax_document_too_many: "Too many fax documents (%{count})"
   fax_email_subject: "Fax from %{source} for %{destination}"
+  pdf: "PDF"
   outbound: "Outbound"
   inbound: "Inbound"
   direction: "Direction"
