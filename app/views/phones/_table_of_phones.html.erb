@@ -45,7 +45,7 @@
       <% if ! NetworkSetting.first.try(:start_dhcp_server) %>
         <p>
           <%= t(:phone_set_config_url) %><br />
-          <tt><%= "https://#{ @controller.guess_local_host }#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
+          <tt><%= "https://#{guess_local_ip_address}#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
         </p>
       <% end %>
     <% end %>
