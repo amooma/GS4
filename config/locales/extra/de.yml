@@ -63,6 +63,7 @@ de:
   fax_thumbnail_not_created: "Fax-Vorschau konnte nicht angelegt werden"
   fax_document_too_many: "Mehr als %{count} Fax-Dokumente angelegt, vor dem Anlegen bitte zunächst alte Dokumente löschen"
   fax_email_subject: "Fax von %{source} für %{destination}"
+  pdf: "PDF"
   outbound: "Ausgehend"
   inbound: "Eingehend"
   direction: "Richtung"
