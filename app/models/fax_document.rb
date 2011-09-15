@@ -125,16 +125,16 @@ class FaxDocument < ActiveRecord::Base
 	end
 	
 	def raw_file_path
-		raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
-		raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_file_suffix}")
+		raw_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
+		raw_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{raw_suffix}")
 		if (File.exists?(raw_file))
-			return raw_file_path
+			return raw_file
 		end
 	end
 	
 	def thumbnail_file_path
 		thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
-		thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{raw_file}#{thumbnail_suffix}")
+		thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{self.raw_file}#{thumbnail_suffix}")
 		if (File.exists?(thumbnail_file))
 			return thumbnail_file
 		end
