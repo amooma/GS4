@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :guess_local_ip_address
+  helper_method :guess_local_host
   
   # https://github.com/ryanb/cancan/wiki/Ensure-Authorization
   check_authorization :if => :requires_authorization
