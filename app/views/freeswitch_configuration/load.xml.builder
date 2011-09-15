@@ -1138,7 +1138,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 =end
 		
 		xml.context( :name => 'internal' ) {  #OPTIMIZE This context is called "public" in the original configuration (misc/freeswitch/fs-conf/).
-		xml.action( :application => 'set', :data => 'ringback=$${us-ring}' )  #OPTIMIZE <action> outside of an <extension>?
+		xml.action( :application => 'set', :data => 'ringback=$${us-ring}' )  #OPTIMIZE <action> outside of an <extension>?  #OPTIMIZE $${us-ring} isn't defined.
 			
 			xml.extension( :name => 'from-kamailio' ) {
 				xml.condition( :field => 'network_addr', :expression => '^127\.0\.0\.1$' )
