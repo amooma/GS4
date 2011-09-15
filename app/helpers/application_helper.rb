@@ -109,22 +109,7 @@ module ApplicationHelper
 			tag_options = tag_options( html_options )
 			
 			href_attr = "href=\"#{ERB::Util.html_escape( url )}\"" unless href
-			
-			# Lets check if this request came from localhost (e.g. the kiosk browser)
-			#
-			if request.env['REMOTE_ADDR'] != '127.0.0.1'
-				"<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape( name || url )}</a>".html_safe
-			else
-				if ERB::Util.html_escape( url )[0] == '/'
-					"<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape( name || url )}</a>".html_safe
-				else
-					if ERB::Util.html_escape( name || url ) == ERB::Util.html_escape( url )
-						"#{ERB::Util.html_escape( name || url )}".html_safe
-					else
-						"#{ERB::Util.html_escape( name || url )} (#{ERB::Util.html_escape( url )})".html_safe
-					end
-				end
-			end
+			"<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape( name || url )}</a>".html_safe
 		end
 	end
 	
