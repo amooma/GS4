@@ -1,0 +1,84 @@
+<%#OPTIMIZE Add internationalization and localization. %>
+
+<style type="text/css">
+	.pattern_help table th,
+	.pattern_help table td {
+		background-color: transparent !important;
+		border: 0px none transparent !important;
+	}
+	.pattern_help table th {
+		white-space: nowrap;
+		font-size: 1.5em;
+		line-height: 130%;
+		font-weight: normal;
+		min-width: 5em;
+		text-align:right;
+		padding-right: 1em;
+		padding-bottom: 0.5em;
+	}
+	.pattern_help table code {
+		color: #090;
+		font-family: Courier New, Courier, monospace;
+		font-weight: bold;
+		padding: 1pt 3pt;
+		margin: 0 1.5pt;
+		background-color: #fff;
+		text-shadow: 1px 1px 3px #ccc;
+	}
+	.pattern_help table tt {
+		color: #080;
+		font-family: Courier New, Courier, monospace;
+		font-weight: bold;
+		padding: 1pt 2pt;
+		margin: 0 0;
+		background-color: #fff;
+	}
+</style>
+
+<div class="simple_form_show pattern_help" style="background:#f0f0f3;">
+<div style="padding: 0.5em 2em;">
+	
+	Ein Muster kann folgende Bestandteile enthalten:<br />
+	<br />
+	<table style="width:99%;">
+		<tr>
+			<th><code>0</code>-<code>9</code></th>
+			<td>Eine Ziffer von „<tt>0</tt>“ bis „<tt>9</tt>“.</td>
+		</tr>
+		<tr>
+			<th><code>a</code>-<code>d</code></th>
+			<td>Ein Buchstabe (Groß-/Kleinschreibung nicht unterschieden) von „<tt>A</tt>“ bis „<tt>D</tt>“. Selten genutzt.</td>
+		</tr>
+		<tr>
+			<th><code>e</code><code>*</code><code>f</code><code>#</code></th>
+			<td>„<tt>E</tt>“ steht für „<tt>*</tt>“ (Stern), „<tt>F</tt>“ für „<tt>#</tt>“ (Raute). Als Ergänzung zu einem „DigitString“ nach H.248.1 erlauben wir hier auch „<tt>*</tt>“ und „<tt>#</tt>“.</td>
+		</tr>
+		<tr>
+			<th><code>x</code></th>
+			<td>Platzhalter für eine beliebige Ziffer „<tt>0</tt>“ - „<tt>9</tt>“.</td>
+		</tr>
+		<tr>
+			<th><code>[</code>…<code>]</code></th>
+			<td>Ein Zeichen aus einem Bereich. Beispiele: „<tt>[0-9]</tt>“, „<tt>[23]</tt>“, „<tt>[236-9]</tt>“, „<tt>[abcijk]</tt>“ (ungültig: „<tt>[a-c]</tt>“).</td>
+		</tr>
+		<tr>
+			<th><code>+</code></th>
+			<td>„<tt>+</tt>“ (Plus) am Anfang von Rufnummern im E.164-Format. (Ergänzung)</td>
+		</tr>
+		<tr>
+			<th><code>.</code></th>
+			<td>Punkt am Ende: mehrere (oder keine) Wiederholungen des vorangehenden Zeichenmusters.</td>
+		</tr>
+		
+		<tr><td colspan="2">Beispiele:</td></tr>
+		<tr><th><tt>xx.</tt></th><td>Alle Ziele</td></tr>
+		<tr><th><tt>0049xx.</tt></th><td>Ziele in Deutschland</td></tr>
+		<tr><th><tt>+49xx.</tt></th><td>Ziele in Deutschland im E.164-Format</td></tr>
+		<tr><th><tt>0900xx.</tt></th><td>Premium-Rufnummern</td></tr>
+		<tr><th><tt>00xx.</tt></th><td>Internationale Rufnummer</td></tr>
+		<tr><th><tt>+xx.</tt></th><td>Internationale Rufnummer im E.164-Format</td></tr>
+		
+	</table>
+	
+</div>
+</div>

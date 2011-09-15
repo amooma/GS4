@@ -1,0 +1,26 @@
+<h1><%= t('dp_pattern.view.index') %></h1>
+
+<table>
+	<tr>
+		<% i18n_path = 'activerecord.attributes.dialplan_pattern.' %>
+		<th><%= t( i18n_path + 'pattern' ) %></th>
+		<th><%= t( i18n_path + 'name' ) %></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+<% @dialplan_patterns.each do |dialplan_pattern| %>
+	<tr>
+		<td><big><tt><%= dialplan_pattern.pattern %></tt></big></td>
+		<td><%= dialplan_pattern.name %></td>
+		<td><%= link_to t(:show), dialplan_pattern %></td>
+		<td><%= link_to t(:edit), edit_dialplan_pattern_path(dialplan_pattern) %></td>
+		<td><%= button_to t(:destroy), dialplan_pattern, :confirm => t(:are_you_sure), :method => :delete %></td>
+	</tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t('dp_pattern.view.new'), new_dialplan_pattern_path %>

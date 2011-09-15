@@ -1,5 +1,7 @@
 class SipGateway < ActiveRecord::Base
 	
+	has_many :dialplan_routes, :dependent => :restrict
+	
 	before_validation {
 		self.port           = nil if self.port           .blank?
 		self.realm          = nil if self.realm          .blank?

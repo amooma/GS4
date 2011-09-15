@@ -124,7 +124,7 @@ class Phone < ActiveRecord::Base
 	)end
 	
 	def mac_address_to_display
-		return [].fill('%02x', 0, 6).join(':') % self.mac_address.scanf( '%2X' * 6 )
+		return [].fill('%02X', 0, 6).join(':') % self.mac_address.scanf( '%2X' * 6 )
 	end
 	
 	private

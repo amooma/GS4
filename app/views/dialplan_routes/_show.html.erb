@@ -1,0 +1,31 @@
+
+<div class="simple_form_show">
+
+<% i18n_path = 'activerecord.attributes.dialplan_route.' %>
+
+<p>
+	<b><%= t( i18n_path + 'eac' ) %>:</b>
+	<big><tt><%= @dialplan_route.eac %></tt></big>
+</p>
+
+<p>
+	<b><%= t( i18n_path + 'pattern' ) %>:</b>
+	<big><tt><%= @dialplan_route.dialplan_pattern.try(:pattern) %></tt></big>
+</p>
+
+<p>
+	<b><%= t( i18n_path + 'user' ) %>:</b>
+	<%= @dialplan_route.user ? @dialplan_route.user.try(:to_display) : t('dp_route.all_users') %>
+</p>
+
+<p>
+	<b><%= t( i18n_path + 'sip_gateway' ) %>:</b>
+	<%= @dialplan_route.sip_gateway ? @dialplan_route.sip_gateway.try(:hostport) : t('dp_route.no_gateway') %>
+</p>
+
+<p>
+	<b><%= t( i18n_path + 'name' ) %>:</b>
+	<%= @dialplan_route.name %>
+</p>
+
+</div>

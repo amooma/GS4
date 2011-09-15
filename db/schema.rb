@@ -95,6 +95,24 @@ ActiveRecord::Schema.define(:version => 20110914122821) do
     t.datetime "updated_at"
   end
 
+  create_table "dialplan_patterns", :force => true do |t|
+    t.string   "pattern"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dialplan_routes", :force => true do |t|
+    t.string   "eac"
+    t.integer  "pattern_id"
+    t.integer  "user_id"
+    t.integer  "sip_gateway_id"
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "extensions", :force => true do |t|
     t.string   "extension"
     t.datetime "created_at"

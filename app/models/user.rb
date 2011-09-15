@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :fax_documents, :dependent => :destroy
   has_many :user_to_extensions, :dependent => :destroy
   has_many :extensions, :through => :user_to_extensions
+  has_many :dialplan_routes, :dependent => :destroy
   has_many :sip_accounts
   has_many :phones, :through => :sip_accounts
   

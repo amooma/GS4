@@ -14,7 +14,7 @@
   <tr>
     <td><%= extension.extension %></td>
     <td><%= extension.destination %></td>
-    <td><%= extension.active %></td>
+    <td><%= extension.active ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show)    ,                                 extension %></td>
     <td><%= link_to t(:edit)    ,            edit_extension_path( extension ) %></td>
     <td><%= link_to t(:destroy) , confirm_destroy_extension_path( extension ) if can?( :destroy, extension ) %></td>

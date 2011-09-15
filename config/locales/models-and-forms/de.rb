@@ -47,6 +47,8 @@
 			:network_setting               => "Netzwerk-Konfiguration",
 			:sip_gateway                   => "Gateway",
 			:user_to_extension             => "Benutzer zu Rufnummer",
+			:dialplan_pattern              => "Wählplan-Muster",
+			:dialplan_route                => "Wählplan-Route",
 			
 		},
 		
@@ -380,6 +382,23 @@
 				:extension     => "Rufnummer",
 				:extension_id  => "Rufnummern-ID",
 			},
+			:dialplan_pattern => {
+				:name     => "Bezeichnung",
+				:pattern  => "Wähl-Muster",
+			},
+			:dialplan_route => {
+				:eac                  => "AKz",
+				:dialplan_pattern     => "Wähl-Muster",
+				:dialplan_pattern_id  => "Wähl-Muster-ID",
+				:pattern              => "Wähl-Muster",
+				:pattern_id           => "Wähl-Muster-ID",
+				:user                 => "Benutzer",
+				:user_id              => "Benutzer-ID",
+				:sip_gateway          => "Gateway",
+				:sip_gateway_id       => "Gateway-ID",
+				:name                 => "Beschreibung",
+				:position             => "Position",
+			},
 			
 		},
 	},
@@ -531,7 +550,7 @@
 				:is_local => "Legt fest ob dieser TK-Knoten für diesen Voicemail-Dienst zuständig ist.",
 			},
 			:phone => {
-				:mac_address    => "Die MAC-Adresse (Media-Access-Control-Adresse) des Telefons. Sie ist üblicherweise auf dem Boden des Gerätes aufgedruckt bzw. über ein Menü am Display des Gerätes ablesbar.",
+				:mac_address    => "Die MAC-Adresse (Media-Access-Control-Adresse) des Telefons. Sie ist üblicherweise auf der Unterseite des Gerätes aufgedruckt bzw. über ein Menü am Display des Gerätes ablesbar.",
 				:phone_model    => "Das Telefon-Modell des Endgeräts.",
 				:phone_model_id => "Relation zu PhoneModel",
 				:ip_address     => "Die aktuelle IP-Adresse des Geräts. Diese ist meist über ein Menü am Display des Gerätes ablesbar.",
@@ -711,6 +730,23 @@
 				:user_id       => "",
 				:extension     => "",
 				:extension_id  => "",
+			},
+			:dialplan_pattern => {
+				:name     => "Eine Bezeichnung.",
+				:pattern  => "Das Wähl-Muster.",  #TODO
+			},
+			:dialplan_route => {
+				:eac                  => "Amtskennziffer / Amtskennzahl die vom Anwender zur (virtuellen) Amtsholung gewählt werden muss. Beispiel: „0“. Das AKz-Präfix wird automatisch von der vom Benutzer gewählten Rufnummer abgeschnitten. Um das Wählen ohne AKz zu ermöglichen und direkt mit dem Wählmuster zu vergleichen lassen Sie die AKz leer.",
+				:dialplan_pattern     => "Das Wähl-Muster mit dem die vom Benutzer gewählte Ziffernfolge nach der AKz verglichen wird.",
+				:dialplan_pattern_id  => "Die ID des Wähl-Musters.",
+				:pattern              => "Das Wähl-Muster mit dem die vom Benutzer gewählte Ziffernfolge nach der AKz verglichen wird.",
+				:pattern_id           => "Die ID des Wähl-Musters.",
+				:user                 => "Der Benutzer für den diese Wählroute gilt. Leer für alle Benutzer.",
+				:user_id              => "Benutzer-ID",
+				:sip_gateway          => "Das Gateway über das der ausgehende Anruf erfolgen soll. Leer für verboten.",
+				:sip_gateway_id       => "Gateway-ID",
+				:name                 => "Ein Beschreibungstext",
+				:position             => "Reihenfolge",
 			},
 			
 		},

@@ -12,7 +12,8 @@ module DialplanPatternMatcher::Matchers
 		end
 		
 		# A prefix (if any) to display that is automatically prepended to the pattern.
-		# E.g. '^' for an anchored regexp-style pattern.
+		# E.g. '^' for an anchored regexp-style pattern class or
+		# '_' for an Asterisk-style pattern class.
 		def self.display_auto_prefix
 			return ''
 		end

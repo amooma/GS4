@@ -376,7 +376,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					return  # no call log
 					
 				else  # Real call forward with destination.
-					logger.info(_bold( "#{logpfx} Forwarding to #{cfwd.destination.inspect} ..." ))
+					logger.info(_bold( "#{logpfx} Forwarding to #{cfwd_always.destination.inspect} ..." ))
 					
 					check_valid_voicemail_box_destination( cfwd_always.destination )
 					

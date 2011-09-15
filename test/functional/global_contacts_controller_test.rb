@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class GlobalContactsControllerTest < ActionController::TestCase
- 
-# Devise Test Helpers
+  
+  # Devise Test Helpers
   # see https://github.com/plataformatec/devise
   include Devise::TestHelpers
   
