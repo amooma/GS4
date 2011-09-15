@@ -124,6 +124,7 @@ class Ability
         can    :destroy , FaxDocument, :user_id => user.id
         can    :transfer, FaxDocument, :user_id => user.id
         can    :number  , FaxDocument, :user_id => user.id
+        can    :confirm_destroy , FaxDocument, :user_id => user.id
         cannot :update  , FaxDocument
         
         can    :read    , CallLog, :sip_account => { :user_id => user.id }
