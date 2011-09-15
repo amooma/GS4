@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110914122821) do
+ActiveRecord::Schema.define(:version => 20110915082240) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20110914122821) do
     t.datetime "sent"
     t.boolean  "outgoing"
     t.integer  "user_id"
+    t.string   "source"
   end
 
   create_table "global_contacts", :force => true do |t|
