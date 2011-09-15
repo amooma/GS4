@@ -86,5 +86,47 @@ module ApplicationHelper
 		content_for(:page_title) { page_title }
 	end
 	
+	# This version of link_to makes sure that in the local Kiosk mode no 
+	# external links are displayed. The Kiosk doesn't provide a back-button.
+	#
+	# The original File:
+	# actionpack/lib/action_view/helpers/url_helper.rb, line 231
+  #
+  def link_to(*args, &block)
+    if block_given?
+      options      = args.first || {}
+      html_options = args.second
+      link_to(capture(&block), options, html_options)
+    else
+      name         = args[0]
+      options      = args[1] || {}
+      html_options = args[2]
+  
+      html_options = convert_options_to_data_attributes(options, html_options)
+      url = url_for(options)
+  
+      href = html_options['href']
+      tag_options = tag_options(html_options)
+  
+      href_attr = "href=\"#{ERB::Util.html_escape(url)}\"" unless href
+      
+      # Lets check if this request came from localhost (e.g. the kiosk browser)
+      #
+      if request.env['REMOTE_ADDR'] != '127.0.0.1'
+        "<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape(name || url)}</a>".html_safe
+      else
+        if ERB::Util.html_escape(url)[0] == '/'
+          "<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape(name || url)}</a>".html_safe
+        else
+          if ERB::Util.html_escape(name || url) == ERB::Util.html_escape(url)
+            "#{ERB::Util.html_escape(name || url)}".html_safe
+          else
+            "#{ERB::Util.html_escape(name || url)} (#{ERB::Util.html_escape(url)})".html_safe
+          end
+        end
+      end
+    end
+  end
+	
 end
 
