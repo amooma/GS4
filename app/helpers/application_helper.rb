@@ -85,10 +85,11 @@ module ApplicationHelper
 		content_for(:page_title) { page_title }
 	end
 	
-	# This version of link_to makes sure that in the local Kiosk mode no 
-	# external links are displayed. The Kiosk doesn't provide a back-button.
+	# This version of +link_to+ makes sure that in the local kiosk
+	# mode no external links are displayed. The kiosk doesn't
+	# provide a back-button.
 	#
-	# The original File:
+	# The original file:
 	# actionpack/lib/action_view/helpers/url_helper.rb, line 231
 	#
 	def link_to( *args, &block )
