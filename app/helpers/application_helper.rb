@@ -109,6 +109,35 @@ module ApplicationHelper
 			tag_options = tag_options( html_options )
 			
 			href_attr = "href=\"#{ERB::Util.html_escape( url )}\"" unless href
+			
+			############################################ CUSTOM {
+			if request.env['REMOTE_ADDR'] == '127.0.0.1'
+				# The request came from a local browser (kiosk browser).
+				if ((url.to_s[0] != '/') \
+				&&  (url.to_s[0] != '#') \
+				)
+					# +url+ is neither an absolute path nor a fragment.
+					# It's probably a fully qualified URL, including a host.
+					# (It could be a relative path, but that doesn't
+					# happen in our application.)
+					# We don't want fully qualified URLs to be
+					# rendered as a link.
+					
+					if (name || url) == url
+						# Link text equals +url+.
+						return "#{ERB::Util.html_escape( name || url )}".html_safe
+					else
+						# Link text is different from the +url+.
+						return "#{ERB::Util.html_escape( name || url )} (#{ERB::Util.html_escape( url )})".html_safe
+					end
+				end
+			end
+			# If we came here it's all good. Either the request
+			# came from a remote browser or the +uri+ doesn't
+			# point to a different host. We can use the return
+			# value of the original +link_to+ method.
+			############################################ CUSTOM }
+			
 			"<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape( name || url )}</a>".html_safe
 		end
 	end
