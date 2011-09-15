@@ -17,14 +17,14 @@ class ApplicationController < ActionController::Base
         :file   => "#{Rails.root}/app/views/403.html.erb",
         :layout => true,
         :locals => { :exception => exception },
-    })
+      })
     end
   end
   
   before_filter { |controller|
     @app_number_of_users = User.count
     if @app_number_of_users > 0 && NetworkSetting.count > 0
-       @render_top_navigation = true
+      @render_top_navigation = true
     end
   }
   
