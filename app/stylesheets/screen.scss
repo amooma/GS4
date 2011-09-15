@@ -598,7 +598,11 @@ div.simple_form_show {
 				text-align: center;
 				border-left: 1px solid hsla(0, 0%, 100%, 0.2);
 				border-right: 1px solid hsla(0, 0%, 0%, 0.2);
-				color: #fff;
+				
+				/*color: #fff;*/
+				/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+				color: #fefefe;
+				
 				text-decoration: none;
 			}
 			
@@ -611,7 +615,10 @@ div.simple_form_show {
 				&:active,
 				&:focus,
 				&.current_page_navigation {
-					color: #fff;
+					/*color: #fff;*/
+					/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+					color: #fefefe;
+					
 					background-color: #029;
 					@include
 					background-image( linear-gradient( top,
@@ -657,7 +664,11 @@ div.simple_form_show {
 			white-space: nowrap;
 			position: absolute;
 			left: 0;
-			background-color: #fff;
+			
+			/*background-color: #fff;*/
+			/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+			background-color: #fefefe;
+			
 			/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
 			
 			a {

@@ -644,14 +644,18 @@ div.simple_form_show b {
 		text-align: center;
 		border-left: 1px solid rgba(255, 255, 255, 0.2);
 		border-right: 1px solid rgba(0, 0, 0, 0.2);
-		color: #fff;
+		/*color: #fff;*/
+		/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+		color: #fefefe;
 		text-decoration: none;
 	}
 	nav.hnav li li a {
 		text-align: left;
 	}
 	nav.hnav li a:hover, nav.hnav li a:active, nav.hnav li a:focus, nav.hnav li a.current_page_navigation {
-		color: #fff;
+		/*color: #fff;*/
+		/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+		color: #fefefe;
 		background-color: #029;
 		background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(50%, rgba(255, 255, 255, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(255, 255, 255, 0.2)));
 		background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
@@ -685,7 +689,9 @@ div.simple_form_show b {
 		white-space: nowrap;
 		position: absolute;
 		left: 0;
-		background-color: #fff;
+		/*background-color: #fff;*/
+		/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+		background-color: #fefefe;
 		/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
 	}
 	nav.hnav ul ul a {
