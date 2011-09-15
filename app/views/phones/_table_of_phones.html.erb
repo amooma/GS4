@@ -9,6 +9,8 @@
     <th></th>
   </tr>
 
+<% guessed_local_host = nil %>
+
 <% phones.each do |phone| %>
   <tr>
     
@@ -48,10 +50,13 @@
         <%= link_to t(:phone_manual, :phone_model => phone.phone_model.name), phone.phone_model.manual_url %>.
       <% end %>
       
-      <% if ! NetworkSetting.first.try(:start_dhcp_server) %>
+      <%
+      if ! NetworkSetting.first.try(:start_dhcp_server)
+        guessed_local_host ||= guess_local_host()
+      %>
         <p>
           <%= t(:phone_set_config_url) %><br />
-          <tt><%= "https://#{guess_local_host || "ip_address"}#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
+          <tt><%= "https://#{guessed_local_host || "ip_address"}#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
         </p>
       <% end %>
     <% end %>
