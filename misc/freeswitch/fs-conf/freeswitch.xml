@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <X-PRE-PROCESS cmd="exec" data="/opt/freeswitch/scripts/freeswitch-gemeinschaft4.sh"/>
 <X-PRE-PROCESS cmd="include" data="freeswitch-gemeinschaft4.xml"/> 
+
