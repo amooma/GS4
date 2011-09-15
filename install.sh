@@ -66,6 +66,8 @@ aptitude install -y --allow-untrusted \
   libtiff-tools \
   curl 
 
+#TODO Add libtiff-tools in the Debian package that requires it. (=> pko)
+
 echo -e "Adding testing and setting APT Pin-Priority ...\n"
 (
 echo 'deb     http://ftp.debian.org/debian/ testing main'
