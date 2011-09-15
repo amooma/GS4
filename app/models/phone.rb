@@ -127,6 +127,12 @@ class Phone < ActiveRecord::Base
 	def mac_address_to_display
 		return [].fill('%02X', 0, 6).join(':') % self.mac_address.scanf( '%2X' * 6 )
 	end
+
+  # The phone can be reached by dialing on of the extensions in this array.
+  #
+	def extensions
+	  self.sip_accounts.map{|sip_account| sip_account.extensions}.flatten
+	end  
 	
 	private
 	

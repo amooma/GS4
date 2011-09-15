@@ -36,11 +36,9 @@
 			sip_account_extensions = sip_account.extensions.accessible_by( current_ability, :show )
 			if sip_account_extensions
 			%>
-			<ul>
 				<% sip_account_extensions.each do |extension| %>
-					<li><%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %></li>
+					<%= link_to extension.extension, sip_account_extension_path(sip_account, extension) %><%= ', ' if extension != sip_account_extensions.last %>
 				<% end %>
-			</ul>
 			<% end %>
 		</td>
 		
