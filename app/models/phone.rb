@@ -131,7 +131,7 @@ class Phone < ActiveRecord::Base
 	# The phone can be reached by dialing on of the extensions in this array.
 	#
 	def extensions
-		self.sip_accounts.map{|sip_account| sip_account.extensions}.flatten
+		(self.sip_accounts || []).map{ |sip_account| sip_account.extensions }.flatten
 	end  
 	
 	private
