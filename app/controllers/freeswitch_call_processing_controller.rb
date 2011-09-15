@@ -423,7 +423,8 @@ class FreeswitchCallProcessingController < ApplicationController
 							dst_sip_account.id, 'in', 'answered', arg_call_uuid,
 							arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
 						)
-						set_ringback
+						
+						action_set_ringback()
 						action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						after_bridge_actions()
 						return
@@ -447,13 +448,13 @@ class FreeswitchCallProcessingController < ApplicationController
 							
 							action :export, "alert_info=http://example.com;info=#{arg_dst_sip_user_real};x-line-id=0"
 							# Note: "localhost" in the Alert-Info header does not work for Snom phones.
-							set_ringback
+							action_set_ringback()
 							action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060,sofia/internal/#{enc_sip_user( assistant_extension.destination )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						)
 						else (
 							# Assistant extension not found. Wrongly configured call forward.
 							logger.info(_bold( "#{logpfx} Assistant extension for #{cfwd_assistant.destination.inspect} not found." ))
-							set_ringback
+							action_set_ringback()
 							action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						) end
 						after_bridge_actions()
@@ -489,7 +490,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						action_log( FS_LOG_INFO, "Calling SIP account <#{ enc_sip_user( arg_dst_sip_user_real ) }@#{ arg_dst_sip_domain }> ..." )
 						action :set       , "call_timeout=#{timeout}"
 						action :export    , "sip_contact_user=ufs"
-						set_ringback
+						action_set_ringback()
 						action :bridge    , "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						after_bridge_actions()
 						action :_continue
@@ -510,8 +511,9 @@ class FreeswitchCallProcessingController < ApplicationController
 						else (
 							sip_gateway_name = "gateway-#{sip_gateway.id}"
 							logger.info(_bold( "#{logpfx} Calling via gateway #{sip_gateway.hostport.inspect} (#{sip_gateway_name}) ..." ))
-							set_ringback
-							action :bridge    ,
+							
+							action_set_ringback()
+							action :bridge,
 								#"{sip_network_destination=sip:#{enc_sip_user( arg_dst_sip_user_real )}@127.0.0.1:5060}" <<
 								"{sip_route_uri=sip:127.0.0.1:5060}" <<
 								"{sip_invite_req_uri=sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }}" <<  # Request-URI
@@ -635,9 +637,9 @@ class FreeswitchCallProcessingController < ApplicationController
 		#action_log( FS_LOG_INFO, 'A-leg hangup Q.850 cause: ${hangup_cause_q850}' )
 	) end
 	
-	def set_ringback
-    action :set, "ringback=$${de-ring}"
-    action :set, "transfer_ringback=$${de-ring}"
+	def action_set_ringback()
+		action :set, 'ringback=$${de-ring}'
+		action :set, 'transfer_ringback=$${de-ring}'
 	end
 	
 	public

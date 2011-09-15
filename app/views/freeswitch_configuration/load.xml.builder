@@ -14,7 +14,8 @@ xml.document( :type => 'freeswitch/xml' ) {
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => "hold_music=#{@hold_music}" )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'use_profile=internal' )
 	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'send_silence_when_idle=400' )
-	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'de-ring=%(1000,4000,425.0)')
+	xml.tag!( 'X-PRE-PROCESS', :cmd => 'set', :data => 'de-ring=%(1000,4000,425.0)' )
+	
 	xml.section( :name => 'languages', :description => 'Language Management' ) {
 		xml.language( :name => 'en', 'say-module' => 'en', 'sound-prefix' => '/opt/freeswitch/sounds/en/us/callie' ) {
 			xml.phrases {
@@ -1118,7 +1119,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 	
 	
 	xml.section( :name => 'dialplan', :description => 'Regex/XML dialplan' ) {
-
+		
 =begin
 		xml.context( :name => 'from-external' ) {
 			
@@ -1137,7 +1138,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 =end
 		
 		xml.context( :name => 'internal' ) {  #OPTIMIZE This context is called "public" in the original configuration (misc/freeswitch/fs-conf/).
-		xml.action( :application => 'set', :data => 'ringback=$${us-ring}' )
+		xml.action( :application => 'set', :data => 'ringback=$${us-ring}' )  #OPTIMIZE <action> outside of an <extension>?  #OPTIMIZE $${us-ring} isn't defined.
 			
 			xml.extension( :name => 'from-kamailio' ) {
 				xml.condition( :field => 'network_addr', :expression => '^127\.0\.0\.1$' )
