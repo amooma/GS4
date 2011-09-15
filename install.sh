@@ -63,6 +63,7 @@ aptitude install -y --allow-untrusted \
   freeswitch-lang-en  \
   ghostscript  \
   imagemagick  \
+  libtiff-tools \
   curl 
 
 echo -e "Adding testing and setting APT Pin-Priority ...\n"
