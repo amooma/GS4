@@ -38,8 +38,8 @@
     <td><%= fax_document.source %></td>
     <td><%= fax_document.destination %></td>
     <td><%= link_to t(:show)    ,                                    fax_document %></td>
-    <td><%= link_to t(:pdf), fax_document_path(fax_document, :format => 'pdf') %></td>
-    <td><%= link_to t(:send)    ,            number_fax_document_path( fax_document ) if can?( :transfer, fax_document ) %></td>
+    <td><%= link_to t(:pdf)     ,                 fax_document_path( fax_document, :format => 'pdf' ) %></td>
+    <td><%= link_to t(:send)    ,          number_fax_document_path( fax_document ) if can?( :transfer, fax_document ) %></td>
     <td><%= link_to t(:destroy) , confirm_destroy_fax_document_path( fax_document ) if can?( :destroy, fax_document ) %></td>
   </tr>
 <% end %>
