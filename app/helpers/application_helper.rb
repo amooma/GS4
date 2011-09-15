@@ -60,7 +60,9 @@ module ApplicationHelper
 						]},
 						
 						{ :text => t(:voicemails)    , :url => voicemails_path },
+						
 						{ :text => t(:fax_documents) , :url => fax_documents_path },
+						
 						{ :text => t(:conferences)   , :url => conferences_path },
 						
 						{ :text => t(:Settings), :sub => [
