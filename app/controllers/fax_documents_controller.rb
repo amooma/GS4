@@ -26,7 +26,7 @@ class FaxDocumentsController < ApplicationController
     @fax_document = FaxDocument.find(params[:id])
     
     respond_to do |format|
-      format.html 
+      format.html
       format.xml  { render :xml => @fax_document }
       format.tif {
         raw_file_name = @fax_document.raw_file_path
