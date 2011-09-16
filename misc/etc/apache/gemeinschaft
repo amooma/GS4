@@ -5,9 +5,9 @@ KeepAliveTimeout 60
 Timeout 100
 
 # Note: We have symlinked mod_passenger.so in the install.sh script.
-# ln -snf "/usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8/ext/apache2/mod_passenger.so" "/usr/lib/apache2/modules/mod_passenger.so"
+# ln -snf "/usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so" "/usr/lib/apache2/modules/mod_passenger.so"
 #
-#LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.8/ext/apache2/mod_passenger.so
+#LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so
 LoadModule passenger_module /usr/lib/apache2/modules/mod_passenger.so
 
 # http://www.modrails.com/documentation/Users guide Apache.html
