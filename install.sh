@@ -181,8 +181,22 @@ mkdir -p /opt/freeswitch/sounds
 
 
 echo -e "Installing Passenger ...\n"
-gem install passenger
-passenger-install-apache2-module
+PASSENGER_VERSION="3.0.9"
+gem install passenger --version "${PASSENGER_VERSION}"
+passenger-install-apache2-module --auto
+
+ln -snf \
+  "/usr/lib/ruby/gems/1.9.1/gems/passenger-${PASSENGER_VERSION}/ext/apache2/mod_passenger.so" \
+  "/usr/lib/apache2/modules/mod_passenger.so"
+
+cd "/usr/lib/ruby/gems/1.9.1/gems/"
+[ ! -e "passenger" ] || rm -rf "passenger"
+
+ln -snf \
+  "passenger-${PASSENGER_VERSION}" \
+  "passenger"
+
+
 a2enmod ssl
 
 
