@@ -56,7 +56,8 @@ class Extension < ActiveRecord::Base
   def update_default_extension_length_if_needed
     if self.extension.to_i.to_s == self.extension.to_s \
     && self.extension.to_s.length != Configuration.get(:default_extension_length).to_i
-      Configuration.where(:name => 'default_extension_length').first.update_attributes(:value => self.extension.to_s.length)
+      Configuration.find_or_create_by_name('default_extension_length').
+        update_attributes(:value => self.extension.to_s.length)
     end
   end
   
