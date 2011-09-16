@@ -2,7 +2,7 @@
 <h1><%= t(:fax_document) %></h1>
 <%= render 'show' %>
 <p>
-  <img src="<%= fax_document_path( @fax_document, :format => 'png' ) %>" />
+  <img src="<%= fax_document_path( @fax_document, :format => 'png' ) %>" alt="PDF" />
 </p>
 
 <%= link_to t(:download), fax_document_path( @fax_document, :format => 'pdf' ) %> |
