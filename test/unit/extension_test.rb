@@ -106,6 +106,23 @@ class ExtensionTest < ActiveSupport::TestCase
 			assert ! Factory.build( :extension, :destination => value ).valid?
 		end
 	}
+
+	should "Change the default length if it makes sense" do
+	  Configuration.find_or_create_by_name('default_extension_length').
+	                update_attributes(:value => '6')
+	  Factory.create( :extension, :extension => 22 )
+	  assert_equal(Configuration.get(:default_extension_length, 12, Integer), 2)
+	  Factory.create( :extension, :extension => 111 )
+	  assert_equal(Configuration.get(:default_extension_length, 12, Integer), 3)
+	end
+
+	should "guess the next free extension" do
+	  Configuration.find_or_create_by_name('default_extension_length').
+	                update_attributes(:value => '6')
+	  assert_equal(Extension.next_unused_extension, 100000)
+	  Factory.create( :extension, :extension => 22 )
+	  assert_equal(Extension.next_unused_extension, 23)
+	end
 	
 	
 end

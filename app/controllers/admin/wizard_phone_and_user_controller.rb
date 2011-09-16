@@ -56,14 +56,14 @@ class Admin::WizardPhoneAndUserController < ApplicationController
 				if with_user
 					format.html { redirect_to( root_path, :notice => I18n.t(:wizard_phone_and_user_saved,
 							:phone_model => @phone.phone_model.name,
-							:mac_address => @phone.mac_address,
+							:mac_address => @phone.mac_address_to_display,
 							:username    => @user.username,
 							:extension   => @phone.sip_accounts.first.extensions.first.extension
 						))}
 				else
 					format.html { redirect_to( root_path, :notice => I18n.t(:wizard_phone_saved,
 							:phone_model => @phone.phone_model.name,
-							:mac_address => @phone.mac_address,
+							:mac_address => @phone.mac_address_to_display,
 							:extension   => @phone.sip_accounts.first.extensions.first.extension
 						))}
 				end
