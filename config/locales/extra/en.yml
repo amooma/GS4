@@ -59,7 +59,7 @@ en:
   fax_document_not_created: "Fax document could not be created"
   fax_document_not_found: "Fax document not found"
   fax_document_not_sent: "Fax document could not be sent"
-  fax_document_sending: "Fax-Dokument sending"
+  fax_document_sending: "Sending fax document"
   fax_thumbnail_not_created: "Fax preview could not be created"
   fax_document_too_many: "Too many fax documents (%{count})"
   fax_email_subject: "Fax from %{source} for %{destination}"
