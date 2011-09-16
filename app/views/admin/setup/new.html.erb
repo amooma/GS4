@@ -8,8 +8,8 @@
 <%= simple_form_for( @user, :url => { :action => "create" }) do |f| %>
 	<%= f.error_messages %>
 	
-	<%= f.input :username %>
-	<%= f.input :password              , :as => :password %>
+	<%= f.input :username                                , :autofocus => (  @user.username.blank?) %>
+	<%= f.input :password              , :as => :password, :autofocus => (! @user.username.blank?) %>
 	<%= f.input :password_confirmation , :as => :password %>
 	<%= f.input :email, :as => :email %>
 	
