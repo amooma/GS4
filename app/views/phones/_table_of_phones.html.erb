@@ -36,7 +36,7 @@
       <td colspan="2" class="vam <%= phone.created_at > t ? 'status_no' : '' %>">
     <% else %>
       <td class="vam"><%= phone.ip_address %></td>
-      <td class="vam"><%#FIXME Fix HTML structure. %>
+      <td class="vam"><%#FIXME Fix HTML structure. ####################### %>
     <% end %>
     
     <% if phone.rebootable? %>
@@ -60,7 +60,7 @@
         </p>
       <% end %>
     <% end %>
-    </td><%#FIXME Fix HTML structure. %>
+    </td><%#FIXME Fix HTML structure. ####################### %>
     
     <td class="vam"><%= link_to t(:edit), edit_phone_path(phone) %></td>
     <td class="vam"><%= link_to t(:destroy), confirm_destroy_phone_path(phone) if can?( :destroy, phone ) %></td>
