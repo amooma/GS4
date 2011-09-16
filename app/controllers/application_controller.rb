@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  
   protect_from_forgery
   
+  helper_method :guess_local_ip_address
+  helper_method :guess_local_host
   
   # https://github.com/ryanb/cancan/wiki/Ensure-Authorization
   check_authorization :if => :requires_authorization
@@ -17,14 +18,14 @@ class ApplicationController < ActionController::Base
         :file   => "#{Rails.root}/app/views/403.html.erb",
         :layout => true,
         :locals => { :exception => exception },
-    })
+      })
     end
   end
   
   before_filter { |controller|
     @app_number_of_users = User.count
     if @app_number_of_users > 0 && NetworkSetting.count > 0
-       @render_top_navigation = true
+      @render_top_navigation = true
     end
   }
   

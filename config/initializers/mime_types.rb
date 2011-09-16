@@ -7,6 +7,7 @@
 Mime::Type.register "text/plain", :txt, ['cfg']
 Mime::Type.register "image/tiff", :tif
 Mime::Type.register "image/png", :png
+Mime::Type.register "application/pdf", :pdf
 Mime::Type.register "audio/x-wav", :wav
 
 #Mime::Type.register_alias "application/xml;e4x=1" , :'e4x.xml'

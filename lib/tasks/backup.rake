@@ -45,3 +45,9 @@ namespace :db do
   
   end
 end
+
+
+# Local Variables:
+# mode: ruby
+# End:
+

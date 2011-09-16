@@ -70,6 +70,7 @@ Gemfile.lock        opt/gemeinschaft/
 lib/*.rb            opt/gemeinschaft/lib/
 #lib/tasks/*.rb      opt/gemeinschaft/lib/tasks/
 lib/tasks/*.rake    opt/gemeinschaft/lib/tasks/
+lib/templates/erb/scaffold/*.erb    opt/gemeinschaft/lib/templates/erb/scaffold/
 
 db/schema.rb        opt/gemeinschaft/db/
 db/seeds.rb         opt/gemeinschaft/db/

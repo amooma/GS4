@@ -260,21 +260,34 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 #header {
 	margin: 0.8em 0 0.5em 0;
 	padding: 0 2pt 1pt 2pt;
+	position: relative;
+	vertical-align: bottom;
 }
 
 #user_nav {
 	text-align: right;
-	position: relative;
 	float: right;
-	padding: 1px;
 }
 
 #application {
 	text-align: left;
-	position: relative;
 	float: left;
-	padding: 1px;
 	font-weight: bold;
+}
+
+#user_nav, #application {
+	position: relative;
+}
+
+#user_nav, #application {
+	padding: 1px;
+	margin-top: 6pt;
+}
+
+#logo {
+	text-align: left;
+	float: left;
+	margin: 0 5pt 0 0;
 }
 
 #content {
@@ -301,8 +314,8 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 #footer {
 	text-align: center;
 	font-size: 0.9em;
-	color: #404040;
-	margin: 3em 0 0 0;
+	color: #505050;
+	margin: 4em 0 0 0;
 }
 #footer .amooma-name {
 	text-transform: uppercase;
@@ -644,14 +657,18 @@ div.simple_form_show b {
 		text-align: center;
 		border-left: 1px solid rgba(255, 255, 255, 0.2);
 		border-right: 1px solid rgba(0, 0, 0, 0.2);
-		color: #fff;
+		/*color: #fff;*/
+		/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+		color: #fefefe;
 		text-decoration: none;
 	}
 	nav.hnav li li a {
 		text-align: left;
 	}
 	nav.hnav li a:hover, nav.hnav li a:active, nav.hnav li a:focus, nav.hnav li a.current_page_navigation {
-		color: #fff;
+		/*color: #fff;*/
+		/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+		color: #fefefe;
 		background-color: #029;
 		background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(50%, rgba(255, 255, 255, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(255, 255, 255, 0.2)));
 		background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.2));
@@ -685,7 +702,9 @@ div.simple_form_show b {
 		white-space: nowrap;
 		position: absolute;
 		left: 0;
-		background-color: #fff;
+		/*background-color: #fff;*/
+		/* Note: #fff/#ffffff/white causes strange rendering bugs in WebKit: https://code.google.com/p/chromium/issues/detail?id=92962 */
+		background-color: #fefefe;
 		/*background-color: hsla( 0, 0%, 100%, 0.95 );*/
 	}
 	nav.hnav ul ul a {

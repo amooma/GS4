@@ -63,7 +63,10 @@ aptitude install -y --allow-untrusted \
   freeswitch-lang-en  \
   ghostscript  \
   imagemagick  \
+  libtiff-tools \
   curl 
+
+#TODO Add libtiff-tools in the Debian package that requires it.
 
 echo -e "Adding testing and setting APT Pin-Priority ...\n"
 (
@@ -100,8 +103,7 @@ echo -e "Installing Ruby ...\n"
 cd /opt/gemeinschaft/misc/ruby-sane
 make deb-install
 
-echo -e "Installing Ruby on Rails ...\n"
-gem install   rails
+echo -e "Installing Rake 0.8.7 ...\n"
 gem install   rake -v 0.8.7
 
 
@@ -114,23 +116,23 @@ aptitude install -y apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev
 
 
 echo -e "Configuring ODBC ...\n"
-
 echo "[gemeinschaft-production]
 Description=My SQLite test database
 Driver=SQLite3
 Database=/opt/gemeinschaft/db/production.sqlite3
 Timeout=2000" >> /etc/odbc.ini
 
+
 ln -s /opt/gemeinschaft /opt/Gemeinschaft4
 
-echo -e "Configuring Kamailio ...\n"
 
+echo -e "Configuring Kamailio ...\n"
 mv /etc/kamailio /etc/kamailio.dist
 ln -s /opt/gemeinschaft/misc/kamailio/etc /etc/kamailio
 sed -i 's/RUN_KAMAILIO=no/RUN_KAMAILIO=yes/' /etc/default/kamailio
 
-echo -e "Configuring Apache ...\n"
 
+echo -e "Configuring Apache ...\n"
 cp /opt/gemeinschaft/misc/etc/apache/gemeinschaft /etc/apache2/sites-available
 a2ensite gemeinschaft
 cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
@@ -139,8 +141,8 @@ chmod 0600 /etc/ssl/amooma/*
 #OPTIMIZE Does the web server need write permissions on the certificates? If it doesn't: chmod 0400 ...
 a2enmod rewrite
 
-echo -e "Configuring FreeSwitch ...\n"
 
+echo -e "Configuring FreeSwitch ...\n"
 mv /opt/freeswitch/conf /opt/freeswitch/conf.dist
 ln -s /opt/gemeinschaft/misc/freeswitch/fs-conf     /opt/freeswitch/conf
 ln -s /opt/gemeinschaft/misc/freeswitch/fs-scripts  /opt/freeswitch/scripts
@@ -148,16 +150,15 @@ sed -i 's/FREESWITCH_ENABLED="false"/FREESWITCH_ENABLED="true"/'  /etc/default/f
 sed -i 's/^FREESWITCH_PARAMS.*/FREESWITCH_PARAMS="-nc -nonat"/'   /etc/default/freeswitch
 
 
-echo -e "Setting up database ...\n"
-
+echo -e "Installing Gem dependencies ...\n"
 cd /opt/gemeinschaft/
 bundle install
+
+
+echo -e "Setting up database ...\n"
+cd /opt/gemeinschaft/
 bundle exec rake db:migrate  RAILS_ENV=production
 bundle exec rake db:seed     RAILS_ENV=production
-
-cd /opt/gemeinschaft/public/
-bundle install --path .
-#OPTIMIZE "bundle install --path ." installs the Gems into a "ruby" directory in /opt/gemeinschaft/. Why should we need this? We don't need it with the Debian packages.
 
 
 echo -e "Creating and populating group \"gemeinschaft\" ...\n"
@@ -178,8 +179,22 @@ mkdir -p /opt/freeswitch/sounds
 
 
 echo -e "Installing Passenger ...\n"
-gem install passenger
-passenger-install-apache2-module
+PASSENGER_VERSION="3.0.9"
+gem install passenger --version "${PASSENGER_VERSION}"
+passenger-install-apache2-module --auto
+
+ln -snf \
+  "/usr/lib/ruby/gems/1.9.1/gems/passenger-${PASSENGER_VERSION}/ext/apache2/mod_passenger.so" \
+  "/usr/lib/apache2/modules/mod_passenger.so"
+
+cd "/usr/lib/ruby/gems/1.9.1/gems/"
+[ ! -e "passenger" ] || rm -rf "passenger"
+
+ln -snf \
+  "passenger-${PASSENGER_VERSION}" \
+  "passenger"
+
+
 a2enmod ssl
 
 

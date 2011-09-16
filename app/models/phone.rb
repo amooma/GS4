@@ -13,9 +13,10 @@ class Phone < ActiveRecord::Base
 	validates_uniqueness_of   :ip_address, :allow_nil => true, :allow_blank => true
 	validates_format_of       :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
 	
+	validates_numericality_of :phone_model_id, :greater_than => 0
 	validates_presence_of     :phone_model
 	
-	validate :cross_check_mac_address_with_ouis, :if => Proc.new{ |phone| ! phone.mac_address.blank? && ! phone.errors[:mac_address] }
+	validate :cross_check_mac_address_with_ouis, :if => Proc.new { |phone| ! phone.mac_address.blank? && ! (phone.errors[:mac_address].count > 0) }
 	
 	after_validation :save_old_last_ip_address
 	
@@ -127,6 +128,12 @@ class Phone < ActiveRecord::Base
 		return [].fill('%02X', 0, 6).join(':') % self.mac_address.scanf( '%2X' * 6 )
 	end
 	
+	# The phone can be reached by dialing on of the extensions in this array.
+	#
+	def extensions
+		(self.sip_accounts || []).map{ |sip_account| sip_account.extensions }.flatten
+	end  
+	
 	private
 	
 	# Formats a MAC address.
@@ -147,11 +154,10 @@ class Phone < ActiveRecord::Base
 	# Make sure that a given MAC address really belongs to a given manufacturer
 	#
 	def cross_check_mac_address_with_ouis
-		oui = self.mac_address.to_s().upcase().gsub( /[^A-F0-9]/, '' )[0,6]
-		oui_obj = Oui.where( :value => oui )
-		if oui_obj.first == nil \
-		|| oui_obj.first.manufacturer != self.phone_model.manufacturer
-			#errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.try(:manufacturer).try(:name) ))
+		oui_str = self.mac_address.to_s().upcase().gsub( /[^A-F0-9]/, '' )[0,6]
+		oui_obj = Oui.where( :value => oui_str ).first
+		if oui_obj == nil \
+		|| (self.phone_model && self.phone_model.try(:manufacturer) != oui_obj.manufacturer)
 			errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.manufacturer.name ))
 		end
 	end

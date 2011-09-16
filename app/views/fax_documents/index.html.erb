@@ -1,3 +1,4 @@
+<% page_title t(:fax_documents) %>
 <h1><%= t(:fax_documents) %></h1>
 
 <table>
@@ -9,8 +10,9 @@
     <th><%= t(:date_date) %></th>
     <th><%= t(:transmitted) %></th>
     <th><%= t(:document) %></th>
-    <th><%= t(:fax) %></th>
+    <th><%= t(:source) %></th>
     <th><%= t(:destination) %></th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -33,14 +35,11 @@
     <% end %>
     </td>
     <td><%= fax_document.file %></td>
-    <td><%
-      if ! fax_document.file.blank?
-        %><%= link_to File.basename( fax_document.file, File.extname(fax_document.file)) + '.tif', fax_document_path( fax_document, :format => 'tif') %><%
-      end
-    %></td>
+    <td><%= fax_document.source %></td>
     <td><%= fax_document.destination %></td>
     <td><%= link_to t(:show)    ,                                    fax_document %></td>
-    <td><%= link_to t(:send)    ,            edit_fax_document_path( fax_document ) if can?( :edit, fax_document ) %></td>
+    <td><%= link_to t(:pdf)     ,                 fax_document_path( fax_document, :format => 'pdf' ) %></td>
+    <td><%= link_to t(:send)    ,          number_fax_document_path( fax_document ) if can?( :transfer, fax_document ) %></td>
     <td><%= link_to t(:destroy) , confirm_destroy_fax_document_path( fax_document ) if can?( :destroy, fax_document ) %></td>
   </tr>
 <% end %>

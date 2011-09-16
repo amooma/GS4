@@ -1,16 +1,39 @@
+# Reduce memory usage.
+# Default values for the prefork MPM:
+# StartServers          :  Apache:   5,  Debian:   5
+# MinSpareServers       :  Apache:   5,  Debian:   5
+# MaxSpareServers       :  Apache:  10,  Debian:  10
+# MaxClients            :  Apache: 256,  Debian: 150
+# MaxRequestsPerChild   :  Apache:   0,  Debian:   0
+<IfModule mpm_prefork_module>
+    StartServers          2
+    MinSpareServers       1
+    MaxSpareServers       4
+    MaxClients           50
+    MaxRequestsPerChild   0
+</IfModule>
+
+
 HostnameLookups Off
 KeepAlive On
 MaxKeepAliveRequests 40
 KeepAliveTimeout 60
 Timeout 100
 
-#TODO Find a better solution for the passenger version here. If this config file depends on a specific version of passenger then install that very version in install.sh (gem install passenger --version '3.0.8') and in the corresponding packages.
-LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so
+# Note: We have symlinked mod_passenger.so in the install.sh script.
+# ln -snf "/usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so" "/usr/lib/apache2/modules/mod_passenger.so"
+#
+#LoadModule passenger_module /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9/ext/apache2/mod_passenger.so
+LoadModule passenger_module /usr/lib/apache2/modules/mod_passenger.so
 
 # http://www.modrails.com/documentation/Users guide Apache.html
 
-#TODO Find a better solution for the passenger version here. If this config file depends on a specific version of passenger then install that very version in install.sh (gem install passenger --version '3.0.8') and in the corresponding packages.
-PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9
+# Note: We have symlinked the Passenger root in the install.sh script.
+# cd "/usr/lib/ruby/gems/1.9.1/gems/" && ln -snf "passenger-3.0.9" "passenger"
+#
+#PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger-3.0.9
+PassengerRoot /usr/lib/ruby/gems/1.9.1/gems/passenger
+
 PassengerRuby /usr/bin/ruby1.9.1
 
 PassengerMaxPoolSize 4

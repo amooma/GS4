@@ -1,0 +1,24 @@
+<h1><%= t(:send) %></h1>
+
+<%= simple_form_for( @fax_document, :url => transfer_fax_document_path) do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.input :file, :disabled => true %>
+	
+	<%= f.input :source do %>
+		<%= f.select( :source,
+			@extensions.collect { |r| [ r.extension ] },
+			{ :include_blank => true, :selected => @fax_document.source }
+		) %>
+	<% end %>
+		
+	<%= f.input :destination %>
+	<%= f.input :outgoing, :as => :hidden, :input_html => { :value => "true" } %>
+	<%= f.input :send, :as => :hidden, :input_html => { :value => "true" } %>
+	
+	<%= f.button :submit, t(:send) %>
+<% end %>
+
+
+<%= link_to t(:show), @fax_document %> |
+<%= link_to t(:Go_to_list), fax_documents_path %>

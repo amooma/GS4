@@ -70,9 +70,9 @@ class Ability
         can    :read    , PhoneModel
         can    :manage  , Phone
         can    :read    , :Setup
-        can    :read    , Voicemail
-        can    :destroy , Voicemail
-        can    :confirm_destroy , Voicemail
+        #can    :read    , Voicemail
+        #can    :destroy , Voicemail
+        #can    :confirm_destroy , Voicemail
         can    :create  , NetworkSetting
         can    :read    , NetworkSetting
         can    :edit    , NetworkSetting
@@ -122,6 +122,9 @@ class Ability
         can    :read    , FaxDocument, :user_id => user.id 
         can    :create  , FaxDocument, :user_id => user.id
         can    :destroy , FaxDocument, :user_id => user.id
+        can    :transfer, FaxDocument, :user_id => user.id
+        can    :number  , FaxDocument, :user_id => user.id
+        can    :confirm_destroy , FaxDocument, :user_id => user.id
         cannot :update  , FaxDocument
         
         can    :read    , CallLog, :sip_account => { :user_id => user.id }

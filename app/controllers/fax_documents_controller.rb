@@ -26,19 +26,24 @@ class FaxDocumentsController < ApplicationController
     @fax_document = FaxDocument.find(params[:id])
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml  { render :xml => @fax_document }
       format.tif {
-        raw_file_suffix = File.basename(Configuration.get(:fax_file_suffix, '.tif'))
-        raw_file =  File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@fax_document.raw_file}#{raw_file_suffix}")
-        send_file raw_file, :type => "image/tiff", 
-          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + raw_file_suffix
+        raw_file_name = @fax_document.raw_file_path
+        send_file raw_file_name, :type => "image/tiff", 
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.tif'
       }
       format.png {
-        thumbnail_suffix = File.basename(Configuration.get(:fax_thumbnail_suffix, '.png'))
-        thumbnail_file = File.expand_path("#{Configuration.get(:fax_files_directory)}/#{@fax_document.raw_file}#{thumbnail_suffix}")
-        send_file thumbnail_file, :type => "image/png", :disposition => 'inline', 
-          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + thumbnail_suffix
+        thumbnail_file_name   = @fax_document.thumbnail_file_path
+        thumbnail_file_name ||= @fax_document.to_thumbnail
+        send_file thumbnail_file_name, :type => "image/png", :disposition => 'inline', 
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.png'
+      }
+      format.pdf {
+        pdf_file_name   = @fax_document.pdf_file_path
+        pdf_file_name ||= @fax_document.to_pdf
+        send_file pdf_file_name, :type => "application/pdf", 
+          :filename => File.basename(@fax_document.file, File.extname(@fax_document.file)) + '.pdf'
       }
     end
   end
@@ -47,7 +52,7 @@ class FaxDocumentsController < ApplicationController
   # GET /fax_documents/new.xml
   def new
     @fax_document = FaxDocument.new
-    
+    @extensions = current_user.extensions
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @fax_document }
@@ -65,12 +70,21 @@ class FaxDocumentsController < ApplicationController
   def create
     @fax_document = FaxDocument.new(params[:fax_document])
     if (! @fax_document.outgoing && ! @fax_document.user_id )
-      @fax_document.user_id = destination_to_user(@fax_document.destination)
+      @fax_document.user_id = destination_to_user( @fax_document.destination )
     end
 
     respond_to do |format|
-      if  @fax_document.save
-        format.html { redirect_to(@fax_document, :notice => t(:fax_document_created)) }
+      if @fax_document.save
+        if (Configuration.get(:fax_send_mail, true, Configuration::Boolean) && ! @fax_document.outgoing && @fax_document.user_id )
+          FaxMailer.new_fax_document(@fax_document).deliver
+        end
+        format.html {
+          if  @fax_document.destination.blank?
+            redirect_to(@fax_document, :notice => t(:fax_document_created))
+          else
+            redirect_to(:action => 'number', :id => @fax_document.id, :notice => t(:fax_document_created)) 
+          end
+        }
         format.xml  { render :xml => @fax_document, :status => :created, :location => @fax_document }
       else
         format.html { render :action => "new" }
@@ -111,12 +125,38 @@ class FaxDocumentsController < ApplicationController
     @fax_document = FaxDocument.find(params[:id])
   end
   
+  def number
+    @fax_document = FaxDocument.find(params[:id])
+    @extensions = current_user.extensions
+  end
+  
+  def transfer
+    @fax_document = FaxDocument.find(params[:id])
+    @extensions = current_user.extensions
+    destination = params[:fax_document][:destination]
+    source = params[:fax_document][:source]
+    
+    respond_to do |format|
+      if @fax_document.update_attributes(:destination => destination, :source => source, :outgoing => true) && @fax_document.transfer(destination)
+        format.html { redirect_to(@fax_document, :notice => t(:fax_document_sending)) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "number" }
+        format.xml  { render :xml => @fax_document.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
   private
-  def destination_to_user(destination)
+  
+  def destination_to_user( destination )
     extension = Extension.where(:extension => destination, :active => true).first
     if (! extension || ! extension.users.first)
       return nil
     end
     return extension.users.first.id
+    #OPTIMIZE to e.g.:
+    #return extension.try(:users).try(:first).try(:id)
   end
+  
 end

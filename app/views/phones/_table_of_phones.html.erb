@@ -2,11 +2,14 @@
   <tr>
     <th><%= t(:mac_address) %></th>
     <th><%= t(:phone_model) %></th>
+    <th><%= t(:extensions) %></th>
     <th><%= t(:ip_address) %></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
+
+<% guessed_local_host = nil %>
 
 <% phones.each do |phone| %>
   <tr>
@@ -21,35 +24,43 @@
       <small>(<%= truncate( phone.phone_model.manufacturer.name, :length => 20 ) %>)</small>
       -->
     </td>
+    <td>
+      <% phone.extensions.each do |extension| %>
+        <%= link_to extension.extension, extension %><%= ', ' if extension != phone.extensions.last %>
+      <% end %>
+    </td>
     
     <% t = Time.now - 45.minutes %>
     
     <% if phone.ip_address.blank? %>
       <td colspan="2" class="vam <%= phone.created_at > t ? 'status_no' : '' %>">
     <% else %>
-      <td class="vam"><%= phone.ip_address  %></td>
-      <td class="vam"><%#FIXME Fix HTML structure. %>
+      <td class="vam"><%= phone.ip_address %></td>
+      <td class="vam"><%#FIXME Fix HTML structure. ####################### %>
     <% end %>
     
     <% if phone.rebootable? %>
       <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
     <% else %>
       <% if phone.created_at > t %>
-        <span style="font-size:4em; vertical-align:0%; float:left; display:block; margin:0 10px 10px 0;"><%= "\u{26A0}" %></span>
+        <span style="font-size:4em; vertical-align:0%; float:left; display:block; margin:20px 10px 10px 0;"><%= "\u{26A0}" %></span>
       <% end %>
-      <%= t(:phone_created_reboot_needed, :time_ago => time_ago_in_words(phone.created_at)) %>
+      <%= t(:phone_created_reboot_needed, :time_ago => time_ago_in_words(phone.created_at).gsub(/eine /,'einer ').gsub(/ein /,'einem ').gsub(/Tage/,'Tagen')) %>
       <% if ! phone.phone_model.manual_url.blank? %>
         <%= link_to t(:phone_manual, :phone_model => phone.phone_model.name), phone.phone_model.manual_url %>.
       <% end %>
       
-      <% if ! NetworkSetting.first.try(:start_dhcp_server) %>
+      <%
+      if ! NetworkSetting.first.try(:start_dhcp_server)
+        guessed_local_host ||= guess_local_host()
+      %>
         <p>
           <%= t(:phone_set_config_url) %><br />
-          <tt><%= "https://#{ @controller.guess_local_host }#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
+          <tt><%= "https://#{guessed_local_host || "ip_address"}#{root_path}settings-{mac}" %></tt><%#OPTIMIZE Generalize setting URL. %>
         </p>
       <% end %>
     <% end %>
-    </td><%#FIXME Fix HTML structure. %>
+    </td><%#FIXME Fix HTML structure. ####################### %>
     
     <td class="vam"><%= link_to t(:edit), edit_phone_path(phone) %></td>
     <td class="vam"><%= link_to t(:destroy), confirm_destroy_phone_path(phone) if can?( :destroy, phone ) %></td>

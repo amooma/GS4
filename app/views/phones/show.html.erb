@@ -1,3 +1,4 @@
+<% page_title "#{t(:phone)} #{@phone.phone_model.name} [#{@phone.mac_address_to_display}]" %>
 <h1><%= t(:phone) %></h1>
 
 <%= render :partial => 'phones/table_of_phones', :locals => {:phones => [@phone]} %>
