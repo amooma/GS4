@@ -1,7 +1,7 @@
 <%= simple_form_for @phone, :url => "/admin/wizard_phone_and_user" do |f| %>
 <% f.simple_fields_for :sip_accounts do |f_sip_account| %>
 	<%= f.error_messages %>
-	<%= f_sip_account.error_messages %>
+	<%#= f_sip_account.error_messages %>
 	
 	<%= f.input :mac_address %>
 	
