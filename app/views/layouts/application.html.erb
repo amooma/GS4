@@ -15,6 +15,7 @@
 	<header>
 		<a class="tty" href="#content"><%= t(:skip_navigation) %></a>
 		<div id="header">
+			<img id="logo" src="<%= root_path %>favicon.png" width="32" height="32" alt=" " %>
 			<div id="application">
 				<% if ! current_page?(:controller => 'admin/setup', :action => 'new') %>
 				<a href="/"><%= t(:application_name) %></a>

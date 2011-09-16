@@ -257,21 +257,34 @@ table {
 #header {
 	margin: 0.8em 0 0.5em 0;
 	padding: 0 2pt 1pt 2pt;
+	position: relative;
+	vertical-align: bottom;
 }
 
 #user_nav {
 	text-align: right;
-	position: relative;
 	float: right;
-	padding: 1px;
 }
 
 #application {
 	text-align: left;
-	position: relative;
 	float: left;
-	padding: 1px;
 	font-weight: bold;
+}
+
+#user_nav, #application {
+	position: relative;
+}
+
+#user_nav, #application {
+	padding: 1px;
+	margin-top: 6pt;
+}
+
+#logo {
+	text-align: left;
+	float: left;
+	margin: 0 5pt 0 0;
 }
 
 #content {
