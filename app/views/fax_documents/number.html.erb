@@ -1,13 +1,13 @@
 <h1><%= t(:send) %></h1>
 
 <%= simple_form_for( @fax_document, :url => transfer_fax_document_path) do |f| %>
-	
 	<%= f.error_messages %>
 	
 	<%= f.input :file, :disabled => true %>
 	<%= f.input :destination %>
 	<%= f.input :outgoing, :as => :hidden, :input_html => { :value => "true" } %>
 	<%= f.input :send, :as => :hidden, :input_html => { :value => "true" } %>
+	
 	<%= f.button :submit, t(:send) %>
 <% end %>
 
