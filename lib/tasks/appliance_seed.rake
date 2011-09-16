@@ -3,3 +3,9 @@ namespace :db do
     Configuration.create(:name => 'is_appliance', :value => 'true')
   end
 end
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
