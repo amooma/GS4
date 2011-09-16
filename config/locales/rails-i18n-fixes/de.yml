@@ -9,7 +9,7 @@
     messages:
       taken: "ist bereits vergeben"
       record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
-      <<: *errors_messages
+      #<<: *errors_messages
     
     full_messages:
       format: "%{attribute} %{message}"
