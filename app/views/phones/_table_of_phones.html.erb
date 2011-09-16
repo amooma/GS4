@@ -43,7 +43,7 @@
       <%= link_to t(:reboot), phone_reboot_path(phone), :confirm => t(:do_really_reboot, :name => phone.phone_model.name) %>
     <% else %>
       <% if phone.created_at > t %>
-        <span style="font-size:4em; vertical-align:0%; float:left; display:block; margin:0 10px 10px 0;"><%= "\u{26A0}" %></span>
+        <span style="font-size:4em; vertical-align:0%; float:left; display:block; margin:20px 10px 10px 0;"><%= "\u{26A0}" %></span>
       <% end %>
       <%= t(:phone_created_reboot_needed, :time_ago => time_ago_in_words(phone.created_at)) %>
       <% if ! phone.phone_model.manual_url.blank? %>
