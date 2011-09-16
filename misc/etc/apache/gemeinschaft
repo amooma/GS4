@@ -1,3 +1,19 @@
+# Reduce memory usage.
+# Default values for the prefork MPM:
+# StartServers          :  Apache:   5,  Debian:   5
+# MinSpareServers       :  Apache:   5,  Debian:   5
+# MaxSpareServers       :  Apache:  10,  Debian:  10
+# MaxClients            :  Apache: 256,  Debian: 150
+# MaxRequestsPerChild   :  Apache:   0,  Debian:   0
+<IfModule mpm_prefork_module>
+    StartServers          2
+    MinSpareServers       1
+    MaxSpareServers       4
+    MaxClients           50
+    MaxRequestsPerChild   0
+</IfModule>
+
+
 HostnameLookups Off
 KeepAlive On
 MaxKeepAliveRequests 40
