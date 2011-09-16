@@ -35,7 +35,7 @@
     <% if phone.ip_address.blank? %>
       <td colspan="2" class="vam <%= phone.created_at > t ? 'status_no' : '' %>">
     <% else %>
-      <td class="vam"><%= phone.ip_address  %></td>
+      <td class="vam"><%= phone.ip_address %></td>
       <td class="vam"><%#FIXME Fix HTML structure. %>
     <% end %>
     
