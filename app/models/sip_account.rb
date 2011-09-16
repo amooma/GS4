@@ -112,6 +112,7 @@ class SipAccount < ActiveRecord::Base
   end
   
   private
+  
   def create_subscriber()
     subscriber = Subscriber.create(
       :username   =>  self.auth_name,
@@ -153,4 +154,5 @@ class SipAccount < ActiveRecord::Base
       end
     end
   end
+  
 end
