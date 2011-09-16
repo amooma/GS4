@@ -314,8 +314,8 @@ table tr:nth-child(odd) > td, table tr.odd > td {
 #footer {
 	text-align: center;
 	font-size: 0.9em;
-	color: #404040;
-	margin: 3em 0 0 0;
+	color: #505050;
+	margin: 4em 0 0 0;
 }
 #footer .amooma-name {
 	text-transform: uppercase;
