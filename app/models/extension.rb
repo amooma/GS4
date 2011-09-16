@@ -62,18 +62,17 @@ class Extension < ActiveRecord::Base
   #
   def self.next_unused_extension
     number_of_digits = Configuration.get(:default_extension_length, 3, Integer)
+    check_extension = 10 ** (number_of_digits - 1)
     if Extension.last != nil && 
        Extension.last.extension.to_i.to_s == Extension.last.extension.to_s && 
        Extension.last.extension.to_i + 1 < (10 ** number_of_digits) - 1 && 
        (Extension.last.extension.to_i + 1).to_s.length == number_of_digits
-      return Extension.last.extension.to_i + 1
-    else
-      check_extension = 10 ** (number_of_digits - 1)
-      while Extension.exists?( :extension => check_extension.to_s )
-        check_extension += 1
-      end
-      return check_extension
+      check_extension = Extension.last.extension.to_i + 1
     end
+    while Extension.exists?( :extension => check_extension.to_s )
+      check_extension += 1
+    end
+    return check_extension
   end
   
 end

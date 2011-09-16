@@ -122,6 +122,8 @@ class ExtensionTest < ActiveSupport::TestCase
 	  assert_equal(Extension.next_unused_extension, 100000)
 	  Factory.create( :extension, :extension => 22 )
 	  assert_equal(Extension.next_unused_extension, 23)
+	  Factory.create( :extension, :extension => 21 )
+	  assert_equal(Extension.next_unused_extension, 23)
 	end
 	
 	
