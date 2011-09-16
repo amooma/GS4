@@ -4,6 +4,14 @@
 	<%= f.error_messages %>
 	
 	<%= f.input :file, :disabled => true %>
+	
+	<%= f.input :source do %>
+		<%= f.select( :source,
+			@extensions.collect { |r| [ r.extension ] },
+			{ :include_blank => true, :selected => @fax_document.source }
+		) %>
+	<% end %>
+		
 	<%= f.input :destination %>
 	<%= f.input :outgoing, :as => :hidden, :input_html => { :value => "true" } %>
 	<%= f.input :send, :as => :hidden, :input_html => { :value => "true" } %>

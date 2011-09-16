@@ -19,7 +19,12 @@
 			<%= f.file_field :upload %>
 		<% end %>
 	<% end %>
-	
+	<%= f.input :source do %>
+		<%= f.select( :source,
+			@extensions.collect { |r| [ r.extension ] },
+			{ :include_blank => true, :selected => @fax_document.source }
+		) %>
+	<% end %>
 	<%= f.input :destination %>
 	<%= f.input :outgoing, :as => :hidden, :input_html => { :value => "true" } %>
 	

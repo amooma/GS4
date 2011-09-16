@@ -52,7 +52,7 @@ class FaxDocumentsController < ApplicationController
   # GET /fax_documents/new.xml
   def new
     @fax_document = FaxDocument.new
-    
+    @extensions = current_user.extensions
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @fax_document }
@@ -78,7 +78,13 @@ class FaxDocumentsController < ApplicationController
         if (Configuration.get(:fax_send_mail, true, Configuration::Boolean) && ! @fax_document.outgoing && @fax_document.user_id )
           FaxMailer.new_fax_document(@fax_document).deliver
         end
-        format.html { redirect_to :action => 'number', :id => @fax_document.id }
+        format.html {
+          if  @fax_document.destination.blank?
+            redirect_to(@fax_document, :notice => t(:fax_document_created))
+          else
+            redirect_to(:action => 'number', :id => @fax_document.id, :notice => t(:fax_document_created)) 
+          end
+        }
         format.xml  { render :xml => @fax_document, :status => :created, :location => @fax_document }
       else
         format.html { render :action => "new" }
@@ -121,16 +127,17 @@ class FaxDocumentsController < ApplicationController
   
   def number
     @fax_document = FaxDocument.find(params[:id])
+    @extensions = current_user.extensions
   end
   
   def transfer
     @fax_document = FaxDocument.find(params[:id])
-    if (params[:fax_document] && ! params[:fax_document][:destination].blank?)
-      destination = params[:fax_document][:destination]
-    end
+    @extensions = current_user.extensions
+    destination = params[:fax_document][:destination]
+    source = params[:fax_document][:source]
     
     respond_to do |format|
-      if @fax_document.update_attributes(:destination => destination) && @fax_document.transfer(destination)
+      if @fax_document.update_attributes(:destination => destination, :source => source, :outgoing => true) && @fax_document.transfer(destination)
         format.html { redirect_to(@fax_document, :notice => t(:fax_document_sending)) }
         format.xml  { head :ok }
       else
