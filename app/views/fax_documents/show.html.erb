@@ -2,11 +2,11 @@
 <h1><%= t(:fax_document) %></h1>
 <%= render 'show' %>
 <p>
-  <img src="<%= fax_document_path(@fax_document, :format => 'png') %>" />
+  <img src="<%= fax_document_path( @fax_document, :format => 'png' ) %>" />
 </p>
 
-<%= link_to t(:download), fax_document_path(@fax_document, :format => 'pdf') %> |
+<%= link_to t(:download), fax_document_path( @fax_document, :format => 'pdf' ) %> |
 <% if can?( :edit, @fax_document ) %>
-<%= link_to t(:edit), edit_fax_document_path(@fax_document) %> |
+<%= link_to t(:edit), edit_fax_document_path( @fax_document ) %> |
 <% end %>
 <%= link_to t(:Go_to_list), fax_documents_path %>
