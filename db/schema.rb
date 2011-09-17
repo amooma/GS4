@@ -10,11 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20110916123009) do
-=======
-ActiveRecord::Schema.define(:version => 20110915082240) do
->>>>>>> 03518a31c2cee07ef1f06d3b42b2ba09634deabd
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"

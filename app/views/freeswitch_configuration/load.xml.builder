@@ -437,9 +437,9 @@ xml.document( :type => 'freeswitch/xml' ) {
 		#	}
 			xml.configuration( :name => 'cdr_sqlite.conf', :descriptionn=> 'CDR SQLITE') {
 				xml.settings {
-								xml.param( :name => "db-path", :value => "/opt/gemeinschaft/db" )
+								xml.param( :name => "db-path", :value => "/tmp" )
 								xml.param( :name => "db-name", :value => "#{ Rails::env.downcase}" )
-								xml.param( :name => "table-name", :value => "cdrs" )
+								xml.param( :name => "db-table", :value => "cdrs" )
 								xml.param( :name => "chanvars_fixed", :value => "foo=1" )
 								xml.param( :name => "chanvars_supp", :value => "bar,sip_from_host" )
 								xml.param( :name => "chanvars_supp_repeat_fixed", :value => "y" )
