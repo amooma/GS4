@@ -26,6 +26,7 @@ en:
   destroy: "Destroy"
   yes_lowercase: "yes"
   no_lowercase: "no"
+  none: "none"
   file: "File"
   upload: "Upload"
   download: "Download"
@@ -473,6 +474,18 @@ en:
       new: "New dialplan pattern"
       edit: "Editing dialplan pattern"
       show: "Dialplan pattern"
+    being_used_in_x_routes:
+      s:
+        one:   "Used in %{count} route."
+        other: "Used in %{count} routes."
+      m:
+        one:   "Is being used in %{count} route."
+        other: "Is being used in %{count} routes."
+      l:
+        one:   "This pattern is being used in %{count} route."
+        other: "This pattern is being used in %{count} routes."
+    explanations:
+      p0: "You can define dialstring patterns here, in order to use them in outbound routes."
   
   dp_route:
     was_created: "Outbound dialplan route was created."
@@ -484,6 +497,10 @@ en:
       show: "Outbound dialplan route"
     all_users: "(all)"
     no_gateway: "(forbidden)"
+    explanations:
+      p0: "If you dial a number at a phone, the PBX checks if an internal SIP account with this extension exists. Should no matching extension be found the outbound routes will be evaluated."
+      p1: "The outbound routes will be evaluated from top to bottom until a matching route is found. Only those rules will be considered that apply to the current user (if the SIP account belongs to a user) and also those rules that apply to all. The dialstring entered at the phone will be matched against the route's external access code (EAC) and pattern."
+      p2: "If for a matching route a gateway has been set, then the PBX will route the call via this gateway. If no gateway has been set then no more routes will be considered, and the call setup will stop. That can be used to define forbidden destinations. Should none of the routes match then the call setup will stop."
   
   
   sip_gateway_was_created: "Gateway was created."

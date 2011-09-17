@@ -14,7 +14,10 @@
 
 <div class="noticebox">#TODO Die Wähl-Routen werden noch nicht ausgewertet!</div>
 
-<table>
+<p style="padding:0;margin:1em 0;font-size:0.95em;"><%= t('dp_route.explanations.p0') %></p>
+<br />
+
+<table align="center">
 	<tr>
 		<% i18n_path = 'activerecord.attributes.dialplan_route.' %>
 		<th><%= t( i18n_path + 'eac' ) %></th>
@@ -28,36 +31,42 @@
 		<th></th>
 	</tr>
 
-<% @dialplan_routes.each do |dp_route| %>
+<% if @dialplan_routes.length == 0 %>
+	<tr>
+		<td colspan="9" style="text-align:center;">-- <i><%= t(:none) %></i> --</td>
+	</tr>
+<% end %>
+
+<% @dialplan_routes.each do |route| %>
 	<tr style="<%=
-		params[:moved_id] && dp_route.id == params[:moved_id].to_i \
+		params[:moved_id] && route.id == params[:moved_id].to_i \
 		? 'outline: 2px solid #aac; outline-offset: 2px; -moz-outline-radius: 5px;' : ''
 	%>">
-		<td><big><tt><%= dp_route.eac %></tt></big></td>
-		<td><big><tt><%= dp_route.dialplan_pattern.try(:pattern) %></tt></big></td>
-		<td><%= dp_route.user ? dp_route.user.try(:to_display) : t('dp_route.all_users') %></td>
-		<td class="<%= dp_route.sip_gateway ? 'status_yes' : 'status_no' %>"><%= dp_route.sip_gateway ? dp_route.sip_gateway.try(:hostport) : t('dp_route.no_gateway') %></td>
-		<td><%= dp_route.name %></td>
+		<td><big><tt><%= route.eac %></tt></big></td>
+		<td><big><tt><%= link_to( route.dialplan_pattern.try(:pattern), route.dialplan_pattern, :title => "\"#{route.dialplan_pattern.name}\"" ) %></tt></big></td>
+		<td><%= route.user ? route.user.try(:to_display) : t('dp_route.all_users') %></td>
+		<td class="<%= route.sip_gateway ? 'status_yes' : 'status_no' %>"><%= route.sip_gateway ? route.sip_gateway.try(:hostport) : t('dp_route.no_gateway') %></td>
+		<td><%= route.name %></td>
 		<td style="text-align:center;"><%=
 			button_to "\u{2191}\u{2191}",
-			move_to_top_dialplan_route_path( dp_route ),
-			{ :class => 'move_button', :disabled => dp_route.first? }
+			move_to_top_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.first? }
 		%><%=
 			button_to "\u{2191}",
-			move_up_dialplan_route_path( dp_route ),
-			{ :class => 'move_button', :disabled => dp_route.first? }
+			move_up_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.first? }
 		%><%=
 			button_to "\u{2193}",
-			move_down_dialplan_route_path( dp_route ),
-			{ :class => 'move_button', :disabled => dp_route.last? }
+			move_down_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.last? }
 		%><%=
 			button_to "\u{2193}\u{2193}",
-			move_to_bottom_dialplan_route_path( dp_route ),
-			{ :class => 'move_button', :disabled => dp_route.last? }
+			move_to_bottom_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.last? }
 		%></td>
-		<td><%= link_to t(:show), dp_route %></td>
-		<td><%= link_to t(:edit), edit_dialplan_route_path( dp_route ) %></td>
-		<td><%= button_to t(:destroy), dp_route, :confirm => t(:are_you_sure), :method => :delete %></td>
+		<td><%= link_to t(:show), route %></td>
+		<td><%= link_to t(:edit), edit_dialplan_route_path( route ) %></td>
+		<td><%= button_to t(:destroy), route, :confirm => t(:are_you_sure), :method => :delete %></td>
 	</tr>
 <% end %>
 </table>
@@ -65,3 +74,12 @@
 <br />
 
 <%= link_to t('dp_route.view.new'), new_dialplan_route_path %>
+
+
+<br />
+<br />
+<br />
+<hr />
+<p style="padding:0;margin:1em 0;font-size:0.95em;"><%= t('dp_route.explanations.p1') %></p>
+<p style="padding:0;margin:1em 0;font-size:0.95em;"><%= t('dp_route.explanations.p2') %></p>
+
