@@ -61,8 +61,8 @@ case "$1" in
 		# `rake db:migrate` on upgrade.(?)
 		#OPTIMIZE Use `bundle exec ...`
 		rake db:setup
-		chown gemeinschaft:gemeinschaft /opt/gemeinschaft/db/*.sqlite3
-		chmod 660 /opt/gemeinschaft/db/*.sqlite3
+		chown gemeinschaft:gemeinschaft /opt/gemeinschaft/db/*.db
+		chmod 660 /opt/gemeinschaft/db/*.db
 	;;
 	
 	abort-upgrade|abort-remove|abort-deconfigure)

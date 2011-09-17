@@ -21,7 +21,7 @@ set -e
 case "$1" in
 	configure)
 		# Add Lighttpd user to group "gemeinschaft" so it can access
-		# "/opt/gemeinschaft/db/*.sqlite3":
+		# "/opt/gemeinschaft/db/*.db":
 		USER="www-data"
 		gemeinschaft_group="gemeinschaft"
 		if groups "$USER" | grep -w -q -v "$gemeinschaft_group"; then

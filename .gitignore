@@ -3,10 +3,12 @@
 
 .DS_Store
 .bundle
-db/*.sqlite3
-db/*.sqlite3-journal
-db/*.db
-db/*.db-journal
+
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.db
+/db/*.db-journal
+
 log/*.log
 tmp/**/*
 /.project
