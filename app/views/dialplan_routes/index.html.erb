@@ -43,7 +43,7 @@
 		? 'outline: 2px solid #aac; outline-offset: 2px; -moz-outline-radius: 5px;' : ''
 	%>">
 		<td><big><tt><%= route.eac %></tt></big></td>
-		<td><big><tt><%= link_to( route.dialplan_pattern.try(:pattern), route.dialplan_pattern, :title => "\"#{route.dialplan_pattern.name}\"" ) %></tt></big></td>
+		<td><big><tt><%= link_to( route.dialplan_pattern.try(:pattern), route.dialplan_pattern, :title => "\"#{route.dialplan_pattern.try(:name)}\"" ) %></tt></big></td>
 		<td><%= route.user ? route.user.try(:to_display) : t('dp_route.all_users') %></td>
 		<td class="<%= route.sip_gateway ? 'status_yes' : 'status_no' %>"><%= route.sip_gateway ? route.sip_gateway.try(:hostport) : t('dp_route.no_gateway') %></td>
 		<td><%= route.name %></td>
