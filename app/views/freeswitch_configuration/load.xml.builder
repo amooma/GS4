@@ -435,20 +435,31 @@ xml.document( :type => 'freeswitch/xml' ) {
 		#		xml.param( :name => 'rotate-on-hup', :value => 'true' )
 		#		xml.param( :name => 'legs', :value => 'ab' )
 		#	}
-			xml.configuration( :name => 'cdr_sqlite.conf', :descriptionn=> 'CDR SQLITE') {
-				xml.settings {
-								xml.param( :name => "db-path", :value => "/opt/gemeinschaft/db" )
-								xml.param( :name => "db-name", :value => "#{ Rails::env.downcase}" )
-								xml.param( :name => "table-name", :value => "cdrs" )
-								xml.param( :name => "chanvars_fixed", :value => "foo=1" )
-								xml.param( :name => "chanvars_supp", :value => "bar,sip_from_host" )
-								xml.param( :name => "chanvars_supp_repeat_fixed", :value => "y" )
-								xml.param( :name => "timezone", :value => "utc" )
-								xml.param( :name => "default-template", :value => "example" )
-								xml.param( :name => "legs", :value => "ab" )
-
-				}
-			#}
+		#	xml.templates {
+		#		# :name_attr => 'content',
+		#		# This is just avoid Builder's strange syntax where attributes are specified after the text content.
+		#		{
+		#			:'sql'       => "INSERT INTO cdrs VALUES ( '${sql_escape(${caller_id_name})}', '${sql_escape(${caller_id_number})}', '${sql_escape(${destination_number})}', '${sql_escape(${context})}', '${sql_escape(${start_stamp})}', '${sql_escape(${answer_stamp})}', '${sql_escape(${end_stamp})}', '${sql_escape(${duration})}', '${sql_escape(${billsec})}', '${sql_escape(${hangup_cause})}', '${sql_escape(${uuid})}', '${sql_escape(${bleg_uuid})}', '${sql_escape(${accountcode})}' );",
+		#			:'example'   => '"${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}","${accountcode}","${read_codec}","${write_codec}"',
+		#		}.
+		#		each { | name, content |
+		#			xml.template( content.to_s, :name => name.to_s )
+		#		}
+		#	}
+		#}
+		
+		xml.configuration( :name => 'cdr_sqlite.conf', :description => 'CDR SQLITE' ) {
+			xml.settings {
+				xml.param( :name => 'db-path', :value => "/opt/gemeinschaft/db" )
+				xml.param( :name => 'db-name', :value => "#{ Rails::env.downcase}" )
+				xml.param( :name => 'table-name', :value => "cdrs" )
+				xml.param( :name => 'chanvars_fixed', :value => "foo=1" )
+				xml.param( :name => 'chanvars_supp', :value => "bar,sip_from_host" )
+				xml.param( :name => 'chanvars_supp_repeat_fixed', :value => "y" )
+				xml.param( :name => 'timezone', :value => "utc" )
+				xml.param( :name => 'default-template', :value => "example" )
+				xml.param( :name => 'legs', :value => "ab" )
+			}
 			xml.templates {
 				# :name_attr => 'content',
 				# This is just avoid Builder's strange syntax where attributes are specified after the text content.
@@ -730,7 +741,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.tag!( 'load', :module => 'mod_logfile' )
 				xml.tag!( 'load', :module => 'mod_xml_rpc' )
 				xml.tag!( 'load', :module => 'mod_xml_curl' )
-				xml.tag!( 'load', :module => 'mod_cdr_csv' )
+				xml.tag!( 'load', :module => 'mod_cdr_csv' )  #OPTIMIZE Do we need mod_cdr_csv?
 				xml.tag!( 'load', :module => 'mod_cdr_sqlite' )
 				xml.tag!( 'load', :module => 'mod_event_socket' )
 				xml.tag!( 'load', :module => 'mod_sofia' )
