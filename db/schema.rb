@@ -10,7 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20110916123009) do
+=======
 ActiveRecord::Schema.define(:version => 20110915082240) do
+>>>>>>> 03518a31c2cee07ef1f06d3b42b2ba09634deabd
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -61,6 +65,24 @@ ActiveRecord::Schema.define(:version => 20110915082240) do
   create_table "call_queues", :force => true do |t|
     t.string   "name"
     t.string   "uuid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cdrs", :force => true do |t|
+    t.string   "caller_id_name"
+    t.string   "caller_id_number"
+    t.string   "destination_number"
+    t.string   "context"
+    t.datetime "start_stamp"
+    t.datetime "answer_stamp"
+    t.datetime "end_stamp"
+    t.integer  "duration"
+    t.integer  "billsec"
+    t.string   "hangup_cause"
+    t.string   "uuid"
+    t.string   "bleg_uuid"
+    t.string   "account_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

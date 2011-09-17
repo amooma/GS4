@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  caller_id_name: MyString
+  caller_id_number: MyString
+  destination_number: MyString
+  context: MyString
+  start_stamp: 2011-09-16 14:30:09
+  answer_stamp: 2011-09-16 14:30:09
+  end_stamp: 2011-09-16 14:30:09
+  duration: 1
+  billsec: 1
+  hangup_cause: MyString
+  uuid: MyString
+  bleg_uuid: MyString
+  account_code: MyString
+
+two:
+  caller_id_name: MyString
+  caller_id_number: MyString
+  destination_number: MyString
+  context: MyString
+  start_stamp: 2011-09-16 14:30:09
+  answer_stamp: 2011-09-16 14:30:09
+  end_stamp: 2011-09-16 14:30:09
+  duration: 1
+  billsec: 1
+  hangup_cause: MyString
+  uuid: MyString
+  bleg_uuid: MyString
+  account_code: MyString

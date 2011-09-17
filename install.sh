@@ -301,7 +301,7 @@ case $n in
 		
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/storage
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/storage /opt/freeswitch/
-		
+		rm -rf /opt/gemeinschaft/.git	
 		;;
 	*)
 		;;
