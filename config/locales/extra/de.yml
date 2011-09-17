@@ -26,6 +26,7 @@ de:
   destroy: "Löschen"
   yes_lowercase: "ja"
   no_lowercase: "nein"
+  none: "keine"
   file: "Datei"
   upload: "Upload"
   download: "Download"
@@ -473,6 +474,18 @@ de:
       new: "Neues Wähl-Muster"
       edit: "Wähl-Muster bearbeiten"
       show: "Wähl-Muster"
+    being_used_in_x_routes:
+      s:
+        one:   "In %{count} Route verwendet."
+        other: "In %{count} Routen verwendet."
+      m:
+        one:   "Wird in %{count} Route verwendet."
+        other: "Wird in %{count} Routen verwendet."
+      l:
+        one:   "Dieses Wähl-Muster wird in %{count} Route verwendet."
+        other: "Dieses Wähl-Muster wird in %{count} Routen verwendet."
+    explanations:
+      p0: "Hier können Sie Wähl-Muster definieren, um diese in den ausgehenden Routen zu verwenden."
   
   dp_route:
     was_created: "Ausgehende Wähl-Route wurde angelegt."
@@ -484,6 +497,10 @@ de:
       show: "Ausgehende Wähl-Route"
     all_users: "(alle)"
     no_gateway: "(verboten)"
+    explanations:
+      p0: "Wenn an einem Telefon eine Rufnummer gewählt wird, so prüft die Anlage zuerst ob ein interner SIP-Account mit dieser Rufnummer (Nebenstelle) vorhanden ist. Sollte die Nebenstelle innerhalb der Anlage nicht vorhanden sein, so werden danach die ausgehenden Wähl-Routen ausgewertet."
+      p1: "Die Wähl-Regeln werden von oben nach unten abgearbeitet bis eine Regel zutrifft. Es werden nur solche Regeln berücksichtigt die für den aktuellen Benutzer gelten (falls der aktuelle SIP-Account zu einem Benutzer gehört) und solche die für alle gelten. Dabei wird die am Telefon gewählte Ziffernfolge mit der Amtskennziffer (AKz) und dem Wähl-Muster der Regeln verglichen."
+      p2: "Wenn für eine zutreffende Regel ein Gateway eingestellt ist, so wird über dieses Gateway nach außen gewählt. Wenn kein Gateway eingestellt ist so wird die Abarbeitung der Regeln beendet und der Rufaufbau abgebrochen. Auf diese Weise lassen sich verbotene Ziele definieren. Sollte keine der Regeln zutreffen so wird der Rufaufbau abgebrochen."
   
   
   sip_gateway_was_created: "Gateway wurde angelegt."

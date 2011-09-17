@@ -111,6 +111,36 @@ class SipAccount < ActiveRecord::Base
     return I18n.t(:sip_account_to_display, :id => self.id, :auth_name => self.auth_name, :caller_name => self.caller_name, :position => self.position, :realm => self.realm)
   end
   
+  # Finds a call forwarding rule by reason and source.
+  #
+  def call_forwards_for( reason, source )
+  (
+    return nil if ! reason
+	  
+    [ source, '' ].each { |the_source|
+      cfwd = (
+        CallForward.where({
+          :sip_account_id => self.id,
+          :active         => true,
+          :source         => the_source.to_s,
+        })
+        .joins( :call_forward_reason )
+        .where( :call_forward_reasons => {
+          :value => reason.to_s,
+        })
+        .first )
+      
+      if cfwd
+        if cfwd.destination == "voicemail"
+          cfwd.destination = "-vbox-#{sip_account.auth_name}"
+        end
+        return cfwd
+      end
+    }
+    
+    return nil
+  )end
+  
   private
   
   def create_subscriber()

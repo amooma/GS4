@@ -795,31 +795,7 @@ class FreeswitchCallProcessingController < ApplicationController
 	#
 	def find_call_forward( sip_account, reason, source )
 	(
-		return nil if ! sip_account
-		return nil if ! reason
-		
-		[ source, '' ].each { |the_source|
-			cfwd = (
-				CallForward.where({
-					:sip_account_id => sip_account.id,
-					:active         => true,
-					:source         => the_source.to_s,
-				})
-				.joins( :call_forward_reason )
-				.where( :call_forward_reasons => {
-					:value => reason.to_s,
-				})
-				.first )
-			
-			if cfwd
-				if cfwd.destination == "voicemail"
-					cfwd.destination = "-vbox-#{sip_account.auth_name}"
-				end
-				return cfwd
-			end
-		}
-		
-		return nil
+		return CallForward.find_matching( sip_account, reason, source )
 	) end
 	
 	

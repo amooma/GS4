@@ -119,8 +119,12 @@ echo -e "Configuring ODBC ...\n"
 echo "[gemeinschaft-production]
 Description=My SQLite test database
 Driver=SQLite3
-Database=/opt/gemeinschaft/db/production.sqlite3
+Database=/opt/gemeinschaft/db/production.db
 Timeout=2000" >> /etc/odbc.ini
+
+#OPTIMIZE Just use the odbc.ini we provide:
+#cd /opt/gemeinschaft/
+#odbcinst -i -s -l -f misc/odbc/gemeinschaft-production.odbc.ini
 
 
 ln -s /opt/gemeinschaft /opt/Gemeinschaft4
@@ -169,7 +173,7 @@ adduser freeswitch  gemeinschaft --quiet
 
 chown -R www-data:gemeinschaft /opt/gemeinschaft
 chmod g+w /opt/gemeinschaft/db
-chmod g+w /opt/gemeinschaft/db/production.sqlite3
+chmod g+w /opt/gemeinschaft/db/production.db
 chmod 777 /opt/gemeinschaft/misc/fax
 
 
@@ -301,7 +305,9 @@ case $n in
 		
 		mkdir -p /opt/gemeinschaft-local/data/opt/freeswitch/storage
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/storage /opt/freeswitch/
-		rm -rf /opt/gemeinschaft/.git	
+		
+		rm -rf /opt/gemeinschaft/.git
+		
 		;;
 	*)
 		;;

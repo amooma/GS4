@@ -31,4 +31,11 @@ class CallForward < ActiveRecord::Base
     return self.call_forward_reason ? self.call_forward_reason.value : nil
   end
   
+  # Finds a call forwarding rule of a SIP account by reason and source.
+  #
+  def self.find_matching( sip_account, reason, source )
+    return nil if ! sip_account
+    return sip_account.call_forwards_for( reason, source )
+  end
+  
 end

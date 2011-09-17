@@ -21,7 +21,7 @@ set -e
 case "$1" in
 	configure)
 		# Add Kamailio user to group "gemeinschaft" so it can access
-		# "/opt/gemeinschaft/db/*.sqlite3":
+		# "/opt/gemeinschaft/db/*.db":
 		. /etc/default/kamailio
 		[ ! -z "$USER" ] || USER="kamailio"
 		gemeinschaft_group="gemeinschaft"

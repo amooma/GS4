@@ -11,16 +11,26 @@
 <p>
 	<b><%= t( i18n_path + 'pattern' ) %>:</b>
 	<big><tt><%= @dialplan_route.dialplan_pattern.try(:pattern) %></tt></big>
+	<span style="font-weight:normal;">&nbsp;&nbsp;&nbsp;&nbsp;
+		(<q><%= @dialplan_route.dialplan_pattern.try(:name) %></q>)</span>
 </p>
 
 <p>
 	<b><%= t( i18n_path + 'user' ) %>:</b>
-	<%= @dialplan_route.user ? @dialplan_route.user.try(:to_display) : t('dp_route.all_users') %>
+	<% if @dialplan_route.user %>
+		<%= @dialplan_route.user.try(:to_display) %>
+	<% else %>
+		<i><%= t('dp_route.all_users') %></i>
+	<% end %>
 </p>
 
 <p>
-	<b><%= t( i18n_path + 'sip_gateway' ) %>:</b>
-	<%= @dialplan_route.sip_gateway ? @dialplan_route.sip_gateway.try(:hostport) : t('dp_route.no_gateway') %>
+	<b><%= t( i18n_path + 'sip_gateway' ) %>:</b>	
+	<% if @dialplan_route.sip_gateway %>
+		<%= @dialplan_route.sip_gateway.try(:hostport) %>
+	<% else %>
+		--- <i><%= t('dp_route.no_gateway') %></i>
+	<% end %>
 </p>
 
 <p>

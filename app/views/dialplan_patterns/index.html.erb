@@ -1,7 +1,10 @@
 <% page_title t('dp_pattern.view.index') %>
 <h1><%= t('dp_pattern.view.index') %></h1>
 
-<table>
+<p style="padding:0;margin:1em 0;font-size:0.95em;"><%= t('dp_pattern.explanations.p0') %></p>
+<br />
+
+<table align="center">
 	<tr>
 		<% i18n_path = 'activerecord.attributes.dialplan_pattern.' %>
 		<th><%= t( i18n_path + 'pattern' ) %></th>
@@ -9,15 +12,23 @@
 		<th></th>
 		<th></th>
 		<th></th>
+		<th></th>
 	</tr>
 
-<% @dialplan_patterns.each do |dialplan_pattern| %>
+<% if @dialplan_patterns.length == 0 %>
 	<tr>
-		<td><big><tt><%= dialplan_pattern.pattern %></tt></big></td>
-		<td><%= dialplan_pattern.name %></td>
-		<td><%= link_to t(:show), dialplan_pattern %></td>
-		<td><%= link_to t(:edit), edit_dialplan_pattern_path(dialplan_pattern) %></td>
-		<td><%= button_to t(:destroy), dialplan_pattern, :confirm => t(:are_you_sure), :method => :delete %></td>
+		<td colspan="5" style="text-align:center;">-- <i><%= t(:none) %> --</i></td>
+	</tr>
+<% end %>
+
+<% @dialplan_patterns.each do |pat| %>
+	<tr>
+		<td><big><tt><%= pat.pattern %></tt></big></td>
+		<td><%= pat.name %></td>
+		<td><%= pat.t_used_by_routes_count(:s) %></td>
+		<td><%= link_to t(:show), pat %></td>
+		<td><%= link_to t(:edit), edit_dialplan_pattern_path( pat ) %></td>
+		<td><%= button_to t(:destroy), pat, :confirm => t(:are_you_sure), :method => :delete %></td>
 	</tr>
 <% end %>
 </table>
