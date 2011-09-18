@@ -58,7 +58,7 @@ module ApplicationHelper
 					
 				when "cdr"
 					menu <<
-						{ :text => t(:call_logs)     , :url => call_logs_path }
+						{ :text => t(:cdrs)     , :url => cdrs_path }
 					
 				when "user"
 					menu <<

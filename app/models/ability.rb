@@ -80,14 +80,16 @@ class Ability
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
         #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
+        can    :read    , Cdr
+        #FIXME Admin only for testing
       )
       
       when "cdr"
       (
-        can    :read    , Home  # just a redirect_to( call_logs_path ) in the HomeController
-        can    :read    , CallLog
+        can    :read    , Home  # just a redirect_to( redirects_path ) in the HomeController
         #OPTIMIZE Add PinChange?
         cannot :have    , SipAccount
+        can    :read    , Cdr
       )
       
       when "user"

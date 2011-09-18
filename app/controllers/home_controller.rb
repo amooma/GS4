@@ -34,7 +34,7 @@ class HomeController < ApplicationController
 				format.html
 			end
 		when 'cdr'
-			redirect_to( call_logs_path )
+			redirect_to( cdrs_path )
 			#render :status => '200 OK',
 			#	:layout => true, :content_type => 'text/html',
 			#	:text => "You have permission to list the call records."

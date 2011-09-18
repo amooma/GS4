@@ -53,7 +53,7 @@
 		},
 		
 		:attributes => {
-			:user => {
+		  :user => {
 				:username  => "Benutzername",
 				:password  => "Passwort",
 				:password_confirmation => "Passwort-Wiederholung",
@@ -399,7 +399,6 @@
 				:name                 => "Beschreibung",
 				:position             => "Position",
 			},
-			
 		},
 	},
 	
