@@ -29,15 +29,11 @@ module ApplicationHelper
 						]},
 						
 						{ :text => t(:servers), :sub => [
-							{ :text => t(:sip_domains)       , :url => sip_servers_path },
-							{ :text => t(:sip_proxies)       , :url => sip_proxies_path },
-							{ :text => t(:voicemail_servers) , :url => voicemail_servers_path },
-							{ :text => t(:nodes)             , :url => nodes_path },
-							{ :text => nil                   , :url => nil },
-							{ :text => t('menu.sip_gateways'), :url => sip_gateways_path },
-							{ :text => nil                   , :url => nil },
 							{ :text => t('menu.dp_routes')   , :url => dialplan_routes_path },
 							{ :text => t('menu.dp_patterns') , :url => dialplan_patterns_path },
+							{ :text => nil                   , :url => nil },
+							{ :text => t(:shutdown) , :url => admin_confirm_shutdown_path},
+							{ :text => t(:reboot_system) , :url => admin_confirm_reboot_path},
 						]},
 						
 						{ :text => t(:help)          , :url => admin_help_path },
