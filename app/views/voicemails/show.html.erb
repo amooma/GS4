@@ -1,3 +1,11 @@
+<%
+if @voicemail_errors && @voicemail_errors.count > 0
+	@voicemail_errors.each { |error|
+		%><div class="noticebox"><%= error %></div><%
+	}
+end
+%>
+
 
 <h1><%= t(:voicemail) %></h1>
 <%= render 'show' %>
