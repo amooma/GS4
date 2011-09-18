@@ -3,79 +3,95 @@ module ApplicationHelper
 	# Define the top navigation menu items
 	#
 	def top_menu_items
-		menu_items = []
+		menu = []
+		
+		# Note: Sub-menus can be { :text => nil, :url => nil } to generate a horizontal separator.
+		
 		if user_signed_in?
 			case current_user.role
 				
 				when "admin"
-					menu_items = [
-						{ :text => t('menu.home')        , :url => root_path },
-						
+					menu <<
+						{ :text => t('menu.home')        , :url => root_path }
+					menu <<
 						{ :text => t(:accounts), :sub => [
+							{ :text => t(:phones)        , :url => phones_path },
 							{ :text => t(:users)         , :url => admin_users_path },
 							{ :text => t(:sip_accounts)  , :url => sip_accounts_path },
+							{ :text => nil               , :url => nil },
 							{ :text => t(:callforwards)  , :url => call_forwards_path },
+							{ :text => nil               , :url => nil },
 							{ :text => t(:personal_contacts) , :url => personal_contacts_path },
 							{ :text => t(:global_contacts)   , :url => global_contacts_path },
-						]},
-						
-						{ :text => t(:phones)        , :url => phones_path },
-						
-						{ :text => t(:extensions)    , :url => extensions_path },
-						
+						]}
+					menu <<
+						{ :text => t(:extensions)    , :url => extensions_path }
+					menu <<
 						{ :text => t(:media_services), :sub => [
 							{ :text => t(:queues)        , :url => call_queues_path },
 							{ :text => t(:conferences)   , :url => conferences_path },
-						]},
-						
-						{ :text => t(:servers), :sub => [
+						]}
+					menu <<
+						{ :text => t('menu.routing'), :sub => [
+							{ :text => t('menu.sip_gateways'), :url => sip_gateways_path },
 							{ :text => t('menu.dp_routes')   , :url => dialplan_routes_path },
 							{ :text => t('menu.dp_patterns') , :url => dialplan_patterns_path },
-							{ :text => nil                   , :url => nil },
-							{ :text => t(:shutdown) , :url => admin_confirm_shutdown_path},
-							{ :text => t(:reboot_system) , :url => admin_confirm_reboot_path},
-						]},
-						
-						{ :text => t(:help)          , :url => admin_help_path },
-					]
-				
+						]}
+					
+					is_appliance = true  #OPTIMIZE
+					if is_appliance
+					menu <<
+						{ :text => t('menu.maintenance'), :sub => [
+							{ :text => t(:shutdown)          , :url => admin_confirm_shutdown_path },
+							{ :text => t(:reboot_system)     , :url => admin_confirm_reboot_path },
+						]}
+					else
+					menu <<
+						{ :text => t(:servers), :sub => [
+							{ :text => t(:sip_domains)       , :url => sip_servers_path },
+							{ :text => t(:sip_proxies)       , :url => sip_proxies_path },
+							{ :text => t(:voicemail_servers) , :url => voicemail_servers_path },
+							{ :text => t(:nodes)             , :url => nodes_path },
+						]}
+					end
+					
+					menu <<
+						{ :text => t(:help)          , :url => admin_help_path }
+					
 				when "cdr"
-					menu_items = [
-						{ :text => t(:call_logs)     , :url => call_logs_path },
-					]
-				
+					menu <<
+						{ :text => t(:call_logs)     , :url => call_logs_path }
+					
 				when "user"
-					menu_items = [
-						{ :text => t(:callforwards)  , :url => call_forwards_path },
-						
-						{ :text => t(:call_logs)     , :url => call_logs_path },
-						
+					menu <<
+						{ :text => t(:callforwards)  , :url => call_forwards_path }
+					menu <<
+						{ :text => t(:call_logs)     , :url => call_logs_path }
+					menu <<
 						{ :text => t(:Contacts), :sub => [
 							{ :text => t(:personal_contacts) , :url => personal_contacts_path },
 							{ :text => t(:global_contacts)   , :url => global_contacts_path },
-						]},
-						
-						{ :text => t(:voicemails)    , :url => voicemails_path },
-						
-						{ :text => t(:fax_documents) , :url => fax_documents_path },
-						
-						{ :text => t(:conferences)   , :url => conferences_path },
-						
+						]}
+					menu <<
+						{ :text => t(:voicemails)    , :url => voicemails_path }
+					menu <<
+						{ :text => t(:fax_documents) , :url => fax_documents_path }
+					menu <<
+						{ :text => t(:conferences)   , :url => conferences_path }
+					menu <<
 						{ :text => t(:Settings), :sub => [
 							{ :text => t(:voicemail_pin_change), :url => pin_change_path },
-						]},
-					]
+						]}
+					
 			end
 		elsif ! current_page?(:controller => 'admin/setup', :action => 'new')
-			menu_items = [
-				{ :text => t(:sign_in)       , :url => new_user_session_path },
-			]
+			menu <<
+				{ :text => t(:sign_in)       , :url => new_user_session_path }
 		else
-			menu_items = [
-				{},
-			] 
+			menu <<
+				{}
 		end
-		return menu_items
+		return menu
 	end
 	
 	def page_title( page_title )
