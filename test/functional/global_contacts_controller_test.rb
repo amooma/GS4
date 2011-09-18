@@ -37,7 +37,6 @@ class GlobalContactsControllerTest < ActionController::TestCase
     assert_difference('GlobalContact.count') do
       post :create, :global_contact => @global_contact.attributes
     end
-
     assert_redirected_to global_contact_path(assigns(:global_contact))
     sign_out @admin_user
   end
@@ -68,7 +67,6 @@ class GlobalContactsControllerTest < ActionController::TestCase
     assert_difference('GlobalContact.count', -1) do
       delete :destroy, :id => @global_contact.to_param
     end
-
     assert_redirected_to global_contacts_path
     sign_out @admin_user
   end
