@@ -11,26 +11,27 @@ class Configuration < ActiveRecord::Base
 	
 	#OPTIMIZE Add do_not_delete flag to model, see db/seeds.rb
 	
+	#TODO Clean up this method so it becomes more readable. Reading entries should not store casted values.
 	def self.get( name, default_value = nil, cast_class = nil )
 		if (! @@conf.key?( name ))
 			config_entry = self.where(:name => name).first
 			if config_entry
 				if (cast_class != nil)
-					@@conf[name] = self.cast_explicitely(config_entry.value, cast_class.name)
+					@@conf[name] = self.cast_explicitely( config_entry.value, cast_class.name )
 				elsif (default_value)
-					@@conf[name] = self.cast_explicitely(config_entry.value, default_value.class.name)
+					@@conf[name] = self.cast_explicitely( config_entry.value, default_value.class.name )
 				else
 					@@conf[name] = config_entry.value
 				end
 			elsif (cast_class != nil)
-				@@conf[name] = self.cast_explicitely(default_value, cast_class.name)
+				@@conf[name] = self.cast_explicitely( default_value, cast_class.name )
 			else
 				@@conf[name] = default_value
 			end
 		end
 		
 		if (cast_class != nil)
-			return self.cast_explicitely(@@conf[name], cast_class.name)
+			return self.cast_explicitely( @@conf[name], cast_class.name )
 		end
 		return @@conf[name]
 	end
