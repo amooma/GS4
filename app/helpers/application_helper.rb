@@ -21,7 +21,6 @@ module ApplicationHelper
 							{ :text => nil               , :url => nil },
 							{ :text => t(:callforwards)  , :url => call_forwards_path },
 							{ :text => nil               , :url => nil },
-							{ :text => t(:personal_contacts) , :url => personal_contacts_path },
 							{ :text => t(:global_contacts)   , :url => global_contacts_path },
 						]}
 					menu <<

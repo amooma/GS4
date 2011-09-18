@@ -50,8 +50,8 @@ class Ability
         can    :manage  , SipProxy
         can    :manage  , VoicemailServer
         can    :manage  , Node
-        can    :manage  , PersonalContact
-        can    :edit_uid, PersonalContact
+        #can    :manage  , PersonalContact
+        #can    :edit_uid, PersonalContact
         can    :manage  , GlobalContact
         can    :manage  , Configuration
         can    :manage  , SipGateway
