@@ -37,8 +37,7 @@ module ApplicationHelper
 							{ :text => t('menu.dp_patterns') , :url => dialplan_patterns_path },
 						]}
 					
-					is_appliance = true  #OPTIMIZE
-					if is_appliance
+					if Cfg.bool( :is_appliance, false )
 					menu <<
 						{ :text => t('menu.maintenance'), :sub => [
 							{ :text => t(:shutdown)          , :url => admin_confirm_shutdown_path },
