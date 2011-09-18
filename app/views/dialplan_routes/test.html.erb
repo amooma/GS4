@@ -27,6 +27,7 @@
 		:label => t('dp_route.test.to_dest'),
 		:hint => false,
 		:required => true,
+		:autofocus => @test_call_dest.to_s.blank?,
 		:input_html => { :value => @test_call_dest.to_s },
 	} %>
 	
