@@ -513,6 +513,7 @@ de:
         is_internal0: "„%{extension}“ ist eine interne Nebenstelle."
         is_internal1: "Wäre sie keine Nebenstelle, dann würden die ausgehenden Routen abgearbeitet."
         is_internal2: "Die folgende Auswertung ist also nur hypothetisch."
+        is_internal3: "In Wirklichkeit wird die interne Nebenstelle angerufen."
         is_not_internal: "„%{extension}“ ist keine interne Nebenstelle. Die folgenden ausgehenden Routen werden abgearbeitet."
         no_match_user: "Route trifft nicht auf den Benutzer des SIP-Accounts zu."
         no_match_eac: "Rufnummer passt nicht zur Amtskennzahl (AKz)."

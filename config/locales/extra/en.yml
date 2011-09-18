@@ -513,6 +513,7 @@ en:
         is_internal0: "“%{extension}” is an internal extension."
         is_internal1: "If it wasn't an extension then the outbound routes would be evaluated."
         is_internal2: "The simulated processing in following is purely hypothetical."
+        is_internal3: "In reality the internal extension will be called."
         is_not_internal: "“%{extension}” isn't an internal extension. The outbound routes in following will be evaluated."
         no_match_user: "Route does not apply to the user of the SIP account."
         no_match_eac: "Destination number does not match the external access code (EAC)."
