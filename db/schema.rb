@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110916123009) do
+ActiveRecord::Schema.define(:version => 20110918124003) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -429,6 +429,15 @@ ActiveRecord::Schema.define(:version => 20110916123009) do
     t.string   "ha1"
     t.string   "ha1b"
     t.string   "rpid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "system_infos", :force => true do |t|
+    t.integer  "diskfree_data"
+    t.integer  "diskfree_db"
+    t.float    "load_avg"
+    t.integer  "memory_free"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

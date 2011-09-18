@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  diskfree_data: 1
+  diskfree_db: 1
+  load_avg: 1
+  memory_free: 1
+
+two:
+  diskfree_data: 1
+  diskfree_db: 1
+  load_avg: 1
+  memory_free: 1
