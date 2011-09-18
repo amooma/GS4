@@ -1,0 +1,18 @@
+<div class="index_overview">
+	<h1>Willkommen bei Gemeinschaft 4.0</h1>
+	<p>Sie haben vor 
+<%= time_ago_in_words(User.first.created_at).gsub(/eine /,'einer ').gsub(/ein /,'einem ').gsub(/Tage/,'Tagen') %>
+		 die VoIP Telefonanlage Gemeinschaft 4.0 erfolgreich installiert. Hier ein paar Tipps zum schnellen Einstieg:</p>
+	<ul>
+		<li>Ein neues Telefon muss per MAC Adresse dem System bekannt gegeben werden. Für die einfacherere Administration stellen wir Ihnen dafür die zwei Assistenten <%= link_to( "\"#{t(:wizard_phone_new)}\"", url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new')) %> und <%= link_to( "\"#{t(:wizard_phone_and_user_new)}\"", url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new', :with_user => true)) %> zur Verfügung.</li>
+		<li>Aktuell werden folgende Telefone unterstützt: 
+		<% PhoneModel.order(:name).each do |phone_model| %><%= link_to phone_model.name, phone_model %><% if phone_model != PhoneModel.order(:name).last %><% if phone_model != PhoneModel.order(:name)[PhoneModel.order(:name).count - 2] %>,<% else %> und<% end %> <% end %><% end %>
+		</li>
+		<li>Bitte beachten Sie, das auf den Telefonen immer die <strong>letzte stabile Firmware</strong> installiert wurde. Einen Link zur Online-Doku der Telefone finden Sie beim jeweiligen <%= link_to 'Telefonmodel', phone_models_path %>.</li>
+		<li>Bitte verfolgen Sie den Twitter-Account <%= link_to '@GemeinschaftPBX', 'http://twitter.com/GemeinschaftPBX' %> für Updates und Informationen zu Gemeinschaft.</li>
+	</ul>
+	<p><strong>Nächster Schritt:</strong> <%= link_to( "#{t(:wizard_phone_new)}", url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new')) %>
+    <h2>Support</h2>
+    <p>Gemeinschaft ist ein Produkt der <%= link_to 'AMOOMA GmbH', 'http://www.amooma.de' %>, die auch kommerziellen Support und Consulting dazu anbietet. Zusätzlich gibt es eine kostenlose Mailingliste unter <%= link_to 'http://groups.google.com/group/gemeinschaft-users', 'http://groups.google.com/group/gemeinschaft-users' %></p>
+	
+</div>

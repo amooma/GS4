@@ -1,0 +1,17 @@
+<div class="index_overview">
+	<h1>Welcome to Gemeinschaft 4.0</h1>
+	<p>You installed Gemeinschaft  
+<%= time_ago_in_words(User.first.created_at) %> ago. Quick start tips:</p>
+	<ul>
+		<li>Use <%= link_to( "\"#{t(:wizard_phone_new)}\"", url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new')) %> and <%= link_to( "\"#{t(:wizard_phone_and_user_new)}\"", url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new', :with_user => true)) %> to setup new phones.</li>
+		<li>We support the following phone models: 
+		<% PhoneModel.order(:name).each do |phone_model| %><%= link_to phone_model.name, phone_model %><% if phone_model != PhoneModel.order(:name).last %><% if phone_model != PhoneModel.order(:name)[PhoneModel.order(:name).count - 2] %>,<% else %> and<% end %> <% end %><% end %>
+		</li>
+		<li>Please always use the <strong>lasted stable Firmware</strong> on the phones.</li>
+		<li>Please follow the Twitter-Account <%= link_to '@GemeinschaftPBX', 'http://twitter.com/GemeinschaftPBX' %> for updates.</li>
+	</ul>
+	<p><strong>Next step:</strong> <%= link_to( "#{t(:wizard_phone_new)}", url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new')) %>
+    <h2>Support</h2>
+    <p>Gemeinschaft is a <%= link_to 'AMOOMA GmbH', 'http://www.amooma.de' %> product. We provide commerical support and consulting for Gemeinschaft. In addition to that you'll find free support at the following mailinglist: <%= link_to 'http://groups.google.com/group/gemeinschaft-users', 'http://groups.google.com/group/gemeinschaft-users' %></p>
+	
+</div>
