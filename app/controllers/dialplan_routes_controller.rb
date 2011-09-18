@@ -36,10 +36,12 @@ class DialplanRoutesController < ApplicationController
       @is_test_call = true
       @test_call_sip_acct_id = (params[:test_call] || {})[:sip_acct_id].to_i
       @test_call_sip_acct = SipAccount.where(:id => @test_call_sip_acct_id).first
+      @is_extension = Extension.where(:active => true, :extension => @test_call_dest).count > 0
     else
       @is_test_call = false
       @test_call_sip_acct_id = nil
       @test_call_sip_acct = nil
+      @is_extension = false
     end
     
     respond_to do |format|
