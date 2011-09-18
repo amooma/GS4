@@ -307,7 +307,7 @@ case $n in
 		ln -s /opt/gemeinschaft-local/data/opt/freeswitch/storage /opt/freeswitch/
 		
 		rm -rf /opt/gemeinschaft/.git
-		
+		echo 'blacklist ipv6' >> /etc/modprobe.d/blacklist		
 		;;
 	*)
 		;;

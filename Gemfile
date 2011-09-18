@@ -60,6 +60,10 @@ group :production do
 	gem 'syslogger', '~> 1.2'
 end
 
+# Whenever (cronjob for rails)
+#
+
+gem 'whenever', :require => false
 #group :development do
 #	# run ./script/annotate to annotate
 #	gem 'annotate-models'

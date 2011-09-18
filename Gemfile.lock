@@ -34,6 +34,7 @@ GEM
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
     cancan (1.6.5)
+    chronic (0.6.4)
     chunky_png (1.2.0)
     compass (0.11.1)
       chunky_png (~> 1.1)
@@ -158,6 +159,9 @@ GEM
     tzinfo (0.3.25)
     warden (1.0.3)
       rack (>= 1.0.0)
+    whenever (0.7.0)
+      activesupport (>= 2.3.4)
+      chronic (~> 0.6.3)
 
 PLATFORMS
   ruby
@@ -181,3 +185,4 @@ DEPENDENCIES
   simple_form
   sqlite3-ruby
   syslogger (~> 1.2)
+  whenever
