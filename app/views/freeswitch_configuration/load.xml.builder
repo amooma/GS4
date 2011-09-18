@@ -465,7 +465,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				# This is just avoid Builder's strange syntax where attributes are specified after the text content.
 				{
 					:'sql'       => "INSERT INTO cdrs VALUES ( '${sql_escape(${caller_id_name})}', '${sql_escape(${caller_id_number})}', '${sql_escape(${destination_number})}', '${sql_escape(${context})}', '${sql_escape(${start_stamp})}', '${sql_escape(${answer_stamp})}', '${sql_escape(${end_stamp})}', '${sql_escape(${duration})}', '${sql_escape(${billsec})}', '${sql_escape(${hangup_cause})}', '${sql_escape(${uuid})}', '${sql_escape(${bleg_uuid})}', '${sql_escape(${accountcode})}', '', '' );",
-					:'example'   => '"${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}","${accountcode}","",""',
+					:'example'   => '"${sql_escape(${caller_id_name})}","${sql_escape(${caller_id_number})}","${sql_escape(${destination_number})}","${sql_escape(${context})}","${sql_escape(${start_stamp})}","${sql_escape(${answer_stamp})}","${sql_escape(${end_stamp})}","${sql_escape(${duration})}","${sql_escape(${billsec})}","${sql_escape(${hangup_cause})}","${sql_escape(${uuid})}","${sql_escape(${bleg_uuid})}","${sql_escape(${accountcode})}","",""',
 				}.
 				each { | name, content |
 					xml.template( content.to_s, :name => name.to_s )
