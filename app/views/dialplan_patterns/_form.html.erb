@@ -1,7 +1,11 @@
 <%= simple_form_for( @dialplan_pattern ) do |f| %>
 	<%= f.error_messages %>
 	
-	<%= f.input :pattern %>
+	<%= f.input :pattern,
+		:input_html => {
+			:pattern => '[+]?([0-9A-Da-dEe*Ff#Xx]|\\[[0-9A-Da-dEe*Ff#\\-]*\\])*\\.?',
+		}
+	%>
 	<%= f.input :name %>
 	
 	<%= f.button :submit %>

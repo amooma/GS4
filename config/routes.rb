@@ -144,6 +144,10 @@ Gemeinschaft4::Application.routes.draw do
 			post :move_to_top
 			post :move_to_bottom
 		end
+		collection do
+			get  :test
+			post :test
+		end
 	end
 	#OPTIMIZE Add confirm_destroy here if necessary.
 	

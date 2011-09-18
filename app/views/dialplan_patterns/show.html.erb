@@ -1,5 +1,5 @@
 <% page_title t('dp_pattern.view.show') %>
 <h1><%= t('dp_pattern.view.show') %> <q><%= @dialplan_pattern.name %></q></h1>
 <%= render 'show' %>
-<%= link_to t(:edit), edit_dialplan_pattern_path( @dialplan_pattern ) if can?( :edit, @dialplan_pattern ) %> |
-<%= link_to t(:Go_to_list), dialplan_patterns_path if can?( :index, DialplanPattern ) %>
+<%= link_to t(:edit), edit_dialplan_pattern_path( @dialplan_pattern ) if can?(:edit, @dialplan_pattern) %> |
+<%= link_to t(:Go_to_list), dialplan_patterns_path if can?(:index, DialplanPattern) %>

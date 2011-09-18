@@ -3,4 +3,4 @@
 
 <%= render 'form' %>
 
-<%= link_to t(:Go_to_list), dialplan_routes_path %>
+<%= link_to t(:Go_to_list), dialplan_routes_path if can?(:index, DialplanRoute) %>

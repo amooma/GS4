@@ -495,12 +495,30 @@ en:
       new: "New outbound dialplan route"
       edit: "Editing outbound dialplan route"
       show: "Outbound dialplan route"
+      test: "Test dialplan routes"
     all_users: "(all)"
     no_gateway: "(forbidden)"
     explanations:
       p0: "If you dial a number at a phone, the PBX checks if an internal SIP account with this extension exists. Should no matching extension be found the outbound routes will be evaluated."
       p1: "The outbound routes will be evaluated from top to bottom until a matching route is found. Only those rules will be considered that apply to the current user (if the SIP account belongs to a user) and also those rules that apply to all. The dialstring entered at the phone will be matched against the route's external access code (EAC) and pattern."
       p2: "If for a matching route a gateway has been set, then the PBX will route the call via this gateway. If no gateway has been set then no more routes will be considered, and the call setup will stop. That can be used to define forbidden destinations. Should none of the routes match then the call setup will stop."
+    test:
+      form_head: "Simulate processing of outbound routes:"
+      to_dest: "to destination"
+      as_sip_acct: "from SIP account"
+      as_sip_acct_none: "unspecified, consider only routes that apply to all"
+      run: "Test"
+      route:
+        no_match_user: "Route does not apply to the user of the SIP account."
+        no_match_eac: "Destination number does not match the external access code (EAC)."
+        no_match_pattern: "Destination number does not match the dialplan pattern."
+        no_match_unknown: "Destination number does not match the route."
+        no_match_no_route: "No route matches."
+        match_first: "Route matches."
+        match_no_gateway: "Gateway: forbidden."
+        match_dial: "“%{number}” will be dialed."
+        match_first_end: "Processing stops here."
+        match_later: "This route would match, but the processing has already been stopped by a higher route."
   
   
   sip_gateway_was_created: "Gateway was created."

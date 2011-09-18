@@ -495,12 +495,30 @@ de:
       new: "Neue ausgehende Wähl-Route"
       edit: "Ausgehende Wähl-Route bearbeiten"
       show: "Ausgehende Wähl-Route"
+      test: "Teste ausgehende Wähl-Routen"
     all_users: "(alle)"
     no_gateway: "(verboten)"
     explanations:
       p0: "Wenn an einem Telefon eine Rufnummer gewählt wird, so prüft die Anlage zuerst ob ein interner SIP-Account mit dieser Rufnummer (Nebenstelle) vorhanden ist. Sollte die Nebenstelle innerhalb der Anlage nicht vorhanden sein, so werden danach die ausgehenden Wähl-Routen ausgewertet."
       p1: "Die Wähl-Regeln werden von oben nach unten abgearbeitet bis eine Regel zutrifft. Es werden nur solche Regeln berücksichtigt die für den aktuellen Benutzer gelten (falls der aktuelle SIP-Account zu einem Benutzer gehört) und solche die für alle gelten. Dabei wird die am Telefon gewählte Ziffernfolge mit der Amtskennziffer (AKz) und dem Wähl-Muster der Regeln verglichen."
       p2: "Wenn für eine zutreffende Regel ein Gateway eingestellt ist, so wird über dieses Gateway nach außen gewählt. Wenn kein Gateway eingestellt ist so wird die Abarbeitung der Regeln beendet und der Rufaufbau abgebrochen. Auf diese Weise lassen sich verbotene Ziele definieren. Sollte keine der Regeln zutreffen so wird der Rufaufbau abgebrochen."
+    test:
+      form_head: "Simulierte Abarbeitung der ausgehenden Wähl-Routen:"
+      to_dest: "zu Ziel-Rufnummer"
+      as_sip_acct: "von SIP-Account"
+      as_sip_acct_none: "beliebig, nur Routen beachten die für alle gelten"
+      run: "Test"
+      route:
+        no_match_user: "Route trifft nicht auf den Benutzer des SIP-Accounts zu."
+        no_match_eac: "Rufnummer passt nicht zur Amtskennzahl (AKz)."
+        no_match_pattern: "Rufnummer passt nicht auf das Wähl-Muster."
+        no_match_unknown: "Rufnummer passt nicht zur Route."
+        no_match_no_route: "Keine Route trifft zu."
+        match_first: "Route trifft zu."
+        match_first_end: "Die Abarbeitung endet hier."
+        match_no_gateway: "Gateway: verboten."
+        match_dial: "Es wird „%{number}“ gewählt."
+        match_later: "Diese Route würde zutreffen, aber die Abarbeitung wurde bereits durch eine andere Route beendet."
   
   
   sip_gateway_was_created: "Gateway wurde angelegt."

@@ -1,7 +1,11 @@
 <%= simple_form_for( @dialplan_route ) do |f| %>
 	<%= f.error_messages %>
 	
-	<%= f.input :eac %>
+	<%= f.input :eac,
+		:input_html => {
+			:pattern => '[0-9*#]*',
+		}
+	%>
 	
 	<%= f.input :dialplan_pattern do %>
 		<%= f.select( :pattern_id,
@@ -9,7 +13,7 @@
 			{ :include_blank => true, :selected => @dialplan_route.pattern_id }
 		) %>
 		&nbsp;&nbsp;&nbsp;
-		<small><%= link_to t('dp_pattern.view.new'), new_dialplan_pattern_path %></small>
+		<small><%= link_to t('dp_pattern.view.new'), new_dialplan_pattern_path if can?(:new, DialplanPattern) %></small>
 	<% end %>
 	
 	<%= f.input :user do %>

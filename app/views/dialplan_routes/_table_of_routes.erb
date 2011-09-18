@@ -1,0 +1,162 @@
+<style type="text/css">
+	form.button_to { display: inline; }
+	form.button_to * { display: inline; }
+	.move_button {
+		margin: 0 1px;
+		vertical-align: middle;
+		text-align: center;
+		letter-spacing: -1px;
+	}
+	
+	tr.was_moved {
+		outline: 2px solid #aac;
+		outline-offset: 2px;
+		-moz-outline-radius: 5px;
+	}
+	
+	tr.test_route_winner {
+		outline: 3px solid #00f;
+		outline-offset: 1px;
+		-moz-outline-radius: 5px;
+	}
+	tr.test_route_winner td {
+		background: #ececff !important;
+	}
+	tr.test_route_no_winner {
+		opacity: 0.4;
+	}
+</style>
+
+
+<table align="center" style="width:95%;">
+	<tr>
+		<% i18n_path = 'activerecord.attributes.dialplan_route.' %>
+		<th><%= t( i18n_path + 'eac' ) %></th>
+		<th><%= t( i18n_path + 'pattern' ) %></th>
+		<th><%= t( i18n_path + 'user' ) %></th>
+		<th><%= t( i18n_path + 'sip_gateway' ) %></th>
+		<th><%= t( i18n_path + 'name' ) %></th>
+		
+		<% if ! @test_view %>
+		<th style="min-width:100pt;"></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<% else %>
+		<th style="width:35%;"></th>
+		<% end %>
+		
+	</tr>
+
+<% if @dialplan_routes.length == 0 %>
+	<tr>
+		<td colspan="9" style="text-align:center;">-- <i><%= t(:none) %></i> --</td>
+	</tr>
+<% end %>
+
+<%
+test_match_found = false
+%>
+
+<% @dialplan_routes.each do |route| %>
+	<%
+	test_match_result = {}
+	test_route_explanation = ''
+	test_is_first_match = false
+	
+	if @is_test_call
+		test_match_result = route.match( @test_call_dest, @test_call_sip_acct.try(:user).try(:id) )
+		
+		if ! test_match_result[:match]
+			test_route_explanation = case test_match_result[:reason]
+				when :user_mismatch    ; t('dp_route.test.route.no_match_user')
+				when :eac_mismatch     ; t('dp_route.test.route.no_match_eac')
+				when :pattern_mismatch ; t('dp_route.test.route.no_match_pattern')
+				when nil               ; t('dp_route.test.route.no_match_unknown')
+				else                   ; t('dp_route.test.route.no_match_unknown') +
+					" (#{test_match_result[:reason]})"
+			end
+		else
+			if test_match_found
+				test_route_explanation = t('dp_route.test.route.match_later')
+			else
+				test_match_found = true
+				test_is_first_match = true
+				phone_number = (test_match_result[:opts] || {})[:number].to_s
+				test_route_explanation = t('dp_route.test.route.match_first')
+				if ! route.sip_gateway
+					test_route_explanation+= ' ' + t('dp_route.test.route.match_no_gateway')
+				else
+					test_route_explanation+= ' '+ t('dp_route.test.route.match_dial', :number => phone_number)
+				end
+				test_route_explanation+= ' ' + t('dp_route.test.route.match_first_end')
+			end
+		end
+	end
+	
+	tr_classes = []
+	if params[:moved_id] && route.id == params[:moved_id].to_i
+		tr_classes << 'was_moved'
+	end
+	if @is_test_call
+		tr_classes << (test_is_first_match ? 'test_route_winner' : 'test_route_no_winner')
+	end
+	
+	%>
+	<tr class="<%= tr_classes.join(' ') %>">
+		<td><big><tt><%= route.eac %></tt></big></td>
+		<td><big><tt><%=
+			if ! @test_view
+				link_to( route.dialplan_pattern.try(:pattern),
+					route.dialplan_pattern,
+					:title => "\"#{route.dialplan_pattern.try(:name)}\""
+				)
+			else
+				route.dialplan_pattern.try(:pattern)
+			end
+		%></tt></big></td>
+		<td><%= route.user ? route.user.try(:to_display) : t('dp_route.all_users') %></td>
+		<td class="<%= route.sip_gateway ? 'status_yes' : 'status_no' %>"><%= route.sip_gateway ? route.sip_gateway.try(:hostport) : t('dp_route.no_gateway') %></td>
+		<td><%= route.name %></td>
+		
+		<%
+			if ! @test_view
+		%>
+		<td style="text-align:center;"><%=
+			button_to "\u{2191}\u{2191}",
+			move_to_top_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.first? }
+		%><%=
+			button_to "\u{2191}",
+			move_up_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.first? }
+		%><%=
+			button_to "\u{2193}",
+			move_down_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.last? }
+		%><%=
+			button_to "\u{2193}\u{2193}",
+			move_to_bottom_dialplan_route_path( route ),
+			{ :class => 'move_button', :disabled => route.last? }
+		%></td>
+		<td><%= link_to t(:show), route if can?(:show, route) %></td>
+		<td><%= link_to t(:edit), edit_dialplan_route_path( route ) if can?(:edit, route) %></td>
+		<td><%= button_to t(:destroy), route, :confirm => t(:are_you_sure), :method => :delete if can?(:destroy, route) %></td>
+		<%
+			else
+		%>
+		<td><%= test_route_explanation %></td>
+		<%
+			end
+		%>
+		
+	</tr>
+<% end %>
+	
+	<% if @is_test_call && ! test_match_found %>
+	<tr>
+		<td colspan="9" style="text-align:center;"><%= t('dp_route.test.route.no_match_no_route') %></td>
+	</tr>
+	<% end %>
+	
+</table>
