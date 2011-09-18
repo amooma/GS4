@@ -64,6 +64,10 @@ end
 #
 
 gem 'whenever', :require => false
+
+# Kminari (pagination)
+#
+gem 'kaminari'
 #group :development do
 #	# run ./script/annotate to annotate
 #	gem 'annotate-models'
