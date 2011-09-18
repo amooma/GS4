@@ -1,3 +1,4 @@
+# -*- mode:ruby -*-
 # locale for GS4 in English 
 
 en:
@@ -422,7 +423,7 @@ en:
   gateway: "Default gateway"
   name_server: "DNS server"
   dhcp_range_start: "First available DHCP address"
-  dhcp_range_end: "Last avalable DHCP address"
+  dhcp_range_end: "Last available DHCP address"
   dhcp_client: "Obtain IP address automatically"
   start_dhcp_server: "Start DHCP server"
   interface: "Network interface"

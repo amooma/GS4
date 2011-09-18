@@ -60,14 +60,15 @@ group :production do
 	gem 'syslogger', '~> 1.2'
 end
 
-# Whenever (cronjob for rails)
-#
 
-gem 'whenever', :require => false
 
 # Kminari (pagination)
 #
 gem 'kaminari'
+# Whenever (Cron jobs for Ruby):
+gem 'whenever', '~> 0.7.0', :require => false
+
+
 #group :development do
 #	# run ./script/annotate to annotate
 #	gem 'annotate-models'
