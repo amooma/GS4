@@ -185,4 +185,4 @@ DEPENDENCIES
   simple_form
   sqlite3-ruby
   syslogger (~> 1.2)
-  whenever
+  whenever (~> 0.7.0)

@@ -62,7 +62,7 @@ end
 
 
 # Whenever (Cron jobs for Ruby):
-gem 'whenever', :require => false
+gem 'whenever', '~> 0.7.0', :require => false
 
 
 #group :development do
