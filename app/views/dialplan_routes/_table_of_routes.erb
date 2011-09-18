@@ -28,6 +28,25 @@
 </style>
 
 
+<% if @is_test_call %>
+	<% if ! @is_extension %>
+		<p align="center"><%=
+			t('dp_route.test.route.is_not_internal', :extension => @test_call_dest)
+		%></p>
+	<% else %>
+		<div class="noticebox">
+			<p align="center"><big><b><%=
+				t('dp_route.test.route.is_internal0', :extension => @test_call_dest)
+			%></b></big><br /><b><%=
+				t('dp_route.test.route.is_internal1')
+			%></b><br /><b><%=
+				t('dp_route.test.route.is_internal2')
+			%></b></p>
+		</div>
+		<br />
+	<% end%>
+<% end %>
+
 <table align="center" style="width:95%;">
 	<tr>
 		<% i18n_path = 'activerecord.attributes.dialplan_route.' %>
