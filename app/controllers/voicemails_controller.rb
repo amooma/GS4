@@ -41,6 +41,7 @@ class VoicemailsController < ApplicationController
 		}
 		
 		if errors.count > 0
+			#FIXME Don't use flash message here. Flash messages are meant for redirects.
 			flash[:alert] = errors.join(" ")
 		end
 		
@@ -70,7 +71,7 @@ class VoicemailsController < ApplicationController
 			end
 			
 			if ! @voicemail
-				#OPTIMIZE Don't use flash message here. Flash messages are meant for redirects.
+				#FIXME Don't use flash message here. Flash messages are meant for redirects.
 				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)
 			end
 		end
