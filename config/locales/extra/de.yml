@@ -461,9 +461,10 @@ de:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
     home: "Home"
-    
     dp_patterns: "Wähl-Muster"
     dp_routes: "Ausgehende Routen"
+    routing: "Routing"
+    maintenance: "Wartung"
   
   
   dp_pattern:

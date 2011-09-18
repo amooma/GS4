@@ -461,9 +461,10 @@ en:
     #sip_gateways: "Gateways"
     sip_gateways: "Gateway"
     home: "Home"
-    
     dp_patterns: "Dialplan patterns"
     dp_routes: "Outbound routes"
+    routing: "Routing"
+    maintenance: "Maintenance"
   
   
   dp_pattern:
