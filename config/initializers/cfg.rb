@@ -59,13 +59,13 @@ module Cfg
 	# default value (if passed as an argument) as a boolean or nil.
 	#
 	# Comparison:
-	#   value = Configuration.get( :foo, false, Boolean )
+	#   value = Configuration.get( :foo, false, Configuration::Boolean )
 	#   vs.
 	#   value = !! ( Cfg.get(:foo) || false )
 	#   vs.
 	#   value = Cfg.bool( :foo, false )
 	#   resp.
-	#   value = Configuration.get( :foo, nil, Boolean )
+	#   value = Configuration.get( :foo, nil, Configuration::Boolean )
 	#   vs.
 	#   value = Cfg.bool( :foo )
 	#
