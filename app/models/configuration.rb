@@ -11,6 +11,9 @@ class Configuration < ActiveRecord::Base
 	
 	#OPTIMIZE Add do_not_delete flag to model, see db/seeds.rb
 	
+	# Note: Find some simplified wrappers around Configuration.get()
+	# in config/initializers/cfg.rb.
+	
 	#TODO Clean up this method so it becomes more readable. Reading entries should not store casted values.
 	def self.get( name, default_value = nil, cast_class = nil )
 		if (! @@conf.key?( name ))
