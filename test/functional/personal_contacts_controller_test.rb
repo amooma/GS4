@@ -13,6 +13,7 @@ class PersonalContactsControllerTest < ActionController::TestCase
     @admin_user = User.where( :username => an_admin_username ).first
     assert_not_nil( @admin_user, "This tests needs user #{an_admin_username.inspect}" )
     @personal_contact.user_id = @admin_user.id
+    
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
   end
