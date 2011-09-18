@@ -16,3 +16,9 @@ namespace :sysinfo do
     
   end
 end
+
+
+# Local Variables:
+# mode: ruby
+# End:
+
