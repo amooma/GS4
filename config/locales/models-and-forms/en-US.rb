@@ -735,7 +735,7 @@
 				:pattern  => "The pattern.",  #TODO
 			},
 			:dialplan_route => {
-				:eac                  => "External access code to be dialed by the users to get a (virtual) outside line. Example: “0”. The EAC prefix will automatically be cut off the dialed number. Leave empty in order to enable dialing without EAC.",
+				:eac                  => "External access code to be dialed by the users to get a (virtual) outside line. Usually “0”, resp. “1” in Northern America. The EAC prefix will automatically be cut off the dialed number. Leave empty in order to enable dialing without EAC.",
 				:dialplan_pattern     => "The pattern which the dialed number (the dial string, after the EAC prefix) will be matched against.",
 				:dialplan_pattern_id  => "The pattern ID.",
 				:pattern              => "The pattern which the dialed number (the dial string, after the EAC prefix) will be matched against.",

@@ -736,7 +736,7 @@
 				:pattern  => "Das Wähl-Muster.",  #TODO
 			},
 			:dialplan_route => {
-				:eac                  => "Amtskennziffer / Amtskennzahl die vom Anwender zur (virtuellen) Amtsholung gewählt werden muss. Beispiel: „0“. Das AKz-Präfix wird automatisch von der vom Benutzer gewählten Rufnummer abgeschnitten. Um das Wählen ohne AKz zu ermöglichen und direkt mit dem Wählmuster zu vergleichen lassen Sie die AKz leer.",
+				:eac                  => "Amtskennziffer / Amtskennzahl die vom Anwender zur (virtuellen) Amtsholung gewählt werden muss. Üblicherweise „0“, bzw. „1“ in Nord-Amerika. Das AKz-Präfix wird automatisch von der vom Benutzer gewählten Rufnummer abgeschnitten. Um das Wählen ohne AKz zu ermöglichen und direkt mit dem Wählmuster zu vergleichen lassen Sie die AKz leer.",
 				:dialplan_pattern     => "Das Wähl-Muster mit dem die vom Benutzer gewählte Ziffernfolge nach der AKz verglichen wird.",
 				:dialplan_pattern_id  => "Die ID des Wähl-Musters.",
 				:pattern              => "Das Wähl-Muster mit dem die vom Benutzer gewählte Ziffernfolge nach der AKz verglichen wird.",

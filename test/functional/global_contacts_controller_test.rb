@@ -12,6 +12,7 @@ class GlobalContactsControllerTest < ActionController::TestCase
     an_admin_username = 'admin1'
     @admin_user = User.where( :username => an_admin_username ).first
     assert_not_nil( @admin_user, "This tests needs user #{an_admin_username.inspect}" )
+    
     #@expected_http_status_if_not_allowed = 403
     @expected_http_status_if_not_allowed = 302
   end
@@ -36,7 +37,6 @@ class GlobalContactsControllerTest < ActionController::TestCase
     assert_difference('GlobalContact.count') do
       post :create, :global_contact => @global_contact.attributes
     end
-
     assert_redirected_to global_contact_path(assigns(:global_contact))
     sign_out @admin_user
   end
@@ -67,7 +67,6 @@ class GlobalContactsControllerTest < ActionController::TestCase
     assert_difference('GlobalContact.count', -1) do
       delete :destroy, :id => @global_contact.to_param
     end
-
     assert_redirected_to global_contacts_path
     sign_out @admin_user
   end

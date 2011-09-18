@@ -1,26 +1,15 @@
+<%= render 'admin/welcome' if Phone.count == 0 && User.count < 2 %>
 
 <div class="index_overview">
 	
 	<section>
 		<h2><%= t(:wizards) %></h2>
 		<ul>
-			<li><%= link_to( "#{t(:wizard_phone_and_user_new)}",
-				url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new', :with_user => true)
-			) %></li>
 			<li><%= link_to( "#{t(:wizard_phone_new)}",
 				url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new')
 			) %></li>
-		</ul>
-	</section>
-		
-	<section>
-		<h2><%= t(:maintenance) %></h2>
-		<ul>
-			<li><%= link_to( t(:shutdown),
-				url_for(:controller => '/admin', :action => 'confirm_shutdown')
-			) %></li>
-			<li><%= link_to( t(:reboot_system),
-				url_for(:controller => '/admin', :action => 'confirm_reboot')
+			<li><%= link_to( "#{t(:wizard_phone_and_user_new)}",
+				url_for(:controller => '/admin/wizard_phone_and_user', :action => 'new', :with_user => true)
 			) %></li>
 		</ul>
 	</section>

@@ -23,6 +23,32 @@ class DialplanRoutesController < ApplicationController
     end
   end
   
+  # GET  /dialplan_routes/test
+  # POST /dialplan_routes/test
+  def test
+    @dialplan_routes = DialplanRoute.order(:position).all
+    @sip_accounts = SipAccount.accessible_by( current_ability, :index ).all
+    @test_view = true
+    
+    @test_call_dest = (params[:test_call] || {})[:dest]
+    @test_call_dest = nil if @test_call_dest.blank?
+    if @test_call_dest
+      @is_test_call = true
+      @test_call_sip_acct_id = (params[:test_call] || {})[:sip_acct_id].to_i
+      @test_call_sip_acct = SipAccount.where(:id => @test_call_sip_acct_id).first
+      @is_extension = Extension.where(:active => true, :extension => @test_call_dest).count > 0
+    else
+      @is_test_call = false
+      @test_call_sip_acct_id = nil
+      @test_call_sip_acct = nil
+      @is_extension = false
+    end
+    
+    respond_to do |format|
+      format.html # test.html.erb
+    end
+  end
+  
   # GET /dialplan_routes/1
   # GET /dialplan_routes/1.xml
   def show
@@ -38,6 +64,7 @@ class DialplanRoutesController < ApplicationController
   # GET /dialplan_routes/new.xml
   def new
     @dialplan_route = DialplanRoute.new
+    @dialplan_route.eac = '0'  # most common external access code (EAC)
     
     respond_to do |format|
       format.html # new.html.erb

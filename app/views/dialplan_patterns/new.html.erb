@@ -3,7 +3,7 @@
 
 <%= render 'form' %>
 
-<%= link_to t(:Go_to_list), dialplan_patterns_path %>
+<%= link_to t(:Go_to_list), dialplan_patterns_path if can?(:index, DialplanPattern) %>
 
 
 <%= render 'help' %>

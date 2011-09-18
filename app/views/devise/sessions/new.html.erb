@@ -4,7 +4,7 @@
 <%= form_for( resource, :as => resource_name, :url => session_path(resource_name) ) do |f| %>
 	<p>
 		<%= f.label :username, t(:username) %><br />
-		<%= f.text_field :username %>
+		<%= f.text_field :username, :autofocus => (resource && resource.respond_to?(:username) && resource.username.blank?) %>
 	</p>
 	
 	<p>
