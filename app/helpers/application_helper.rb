@@ -37,7 +37,7 @@ module ApplicationHelper
 							{ :text => t('menu.dp_patterns') , :url => dialplan_patterns_path },
 						]}
 					
-					if Cfg.bool( :is_appliance, false )
+					if is_appliance
 					menu <<
 						{ :text => t('menu.maintenance'), :sub => [
 							{ :text => t(:shutdown)          , :url => admin_confirm_shutdown_path },
@@ -94,6 +94,10 @@ module ApplicationHelper
 	
 	def page_title( page_title )
 		content_for(:page_title) { page_title }
+	end
+	
+	def is_appliance
+		return Cfg.bool( :is_appliance, false )
 	end
 	
 	# This version of +link_to+ makes sure that in the local kiosk
