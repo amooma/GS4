@@ -7,7 +7,11 @@
 	<%= t('dp_route.test.form_head') %><br />
 	<br />
 	
-	<%= f.input :sip_acct, :label => t('dp_route.test.as_sip_acct'), :hint => false, :required => false do %>
+	<%= f.input :sip_acct, {
+		:label => t('dp_route.test.as_sip_acct'),
+		:hint => false,
+		:required => false,
+	} do %>
 		<%= f.select( :sip_acct_id,
 			[
 				[ "-- (#{t('dp_route.test.as_sip_acct_none')})", '' ],
@@ -18,7 +22,13 @@
 		) %>
 	<% end %>
 	
-	<%= f.input :dest, :as => :string, :label => t('dp_route.test.to_dest'), :hint => false, :required => true, :input_html => { :value => @test_call_dest.to_s } %>
+	<%= f.input :dest, {
+		:as => :string,
+		:label => t('dp_route.test.to_dest'),
+		:hint => false,
+		:required => true,
+		:input_html => { :value => @test_call_dest.to_s },
+	} %>
 	
 	<%= f.button :submit, t('dp_route.test.run') %>
 <% end %>
