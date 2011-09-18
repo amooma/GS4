@@ -575,5 +575,5 @@ de:
   destination_number: "Ziel-Rufnummer"
   start_stamp: "Anruf-Beginn"
   duration: "Anruf-Dauer"
-  hangup_cause: "Auflege-Grund"
+  hangup_cause: "Auslösegrund (hangup cause)"
   
