@@ -451,9 +451,8 @@ xml.document( :type => 'freeswitch/xml' ) {
 		
 		xml.configuration( :name => 'cdr_sqlite.conf', :description => 'CDR SQLITE' ) {
 			xml.settings {
-				xml.param( :name => 'db-path', :value => "/opt/gemeinschaft/db" )
-				xml.param( :name => 'db-name', :value => "#{ Rails::env.downcase}" )
-				xml.param( :name => 'table-name', :value => "cdrs" )
+				xml.param( :name => 'db-name', :value => "/opt/gemeinschaft/db/#{ Rails::env.downcase}.db" )
+				xml.param( :name => 'db-table', :value => "cdrs" )
 				xml.param( :name => 'chanvars_fixed', :value => "foo=1" )
 				xml.param( :name => 'chanvars_supp', :value => "bar,sip_from_host" )
 				xml.param( :name => 'chanvars_supp_repeat_fixed', :value => "y" )
@@ -466,7 +465,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				# This is just avoid Builder's strange syntax where attributes are specified after the text content.
 				{
 					:'sql'       => "INSERT INTO cdrs VALUES ( '${sql_escape(${caller_id_name})}', '${sql_escape(${caller_id_number})}', '${sql_escape(${destination_number})}', '${sql_escape(${context})}', '${sql_escape(${start_stamp})}', '${sql_escape(${answer_stamp})}', '${sql_escape(${end_stamp})}', '${sql_escape(${duration})}', '${sql_escape(${billsec})}', '${sql_escape(${hangup_cause})}', '${sql_escape(${uuid})}', '${sql_escape(${bleg_uuid})}', '${sql_escape(${accountcode})}', '', '' );",
-					:'example'   => '"${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}","${accountcode}"',
+					:'example'   => '"${caller_id_name}","${caller_id_number}","${destination_number}","${context}","${start_stamp}","${answer_stamp}","${end_stamp}","${duration}","${billsec}","${hangup_cause}","${uuid}","${bleg_uuid}","${accountcode}","",""',
 				}.
 				each { | name, content |
 					xml.template( content.to_s, :name => name.to_s )
