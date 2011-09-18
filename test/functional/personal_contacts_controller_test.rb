@@ -38,7 +38,6 @@ class PersonalContactsControllerTest < ActionController::TestCase
     assert_difference('PersonalContact.count') do
       post :create, :personal_contact => @personal_contact.attributes
     end
-
     assert_redirected_to personal_contact_path(assigns(:personal_contact))
     sign_out @admin_user
   end
@@ -69,7 +68,6 @@ class PersonalContactsControllerTest < ActionController::TestCase
     assert_difference('PersonalContact.count', -1) do
       delete :destroy, :id => @personal_contact.to_param
     end
-
     assert_redirected_to personal_contacts_path
     sign_out @admin_user
   end
