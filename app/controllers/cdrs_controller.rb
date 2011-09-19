@@ -6,7 +6,7 @@ class CdrsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @cdrs = Cdr.accessible_by( current_ability, :index ).order(:start_stamp).page( params[:page] ).per(20)
+    @cdrs = Cdr.accessible_by( current_ability, :index ).order('start_stamp DESC').page( params[:page] ).per(20)
   end
   
 end
