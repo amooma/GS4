@@ -585,3 +585,22 @@ en:
   start_stamp: "Call start"
   call_duration: "Duration"
   hangup_cause: "Hangup cause"
+
+  mail_configuration: "Mail configuration"
+  email_smarthost: "Outgoing mail (smarthost)"
+  fax_send_mail: "Fax to e-mail"
+  fax_pop3: "E-mail to fax"
+  smarthost:
+    hostname: "Hostname"
+    port: "Port"
+    domain: "Domain"
+    username: "User"
+    password: "Password"
+    from_address: "From address"
+  email_pop3: "Incoming mail (POP3)"
+  mailserver:
+    hostname: "Hostname"
+    port: "Port"
+    username: "Username"
+    password: "Password"
+    
