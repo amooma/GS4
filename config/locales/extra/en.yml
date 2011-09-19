@@ -25,6 +25,7 @@ en:
       first: "&lt;&lt; First"
       next: "Next &gt;"
       last: "Last &gt;&gt;"
+      truncate: "..."
   
   show: "Show"
   back: "Back"
