@@ -69,8 +69,10 @@ class FaxDocument < ActiveRecord::Base
 		end
 	end
 	
-	def to_raw
-		if (@upload && ! @upload.tempfile.path.blank?)
+	def to_raw(filename = nil, original_filename = 'fax.pdf')
+		if (! filename.blank?)
+			input_file = File.expand_path( filename )
+		elsif (@upload && ! @upload.tempfile.path.blank?)
 			input_file = @upload.tempfile.path()
 			original_filename = @upload.original_filename
 		elsif (! self.file.blank?)
