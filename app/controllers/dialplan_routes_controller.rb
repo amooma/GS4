@@ -6,7 +6,9 @@ class DialplanRoutesController < ApplicationController
   load_and_authorize_resource
   
   before_filter { |controller|
-    @dp_patterns   = DialplanPattern .accessible_by( current_ability, :index ).order([ :pattern ])
+    @dp_patterns_by_pattern   = DialplanPattern .accessible_by( current_ability, :index ).order([ :pattern ])
+    @dp_patterns_by_name      = DialplanPattern .accessible_by( current_ability, :index ).order([ :name ])
+    @dp_patterns              = @dp_patterns_by_pattern
     @users         = User            .accessible_by( current_ability, :index ).order([ :sn, :gn, :username ]).keep_if{ |u| Ability.new(u).can?(:have, SipAccount) }
     @sip_gws       = SipGateway      .accessible_by( current_ability, :index ).order([ :host, :port ])
   }

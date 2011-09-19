@@ -8,13 +8,27 @@
 	%>
 	
 	<%= f.input :dialplan_pattern do %>
-		<%= f.select( :pattern_id,
-			@dp_patterns.collect {|r| [ "#{r.pattern} \u{00A0}\u{00A0}--\u{00A0} #{r.name}", r.id ] },
+		<%= f.select( :pattern_id, (
+				@dp_patterns_by_name    .collect {|r| [ "#{r.name} \u{00A0}\u{00A0}--\u{00A0} #{r.pattern}", r.id ] }
+			),
 			{ :include_blank => true, :selected => @dialplan_route.pattern_id }
 		) %>
 		&nbsp;&nbsp;&nbsp;
 		<small><%= link_to t('dp_pattern.view.new'), new_dialplan_pattern_path if can?(:new, DialplanPattern) %></small>
 	<% end %>
+	
+<%#	<%= f.input :dialplan_pattern do %>
+<%#		<%= select_tag 'dialplan_route[pattern_id]',
+<%#			grouped_options_for_select([
+<%#				[ t('dp_route.patterns_sorted_by_pattern'),
+<%#					@dp_patterns_by_pattern .collect {|r| [ "#{r.pattern} \u{00A0}\u{00A0}--\u{00A0} #{r.name}", r.id ] }
+<%#				],
+<%#				[ t('dp_route.patterns_sorted_by_name'),
+<%#					@dp_patterns_by_name    .collect {|r| [ "#{r.name} \u{00A0}--\u{00A0}\u{00A0} #{r.pattern}", r.id ] }
+<%#				]
+<%#			])
+<%#		%>
+<%#	<% end %>
 	
 	<%= f.input :user do %>
 		<%= f.select( :user_id,

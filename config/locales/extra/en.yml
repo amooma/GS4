@@ -498,6 +498,8 @@ en:
       edit: "Editing outbound dialplan route"
       show: "Outbound dialplan route"
       test: "Test dialplan routes"
+    patterns_sorted_by_pattern : "Sorted by pattern"
+    patterns_sorted_by_name    : "Sorted by description"
     all_users: "(all)"
     no_gateway: "(forbidden)"
     explanations:

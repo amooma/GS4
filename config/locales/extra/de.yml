@@ -498,6 +498,8 @@ de:
       edit: "Ausgehende Wähl-Route bearbeiten"
       show: "Ausgehende Wähl-Route"
       test: "Teste ausgehende Wähl-Routen"
+    patterns_sorted_by_pattern : "Sortiert nach Wähl-Muster"
+    patterns_sorted_by_name    : "Sortiert nach Bezeichnung"
     all_users: "(alle)"
     no_gateway: "(verboten)"
     explanations:
