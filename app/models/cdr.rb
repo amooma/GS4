@@ -29,7 +29,7 @@ class Cdr < ActiveRecord::Base
 			when :SUBSCRIBER_ABSENT ; [ 20, "Subscriber absent" ]
 			when :CALL_REJECTED ; [ 21, "Call rejected" ]
 			when :NUMBER_CHANGED ; [ 22, "Number changed" ]
-			when :REDIRECTION_TO_NEW_DESTINATION ; [ 23, "Redirected" ]
+			when :REDIRECTION_TO_NEW_DESTINATION ; [ 23, "Exchange redirected" ]
 			when :EXCHANGE_ROUTING_ERROR ; [ 25, "Exchange routing error" ]
 			when :DESTINATION_OUT_OF_ORDER ; [ 27, "Destination out of order" ]
 			when :INVALID_NUMBER_FORMAT ; [ 28, "Invalid number format / address incomplete" ]
