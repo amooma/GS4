@@ -571,6 +571,8 @@ de:
   phone_set_config_url: "Nach dem Zurücksetzen auf die Werkseinstellungen folgende Setting-URL auf dem Telefon konfigurieren:"
   phone_manual: "Online-Handbuch zum %{phone_model}"
   
+  default_caller_name: "Nebenstelle"
+  
   cdrs: "Einzel-Verbindungen"
   listing_cdrs: "Einzel-Verbindungen"
   caller_id_name: "Anrufer-Name"
