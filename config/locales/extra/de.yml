@@ -586,17 +586,18 @@ de:
   call_duration: "Anruf-Dauer"
   hangup_cause: "Auslösegrund (hangup cause)"
   
-  mail_configuration: "eMail Konfiguration"
-  email_smarthost: "Ausgehende eMail (Smarthost)"
-  fax_send_mail: "Fax-Dokumente per eMail versenden"
-  fax_pop3: "Fax-Dokumente von eMail-Konto beziehen"
+  mail_configuration: "E-Mail Konfiguration"
+  email_smarthost: "Ausgehende E-Mail (Smarthost)"
+  fax_send_mail: "Fax-Dokumente per E-Mail versenden"
+  fax_pop3: "Fax-Dokumente von E-Mail-Konto beziehen"
   smarthost:
     hostname: "Hostname"
     port: "Port"
     domain: "Domäne"
     username: "Benutzername"
     password: "Passwort"
-  email_pop3: "Eingehende eMail (POP3)"
+    from_address: "Absender-Adresse"
+  email_pop3: "Eingehende E-Mail (POP3)"
   mailserver:
     hostname: "Hostname"
     port: "Port"

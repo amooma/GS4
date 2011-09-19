@@ -10,6 +10,7 @@ class Admin::MailConfigurationController < ApplicationController
 		@smarthost_domain                = Configuration.get( :smarthost_domain, 'gemeinschaft.local' )
 		@smarthost_username              = Configuration.get( :smarthost_username, '' )
 		@smarthost_password              = Configuration.get( :smarthost_password, '' )
+		@smarthost_from_address          = Configuration.get( :smarthost_from_address, '' )
 		@smarthost_authentication        = Configuration.get( :smarthost_authentication, 'plain' )
 		@smarthost_enable_starttls_auto  = Configuration.get( :smarthost_enable_starttls_auto, true, Configuration::Boolean )
 		

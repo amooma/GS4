@@ -596,6 +596,7 @@ en:
     domain: "Domain"
     username: "User"
     password: "Password"
+    from_address: "From address"
   email_pop3: "Incoming mail (POP3)"
   mailserver:
     hostname: "Hostname"

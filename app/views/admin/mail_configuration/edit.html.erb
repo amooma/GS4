@@ -59,6 +59,15 @@
 		:input_html => { :value => @smarthost_password.to_s },
 	} %>
 	
+	<%= f.input :smarthost_from_address, {
+		:as => :string,
+		:label => t('smarthost.from_address'),
+		:hint => false,
+		:required => false,
+		:autofocus => @smarthost_from_address.to_s.blank?,
+		:input_html => { :value => @smarthost_from_address.to_s },
+	} %>
+	
 	<%= t('email_pop3') %><br />
 	<br />
 	
