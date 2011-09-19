@@ -2,6 +2,18 @@ class Cdr < ActiveRecord::Base
 	self.primary_key = 'uuid'
 	
 	
+	def find_b_leg_cdr
+		return self.bleg_uuid ?
+			Cdr.where( :uuid => self.bleg_uuid ).first :
+			nil
+	end
+	
+	def find_a_leg_cdr
+		return self.uuid ?
+			Cdr.where( :bleg_uuid => self.uuid ).first :
+			nil
+	end
+	
 	def cause_verbose
 		(code, text) = case self.hangup_cause.to_s.to_sym
 			when :UNSPECIFIED ; [ 0, "Unspecified" ]
