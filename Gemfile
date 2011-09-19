@@ -60,11 +60,9 @@ group :production do
 	gem 'syslogger', '~> 1.2'
 end
 
-
-
-# Kminari (pagination)
-#
+# Kaminari (pagination)
 gem 'kaminari'
+
 # Whenever (Cron jobs for Ruby):
 gem 'whenever', '~> 0.7.0', :require => false
 
