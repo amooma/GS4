@@ -9,7 +9,7 @@
 	
 	<%= f.input :dialplan_pattern do %>
 		<%= f.select( :pattern_id,
-			@dp_patterns.collect {|r| [ "#{r.pattern} -- #{r.name}", r.id ] },
+			@dp_patterns.collect {|r| [ "#{r.pattern} \u{00A0}\u{00A0}--\u{00A0} #{r.name}", r.id ] },
 			{ :include_blank => true, :selected => @dialplan_route.pattern_id }
 		) %>
 		&nbsp;&nbsp;&nbsp;
