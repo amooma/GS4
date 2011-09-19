@@ -7,6 +7,12 @@ en:
       default: "%Y-%m-%d"
       short: "%e %b"
       long: "%B %e, %Y"
+  views:
+    pagination:  
+      previous: "&lt; Previous"
+      first: "&lt;&lt; First"
+      next: "Next &gt;"
+      last: "Last &gt;&gt;"
 
   time:
     formats:
@@ -567,3 +573,12 @@ en:
   phone_manual: "Online manual for the %{phone_model}"
   
   default_caller_name: "Extension"
+
+  cdrs: "Call detail records"
+  listing_cdrs: "Call detail records"
+  caller_id_name: "Caller name"
+  caller_id_number: "Caller number"
+  destination_number: "Destination number"
+  start_stamp: "Call start"
+  duration: "Duration"
+  hangup_cause: "Hangup cause"

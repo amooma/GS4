@@ -61,6 +61,10 @@ group :production do
 end
 
 
+
+# Kminari (pagination)
+#
+gem 'kaminari'
 # Whenever (Cron jobs for Ruby):
 gem 'whenever', '~> 0.7.0', :require => false
 

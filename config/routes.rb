@@ -88,7 +88,7 @@ Gemeinschaft4::Application.routes.draw do
 	end
 	
 	resources :admin                , :only => [ :index ]
-	
+	resources :cdrs									, :only => [ :index ]
 	resources :kamailio             , :only => [ :index ], :format => 'txt'  #OPTIMIZE Is this route being used?
 	
 	match '/admin/help',

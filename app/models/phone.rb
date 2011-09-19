@@ -21,7 +21,7 @@ class Phone < ActiveRecord::Base
 	after_validation :save_old_last_ip_address
 	
 	
-	has_many    :sip_accounts, :order => 'position', :dependent => :destroy
+	has_many    :sip_accounts, :order => 'position'
 	
 	has_many    :phone_keys, :through => :sip_accounts
 	
