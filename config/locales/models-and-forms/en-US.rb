@@ -49,6 +49,7 @@
 			:user_to_extension             => "User to extension",
 			:dialplan_pattern              => "Dialplan pattern",
 			:dialplan_route                => "Dialplan route",
+			:cdr                           => "Call detail record",
 			
 		},
 		
@@ -397,6 +398,21 @@
 				:sip_gateway_id       => "Gateway ID",
 				:name                 => "Description",
 				:position             => "Position",
+			},
+			:cdr => {
+				:caller_id_name      => "Caller name",
+				:caller_id_number    => "Caller number",
+				:destination_number  => "Destination number",
+				:context             => "Context",
+				:start_stamp         => "Call start",
+				:answer_stamp        => "Answer time",
+				:end_stamp           => "Call end",
+				:duration            => "Duration",
+				:billsec             => "Seconds",
+				:hangup_cause        => "Hangup cause",
+				:uuid                => "UUID",
+				:bleg_uuid           => "UUID B",
+				:account_code        => "Account code",
 			},
 			
 		},
@@ -747,6 +763,8 @@
 				:name                 => "Description text",
 				:position             => "Order",
 			},
+			:cdr => {
+			}
 			
 		},
 	},
