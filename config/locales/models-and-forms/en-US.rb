@@ -409,7 +409,7 @@
 				:end_stamp           => "Call end",
 				:duration            => "Duration (call)",
 				:billsec             => "Bill. duration",
-				:hangup_cause        => "Hangup cause",
+				:hangup_cause        => "Q.850 hangup cause",
 				:uuid                => "UUID",
 				:bleg_uuid           => "UUID B",
 				:account_code        => "Account",

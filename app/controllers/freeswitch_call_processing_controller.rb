@@ -198,6 +198,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		############################################################
 		
 		src_sip_account = nil   # the src. SipAccount (if any)
+		src_user        = nil   # the src. User (if any)
 		
 	#	dst_type        = nil   # the dst. type
 		dst_sip_account = nil   # the dst. SipAccount (if any)
@@ -503,27 +504,66 @@ class FreeswitchCallProcessingController < ApplicationController
 					else (
 						logger.info(_bold( "#{logpfx} Extension <#{ enc_sip_user( arg_dst_sip_user_real ) }> not found. Calling outbound ..." ))
 						action :export    , "sip_contact_user=ufs"
-						sip_gateway = SipGateway.first  #OPTIMIZE
-						if ! sip_gateway; (
-							logger.info(_bold( "#{logpfx} No gateways." ))
-							
-						)
-						else (
-							sip_gateway_name = "gateway-#{sip_gateway.id}"
-							logger.info(_bold( "#{logpfx} Calling via gateway #{sip_gateway.hostport.inspect} (#{sip_gateway_name}) ..." ))
-							
-							action_set_ringback()
-							action :bridge,
-								#"{sip_network_destination=sip:#{enc_sip_user( arg_dst_sip_user_real )}@127.0.0.1:5060}" <<
-								"{sip_route_uri=sip:127.0.0.1:5060}" <<
-								"{sip_invite_req_uri=sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }}" <<  # Request-URI
-								"{sip_invite_to_uri=<sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }>}" <<  # To-URI
-								"sofia/gateway/#{sip_gateway_name}/" <<
-								"#{enc_sip_user( arg_dst_sip_user_real )}" <<
-								";fs_path=sip:127.0.0.1:5060"
-							
-							after_bridge_actions()
-						) end
+						
+						# Get applicable outbound routes, i.e. the ones that are
+						# independent of a user and the ones that apply to the
+						# user (if any) of the current SIP account (src_sip_account).
+						
+						src_user = src_sip_account.user if src_sip_account
+						
+						if src_user
+							logger.debug( "#{logpfx} Fetching routes that apply to any account or user #{src_user.username.inspect}  ..." )
+							routes = DialplanRoute.where(
+								DialplanRoute.arel_table[:user_id].eq( nil ) .or \
+								DialplanRoute.arel_table[:user_id].eq( src_user.id   )
+							).order( DialplanRoute.arel_table[:position] )
+						else
+							logger.debug( "#{logpfx} Fetching routes that apply to any account  ..." )
+							routes = DialplanRoute.where(
+								DialplanRoute.arel_table[:user_id].eq( nil )
+							).order( DialplanRoute.arel_table[:position] )
+						end
+						logger.debug( "#{logpfx} Got #{routes.length} route(s) that might apply." )
+						logger.debug( "#{logpfx} Destination: #{arg_dst_sip_user_real.inspect}" )
+						routes.each { |route|
+							begin
+								match_result = route.match( arg_dst_sip_user_real.to_s, src_user.try(:id) ) || {}
+							rescue => e
+								match_result = {}
+								logger.error(_bold( "#{logpfx} Error: #{e.message} (#{e.class.name})" ))
+							end
+							logger.debug( "#{logpfx} Route #{route.eac}|#{route.dialplan_pattern.try(:pattern)} (#{route.name.inspect}) => Match: #{match_result[:match].inspect}" + (match_result[:match] ? '' : ", reason: #{match_result[:reason].to_s.inspect}") )
+							if match_result[:match]
+								if ! route.sip_gateway
+									logger.info(_bold( "#{logpfx} Route says: forbidden." ))
+									action :respond, "403 Forbidden"
+									action :hangup
+									return
+								end
+								
+								phone_number = (match_result[:opts] || {})[:number].to_s
+								sip_gateway_name = "gateway-#{sip_gateway.try(:id)}"
+								logger.info(_bold( "#{logpfx} Calling #{phone_number.inspect} via gateway #{sip_gateway.try(:hostport).inspect} (#{sip_gateway_name}) ..." ))
+								
+								action_set_ringback()
+								action :bridge,
+									#"{sip_network_destination=sip:#{enc_sip_user( arg_dst_sip_user_real )}@127.0.0.1:5060}" <<
+									"{sip_route_uri=sip:127.0.0.1:5060}" <<
+									"{sip_invite_req_uri=sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }}" <<  # Request-URI
+									"{sip_invite_to_uri=<sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }>}" <<  # To-URI
+									"sofia/gateway/#{sip_gateway_name}/" <<
+									"#{enc_sip_user( arg_dst_sip_user_real )}" <<
+									";fs_path=sip:127.0.0.1:5060"
+								
+								after_bridge_actions()
+								#action :hangup
+								return
+							end
+						}
+						logger.info(_bold( "#{logpfx} No matching route found." ))
+						action :respond, "403 Forbidden"
+						action :hangup
+						return
 						
 					) end
 					
