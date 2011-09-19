@@ -410,7 +410,7 @@
 				:end_stamp           => "Anruf-Ende",
 				:duration            => "Dauer (Anruf)",
 				:billsec             => "Dauer (Verb.)",
-				:hangup_cause        => "Auslösegrund (hangup cause)",
+				:hangup_cause        => "Auslösegrund (Q.850 hangup cause)",
 				:uuid                => "UUID",
 				:bleg_uuid           => "UUID B",
 				:account_code        => "Account",
