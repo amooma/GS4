@@ -11,6 +11,7 @@
     <th><%= t( i18n_path + 'caller_id_number' ) %></th>
     <th><%= t( i18n_path + 'destination_number' ) %></th>
     <th><%= t( i18n_path + 'duration' ) %></th>
+    <th><%= t( i18n_path + 'billsec' ) %></th>
     <th><%= t( i18n_path + 'hangup_cause' ) %></th>
  </tr>
 
@@ -27,6 +28,7 @@
       end
     %></td>
     <td style="text-align:right;"><%= cdr.duration %> s</td>
+    <td style="text-align:right;"><%= cdr.billsec %> s</td>
     <td><%= cdr.hangup_cause %></td>
   </tr>
 <% end %>
