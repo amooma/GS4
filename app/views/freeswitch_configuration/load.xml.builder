@@ -474,7 +474,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 							'"${sql_escape(${end_stamp})}"',
 							'"${sql_escape(${duration})}"',
 							'"${sql_escape(${billsec})}"',
-							'"${sql_escape(${hangup_cause})}"',
+							'"${sql_escape(${hangup_cause})}"',  #OPTIMIZE Store ${hangup_cause_q850} instead?
 							'"${sql_escape(${uuid})}"',
 							'"${sql_escape(${bleg_uuid})}"',
 							'"${sql_escape(${accountcode})}"',
