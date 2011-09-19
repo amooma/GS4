@@ -63,8 +63,8 @@ class Ability
         end
         cannot :manage  , CallLog
         cannot :manage  , Cdr
-        can    :read    , CallLog   #FIXME Only for testing
-        can    :read    , Cdr       #FIXME Only for testing
+        #can    :read    , CallLog   # Do not enable except for testing.
+        #can    :read    , Cdr       # Do not enable except for testing.
         cannot :update  , FaxDocument
         cannot :manage  , Authentication
         cannot :manage  , Manufacturer
