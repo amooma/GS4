@@ -408,7 +408,7 @@
 				:answer_stamp        => "Answer time",
 				:end_stamp           => "Call end",
 				:duration            => "Duration",
-				:billsec             => "Seconds",
+				:billsec             => "Bill. duration",
 				:hangup_cause        => "Hangup cause",
 				:uuid                => "UUID",
 				:bleg_uuid           => "UUID B",
