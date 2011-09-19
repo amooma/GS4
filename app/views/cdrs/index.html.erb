@@ -17,8 +17,8 @@
 <% @cdrs.each do |cdr| %>
   <tr>
     <td><%= cdr.caller_id_name %></td>
-    <td><tt><%= cdr.caller_id_number %></tt></td>
-    <td><tt><%= cdr.destination_number %></tt></td>
+    <td><%= cdr.caller_id_number %></td>
+    <td><%= cdr.destination_number %></td>
     <td><%= cdr.start_stamp %></td>
     <td style="text-align:right;"><%= cdr.duration %> s</td>
     <td><%= cdr.hangup_cause %></td>
