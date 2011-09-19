@@ -17,7 +17,7 @@
 
 <% @cdrs.each do |cdr| %>
 	<tr>
-		<td><%= cdr.start_stamp %></td>
+		<td><%= cdr.start_stamp.to_s.gsub( / UTC$/, '' ) %></td>
 		<td><%= cdr.caller_id_name %></td>
 		<td><b><%= cdr.caller_id_number %></b></td>
 		<td><%
