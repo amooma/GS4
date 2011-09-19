@@ -6,8 +6,7 @@ class CdrsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @cdrs = Cdr.order(:start_stamp).page(params[:page]).per(2)
-    #FIXME .per(2) only for Testing
+    @cdrs = Cdr.order(:start_stamp).page(params[:page]).per(20)
   end
   
 end
