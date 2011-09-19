@@ -2,7 +2,7 @@
 	<%= f.error_messages %>
 	
 	<%= f.input :name %>
-	<%= f.input :uuid %>
+	<%= f.input :uuid, :as => :hidden %>
 	
 	<%= f.button :submit %>
 <% end %>
