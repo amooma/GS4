@@ -453,10 +453,10 @@ xml.document( :type => 'freeswitch/xml' ) {
 			xml.settings {
 				xml.param( :name => 'db-name', :value => "/opt/gemeinschaft/db/#{ Rails::env.downcase}.db" )
 				xml.param( :name => 'db-table', :value => "cdrs" )
-				xml.param( :name => 'chanvars_fixed', :value => "foo=1" )
-				xml.param( :name => 'chanvars_supp', :value => "bar,sip_from_host" )
+				xml.param( :name => 'chanvars_fixed', :value => "foo=1" )  #OPTIMIZE Add explanation.
+				xml.param( :name => 'chanvars_supp', :value => "bar,sip_from_host" )  #OPTIMIZE Add explanation.
 				xml.param( :name => 'chanvars_supp_repeat_fixed', :value => "y" )
-				xml.param( :name => 'timezone', :value => "utc" )
+				xml.param( :name => 'timezone', :value => "utc" )  #FIXME Doesn't seem to work.
 				xml.param( :name => 'default-template', :value => "gs" )
 				xml.param( :name => 'legs', :value => "ab" )
 			}
