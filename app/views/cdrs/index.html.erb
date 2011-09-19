@@ -4,32 +4,32 @@
 <br />
 
 <table>
-  <tr>
-    <% i18n_path = 'activerecord.attributes.cdr.' %>
-    <th><%= t( i18n_path + 'start_stamp' ) %> &nbsp;&uarr;</th>
-    <th><%= t( i18n_path + 'caller_id_name' ) %></th>
-    <th><%= t( i18n_path + 'caller_id_number' ) %></th>
-    <th><%= t( i18n_path + 'destination_number' ) %></th>
-    <th><%= t( i18n_path + 'duration' ) %></th>
-    <th><%= t( i18n_path + 'billsec' ) %></th>
-    <th><%= t( i18n_path + 'hangup_cause' ) %></th>
- </tr>
+	<tr>
+		<% i18n_path = 'activerecord.attributes.cdr.' %>
+		<th><%= t( i18n_path + 'start_stamp' ) %> &nbsp;&uarr;</th>
+		<th><%= t( i18n_path + 'caller_id_name' ) %></th>
+		<th><%= t( i18n_path + 'caller_id_number' ) %></th>
+		<th><%= t( i18n_path + 'destination_number' ) %></th>
+		<th><%= t( i18n_path + 'duration' ) %></th>
+		<th><%= t( i18n_path + 'billsec' ) %></th>
+		<th><%= t( i18n_path + 'hangup_cause' ) %></th>
+	</tr>
 
 <% @cdrs.each do |cdr| %>
-  <tr>
-    <td><%= cdr.start_stamp %></td>
-    <td><%= cdr.caller_id_name %></td>
-    <td><b><%= cdr.caller_id_number %></b></td>
-    <td><%
-      if cdr.destination_number && cdr.destination_number.to_s.match( /^-kambridge-/ )
-        %><b><%= cdr.destination_number.to_s.gsub( /^-kambridge-/, '' ) %></b><%
-      else
-        %><%= cdr.destination_number %><%
-      end
-    %></td>
-    <td style="text-align:right;"><%= cdr.duration %> s</td>
-    <td style="text-align:right;"><%= cdr.billsec %> s</td>
-    <td><%= cdr.cause_verbose %></td>
-  </tr>
+	<tr>
+		<td><%= cdr.start_stamp %></td>
+		<td><%= cdr.caller_id_name %></td>
+		<td><b><%= cdr.caller_id_number %></b></td>
+		<td><%
+			if cdr.destination_number && cdr.destination_number.to_s.match( /^-kambridge-/ )
+			%><b><%= cdr.destination_number.to_s.gsub( /^-kambridge-/, '' ) %></b><%
+			else
+			%><%= cdr.destination_number %><%
+			end
+		%></td>
+		<td style="text-align:right;"><%= cdr.duration %> s</td>
+		<td style="text-align:right;"><%= cdr.billsec %> s</td>
+		<td><%= cdr.cause_verbose %></td>
+	</tr>
 <% end %>
 </table>
