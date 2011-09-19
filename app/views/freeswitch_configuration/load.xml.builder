@@ -467,7 +467,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					:'gs' => [
 							'"${sql_escape(${caller_id_name})}"',
 							'"${sql_escape(${caller_id_number})}"',
-							'"${sql_escape(${destination_number})}"',
+							'"${sql_escape(${destination_number})}"',  #OPTIMIZE Store ${ani} or ${sip_to_user} in a separate column.
 							'"${sql_escape(${context})}"',
 							'"${sql_escape(${start_stamp})}"',
 							'"${sql_escape(${answer_stamp})}"',
