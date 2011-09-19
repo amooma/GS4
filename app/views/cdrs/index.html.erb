@@ -1,25 +1,27 @@
 <% page_title t(:listing_cdrs) %>
 <h1><%= t(:listing_cdrs) %></h1>
 <%= paginate @cdrs %>
+<br />
 
 <table>
   <tr>
-    <th><%= t(:caller_id_name) %></th>
-    <th><%= t(:caller_id_number) %></th>
-    <th><%= t(:destination_number) %></th>
-    <th><%= t(:start_stamp) %></th>
-    <th><%= t(:call_duration) %></th>
-    <th><%= t(:hangup_cause) %></th>
+    <% i18n_path = 'activerecord.attributes.cdr.' %>
+    <th><%= t( i18n_path + 'caller_id_name' ) %></th>
+    <th><%= t( i18n_path + 'caller_id_number' ) %></th>
+    <th><%= t( i18n_path + 'destination_number' ) %></th>
+    <th><%= t( i18n_path + 'start_stamp' ) %></th>
+    <th><%= t( i18n_path + 'duration' ) %></th>
+    <th><%= t( i18n_path + 'hangup_cause' ) %></th>
  </tr>
 
-  <% @cdrs.each do |cdr| %>
+<% @cdrs.each do |cdr| %>
   <tr>
     <td><%= cdr.caller_id_name %></td>
-    <td><%= cdr.caller_id_number %></td>
-    <td><%= cdr.destination_number %></td>
+    <td><tt><%= cdr.caller_id_number %></tt></td>
+    <td><tt><%= cdr.destination_number %></tt></td>
     <td><%= cdr.start_stamp %></td>
-    <td><%= cdr.duration %></td>
+    <td style="text-align:right;"><%= cdr.duration %> s</td>
     <td><%= cdr.hangup_cause %></td>
   </tr>
-  <% end %>
+<% end %>
 </table>
