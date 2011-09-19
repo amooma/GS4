@@ -401,8 +401,8 @@
 			},
 			:cdr => {
 				:caller_id_name      => "Caller name",
-				:caller_id_number    => "Caller number",
-				:destination_number  => "Destination number",
+				:caller_id_number    => "Caller",
+				:destination_number  => "Destination",
 				:context             => "Context",
 				:start_stamp         => "Call start",
 				:answer_stamp        => "Answer time",

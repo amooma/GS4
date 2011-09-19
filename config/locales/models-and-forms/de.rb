@@ -402,10 +402,10 @@
 			},
 			:cdr => {
 				:caller_id_name      => "Anrufer-Name",
-				:caller_id_number    => "Anrufer-Nummer",
+				:caller_id_number    => "Anrufer",
 				:destination_number  => "Ziel-Rufnummer",
 				:context             => "Kontext",
-				:start_stamp         => "Anruf-Anfang",
+				:start_stamp         => "Anruf-Beginn",
 				:answer_stamp        => "Antwort-Zeit",
 				:end_stamp           => "Anruf-Ende",
 				:duration            => "Anruf-Dauer",
