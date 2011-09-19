@@ -23,7 +23,9 @@ class Admin::MailConfigurationController < ApplicationController
 	}
 	
 	def edit
-		self.index
+		respond_to do |format|
+			format.html
+		end
 	end
 	
 	def show
