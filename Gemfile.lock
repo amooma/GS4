@@ -178,7 +178,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   hirb
-  kaminari
+  kaminari (~> 0.12.4)
   omniauth
   rails (~> 3.0.3)
   rails-erd
