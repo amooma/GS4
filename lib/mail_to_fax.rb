@@ -1,7 +1,8 @@
 class MailToFax < ActionMailer::Base
-	def receive(email)
+	
+	def receive( email )
 		user = User.where( :email => email.from ).first
-		if user && email.has_attachments?			
+		if user && email.has_attachments?
 			email.attachments.each do |attachment|
 				file_base_name = "#{File.basename( Configuration.get( :fax_outgoing_file_prefix, 'fax_out_' ))}#{SecureRandom.hex(10)}"
 				pdf_suffix = File.basename( Configuration.get( :fax_pdf_suffix, '.pdf' ))
@@ -23,4 +24,5 @@ class MailToFax < ActionMailer::Base
 			end
 		end
 	end
+	
 end
