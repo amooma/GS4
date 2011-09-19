@@ -164,6 +164,21 @@ Gemeinschaft4::Application.routes.draw do
 		resources :setup  #OPTIMIZE Do we need a full resource or just an index?
 	end
 	
+	match '/admin/mail_configuration',
+		:via        => [ :get ],
+		:controller => 'admin/mail_configuration',
+		:action     => :edit
+	
+	match '/admin/mail_configuration',
+		:via        => [ :post ],
+		:controller => 'admin/mail_configuration',
+		:action     => :create
+	
+	match '/admin/mail_configuration/show',
+		:via        => [ :get ],
+		:controller => 'admin/mail_configuration',
+		:action     => :show
+	
 	# Cantina
 	resources :reboot_requests, :only => [:index, :show, :create, :new ]  #OPTIMIZE Is this route being used?
 	

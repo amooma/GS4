@@ -585,3 +585,20 @@ de:
   call_duration: "Anruf-Dauer"
   hangup_cause: "Auslösegrund (hangup cause)"
   
+  mail_configuration: "eMail Konfiguration"
+  email_smarthost: "Ausgehende eMail (Smarthost)"
+  fax_send_mail: "Fax-Dokumente per eMail versenden"
+  fax_pop3: "Fax-Dokumente von eMail-Konto beziehen"
+  smarthost:
+    hostname: "Hostname"
+    port: "Port"
+    domain: "Domäne"
+    username: "Benutzername"
+    password: "Passwort"
+  email_pop3: "Eingehende eMail (POP3)"
+  mailserver:
+    hostname: "Hostname"
+    port: "Port"
+    username: "Benutzername"
+    password: "Passwort"
+  
