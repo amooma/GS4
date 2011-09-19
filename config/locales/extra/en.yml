@@ -7,13 +7,7 @@ en:
       default: "%Y-%m-%d"
       short: "%e %b"
       long: "%B %e, %Y"
-  views:
-    pagination:  
-      previous: "&lt; Previous"
-      first: "&lt;&lt; First"
-      next: "Next &gt;"
-      last: "Last &gt;&gt;"
-
+  
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
@@ -22,8 +16,16 @@ en:
       long: "%B %d, %Y %H:%M"
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
-      
+  
   application_name: "Gemeinschaft 4.0"
+  
+  views:
+    pagination:  
+      previous: "&lt; Previous"
+      first: "&lt;&lt; First"
+      next: "Next &gt;"
+      last: "Last &gt;&gt;"
+  
   show: "Show"
   back: "Back"
   Go_to_list: "Go to the list"
