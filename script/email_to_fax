@@ -1,0 +1,53 @@
+#! /usr/bin/env ruby
+begin
+
+APP_PATH = File.expand_path('../../config/application',  __FILE__)
+require File.expand_path('../../config/boot',  __FILE__)
+require APP_PATH
+
+begin
+	Rails.application.require_environment!
+rescue ActiveRecord::AdapterNotSpecified => e
+	error "No such Rails environment: \"#{Rails.env}\"."
+	exit 1
+end
+
+if ! Configuration.get(:fax_pop3, false, Configuration::Boolean) && Configuration.get(:mailserver_hostname).blank? 
+	exit 0
+end
+
+require 'net/pop'
+require 'mail_to_fax'
+
+Net::POP3.enable_ssl(OpenSSL::SSL::VERIFY_NONE) if Configuration.get(:mailserver_ssl, true, Configuration::Boolean)
+begin
+	Net::POP3.start(
+		Configuration.get(:mailserver_hostname),
+		Configuration.get(:mailserver_port, 110, Integer),
+		Configuration.get(:mailserver_username),
+		Configuration.get(:mailserver_password)
+	) do |pop3|
+		if ! pop3.mails.empty?
+			pop3.mails.each do |email|
+				begin
+					MailToFax.receive(email.pop)
+					email.delete
+				rescue Exception => e
+					$stderr.puts( "[POP3] Error receiving mail: #{e.message}" )
+				end
+			end
+		end
+	end
+
+rescue Exception => e
+	$stderr.puts( "[POP3] Error processing mail: #{e.message}" )
+end
+
+rescue SignalException => e
+	$stderr.print "#{e.class.to_s}"
+	$stderr.print " (Signal #{e.signo.to_s})" if e.respond_to?(:signo) && e.signo
+	$stderr.puts ""
+	exit 130
+end
+
+exit 0
