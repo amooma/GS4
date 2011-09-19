@@ -7,13 +7,7 @@ de:
       default: "%d.%m.%Y"
       short: "%e.%m."
       long: "%e. %B %Y"
-  views:
-    pagination:  
-      previous: "&lt; Vorherige"
-      first: "&lt;&lt; Erste"
-      next: "Nächste &gt;"
-      last: "Letzte &gt;&gt;"
-
+  
   time:
     formats:
       default: "%d.%m.%Y %H:%M"
@@ -22,7 +16,16 @@ de:
       long: "%A, %e. %B %Y, %H:%M"
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
+  
   application_name: "Gemeinschaft 4.0"
+  
+  views:
+    pagination:  
+      previous: "&lt; Vorherige"
+      first: "&lt;&lt; Erste"
+      next: "Nächste &gt;"
+      last: "Letzte &gt;&gt;"
+  
   show: "Anzeigen"
   back: "Zurück"
   Go_to_list: "Zur Liste"
@@ -52,6 +55,7 @@ de:
   
   role: "Rolle"
   
+  sort_by_attr: "Sortiere nach %{attr}"
   model_cannot_be_changed: "%{model_name} kann nicht geändert werden. Bitte neu anlegen"
   file_not_found: "Datei nicht gefunden"
   file_exists: "Datei existiert bereits"
@@ -503,6 +507,8 @@ de:
       edit: "Ausgehende Wähl-Route bearbeiten"
       show: "Ausgehende Wähl-Route"
       test: "Teste ausgehende Wähl-Routen"
+    patterns_sorted_by_pattern : "Sortiert nach Wähl-Muster"
+    patterns_sorted_by_name    : "Sortiert nach Bezeichnung"
     all_users: "(alle)"
     no_gateway: "(verboten)"
     explanations:
@@ -568,12 +574,14 @@ de:
   phone_set_config_url: "Nach dem Zurücksetzen auf die Werkseinstellungen folgende Setting-URL auf dem Telefon konfigurieren:"
   phone_manual: "Online-Handbuch zum %{phone_model}"
   
+  default_caller_name: "Nebenstelle"
+  
   cdrs: "Einzel-Verbindungen"
   listing_cdrs: "Einzel-Verbindungen"
   caller_id_name: "Anrufer-Name"
   caller_id_number: "Anrufer-Nummer"
   destination_number: "Ziel-Rufnummer"
   start_stamp: "Anruf-Beginn"
-  duration: "Anruf-Dauer"
+  call_duration: "Anruf-Dauer"
   hangup_cause: "Auslösegrund (hangup cause)"
   

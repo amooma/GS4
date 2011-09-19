@@ -7,13 +7,7 @@ en:
       default: "%Y-%m-%d"
       short: "%e %b"
       long: "%B %e, %Y"
-  views:
-    pagination:  
-      previous: "&lt; Previous"
-      first: "&lt;&lt; First"
-      next: "Next &gt;"
-      last: "Last &gt;&gt;"
-
+  
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
@@ -22,8 +16,16 @@ en:
       long: "%B %d, %Y %H:%M"
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
-      
+  
   application_name: "Gemeinschaft 4.0"
+  
+  views:
+    pagination:  
+      previous: "&lt; Previous"
+      first: "&lt;&lt; First"
+      next: "Next &gt;"
+      last: "Last &gt;&gt;"
+  
   show: "Show"
   back: "Back"
   Go_to_list: "Go to the list"
@@ -53,6 +55,7 @@ en:
   
   role: "Role"
   
+  sort_by_attr: "Sort by %{attr}"
   model_cannot_be_changed: "%{model_name} cannot be changed. Please create a new one"
   file_not_found: "File not found"
   file_exists: "File already exists"
@@ -504,6 +507,8 @@ en:
       edit: "Editing outbound dialplan route"
       show: "Outbound dialplan route"
       test: "Test dialplan routes"
+    patterns_sorted_by_pattern : "Sorted by pattern"
+    patterns_sorted_by_name    : "Sorted by description"
     all_users: "(all)"
     no_gateway: "(forbidden)"
     explanations:
@@ -577,5 +582,5 @@ en:
   caller_id_number: "Caller number"
   destination_number: "Destination number"
   start_stamp: "Call start"
-  duration: "Duration"
+  call_duration: "Duration"
   hangup_cause: "Hangup cause"

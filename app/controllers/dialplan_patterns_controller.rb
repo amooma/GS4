@@ -9,7 +9,14 @@ class DialplanPatternsController < ApplicationController
   # GET /dialplan_patterns
   # GET /dialplan_patterns.xml
   def index
-    @dialplan_patterns = DialplanPattern.order(:pattern).all
+    @sort_by = params[:sort].to_s.to_sym
+    @sort_by = :name if ! [ :name, :pattern ].include?( @sort_by )
+    case @sort_by
+      when :pattern ; @multi_sort_by = [ @sort_by, :name ]
+      when :name    ; @multi_sort_by = [ @sort_by, :pattern ]
+      else          ; @multi_sort_by = [ @sort_by ]
+    end
+    @dp_patterns = DialplanPattern.order( @multi_sort_by ).all
     
     respond_to do |format|
       format.html # index.html.erb

@@ -49,11 +49,12 @@
 			:user_to_extension             => "Benutzer zu Rufnummer",
 			:dialplan_pattern              => "Wählplan-Muster",
 			:dialplan_route                => "Wählplan-Route",
+			:cdr                           => "Einzel-Verbindung",
 			
 		},
 		
 		:attributes => {
-		  :user => {
+			:user => {
 				:username  => "Benutzername",
 				:password  => "Passwort",
 				:password_confirmation => "Passwort-Wiederholung",
@@ -399,6 +400,22 @@
 				:name                 => "Beschreibung",
 				:position             => "Position",
 			},
+			:cdr => {
+				:caller_id_name      => "Anrufer-Name",
+				:caller_id_number    => "Anrufer-Nummer",
+				:destination_number  => "Ziel-Rufnummer",
+				:context             => "Kontext",
+				:start_stamp         => "Anruf-Anfang",
+				:answer_stamp        => "Antwort-Zeit",
+				:end_stamp           => "Anruf-Ende",
+				:duration            => "Anruf-Dauer",
+				:billsec             => "Sekunden",
+				:hangup_cause        => "Auslösegrund (hangup cause)",
+				:uuid                => "UUID",
+				:bleg_uuid           => "UUID B",
+				:account_code        => "Account-Kennung",
+			},
+			
 		},
 	},
 	
@@ -747,6 +764,8 @@
 				:name                 => "Ein Beschreibungstext",
 				:position             => "Reihenfolge",
 			},
+			:cdr => {
+			}
 			
 		},
 	},

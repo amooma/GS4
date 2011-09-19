@@ -355,3 +355,52 @@ call_forward_reasons = ['busy', 'noanswer', 'offline', 'always', 'assistant']
 call_forward_reasons.each do |reason|
 	CallForwardReason.create(:value => reason)
 end
+
+
+
+################################################################
+# Dialplan patterns
+################################################################
+
+DialplanPattern.create([
+	{ :pattern => "xx."            , :name => "Alle Rufnummern" },
+	{ :pattern => "0[1-9]xxx."     , :name => "Nationale Rufnummern" },
+	{ :pattern => "00xx."          , :name => "Internationale Rufnummern" },
+	{ :pattern => "[1-9]xx."       , :name => "Rufnummern im eigenen Ortsnetz" },
+	{ :pattern => "090[0-5]xx."    , :name => "National: Mehrwertnummern / Premium-Rate-Dienste" },
+	{ :pattern => "11[0-7]x."      , :name => "Notrufnummern etc." },
+	{ :pattern => "19222"          , :name => "Notruf Rettungsdienst/Krankentransporte" },
+	{ :pattern => "118x."          , :name => "Auskunftsdienste (u.U. teuer, können vermitteln)" },
+	{ :pattern => "09009x."        , :name => "National: Mehrwertnummern (Dialer)" },
+	{ :pattern => "09005x."        , :name => "National: Mehrwertnummern (Erwachsenenunterhaltung)" },
+	{ :pattern => "0902x."         , :name => "National: Televoting (14 ct/Anruf)" },
+	{ :pattern => "019[1-7]x."     , :name => "National: Internet-Zugänge etc." },
+	{ :pattern => "019[89]x."      , :name => "National: Routingnummern / netzinterne Verkehrslenkung" },
+	{ :pattern => "080[01]x."      , :name => "National: Mehrwertnummern (kostenlos)" },
+	{ :pattern => "01805x."        , :name => "National: Mehrwertnummern (Hotlines/Erwachsenenunterhaltung)" },
+	{ :pattern => "01802001033x."  , :name => "National: Handvermittlung ins Ausland (teuer)" },
+	{ :pattern => "0180x."         , :name => "National: Mehrwertnummern" },
+	{ :pattern => "013[7-8]x."     , :name => "National: Televoting (25-100 ct/Anruf)" },
+	{ :pattern => "012x."          , :name => "National: Innovative Dienste (teuer)" },
+	{ :pattern => "031x."          , :name => "National: Testrufnummern" },
+	{ :pattern => "032x."          , :name => "National: Ortsunabhängige Teilnehmerrufnummern" },
+	{ :pattern => "01[5-7]xx."     , :name => "National: Mobilfunk" },
+#	{ :pattern => "018x."          , :name => "National: Nutzergruppen" },
+	{ :pattern => "0180x."         , :name => "National: Geteilte-Kosten-Dienste" },
+	{ :pattern => "0181x."         , :name => "National: Internationale Virtuelle Private Netze (IVPN)" },
+	{ :pattern => "050[12]x."      , :name => "National: Telekommunikationsdienste" },
+	{ :pattern => "06001x."        , :name => "National: Telekommunikationsdienste" },
+	{ :pattern => "0601x."         , :name => "National: Telekommunikationsdienste" },
+#	{ :pattern => "070[12]x."      , :name => "National: Persönliche Rufnummern" },
+])
+
+
+################################################################
+# Dialplan routes
+################################################################
+
+pat = DialplanPattern.where( :pattern => "xx." ).first
+pat.dialplan_routes.create({ :eac => "0", :user_id => nil, :sip_gateway_id => nil, :name => "Beispiel" }) if pat
+
+
+

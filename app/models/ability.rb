@@ -62,6 +62,9 @@ class Ability
           u.try(:id) == user.id
         end
         cannot :manage  , CallLog
+        cannot :manage  , Cdr
+        #can    :read    , CallLog   # Do not enable except for testing.
+        #can    :read    , Cdr       # Do not enable except for testing.
         cannot :update  , FaxDocument
         cannot :manage  , Authentication
         cannot :manage  , Manufacturer
@@ -80,16 +83,14 @@ class Ability
         can    :edit    , PinChange, :user_id => user.id
         can    :update  , PinChange, :user_id => user.id
         #FIXME User can change the user_id attribute.(?) -- See abilities for CallForward.
-        can    :read    , Cdr
-        #FIXME Admin only for testing
       )
       
       when "cdr"
       (
-        can    :read    , Home  # just a redirect_to( redirects_path ) in the HomeController
+        can    :read    , Home  # just a redirect_to( cdrs_path ) in the HomeController
+        can    :read    , Cdr
         #OPTIMIZE Add PinChange?
         cannot :have    , SipAccount
-        can    :read    , Cdr
       )
       
       when "user"

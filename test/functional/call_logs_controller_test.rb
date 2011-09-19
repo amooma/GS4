@@ -29,6 +29,14 @@ class CallLogsControllerTest < ActionController::TestCase
 	
 	
 	
+	test "should not get index (CDR admin)" do
+		sign_in :user, @cdr_user
+		get :index
+		#assert_response :success
+		#assert_not_nil assigns(:call_logs)
+		assert_response( @expected_http_status_if_not_allowed )
+		sign_out @cdr_user
+	end
 	
 	test "should get index (of their own call logs) (normal user)" do
 		sign_in :user, @user_user
@@ -119,6 +127,7 @@ class CallLogsControllerTest < ActionController::TestCase
 	test "should not show call_log (CDR admin)" do
 		sign_in :user, @cdr_user
 		get :show, :id => @call_log.to_param
+		#assert_response :success
 		assert_response( @expected_http_status_if_not_allowed )
 		sign_out @cdr_user
 	end
