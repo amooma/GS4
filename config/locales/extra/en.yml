@@ -47,6 +47,7 @@ en:
   
   role: "Role"
   
+  sort_by_attr: "Sort by %{attr}"
   model_cannot_be_changed: "%{model_name} cannot be changed. Please create a new one"
   file_not_found: "File not found"
   file_exists: "File already exists"

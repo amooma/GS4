@@ -47,6 +47,7 @@ de:
   
   role: "Rolle"
   
+  sort_by_attr: "Sortiere nach %{attr}"
   model_cannot_be_changed: "%{model_name} kann nicht geändert werden. Bitte neu anlegen"
   file_not_found: "Datei nicht gefunden"
   file_exists: "Datei existiert bereits"

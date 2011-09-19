@@ -7,21 +7,41 @@
 <table align="center">
 	<tr>
 		<% i18n_path = 'activerecord.attributes.dialplan_pattern.' %>
-		<th><%= t( i18n_path + 'pattern' ) %></th>
-		<th><%= t( i18n_path + 'name' ) %></th>
+		<th>
+			<% if @sort_by == :pattern %>
+				<%= t( i18n_path + 'pattern' ) %>&nbsp;&nbsp;&darr;
+			<% else %>
+				<%= link_to(
+					t( i18n_path + 'pattern' ),
+					{ :sort => 'pattern' },
+					{ :title => t(:sort_by_attr, :attr => t( i18n_path + 'pattern' )) }
+				) %>
+			<% end %>
+		</th>
+		<th>
+			<% if @sort_by == :name %>
+				<%= t( i18n_path + 'name' ) %>&nbsp;&nbsp;&darr;
+			<% else %>
+				<%= link_to(
+					t( i18n_path + 'name' ),
+					{ :sort => 'name' },
+					{ :title => t(:sort_by_attr, :attr => t( i18n_path + 'name' )) }
+				) %>
+			<% end %>
+		</th>
 		<th></th>
 		<th></th>
 		<th></th>
 		<th></th>
 	</tr>
 
-<% if @dialplan_patterns.length == 0 %>
+<% if @dp_patterns.length == 0 %>
 	<tr>
 		<td colspan="6" style="text-align:center;">-- <i><%= t(:none) %> --</i></td>
 	</tr>
 <% end %>
 
-<% @dialplan_patterns.each do |pat| %>
+<% @dp_patterns.each do |pat| %>
 	<tr>
 		<td><big><tt><%= pat.pattern %></tt></big></td>
 		<td><%= pat.name %></td>
