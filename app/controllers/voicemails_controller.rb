@@ -13,7 +13,7 @@ class VoicemailsController < ApplicationController
 	def index
 		sip_accounts = current_user.sip_accounts.all
 		@voicemails = []
-		errors = []
+		@voicemail_errors = []
 		
 		if sip_accounts
 			sip_accounts.each { |sip_account|
@@ -21,7 +21,7 @@ class VoicemailsController < ApplicationController
 				sip_acct_voicemails = XmlRpc::voicemails_get( sip_account.auth_name, sip_account.voicemail_server.host )
 				
 				if ! sip_acct_voicemails
-					errors << t( :error_retrieving_voicemail_list, :name => sip_account.to_display )
+					@voicemail_errors << t( :error_retrieving_voicemail_list, :name => sip_account.to_display )
 				elsif sip_acct_voicemails
 					if (sip_acct_voicemails.class == Array)
 						@voicemails = @voicemails.concat( sip_acct_voicemails )
@@ -35,16 +35,11 @@ class VoicemailsController < ApplicationController
 			if (voicemail_details && voicemail_details.key?('VM-Message-Duration'))
 				voicemail_message['duration'] = voicemail_details['VM-Message-Duration']
 			else
-				errors << t( :error_retrieving_voicemail, :name => voicemail_message['uuid'] )
+				@voicemail_errors << t( :error_retrieving_voicemail, :name => voicemail_message['uuid'] )
 				voicemail_message['duration'] = 0
 			end
 		}
-		
-		if errors.count > 0
-			#FIXME Don't use flash message here. Flash messages are meant for redirects.
-			flash[:alert] = errors.join(" ")
-		end
-		
+				
 		respond_to do |format|
 			format.html
 			format.xml { render :xml => @voicemails }
@@ -52,6 +47,8 @@ class VoicemailsController < ApplicationController
 	end
 	
 	def show
+		@voicemail_errors = []
+		
 		if (params[:id] && params[:account])
 			uuid = params[:id]
 			sip_account = current_user.sip_accounts.where( :auth_name => params[:account] ).first
@@ -71,8 +68,7 @@ class VoicemailsController < ApplicationController
 			end
 			
 			if ! @voicemail
-				#FIXME Don't use flash message here. Flash messages are meant for redirects.
-				flash[:alert] = t(:error_retrieving_voicemail, :name => uuid)
+				@voicemail_errors << t(:error_retrieving_voicemail, :name => uuid)
 			end
 		end
 		
