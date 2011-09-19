@@ -579,6 +579,6 @@ de:
   caller_id_number: "Anrufer-Nummer"
   destination_number: "Ziel-Rufnummer"
   start_stamp: "Anruf-Beginn"
-  duration: "Anruf-Dauer"
+  call_duration: "Anruf-Dauer"
   hangup_cause: "Auslösegrund (hangup cause)"
   

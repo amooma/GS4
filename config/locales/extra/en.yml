@@ -580,5 +580,5 @@ en:
   caller_id_number: "Caller number"
   destination_number: "Destination number"
   start_stamp: "Call start"
-  duration: "Duration"
+  call_duration: "Duration"
   hangup_cause: "Hangup cause"
