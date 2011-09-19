@@ -25,6 +25,7 @@ de:
       first: "&lt;&lt; Erste"
       next: "Nächste &gt;"
       last: "Letzte &gt;&gt;"
+      truncate: "..."
   
   show: "Anzeigen"
   back: "Zurück"
