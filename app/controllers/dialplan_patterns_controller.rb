@@ -9,7 +9,7 @@ class DialplanPatternsController < ApplicationController
   # GET /dialplan_patterns
   # GET /dialplan_patterns.xml
   def index
-    @sort_by = params[:sort].to_sym
+    @sort_by = params[:sort].to_s.to_sym
     @sort_by = :name if ! [ :name, :pattern ].include?( @sort_by )
     case @sort_by
       when :pattern ; @multi_sort_by = [ @sort_by, :name ]
