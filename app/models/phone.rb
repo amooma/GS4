@@ -158,7 +158,7 @@ class Phone < ActiveRecord::Base
 		oui_obj = Oui.where( :value => oui_str ).first
 		if oui_obj == nil \
 		|| (self.phone_model && self.phone_model.try(:manufacturer) != oui_obj.manufacturer)
-			errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.manufacturer.name ))
+			errors.add( :mac_address, I18n.t(:mac_address_not_matching_oui, :manufacturer => self.phone_model.try(:manufacturer).try(:name) ))
 		end
 	end
 	
