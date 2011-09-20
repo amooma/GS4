@@ -7,6 +7,11 @@
 <br />
 
 <p>
+  <b><%= t('fax_send_mail') %>:</b>
+  <%= @fax_send_mail ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
+
+<p>
   <b><%= t('smarthost.hostname') %>:</b>
   <%= @smarthost_hostname %>
 </p>
@@ -27,6 +32,11 @@
 </p>
 
 <p>
+  <b><%= t('smarthost.password') %>:</b>
+  <%= "*" * @smarthost_password.length %>
+</p>
+
+<p>
   <b><%= t('smarthost.from_address') %>:</b>
   <%= @smarthost_from_address %>
 </p>
@@ -34,6 +44,11 @@
 <br />
 <%= t('email_pop3') %><br />
 <br />
+
+<p>
+  <b><%= t('fax_pop3') %>:</b>
+  <%= @fax_pop3 ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
 
 <p>
   <b><%= t('mailserver.hostname') %>:</b>
@@ -48,6 +63,11 @@
 <p>
   <b><%= t('mailserver.username') %>:</b>
   <%= @mailserver_username %>
+</p>
+
+<p>
+  <b><%= t('mailserver.password') %>:</b>
+  <%= "*" * @mailserver_password.length %>
 </p>
 
 </div>
