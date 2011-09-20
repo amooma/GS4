@@ -1,8 +1,10 @@
 <h1><%= t(:listing_phone_models)%></h1>
 
-<%= link_to t(:new_phone_model), new_phone_model_path if can?( :new, PhoneModel ) %>
-<br />
-<br />
+<% if can?( :new, PhoneModel ) %>
+	<%= link_to t(:new_phone_model), new_phone_model_path %>
+	<br />
+	<br />
+<% end %>
 
 <%= render :partial => 'table_of_phone_models', :locals => {:phone_models => @phone_models} %>
 
