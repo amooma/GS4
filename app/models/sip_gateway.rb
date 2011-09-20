@@ -24,11 +24,11 @@ class SipGateway < ActiveRecord::Base
 		:allow_nil => true,
 		:allow_blank => false
 	
-	validates_presence_of     :username
-	validate_username         :username, :allow_nil => false, :allow_blank => false
+	validates_presence_of     :username, :if => Proc.new{|sip_gateway| sip_gateway.register}
+	validate_username         :username, :allow_nil => false, :allow_blank => false, :if => Proc.new{|sip_gateway| sip_gateway.register}
 	
-	validates_presence_of     :password
-	validate_password         :password, :allow_nil => false, :allow_blank => false
+	validates_presence_of     :password, :if => Proc.new{|sip_gateway| sip_gateway.register}
+	validate_password         :password, :allow_nil => false, :allow_blank => false, :if => Proc.new{|sip_gateway| sip_gateway.register}
 	
 	validate_username         :from_user, :allow_nil => true, :allow_blank => false
 	

@@ -73,7 +73,8 @@ class NetworkSetting < ActiveRecord::Base
         iface #{interface} inet static
         address #{ip_address}
         netmask #{netmask}
-        #{"gateway #{gateway}" if ! gateway.blank?}    
+        #{"gateway #{gateway}" if ! gateway.blank?}
+        #{"gateway #{ip_address}" if gateway.blank?}
         "
       else
         network_interfaces_write = "

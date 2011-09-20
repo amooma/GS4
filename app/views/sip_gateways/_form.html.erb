@@ -4,15 +4,15 @@
 	<%= f.error_messages %>
 	
 	<%= f.input :host %>
-	<%= f.input :port %>
-	<%= f.input :realm %>
-	<%= f.input :username %>
-	<%= f.input :password %>
-	<%= f.input :from_user %>
-	<%= f.input :from_domain %>
-	<%= f.input :register %>
+	<%= f.input :port, :as => :hidden %>
+	<%= f.input :realm, :as => :hidden %>
+	<%= f.input :username, :as => :hidden %>
+	<%= f.input :password, :as => :hidden %>
+	<%= f.input :from_user, :as => :hidden %>
+	<%= f.input :from_domain, :as => :hidden %>
+	<%= f.input :register, :as => :hidden, :input_html => { :value => false } %>
 	<%= f.input :reg_transport, :as => :hidden %>
-	<%= f.input :expire %>
+	<%= f.input :expire, :as => :hidden %>
 	
 	<%= f.button :submit %>
 <% end %>

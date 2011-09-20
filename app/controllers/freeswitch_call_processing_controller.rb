@@ -542,19 +542,22 @@ class FreeswitchCallProcessingController < ApplicationController
 								end
 								
 								phone_number = (match_result[:opts] || {})[:number].to_s
-								sip_gateway_name = "gateway-#{sip_gateway.try(:id)}"
-								logger.info(_bold( "#{logpfx} Calling #{phone_number.inspect} via gateway #{sip_gateway.try(:hostport).inspect} (#{sip_gateway_name}) ..." ))
+								sip_gateway_name = "gateway-#{route.sip_gateway.try(:id)}"
+								logger.info(_bold( "#{logpfx} Calling #{phone_number.inspect} via gateway #{route.sip_gateway.try(:hostport).inspect} (#{sip_gateway_name}) ..." ))
 								
 								action_set_ringback()
-								action :bridge,
-									#"{sip_network_destination=sip:#{enc_sip_user( arg_dst_sip_user_real )}@127.0.0.1:5060}" <<
-									"{sip_route_uri=sip:127.0.0.1:5060}" <<
-									"{sip_invite_req_uri=sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }}" <<  # Request-URI
-									"{sip_invite_to_uri=<sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }>}" <<  # To-URI
-									"sofia/gateway/#{sip_gateway_name}/" <<
-									"#{enc_sip_user( arg_dst_sip_user_real )}" <<
-									";fs_path=sip:127.0.0.1:5060"
-								
+								#action :bridge,
+									##"{sip_network_destination=sip:#{enc_sip_user( arg_dst_sip_user_real )}@127.0.0.1:5060}" <<
+									#"{sip_route_uri=sip:127.0.0.1:5060}" <<
+									#"{sip_invite_req_uri=sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }}" <<  # Request-URI
+									#"{sip_invite_to_uri=<sip:#{enc_sip_user( arg_dst_sip_user_real )}@#{ sip_gateway.hostport }>}" <<  # To-URI
+									#"sofia/gateway/#{sip_gateway_name}/" <<
+									#"#{enc_sip_user( arg_dst_sip_user_real )}" <<
+									#";fs_path=sip:127.0.0.1:5060"
+									#
+									action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{ route.sip_gateway.hostport };fs_path=sip:127.0.0.1:5060"
+
+									
 								after_bridge_actions()
 								#action :hangup
 								return

@@ -1,0 +1,75 @@
+<% page_title t(:mail_configuration) %>
+<h1><%= t(:mail_configuration) %></h1>
+
+<div class="simple_form_show">
+
+<%= t('email_smarthost') %><br />
+<br />
+
+<p>
+  <b><%= t('fax_send_mail') %>:</b>
+  <%= @fax_send_mail ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
+
+<p>
+  <b><%= t('smarthost.hostname') %>:</b>
+  <%= @smarthost_hostname %>
+</p>
+
+<p>
+  <b><%= t('smarthost.port') %>:</b>
+  <%= @smarthost_port %>
+</p>
+
+<p>
+  <b><%= t('smarthost.domain') %>:</b>
+  <%= @smarthost_domain %>
+</p>
+
+<p>
+  <b><%= t('smarthost.username') %>:</b>
+  <%= @smarthost_username %>
+</p>
+
+<p>
+  <b><%= t('smarthost.password') %>:</b>
+  <%= "*" * @smarthost_password.length %>
+</p>
+
+<p>
+  <b><%= t('smarthost.from_address') %>:</b>
+  <%= @smarthost_from_address %>
+</p>
+
+<br />
+<%= t('email_pop3') %><br />
+<br />
+
+<p>
+  <b><%= t('fax_pop3') %>:</b>
+  <%= @fax_pop3 ? t(:yes_lowercase) : t(:no_lowercase) %>
+</p>
+
+<p>
+  <b><%= t('mailserver.hostname') %>:</b>
+  <%= @mailserver_hostname %>
+</p>
+
+<p>
+  <b><%= t('mailserver.port') %>:</b>
+  <%= @mailserver_port %>
+</p>
+
+<p>
+  <b><%= t('mailserver.username') %>:</b>
+  <%= @mailserver_username %>
+</p>
+
+<p>
+  <b><%= t('mailserver.password') %>:</b>
+  <%= "*" * @mailserver_password.length %>
+</p>
+
+</div>
+
+<%= link_to t(:edit), admin_mail_configuration_path %>

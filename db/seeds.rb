@@ -24,6 +24,7 @@ Configuration.create([
 	{ :name => 'voicemail_min_record_length' , :value => '3' },
 	{ :name => 'voicemail_max_files'         , :value => '2048' },
 	{ :name => 'default_extension_length'    , :value => '3' },
+	{ :name => 'snom_rtp'                    , :value => false },
 ])
 
 

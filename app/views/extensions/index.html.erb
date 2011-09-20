@@ -4,7 +4,7 @@
 <table>
   <tr>
     <th><%= t(:extension) %></th>
-    <th><%= t(:destination) %></th>
+    <th colspan = "2"><%= t(:destination) %></th>
     <th><%= t(:active) %></th>
     <th></th>
     <th></th>
@@ -14,7 +14,20 @@
 <% @extensions.each do |extension| %>
   <tr>
     <td><%= extension.extension %></td>
-    <td><%= extension.destination %></td>
+    <td><%= extension.destination %></td>    
+    <td>
+<% if extension.users.count > 0 %>
+  <% if extension.destination == "-fax-receive-" %>
+  <%= t(:fax) %>: <%= extension.users.first.to_display %>
+  <% else %>
+  <%= t(:user) %>: <%= extension.users.first.to_display %>
+  <% end %>
+<% elsif extension.sip_accounts.count > 0 %>
+<%= t(:sip_account) %>: <%= extension.sip_accounts.first.to_display %>
+<% elsif extension.conferences.count > 0  %>
+<%= t(:conference) %>: <%= extension.conferences.first.name %>
+<% end %>
+    </td>
     <td><%= extension.active ? t(:yes_lowercase) : t(:no_lowercase) %></td>
     <td><%= link_to t(:show)    ,                                 extension %></td>
     <td><%= link_to t(:edit)    ,            edit_extension_path( extension ) %></td>

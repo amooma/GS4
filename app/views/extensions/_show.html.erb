@@ -9,6 +9,18 @@
 <p>
   <b><%= t(:destination) %>:</b>
   <%= @extension.destination %>
+<br> 
+<% if @extension.users.count > 0 %>
+  <% if @extension.destination == "-fax-receive-" %>
+  <%= t(:fax) %>: <%= @extension.users.first.to_display %>
+  <% else %>
+  <%= t(:user) %>: <%= @extension.users.first.to_display %>
+  <% end %>
+<% elsif @extension.sip_accounts.count > 0 %>
+<%= t(:sip_account) %>: <%= @extension.sip_accounts.first.to_display %>
+<% elsif @extension.conferences.count > 0  %>
+<%= t(:conference) %>: <%= @extension.conferences.first.name %>
+<% end %>
 </p>
 
 <p>
