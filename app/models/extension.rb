@@ -53,6 +53,43 @@ class Extension < ActiveRecord::Base
   # needs to be changed.
   # It assumes that a new length automaticly results in a new default.
   #
+  
+  def type  
+    if self.sip_accounts.count > 0
+      return :sipaccount
+    elsif self.conferences.count > 0
+      return :conference
+    elsif self.users.count > 0
+      return :faxreceive
+    elsif self.destination == '-vmenu-'
+      return :vmenu
+    elsif self.destination == '-park-in-'
+      return :parkin
+    elsif self.destination == '-park-out-'
+      return :parkout
+    elsif self.destination =~ /-queue-(.*)/
+      return :queue
+    else
+      retun nil
+    end
+  end
+  
+  def type=(value)
+    @type = value
+  end
+  
+  def types
+    {
+      I18n.t(:sip_account) => :sipaccount,
+      I18n.t(:call_queue)  => :queue,
+      I18n.t(:conference)  => :conference,
+      I18n.t(:fax)         => :faxreceive,
+      I18n.t(:voicemail)   => :vmenu,
+      I18n.t(:park_in)     => :parkin,
+      I18n.t(:park_out)    => :parkout,
+    }
+  end
+  
   def update_default_extension_length_if_needed
     if self.extension.to_i.to_s == self.extension.to_s \
     && self.extension.to_s.length != Configuration.get(:default_extension_length).to_i
