@@ -44,7 +44,7 @@ class CallQueuesController < ApplicationController
       :destination => @call_queue.uuid,
       :active => true,
     )
-	
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @call_queue }
