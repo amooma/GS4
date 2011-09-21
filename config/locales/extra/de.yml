@@ -604,3 +604,6 @@ de:
     username: "Benutzername"
     password: "Passwort"
   
+  park_in: "Parken"
+  park_out: "Ent-Parken"
+  

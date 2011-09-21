@@ -125,6 +125,7 @@
 				:extension    => "Extension",
 				:destination  => "Destination",
 				:active       => "Active",
+				:type         => "Type",
 			},
 			:fax_document => {
 				:destination  => "Destination",
@@ -488,6 +489,7 @@
 				:extension => "The extension that callers have to dial.",
 				:destination => "The destination is usually the identifier of a SIP account, or conference or call queue. In these cases this field has automatically been filled.",
 				:active => "Only active extensions will be considered in the dial plan. This way you can easily deactivate extensions temporarily without having to delete them.",
+				:type => "How the extension will be used",
 			},
 			:fax_document => {
 				:destination => "The destination number.",
