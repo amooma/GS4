@@ -394,7 +394,7 @@ DialplanPattern.create([
 	{ :pattern => "050[12]x."      , :name => "National: Telekommunikationsdienste" },
 	{ :pattern => "06001x."        , :name => "National: Telekommunikationsdienste" },
 	{ :pattern => "0601x."         , :name => "National: Telekommunikationsdienste" },
-#	{ :pattern => "070[12]x."      , :name => "National: Persönliche Rufnummern" },
+#	{ :pattern => "070[12]x."      , :name => "National: Persoenliche Rufnummern" },
 ])
 
 

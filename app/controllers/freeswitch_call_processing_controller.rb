@@ -556,8 +556,7 @@ class FreeswitchCallProcessingController < ApplicationController
 									#";fs_path=sip:127.0.0.1:5060"
 									#
 									action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{ route.sip_gateway.hostport };fs_path=sip:127.0.0.1:5060"
-
-									
+								
 								after_bridge_actions()
 								#action :hangup
 								return

@@ -1,13 +1,13 @@
 module Pop3Pull
-
+	
 	def self.start
 		if ! Configuration.get(:fax_pop3, false, Configuration::Boolean) && Configuration.get(:mailserver_hostname).blank? 
 			return false
 		end
-
+		
 		require 'net/pop'
 		require 'mail_to_fax'
-
+		
 		Net::POP3.enable_ssl(OpenSSL::SSL::VERIFY_NONE) if Configuration.get(:mailserver_ssl, true, Configuration::Boolean)
 		begin
 			Net::POP3.start(
@@ -27,7 +27,7 @@ module Pop3Pull
 					end
 				end
 			end
-
+			
 		rescue Exception => e
 			Rails::logger.error( "Error processing mail: #{e.message}" )
 		end
