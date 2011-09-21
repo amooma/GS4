@@ -4,6 +4,12 @@ RAW_FILE="$1"
 FAX_FILE="fax_from_$3.tif"
 DST="$2"
 SRC="$3"
+REMOTE_ID="$4"
+TOTAL_PAGES="$5"
+REC_PAGES="$6"
+SUCCESS="$7"
+RESULT_CODE="$8"
+RESULT_TEXT="$9"
 RECEIVED=`date`
 
 POST_URL="http://127.0.0.1/fax_documents.xml"

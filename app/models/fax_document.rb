@@ -39,9 +39,10 @@ class FaxDocument < ActiveRecord::Base
 			errors.add( :base, I18n.t(:fax_document_not_sent))
 			return false
 		end
-		
+		raw_suffix = File.basename( Configuration.get( :fax_file_suffix, '.tif' ))
+		raw_file = File.expand_path( "#{Configuration.get( :fax_files_directory )}/#{self.raw_file}#{raw_suffix}" )
 		require 'xml_rpc'
-		result = XmlRpc.send_fax( destination, domain, self.raw_file )
+		result = XmlRpc.send_fax( destination, domain, raw_file, self.source )
 		if ! result
 			errors.add( :base, I18n.t(:fax_document_not_sent))
 			return false
