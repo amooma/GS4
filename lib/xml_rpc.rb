@@ -61,7 +61,7 @@ module XmlRpc
 	end
 	
 	def self.send_fax( destination, domain, raw_file, caller_id_num = '', caller_id_name = '')
-		channel_variables = "origination_caller_id_number='#{caller_id_num}',origination_caller_id_name='#{caller_id_name}'"
+		channel_variables = "origination_caller_id_number='#{caller_id_num}',origination_caller_id_name='#{caller_id_name}',fax_ident='#{caller_id_num}',fax_header='#{caller_id_name}'"
 		response = request('originate', "{#{channel_variables}}sofia/internal/#{destination}@#{domain};fs_path=sip:127.0.0.1:5060 &txfax(#{raw_file})")
 		
 		if (! response)
