@@ -9,7 +9,7 @@ class CallQueuesController < ApplicationController
   # GET /call_queues
   # GET /call_queues.xml
   def index
-    @call_queues = CallQueue.accessible_by( current_ability, :index ).all
+    @call_queues = CallQueue.includes(:extensions).order('extensions.extension ASC').accessible_by( current_ability, :index ).all
 
     respond_to do |format|
       if CallQueue.all.blank? 

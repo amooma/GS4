@@ -16,5 +16,11 @@
 	<%= f.input :pin %>
 	<%= f.input :uuid, :as => :hidden %>
 	
+	<%= f.simple_fields_for :extensions do |extension| %>
+		<%= extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
+		<%= extension.input :destination, :as => :hidden %>
+		<%= extension.input :active, :as => :hidden %>
+	<% end %>
+	
 	<%= f.button :submit %>
 <% end %>

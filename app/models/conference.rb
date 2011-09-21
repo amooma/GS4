@@ -1,10 +1,10 @@
 class Conference < ActiveRecord::Base
-  
   has_many :conference_to_extensions, :dependent => :destroy
   has_many :extensions, :through => :conference_to_extensions
   
   belongs_to :user
   
+  accepts_nested_attributes_for :extensions
   
   #OPTIMIZE Validate presence of :user if :user_id is set.
   
@@ -20,4 +20,5 @@ class Conference < ActiveRecord::Base
   validates_format_of       :uuid, :with => /^-conference-.*$/,
     :allow_nil => false, :allow_blank => false
   
+  validates_uniqueness_of :name
 end

@@ -11,4 +11,6 @@ class CallQueue < ActiveRecord::Base
   # OPTIMIZE :uuid length = "-queue-" + 10
   validates_format_of :uuid, :with => /^-queue-.*$/,
     :allow_nil => false, :allow_blank => false
+    
+  validates_uniqueness_of :name
 end
