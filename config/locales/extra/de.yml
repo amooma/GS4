@@ -212,6 +212,7 @@ de:
   call_queue_need_to_create_extension: "Sie müssen eine Rufnummer anlegen, bevor Sie die Warteschleife nutzen können!"
   call_queue_created: "Warteschleife wurde erfolgreich angelegt"
   call_queue_updated: "Warteschleife wurde erfolgreich aktualisiert"
+  no_call_queue_in_db_so_redirect_to_new: "Aktuell existieren keine Warteschleifen im System. Auf dieser Seite können Sie eine neue anlegen."
   editing_call_log: "Anruflisten-Eintrag bearbeiten"
   listing_call_logs: "Anrufliste"
   sip_account_id: "SIP-Account-ID"

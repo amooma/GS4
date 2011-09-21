@@ -7,6 +7,8 @@ class Extension < ActiveRecord::Base
   has_many :user_to_extensions, :dependent => :destroy
   has_many :users, :through => :user_to_extensions
   
+  has_many :call_queue_to_extensions, :dependent => :destroy
+  has_many :call_queues, :through => :call_queue_to_extensions
   
   validates_inclusion_of  :active, :in => [ true, false ], :allow_nil => false
   

@@ -212,6 +212,7 @@ en:
   call_queue_need_to_create_extension: "You need to create an extension to call the queue!"
   call_queue_created: "Call queue was successfully created"
   call_queue_updated: "Call queue was successfully updated"
+  no_call_queue_in_db_so_redirect_to_new: "There are currently no call queues in the database. You can create a new one on this page."
   editing_call_log: "Editing call log entry"
   listing_call_logs: "Call log"
   sip_account_id: "SIP account ID"
