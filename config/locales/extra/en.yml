@@ -204,6 +204,7 @@ en:
   conference_need_to_create_extension: "You need to create an extension to be able to call the conference room!"
   conference_created: 'Conference was successfully created'
   conference_updated: 'Conference was successfully updated'
+  no_conference_in_db_so_redirect_to_new: "There are currently no conferences in the database. You can create a new one on this page."
   editing_call_queue: "Editing queue"
   uuid: "UUID"
   new_call_queue: "New queue"
@@ -212,6 +213,7 @@ en:
   call_queue_need_to_create_extension: "You need to create an extension to call the queue!"
   call_queue_created: "Call queue was successfully created"
   call_queue_updated: "Call queue was successfully updated"
+  no_call_queue_in_db_so_redirect_to_new: "There are currently no call queues in the database. You can create a new one on this page."
   editing_call_log: "Editing call log entry"
   listing_call_logs: "Call log"
   sip_account_id: "SIP account ID"
@@ -586,7 +588,7 @@ en:
   call_duration: "Duration"
   hangup_cause: "Hangup cause"
 
-  mail_configuration: "Mail configuration"
+  mail_configuration: "E-mail configuration"
   email_smarthost: "Outgoing mail (smarthost)"
   fax_send_mail: "Fax to e-mail"
   fax_pop3: "E-mail to fax"
@@ -594,7 +596,7 @@ en:
     hostname: "Hostname"
     port: "Port"
     domain: "Domain"
-    username: "User"
+    username: "Username"
     password: "Password"
     from_address: "From address"
   email_pop3: "Incoming mail (POP3)"

@@ -4,7 +4,7 @@
 <table>
   <tr>
     <th><%= t(:extension) %></th>
-    <th colspan = "2"><%= t(:destination) %></th>
+    <th colspan="2"><%= t(:destination) %></th>
     <th><%= t(:active) %></th>
     <th></th>
     <th></th>
@@ -14,7 +14,7 @@
 <% @extensions.each do |extension| %>
   <tr>
     <td><%= extension.extension %></td>
-    <td><%= extension.destination %></td>    
+    <td><%= extension.destination %></td>
     <td>
 <% extension_type = extension.type %>
 <% if extension_type    == :sipaccount %>

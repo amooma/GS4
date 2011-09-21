@@ -12,10 +12,14 @@ class ConferencesController < ApplicationController
   # GET /conferences
   # GET /conferences.xml
   def index
-    @conferences = Conference.accessible_by( current_ability, :index ).all
+    @conferences = Conference.includes(:extensions).order('extensions.extension ASC').accessible_by( current_ability, :index ).all
 
     respond_to do |format|
-      format.html # index.html.erb
+      if Conference.all.blank?
+        format.html { redirect_to(new_conference_path, :notice => t(:no_call_queue_in_db_so_redirect_to_new)) }
+      else
+        format.html # index.html.erb
+      end
       format.xml  { render :xml => @conferences }
     end
   end
@@ -36,7 +40,15 @@ class ConferencesController < ApplicationController
   def new
     @conference = Conference.new
     @conference.uuid = "-conference-#{SecureRandom.hex(10)}"
+    @conference.name = "#{t(:conference)}-#{Conference.count + 1}"
+    @conference.pin = 100000 + SecureRandom.random_number( 899999 )
     
+    extension = @conference.extensions.build(
+      :extension => Extension.next_unused_extension,
+      :destination => @conference.uuid,
+      :active => true,
+    )
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @conference }
