@@ -56,8 +56,10 @@ class Extension < ActiveRecord::Base
   # It assumes that a new length automaticly results in a new default.
   #
   
-  def type  
-    if self.sip_accounts.count > 0
+  def type
+    if @type
+      return @type
+    elsif self.sip_accounts.count > 0
       return :sipaccount
     elsif self.conferences.count > 0
       return :conference
