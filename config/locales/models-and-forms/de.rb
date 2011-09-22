@@ -125,6 +125,7 @@
 				:extension    => "Rufnummer",
 				:destination  => "Ziel",
 				:active       => "Aktiv",
+				:type         => "Typ",
 			},
 			:fax_document => {
 				:destination  => "Ziel",
@@ -489,6 +490,7 @@
 				:extension => "Die vom Anrufer zu wählende Nebenstelle.",
 				:destination => "Das Ziel ist normalerweise der Identifikator eines SIP-Accounts, einer Konferenz oder einer Warteschleife. In diesen Fällen ist das Feld hier automatisch vorbefüllt.",
 				:active => "Nur aktive Rufnummern werden im Wählplan berücksichtigt. Auf diese Weise können Rufnummern vorübergehend deaktiviert werden ohne sie zu löschen.",
+				:type => "Die Verwendung der Rufnummer",
 			},
 			:fax_document => {
 				:destination => "Die Ziel-Rufnummer.",

@@ -204,6 +204,7 @@ de:
   conference_need_to_create_extension: "Sie müssen eine Rufnummer anlegen, bevor Sie den Konferenzraum nutzen können!"
   conference_created: 'Konferenz wurde erfolgreich angelegt'
   conference_updated: 'Konferenz wurde erfolgreich aktualisiert'
+  no_conference_in_db_so_redirect_to_new: "Aktuell existieren keine Konferenzen im System. Auf dieser Seite können Sie eine neue anlegen."
   editing_call_queue: "Warteschleife"
   uuid: "UUID"
   new_call_queue: "Neue Warteschleife"
@@ -604,4 +605,7 @@ de:
     port: "Port"
     username: "Benutzername"
     password: "Passwort"
+  
+  park_in: "Parken"
+  park_out: "Ent-Parken"
   

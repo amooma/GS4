@@ -954,8 +954,8 @@ xml.document( :type => 'freeswitch/xml' ) {
 						# ext-sip-ip: "auto-nat": FS will send 127.0.0.1 in the
 						# Contact in REGISTER. "auto": detected IP address of the
 						# default route:
-						#xml.param( :name => 'ext-sip-ip', :value => 'auto-nat' )
-						xml.param( :name => 'ext-sip-ip', :value => 'auto' )
+						xml.param( :name => 'ext-sip-ip', :value => 'auto-nat' )
+						#xml.param( :name => 'ext-sip-ip', :value => 'auto' )
 						
 						xml.param( :name => 'hold-music', :value => "#{@hold_music}" )
 						xml.param( :name => 'apply-nat-acl', :value => 'nat.auto' )
