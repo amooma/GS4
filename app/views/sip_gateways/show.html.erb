@@ -6,10 +6,12 @@
 <% i18n_path = 'activerecord.attributes.sip_gateway.' %>
 
 <p>
-	<b><%= t( i18n_path + 'host' ) %> (+ <%= t( i18n_path + 'port' ) %>):</b>
+	<b><%= t( i18n_path + 'host' ) %>
+		<!-- <![CDATA[ (+ <%= t( i18n_path + 'port' ) %>) ]]> -->:</b>
 	<%= @sip_gateway.hostport %>
 </p>
 
+<!-- <![CDATA[
 <p>
 	<b><%= t( i18n_path + 'realm' ) %>:</b>
 	<%= @sip_gateway.realm %>
@@ -44,6 +46,7 @@
 	<b><%= t( i18n_path + 'expire' ) %>:</b>
 	<%= @sip_gateway.expire %>&nbsp;s
 </p>
+]]> -->
 
 </div>
 

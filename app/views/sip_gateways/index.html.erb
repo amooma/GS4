@@ -4,12 +4,18 @@
 <table>
 	<tr>
 		<% i18n_path = 'activerecord.attributes.sip_gateway.' %>
-		<th><%= t( i18n_path + 'host' ) %> (+ <%= t( i18n_path + 'port' ) %>)</th>
+		<th><%= t( i18n_path + 'host' ) %>
+			<!-- <![CDATA[
+			(+ <%= t( i18n_path + 'port' ) %>)
+			]]> -->
+		</th>
+		<!-- <![CDATA[
 		<th><%= t( i18n_path + 'realm' ) %></th>
 		<th><%= t( i18n_path + 'username' ) %></th>
 		<th><%= t( i18n_path + 'register' ) %></th>
 		
 		<th><%= t(:sip_gateway_reg_state) %></th>
+		]]> -->
 		<th><%= t(:sip_gateway_status) %></th>
 		
 		<th></th>
@@ -42,11 +48,13 @@
 %>
 	<tr>
 		<td><%= sip_gw.hostport %></td>
+		<!-- <![CDATA[
 		<td><%= sip_gw.realm %></td>
 		<td><%= sip_gw.username %></td>
 		<td><%= sip_gw.register ? t(:yes_lowercase) : t(:no_lowercase) %></td>
 		
 		<td><%= @reg_states[  reg_state ] || reg_state || '?' %> <%= reg_state_extra %></td>
+		]]> -->
 		<td class="<%= gw_status == 'UP' ? 'status_yes' : 'status_no' %>"><%= @gw_statuses[ gw_status ] || gw_status || '?' %> <%= gw_status_extra %></td>
 		
 		<td><%= link_to t(:show), sip_gw %></td>
