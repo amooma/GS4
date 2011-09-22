@@ -57,9 +57,9 @@
 		]]> -->
 		<td class="<%= gw_status == 'UP' ? 'status_yes' : 'status_no' %>"><%= @gw_statuses[ gw_status ] || gw_status || '?' %> <%= gw_status_extra %></td>
 		
-		<td><%= link_to t(:show), sip_gw %></td>
-		<td><%= link_to t(:edit), edit_sip_gateway_path( sip_gw ) %></td>
-		<td><%= button_to t(:destroy), sip_gw, :confirm => t(:are_you_sure), :method => :delete %></td>
+		<td><%= link_to t(:show)    ,                                   sip_gw   %></td>
+		<td><%= link_to t(:edit)    ,            edit_sip_gateway_path( sip_gw ) %></td>
+		<td><%= link_to t(:destroy) , confirm_destroy_sip_gateway_path( sip_gw ) %></td>
 	</tr>
 <% } %>
 </table>

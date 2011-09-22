@@ -126,6 +126,11 @@ class DialplanRoutesController < ApplicationController
   end
   
   
+  def confirm_destroy
+    @dialplan_route = DialplanRoute.find(params[:id])
+  end
+  
+  
   # POST dialplan_routes/1/move_up
   def move_up
     @dialplan_route = DialplanRoute.find(params[:id])
