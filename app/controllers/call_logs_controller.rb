@@ -14,7 +14,7 @@ class CallLogsController < ApplicationController
   # GET /call_logs
   # GET /call_logs.xml
   def index
-    @call_logs = CallLog.accessible_by( current_ability, :index ).order('created_at DESC').all
+    @call_logs = CallLog.accessible_by( current_ability, :index ).order('created_at DESC').page( params[:page] ).per(20)
 
     respond_to do |format|
       format.html # index.html.erb
