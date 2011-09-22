@@ -3,40 +3,40 @@
 <br />
 
 <table>
-  <tr>
-    <th><%= t(:date_date) %> &nbsp;&uarr;</th>
-    <!-- <![CDATA[
-    <th><%= t(:sip_account) %></th>
-    ]]> -->
-    <th><%= t(:source) %></th>
-    <th><%= t(:source_name) %></th>
-    <th><%= t(:destination) %></th>
-    <th><%= t(:destination_name) %></th>
-    <th><%= t(:call_type) %></th>
-    <th><%= t(:disposition) %></th>
-    <th><%= t(:forwarded_to) %></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th><%= t(:date_date) %> &nbsp;&uarr;</th>
+		<!-- <![CDATA[
+		<th><%= t(:sip_account) %></th>
+		]]> -->
+		<th><%= t(:source) %></th>
+		<th><%= t(:source_name) %></th>
+		<th><%= t(:destination) %></th>
+		<th><%= t(:destination_name) %></th>
+		<th><%= t(:call_type) %></th>
+		<th><%= t(:disposition) %></th>
+		<th><%= t(:forwarded_to) %></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
 <% @call_logs.each do |call_log| %>
-  <tr>
-    <td><nobr><%= l(call_log.created_at.localtime, :format => :call_log_normal) %></nobr></td>
-    <!-- <![CDATA[
-    <td><%= call_log.sip_account.try(:caller_name) %></td>
-    ]]> -->
-    <td><b><%= call_log.source %></b></td>
-    <td><%= call_log.source_name %></td>
-    <td><b><%= call_log.destination %></b></td>
-    <td><%= call_log.destination_name %></td>
-    <td><%= call_log.call_type %></td>
-    <td><%= call_log.disposition %></td>
-    <td><%= call_log.forwarded_to %></td>
-    <td><%= link_to t(:show)    ,                                call_log   if can?( :show    , call_log ) %></td>
-    <td><%= link_to t(:edit)    ,            edit_call_log_path( call_log ) if can?( :edit    , call_log ) %></td>
-    <td><%= link_to t(:destroy) , confirm_destroy_call_log_path( call_log ) if can?( :destroy , call_log ) %></td>
-  </tr>
+	<tr>
+		<td><nobr><%= l(call_log.created_at.localtime, :format => :call_log_normal) %></nobr></td>
+		<!-- <![CDATA[
+		<td><%= call_log.sip_account.try(:caller_name) %></td>
+		]]> -->
+		<td><b><%= call_log.source %></b></td>
+		<td><%= call_log.source_name %></td>
+		<td><b><%= call_log.destination %></b></td>
+		<td><%= call_log.destination_name %></td>
+		<td><%= call_log.call_type %></td>
+		<td><%= call_log.disposition %></td>
+		<td><%= call_log.forwarded_to %></td>
+		<td><%= link_to t(:show)    ,                                call_log   if can?( :show    , call_log ) %></td>
+		<td><%= link_to t(:edit)    ,            edit_call_log_path( call_log ) if can?( :edit    , call_log ) %></td>
+		<td><%= link_to t(:destroy) , confirm_destroy_call_log_path( call_log ) if can?( :destroy , call_log ) %></td>
+	</tr>
 <% end %>
 </table>
 
