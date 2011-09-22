@@ -1,5 +1,6 @@
 <%= simple_form_for( @extension ) do |f| %>
 	<%= f.error_messages %>
+	
 	<% no_edit = ! @extension.destination.nil? && @extension.errors.count < 1 %>
 	<%= f.input :extension %>
 	<%= f.input :destination, :required => false, :input_html => { :disabled => no_edit } %>
