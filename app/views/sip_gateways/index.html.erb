@@ -16,7 +16,9 @@
 		
 		<th><%= t(:sip_gateway_reg_state) %></th>
 		]]> -->
+		<!-- <![CDATA[
 		<th><%= t(:sip_gateway_status) %></th>
+		]]> -->
 		
 		<th></th>
 		<th></th>
@@ -55,7 +57,9 @@
 		
 		<td><%= @reg_states[  reg_state ] || reg_state || '?' %> <%= reg_state_extra %></td>
 		]]> -->
+		<!-- <![CDATA[
 		<td class="<%= gw_status == 'UP' ? 'status_yes' : 'status_no' %>"><%= @gw_statuses[ gw_status ] || gw_status || '?' %> <%= gw_status_extra %></td>
+		]]> -->
 		
 		<td><%= link_to t(:show)    ,                                   sip_gw   %></td>
 		<td><%= link_to t(:edit)    ,            edit_sip_gateway_path( sip_gw ) %></td>
