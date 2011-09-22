@@ -72,7 +72,7 @@ class Extension < ActiveRecord::Base
     elsif self.destination =~ /-queue-(.*)/
       return :queue
     else
-      retun nil
+      return nil
     end
   end
   
