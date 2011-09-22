@@ -32,4 +32,6 @@
 
 <br />
 
+<% if NetworkSetting.count < 1 %>
 <%= link_to t(:new_network_setting), new_network_setting_path %>
+<% end %>
