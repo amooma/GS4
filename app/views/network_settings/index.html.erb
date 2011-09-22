@@ -1,32 +1,33 @@
 <h1><%= t(:network_setting) %></h1>
 
 <table>
-  <tr>
-    <th><%= t(:ip_address) %></th>
-    <th><%= t(:netmask) %></th>
-    <th><%= t(:gateway) %></th>
-    <th><%= t(:name_server) %></th>
-    <th><%= t(:dhcp_range_start) %></th>
-    <th><%= t(:dhcp_range_end) %></th>
-    <th><%= t(:start_dhcp_server) %></th>
-    <th><%= t(:dhcp_client) %></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th><%= t(:dhcp_client) %></th>
+		<th><%= t(:ip_address) %></th>
+		<th><%= t(:netmask) %></th>
+		<th><%= t(:gateway) %></th>
+		<th><%= t(:name_server) %></th>
+		<th><%= t(:start_dhcp_server) %></th>
+		<th><%= t(:dhcp_range_start) %></th>
+		<th><%= t(:dhcp_range_end) %></th>
+		<th></th>
+		<th></th>
+	</tr>
 
 <% @network_settings.each do |network_setting2| %>
-  <tr>
-    <td><%= network_setting2.ip_address %></td>
-    <td><%= network_setting2.netmask %></td>
-    <td><%= network_setting2.gateway %></td>
-    <td><%= network_setting2.name_server %></td>
-    <td><%= network_setting2.dhcp_range_start %></td>
-    <td><%= network_setting2.dhcp_range_end %></td>
-    <td><%= network_setting2.start_dhcp_server ? t(:yes_lowercase) : t(:no_lowercase) %></td>
-    <td><%= network_setting2.dhcp_client ? t(:yes_lowercase) : t(:no_lowercase) %></td>
-    <td><%= link_to t(:show) ,                            network_setting2 %></td>
-    <td><%= link_to t(:edit) , edit_network_setting_path( network_setting2 ) %></td>
-  </tr>
+	<tr>
+		<td><%= network_setting2.dhcp_client ? t(:yes_lowercase) : t(:no_lowercase) %></td>
+		<td><%= network_setting2.ip_address %></td>
+		<td><%= network_setting2.netmask %></td>
+		<td><%= network_setting2.gateway %></td>
+		<td><%= network_setting2.name_server %></td>
+		<td><%= network_setting2.start_dhcp_server ? t(:yes_lowercase) : t(:no_lowercase) %></td>
+		<td><%= network_setting2.dhcp_range_start %></td>
+		<td><%= network_setting2.dhcp_range_end %></td>
+		
+		<td><%= link_to t(:show) ,                            network_setting2 %></td>
+		<td><%= link_to t(:edit) , edit_network_setting_path( network_setting2 ) %></td>
+	</tr>
 <% end %>
 </table>
 
