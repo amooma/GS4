@@ -47,8 +47,10 @@ class ExtensionsControllerTest < ActionController::TestCase
   
   test "should create extension" do
     sign_in :user, @admin_user
+    attributes = @extension.attributes
+    attributes[:type] = 'vmenu'
     assert_difference('Extension.count') {
-      post :create, :extension => @extension.attributes
+      post :create, :extension => attributes
     }
     assert_redirected_to( extension_path( assigns(:extension)))
     sign_out @admin_user
