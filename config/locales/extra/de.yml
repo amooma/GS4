@@ -16,6 +16,8 @@ de:
       long: "%A, %e. %B %Y, %H:%M"
       call_log_recent: "%H:%M"
       call_log_old: "%e.%m."
+      #call_log_normal: "%e.\u2009%b.\u2009%Y, %H:%M"
+      call_log_normal: "%d.%m.%Y, %H:%M"
   
   application_name: "Gemeinschaft 4.0"
   
