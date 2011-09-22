@@ -90,15 +90,15 @@ class ExtensionsController < ApplicationController
   # POST /extensions.xml
   def create
     redirect_source = true
-    extension_type = params[:extension][:type]    
-    destination = params[:extension][:destination]
+    extension_type  = params[:extension][:type]
+    destination     = params[:extension][:destination]
 
     if ( @sip_account.nil? &&  @conference.nil? &&  @call_queue.nil? )
-      redirect_source = false      
+      redirect_source = false
       case extension_type
       when 'sipaccount'
         @sip_account    = SipAccount.where(:auth_name => params[:extension][:destination]).first
-      when 'conference'    
+      when 'conference'
         @conference  = Conference.where(:uuid => params[:extension][:destination]).first
       when 'queue'
         @call_queue  = CallQueue.where(:uuid => params[:extension][:destination]).first
