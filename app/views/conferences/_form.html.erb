@@ -13,7 +13,7 @@
 	<% end %>
 	
 	<%= f.input :name %>
-	<%= f.input :pin %>
+	<%= f.input :pin, :as => :string %>
 	<%= f.input :uuid, :as => :hidden %>
 	
 	<%= f.simple_fields_for :extensions do |extension| %>
