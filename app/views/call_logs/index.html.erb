@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-	<th><%= t(:date_date) %></th>
+	<th><%= t(:date_date) %> &nbsp;&uarr;</th>
     <th><%= t(:sip_account) %></th>
     <th><%= t(:source) %></th>
     <th><%= t(:source_name) %></th>
@@ -18,7 +18,7 @@
 
 <% @call_logs.each do |call_log| %>
   <tr>
-	<td><%= l(call_log.created_at.localtime, :format => :short) %></td>
+	<td><nobr><%= l(call_log.created_at.localtime, :format => :call_log_normal) %></nobr></td>
     <td><%= call_log.sip_account_id %></td>
     <td><%= call_log.source %></td>
     <td><%= call_log.source_name %></td>
