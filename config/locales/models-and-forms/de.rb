@@ -420,6 +420,29 @@
 		},
 	},
 	
+	:activemodel => {
+		:models => {
+			:email_configuration => "E-Mail-Konfiguration",
+		},
+		:attributes => {
+			:email_configuration => {
+				:smarthost_hostname   => "Smarthost-Host",
+				:smarthost_port       => "Smarthost-Port",
+				:smarthost_domain     => "Smarthost-Domain",
+				:smarthost_username   => "Smarthost-Benutzername",
+				:smarthost_password   => "Smarthost-Passwort",
+				:smarthost_authentication => "Smarthost-Authentifizierungsmethode",
+				:smarthost_enable_starttls_auto => "Smarthost-Auto-StartTLS",
+				:mailserver_hostname  => "Mail-Server-Host",
+				:mailserver_port      => "Mail-Server-Port",
+				:mailserver_username  => "Mail-Server-Benutzername",
+				:mailserver_password  => "Mail-Server-Passwort",
+				:fax_send_mail        => "Fax-Dokumente per E-Mail versenden",
+				:fax_pop3             => "Fax-Dokumente von E-Mail-Konto beziehen",
+			},
+		},
+	},
+	
 	:simple_form => {
 		:hints => {
 			:user => {

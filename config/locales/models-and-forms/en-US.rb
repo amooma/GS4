@@ -419,6 +419,29 @@
 		},
 	},
 	
+	:activemodel => {
+		:models => {
+			:email_configuration => "E-Mail configuration",
+		},
+		:attributes => {
+			:email_configuration => {
+				:smarthost_hostname   => "Smarthost host",
+				:smarthost_port       => "Smarthost port",
+				:smarthost_domain     => "Smarthost domain",
+				:smarthost_username   => "Smarthost username",
+				:smarthost_password   => "Smarthost password",
+				:smarthost_authentication => "Smarthost authentication method",
+				:smarthost_enable_starttls_auto => "Smarthost auto-StartTLS",
+				:mailserver_hostname  => "Mail server host",
+				:mailserver_port      => "Mail server port",
+				:mailserver_username  => "Mail server username",
+				:mailserver_password  => "Mail server password",
+				:fax_send_mail        => "Send fax documents via E-mail",
+				:fax_pop3             => "Receive fax documents via e-mail",
+			},
+		},
+	},
+	
 	:simple_form => {
 		:hints => {
 			:user => {

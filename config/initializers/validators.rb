@@ -1,6 +1,9 @@
-ActiveRecord::Base.class_eval do
+
+module ActiveModel
+module Validations
+module HelperMethods
   
-  def self.validate_ip_port( attr_names, options={} )
+  def validate_ip_port( attr_names, options={} )
     validates_numericality_of( attr_names, {
       :only_integer => true,
       :greater_than =>     0,
@@ -9,7 +12,7 @@ ActiveRecord::Base.class_eval do
     }.merge!( options ) )
   end
   
-  def self.validate_netmask( attr_names, options={} )
+  def validate_netmask( attr_names, options={} )
     configuration = {
       :allow_nil   => false,
       :allow_blank => false,
@@ -25,7 +28,7 @@ ActiveRecord::Base.class_eval do
     validates_format_of( attr_names, configuration )
   end
   
-  def self.validate_hostname_or_ip( attr_names, options={} )
+  def validate_hostname_or_ip( attr_names, options={} )
     # Validate the server. This is the "host" rule from RFC 3261
     # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
     configuration = {
@@ -155,7 +158,7 @@ ActiveRecord::Base.class_eval do
   end
   
   # Validate username. This is the "user" rule from RFC 3261.
-  def self.validate_username( attr_names, options={} )
+  def validate_username( attr_names, options={} )
     configuration = {
       :allow_nil   => false,
       :allow_blank => false,
@@ -175,7 +178,7 @@ ActiveRecord::Base.class_eval do
     validates_format_of( attr_names, configuration )
   end
   
-  def self.validate_password( attr_names, options={} )
+  def validate_password( attr_names, options={} )
     configuration = {
       :allow_nil   => true,
       :allow_blank => true,
@@ -196,3 +199,9 @@ ActiveRecord::Base.class_eval do
   end
   
 end
+end
+end
+
+#ActiveRecord::Base.class_eval do
+#  include ActiveModel::Validations::HelperMethods
+#end

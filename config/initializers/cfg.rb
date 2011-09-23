@@ -86,5 +86,13 @@ module Cfg
 		return (!! default) if default != nil
 		return nil
 	end
-
+	
+	
+	
+	def self.store( param, val )
+		c = Configuration.find_or_create_by_name( param.to_s )
+		c.value = val
+		c.save
+	end
+	
 end

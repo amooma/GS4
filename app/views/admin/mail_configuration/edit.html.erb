@@ -1,7 +1,8 @@
 <% page_title t('mail_configuration') %>
 <h1><%= t('mail_configuration') %></h1>
 
-<%= simple_form_for( "email_configuration", :html => {:method => :post} ) do |f| %>
+<%= simple_form_for( :email_configuration, :html => {:method => :post} ) do |f| %>
+	<%= f.error_messages %>
 	
 	<%= t('email_smarthost') %><br />
 	<br />
@@ -10,8 +11,6 @@
 		:as => :boolean,
 		:label => t('fax_send_mail'),
 		:hint => false,
-		:autofocus => @fax_send_mail.to_s.blank?,
-		:input_html => { :checked => @fax_send_mail },
 	} %>
 
 	<%= f.input :smarthost_hostname, {
@@ -19,8 +18,6 @@
 		:label => t('smarthost.hostname'),
 		:hint => false,
 		:required => false,
-		:autofocus => @smarthost_hostname.to_s.blank?,
-		:input_html => { :value => @smarthost_hostname.to_s },
 	} %>
 	
 	<%= f.input :smarthost_port, {
@@ -28,8 +25,6 @@
 		:label => t('smarthost.port'),
 		:hint => false,
 		:required => false,
-		:autofocus => @smarthost_port.to_s.blank?,
-		:input_html => { :value => @smarthost_port.to_s },
 	} %>
 	
 	<%= f.input :smarthost_domain, {
@@ -37,8 +32,6 @@
 		:label => t('smarthost.domain'),
 		:hint => false,
 		:required => false,
-		:autofocus => @smarthost_domain.to_s.blank?,
-		:input_html => { :value => @smarthost_domain.to_s },
 	} %>
 	
 	<%= f.input :smarthost_username, {
@@ -46,8 +39,6 @@
 		:label => t('smarthost.username'),
 		:hint => false,
 		:required => false,
-		:autofocus => @smarthost_username.to_s.blank?,
-		:input_html => { :value => @smarthost_username.to_s },
 	} %>
 	
 	<%= f.input :smarthost_password, {
@@ -55,8 +46,6 @@
 		:label => t('smarthost.password'),
 		:hint => false,
 		:required => false,
-		:autofocus => @smarthost_password.to_s.blank?,
-		:input_html => { :value => @smarthost_password.to_s },
 	} %>
 	
 	<%= f.input :smarthost_from_address, {
@@ -64,8 +53,6 @@
 		:label => t('smarthost.from_address'),
 		:hint => false,
 		:required => false,
-		:autofocus => @smarthost_from_address.to_s.blank?,
-		:input_html => { :value => @smarthost_from_address.to_s },
 	} %>
 	
 	<br />
@@ -76,8 +63,6 @@
 		:as => :boolean,
 		:label => t('fax_pop3'),
 		:hint => false,
-		:autofocus => @fax_pop3.to_s.blank?,
-		:input_html => { :checked => @fax_pop3 },
 	} %>
 	
 	<%= f.input :mailserver_hostname, {
@@ -85,8 +70,6 @@
 		:label => t('mailserver.hostname'),
 		:hint => false,
 		:required => false,
-		:autofocus => @mailserver_hostname.to_s.blank?,
-		:input_html => { :value => @mailserver_hostname.to_s },
 	} %>
 	
 	<%= f.input :mailserver_port, {
@@ -94,8 +77,6 @@
 		:label => t('mailserver.port'),
 		:hint => false,
 		:required => false,
-		:autofocus => @mailserver_port.to_s.blank?,
-		:input_html => { :value => @mailserver_port.to_s },
 	} %>
 	
 	<%= f.input :mailserver_username, {
@@ -103,8 +84,6 @@
 		:label => t('mailserver.username'),
 		:hint => false,
 		:required => false,
-		:autofocus => @mailserver_username.to_s.blank?,
-		:input_html => { :value => @mailserver_username.to_s },
 	} %>
 	
 	<%= f.input :mailserver_password, {
@@ -112,8 +91,6 @@
 		:label => t('mailserver.password'),
 		:hint => false,
 		:required => false,
-		:autofocus => @mailserver_password.to_s.blank?,
-		:input_html => { :value => @mailserver_password.to_s },
 	} %>
 	
 	<%= f.button :submit, t( :save ) %>
