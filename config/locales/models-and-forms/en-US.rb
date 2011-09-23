@@ -25,7 +25,7 @@
 			:pin_change                    => "(SIP account: change voicemail PIN)",  #OPTIMIZE See app/models/pin_change.rb
 			:configuration                 => "Configuration",
 			:authentication                => "Authentication",
-			:call_forward_reason           => "Call forward reason",
+			:call_forward_reason           => "Call forward case",
 			:call_queue_to_extension       => "Call queue to extension",
 			:codec                         => "Codec",
 			:conference_to_extension       => "Conference room to extension",
@@ -467,7 +467,7 @@
 				:active => "Only active call forwarding rules will be followed. This way you can easily deactivate call forwards temporarily without having to delete them.",
 			},  
 			:call_forward_reason => {
-				:value => "Call forward reason, e.g. busy, noanswer, offline, always, assistant",
+				:value => "Call forward case, e.g. busy, noanswer, offline, always, assistant",
 			},                   
 			:call_log => {
 				:call_type => "Type of the call, e.g. in, out",

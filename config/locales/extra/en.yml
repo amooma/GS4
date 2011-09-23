@@ -238,7 +238,7 @@ en:
   call_forward_created: "Call forward was successfully created"
   call_forward_updated: "Call forward was successfully updated"
   numeric_in_range: "must be all digits and between %{begin} and %{end}"
-  reason_on_noanswer_only: "must only be set if reason = noanswer"
+  reason_on_noanswer_only: "must only be set if case = noanswer"
   listing_subscribers: "Subscribers"
   username: "Username"
   domain: "Domain"

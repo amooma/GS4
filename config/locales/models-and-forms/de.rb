@@ -25,7 +25,7 @@
 			:pin_change                    => "(SIP-Account: Voicemail-PIN ändern)",  #OPTIMIZE See app/models/pin_change.rb
 			:configuration                 => "Konfiguration",
 			:authentication                => "Authentifikation",
-			:call_forward_reason           => "Grund der Rufumleitung",
+			:call_forward_reason           => "Rufumleitungsfall",
 			:call_queue_to_extension       => "Warteschlange zu Rufnummer",
 			:codec                         => "Codec",
 			:conference_to_extension       => "Konferenzraum zu Rufnummer",
