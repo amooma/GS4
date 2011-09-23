@@ -85,4 +85,10 @@ class Cdr < ActiveRecord::Base
 		return code ? "#{text} (#{code})" : "#{text}"
 	end
 	
+	def self.delete_old
+		cdr_keep_days = Configuration.get( :cdr_keep_days, 32, Integer )
+		old_entries = self.where( :end_stamp => Time.zone.at(0)..Time.zone.at(Time.now.advance( :days => ( cdr_keep_days * -1 ) ) ) )
+		return self.delete(old_entries)
+	end
+	
 end
