@@ -160,9 +160,9 @@ test_match_found = false
 			move_to_bottom_dialplan_route_path( route ),
 			{ :class => 'move_button', :disabled => route.last? }
 		%></td>
-		<td><%= link_to t(:show), route if can?(:show, route) %></td>
-		<td><%= link_to t(:edit), edit_dialplan_route_path( route ) if can?(:edit, route) %></td>
-		<td><%= button_to t(:destroy), route, :confirm => t(:are_you_sure), :method => :delete if can?(:destroy, route) %></td>
+		<td><%= link_to t(:show)    ,                                      route   if can?(:show    , route) %></td>
+		<td><%= link_to t(:edit)    ,            edit_dialplan_route_path( route ) if can?(:edit    , route) %></td>
+		<td><%= link_to t(:destroy) , confirm_destroy_dialplan_route_path( route ) if can?(:destroy , route) %></td>
 		<%
 			else
 		%>

@@ -143,16 +143,19 @@ Gemeinschaft4::Application.routes.draw do
 			post :move_down
 			post :move_to_top
 			post :move_to_bottom
+			get 'confirm_destroy'
 		end
 		collection do
 			get  :test
 			post :test
 		end
 	end
-	#OPTIMIZE Add confirm_destroy here if necessary.
 	
-	resources :dialplan_patterns, :path => 'dialplan-patterns'
-	#OPTIMIZE Add confirm_destroy here if necessary.
+	resources :dialplan_patterns, :path => 'dialplan-patterns' do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
 	namespace :admin do
 		resources :wizard_phone_and_user, :only => [:new, :create]
@@ -256,8 +259,11 @@ Gemeinschaft4::Application.routes.draw do
 		end
 	end
 	
-	resources :sip_gateways, :path => 'gateways'
-	#OPTIMIZE Add confirm_destroy here if necessary.
+	resources :sip_gateways, :path => 'gateways' do
+		member do
+			get 'confirm_destroy'
+		end
+	end
 	
 	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
 	match 'pin_change/update' => 'pin_change#update' , :as => :pin_change  #TODO "Missing template pin_change/edit"

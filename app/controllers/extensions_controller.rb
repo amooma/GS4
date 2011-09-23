@@ -90,19 +90,34 @@ class ExtensionsController < ApplicationController
   # POST /extensions.xml
   def create
     redirect_source = true
+    extension_type  = params[:extension][:type]
+    destination     = params[:extension][:destination]
+
     if ( @sip_account.nil? &&  @conference.nil? &&  @call_queue.nil? )
-      if ( @sip_account    = SipAccount.where(:auth_name => params[:extension][:destination]).first )
-        redirect_source = false
-      elsif ( @conference  = Conference.where(:uuid => params[:extension][:destination]).first )
-        redirect_source = false
-      elsif ( @call_queue  = CallQueue.where(:uuid => params[:extension][:destination]).first )
-        redirect_source = false  
+      redirect_source = false
+      case extension_type
+      when 'sipaccount'
+        @sip_account    = SipAccount.where(:auth_name => params[:extension][:destination]).first
+      when 'conference'
+        @conference  = Conference.where(:uuid => params[:extension][:destination]).first
+      when 'queue'
+        @call_queue  = CallQueue.where(:uuid => params[:extension][:destination]).first
+      when 'faxreceive'
+        @user = User.where(:username => params[:extension][:destination]).first
+        params[:extension][:destination] = '-fax-receive-'
+      when 'vmenu'
+        params[:extension][:destination] = '-vmenu-'
+      when 'parkin'
+        params[:extension][:destination] = '-park-in-'
+      when 'parkout'
+        params[:extension][:destination] = '-park-out-'
       end
     end
 
     if ! @sip_account.nil?
       @extension = @sip_account.extensions.build(params[:extension])
-      
+      @extension.type = extension_type
+
       respond_to do |format|
         if @sip_account.save
           format.html { redirect_source ? redirect_to( @sip_account, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
@@ -114,7 +129,8 @@ class ExtensionsController < ApplicationController
       end
     elsif ! @conference.nil?
       @extension = @conference.extensions.build(params[:extension])
-      
+      @extension.type = extension_type
+  
       respond_to do |format|
         if @conference.save
           format.html { redirect_source ? redirect_to( @conference, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
@@ -126,7 +142,8 @@ class ExtensionsController < ApplicationController
       end
     elsif ! @call_queue.nil?
       @extension = @call_queue.extensions.build(params[:extension])
-      
+      @extension.type = extension_type
+  
       respond_to do |format|
         if @call_queue.save
           format.html { redirect_source ? redirect_to( @call_queue, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
@@ -136,9 +153,28 @@ class ExtensionsController < ApplicationController
           format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
         end
       end
-    else
+    elsif ! @user.nil?
       @extension = Extension.new(params[:extension])
-      
+      @extension.type = extension_type
+  
+      if (saved = @extension.save)
+        @extension.users << @user
+        saved = @extension.save
+      end
+      @extension.destination = destination
+      respond_to do |format|
+        if saved
+          format.html { redirect_source ? redirect_to( @user, :notice => t(:extension_created) ) : redirect_to( @extension, :notice => t(:extension_created) )}
+          format.xml  { render :xml => @user, :status => :created, :location => @extension }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
+        end
+      end
+    elsif extension_type == 'vmenu' || extension_type == 'parkin' ||  extension_type == 'parkout'
+      @extension = Extension.new(params[:extension])
+      @extension.type = extension_type
+
       respond_to do |format|
         if @extension.save
           format.html { redirect_to( @extension, :notice => t(:extension_created) )}
@@ -147,6 +183,13 @@ class ExtensionsController < ApplicationController
           format.html { render :action => "new" }
           format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
         end
+      end
+    else
+      @extension.type = extension_type
+      @extension.errors.add( :base, t('activerecord.attributes.extension.destination'))
+      respond_to do |format|
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @extension.errors, :status => :unprocessable_entity }
       end
     end
   end

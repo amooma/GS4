@@ -134,4 +134,8 @@ class SipGatewaysController < ApplicationController
 		end
 	end
 	
+	def confirm_destroy
+		@sip_gateway = SipGateway.find(params[:id])
+	end
+	
 end

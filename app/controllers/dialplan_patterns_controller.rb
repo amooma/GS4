@@ -108,4 +108,9 @@ class DialplanPatternsController < ApplicationController
     end
   end
   
+  
+  def confirm_destroy
+    @dialplan_pattern = DialplanPattern.find(params[:id])
+  end
+  
 end

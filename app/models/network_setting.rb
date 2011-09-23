@@ -130,7 +130,12 @@ class NetworkSetting < ActiveRecord::Base
   private
   
   def write_files( filename, output )
-    File.open(filename, 'w') {|f| f.write(output) }
+    #begin
+      File.open(filename, 'w') {|f| f.write(output) }
+    #rescue => e
+    #  #OPTIMIZE We are called from after_save, so we can't add errors.
+    #  errors.add( :base, "Failed to write #{filename.inspect}." )
+    #end
   end
   
 end

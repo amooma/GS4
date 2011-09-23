@@ -4,10 +4,10 @@
 	<%= f.input :name %>
 	<%= f.input :uuid, :as => :hidden %>
 	
-	<%= f.simple_fields_for :extensions do |extension| %>
-		<%= extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
-		<%= extension.input :destination, :as => :hidden %>
-		<%= extension.input :active, :as => :hidden %>
+	<%= f.simple_fields_for :extensions do |f_extension| %>
+		<%= f_extension.input :extension, :hint => t('simple_form.hints.extension.extension') %>
+		<%= f_extension.input :destination, :as => :hidden %>
+		<%= f_extension.input :active, :as => :hidden %>
 	<% end %>
 	
 	<%= f.button :submit %>

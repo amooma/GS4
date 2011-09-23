@@ -16,16 +16,25 @@
     <td><%= extension.extension %></td>
     <td><%= extension.destination %></td>
     <td>
-<% if extension.users.count > 0 %>
+<% extension_type = extension.type %>
+<% if extension_type    == :sipaccount %>
+<%= t(:sip_account) %>: <%= extension.sip_accounts.first.to_display %>
+<% elsif extension_type == :queue  %>
+<%= t(:call_queue) %>
+<% elsif extension_type == :conference  %>
+<%= t(:conference) %>: <%= extension.conferences.first.name %>
+<% elsif extension_type == :faxreceive %>
   <% if extension.destination == "-fax-receive-" %>
   <%= t(:fax) %>: <%= extension.users.first.to_display %>
   <% else %>
   <%= t(:user) %>: <%= extension.users.first.to_display %>
   <% end %>
-<% elsif extension.sip_accounts.count > 0 %>
-<%= t(:sip_account) %>: <%= extension.sip_accounts.first.to_display %>
-<% elsif extension.conferences.count > 0  %>
-<%= t(:conference) %>: <%= extension.conferences.first.name %>
+<% elsif extension_type == :vmenu  %>
+<%= t(:voicemail) %>
+<% elsif extension_type == :parkin  %>
+<%= t(:park_in) %>
+<% elsif extension_type == :parkout  %>
+<%= t(:park_out) %>
 <% end %>
     </td>
     <td><%= extension.active ? t(:yes_lowercase) : t(:no_lowercase) %></td>
