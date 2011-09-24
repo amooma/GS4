@@ -711,7 +711,7 @@
 				:phone => "Das Telefon auf das dieser SIP-Account provisioniert werden soll.",
 				:phone_id => "Relation zu Phone",
 				:position => "Position in der Liste",
-				:voicemail_pin_old   => "Das Voicemail-Passwort, welches bisher berwendet wurde",
+				:voicemail_pin_old   => "Das Voicemail-Passwort, welches bisher verwendet wurde",
 				:voicemail_pin_confirmation => "Die Bestätigung muss exakt mit dem Passwort überinstimmen",
 			},
 			:sip_account_codec => {
