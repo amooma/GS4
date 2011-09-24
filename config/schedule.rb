@@ -28,4 +28,8 @@ every :day, :at => '4:44 am' do
   runner "CallLog.delete_old"
 end
 
+every 3.minutes do 
+  rake "fax:pop3"
+end
+
 # Learn more: http://github.com/javan/whenever
