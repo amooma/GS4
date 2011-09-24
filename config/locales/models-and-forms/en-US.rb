@@ -320,7 +320,8 @@
 				:phone               => "Phone",
 				:phone_id            => "Phone ID",
 				:position            => "Position",
-				:voicemail_pin_old   => "Current Voicemail password",
+				
+				:voicemail_pin_old   => "Current voicemail password",
 				:voicemail_pin_confirmation => "Voicemail password confirmation",
 			},
 			:sip_account_codec => {
@@ -710,8 +711,9 @@
 				:phone => "The phone onto which this SIP account should be provisioned.",
 				:phone_id => "Relation to Phone",
 				:position => "Position in liste",
+				
 				:voicemail_pin_old   => "Voicemail password currently in use",
-				:voicemail_pin_confirmation => "The Voicemail password and confirmation password must match",
+				:voicemail_pin_confirmation => "The voicemail password and confirmation password must match",
 			},
 			:sip_account_codec => {
 				:codec          => "Relation to the codec",
