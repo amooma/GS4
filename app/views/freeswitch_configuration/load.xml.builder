@@ -1274,9 +1274,11 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 			
 			xml.extension( :name => 'gs-main' ) {
-				xml.condition( :field => '${sip_has_crypto}', :expression => '^(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)$', :break => 'never') {
-				  xml.action( :application => "set", :data => "sip_secure_media=true")
-				  xml.action( :application => "export", :data => "sip_secure_media=true")
+				xml.condition( :field => '${sip_has_crypto}', :expression => '^(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)$', :break => 'never' ) {
+					# http://wiki.freeswitch.org/wiki/Secure_RTP
+					# http://wiki.freeswitch.org/wiki/SRTP
+					xml.action( :application => "set", :data => "sip_secure_media=true" )
+					xml.action( :application => "export", :data => "sip_secure_media=true" )
 				}
 				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {

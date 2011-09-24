@@ -265,8 +265,15 @@ Gemeinschaft4::Application.routes.draw do
 		end
 	end
 	
-	match 'pin_change'        => 'pin_change#edit'   , :as => :pin_change  #TODO "Missing template pin_change/edit"
-	match 'pin_change/update' => 'pin_change#update' , :as => :pin_change  #TODO "Missing template pin_change/edit"
+	match 'pin_change',
+		:via        => [ :get ],
+		:controller => :pin_change,
+		:action     => :edit
+	
+	match 'pin_change',
+		:via        => [ :post ],
+		:controller => :pin_change,
+		:action     => :update
 	
 	# The priority is based upon order of creation:
 	# first created -> highest priority.

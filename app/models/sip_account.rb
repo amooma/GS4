@@ -141,6 +141,12 @@ class SipAccount < ActiveRecord::Base
     return nil
   )end
   
+  def voicemail_pin_confirmation
+  end
+  
+  def voicemail_pin_old
+  end
+  
   private
   
   def create_subscriber()

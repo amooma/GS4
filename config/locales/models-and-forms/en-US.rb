@@ -25,7 +25,7 @@
 			:pin_change                    => "(SIP account: change voicemail PIN)",  #OPTIMIZE See app/models/pin_change.rb
 			:configuration                 => "Configuration",
 			:authentication                => "Authentication",
-			:call_forward_reason           => "Call forward reason",
+			:call_forward_reason           => "Call forward case",
 			:call_queue_to_extension       => "Call queue to extension",
 			:codec                         => "Codec",
 			:conference_to_extension       => "Conference room to extension",
@@ -320,6 +320,9 @@
 				:phone               => "Phone",
 				:phone_id            => "Phone ID",
 				:position            => "Position",
+				
+				:voicemail_pin_old   => "Current voicemail password",
+				:voicemail_pin_confirmation => "Voicemail password confirmation",
 			},
 			:sip_account_codec => {
 				:codec          => "Codec",
@@ -419,6 +422,29 @@
 		},
 	},
 	
+	:activemodel => {
+		:models => {
+			:email_configuration => "E-Mail configuration",
+		},
+		:attributes => {
+			:email_configuration => {
+				:smarthost_hostname   => "Smarthost host",
+				:smarthost_port       => "Smarthost port",
+				:smarthost_domain     => "Smarthost domain",
+				:smarthost_username   => "Smarthost username",
+				:smarthost_password   => "Smarthost password",
+				:smarthost_authentication => "Smarthost authentication method",
+				:smarthost_enable_starttls_auto => "Smarthost auto-StartTLS",
+				:mailserver_hostname  => "Mail server host",
+				:mailserver_port      => "Mail server port",
+				:mailserver_username  => "Mail server username",
+				:mailserver_password  => "Mail server password",
+				:fax_send_mail        => "Send fax documents via E-mail",
+				:fax_pop3             => "Receive fax documents via e-mail",
+			},
+		},
+	},
+	
 	:simple_form => {
 		:hints => {
 			:user => {
@@ -444,7 +470,7 @@
 				:active => "Only active call forwarding rules will be followed. This way you can easily deactivate call forwards temporarily without having to delete them.",
 			},  
 			:call_forward_reason => {
-				:value => "Call forward reason, e.g. busy, noanswer, offline, always, assistant",
+				:value => "Call forward case, e.g. busy, noanswer, offline, always, assistant",
 			},                   
 			:call_log => {
 				:call_type => "Type of the call, e.g. in, out",
@@ -685,6 +711,9 @@
 				:phone => "The phone onto which this SIP account should be provisioned.",
 				:phone_id => "Relation to Phone",
 				:position => "Position in liste",
+				
+				:voicemail_pin_old   => "Voicemail password currently in use",
+				:voicemail_pin_confirmation => "The voicemail password and confirmation password must match",
 			},
 			:sip_account_codec => {
 				:codec          => "Relation to the codec",

@@ -25,7 +25,7 @@
 			:pin_change                    => "(SIP-Account: Voicemail-PIN ändern)",  #OPTIMIZE See app/models/pin_change.rb
 			:configuration                 => "Konfiguration",
 			:authentication                => "Authentifikation",
-			:call_forward_reason           => "Grund der Rufumleitung",
+			:call_forward_reason           => "Rufumleitungsfall",
 			:call_queue_to_extension       => "Warteschlange zu Rufnummer",
 			:codec                         => "Codec",
 			:conference_to_extension       => "Konferenzraum zu Rufnummer",
@@ -321,6 +321,9 @@
 				:phone               => "Telefon",
 				:phone_id            => "Telefon-ID",
 				:position            => "Position",
+				
+				:voicemail_pin_old   => "Bisheriges Voicemail-Passwort",
+				:voicemail_pin_confirmation => "Voicemail-Passwort-Bestätigung",
 			},
 			:sip_account_codec => {
 				:codec          => "Codec",
@@ -417,6 +420,29 @@
 				:account_code        => "Account",
 			},
 			
+		},
+	},
+	
+	:activemodel => {
+		:models => {
+			:email_configuration => "E-Mail-Konfiguration",
+		},
+		:attributes => {
+			:email_configuration => {
+				:smarthost_hostname   => "Smarthost-Host",
+				:smarthost_port       => "Smarthost-Port",
+				:smarthost_domain     => "Smarthost-Domain",
+				:smarthost_username   => "Smarthost-Benutzername",
+				:smarthost_password   => "Smarthost-Passwort",
+				:smarthost_authentication => "Smarthost-Authentifizierungsmethode",
+				:smarthost_enable_starttls_auto => "Smarthost-Auto-StartTLS",
+				:mailserver_hostname  => "Mail-Server-Host",
+				:mailserver_port      => "Mail-Server-Port",
+				:mailserver_username  => "Mail-Server-Benutzername",
+				:mailserver_password  => "Mail-Server-Passwort",
+				:fax_send_mail        => "Fax-Dokumente per E-Mail versenden",
+				:fax_pop3             => "Fax-Dokumente von E-Mail-Konto beziehen",
+			},
 		},
 	},
 	
@@ -686,6 +712,9 @@
 				:phone => "Das Telefon auf das dieser SIP-Account provisioniert werden soll.",
 				:phone_id => "Relation zu Phone",
 				:position => "Position in der Liste",
+				
+				:voicemail_pin_old   => "Das Voicemail-Passwort, welches bisher verwendet wurde",
+				:voicemail_pin_confirmation => "Die Bestätigung muss exakt mit dem Passwort übereinstimmen.",
 			},
 			:sip_account_codec => {
 				:codec          => "Relation zum Codec",
