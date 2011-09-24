@@ -19,4 +19,9 @@
 every 2.hours do
   rake "sysinfo:get"
 end
+
+every :day, :at => '3:33 am' do 
+  runner "Cdr.delete_old"
+end
+
 # Learn more: http://github.com/javan/whenever
