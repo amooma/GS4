@@ -1,3 +1,4 @@
-misc/kamailio/etc/kamailio.cfg  etc/kamailio/
-#misc/kamailio/etc/db_text/*     etc/kamailio/db_text/
+misc/kamailio/etc/kamailio.cfg      etc/kamailio/
+misc/kamailio/etc/tls-amooma.cfg    etc/kamailio/
+#misc/kamailio/etc/db_text/*         etc/kamailio/db_text/
 
