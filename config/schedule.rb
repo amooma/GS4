@@ -24,4 +24,8 @@ every :day, :at => '3:33 am' do
   runner "Cdr.delete_old"
 end
 
+every :day, :at => '4:44 am' do 
+  runner "CallLog.delete_old"
+end
+
 # Learn more: http://github.com/javan/whenever
