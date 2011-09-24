@@ -8,58 +8,49 @@ class PinChangeController < ApplicationController
 	
 	def edit
 		@sip_accounts = current_user.sip_accounts.find(:all, :conditions => ['voicemail_server_id NOT NULL'])
-		
+		if @sip_account  = @sip_accounts.first
+			@sip_account.voicemail_pin = nil
+		else
+			@sip_account = SipAccount.new
+		end
+
 		respond_to do |format|
 			format.html
-			format.xml { head :ok }
 		end
 	end
 	
 	def update
 		@sip_accounts = current_user.sip_accounts.find(:all, :conditions => ['voicemail_server_id NOT NULL'])
-		@sip_account  = current_user.sip_accounts.where(:id => params[:sip_account_id]).first
-		
-		if (@sip_account)
-			@changes = false
-			
-			pin              = params[:voicemail_pin]
-			old_pin          = params[:old_voicemail_pin]
-			pin_confirmation = params[:voicemail_pin_confirmation]
-			
-			active_pin       = @sip_account.voicemail_pin
-			
-			@errors = false  #OPTIMIZE Why is this an instance variable instead of a local variable?
+		@sip_account  = current_user.sip_accounts.where(:id => params[:sip_account][:id]).first
+
+		if @sip_account
+			pin              = params[:sip_account][:voicemail_pin]
+			old_pin          = params[:sip_account][:voicemail_pin_old]
+			pin_confirmation = params[:sip_account][:voicemail_pin_confirmation]
+			current_pin      = @sip_account.voicemail_pin
+			@sip_account.voicemail_pin = nil
 			
 			if (pin.blank?)
-				@sip_account.errors.add( :base, t(:voicemail_no_pin))
-				@errors = true
+				@sip_account.errors.add( :voicemail_pin, t(:voicemail_no_pin))
 			end
 			if (old_pin.blank?)
-				@sip_account.errors.add( :base, t(:voicemail_no_old_pin))
-				@errors = true
+				@sip_account.errors.add( :voicemail_pin_old, t(:voicemail_no_old_pin))
 			end
 			if (pin_confirmation.blank?)
-				@sip_account.errors.add( :base, t(:voicemail_no_pin_confirmation))
-				@errors = true
+				@sip_account.errors.add( :voicemail_pin_confirmation, t(:voicemail_no_pin_confirmation))
 			end
 			if (pin_confirmation != pin)
-				@sip_account.errors.add( :base, t(:voicemail_pin_confirmation_different))
-				@errors = true
+				@sip_account.errors.add( :voicemail_pin_confirmation, t(:voicemail_pin_confirmation_different))
+			end
+			if (old_pin.to_i != current_pin)
+				@sip_account.errors.add( :voicemail_pin_old, t(:voicemail_old_pin_different))
 			end
 			
-			if (@errors != true && old_pin.to_i != active_pin)
-				@sip_account.errors.add( :base, t(:voicemail_old_pin_different))
-				@errors = true
-			end
-			
-			if (@errors != true)
-				@errors = ! @sip_account.update_attributes(:voicemail_pin => pin)
-				if (! @errors) 
-					flash[:notice] = t(:voicemail_pin_changed)
-				end
+			if (@sip_account.errors.blank? && @sip_account.update_attributes(:voicemail_pin => pin))
+				flash[:notice] = t(:voicemail_pin_changed)
 			end
 		end
-		
+
 		respond_to do |format|
 			format.html { render :action => "edit" }
 			format.xml  { head :ok }

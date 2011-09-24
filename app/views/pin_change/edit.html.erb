@@ -1,24 +1,31 @@
+<% page_title t(:voicemail_pin_change) %>
 <h1><%= t(:voicemail_pin_change) %></h1>
 
-<% if @errors == true %>
-<%= simple_form_for( @sip_account ) do |f| %>
+<%= simple_form_for( @sip_account, :url => pin_change_path, :html => {:method => :post} ) do |f| %>
+	
 	<%= f.error_messages %>
-<% end %>
-<% end %>
+	
+	<%= f.input :sip_account, { 
+		:label => t('activerecord.models.sip_account'),
+		:hint => false,
+	}  do %>
+		<%= f.select( :id, @sip_accounts.collect { |r| [ r.to_display, r.id ] }, { :include_blank => false } ) %>
+	<% end %>
+  
+  <%= f.input :voicemail_pin_old, {
+		:as => :password,
+		:required => true,
+	} %>
 
-<%= form_tag( pin_change_path ) do %>
-	<p><%= t(:sip_account) %>
-		<%= select_tag :sip_account_id, options_from_collection_for_select( @sip_accounts, :id, :to_display ) %>
-	</p>
+  <%= f.input :voicemail_pin, {
+		:as => :password,
+		:required => true,
+	} %>
 	
-	<p><%= t(:old_voicemail_pin) %>
-	<%= password_field_tag :old_voicemail_pin %></p>
-	
-	<p><%= t(:voicemail_pin) %>
-	<%= password_field_tag :voicemail_pin %></p>
-	
-	<p><%= t(:voicemail_pin_confirmation) %>
-	<%= password_field_tag :voicemail_pin_confirmation %></p>
-	
-	<%= submit_tag t(:voicemail_pin_change) %>
+	<%= f.input :voicemail_pin_confirmation, {
+		:as => :password,
+		:required => true,
+	} %>
+
+	<%= f.button :submit, t(:save) %>
 <% end %>
