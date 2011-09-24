@@ -2,22 +2,21 @@
 <h1><%= t(:voicemail_pin_change) %></h1>
 
 <%= simple_form_for( @sip_account, :url => pin_change_path, :html => {:method => :post} ) do |f| %>
-	
 	<%= f.error_messages %>
 	
 	<%= f.input :sip_account, { 
 		:label => t('activerecord.models.sip_account'),
 		:hint => false,
-	}  do %>
+	} do %>
 		<%= f.select( :id, @sip_accounts.collect { |r| [ r.to_display, r.id ] }, { :include_blank => false } ) %>
 	<% end %>
-  
-  <%= f.input :voicemail_pin_old, {
+	
+	<%= f.input :voicemail_pin_old, {
 		:as => :password,
 		:required => true,
 	} %>
-
-  <%= f.input :voicemail_pin, {
+	
+	<%= f.input :voicemail_pin, {
 		:as => :password,
 		:required => true,
 	} %>
@@ -26,6 +25,6 @@
 		:as => :password,
 		:required => true,
 	} %>
-
+	
 	<%= f.button :submit, t(:save) %>
 <% end %>
