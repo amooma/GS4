@@ -264,7 +264,7 @@ Gemeinschaft4::Application.routes.draw do
 			get 'confirm_destroy'
 		end
 	end
-
+	
 	match 'pin_change',
 		:via        => [ :get ],
 		:controller => :pin_change,
