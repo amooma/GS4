@@ -56,6 +56,7 @@ aptitude install -y --allow-untrusted \
   libjpeg62 \
   kamailio  \
   kamailio-unixodbc-modules \
+  kamailio-tls-modules \
   freeswitch \
   freeswitch-lua  \
   freeswitch-perl freeswitch-spidermonkey \

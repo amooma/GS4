@@ -944,7 +944,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'inbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
 						xml.param( :name => 'outbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
 						xml.param( :name => 'inbound-codec-negotiation', :value => 'greedy' )
-						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
+						#xml.param( :name => 'inbound-late-negotiation', :value => 'false' )
 						# http://wiki.freeswitch.org/wiki/Codec_negotiation#Late_Negotiation_.28requires_param.29
 						
 						xml.param( :name => 'rtp-ip', :value => "#{@sip_server_ip}" )
@@ -1257,7 +1257,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'set', :data => "fax_enable_t38_request=#{Configuration.get(:fax_enable_t38_request, true, Configuration::Boolean)}" )
 					xml.action( :application => 'set', :data => "fax_enable_t38=#{Configuration.get(:fax_enable_t38, true, Configuration::Boolean)}" )
 					xml.action( :application => 'set', :data => "api_hangup_hook=system 
- ${base_dir}/scripts/fax_store.sh #{@rxfax_file_base_name} 
+ ${base_dir}/scripts/fax_store.sh create #{@rxfax_file_base_name}
  '\\\\\\${sip_to_user}' 
  '\\\\\\${caller_id_number}' 
  '\\\\\\${fax_remote_station_id}'

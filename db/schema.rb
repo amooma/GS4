@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110918200512) do
+ActiveRecord::Schema.define(:version => 20110925162402) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -401,6 +401,7 @@ ActiveRecord::Schema.define(:version => 20110918200512) do
     t.integer  "expire"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "caller_id_patterns"
   end
 
   create_table "sip_proxies", :force => true do |t|
