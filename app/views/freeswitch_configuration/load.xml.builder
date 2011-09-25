@@ -1257,7 +1257,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'set', :data => "fax_enable_t38_request=#{Configuration.get(:fax_enable_t38_request, true, Configuration::Boolean)}" )
 					xml.action( :application => 'set', :data => "fax_enable_t38=#{Configuration.get(:fax_enable_t38, true, Configuration::Boolean)}" )
 					xml.action( :application => 'set', :data => "api_hangup_hook=system 
- ${base_dir}/scripts/fax_store.sh #{@rxfax_file_base_name} 
+ ${base_dir}/scripts/fax_store.sh create #{@rxfax_file_base_name}
  '\\\\\\${sip_to_user}' 
  '\\\\\\${caller_id_number}' 
  '\\\\\\${fax_remote_station_id}'

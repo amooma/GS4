@@ -39,10 +39,14 @@ class FaxDocument < ActiveRecord::Base
 			errors.add( :base, I18n.t(:fax_document_not_sent))
 			return false
 		end
-		raw_suffix = File.basename( Configuration.get( :fax_file_suffix, '.tif' ))
-		raw_file = File.expand_path( "#{Configuration.get( :fax_files_directory )}/#{self.raw_file}#{raw_suffix}" )
+		raw_suffix    = File.basename( Configuration.get( :fax_file_suffix, '.tif' ))
+		raw_file      = File.expand_path( "#{Configuration.get( :fax_files_directory )}/#{self.raw_file}#{raw_suffix}" )
+		retries       = Configuration.get( :fax_send_retries, 3, Integer )
+		retry_seconds = Configuration.get( :fax_send_retry_seconds, 30, Integer )
+		fax_header    = Configuration.get(:fax_header, "", String)
+		
 		require 'xml_rpc'
-		result = XmlRpc.send_fax( destination, domain, raw_file, self.source )
+		result = XmlRpc.send_fax( destination, domain, raw_file, self.source, fax_header, retries, retry_seconds, self.id )
 		if ! result
 			errors.add( :base, I18n.t(:fax_document_not_sent))
 			return false
