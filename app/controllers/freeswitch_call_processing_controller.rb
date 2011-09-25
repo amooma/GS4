@@ -540,9 +540,30 @@ class FreeswitchCallProcessingController < ApplicationController
 									action :hangup
 									return
 								end
-								
+
 								phone_number = (match_result[:opts] || {})[:number].to_s
 								sip_gateway_name = "gateway-#{route.sip_gateway.try(:id)}"
+								sip_gateway_caller_id_patterns = route.sip_gateway.try(:caller_id_patterns)
+								caller_ids_available = src_sip_account.extensions.where(:active => true).all
+
+								if caller_ids_available.blank?
+									logger.warn(_bold( "#{logpfx} No active extensions for sip account \"#{src_sip_account.to_display}\" - caller ID not set" ))
+								elsif sip_gateway_caller_id_patterns.blank?
+									logger.debug(_bold( "#{logpfx} No caller ID patterns set for gateway \"#{sip_gateway_name}\" - caller ID not set" ))
+								else
+									caller_ids_available = caller_ids_available.collect { |r| r.extension }
+									logger.debug(_bold( "#{logpfx} Caller ID patterns for gateway \"#{sip_gateway_name}\" : #{sip_gateway_caller_id_patterns.split( /, */ )}" ))
+									logger.debug(_bold( "#{logpfx} Caller IDs available for sip account \"#{src_sip_account.to_display}\" : #{caller_ids_available}" ))
+									caller_id_number = get_gateway_caller_id( caller_ids_available, sip_gateway_caller_id_patterns.split( /, */ ) )
+									logger.debug(_bold( "#{logpfx} Caller ID for sip account \"#{src_sip_account.to_display}\" : #{caller_id_number}" ))
+									if caller_id_number
+										logger.info(_bold( "#{logpfx} Caller ID set to #{caller_id_number} ..." ))
+										action :set, "effective_caller_id_number=#{ enc_sip_user( caller_id_number )}"
+									else
+										logger.info(_bold( "#{logpfx} Caller ID left untouched ..." ))
+									end
+								end                                      
+								
 								logger.info(_bold( "#{logpfx} Calling #{phone_number.inspect} via gateway #{route.sip_gateway.try(:hostport).inspect} (#{sip_gateway_name}) ..." ))
 								
 								action_set_ringback()
@@ -672,6 +693,27 @@ class FreeswitchCallProcessingController < ApplicationController
 		action :set, "sip_h_Privacy=" << ((! clir) ? 'none' : 'id;header')
 	) end
 	
+	
+	def get_gateway_caller_id( caller_ids, caller_id_patterns )
+	(
+		require 'dialplan_pattern_matcher'
+
+		caller_id_patterns.each do |caller_id_pattern|
+			caller_ids.each do |caller_id|
+				begin
+					if ! dialplan_pattern = DPP( :megaco_digitstring_mod, caller_id_pattern )
+						break
+					end
+					if dialplan_pattern.match( caller_id )
+						return caller_id
+					end
+				rescue => e
+					return false
+				end
+			end
+		end
+		return nil
+	) end
 	
 	def after_bridge_actions()
 	(

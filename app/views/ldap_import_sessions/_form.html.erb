@@ -1,0 +1,14 @@
+<%= simple_form_for( @ldap_import_session ) do |f| %>
+	<%= f.error_notification %>
+	
+	<%= f.input :host %>
+	<%= f.input :version %>
+	<%= f.input :ssl %>
+	<%= f.input :port %>
+	<%= f.input :bind_dn %>
+	<%= f.input :password %>
+	<%= f.input :base_dn %>
+	<%= f.input :cn %>
+	
+	<%= f.button :submit %>
+<% end %>

@@ -1,7 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  	resources :ldap_import_sessions
 
-  	
 	resources :network_settings
 	
 	resources :configurations
@@ -254,6 +254,7 @@ Gemeinschaft4::Application.routes.draw do
 			get 'confirm_destroy'
 			get 'number'
 			put 'transfer'
+			post 'update'
 		end
 	end
 	
