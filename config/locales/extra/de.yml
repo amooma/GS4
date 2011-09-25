@@ -346,6 +346,7 @@ de:
   
   
   global_contacts: "Kontakte (anlagenweit)"
+  ldap_import_sessions: "LDAP Import (Kontakte)"
   
   global_contact: "Anlagenweiter Kontakt"
   new_global_contact: "Neuer Kontakt (anlagenweit)"

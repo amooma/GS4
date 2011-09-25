@@ -343,9 +343,10 @@ en:
   fax_business: "Business faxnumber"
   
   contacts: "Contacts"
-  
+
   
   global_contacts: "Contacts (system-wide)"
+  ldap_import_sessions: "LDAP Import (Kontakte)"
   
   global_contact: "System-wide Contact"
   new_global_contact: "New system-wide contact"
