@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>State:</b>
+  <%= @backup.state %>
+</p>
+
+<p>
+  <b>Info:</b>
+  <pre>
+  <%= @backup.info %>
+  </pre>
+</p>
+
+
+<%= link_to 'Back', backups_path %>
