@@ -250,6 +250,7 @@ Gemeinschaft4::Application.routes.draw do
 			get 'confirm_destroy'
 			get 'number'
 			put 'transfer'
+			post 'update'
 		end
 	end
 	
