@@ -944,7 +944,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 						xml.param( :name => 'inbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
 						xml.param( :name => 'outbound-codec-prefs', :value => 'G7221@32000h,G7221@16000h,G722,PCMA,PCMU,GSM' )
 						xml.param( :name => 'inbound-codec-negotiation', :value => 'greedy' )
-						xml.param( :name => 'inbound-late-negotiation', :value => 'true' )
+						#xml.param( :name => 'inbound-late-negotiation', :value => 'false' )
 						# http://wiki.freeswitch.org/wiki/Codec_negotiation#Late_Negotiation_.28requires_param.29
 						
 						xml.param( :name => 'rtp-ip', :value => "#{@sip_server_ip}" )
@@ -1274,9 +1274,11 @@ xml.document( :type => 'freeswitch/xml' ) {
 			}
 			
 			xml.extension( :name => 'gs-main' ) {
-				xml.condition( :field => '${sip_has_crypto}', :expression => '^(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)$', :break => 'never') {
-				  xml.action( :application => "set", :data => "sip_secure_media=true")
-				  xml.action( :application => "export", :data => "sip_secure_media=true")
+				xml.condition( :field => '${sip_has_crypto}', :expression => '^(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)$', :break => 'never' ) {
+					# http://wiki.freeswitch.org/wiki/Secure_RTP
+					# http://wiki.freeswitch.org/wiki/SRTP
+					xml.action( :application => "set", :data => "sip_secure_media=true" )
+					xml.action( :application => "export", :data => "sip_secure_media=true" )
 				}
 				xml.condition( :field => '${module_exists(mod_spidermonkey)}', :expression => 'true' )
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge-(.+)$' ) {

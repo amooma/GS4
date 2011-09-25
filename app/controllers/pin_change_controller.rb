@@ -13,7 +13,7 @@ class PinChangeController < ApplicationController
 		else
 			@sip_account = SipAccount.new
 		end
-
+		
 		respond_to do |format|
 			format.html
 		end
@@ -22,7 +22,7 @@ class PinChangeController < ApplicationController
 	def update
 		@sip_accounts = current_user.sip_accounts.find(:all, :conditions => ['voicemail_server_id NOT NULL'])
 		@sip_account  = current_user.sip_accounts.where(:id => params[:sip_account][:id]).first
-
+		
 		if @sip_account
 			pin              = params[:sip_account][:voicemail_pin]
 			old_pin          = params[:sip_account][:voicemail_pin_old]
@@ -50,7 +50,7 @@ class PinChangeController < ApplicationController
 				flash[:notice] = t(:voicemail_pin_changed)
 			end
 		end
-
+		
 		respond_to do |format|
 			format.html { render :action => "edit" }
 			format.xml  { head :ok }

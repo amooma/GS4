@@ -321,8 +321,9 @@
 				:phone               => "Telefon",
 				:phone_id            => "Telefon-ID",
 				:position            => "Position",
+				
 				:voicemail_pin_old   => "Bisheriges Voicemail-Passwort",
-				:voicemail_pin_confirmation => "Voicemail-Passwort Bestätigung",
+				:voicemail_pin_confirmation => "Voicemail-Passwort-Bestätigung",
 			},
 			:sip_account_codec => {
 				:codec          => "Codec",
@@ -711,8 +712,9 @@
 				:phone => "Das Telefon auf das dieser SIP-Account provisioniert werden soll.",
 				:phone_id => "Relation zu Phone",
 				:position => "Position in der Liste",
+				
 				:voicemail_pin_old   => "Das Voicemail-Passwort, welches bisher verwendet wurde",
-				:voicemail_pin_confirmation => "Die Bestätigung muss exakt mit dem Passwort überinstimmen",
+				:voicemail_pin_confirmation => "Die Bestätigung muss exakt mit dem Passwort übereinstimmen.",
 			},
 			:sip_account_codec => {
 				:codec          => "Relation zum Codec",
