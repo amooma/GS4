@@ -17,7 +17,10 @@ class Configuration < ActiveRecord::Base
 	#TODO Clean up this method so it becomes more readable. Reading entries should not store casted values.
 	def self.get( name, default_value = nil, cast_class = nil )
 		if (! @@conf.key?( name ))
-			config_entry = self.where(:name => name).first
+			begin
+				config_entry = self.where(:name => name).first
+			rescue
+			end	
 			if config_entry
 				if (cast_class != nil)
 					@@conf[name] = self.cast_explicitely( config_entry.value, cast_class.name )
