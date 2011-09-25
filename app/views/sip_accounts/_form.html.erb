@@ -9,7 +9,7 @@
 	<% end %>
 	
 	<%= f.input :caller_name %>
-	<%= f.input :auth_name %>
+	<%= f.input :auth_name, :input_html => { :readonly => ! @sip_account.auth_name.blank? } %>
 	<%= f.input :password, :as => :password %>
 	<%= f.input :realm %>
 	
