@@ -46,4 +46,11 @@
 </p>
 ]]> -->
 
+<p>
+	<b><%= t( i18n_path + 'caller_id_patterns' ) %></b>
+	<% @sip_gateway.caller_id_patterns.split( /, */ ).each do |caller_id_pattern| %>
+	<%= caller_id_pattern %><br>
+	<% end %>
+</p>
+
 </div>
