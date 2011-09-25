@@ -1,5 +1,7 @@
 Gemeinschaft4::Application.routes.draw do
 	
+  resources :ldap_import_sessions
+
 	resources :network_settings
 	
 	resources :configurations

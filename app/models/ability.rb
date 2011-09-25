@@ -35,6 +35,7 @@ class Ability
       
       when "admin"
       (
+        can    :manage  , LdapImportSession
         can    :read    , Home
         can    :manage  , Admin
         can    :manage  , User
