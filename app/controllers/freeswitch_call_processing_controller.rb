@@ -70,52 +70,57 @@ class FreeswitchCallProcessingController < ApplicationController
 	# (NO_ROUTE_DESTINATION). No big problem.
 	#
 	CALL_FORWARD_DISPOSITIONS_MAP = {
-		## 200:
-		'NORMAL_CLEARING'          => nil,
+		# 200:
+		:NORMAL_CLEARING           => nil,
+		#
+		:SUCCESS                   => nil,
+		
 		# -:
-		'UNALLOCATED_NUMBER'       => :offline,  #OPTIMIZE ?
+		:UNALLOCATED_NUMBER        => :offline,  #OPTIMIZE ?
 		# 404, 485, 604:
-		'NO_ROUTE_DESTINATION'     => :offline,
+		:NO_ROUTE_DESTINATION      => :offline,
 		# 486, 600:
-		'USER_BUSY'                => :busy,
+		:USER_BUSY                 => :busy,
 		# 480:
-		'NO_USER_RESPONSE'         => :offline,
+		:NO_USER_RESPONSE          => :offline,
 		# 400, 481, 500, 503:
-		'NORMAL_TEMPORARY_FAILURE' => :offline,
+		:NORMAL_TEMPORARY_FAILURE  => :offline,
 		# -:
-		'NO_ANSWER'                => :noanswer,
+		:NO_ANSWER                 => :noanswer,
 		# 401, 402, 403, 407, 603:
-		'CALL_REJECTED'            => :busy,      # or :offline
+		:CALL_REJECTED             => :busy,      # or :offline
 		# -:
-		'SWITCH_CONGESTION'        => :offline,
+		:SWITCH_CONGESTION         => :offline,
 		# -:
-		'REQUESTED_CHAN_UNAVAIL'   => :offline,
+		:REQUESTED_CHAN_UNAVAIL    => :offline,
 		# 480:
-		'NO_USER_RESPONSE'         => :offline,
+		:NO_USER_RESPONSE          => :offline,
 		# -:
-		'SUBSCRIBER_ABSENT'        => :offline,
+		:SUBSCRIBER_ABSENT         => :offline,
 		# 408, 504:
-		'RECOVERY_ON_TIMER_EXPIRE' => :offline,
+		:RECOVERY_ON_TIMER_EXPIRE  => :offline,
 		# 410:
-		'NUMBER_CHANGED'           => :offline,
+		:NUMBER_CHANGED            => :offline,
 		# 413, 414, 416, 420, 421, 423, 505, 513:
-		'INTERWORKING'             => :offline,
+		:INTERWORKING              => :offline,
 		# 484:
-		'INVALID_NUMBER_FORMAT'    => :offline,
+		:INVALID_NUMBER_FORMAT     => :offline,
 		# 488, 606:
-		'INCOMPATIBLE_DESTINATION' => :offline,
+		:INCOMPATIBLE_DESTINATION  => :offline,
 		# 502:
-		'NETWORK_OUT_OF_ORDER'     => :offline,
+		:NETWORK_OUT_OF_ORDER      => :offline,
 		# 405:
-		'SERVICE_UNAVAILABLE'      => :offline,
+		:SERVICE_UNAVAILABLE       => :offline,
 		# 406, 415, 501:
-		'SERVICE_NOT_IMPLEMENTED'  => :offline,
+		:SERVICE_NOT_IMPLEMENTED   => :offline,
 		# 482, 483:
-		'EXCHANGE_ROUTING_ERROR'   => :offline,
+		:EXCHANGE_ROUTING_ERROR    => :offline,
 		# 487:
-		'ORIGINATOR_CANCEL'        => :offline,
+		:ORIGINATOR_CANCEL         => :offline,
+		# -:
+		:MANDATORY_IE_MISSING      => :offline,
 		# everything else:
-		'NORMAL_UNSPECIFIED'       => :offine,
+		:NORMAL_UNSPECIFIED        => :offine,
 	}
 	CALL_FORWARD_DISPOSITIONS_MAP.default = :offline
 	
@@ -123,10 +128,19 @@ class FreeswitchCallProcessingController < ApplicationController
 	protected
 	
 	
-	def call_log( sip_acct_id=nil, type=nil, disp=nil, uuid=nil, src_num=nil, src_name=nil, dst_num=nil, dst_name=nil, fwdd_to=nil )
+	def call_log( sip_acct=nil, type=nil, disp=nil, uuid=nil, src_num=nil, src_name=nil, dst_num=nil, dst_name=nil, fwdd_to=nil )
 	(
+		return false if ! sip_acct
+		logger.info( "#{logpfx} Writing call log for " <<
+			"acct. #{sip_acct.to_display.inspect}, " <<
+			"#{type.inspect}, " <<
+			"from #{src_num.inspect} (#{src_name.inspect}) " <<
+			"to #{dst_num.inspect} (#{dst_name.inspect}): " <<
+			"#{disp.inspect}" <<
+			(fwdd_to.blank? ? '' : ", fwdd_to #{fwdd_to.inspect}") <<
+			" ..." )
 		CallLog.create({
-			:sip_account_id    => sip_acct_id,
+			:sip_account_id    => sip_acct.id,
 			:call_type         => type,
 			:uuid              => uuid,
 			:disposition       => disp,
@@ -192,6 +206,24 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		@call_id = arg_sip_call_id
 		
+		arg_sip_has_crypto        = _arg :'var_sip_has_crypto'
+		arg_sip_has_crypto        = nil if ! [ 'AES_CM_128_HMAC_SHA1_80', 'AES_CM_128_HMAC_SHA1_32' ].include?( arg_sip_has_crypto )
+		arg_sip_crypto_mandatory  = _arg :'var_sip_crypto_mandatory'
+		arg_sip_crypto_mandatory  = [ 'true' ].include?( arg_sip_crypto_mandatory.to_s.downcase )
+		
+		#logger.info( "#{logpfx} var_switch_r_sdp       = #{ (_arg :'var_switch_r_sdp'      ).to_s.gsub(/[\r\n]+/,'\\n') }" )
+		#logger.info( "#{logpfx} var_sip_local_sdp_str  = #{ (_arg :'var_sip_local_sdp_str' ).to_s.gsub(/[\r\n]+/,'\\n') }" )
+		
+		#arg_session_in_hangup_hook= _arg :'var_session_in_hangup_hook'
+		#logger.info( "#{logpfx} session_in_hangup_hook: #{arg_session_in_hangup_hook}" )
+		#arg_session_in_hangup_hook= [ 'true' ].include?( arg_session_in_hangup_hook.to_s.downcase )
+		
+		arg_x_session_ready       = _arg :'var_x_session_ready'
+		#logger.info( "#{logpfx} arg_x_session_ready: #{arg_x_session_ready.inspect}" )
+		arg_x_session_ready       = [ 'true' ].include?( arg_x_session_ready.to_s.downcase )
+		
+		#arg_max_forwards          = _arg :'var_max_forwards'
+		
 		
 		############################################################
 		# Initialize objects:
@@ -205,8 +237,8 @@ class FreeswitchCallProcessingController < ApplicationController
 		dst_conference  = nil   # the dst. Conference (if any)
 		dst_queue       = nil   # the dst. Queue (if any)
 		
-		src_call_log    = nil   # the src. CallLog (if any)
-		dst_call_log    = nil   # the dst. CallLog (if any)
+		#src_call_log    = nil   # the src. CallLog (if any)
+		#dst_call_log    = nil   # the dst. CallLog (if any)
 		
 		if ! arg_src_sip_user.blank?
 			src_sip_account = (
@@ -215,7 +247,7 @@ class FreeswitchCallProcessingController < ApplicationController
 				.where( :sip_servers => { :host => arg_src_cid_sip_domain })
 				.first
 			)
-			src_call_log = CallLog.where({ :uuid => arg_call_uuid, :sip_account_id => src_sip_account.id }).first if src_sip_account
+			#src_call_log = CallLog.where({ :uuid => arg_call_uuid, :sip_account_id => src_sip_account.id }).first if src_sip_account
 		end
 		
 		if ! arg_dst_sip_user_real.blank?
@@ -233,7 +265,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					.where( :sip_servers => { :host => arg_dst_sip_domain })
 					.first
 				)
-				dst_call_log = CallLog.where({ :uuid => arg_call_uuid, :sip_account_id => dst_sip_account.id }).first if dst_sip_account
+				#dst_call_log = CallLog.where({ :uuid => arg_call_uuid, :sip_account_id => dst_sip_account.id }).first if dst_sip_account
 			end
 		end
 		
@@ -255,16 +287,21 @@ class FreeswitchCallProcessingController < ApplicationController
 		logger.info(_bold( "#{logpfx} Callee: <#{ enc_sip_user( arg_dst_sip_user_real )}@#{ arg_dst_sip_domain     }> (" << (dst_sip_account ? "SipAccount ID #{dst_sip_account.id}" : "no SipAccount") << ")" ))
 		
 		if false  # you may want to enable this during debugging
-			_args.each { |k,v|
+			logger.info( "#{logpfx} Parameters (#{_args.length}) {" )
+			logger.info( "#{logpfx} #{_args.inspect}" )
+			_args.each_pair { |k,v|
 				case v
 					when String
-						logger.debug( "   #{k.ljust(36)} = #{v.inspect}" )
+						logger.info( "   #{k.ljust(36)} = #{v.inspect}" )
 					#when Hash  # not used (yet?)
 					#	v.each { |k1,v1|
-					#		logger.debug( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
+					#		logger.info( "   #{k}[ #{k1.ljust(30)} ] = #{v1.inspect}" )
 					#	}
+					else
+						logger.info( "   #{k.ljust(36)} = #{v.inspect}" )
 				end
 			}
+			logger.info( "#{logpfx} Parameters }" )
 		end
 		
 		
@@ -286,12 +323,39 @@ class FreeswitchCallProcessingController < ApplicationController
 			# it evaluates.
 			logger.info(_bold( "#{logpfx} Too many iterations (#{arg_continue_counter})." ))
 			action_log( FS_LOG_WARNING, "Too many iterations (#{arg_continue_counter})." )
-			case _arg( 'Answer-State' )
+			case _arg :'Answer-State'
 				when 'ringing' ; action :respond, '500 Server internal error'
 				else           ; action :hangup
 			end
 			return
 		end
+		
+		arg_continue_counter      = _arg :'var_x_continue_counter'
+		arg_continue_counter      = 0 if arg_continue_counter.blank?
+		
+		
+		#logger.info(_bold( "#{logpfx} Max-Forwards: #{arg_max_forwards.inspect}" ))
+		
+		
+		@arg_done_so_far          = _arg :'var_x_done_so_far'
+		@arg_done_so_far        ||= ''
+		
+		#logger.info( "#{logpfx} SDP crypto: #{arg_sip_has_crypto.inspect}" <<
+		#	(arg_sip_has_crypto ? " (#{ arg_sip_crypto_mandatory ? "mandatory" : "optional" })" : "")
+		#)
+		if arg_sip_has_crypto
+			logger.info( "#{logpfx} Crypto #{arg_sip_has_crypto.inspect} (" <<
+				(arg_sip_crypto_mandatory ? "mandatory" : "optional" ) <<
+				") offered in SDP. Enabling SRTP." )
+			action :set    , 'sip_secure_media=true'
+			action :export , 'sip_secure_media=true'
+		else
+			logger.info( "#{logpfx} No crypto offered in SDP. Won't enable SRTP." )
+		end
+		
+		logger.info( "#{logpfx} Steps done so far: #{steps_done.inspect}" )
+		
+		logger.info( "#{logpfx} Session ready?: #{ arg_x_session_ready ? "yes" : "no" }" )
 		
 		
 		# For FreeSwitch dialplan applications see
@@ -334,10 +398,20 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		if arg_dst_sip_user_alias.blank?
 			logger.info(_bold( "#{logpfx} No destination given." ))
-			case _arg( 'Answer-State' )
+			logger.info(_bold( "#{logpfx} Answer-State: #{ _arg :'Answer-State' }" ))
+			case _arg :'Answer-State'
 				when 'ringing' ; action :respond, '404 Not found'  # or '400 Bad Request'? or '484 Address Incomplete'?
 				else           ; action :hangup
 			end
+			return
+		end
+		
+		
+		if arg_call_disposition.to_s.to_sym == :EXCHANGE_ROUTING_ERROR
+			# 482 Loop Detected or 483 Too Many Hops
+			logger.info(_bold( "#{logpfx} ######################## Loop detected" ))
+			action :respond, "482 Loop detected"
+			action :hangup
 			return
 		end
 		
@@ -346,19 +420,25 @@ class FreeswitchCallProcessingController < ApplicationController
 		# Figure out what to do with the call:
 		############################################################
 		
-		if arg_call_disposition.blank?; (
+		# Always continue:
+		#action :_continue
+		
+		#if arg_call_disposition.blank?; (
+		if ! step_done?( 'step1' ) && arg_x_session_ready; (
 			# We didn't try to call the SIP account yet.
 			#logger.info( "#{logpfx} We didn't try to call the SIP account yet." )
 			
+			step_doing_now( 'step1' )
+			
 			#set_caller_id( src_sip_account, arg_src_cid_sip_display, arg_src_sip_user, arg_dst_sip_domain )
 			
-			# Write call log:
-			if src_sip_account
-				call_log(
-					src_sip_account.id, 'out', 'answered', arg_call_uuid,
-					arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
-				)
-			end
+			## Write call log:
+			#if src_sip_account
+			#	call_log(
+			#		src_sip_account.id, 'out', 'answered', arg_call_uuid,
+			#		arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+			#	)
+			#end
 			
 			
 			############################################################
@@ -381,10 +461,10 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 					check_valid_voicemail_box_destination( cfwd_always.destination )
 					
-					call_log(
-						dst_sip_account.id, 'in', 'forwarded', arg_call_uuid,
-						arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, cfwd_always.destination
-					)
+					#call_log(
+					#	dst_sip_account.id, 'in', 'forwarded', arg_call_uuid,
+					#	arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, cfwd_always.destination
+					#)
 					
 					action :transfer, "#{enc_sip_user( cfwd_always.destination )} XML default"
 				end
@@ -420,10 +500,10 @@ class FreeswitchCallProcessingController < ApplicationController
 					if is_assistant; (  # Is the assistant of a call forward.(?)
 						logger.info(_bold( "#{logpfx} Is the assistant." ))
 						
-						call_log(
-							dst_sip_account.id, 'in', 'answered', arg_call_uuid,
-							arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
-						)
+						#call_log(
+						#	dst_sip_account.id, 'in', 'answered', arg_call_uuid,
+						#	arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+						#)
 						
 						action_set_ringback()
 						action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
@@ -434,18 +514,18 @@ class FreeswitchCallProcessingController < ApplicationController
 					else (  # Has a call forward to an assistant.(?)
 						logger.info(_bold( "#{logpfx} Has a call forward to an assistant." ))
 						
-						call_log(
-							dst_sip_account.id, 'in', 'answered', arg_call_uuid,
-							arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
-						)
+						#call_log(
+						#	dst_sip_account.id, 'in', 'answered', arg_call_uuid,
+						#	arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+						#)
 						
 						assistant_extension  = Extension.where( :extension => "#{cfwd_assistant.destination}", :active => true ).first
 						if assistant_extension; (
 							assistant_sip_account = assistant_extension.sip_accounts.first
-							call_log(
-								assistant_sip_account.id, 'in', 'answered', arg_call_uuid,
-								arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
-							)
+							#call_log(
+							#	assistant_sip_account.id, 'in', 'answered', arg_call_uuid,
+							#	arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+							#)
 							
 							action :export, "alert_info=http://example.com;info=#{arg_dst_sip_user_real};x-line-id=0"
 							# Note: "localhost" in the Alert-Info header does not work for Snom phones.
@@ -482,10 +562,10 @@ class FreeswitchCallProcessingController < ApplicationController
 						
 						#OPTIMIZE It's strange to write call logs as "answered" and then
 						# delete them later if the call wasn't answered.
-						call_log(
-							dst_sip_account.id, 'in', 'answered', arg_call_uuid,
-							arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
-						)
+						#call_log(
+						#	dst_sip_account.id, 'in', 'answered', arg_call_uuid,
+						#	arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+						#)
 						
 						# Ring the SIP account via Kamailio:
 						action_log( FS_LOG_INFO, "Calling SIP account <#{ enc_sip_user( arg_dst_sip_user_real ) }@#{ arg_dst_sip_domain }> ..." )
@@ -494,7 +574,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						action_set_ringback()
 						action :bridge    , "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						after_bridge_actions()
-						action :_continue
+						#action :_continue
 					)
 					elsif dst_conference; (
 						logger.info(_bold( "#{logpfx} Entering conference room <#{ enc_sip_user( arg_dst_sip_user_real ) }@#{ arg_dst_sip_domain }> ..." ))
@@ -512,19 +592,19 @@ class FreeswitchCallProcessingController < ApplicationController
 						src_user = src_sip_account.user if src_sip_account
 						
 						if src_user
-							logger.debug( "#{logpfx} Fetching routes that apply to any account or user #{src_user.username.inspect}  ..." )
+							logger.info( "#{logpfx} Fetching routes that apply to any account or user #{src_user.username.inspect} ..." )
 							routes = DialplanRoute.where(
 								DialplanRoute.arel_table[:user_id].eq( nil ) .or \
 								DialplanRoute.arel_table[:user_id].eq( src_user.id   )
 							).order( DialplanRoute.arel_table[:position] )
 						else
-							logger.debug( "#{logpfx} Fetching routes that apply to any account  ..." )
+							logger.info( "#{logpfx} Fetching routes that apply to any account ..." )
 							routes = DialplanRoute.where(
 								DialplanRoute.arel_table[:user_id].eq( nil )
 							).order( DialplanRoute.arel_table[:position] )
 						end
-						logger.debug( "#{logpfx} Got #{routes.length} route(s) that might apply." )
-						logger.debug( "#{logpfx} Destination: #{arg_dst_sip_user_real.inspect}" )
+						logger.info( "#{logpfx} Got #{routes.length} route(s) that might apply." )
+						logger.info( "#{logpfx} Destination: #{arg_dst_sip_user_real.inspect}" )
 						routes.each { |route|
 							begin
 								match_result = route.match( arg_dst_sip_user_real.to_s, src_user.try(:id) ) || {}
@@ -532,7 +612,7 @@ class FreeswitchCallProcessingController < ApplicationController
 								match_result = {}
 								logger.error(_bold( "#{logpfx} Error: #{e.message} (#{e.class.name})" ))
 							end
-							logger.debug( "#{logpfx} Route #{route.eac}|#{route.dialplan_pattern.try(:pattern)} (#{route.name.inspect}) => Match: #{match_result[:match].inspect}" + (match_result[:match] ? '' : ", reason: #{match_result[:reason].to_s.inspect}") )
+							logger.info( "#{logpfx} Route #{route.eac}|#{route.dialplan_pattern.try(:pattern)} (#{route.name.inspect}) => Match: #{match_result[:match].inspect}" + (match_result[:match] ? '' : ", reason: #{match_result[:reason].to_s.inspect}") )
 							if match_result[:match]
 								if ! route.sip_gateway
 									logger.info(_bold( "#{logpfx} Route says: forbidden." ))
@@ -556,7 +636,10 @@ class FreeswitchCallProcessingController < ApplicationController
 								#	"#{enc_sip_user( arg_dst_sip_user_real )}" <<
 								#	";fs_path=sip:127.0.0.1:5060"
 								
-								action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{ route.sip_gateway.hostport };fs_path=sip:127.0.0.1:5060"
+								action :bridge,
+									"[leg_progress_timeout=15]" <<
+									"sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{ route.sip_gateway.hostport }" <<
+									";fs_path=sip:127.0.0.1:5060"
 								
 								after_bridge_actions()
 								#action :hangup
@@ -572,15 +655,19 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 				) end
 			) end
+			return
 		)
-		else (
+		elsif ! step_done?( 'conditional_cfwd' ); (
 			############################################################
 			# We have already tried to call the SIP account.
 			############################################################
+			
+			step_doing_now( 'conditional_cfwd' )
+			
 			# We will now check call-forwards on busy ("busy") / unavailable
 			# ("noanswer") / offline ("offline").
-			
-			cfwd_mapped_reason = CALL_FORWARD_DISPOSITIONS_MAP[ arg_call_disposition ]
+						
+			cfwd_mapped_reason = CALL_FORWARD_DISPOSITIONS_MAP[ arg_call_disposition.to_s.to_sym ]
 			logger.info(_bold( "#{logpfx} Call disposition: #{arg_call_disposition.inspect} => #{cfwd_mapped_reason.inspect}" ))
 			
 			if ! cfwd_mapped_reason
@@ -610,30 +697,68 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 					check_valid_voicemail_box_destination( cfwd.destination )
 					
-					call_log_disposition = 'forwarded'
-					call_log_forwarded_to = cfwd.destination
+					#call_log_disposition = 'forwarded'
+					#call_log_forwarded_to = cfwd.destination
 					
 					action :transfer, "#{enc_sip_user( cfwd.destination )} XML default"
 				end
 			)
 			else (  # No call forward.
-				logger.info(_bold( "#{logpfx} No matching call-forward." ))
+				logger.info(_bold( "#{logpfx} No matching call-forward (on #{cfwd_mapped_reason})." ))
 				
-				call_log_disposition = 'noanswer'
-				call_log_forwarded_to = nil
+				#call_log_disposition = 'noanswer'
+				#call_log_forwarded_to = nil
 				
 				action :hangup
 			) end
 			
-			# Write the call log:
-			dst_call_log.destroy if dst_call_log
-			if dst_sip_account
+			## Write the call log:
+			#dst_call_log.destroy if dst_call_log
+			#if dst_sip_account
+			#	call_log(
+			#		dst_sip_account.id, 'in', call_log_disposition, arg_call_uuid,
+			#		arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+			#	)
+			#end
+			
+			return
+		)
+		elsif ! step_done?( 'call_logs' ); (
+			
+			# call_log_disposition must be one of: 'answered', 'noanswer' or 'forwarded'.
+			#FIXME
+			
+			mapped_reason = CALL_FORWARD_DISPOSITIONS_MAP[ arg_call_disposition.to_s.to_sym ]
+			call_log_disposition = (mapped_reason ? 'noanswer' : 'answered')
+			
+			logger.info(_bold( "#{logpfx} Writing call logs. (Disposition: #{arg_call_disposition.inspect} -> #{mapped_reason.inspect} -> #{call_log_disposition.inspect})" ))
+			
+			if src_sip_account
 				call_log(
-					dst_sip_account.id, 'in', call_log_disposition, arg_call_uuid,
-					arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, nil
+					src_sip_account, 'out',
+					call_log_disposition,
+					arg_call_uuid,
+					arg_src_cid_sip_user, arg_src_cid_sip_display,
+					arg_dst_sip_dnis_user, nil,
+					nil
 				)
 			end
 			
+			if dst_sip_account
+				call_log(
+					dst_sip_account, 'in',
+					call_log_disposition,
+					arg_call_uuid,
+					arg_src_cid_sip_user, arg_src_cid_sip_display,
+					arg_dst_sip_dnis_user, nil,
+					nil
+				)
+			end
+			
+			return
+		)
+		else (
+			action :hangup
 		) end
 	) end
 	
@@ -679,6 +804,19 @@ class FreeswitchCallProcessingController < ApplicationController
 		#action_log( FS_LOG_INFO, 'A-leg hangup cause: ${hangup_cause}' )
 		#action_log( FS_LOG_INFO, 'A-leg hangup Q.850 cause: ${hangup_cause_q850}' )
 	) end
+	
+	def steps_done
+		return ( @arg_done_so_far || '' ).split(',')
+	end
+	
+	def step_done?( todo )
+		steps_done.include?( todo.to_s )
+	end
+	
+	def step_doing_now( doing_now )
+		steps = steps_done << doing_now.to_s
+		action :set, "x_done_so_far=#{ steps.join(',') }"
+	end
 	
 	def action_set_ringback()
 		action :set, 'ringback=$${de-ring}'
@@ -806,7 +944,7 @@ class FreeswitchCallProcessingController < ApplicationController
 		end
 		ret = ret.join('')
 		ret = ret[ 0, ret.bytesize-1 ].force_encoding( Encoding::UTF_8 )
-		#logger.debug( "enc_sip_displayname( #{orig_str.inspect} )  =>  #{ret.inspect}" )
+		#logger.info( "enc_sip_displayname( #{orig_str.inspect} )  =>  #{ret.inspect}" )
 		return ret
 	) end
 	

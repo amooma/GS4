@@ -65,12 +65,58 @@ try {
 	function get_channel_info()
 	{
 		var chan_dump_str = apiExecute( 'uuid_dump', session.uuid );
-		if (chan_dump_str.match( /^INVALID\s*COMMAND/i )) {
-			return false;
+		if (chan_dump_str.match( /^INVALID\s*COMMAND/i )
+		||  chan_dump_str.match( /^-?ERR\s*No\s*Such\s*Channel/i )
+		) {
+			//return false;
+			chan_dump_str = ''
+			
+			chan_dump_str+= "variable_uuid: "+ (session.uuid) +"\n"
+			
+			chan_var_names = [
+			//	'uuid',
+				'sip_call_id',
+				'sip_from_user',
+				'sip_from_user_stripped',
+				'sip_from_host',
+				'sip_from_display',
+				'sip_req_user',
+				'sip_req_host',
+				'sip_to_host',
+				'sip_to_user',
+				'originate_disposition',
+				'sip_has_crypto',
+				'sip_crypto_mandatory',
+				'sip_secure_media',
+				'x_continue_counter',
+				'x_done_so_far',
+				'direction',
+			];
+			for (var i = 0; i < chan_var_names.length; ++i) {
+				chan_var_name = chan_var_names[i];
+				val = session.getVariable( chan_var_name );
+				if (val) { chan_dump_str+= "variable_"+ chan_var_name +": "+ (val) +"\n"; }
+			}
+			
+			val = session.caller_id_num;
+			if (val) { chan_dump_str+= "Caller-Caller-ID-Number" +": "+ (val) +"\n"; }
+			val = session.caller_id_name;
+			if (val) { chan_dump_str+= "Caller-Caller-ID-Name" +": "+ (val) +"\n"; }
+			val = session.destination;
+			if (val) { chan_dump_str+= "Caller-Destination-Number" +": "+ (val) +"\n"; }
+			val = session.ani;
+			if (val) { chan_dump_str+= "Caller-ANI" +": "+ (val) +"\n"; }
+			val = session.state;
+			if (val) { chan_dump_str+= "Channel-State" +": "+ (val) +"\n"; }
+			val = session.name;
+			if (val) { chan_dump_str+= "Channel-Name" +": "+ (val) +"\n"; }
+			
+			//chan_dump_str+= "variable_x_session_ready: no\n"
 		}
-		if (chan_dump_str.match( /^-?ERR\s*No\s*Such\s*Channel/i )) {
-			return false;
+		else {
+			//chan_dump_str+= "variable_x_session_ready: yes\n"
 		}
+		
 		var chan_info = {};
 		//var chan_vars = {};
 		var re = /^([a-zA-Z_\-1-9]+)\s*:\s*([^\n\r]*)/mg;
@@ -118,6 +164,7 @@ try {
 			chan_info[ name ] = val;
 		}
 		//chan_info['vars'] = chan_vars;
+		//chan_info[ 'var_x_session_ready' ] = (session.ready() ? 'true' : 'false');
 		return chan_info;
 	}
 	
@@ -186,11 +233,13 @@ try {
 				+"\n----------------------" );
 		},
 		
-		request_actions: function()
+		request_actions: function( session_is_ready )
 		{
 			log( LOG_DEBUG, "Requesting dialplan actions via HTTP ..." );
 			this._load_curl();
-			var query_data = Hash.to_query( get_channel_info() || {} );
+			chan_info = get_channel_info() || {};
+			chan_info['var_x_session_ready'] = (session_is_ready ? 'true' : 'false');
+			var query_data = Hash.to_query( chan_info );
 			log( LOG_DEBUG, "Query data is "+ (query_data.length) +" bytes." );
 			var buffer_obj = { data: '' };
 			var t = (new Date()).getTime();
@@ -297,10 +346,10 @@ try {
 			return xml_obj;
 		},
 		
-		process_actions: function( dialplan_actions_xml_obj )
+		process_actions: function( dialplan_actions_xml_obj, session_is_ready )
 		{
 			if (! dialplan_actions_xml_obj) {
-				dialplan_actions_xml_obj = this.request_actions();
+				dialplan_actions_xml_obj = this.request_actions( session_is_ready );
 			}
 			if ((typeof(dialplan_actions_xml_obj)) != 'xml') {
 				throw new Error( "Expected an E4X XML object (got "+ (typeof(dialplan_actions_xml_obj)) +")!" );
@@ -315,10 +364,12 @@ try {
 					throw new Error( "Too many dialplan actions!" );
 				}
 				
+				/*
 				if (! session.ready()) {
 					log( LOG_NOTICE, "Session has ended. Aborting dialplan execution." );
 					break;
 				}
+				*/
 				
 				var tag_name = item.name().toString();
 				//log( LOG_DEBUG, "Got element <"+ tag_name +">..." );
@@ -375,21 +426,24 @@ try {
 	else {
 		session.setVariable( 'continue_on_fail', 'true' );
 		session.setVariable( 'hangup_after_bridge', 'true' );
+		session.setVariable( 'session_in_hangup_hook', 'true' );
 		
 		//log( LOG_DEBUG, apiExecute( 'uuid_dump', session.uuid ) );
 		//log( LOG_DEBUG, session.execute( 'info' ) );
 		
-		var num_requests = 0;
+		var num_requests = 1;
 		while (session.ready()) {
-			++num_requests;
 			if (num_requests > 100) {
 				throw new Error( "Too many dialplan requests!" );
 			}
-			log( LOG_INFO, "Dialplan actions, iteration "+ num_requests.toString() +" ..." );
-			var do_continue_iterations = DialplanService.process_actions();
+			log( LOG_INFO, "Dialplan actions, iteration "+ (num_requests.toString()) +" ..." );
+			++num_requests;
+			var do_continue_iterations = DialplanService.process_actions( undefined, true );
 			if (! do_continue_iterations) break;
-			session.execute( 'sleep', '500' );  // just to make sure the iterations are not too fast
+			session.execute( 'sleep', '100' );  // just to make sure the iterations are not too fast
 		}
+		log( LOG_INFO, "Dialplan actions, final iteration ..." );
+		DialplanService.process_actions( undefined, false );
 		log( LOG_INFO, "Done." );
 	}
 	exit();
