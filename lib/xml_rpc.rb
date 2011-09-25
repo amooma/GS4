@@ -70,7 +70,7 @@ module XmlRpc
 		channel_variables['origination_caller_id_name']   = caller_id_num if ! caller_id_name
 		channel_variables['fax_ident']                    = caller_id_num
 		channel_variables['fax_header']                   = caller_id_name 
-        channel_variables_s = channel_variables.collect { |key, value| "#{key}='#{value}'" }.join(',')
+		channel_variables_s = channel_variables.collect { |key, value| "#{key}='#{value}'" }.join(',')
 		response = request('originate', "{#{channel_variables_s}}sofia/internal/#{destination}@#{domain};fs_path=sip:127.0.0.1:5060 &txfax(#{raw_file})")
 		
 		if (! response)
