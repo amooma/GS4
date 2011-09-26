@@ -44,6 +44,7 @@ module ApplicationHelper
 							{ :text => t(:network_setting)   , :url => network_settings_path },
 							{ :text => t(:shutdown)          , :url => admin_confirm_shutdown_path },
 							{ :text => t(:reboot_system)     , :url => admin_confirm_reboot_path },
+							{ :text => t(:backup)            , :url => backups_path },
 						]}
 					else
 					menu <<
