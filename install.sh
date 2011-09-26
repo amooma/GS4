@@ -310,6 +310,8 @@ case $n in
 		rm -rf /opt/gemeinschaft/.git
 		
 		echo 'blacklist ipv6' >> /etc/modprobe.d/blacklist
+		cd /
+		gem install whenever
 		cd /opt/gemeinschaft
 		whenever -w		
 		;;
