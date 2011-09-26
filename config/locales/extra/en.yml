@@ -611,6 +611,7 @@ en:
   park_in: "Park in"
   park_out: "Park out"
   
+  backup: "Backup"
   new_backup: "Create backup"
   backup_device: "Backup device"
   make_backup: "Create backup on this device"

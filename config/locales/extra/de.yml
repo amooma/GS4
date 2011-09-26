@@ -611,6 +611,7 @@ de:
   park_in: "Parken"
   park_out: "Ent-Parken"
   
+  backup: "Sicherung"
   new_backup: "Backup erstellen"
   backup_device: "Backup Medium"
   make_backup: "Backup auf diesem Medium erstellen"
