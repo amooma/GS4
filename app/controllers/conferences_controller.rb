@@ -15,7 +15,7 @@ class ConferencesController < ApplicationController
     @conferences = Conference.includes(:extensions).order('extensions.extension ASC').accessible_by( current_ability, :index ).all
 
     respond_to do |format|
-      if Conference.all.blank?
+      if Conference.all.blank? && can?( :new, Conference )
         format.html { redirect_to(new_conference_path, :notice => t(:no_call_queue_in_db_so_redirect_to_new)) }
       else
         format.html # index.html.erb
