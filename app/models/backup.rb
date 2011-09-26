@@ -7,6 +7,8 @@ class Backup < ActiveRecord::Base
   validates_format_of :backup_device, :with => /^[a-z]{3}$/, :on => :create
   
   before_save(:on => :update) {
+    require 'iconv'
+
     log_file = '/tmp/backup_system.log'
     if FileTest.exists?( log_file )
       log_data = File.read( log_file, nil, 0, {
@@ -17,9 +19,9 @@ class Backup < ActiveRecord::Base
     else
       log_data = ''
     end
-    self.info = log_data  
+    info = log_data.to_yaml  
   }
-  after_save(:on => :create) {
-     `sudo nohup /usr/local/bin/backup_system.sh "#{self.id}" "#{self.backup_device}" > /dev/null &`
+  after_create() {
+     `sudo nohup /usr/local/bin/backup_system.sh "#{self.id}" "#{self.backup_device}" "#{self.password if ! self.password.empty?}" &`
   }
 end
