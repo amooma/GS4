@@ -142,7 +142,8 @@ cp /opt/gemeinschaft/misc/etc/apache/gemeinschaft /etc/apache2/sites-available
 a2ensite gemeinschaft
 cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
 chown www-data /etc/ssl/amooma/*
-chmod 0600 /etc/ssl/amooma/*
+chgrp gemeinschaft /etc/ssl/amooma/*
+chmod 0660 /etc/ssl/amooma/*
 #OPTIMIZE Does the web server need write permissions on the certificates? If it doesn't: chmod 0400 ...
 a2enmod rewrite
 
