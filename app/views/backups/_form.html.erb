@@ -7,7 +7,7 @@
 	<% if @backup_devices %>
 	<%= f.input :backup_device do %>
 	<%= f.select( :backup_device,
-		@backup_devices.collect {|r| [ r.split(':')[1], r.split(':')[0] ] },
+		@backup_devices.collect {|r| [ r, r.split(':')[0] ] },
 		) %>
 	<% end %>
 	<% end %>
