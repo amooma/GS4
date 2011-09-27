@@ -22,6 +22,6 @@ class Backup < ActiveRecord::Base
     info = log_data.to_yaml  
   }
   after_create() {
-     `sudo nohup /usr/local/bin/backup_system.sh "#{self.id}" "#{self.backup_device}" "#{self.password if ! self.password.empty?}" &`
+     `sudo nohup /usr/local/bin/backup_system.sh "#{self.id}" "#{self.backup_device}" "#{self.password if ! self.password.empty?}" > /dev/null &`
   }
 end
