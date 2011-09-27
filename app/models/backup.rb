@@ -6,7 +6,7 @@ class Backup < ActiveRecord::Base
   validates_format_of :password, :with => /^[0-9a-zA-Z]*$/, :allow_blank => true, :allow_nil => true
   validates_format_of :backup_device, :with => /^[a-z]{3}$/, :on => :create
   
-  before_save(:on => :update) {
+  before_update() {
     require 'iconv'
 
     log_file = '/tmp/backup_system.log'
@@ -19,7 +19,7 @@ class Backup < ActiveRecord::Base
     else
       log_data = ''
     end
-    info = log_data.to_yaml  
+    self.info = log_data.to_yaml  
   }
   after_create() {
      `sudo nohup /usr/local/bin/backup_system.sh "#{self.id}" "#{self.backup_device}" "#{self.password if ! self.password.empty?}" > /dev/null &`
