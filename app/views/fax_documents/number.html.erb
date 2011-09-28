@@ -8,7 +8,7 @@
 	<%= f.input :source do %>
 		<%= f.select( :source,
 			@extensions.collect { |r| [ r.extension ] },
-			{ :include_blank => true, :selected => @fax_document.source }
+			{ :include_blank => false, :selected => @fax_document.source }
 		) %>
 	<% end %>
 		
