@@ -51,6 +51,8 @@ class FaxDocument < ActiveRecord::Base
 			errors.add( :base, I18n.t(:fax_document_not_sent))
 			return false
 		end
+		
+		return true
 	end
 	
 	def delete_fax_files( raw_file )

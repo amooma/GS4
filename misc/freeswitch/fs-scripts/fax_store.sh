@@ -15,15 +15,15 @@ if [ "${CMD}" = "update" ]; then
 	DOCUMENT_ID="${2}"
 	POST_URL="http://127.0.0.1/fax_documents/${DOCUMENT_ID}.xml"
 	if [ "${SUCCESS}" = "1" ]; then
-		DOCUMENT="<sent>${DATE}</sent>"
+		DOCUMENT="<sent>${DATE}</sent><status>${RESULT_CODE}</status>"
 	else
-		DOCUMENT="<sent></sent>"
+		DOCUMENT="<sent></sent><status>${RESULT_CODE}</status>"
 	fi
 elif [ "${CMD}" = "create" ]; then
 	RAW_FILE="${2}"
 	FAX_FILE="fax_from_${REMOTE_ID}.tif"
 	POST_URL="http://127.0.0.1/fax_documents.xml"
-	DOCUMENT="<outgoing>false</outgoing><file>${FAX_FILE}</file><raw-file>${RAW_FILE}</raw-file><title>Fax from ${REMOTE_ID}</title><received>${DATE}</received><destination>${DST}</destination><source>${SRC}</source>"
+	DOCUMENT="<outgoing>false</outgoing><file>${FAX_FILE}</file><raw-file>${RAW_FILE}</raw-file><title>Fax from ${REMOTE_ID}</title><received>${DATE}</received><destination>${DST}</destination><source>${SRC}</source><status>${RESULT_CODE}</status>"
 else
 	exit 1
 fi

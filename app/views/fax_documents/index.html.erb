@@ -9,6 +9,7 @@
     <% end %>
     <th><%= t(:date_date) %></th>
     <th><%= t(:transmitted) %></th>
+    <th><%= t(:status) %></th>
     <th><%= t(:document) %></th>
     <th><%= t(:source) %></th>
     <th><%= t(:destination) %></th>
@@ -34,6 +35,8 @@
       <%= t(:no_lowercase) %>
     <% end %>
     </td>
+    <td><%= t("fax_result.code_#{fax_document.status}") if !fax_document.status.blank? %></td>
+    
     <td><%= fax_document.file %></td>
     <td><%= fax_document.source %></td>
     <td><%= fax_document.destination %></td>
