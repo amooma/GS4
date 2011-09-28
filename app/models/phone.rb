@@ -32,7 +32,10 @@ class Phone < ActiveRecord::Base
 	has_many    :reboot_requests, :order => 'start', :dependent => :destroy
 	
 	accepts_nested_attributes_for :sip_accounts
-	
+	before_create() {
+		self.http_user = SecureRandom.hex(10)
+		self.http_password = SecureRandom.hex(10)
+	}
 	# log a provisioning
 	#
 	def log_provisioning( memo=nil, succeeded=true )
