@@ -83,6 +83,24 @@ en:
   direction: "Direction"
   transmitted: "Transmitted"
   sent: "Sent"
+  fax_result:
+    code_0: "Transmitted"
+    code_2: "Timed out waiting for initial communication"
+    code_3: "Timed out waiting for the first message"
+    code_5: "The HDLC carrier did not stop in a timely manner"
+    code_6: "Failed to train with any of the compatible modems"
+    code_13: "Unexpected message received"
+    code_14: "Received bad response to DCS or training"
+    code_15: "Received a DCN from remote after sending a page"
+    code_17: "Received a DCN while waiting for a DIS"
+    code_20: "Received no response to DCS or TCF"
+    code_23: "Invalid ECM response received from transmitter"
+    code_31: "Timer T2 expired while waiting for fax page"
+    code_32: "Timer T2 expired while waiting for next fax page"
+    code_48: "Disconnected after permitted retries"
+    code_49: "The call dropped prematurely"
+    code_257: "Sending"
+    
   extension: "Extension"
   editing_extension: "Editing extension"
   new_extension: "New extension"
@@ -343,9 +361,10 @@ en:
   fax_business: "Business faxnumber"
   
   contacts: "Contacts"
-  
+
   
   global_contacts: "Contacts (system-wide)"
+  ldap_import_sessions: "LDAP Import (Kontakte)"
   
   global_contact: "System-wide Contact"
   new_global_contact: "New system-wide contact"

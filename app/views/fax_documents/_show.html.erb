@@ -40,6 +40,13 @@
 <% end %>
 
 <p>
+  <b><%= t(:status) %>:</b>
+  <% if (! @fax_document.status.blank? ) %>
+    <%= t("fax_result.code_#{@fax_document.status}") %>
+  <% end %>
+</p>
+
+<p>
   <b><%= t(:source) %>:</b>
   <%= @fax_document.source %>
 </p>

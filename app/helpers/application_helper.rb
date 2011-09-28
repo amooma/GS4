@@ -22,6 +22,8 @@ module ApplicationHelper
 							{ :text => t(:callforwards)  , :url => call_forwards_path },
 							{ :text => nil               , :url => nil },
 							{ :text => t(:global_contacts)   , :url => global_contacts_path },
+							{ :text => nil               , :url => nil },
+							{ :text => t(:ldap_import_sessions)   , :url => new_ldap_import_session_path },
 						]}
 					menu <<
 						{ :text => t(:extensions)    , :url => extensions_path }

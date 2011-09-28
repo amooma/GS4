@@ -515,7 +515,10 @@ class FreeswitchCallProcessingController < ApplicationController
 							src_user = src_sip_account.user
 						elsif arg_src_fax_document_id
 							fax_document = FaxDocument.where( :id => arg_src_fax_document_id ).first
-							src_user = fax_document.user if fax_document
+							if fax_document
+								src_user = fax_document.user
+								fax_document.update_attributes( :status => 257 )
+							end
 						end
 						
 						if src_user

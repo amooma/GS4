@@ -2,8 +2,8 @@
 	<%= f.error_notification %>
 	
 	<%= f.input :host %>
-	<%= f.input :version %>
-	<%= f.input :ssl %>
+	<%= f.input :version, :hint => '2 oder 3' %>
+	<%= f.input :ssl, :as => :radio, :label => 'SSL' %>
 	<%= f.input :port %>
 	<%= f.input :bind_dn %>
 	<%= f.input :password %>
