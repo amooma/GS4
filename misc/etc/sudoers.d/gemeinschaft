@@ -1,4 +1,5 @@
+Cmnd_Alias BACKUP = /usr/bin/nohup /usr/local/bin/backup_system.sh *
 Cmnd_Alias SHUTDOWN = /sbin/shutdown -h now
 Cmnd_Alias REBOOT = /sbin/shutdown -r now
-www-data  ALL = (ALL) NOPASSWD: SHUTDOWN, REBOOT
+www-data  ALL = (ALL) NOPASSWD: SHUTDOWN, REBOOT, BACKUP
 

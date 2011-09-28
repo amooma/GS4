@@ -1,0 +1,15 @@
+<%= simple_form_for( @backup ) do |f| %>
+	<%= f.error_notification %>
+	
+	<%= f.input :state, :as => :hidden %>
+	<%= f.input :password %>
+	<%= f.input :password_confirmation %>
+	<% if @backup_devices %>
+	<%= f.input :backup_device do %>
+	<%= f.select( :backup_device,
+		@backup_devices.collect {|r| [ r, r.split(':')[0] ] },
+		) %>
+	<% end %>
+	<% end %>
+	<%= f.button :submit %>
+<% end %>

@@ -8,6 +8,7 @@ case $1 in
 		iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
 		iptables -A INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
 		iptables -A INPUT -i eth0 -p udp --dport 5060 -j ACCEPT
+    iptables -A INPUT -i eth0 -p tcp --dport 5061 -j ACCEPT
 		iptables -A INPUT -i eth0 -p udp --sport 67:68 --dport 67:68 -j ACCEPT
 		iptables -A INPUT -i eth0 -p udp --dport 1024: --sport 1024: -j ACCEPT
 		iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT

@@ -95,7 +95,7 @@ class NetworkSetting < ActiveRecord::Base
         dnsmasq_conf ="
           dhcp-range=#{dhcp_range_start},#{dhcp_range_end},12h
           dhcp-option=66,https://#{ip_address}:443
-          dhcp-option=67,settings
+          dhcp-option=67,settings-{mac}
         "
       else
         dnsmasq_conf = ""

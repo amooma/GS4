@@ -1,6 +1,6 @@
 Gemeinschaft4::Application.routes.draw do
 	
-  resources :ldap_import_sessions
+  	resources :ldap_import_sessions
 
 	resources :network_settings
 	
@@ -63,6 +63,7 @@ Gemeinschaft4::Application.routes.draw do
 	resources :call_queues do
 		resources :extensions
 	end
+	resources :backups, :only => [ :index, :create, :update, :show, :destroy, :new ]
 	
 	resources :sip_servers          , :only => [ :index, :show, :new, :create, :destroy ] do
 		member do
@@ -92,7 +93,8 @@ Gemeinschaft4::Application.routes.draw do
 	resources :admin                , :only => [ :index ]
 	resources :cdrs                 , :only => [ :index ]
 	resources :kamailio             , :only => [ :index ], :format => 'txt'  #OPTIMIZE Is this route being used?
-	
+
+
 	match '/admin/help',
 		:via        => [ :get ],
 		:controller => :admin,

@@ -133,10 +133,17 @@ try {
 				if (! hash.hasOwnProperty(prop)) continue;
 				switch (typeof(hash[prop])) {
 					case 'string':
+						/*
 						www_form_urlencoded.push(
 							escape( prop         ).replace('%20','+') +
 							'='+
 							escape( hash[prop]   ).replace('%20','+')
+						);
+						*/
+						www_form_urlencoded.push(
+							escape( prop         ).replace('+','%2B') +
+							'='+
+							escape( hash[prop]   ).replace('+','%2B')
 						);
 						break;
 					/*

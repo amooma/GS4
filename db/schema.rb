@@ -10,12 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110925162402) do
+ActiveRecord::Schema.define(:version => 20110928141302) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "backups", :force => true do |t|
+    t.string   "state"
+    t.string   "info"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20110925162402) do
     t.boolean  "outgoing"
     t.integer  "user_id"
     t.string   "source"
+    t.integer  "status"
   end
 
   create_table "global_contacts", :force => true do |t|
