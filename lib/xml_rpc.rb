@@ -62,16 +62,18 @@ module XmlRpc
 	
 	def self.send_fax( destination, domain, raw_file, caller_id_num = '', caller_id_name = '', retries = 1, retry_seconds = 60, fax_document_id = nil )
 		channel_variables = Hash.new
-		channel_variables['api_hangup_hook']              = "system /opt/freeswitch/scripts/fax_store.sh update #{fax_document_id}" if fax_document_id
-		channel_variables['originate_retries']            = retries		
+		channel_variables['fax_document_id']              = fax_document_id
+		channel_variables['fax_document_file']            = raw_file
+		channel_variables['originate_retries']            = retries
 		channel_variables['originate_retry_sleep_ms']     = retry_seconds * 1000
 		channel_variables['origination_caller_id_number'] = caller_id_num
 		channel_variables['origination_caller_id_name']   = caller_id_name if caller_id_name
 		channel_variables['origination_caller_id_name']   = caller_id_num if ! caller_id_name
 		channel_variables['fax_ident']                    = caller_id_num
-		channel_variables['fax_header']                   = caller_id_name 
+		channel_variables['fax_header']                   = caller_id_name
+		
 		channel_variables_s = channel_variables.collect { |key, value| "#{key}='#{value}'" }.join(',')
-		response = request('originate', "{#{channel_variables_s}}sofia/internal/#{destination}@#{domain};fs_path=sip:127.0.0.1:5060 &txfax(#{raw_file})")
+		response = request('originate', "{#{channel_variables_s}}loopback/-fax-txfax-/default -kambridge-#{destination}")
 		
 		if (! response)
 			return false

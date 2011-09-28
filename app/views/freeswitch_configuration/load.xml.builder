@@ -1248,6 +1248,28 @@ xml.document( :type => 'freeswitch/xml' ) {
 					xml.action( :application => 'voicemail', :data => 'check default ${domain_name} ${sip_from_user}' )
 				}
 			}
+			xml.extension(:name => 'kam-fax-txfax' ) {
+				xml.condition( :field => 'destination_number', :expression => '^-fax-txfax-$' ) {
+					xml.action( :application => 'set', :data => 'session_in_hangup_hook=true' )
+					xml.action( :application => 'set', :data => 'bypass_media=false' )
+					xml.action( :application => 'set', :data => "fax_enable_t38=#{Configuration.get(:fax_enable_t38, true, Configuration::Boolean)}" )
+					xml.action( :application => 'set', :data => "api_hangup_hook=system 
+ ${base_dir}/scripts/fax_store.sh update '\\\\\\${fax_document_id}'
+ '\\\\\\${sip_to_user}' 
+ '\\\\\\${caller_id_number}' 
+ '\\\\\\${fax_remote_station_id}'
+ '\\\\\\${fax_document_total_pages}'
+ '\\\\\\${fax_document_transferred_pages}'
+ '\\\\\\${fax_success}'
+ '\\\\\\${fax_result_code}'
+ '\\\\\\${hangup_cause_q850}'
+ '\\\\\\${fax_result_text}'
+ " )
+					xml.action( :application => 'sched_hangup', :data => "+#{Configuration.get(:fax_max_duration, 1800, Integer)} allotted_timeout" )
+					xml.action( :application => 'txfax', :data => '${fax_document_file}' )
+					xml.action( :application => 'hangup' )
+				}
+			}
 			
 			xml.extension(:name => 'kam-fax-receive' ) {
 				xml.condition( :field => 'destination_number', :expression => '^-kambridge--fax-receive-$' ) {
@@ -1265,6 +1287,7 @@ xml.document( :type => 'freeswitch/xml' ) {
  '\\\\\\${fax_document_transferred_pages}'
  '\\\\\\${fax_success}'
  '\\\\\\${fax_result_code}'
+ '\\\\\\${hangup_cause_q850}'
  '\\\\\\${fax_result_text}'
  " )
 					xml.action( :application => 'sched_hangup', :data => "+#{Configuration.get(:fax_max_duration, 1800, Integer)} allotted_timeout" )

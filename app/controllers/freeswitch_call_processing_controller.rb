@@ -165,6 +165,8 @@ class FreeswitchCallProcessingController < ApplicationController
 		arg_src_cid_sip_user      = _arg :'Caller-Caller-ID-Number'
 		arg_src_cid_sip_display   = _arg :'Caller-Caller-ID-Name'  # now always included
 		arg_src_cid_sip_display   = _arg :'var_sip_from_display' if arg_src_cid_sip_display.blank?
+
+		arg_src_fax_document_id   = _arg :'var_fax_document_id'
 		
 		
 		############################################################
@@ -509,7 +511,12 @@ class FreeswitchCallProcessingController < ApplicationController
 						# independent of a user and the ones that apply to the
 						# user (if any) of the current SIP account (src_sip_account).
 						
-						src_user = src_sip_account.user if src_sip_account
+						if src_sip_account
+							src_user = src_sip_account.user
+						elsif arg_src_fax_document_id
+							fax_document = FaxDocument.where( :id => arg_src_fax_document_id ).first
+							src_user = fax_document.user if fax_document
+						end
 						
 						if src_user
 							logger.debug( "#{logpfx} Fetching routes that apply to any account or user #{src_user.username.inspect}  ..." )
@@ -544,18 +551,29 @@ class FreeswitchCallProcessingController < ApplicationController
 								phone_number = (match_result[:opts] || {})[:number].to_s
 								sip_gateway_name = "gateway-#{route.sip_gateway.try(:id)}"
 								sip_gateway_caller_id_patterns = route.sip_gateway.try(:caller_id_patterns)
-								caller_ids_available = src_sip_account.extensions.where(:active => true).all
+
+								if src_sip_account
+									caller_ids_available = src_sip_account.extensions.where(:active => true).all
+									caller_ids_available = caller_ids_available.collect { |r| r.extension } if caller_ids_available
+								elsif src_user
+									caller_ids_available = src_user.extensions.where(:active => true).all
+									caller_ids_available = caller_ids_available.collect { |r| r.extension } if caller_ids_available
+									
+									if fax_document && ! caller_ids_available.blank? && caller_ids_available.include?(fax_document.source)
+										logger.debug(_bold( "#{logpfx} Prefer fax source as caller ID: #{fax_document.source}" ))
+										caller_ids_available.unshift(fax_document.source)
+									end
+								end
 
 								if caller_ids_available.blank?
-									logger.warn(_bold( "#{logpfx} No active extensions for sip account \"#{src_sip_account.to_display}\" - caller ID not set" ))
+									logger.warn(_bold( "#{logpfx} No active extensions - caller ID not set" ))
 								elsif sip_gateway_caller_id_patterns.blank?
 									logger.debug(_bold( "#{logpfx} No caller ID patterns set for gateway \"#{sip_gateway_name}\" - caller ID not set" ))
 								else
-									caller_ids_available = caller_ids_available.collect { |r| r.extension }
 									logger.debug(_bold( "#{logpfx} Caller ID patterns for gateway \"#{sip_gateway_name}\" : #{sip_gateway_caller_id_patterns.split( /, */ )}" ))
-									logger.debug(_bold( "#{logpfx} Caller IDs available for sip account \"#{src_sip_account.to_display}\" : #{caller_ids_available}" ))
+									logger.debug(_bold( "#{logpfx} Caller IDs available: #{caller_ids_available}" ))
 									caller_id_number = get_gateway_caller_id( caller_ids_available, sip_gateway_caller_id_patterns.split( /, */ ) )
-									logger.debug(_bold( "#{logpfx} Caller ID for sip account \"#{src_sip_account.to_display}\" : #{caller_id_number}" ))
+									logger.debug(_bold( "#{logpfx} Caller ID: #{caller_id_number}" ))
 									if caller_id_number
 										logger.info(_bold( "#{logpfx} Caller ID set to #{caller_id_number} ..." ))
 										action :set, "effective_caller_id_number=#{ enc_sip_user( caller_id_number )}"
