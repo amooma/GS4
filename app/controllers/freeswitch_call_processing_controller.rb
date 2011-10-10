@@ -494,6 +494,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						action :set       , "call_timeout=#{timeout}"
 						action :export    , "sip_contact_user=ufs"
 						action_set_ringback()
+						action :set, "api_hangup_hook=system wget http://127.0.0.1/freeswitch-missed-call-${uuid}"
 						action :bridge    , "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						after_bridge_actions()
 						action :_continue
