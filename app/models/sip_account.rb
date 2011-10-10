@@ -132,7 +132,7 @@ class SipAccount < ActiveRecord::Base
       
       if cfwd
         if cfwd.destination == "voicemail"
-          cfwd.destination = "-vbox-#{sip_account.auth_name}"
+          cfwd.destination = "-vbox-#{auth_name}"
         end
         return cfwd
       end
