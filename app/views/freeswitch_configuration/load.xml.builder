@@ -458,7 +458,7 @@ xml.document( :type => 'freeswitch/xml' ) {
 				xml.param( :name => 'chanvars_supp_repeat_fixed', :value => "y" )
 				xml.param( :name => 'timezone', :value => "utc" )  #OPTIMIZE Doesn't seem to work.
 				xml.param( :name => 'default-template', :value => "gs" )
-				xml.param( :name => 'legs', :value => "ab" )
+				xml.param( :name => 'legs', :value => "a" )
 			}
 			xml.templates {
 				# :name_attr => 'content',

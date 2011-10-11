@@ -207,6 +207,9 @@ Gemeinschaft4::Application.routes.draw do
 		:format => 'xml',
 		:constraints => { :mac_address => /000413.*/ }
 	
+	match 'freeswitch-missed-call-:uuid' => 'freeswitch_call_log#set_missed_call'
+	resources :freeswitch_call_log    , :only => [ :set_missed_call ]
+	
 	resources :provisioning_log_entries, :only => [ :index, :show ]  #OPTIMIZE Is this route being used?
 	resources :phone_model_mac_addresses  #OPTIMIZE Is this route being used?
 	match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
