@@ -635,3 +635,4 @@ de:
   backup_device: "Backup Medium"
   make_backup: "Backup auf diesem Medium erstellen"
 
+  call_forward_loop: "Diese Umleitung produziert einen Loop"
