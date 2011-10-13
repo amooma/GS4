@@ -18,10 +18,12 @@ class FreeswitchCallLogController < ApplicationController
   
   def set_missed_call
     disposition = Cdr.where(:uuid => params[:uuid]).first.try(:hangup_cause)
-    call_log = CallLog.where(:uuid => params[:uuid], :call_type => "in").first
+    call_log = CallLog.where(:uuid => params[:uuid], :call_type => "in")
 
     if ! call_log.nil? && disposition != "NORMAL_CLEARING"
-      call_log.update_attributes(:disposition => "missed")
+      call_log.each do |c|
+        c.update_attributes(:disposition => "noanswer")
+      end
     end
     respond_to do |format|
       format.html 
