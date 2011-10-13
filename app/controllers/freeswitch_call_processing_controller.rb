@@ -490,10 +490,13 @@ class FreeswitchCallProcessingController < ApplicationController
 						)
 						
 						# Ring the SIP account via Kamailio:
+						action :set, "session_in_hangup_hook=true"
+
 						action_log( FS_LOG_INFO, "Calling SIP account <#{ enc_sip_user( arg_dst_sip_user_real ) }@#{ arg_dst_sip_domain }> ..." )
 						action :set       , "call_timeout=#{timeout}"
 						action :export    , "sip_contact_user=ufs"
 						action_set_ringback()
+						action :set, "api_reporting_hook=system wget http://127.0.0.1/freeswitch-missed-call-${uuid} -O /dev/null > /dev/null"
 						action :bridge    , "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						after_bridge_actions()
 						action :_continue
@@ -598,7 +601,7 @@ class FreeswitchCallProcessingController < ApplicationController
 								#	"#{enc_sip_user( arg_dst_sip_user_real )}" <<
 								#	";fs_path=sip:127.0.0.1:5060"
 								
-								action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{ route.sip_gateway.hostport };fs_path=sip:127.0.0.1:5060"
+								action :bridge, "sofia/internal/#{phone_number}@#{ route.sip_gateway.hostport };fs_path=sip:127.0.0.1:5060"
 								
 								after_bridge_actions()
 								#action :hangup

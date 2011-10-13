@@ -634,3 +634,5 @@ en:
   new_backup: "Create backup"
   backup_device: "Backup device"
   make_backup: "Create backup on this device"
+
+  call_forward_loop: "This call forward produces a loop"

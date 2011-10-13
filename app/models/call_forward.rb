@@ -26,6 +26,7 @@ class CallForward < ActiveRecord::Base
       errors.add( :sip_account_id, I18n::t(:cannot_be_changed) )
     end
   }
+  validate :protects_loop
   
   def reason_str
     return self.call_forward_reason ? self.call_forward_reason.value : nil
@@ -37,5 +38,12 @@ class CallForward < ActiveRecord::Base
     return nil if ! sip_account
     return sip_account.call_forwards_for( reason, source )
   end
-  
+  def protects_loop
+    if self.source == self.destination
+      errors.add(:destination, I18n::t(:call_forward_loop))
+    end
+    if ! self.sip_account.extensions.where(:extension => self.destination).empty?
+      errors.add(:destination, I18n::t(:call_forward_loop))
+    end
+  end
 end
