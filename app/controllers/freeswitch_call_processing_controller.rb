@@ -194,7 +194,11 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		@call_id = arg_sip_call_id
 		
-		my_uuid = @call_id.split(/-/)[-4 ,4].join if ! @call_id.split(/-/)[-4, 4].nil?
+		if ! @call_id.split(/-/)[-4, 4].nil?
+    	my_uuid = @call_id.split(/-/)[-4 ,4].join 
+		else
+      my_uuid = "dummy-#{rand(99999)}"
+		end
 		
 		kill_uuid = CallForwardHop.find_or_create_by_uuid(:uuid => "kill_uuid")
 		kill_uuid.update_attributes(:hop => rand(99999))
