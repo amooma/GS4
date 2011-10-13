@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110928141302) do
+ActiveRecord::Schema.define(:version => 20111013104213) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20110928141302) do
   create_table "backups", :force => true do |t|
     t.string   "state"
     t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "call_forward_hops", :force => true do |t|
+    t.string   "uuid"
+    t.integer  "hop"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

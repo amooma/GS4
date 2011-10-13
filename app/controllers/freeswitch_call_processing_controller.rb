@@ -194,7 +194,12 @@ class FreeswitchCallProcessingController < ApplicationController
 		
 		@call_id = arg_sip_call_id
 		
+		my_uuid = @call_id.split(/-/)[-4 ,4].join if ! @call_id.split(/-/)[-4, 4].nil?
 		
+		kill_uuid = CallForwardHop.find_or_create_by_uuid(:uuid => "kill_uuid")
+		kill_uuid.update_attributes(:hop => rand(99999))
+		call_forward_hop = CallForwardHop.find_or_create_by_uuid(:uuid => "#{my_uuid}")
+    max_call_forward_hop = Configuration.get(:call_forward_max_hop, 30, Integer )
 		############################################################
 		# Initialize objects:
 		############################################################
@@ -368,7 +373,9 @@ class FreeswitchCallProcessingController < ApplicationController
 			############################################################
 			
 			cfwd_always    = find_call_forward( dst_sip_account, :always    , arg_src_cid_sip_user )
-			if cfwd_always; (
+			logger.info(_bold( "AAAAAAAAAA #{call_forward_hop.hop}" ))
+
+			if cfwd_always && call_forward_hop.hop < max_call_forward_hop; (
 				# We have an unconditional call-forward.
 				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd_always.reason_str.inspect} for caller #{cfwd_always.source.inspect} to #{cfwd_always.destination.inspect}." ))
 				
@@ -387,7 +394,7 @@ class FreeswitchCallProcessingController < ApplicationController
 						dst_sip_account.id, 'in', 'forwarded', arg_call_uuid,
 						arg_src_cid_sip_user, arg_src_cid_sip_display, arg_dst_sip_dnis_user, nil, cfwd_always.destination
 					)
-					
+					call_forward_hop.update_attributes(:hop => call_forward_hop.hop+1)
 					action :transfer, "#{enc_sip_user( cfwd_always.destination )} XML default"
 				end
 			)
@@ -416,7 +423,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					end
 				end
 				
-				if cfwd_assistant; (
+				if cfwd_assistant && call_forward_hop.hop < max_call_forward_hop; (
 					logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd_assistant.reason_str.inspect} for caller #{cfwd_assistant.source.inspect} to #{cfwd_assistant.destination.inspect}." ))
 					
 					if is_assistant; (  # Is the assistant of a call forward.(?)
@@ -452,6 +459,7 @@ class FreeswitchCallProcessingController < ApplicationController
 							action :export, "alert_info=http://example.com;info=#{arg_dst_sip_user_real};x-line-id=0"
 							# Note: "localhost" in the Alert-Info header does not work for Snom phones.
 							action_set_ringback()
+              call_forward_hop.update_attributes(:hop => call_forward_hop.hop+1)
 							action :bridge, "sofia/internal/#{enc_sip_user( arg_dst_sip_user_real )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060,sofia/internal/#{enc_sip_user( assistant_extension.destination )}@#{arg_dst_sip_domain};fs_path=sip:127.0.0.1:5060"
 						)
 						else (
@@ -641,7 +649,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			cfwd = find_call_forward( dst_sip_account, cfwd_mapped_reason, arg_src_cid_sip_user )
 			
-			if cfwd; (  # Call forward.
+			if cfwd && call_forward_hop < max_call_forward_hop; (  # Call forward.
 				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason_str.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
 				
 				if cfwd.destination.blank?  # Blacklisted.
@@ -657,7 +665,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					
 					call_log_disposition = 'forwarded'
 					call_log_forwarded_to = cfwd.destination
-					
+					call_forward_hop.update_attributes(:hop => call_forward_hop.hop+1)
 					action :transfer, "#{enc_sip_user( cfwd.destination )} XML default"
 				end
 			)

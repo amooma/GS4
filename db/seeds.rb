@@ -26,6 +26,7 @@ Configuration.create([
 	{ :name => 'default_extension_length'    , :value => '3' },
 	{ :name => 'snom_srtp'                    , :value => 'false' },
 	{ :name => 'snom_transport_tls'           , :value => 'false' },
+	{ :name => 'call_forward_max_hop'          , :value => '30' },
 ])
 
 
