@@ -86,6 +86,9 @@ module ApplicationHelper
 						{ :text => t(:Settings), :sub => [
 							{ :text => t(:voicemail_pin_change), :url => pin_change_path },
 						]}
+					menu <<
+            { :text => t(:help), :url => help_path }
+						
 					
 			end
 		elsif ! current_page?(:controller => 'admin/setup', :action => 'new')

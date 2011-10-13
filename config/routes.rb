@@ -93,7 +93,11 @@ Gemeinschaft4::Application.routes.draw do
 	resources :admin                , :only => [ :index ]
 	resources :cdrs                 , :only => [ :index ]
 	resources :kamailio             , :only => [ :index ], :format => 'txt'  #OPTIMIZE Is this route being used?
-
+  
+  match '/help',
+		:via        => [ :get ],
+		:controller => :home,
+		:action     => 'help'
 
 	match '/admin/help',
 		:via        => [ :get ],

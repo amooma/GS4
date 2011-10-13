@@ -37,6 +37,7 @@ class Ability
       (
         can    :manage  , LdapImportSession
         can    :read    , Home
+        can    :help    , Home
         can    :manage  , Admin
         can    :manage  , User
         can    :manage  , SipAccount
@@ -97,7 +98,7 @@ class Ability
       when "user"
       (
         can    :read    , Home
-        
+        can    :help    , Home
         can    :have    , SipAccount
         
         can    :read    , CallForward, :sip_account => { :user_id => user.id }
