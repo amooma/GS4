@@ -119,7 +119,10 @@ class Ability
           call_forward.try(:sip_account).try(:user_id) == user.id \
           && user.id != nil
         end
-        #OPTIMIZE Missing can    :confirm_destroy , CallForward do ... ?
+        can    :confirm_destroy , CallForward do |call_forward|
+          call_forward.try(:sip_account).try(:user_id) == user.id \
+          && user.id != nil
+        end
         can    :read_title, SipAccount, :user_id => user.id
         can    :read    , GlobalContact
         
