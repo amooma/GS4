@@ -653,7 +653,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			cfwd = find_call_forward( dst_sip_account, cfwd_mapped_reason, arg_src_cid_sip_user )
 			
-			if cfwd && call_forward_hop < max_call_forward_hop; (  # Call forward.
+			if cfwd && call_forward_hop.hop < max_call_forward_hop; (  # Call forward.
 				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason_str.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
 				
 				if cfwd.destination.blank?  # Blacklisted.
