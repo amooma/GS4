@@ -3,4 +3,4 @@
 
 chgrp -R gemeinschaft /opt/gemeinschaft-local
 chmod -R g+rw /opt/gemeinschaft-local
-
+echo "delete from sessions" | isql gemeinschaft-production > /dev/null
