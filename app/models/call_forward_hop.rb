@@ -7,6 +7,6 @@ class CallForwardHop < ActiveRecord::Base
   }
   
   after_save {
-    CallForwardHop.where("updated_at < :recent", {:recent => 10.seconds.ago}).destroy_all
+    CallForwardHop.where("updated_at < :recent", {:recent => 30.seconds.ago}).destroy_all
   }
 end
