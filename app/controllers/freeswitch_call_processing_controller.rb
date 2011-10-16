@@ -379,7 +379,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			cfwd_always    = find_call_forward( dst_sip_account, :always    , arg_src_cid_sip_user )
 			logger.info(_bold( "AAAAAAAAAA #{call_forward_hop.hop}" ))
 
-			if cfwd_always && call_forward_hop.hop < max_call_forward_hop; (
+			if cfwd_always && (call_forward_hop.hop < max_call_forward_hop || call_forward_hop.hop == 0); (
 				# We have an unconditional call-forward.
 				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd_always.reason_str.inspect} for caller #{cfwd_always.source.inspect} to #{cfwd_always.destination.inspect}." ))
 				
@@ -427,7 +427,7 @@ class FreeswitchCallProcessingController < ApplicationController
 					end
 				end
 				
-				if cfwd_assistant && call_forward_hop.hop < max_call_forward_hop; (
+				if cfwd_assistant && (call_forward_hop.hop < max_call_forward_hop || call_forward_hop.hop == 0); (
 					logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd_assistant.reason_str.inspect} for caller #{cfwd_assistant.source.inspect} to #{cfwd_assistant.destination.inspect}." ))
 					
 					if is_assistant; (  # Is the assistant of a call forward.(?)
@@ -653,7 +653,7 @@ class FreeswitchCallProcessingController < ApplicationController
 			
 			cfwd = find_call_forward( dst_sip_account, cfwd_mapped_reason, arg_src_cid_sip_user )
 			
-			if cfwd && call_forward_hop.hop < max_call_forward_hop; (  # Call forward.
+			if cfwd && (call_forward_hop.hop < max_call_forward_hop || call_forward_hop.hop == 0); (  # Call forward.
 				logger.info(_bold( "#{logpfx} Found call-forward on #{cfwd.reason_str.inspect} for caller #{cfwd.source.inspect} to #{cfwd.destination.inspect}." ))
 				
 				if cfwd.destination.blank?  # Blacklisted.
