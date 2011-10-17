@@ -167,6 +167,7 @@ bundle exec rake db:seed     RAILS_ENV=production
 echo -e "Creating and populating group \"gemeinschaft\" ...\n"
 addgroup gemeinschaft || true
 adduser www-data    gemeinschaft --quiet
+adduser www-data    daemon --quiet
 adduser kamailio    gemeinschaft --quiet
 adduser freeswitch  gemeinschaft --quiet
 
