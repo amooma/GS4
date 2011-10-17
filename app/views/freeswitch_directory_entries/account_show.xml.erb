@@ -13,7 +13,9 @@
 						<user id="<%= acct.auth_name %>">
 							<params>
 								<param name="dial-string" value="${sofia_contact(<%= acct.auth_name %>@<%= domain %>)}" />
-								<param name="a1-hash" value="<%= Digest::MD5.hexdigest(
+								<param name="vm-password" value="<%= acct.voicemail_pin%>"/>
+
+								<!--<param name="a1-hash" value="<%= Digest::MD5.hexdigest(
 									acct.auth_name.to_s + ":" +
 									realm + ":" +
 									acct.password.to_s
@@ -25,7 +27,7 @@
 										? acct.voicemail_pin.to_s \
 										: rand(999999999).to_s.rjust(9,'0') + rand(999999999).to_s.rjust(9,'0')
 									)
-								) %>" />
+								) %>" />-->
 								<param name="vm-enabled" value="true" />
 							</params>
 							<variables>
