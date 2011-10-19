@@ -259,15 +259,22 @@ class ManufacturerSnomController < ApplicationController
 			@query_timeout = params[:query_timeout]
 			@cfwd_destination = params[:destination]
 			if (@query_timeout && @cfwd_destination.blank?)
-				render :action => 'call_forwarding_save'  
-			end
-			@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
-			if (call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => true  , :source => '' ).first \
-			||  call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => false , :source => '' ).first
-			)
-				@noanswer_timeout = call_forward.call_timeout
+				call_forward = save_call_forward( @sip_account, @cfwd_case_noanswer_id, nil, nil )
+				if (call_forward)
+					@message = t(:call_forwarding_saved)
+				else
+					@message = t(:call_forwarding_not_saved)
+				end
+				render :action => 'call_forwarding_save'				  
 			else
-				@noanswer_timeout = Configuration.get(:call_forward_default_timeout, 20, Integer)
+				@noanswer_destination  = get_call_forward( @sip_account, @cfwd_case_noanswer_id )
+				if (call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => true  , :source => '' ).first \
+				||  call_forward = @sip_account.call_forwards.where( :call_forward_reason_id => @cfwd_case_noanswer_id, :active => false , :source => '' ).first
+				)
+					@noanswer_timeout = call_forward.call_timeout
+				else
+					@noanswer_timeout = Configuration.get(:call_forward_default_timeout, 20, Integer)
+				end
 			end
 		end
 	end

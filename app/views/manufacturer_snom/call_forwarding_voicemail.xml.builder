@@ -9,7 +9,7 @@ xml.SnomIPPhoneMenu {
 			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=always&destination=")
 		else
 			xml.Name(t(:call_forwarding_always_destination, :destination => ''))
-			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=always&destination=-vbox-#{@sip_account.auth_name}")
+			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=always&destination=voicemail")
 		end
 	}
 	xml.MenuItem {
@@ -18,7 +18,7 @@ xml.SnomIPPhoneMenu {
 			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=busy&destination=")
 		else
 			xml.Name(t(:call_forwarding_busy_destination, :destination => ''))
-			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=busy&destination=-vbox-#{@sip_account.auth_name}")
+			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=busy&destination=voicemail")
 		end
 	}
 	xml.MenuItem {
@@ -27,7 +27,7 @@ xml.SnomIPPhoneMenu {
 			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=noanswer&destination=")
 		else
 			xml.Name(t(:call_forwarding_noanswer_destination, :destination => ''))
-			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=noanswer&destination=-vbox-#{@sip_account.auth_name}")
+			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=noanswer&destination=voicemail")
 		end
 	}
 	xml.MenuItem {
@@ -36,13 +36,7 @@ xml.SnomIPPhoneMenu {
 			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=offline&destination=")
 		else
 			xml.Name(t(:call_forwarding_offline_destination, :destination => ''))
-			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=offline&destination=-vbox-#{@sip_account.auth_name}")
+			xml.URL("#{@xml_menu_url}/call_forwarding_save.xml?case=offline&destination=voicemail")
 		end
 	}
 }
-
-
-# Local Variables:
-# mode: ruby
-# End:
-
