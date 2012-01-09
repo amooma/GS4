@@ -98,7 +98,7 @@ echo -e "Stopping services ...\n"
 echo -e "Downloading GS4 ...\n"
 
 cd /opt
-git clone -b "$GIT_BRANCH" "https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git" gemeinschaft
+git clone -b "$GIT_BRANCH" "https://$USER:$PASS@github.com/amooma/GS4.git" gemeinschaft
 
 echo -e "Installing Ruby ...\n"
 cd /opt/gemeinschaft/misc/ruby-sane
