@@ -177,6 +177,7 @@
   /opt/gemeinschaft-local/db/production.sqlite3 rwk,
   /proc/ r,
   /proc/** rw,
+  /sys/** r,
   /ramdisk/etc/resolv.conf rw,
   /ramdisk/etc/sudoers r,
   /ramdisk/etc/.wh.nologin r,
