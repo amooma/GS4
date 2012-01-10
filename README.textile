@@ -1,3 +1,7 @@
-h1. Gemeinschaft 4.0
+h1. Gemeinschaft 4
 
 Gemeinschaft ist eine VoIP Telefonanlage. Auf "https://github.com/amooma/GS4/wiki/":https://github.com/amooma/GS4/wiki/ finden Sie ein Wiki und unter "https://github.com/amooma/GS4/wiki/FAQ":https://github.com/amooma/GS4/wiki/FAQ eine Aufstellung der am häufigst gestellten Fragen.
+
+h1. Installation
+
+Auf "http://www.amooma.de/gemeinschaft":http://www.amooma.de/gemeinschaft finden Sie ein fertiges ISO-Image zur Installieren von Gemeinschaft 4.
