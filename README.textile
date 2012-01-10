@@ -1,3 +1,3 @@
 h1. Gemeinschaft 4.0
 
-Gemeinschaft ist eine VoIP Telefonanlage.
+Gemeinschaft ist eine VoIP Telefonanlage. Auf "https://github.com/amooma/GS4/wiki/":https://github.com/amooma/GS4/wiki/ finden Sie ein Wiki und unter "https://github.com/amooma/GS4/wiki/FAQ":https://github.com/amooma/GS4/wiki/FAQ eine Aufstellung der am häufigst gestellten Fragen.
