@@ -84,7 +84,7 @@
   /KNOPPIX/sbin/shutdown ix,
   /KNOPPIX/usr/*/ruby* mrix,
   /KNOPPIX/usr/*/ruby*/** mrix,
-  /KNOPPIX/usr/bin/logger mrix,
+  /KNOPPIX/usr/bin/logger mrpx,
   /KNOPPIX/usr/bin/sudo mrix,
   /KNOPPIX/usr/lib/** mr,
   /KNOPPIX/usr/lib/apache2/modules/mod_auth_basic.so mr,
