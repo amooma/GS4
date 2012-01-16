@@ -1,0 +1,18 @@
+h1. Gemeinschaft 4
+
+Gemeinschaft ist eine VoIP Telefonanlage. Auf "https://github.com/amooma/GS4/wiki/":https://github.com/amooma/GS4/wiki/ finden Sie ein Wiki und unter "https://github.com/amooma/GS4/wiki/FAQ":https://github.com/amooma/GS4/wiki/FAQ eine Aufstellung der am häufigst gestellten Fragen.
+
+h1. Installation
+
+Auf "http://www.amooma.de/gemeinschaft":http://www.amooma.de/gemeinschaft finden Sie ein fertiges ISO-Image zur Installieren von Gemeinschaft 4.
+
+h1. Danke!
+
+Ich (Stefan Wintermeyer - Geschäftsführer der AMOOMA GmbH) möchte mich bei folgenden Personen und Institutionen für die besondere Hilfe und Unterstützung bei der Realisierung von Gemeinschaft 4 in 2011 und 2012 bedanken. Mit allen hat die Arbeit sehr viel Spass gemacht.
+
+* Bundesamt für Sicherheit in der Informationstechnik (BSI)
+* Sascha Daniels
+* Philipp Kempgen
+* Peter Kozak
+* Klaus Knopper
+* Ralf Spenneberg
