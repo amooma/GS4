@@ -17,14 +17,6 @@ if ! grep '^6\.' /etc/debian_version ; then
 fi
 
 
-echo -e "Please enter your github.com username:\n"
-read USER
-
-echo -e "Please enter your github.com password:\n"
-read PASS
-
-
-
 set -x
 
 
@@ -98,7 +90,7 @@ echo -e "Stopping services ...\n"
 echo -e "Downloading GS4 ...\n"
 
 cd /opt
-git clone -b "$GIT_BRANCH" "https://$USER:$PASS@github.com/amooma/Gemeinschaft4.git" gemeinschaft
+git clone -b "$GIT_BRANCH" "https://github.com/amooma/GS4.git" gemeinschaft
 
 echo -e "Installing Ruby ...\n"
 cd /opt/gemeinschaft/misc/ruby-sane
