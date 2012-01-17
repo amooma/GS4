@@ -149,7 +149,14 @@ LogFormat "%h %l %u \"%r\" %>s %b KA:%k \"%{User-agent}i\"" log_format_for_syslo
 		Options -MultiViews
 		Options FollowSymLinks
 	</Directory>
-	
+        
+        SSLVerifyClient none
+        SSLCACertificateFile /etc/ssl/amooma/snom-ca
+
+       <Files ~ "settings-.*">
+          SSLVerifyClient require
+          SSLVerifyDepth 1
+        </Files>	
 	SSLEngine on
 	SSLCertificateFile    /etc/ssl/amooma/server_cert.pem
 	SSLCertificateKeyFile /etc/ssl/amooma/server_key.pem
