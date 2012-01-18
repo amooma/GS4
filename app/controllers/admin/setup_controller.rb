@@ -29,6 +29,7 @@ class Admin::SetupController < ApplicationController
   def new
     @user = User.new
     @user.username = "admin"
+    @user.email = "admin@localhost.local"
     flash[:notice] = t(:mandatory_fields)
   end
   
