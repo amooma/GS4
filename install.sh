@@ -134,6 +134,7 @@ cp /opt/gemeinschaft/misc/etc/apache/gemeinschaft /etc/apache2/sites-available
 a2ensite gemeinschaft
 cp -r /opt/gemeinschaft/misc/etc/ssl/amooma /etc/ssl/
 #OPTIMIZE Does the web server need write permissions on the certificates? If it doesn't: chmod 0400 ...
+# It is on a read only fs and we have apparmor
 a2enmod rewrite
 
 
