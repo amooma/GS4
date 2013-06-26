@@ -4,7 +4,11 @@ Gemeinschaft ist eine VoIP Telefonanlage. Auf "https://github.com/amooma/GS4/wik
 
 h1. Installation
 
-Auf "http://www.amooma.de/gemeinschaft":http://www.amooma.de/gemeinschaft finden Sie ein fertiges ISO-Image zur Installieren von Gemeinschaft 4.
+Auf "http://amooma.de/gemeinschaft/gs4":http://amooma.de/gemeinschaft/gs4 finden Sie ein fertiges ISO-Image zur Installieren von Gemeinschaft 4.
+
+h1. Gemeinschaft 5
+
+Die Zeit bleibt nicht stehen. Auf "http://amooma.de/gemeinschaft/gs5":http://amooma.de/gemeinschaft/gs5 finden Sie die neue Version 5.
 
 h1. Danke!
 
